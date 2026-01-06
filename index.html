@@ -3,81 +3,219 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AllDay Archive | Global Premium Daily Vault</title>
-    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;900&family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
+    <title>AllDay Archive | Global Daily Vault</title>
+    <!-- 폰트 및 스타일링 -->
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;900&family=Inter:wght@300;400;700;800&display=swap" rel="stylesheet">
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
         body { font-family: 'Inter', sans-serif; background-color: #050505; color: #fff; overflow-x: hidden; scroll-behavior: smooth; }
         .font-hud { font-family: 'Orbitron', sans-serif; }
         .bg-glow { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: radial-gradient(circle at 50% 50%, #0f172a 0%, #050505 100%); z-index: -1; }
-        .glass-card { background: rgba(15, 23, 42, 0.8); backdrop-filter: blur(20px); border: 1px solid rgba(255, 255, 255, 0.1); border-radius: 32px; transition: all 0.4s ease; }
-        .tag-blue { background: rgba(56, 189, 248, 0.1); color: #38bdf8; font-size: 10px; font-weight: 800; padding: 4px 12px; border-radius: 99px; text-transform: uppercase; }
-        .tag-pink { background: rgba(244, 114, 182, 0.1); color: #f472b6; font-size: 10px; font-weight: 800; padding: 4px 12px; border-radius: 99px; text-transform: uppercase; }
-        /* 초기 로딩 시 아래 영역은 숨김 */
+        .glass-card { background: rgba(15, 23, 42, 0.9); backdrop-filter: blur(20px); border: 1px solid rgba(255, 255, 255, 0.1); border-radius: 32px; transition: all 0.4s ease; }
+        .tag-blue { background: rgba(56, 189, 248, 0.2); color: #38bdf8; font-size: 10px; font-weight: 800; padding: 4px 12px; border-radius: 99px; text-transform: uppercase; }
+        /* 초기 로딩 시 아래 영역 숨김 */
         #vault-data { display: none; }
-        input[type="date"]::-webkit-calendar-picker-indicator { filter: invert(1); cursor: pointer; scale: 1.5; }
+        /* 버튼을 다른 요소보다 항상 위에 둠 */
+        #scan-btn { z-index: 100; cursor: pointer !important; position: relative; }
+        input[type="date"] { color-scheme: dark; cursor: pointer; }
     </style>
 </head>
 <body>
     <div class="bg-glow"></div>
 
     <!-- Navigation -->
-    <nav class="fixed w-full z-50 px-8 py-6 flex justify-between items-center border-b border-white/5 bg-black/60 backdrop-blur-md">
+    <nav class="fixed w-full z-50 px-8 py-6 flex justify-between items-center border-b border-white/5 bg-black/80 backdrop-blur-md">
         <div class="font-hud text-xl font-black text-sky-400">ALLDAY ARCHIVE</div>
-        <select id="regionSelect" class="bg-slate-900 border border-sky-500/30 text-sky-400 text-[10px] font-hud p-2 rounded outline-none uppercase">
-            <option value="US">Region: USA / Global</option>
-            <option value="KR">Region: South Korea</option>
-            <option value="UK">Region: United Kingdom</option>
-            <option value="JP">Region: Japan</option>
-        </select>
+        <div class="flex items-center gap-4">
+            <select id="regionSelect" class="bg-slate-900 border border-sky-500/30 text-sky-400 text-[10px] font-hud p-2 rounded outline-none uppercase">
+                <option value="US">Region: USA / Global</option>
+                <option value="KR">Region: South Korea</option>
+                <option value="UK">Region: United Kingdom</option>
+                <option value="JP">Region: Japan</option>
+            </select>
+        </div>
     </nav>
 
-    <main class="relative pt-40 pb-20 px-6 max-w-7xl mx-auto space-y-32">
+    <main class="relative pt-40 pb-20 px-6 max-w-7xl mx-auto space-y-24">
         
         <!-- Section 1: Hero Portal -->
-        <section class="text-center space-y-12 py-10" id="portal">
+        <section class="text-center space-y-12 py-10">
             <div class="space-y-4">
-                <h2 class="font-hud text-sky-500 text-xs tracking-[0.5em] uppercase">Temporal Data Link Online</h2>
-                <h1 class="text-5xl md:text-8xl font-black leading-tight uppercase">History <br><span class="text-transparent bg-clip-text bg-gradient-to-r from-sky-400 to-blue-600">Unfolded.</span></h1>
+                <h2 class="font-hud text-sky-500 text-xs tracking-[0.5em] uppercase">Universal History Database</h2>
+                <h1 class="text-5xl md:text-8xl font-black leading-tight uppercase">Archive <br><span class="text-transparent bg-clip-text bg-gradient-to-r from-sky-400 to-blue-600">Accessed.</span></h1>
             </div>
             
-            <div class="glass-card max-w-2xl mx-auto p-3 border-sky-500/30 flex flex-col md:flex-row gap-3">
-                <input type="date" id="inputDate" class="flex-1 bg-transparent p-6 text-2xl font-hud outline-none text-white text-center">
-                <button onclick="handleScan()" class="bg-sky-500 hover:bg-sky-400 text-black font-black px-12 py-6 rounded-2xl font-hud tracking-widest transition-all shadow-xl shadow-sky-500/20">SCAN</button>
+            <div class="glass-card max-w-2xl mx-auto p-4 border-sky-500/30 flex flex-col md:flex-row gap-4">
+                <input type="date" id="inputDate" class="flex-1 bg-transparent p-4 text-2xl font-hud outline-none text-white text-center border-b border-white/10 md:border-none">
+                <button id="scan-btn" onclick="handleScan()" class="bg-sky-500 hover:bg-sky-400 text-black font-black px-12 py-6 rounded-2xl font-hud tracking-widest transition-all shadow-xl">SCAN</button>
             </div>
 
-            <div class="flex justify-center flex-wrap gap-10 text-[10px] font-hud text-gray-500 uppercase tracking-widest">
-                <div id="quick-weather">☀️ Atmospheric Ready</div>
-                <div id="quick-holiday">Holiday Scan Ready</div>
-                <div id="quick-ganji">Zodiac Sync Ready</div>
+            <div class="flex justify-center flex-wrap gap-8 text-[9px] font-hud text-gray-500 uppercase tracking-widest">
+                <div id="quick-weather">☀️ Atmospheric Status</div>
+                <div id="quick-holiday">Cultural Marker</div>
+                <div id="quick-ganji">Time Cycle Link</div>
             </div>
         </section>
 
-        <!-- [REVEAL AREA] Everything below is hidden until SCAN -->
+        <!-- [REVEAL AREA] -->
         <div id="vault-data" class="space-y-32">
             
-            <!-- 2. Quiz Section -->
-            <section id="section-quiz" class="glass-card p-12 relative overflow-hidden border-l-4 border-sky-500">
+            <!-- 퀴즈 섹션 (스포츠/발명 통합) -->
+            <section class="glass-card p-12 relative overflow-hidden border-l-4 border-sky-500">
                 <div class="absolute -top-10 -right-10 text-[12rem] font-black text-white/5 pointer-events-none font-serif">?</div>
                 <div class="relative z-10 space-y-8">
-                    <span class="tag-blue">Daily Mystery Quiz</span>
-                    <h3 id="quiz-question" class="text-3xl md:text-4xl font-bold leading-tight max-w-3xl italic">Identify the major breakthrough...</h3>
+                    <span class="tag-blue">Time Machine Quiz</span>
+                    <h3 id="quiz-question" class="text-3xl md:text-4xl font-bold leading-tight max-w-3xl italic text-sky-100">Scanning historical data...</h3>
                     <div id="quiz-options" class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                        <!-- JS injects buttons here -->
+                        <!-- 버튼이 여기에 생성됨 -->
                     </div>
                 </div>
             </section>
 
-            <!-- 3. Hall of Fame (Births & Achievements) -->
+            <!-- 인물 및 성취 (생일/노벨상/아카데미) -->
             <section class="space-y-12">
-                <h2 class="font-hud text-3xl font-black tracking-widest text-white uppercase">Hall of <span class="text-sky-500">Fame</span></h2>
+                <h2 class="font-hud text-3xl font-black tracking-widest text-white uppercase">Hall of <span class="text-sky-500">Legends</span></h2>
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
                     <div class="glass-card p-10 space-y-6">
-                        <span class="tag-pink">Birthdays & Legacies</span>
-                        <div id="disp-births" class="text-2xl font-bold text-gray-100 uppercase tracking-tight">Famous figures...</div>
-                        <p class="text-xs text-gray-500 uppercase tracking-widest">Born or passed on this day</p>
+                        <span class="tag-blue" style="background:rgba(244,114,182,0.1); color:#f472b6;">Famous Birthdays</span>
+                        <div id="disp-births" class="text-2xl font-bold text-gray-100 uppercase">Searching Icons...</div>
+                        <p class="text-[10px] text-gray-500 uppercase tracking-[0.2em]">Legends born on this exact calendar day</p>
                     </div>
                     <div class="glass-card p-10 space-y-6 border-t-2 border-amber-500/30">
-                        <span class="tag-blue" style="color:#fbbf24; background:rgba(251,191,36,0.1)">Achievements</span>
-                        <div id="disp-awards" class="text-2xl font-bold text-gray-100 uppercase tracking-tight">Nobel & Academy awards</div>
-                        <p class="text-xs text-gray-500 uppercase tracking-widest">Recognition of excellence</p>
+                        <span class="tag-blue" style="color:#fbbf24; background:rgba(251,191,36,0.1)">Great Achievements</span>
+                        <div id="disp-awards" class="text-2xl font-bold text-gray-100 uppercase">Scanning Nobel & Oscars...</div>
+                        <p class="text-[10px] text-gray-500 uppercase tracking-[0.2em]">Major awards and milestones recognized today</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 엔터테인먼트 제국 (영화, 음악, 책, 만화, 게임) -->
+            <section class="space-y-12">
+                <h2 class="font-hud text-3xl font-black tracking-widest text-white uppercase">Entertainment <span class="text-pink-500">Archive</span></h2>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                    <div class="glass-card p-8 space-y-6">
+                        <span class="tag-blue">Cinema</span>
+                        <h4 id="disp-movie" class="text-xl font-black uppercase tracking-tighter">Box Office #1</h4>
+                        <p class="text-[10px] text-gray-400">Record-breaking films & daily hot buzz.</p>
+                        <button class="w-full py-3 border border-white/10 rounded-xl text-[9px] font-hud hover:bg-white hover:text-black transition-all">WATCH OST VIDEO</button>
+                    </div>
+                    <div class="glass-card p-8 space-y-6 border-t-2 border-pink-500/50">
+                        <span class="tag-blue" style="color:#f472b6; background:rgba(244,114,182,0.1)">Global Music</span>
+                        <h4 id="disp-music" class="text-xl font-black uppercase tracking-tighter">Billboard Chart</h4>
+                        <button class="w-full py-4 border border-pink-500/20 rounded-xl font-hud text-[9px] text-pink-400 hover:bg-pink-500 hover:text-white transition-all">LISTEN ON SPOTIFY</button>
+                    </div>
+                    <div class="glass-card p-8 space-y-6">
+                        <span class="tag-blue" style="color:#a855f7; background:rgba(168,85,247,0.1)">Media & Tech</span>
+                        <h4 id="disp-media" class="text-xl font-black uppercase tracking-tighter">Books / Comics / Games</h4>
+                        <button class="w-full py-3 border border-white/10 rounded-xl text-[9px] font-hud hover:bg-white hover:text-black transition-all">VIEW STORY</button>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 요리 역사 & 발명품 기원 -->
+            <section class="grid grid-cols-1 md:grid-cols-2 gap-10">
+                <div class="glass-card p-12 space-y-6">
+                    <span class="tag-blue">Origins: Firsts</span>
+                    <h4 id="disp-firsts" class="text-4xl font-black uppercase tracking-tighter italic">Scanning Origins...</h4>
+                    <p class="text-gray-400 text-sm leading-relaxed">Discover when inventions first sparked to life.</p>
+                </div>
+                <div class="glass-card p-12 space-y-6 bg-gradient-to-br from-slate-900 to-black border-emerald-500/20">
+                    <span class="tag-blue" style="color:#10b981; background:rgba(16,185,129,0.1)">Culinary Vault</span>
+                    <h4 class="text-4xl font-black uppercase tracking-tighter">Royal Recipe</h4>
+                    <p class="text-[10px] text-emerald-500 font-bold">Step-by-step process recovered.</p>
+                    <button class="bg-white text-black font-hud text-[10px] px-8 py-4 rounded-xl font-black hover:bg-emerald-500 transition-all">GET RECIPE ON BLOG</button>
+                </div>
+            </section>
+
+            <!-- 디지털 기록 (인기 검색어 및 뉴스) -->
+            <section class="glass-card p-12">
+                <h2 class="font-hud text-xl mb-10 uppercase tracking-[0.2em]">Digital <span class="text-sky-500">Pulse</span></h2>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-16">
+                    <div>
+                        <h5 class="text-[9px] font-hud text-gray-500 mb-6 uppercase tracking-widest">Trending Keywords (Historical)</h5>
+                        <ul id="disp-trends" class="space-y-3 text-sm font-bold text-sky-400">
+                            <!-- Trends go here -->
+                        </ul>
+                    </div>
+                    <div>
+                        <h5 class="text-[9px] font-hud text-gray-500 mb-6 uppercase tracking-widest">Major Global News</h5>
+                        <p id="disp-news" class="text-gray-300 text-lg leading-relaxed italic uppercase font-bold">Connecting to archive...</p>
+                    </div>
+                </div>
+            </section>
+
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="py-24 text-center border-t border-white/5 bg-black space-y-12">
+        <div class="space-y-4">
+            <p class="text-[10px] font-hud text-gray-400 uppercase tracking-widest">Support the Archive Project</p>
+            <a href="https://www.buymeacoffee.com" target="_blank" class="inline-flex items-center gap-3 bg-yellow-400 text-black px-8 py-3 rounded-2xl font-black hover:bg-white transition-all">☕ BUY ME A COFFEE</a>
+        </div>
+        <div class="space-y-2">
+            <div class="font-hud text-sky-400 text-xl font-black tracking-widest uppercase">ALLDAY ARCHIVE</div>
+            <p class="text-[8px] text-gray-600 tracking-[0.5em] uppercase">Global Automated History Engine © 2026</p>
+        </div>
+        <div class="pt-8 border-t border-white/5 max-w-xs mx-auto text-[8px] text-gray-500 uppercase font-bold">
+            Feedback: <a href="mailto:your-email@gmail.com" class="text-sky-500 underline">your-email@gmail.com</a>
+        </div>
+    </footer>
+
+    <script>
+        // 무조건 실행되는 핵심 함수
+        function handleScan() {
+            const dateInput = document.getElementById('inputDate').value;
+            
+            // 1. 날짜 입력 안 했으면 경고
+            if (!dateInput) {
+                alert("PLEASE SELECT A TARGET DATE FIRST.");
+                return;
+            }
+
+            // 2. 알림창 띄우기 (작동 확인용)
+            console.log("Scan initiated for: " + dateInput);
+
+            // 3. 숨겨진 영역 즉시 강제 노출
+            const vault = document.getElementById('vault-data');
+            vault.style.display = 'block';
+
+            // 4. 데이터 업데이트 로직 실행
+            syncData(dateInput);
+
+            // 5. 아래로 강제 이동
+            setTimeout(() => {
+                vault.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            }, 100);
+        }
+
+        function syncData(dateValue) {
+            const region = document.getElementById('regionSelect').value;
+            const date = new Date(dateValue);
+            const year = date.getFullYear();
+
+            // 날씨, 기념일, 간지 정보 업데이트
+            document.getElementById('quick-weather').innerText = region === 'KR' ? "❄️ -2°C (Seoul)" : "☁️ 14°C (International)";
+            document.getElementById('quick-holiday').innerText = "Significant Global Occasion";
+            document.getElementById('quick-ganji').innerText = "Year: " + year + " Records Sync";
+
+            // 각 카드 텍스트 업데이트
+            document.getElementById('disp-births').innerText = region === 'KR' ? "K-STARS & KINGS" : "WORLD LEADERS & ICONS";
+            document.getElementById('disp-awards').innerText = "Nobel & Academy Milestones";
+            document.getElementById('disp-movie').innerText = region === 'KR' ? "KOREAN BLOCKBUSTER" : "HOLLYWOOD MASTERPIECE";
+            document.getElementById('disp-music').innerText = region === 'KR' ? "GAYO TOP 10 LEGEND" : "BILLBOARD GLOBAL #1";
+            document.getElementById('disp-media').innerText = "CLASSIC BOOKS & GAMES";
+            document.getElementById('disp-firsts').innerText = "THE FIRST EVER INVENTIONS";
+            document.getElementById('disp-trends').innerHTML = "<li>#1 Global Event</li><li>#2 New Discovery</li><li>#3 Cultural Shift</li>";
+            document.getElementById('disp-news').innerText = `"A historic treaty was documented on this very day."`;
+
+            // 퀴즈 문제 생성
+            document.getElementById('quiz-question').innerText = `IN ${year}, A MASSIVE CULTURAL SHIFT OCCURRED IN THIS REGION. DO YOU KNOW WHAT WAS DISCOVERED TODAY?`;
+            document.getElementById('quiz-options').innerHTML = `
+                <button onclick="alert('ACCESS GRANTED')" class="glass-card p-6 text-left hover:bg-sky-500 hover:text-black transition-all font-bold text-xs uppercase tracking-widest">A. THE ORIGINAL DEBUT</button>
+                <button onclick="alert('ACCESS GRANTED')" class="glass-card p-6 text-left hover:bg-sky-500 hover:text-black transition-all font-bold text-xs uppercase tracking-widest">B. THE FIRST PATENT</button>
+            `;
+        }
+    </script>
+</body>
+</html>
