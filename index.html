@@ -3,159 +3,147 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AllDay Archive | Global Daily Vault</title>
-    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;900&family=Inter:wght@300;400;700&display=swap" rel="stylesheet">
+    <title>AllDay Archive | Global Daily Knowledge Vault</title>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;900&family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
         body { font-family: 'Inter', sans-serif; background-color: #050505; color: #fff; overflow-x: hidden; }
         .font-hud { font-family: 'Orbitron', sans-serif; }
         .bg-glow { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: radial-gradient(circle at 50% 50%, #0f172a 0%, #050505 100%); z-index: -1; }
-        .glass-panel { background: rgba(15, 23, 42, 0.7); backdrop-filter: blur(20px); border: 1px solid rgba(255, 255, 255, 0.08); transition: all 0.4s ease; }
-        .tab-active { background: #38bdf8 !important; color: #000 !important; font-weight: 900; }
-        .status-dot { width: 8px; height: 8px; background: #22c55e; border-radius: 50%; display: inline-block; box-shadow: 0 0 10px #22c55e; }
+        .glass-card { background: rgba(15, 23, 42, 0.7); backdrop-filter: blur(20px); border: 1px solid rgba(255, 255, 255, 0.08); transition: all 0.4s ease; border-radius: 32px; }
+        .glass-card:hover { border-color: #38bdf8; transform: translateY(-5px); box-shadow: 0 10px 30px rgba(56, 189, 248, 0.1); }
+        .tag-blue { background: rgba(56, 189, 248, 0.1); color: #38bdf8; font-size: 10px; font-weight: 800; padding: 4px 10px; border-radius: 99px; text-transform: uppercase; letter-spacing: 1px; }
+        .tag-pink { background: rgba(244, 114, 182, 0.1); color: #f472b6; font-size: 10px; font-weight: 800; padding: 4px 10px; border-radius: 99px; text-transform: uppercase; letter-spacing: 1px; }
+        .btn-donate { background: #ffdd00; color: #000; font-weight: 800; border-radius: 12px; padding: 10px 20px; transition: all 0.3s; display: inline-flex; items-center: center; gap: 8px; }
+        .btn-donate:hover { background: #fff; transform: scale(1.05); }
     </style>
 </head>
 <body>
     <div class="bg-glow"></div>
 
-    <!-- Top Nav -->
+    <!-- Navigation -->
     <nav class="fixed w-full z-50 px-8 py-6 flex justify-between items-center border-b border-white/5 bg-black/60 backdrop-blur-md">
         <div class="font-hud text-xl font-black text-sky-400">ALLDAY ARCHIVE</div>
-        <div class="flex items-center gap-6">
-            <select id="globalRegion" onchange="syncAllData()" class="bg-slate-900 border border-sky-500/50 text-sky-400 text-[10px] font-hud p-2 rounded uppercase outline-none">
+        <div class="flex items-center gap-4">
+            <select id="regionSelect" onchange="syncData()" class="bg-slate-900 border border-sky-500/30 text-sky-400 text-[10px] font-hud p-2 rounded outline-none uppercase">
                 <option value="US">Region: USA</option>
                 <option value="KR">Region: Korea</option>
                 <option value="UK">Region: UK</option>
                 <option value="JP">Region: Japan</option>
-                <option value="FR">Region: France</option>
             </select>
-            <div class="flex items-center gap-2 font-hud text-[9px] text-gray-500">
-                <span class="status-dot"></span> LIVE SCAN
-            </div>
         </div>
     </nav>
 
-    <main class="relative pt-40 pb-20 px-6 max-w-7xl mx-auto space-y-24">
+    <main class="relative pt-40 pb-20 px-6 max-w-7xl mx-auto space-y-32">
         
-        <!-- Search & Core Info -->
+        <!-- Hero Section -->
         <section class="text-center space-y-12">
-            <h1 class="text-6xl md:text-8xl font-black tracking-tighter leading-none font-hud">ARCHIVE <span class="text-sky-500">SCANNER</span></h1>
-            <div class="glass-panel max-w-2xl mx-auto p-2 rounded-3xl border-sky-500/30 flex flex-col md:flex-row gap-2">
-                <input type="date" id="targetDate" class="flex-1 bg-transparent p-6 text-2xl font-hud outline-none text-white text-center">
-                <button onclick="unlockVault()" class="bg-sky-500 hover:bg-sky-400 text-black font-black px-12 py-6 rounded-2xl font-hud tracking-widest transition-all">DECODE</button>
+            <div class="space-y-4">
+                <h2 class="font-hud text-sky-500 text-xs tracking-[0.5em] uppercase">Universal Archive Synchronized</h2>
+                <h1 class="text-6xl md:text-8xl font-black leading-tight uppercase">History <br><span class="text-transparent bg-clip-text bg-gradient-to-r from-sky-400 to-blue-600">Unfolded.</span></h1>
+            </div>
+            <div class="glass-card max-w-2xl mx-auto p-2 border-sky-500/30 flex flex-col md:flex-row gap-2">
+                <input type="date" id="inputDate" class="flex-1 bg-transparent p-6 text-2xl font-hud outline-none text-white text-center">
+                <button onclick="unlockVault()" class="bg-sky-500 hover:bg-sky-400 text-black font-black px-12 py-6 rounded-2xl font-hud tracking-widest transition-all">SCAN</button>
+            </div>
+            <div class="flex justify-center flex-wrap gap-10 text-[10px] font-hud text-gray-500 uppercase tracking-widest">
+                <div id="disp-weather">☀️ Weather Scan: Ready</div>
+                <div id="disp-holiday">Holiday Scan: Ready</div>
+                <div id="disp-ganji">Zodiac Scan: Ready</div>
             </div>
         </section>
 
-        <!-- Main Dashboard (Hidden until Decode) -->
-        <div id="vault-content" class="space-y-24 hidden">
+        <!-- Hidden Archive Content -->
+        <div id="vault-data" class="space-y-32 hidden">
             
-            <!-- Basic info: Weather, Holiday, Trends -->
-            <section class="grid grid-cols-1 md:grid-cols-3 gap-8">
-                <div class="glass-panel p-8 rounded-[32px] border-t-2 border-sky-500/50">
-                    <h3 class="font-hud text-[10px] text-sky-400 uppercase tracking-widest mb-4">Historical Atmosphere</h3>
-                    <div id="weatherDisplay" class="text-5xl font-black mb-2">☀️ 24°C</div>
-                    <p class="text-gray-400 text-xs">Clear skies in the selected region on this very day.</p>
-                </div>
-                <div class="glass-panel p-8 rounded-[32px] border-t-2 border-emerald-500/50">
-                    <h3 class="font-hud text-[10px] text-emerald-400 uppercase tracking-widest mb-4">The Occasion</h3>
-                    <div id="holidayDisplay" class="text-3xl font-bold leading-tight">National Day</div>
-                    <p class="text-gray-400 text-xs mt-2">A significant celebration held across the nation today.</p>
-                </div>
-                <div class="glass-panel p-8 rounded-[32px] border-t-2 border-amber-500/50">
-                    <h3 class="font-hud text-[10px] text-amber-400 uppercase tracking-widest mb-4">Search Pulse</h3>
-                    <ul id="trendDisplay" class="space-y-2 text-sm font-bold">
-                        <li>1. Tech Expo <span class="text-amber-500">↑</span></li>
-                        <li>2. Global Peace <span class="text-amber-500">↑</span></li>
-                        <li>3. New Album <span class="text-amber-500">↑</span></li>
-                    </ul>
+            <!-- Quiz Section -->
+            <section class="glass-card p-12 relative overflow-hidden border-l-4 border-sky-500">
+                <div class="absolute -top-10 -right-10 text-[12rem] font-black text-white/5 pointer-events-none font-serif">?</div>
+                <div class="relative z-10 space-y-8">
+                    <span class="tag-blue">Daily Mystery Quiz</span>
+                    <h3 id="quiz-question" class="text-3xl md:text-4xl font-bold leading-tight max-w-3xl italic">Identify the major breakthrough that happened on this day...</h3>
+                    <div id="quiz-options" class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        <!-- Options injected by JS -->
+                    </div>
                 </div>
             </section>
 
-            <!-- Entertainment: Music & Movie Sync -->
+            <!-- Hall of Fame -->
             <section class="space-y-12">
-                <div class="flex items-center gap-6">
-                    <h2 class="font-hud text-3xl font-black tracking-widest text-white uppercase">CULTURAL <span class="text-sky-500">SYNC</span></h2>
-                    <div class="flex-1 h-px bg-gradient-to-r from-sky-500 to-transparent opacity-20"></div>
-                </div>
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-10">
-                    <!-- Music -->
-                    <div class="glass-panel p-10 rounded-[40px] space-y-6">
-                        <span class="font-hud text-pink-500 text-[10px] uppercase">Music Chart #1</span>
-                        <div class="aspect-video bg-slate-900/80 rounded-3xl flex flex-col items-center justify-center border border-white/5">
-                            <p id="musicArtist" class="font-hud text-3xl font-black">LEGENDARY ARTIST</p>
-                            <p id="musicSong" class="text-pink-400 italic">"Global Hit Track"</p>
-                        </div>
-                        <button class="w-full py-4 border border-pink-500/20 rounded-xl font-hud text-[10px] text-pink-500 hover:bg-pink-500 hover:text-white transition-all uppercase">Open Spotify / Youtube</button>
+                <h2 class="font-hud text-3xl font-black tracking-widest text-white uppercase">Hall of <span class="text-sky-500">Fame</span></h2>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                    <div class="glass-card p-8 space-y-4">
+                        <span class="tag-pink">Birthdays & Legacies</span>
+                        <div id="disp-births" class="text-xl font-bold text-gray-200 uppercase">Scanning famous individuals...</div>
+                        <p class="text-xs text-gray-500">Key figures born or passed on this day.</p>
                     </div>
-                    <!-- Movie -->
-                    <div class="glass-panel p-10 rounded-[40px] space-y-6">
-                        <span class="font-hud text-sky-400 text-[10px] uppercase">Box Office #1</span>
-                        <div class="aspect-video bg-slate-900/80 rounded-3xl flex items-center justify-center border border-white/5">
-                            <p id="movieTitle" class="font-hud text-2xl font-black text-center px-4 uppercase">CINEMA MASTERPIECE</p>
-                        </div>
-                        <button class="w-full py-4 border border-white/10 rounded-xl font-hud text-[10px] hover:bg-white hover:text-black transition-all uppercase">Watch Trailer / OST</button>
+                    <div class="glass-card p-8 space-y-4 border-t-2 border-amber-500/30">
+                        <span class="tag-blue" style="color:#fbbf24; background:rgba(251,191,36,0.1)">Global Achievements</span>
+                        <div id="disp-awards" class="text-xl font-bold text-gray-200 uppercase">Nobel, Oscars & Milestones</div>
+                        <p class="text-xs text-gray-500">Records of high-level recognition.</p>
                     </div>
                 </div>
             </section>
 
-            <!-- Culinary & More -->
-            <section class="glass-panel p-12 rounded-[50px] bg-gradient-to-br from-slate-900 to-black flex flex-col lg:flex-row gap-12 items-center">
-                <div class="w-full lg:w-1/3 aspect-square bg-slate-800 rounded-3xl flex items-center justify-center font-hud text-gray-600 border border-white/5">AI RECIPE PREVIEW</div>
-                <div class="flex-1 space-y-6 text-center lg:text-left">
-                    <span class="font-hud text-emerald-400 text-[10px] tracking-widest uppercase">Gastronomy History</span>
-                    <h3 class="text-5xl font-black font-hud">A DISH BORN TODAY</h3>
-                    <p class="text-gray-400 text-lg">We've uncovered a 200-year-old recipe first served in this region today.</p>
-                    <button class="bg-white text-black font-hud font-black px-12 py-5 rounded-2xl text-[10px] hover:bg-emerald-400 transition-all uppercase">Get Full Recipe & Story</button>
+            <!-- Entertainment Grid -->
+            <section class="space-y-12">
+                <h2 class="font-hud text-3xl font-black tracking-widest text-white uppercase">Cultural <span class="text-pink-500">Core</span></h2>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                    <div class="glass-card p-6 space-y-4">
+                        <span class="tag-blue">Cinema</span>
+                        <h4 id="disp-movie" class="text-xl font-black uppercase tracking-tighter">Box Office #1</h4>
+                        <button class="w-full py-2 border border-white/10 rounded-lg text-[9px] font-hud hover:bg-white hover:text-black transition-all">OST & TRAILER</button>
+                    </div>
+                    <div class="glass-card p-6 space-y-4 border-t-2 border-pink-500/50">
+                        <span class="tag-pink">Music</span>
+                        <h4 id="disp-music" class="text-xl font-black uppercase tracking-tighter">Billboard #1</h4>
+                        <button class="w-full py-2 border border-pink-500/20 rounded-lg text-[9px] font-hud text-pink-400 hover:bg-pink-500 hover:text-white transition-all">LISTEN ON SPOTIFY</button>
+                    </div>
+                    <div class="glass-card p-6 space-y-4">
+                        <span class="tag-blue" style="color:#a855f7; background:rgba(168,85,247,0.1)">Media</span>
+                        <h4 id="disp-book" class="text-xl font-black uppercase tracking-tighter">Books, Comics, Games</h4>
+                        <button class="w-full py-2 border border-white/10 rounded-lg text-[9px] font-hud hover:bg-white hover:text-black transition-all">TECH ARCHIVE</button>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Firsts & Culinary -->
+            <section class="grid grid-cols-1 md:grid-cols-2 gap-10">
+                <div class="glass-card p-10 space-y-6">
+                    <span class="tag-blue">Inventions & Sports Origins</span>
+                    <h4 id="disp-firsts" class="text-3xl font-black uppercase tracking-tighter">The First Ever...</h4>
+                    <p class="text-gray-400 text-sm italic">"Discover the moment when a ball was first kicked or a light was first lit."</p>
+                </div>
+                <div class="glass-card p-10 space-y-6 bg-gradient-to-br from-slate-900 to-black border-emerald-500/20">
+                    <span class="tag-blue" style="color:#10b981; background:rgba(16,185,129,0.1)">Culinary Vault</span>
+                    <h4 class="text-3xl font-black uppercase tracking-tighter">Ancient Recipe</h4>
+                    <button class="bg-white text-black font-hud text-[10px] px-6 py-3 rounded-xl font-black hover:bg-emerald-500">FULL RECIPE ON BLOG</button>
+                </div>
+            </section>
+
+            <!-- Trends & News -->
+            <section class="glass-card p-10">
+                <h2 class="font-hud text-xl mb-8 uppercase tracking-widest">Digital <span class="text-sky-500">Footprints</span></h2>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-12">
+                    <div>
+                        <h5 class="text-[9px] font-hud text-gray-500 mb-4 uppercase tracking-[0.3em]">Trending TOP 10 (Historical)</h5>
+                        <ul id="disp-trends" class="space-y-2 text-sm font-bold text-sky-400">
+                            <!-- Injected Trends -->
+                        </ul>
+                    </div>
+                    <div>
+                        <h5 class="text-[9px] font-hud text-gray-500 mb-4 uppercase tracking-[0.3em]">Major News Headlines</h5>
+                        <p id="disp-news" class="text-gray-400 text-sm italic">"Connecting to news archives..."</p>
+                    </div>
                 </div>
             </section>
 
         </div>
     </main>
 
-    <footer class="py-20 text-center space-y-6 bg-black border-t border-white/5">
-        <div class="font-hud text-xl text-sky-400">ALLDAY ARCHIVE</div>
-        <p class="text-[9px] text-gray-600 tracking-[0.5em] uppercase">The Ultimate Global History Dashboard</p>
-        <div class="flex justify-center gap-8 text-[9px] font-bold text-gray-400 uppercase font-hud">
-            <a href="#">Terms</a><a href="#">Donation</a><a href="#">Privacy</a>
-        </div>
-    </footer>
-
-    <script>
-        function unlockVault() {
-            document.getElementById('vault-content').classList.remove('hidden');
-            syncAllData();
-            document.getElementById('vault-content').scrollIntoView({ behavior: 'smooth' });
-        }
-
-        // 핵심: 국가 변경 시 모든 데이터를 동기화하는 함수
-        function syncAllData() {
-            const region = document.getElementById('globalRegion').value;
-            const weather = document.getElementById('weatherDisplay');
-            const holiday = document.getElementById('holidayDisplay');
-            const musicArt = document.getElementById('musicArtist');
-            const movieTitle = document.getElementById('movieTitle');
-            const trends = document.getElementById('trendDisplay');
-
-            if(region === 'KR') {
-                weather.innerText = "❄️ -2°C";
-                holiday.innerText = "Independence Movement Day";
-                musicArt.innerText = "H.O.T.";
-                movieTitle.innerText = "THE CONTACT (1997)";
-                trends.innerHTML = "<li>1. IMF Crisis News</li><li>2. Gold Collection</li><li>3. New PC Room</li>";
-            } else if(region === 'US') {
-                weather.innerText = "☁️ 12°C";
-                holiday.innerText = "New Mexico Statehood Day";
-                musicArt.innerText = "BRITNEY SPEARS";
-                movieTitle.innerText = "TITANIC (1998)";
-                trends.innerHTML = "<li>1. Super Bowl Prep</li><li>2. Silicon Valley News</li><li>3. Bill Clinton</li>";
-            } else {
-                weather.innerText = "⛅ 18°C";
-                holiday.innerText = "Local Celebration";
-                musicArt.innerText = "GLOBAL STAR";
-                movieTitle.innerText = "LOCAL HIT MOVIE";
-                trends.innerHTML = "<li>1. Topic A</li><li>2. Topic B</li><li>3. Topic C</li>";
-            }
-        }
-    </script>
-</body>
-</html>
+    <!-- Footer with Donation & Feedback -->
+    <footer class="py-20 text-center border-t border-white/5 bg-black space-y-10">
+        <!-- Donation Section -->
+        <div class="space-y-4">
+            <p class="text-[10px] font-hud text-gray-400 uppercase tracking-widest">Support our Archive project</p>
+            <a href="
