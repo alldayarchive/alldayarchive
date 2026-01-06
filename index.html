@@ -3,147 +3,155 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AllDay Archive | Your Global Daily Time Machine</title>
-    <!-- 구글 폰트 적용: 고급스러운 헤드라인(Playfair) + 깔끔한 본문(Inter) -->
+    <title>AllDay Archive | Global Daily Time Machine</title>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;700;900&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
         body { font-family: 'Inter', sans-serif; background-color: #0a0a0a; color: #fff; scroll-behavior: smooth; }
-        h1, h2, .font-serif { font-family: 'Playfair Display', serif; }
+        h1, h2, h3, .font-serif { font-family: 'Playfair Display', serif; }
         .glass { background: rgba(255, 255, 255, 0.03); backdrop-filter: blur(12px); border: 1px solid rgba(255,255,255,0.1); transition: all 0.3s ease; }
         .glass:hover { border-color: #38bdf8; background: rgba(56, 189, 248, 0.05); }
         .tab-active { color: #38bdf8; border-bottom: 2px solid #38bdf8; }
         .btn-primary { background: #38bdf8; color: #000; font-weight: 900; transition: all 0.3s ease; }
         .btn-primary:hover { background: #7dd3fc; transform: translateY(-2px); box-shadow: 0 10px 20px rgba(56, 189, 248, 0.3); }
+        .category-tag { font-size: 0.65rem; font-weight: 900; letter-spacing: 0.2em; text-transform: uppercase; padding: 4px 12px; border-radius: 99px; background: rgba(56, 189, 248, 0.1); color: #38bdf8; }
     </style>
 </head>
 <body>
 
-    <!-- Navigation Bar -->
+    <!-- Navigation -->
     <nav class="fixed w-full z-50 glass px-6 py-4 flex justify-between items-center">
         <div class="text-xl font-black tracking-tighter text-sky-400">ALLDAY ARCHIVE</div>
         <div class="space-x-8 text-xs font-bold uppercase tracking-widest hidden md:flex">
-            <a href="#" class="tab-active">Today</a>
+            <a href="#" class="tab-active">Portal</a>
             <a href="#history" class="hover:text-sky-400">History</a>
-            <a href="#movies" class="hover:text-sky-400">Movies</a>
-            <a href="#food" class="hover:text-sky-400">Recipes</a>
+            <a href="#entertainment" class="hover:text-sky-400">Entertainment</a>
+            <a href="#food" class="hover:text-sky-400">Culinary</a>
         </div>
-        <div class="flex items-center gap-4">
-            <button class="text-xs border border-white/20 px-4 py-1 rounded-full hover:bg-white hover:text-black">🌐 EN</button>
-        </div>
+        <button class="text-xs border border-white/20 px-4 py-1 rounded-full hover:bg-white hover:text-black uppercase">Language: EN</button>
     </nav>
 
-    <!-- Main Content Container -->
-    <main class="pt-32 px-6 max-w-5xl mx-auto space-y-24 pb-32">
+    <main class="pt-32 px-6 max-w-6xl mx-auto space-y-24 pb-32">
         
-        <!-- Hero Section: The Portal -->
-        <section class="text-center space-y-10 py-16">
+        <!-- Hero Section -->
+        <section class="text-center space-y-10 py-10">
             <div class="space-y-4">
-                <h2 class="text-sky-500 font-bold tracking-[0.5em] uppercase text-sm">Welcome to the Archive</h2>
-                <h1 class="text-6xl md:text-8xl font-bold leading-tight">Every Second <br><span class="text-transparent bg-clip-text bg-gradient-to-r from-sky-400 to-blue-600">Becomes History.</span></h1>
+                <h2 class="text-sky-500 font-bold tracking-[0.5em] uppercase text-sm italic">"The World in One Day"</h2>
+                <h1 class="text-6xl md:text-8xl font-bold leading-tight">Travel to <br><span class="text-transparent bg-clip-text bg-gradient-to-r from-sky-400 to-blue-600">January 6th</span></h1>
             </div>
-            
             <div class="flex flex-col md:flex-row justify-center items-center gap-4 max-w-2xl mx-auto">
                 <input type="date" id="dateInput" class="bg-white/5 border border-white/10 p-5 rounded-2xl text-xl w-full md:w-64 outline-none focus:ring-2 ring-sky-400 text-center">
-                <button onclick="startJourney()" class="btn-primary px-12 py-5 rounded-2xl text-xl w-full md:w-auto">TRAVEL NOW</button>
+                <button onclick="startJourney()" class="btn-primary px-12 py-5 rounded-2xl text-xl w-full md:w-auto">SCAN HISTORY</button>
             </div>
         </section>
 
-        <!-- Quiz Section: Interaction & Engagement -->
+        <!-- Quiz Area -->
         <section id="quiz-area" class="glass p-12 rounded-[50px] relative overflow-hidden">
             <div class="absolute -top-10 -right-10 text-[12rem] font-black text-white/5 pointer-events-none font-serif">?</div>
-            <div class="relative z-10 space-y-8 text-center md:text-left">
-                <div>
-                    <h3 class="text-sky-400 font-bold mb-2 uppercase tracking-widest text-sm">Daily Mystery</h3>
-                    <p id="quiz-question" class="text-3xl md:text-4xl font-bold leading-tight">"In 1912, on this very day, which territory became the 47th state of the USA?"</p>
-                </div>
-                
+            <div class="relative z-10 space-y-8">
+                <span class="category-tag">Today's Mystery Quiz</span>
+                <p class="text-3xl md:text-4xl font-bold leading-tight max-w-3xl">"In 1891, on this day, the first rules of this global sport were published in Springfield. Which sport?"</p>
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                    <button onclick="showAnswer()" class="glass p-6 rounded-2xl text-left text-lg font-medium hover:bg-white/10">A. Arizona</button>
-                    <button onclick="showAnswer()" class="glass p-6 rounded-2xl text-left text-lg font-medium hover:bg-white/10">B. New Mexico</button>
-                    <button onclick="showAnswer()" class="glass p-6 rounded-2xl text-left text-lg font-medium hover:bg-white/10">C. Alaska</button>
-                    <button onclick="showAnswer()" class="glass p-6 rounded-2xl text-left text-lg font-medium hover:bg-white/10">D. Hawaii</button>
+                    <button onclick="showAnswer()" class="glass p-6 rounded-2xl text-left hover:bg-white/10 text-lg">A. Soccer</button>
+                    <button onclick="showAnswer()" class="glass p-6 rounded-2xl text-left hover:bg-white/10 text-lg">B. Basketball</button>
+                    <button onclick="showAnswer()" class="glass p-6 rounded-2xl text-left hover:bg-white/10 text-lg">C. Baseball</button>
+                    <button onclick="showAnswer()" class="glass p-6 rounded-2xl text-left hover:bg-white/10 text-lg">D. Rugby</button>
                 </div>
             </div>
         </section>
 
-        <!-- Archive Results: The Hidden Treasures (Unlocked after quiz) -->
-        <div id="archive-result" class="space-y-12 hidden">
+        <!-- Archive Results -->
+        <div id="archive-result" class="space-y-20 hidden">
             
-            <!-- Category Header -->
-            <div class="border-l-4 border-sky-500 pl-6">
-                <h2 class="text-4xl font-bold font-serif">Records for January 6th</h2>
-                <p class="text-gray-400">You've unlocked 3,421 historical records from our archive.</p>
-            </div>
+            <!-- 1. Entertainment Mega Section -->
+            <section id="entertainment" class="space-y-10">
+                <div class="flex justify-between items-end border-b border-white/10 pb-4">
+                    <h2 class="text-4xl font-bold font-serif">Entertainment Legends</h2>
+                    <p class="text-sky-400 font-bold uppercase text-xs tracking-widest">Movies • Music • Books • Games</p>
+                </div>
 
-            <!-- Content Grid -->
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
-                <!-- 1. Historical Firsts -->
-                <div class="glass p-10 rounded-[40px] space-y-6">
-                    <div class="w-full h-48 bg-slate-800 rounded-3xl flex items-center justify-center text-gray-500 italic">
-                        [AI Image: 1st Diesel Engine Demo]
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                    <!-- Movie Card -->
+                    <div class="glass p-6 rounded-[30px] space-y-4">
+                        <div class="h-64 bg-slate-800 rounded-2xl flex items-center justify-center text-gray-500 italic">[AI Movie Poster]</div>
+                        <span class="category-tag">Cinema History</span>
+                        <h4 class="text-xl font-bold">Titanic Returns (1998)</h4>
+                        <p class="text-sm text-gray-400">On this day, Titanic officially became the highest-grossing film of all time in 1998.</p>
+                        <button class="text-xs font-bold text-sky-400 hover:underline">Watch OST on YouTube →</button>
                     </div>
-                    <span class="text-sky-400 text-xs font-bold uppercase tracking-widest">Invention of the Day</span>
-                    <h4 class="text-3xl font-bold">The Diesel Revolution (1898)</h4>
-                    <p class="text-gray-400 leading-relaxed">Rudolf Diesel first demonstrated his compression-ignition engine today, forever changing global industry and transport.</p>
-                </div>
 
-                <!-- 2. Trending Searches (Past) -->
-                <div class="glass p-10 rounded-[40px] space-y-6 border-t-4 border-sky-500">
-                    <span class="text-sky-400 text-xs font-bold uppercase tracking-widest">Global Trends (2008)</span>
-                    <h4 class="text-3xl font-bold">What the World Searched</h4>
-                    <ul class="space-y-4">
-                        <li class="flex justify-between items-center border-b border-white/5 pb-2">
-                            <span>1. CES Las Vegas 2008</span>
-                            <span class="text-sky-500 font-bold">#1</span>
-                        </li>
-                        <li class="flex justify-between items-center border-b border-white/5 pb-2">
-                            <span>2. iPhone 3G Concept</span>
-                            <span class="text-sky-500 font-bold">#2</span>
-                        </li>
-                        <li class="flex justify-between items-center border-b border-white/5 pb-2">
-                            <span>3. Barack Obama Speech</span>
-                            <span class="text-sky-500 font-bold">#3</span>
-                        </li>
-                    </ul>
-                    <p class="text-xs text-gray-500 italic">Data curated from Global Search Archives.</p>
-                </div>
-            </div>
+                    <!-- Music Card -->
+                    <div class="glass p-6 rounded-[30px] space-y-4 border-t-2 border-pink-500/30">
+                        <div class="h-64 bg-slate-800 rounded-2xl flex items-center justify-center text-gray-500 italic">[AI Music Art]</div>
+                        <span class="category-tag" style="color:#f472b6; background:rgba(244,114,182,0.1)">Billboard #1</span>
+                        <h4 class="text-xl font-bold">Global Chart Topper</h4>
+                        <p class="text-sm text-gray-400">"Believe" by Cher was dominating the charts worldwide on this day in 1999.</p>
+                        <button class="text-xs font-bold text-pink-400 hover:underline">Listen on Spotify →</button>
+                    </div>
 
-            <!-- 3. Food History (Full Width) -->
-            <div class="glass p-10 rounded-[40px] flex flex-col md:flex-row gap-12 items-center">
+                    <!-- Game/Comics Card -->
+                    <div class="glass p-6 rounded-[30px] space-y-4">
+                        <div class="h-64 bg-slate-800 rounded-2xl flex items-center justify-center text-gray-500 italic">[AI Comic Art]</div>
+                        <span class="category-tag" style="color:#fbbf24; background:rgba(251,191,36,0.1)">Comics & Games</span>
+                        <h4 class="text-xl font-bold">The First 'Superman'</h4>
+                        <p class="text-sm text-gray-400">Tracing the first appearance of iconic heroes in comics released this week in history.</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 2. Historical & Global Firsts -->
+            <section id="history" class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <div class="glass p-10 rounded-[40px] space-y-4">
+                    <span class="category-tag">Historical Firsts</span>
+                    <h4 class="text-3xl font-bold">New Mexico (1912)</h4>
+                    <p class="text-gray-400">President William Howard Taft signed the proclamation making New Mexico the 47th state today.</p>
+                </div>
+                <div class="glass p-10 rounded-[40px] space-y-4 border-l-4 border-sky-500">
+                    <span class="category-tag">World Holidays</span>
+                    <h4 class="text-3xl font-bold">Epiphany (Global)</h4>
+                    <p class="text-gray-400">Celebrated across Europe and Latin America today. Discover the unique traditions of each country.</p>
+                </div>
+            </section>
+
+            <!-- 3. Food & Blog Link -->
+            <section id="food" class="glass p-10 rounded-[40px] flex flex-col md:flex-row gap-12 items-center border-2 border-emerald-500/20">
                 <div class="w-full md:w-2/5 h-64 bg-slate-800 rounded-3xl flex items-center justify-center text-gray-500 italic">
-                    [AI Image: Original 1894 Eggs Benedict]
+                    [AI Image: Historical Recipe]
                 </div>
                 <div class="space-y-6 flex-1">
-                    <span class="text-emerald-400 text-xs font-bold uppercase tracking-widest">Culinary History</span>
-                    <h4 class="text-4xl font-bold">The Legend of Eggs Benedict</h4>
-                    <p class="text-gray-400 leading-relaxed">Tracing back to the Waldorf Hotel on this very day in 1894. A retired Wall Street stockbroker requested this legendary combination to cure a hangover.</p>
-                    <a href="https://your-blog-link.com" target="_blank" class="inline-block bg-white text-black font-black px-8 py-3 rounded-full hover:bg-emerald-400 transition-all">GET ORIGINAL RECIPE →</a>
+                    <span class="category-tag" style="color:#34d399; background:rgba(52,211,153,0.1)">Culinary Archive</span>
+                    <h4 class="text-4xl font-bold">Secret Palace Recipe</h4>
+                    <p class="text-gray-400 leading-relaxed">This dish was served to royalty on this day 200 years ago. We've recovered the original ingredients for you.</p>
+                    <a href="#" class="inline-block bg-white text-black font-black px-10 py-4 rounded-full hover:bg-emerald-400 transition-all uppercase tracking-tighter">View Full Recipe & History →</a>
                 </div>
-            </div>
+            </section>
+
+            <!-- 4. Trending Archive -->
+            <section class="glass p-10 rounded-[40px]">
+                <h4 class="text-2xl font-bold mb-6">What the World was Searching (Jan 6th)</h4>
+                <div class="flex flex-wrap gap-4">
+                    <span class="border border-white/10 px-4 py-2 rounded-xl text-sm">#1 CES Las Vegas</span>
+                    <span class="border border-white/10 px-4 py-2 rounded-xl text-sm">#2 iPhone 3G Rumors</span>
+                    <span class="border border-white/10 px-4 py-2 rounded-xl text-sm">#3 Winter Olympics Prep</span>
+                    <span class="border border-white/10 px-4 py-2 rounded-xl text-sm">#4 New Year Resolutions</span>
+                    <span class="border border-white/10 px-4 py-2 rounded-xl text-sm">#5 Stock Market Open</span>
+                </div>
+            </section>
 
         </div>
-
     </main>
 
-    <!-- Footer -->
     <footer class="py-20 text-center text-slate-600 border-t border-white/5">
-        <p class="text-sm tracking-widest uppercase mb-4">&copy; 2026 ALLDAY ARCHIVE</p>
-        <div class="flex justify-center gap-8 text-xs font-bold uppercase">
-            <a href="#" class="hover:text-white">Terms</a>
-            <a href="#" class="hover:text-white">Privacy</a>
-            <a href="#" class="hover:text-white">Contact</a>
-        </div>
+        <p class="text-sm tracking-widest uppercase mb-4 font-bold tracking-tighter">ALLDAY ARCHIVE © 2026</p>
+        <p class="text-xs opacity-50">Providing human history, one day at a time.</p>
     </footer>
 
     <script>
         function startJourney() {
-            // Scroll to quiz area when button clicked
             document.getElementById('quiz-area').scrollIntoView({ behavior: 'smooth' });
         }
         function showAnswer() {
-            alert("Correct Answer: B. New Mexico! \nArchive unlocked for January 6th.");
+            alert("Correct! Basketball was born in Springfield. \nNow unlocking the Full Archive for January 6th.");
             document.getElementById('archive-result').classList.remove('hidden');
             document.getElementById('archive-result').scrollIntoView({ behavior: 'smooth' });
         }
