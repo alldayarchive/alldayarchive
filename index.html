@@ -3,20 +3,19 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AllDay Archive | Global Daily Vault</title>
+    <title>AllDay Archive | Global Premium Daily Vault</title>
     <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;900&family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
         body { font-family: 'Inter', sans-serif; background-color: #050505; color: #fff; overflow-x: hidden; scroll-behavior: smooth; }
         .font-hud { font-family: 'Orbitron', sans-serif; }
         .bg-glow { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: radial-gradient(circle at 50% 50%, #0f172a 0%, #050505 100%); z-index: -1; }
-        .glass-card { background: rgba(15, 23, 42, 0.8); backdrop-filter: blur(20px); border: 1px solid rgba(255, 255, 255, 0.08); border-radius: 32px; transition: all 0.4s ease; }
-        .glass-card:hover { border-color: #38bdf8; box-shadow: 0 0 30px rgba(56, 189, 248, 0.15); }
-        .tag-blue { background: rgba(56, 189, 248, 0.1); color: #38bdf8; font-size: 10px; font-weight: 800; padding: 4px 12px; border-radius: 99px; text-transform: uppercase; letter-spacing: 1px; }
-        .tag-rose { background: rgba(244, 114, 182, 0.1); color: #f472b6; font-size: 10px; font-weight: 800; padding: 4px 12px; border-radius: 99px; text-transform: uppercase; letter-spacing: 1px; }
-        .hidden-content { display: none; opacity: 0; transform: translateY(20px); }
-        .show-content { display: block; opacity: 1; transform: translateY(0); transition: all 0.8s ease; }
-        input[type="date"]::-webkit-calendar-picker-indicator { filter: invert(1); cursor: pointer; }
+        .glass-card { background: rgba(15, 23, 42, 0.8); backdrop-filter: blur(20px); border: 1px solid rgba(255, 255, 255, 0.1); border-radius: 32px; transition: all 0.4s ease; }
+        .tag-blue { background: rgba(56, 189, 248, 0.1); color: #38bdf8; font-size: 10px; font-weight: 800; padding: 4px 12px; border-radius: 99px; text-transform: uppercase; }
+        .tag-pink { background: rgba(244, 114, 182, 0.1); color: #f472b6; font-size: 10px; font-weight: 800; padding: 4px 12px; border-radius: 99px; text-transform: uppercase; }
+        /* 초기 로딩 시 아래 영역은 숨김 */
+        #vault-data { display: none; }
+        input[type="date"]::-webkit-calendar-picker-indicator { filter: invert(1); cursor: pointer; scale: 1.5; }
     </style>
 </head>
 <body>
@@ -26,7 +25,7 @@
     <nav class="fixed w-full z-50 px-8 py-6 flex justify-between items-center border-b border-white/5 bg-black/60 backdrop-blur-md">
         <div class="font-hud text-xl font-black text-sky-400">ALLDAY ARCHIVE</div>
         <select id="regionSelect" class="bg-slate-900 border border-sky-500/30 text-sky-400 text-[10px] font-hud p-2 rounded outline-none uppercase">
-            <option value="US">Region: Global/USA</option>
+            <option value="US">Region: USA / Global</option>
             <option value="KR">Region: South Korea</option>
             <option value="UK">Region: United Kingdom</option>
             <option value="JP">Region: Japan</option>
@@ -35,63 +34,50 @@
 
     <main class="relative pt-40 pb-20 px-6 max-w-7xl mx-auto space-y-32">
         
-        <!-- Hero Section -->
-        <section class="text-center space-y-12 py-10">
+        <!-- Section 1: Hero Portal -->
+        <section class="text-center space-y-12 py-10" id="portal">
             <div class="space-y-4">
-                <h2 class="font-hud text-sky-500 text-xs tracking-[0.5em] uppercase animate-pulse text-center">Historical Portal Synchronized</h2>
+                <h2 class="font-hud text-sky-500 text-xs tracking-[0.5em] uppercase">Temporal Data Link Online</h2>
                 <h1 class="text-5xl md:text-8xl font-black leading-tight uppercase">History <br><span class="text-transparent bg-clip-text bg-gradient-to-r from-sky-400 to-blue-600">Unfolded.</span></h1>
             </div>
-            <div class="glass-card max-w-2xl mx-auto p-2 border-sky-500/30 flex flex-col md:flex-row gap-2">
+            
+            <div class="glass-card max-w-2xl mx-auto p-3 border-sky-500/30 flex flex-col md:flex-row gap-3">
                 <input type="date" id="inputDate" class="flex-1 bg-transparent p-6 text-2xl font-hud outline-none text-white text-center">
-                <button onclick="handleScan()" class="bg-sky-500 hover:bg-sky-400 text-black font-black px-12 py-6 rounded-2xl font-hud tracking-widest transition-all">SCAN</button>
+                <button onclick="handleScan()" class="bg-sky-500 hover:bg-sky-400 text-black font-black px-12 py-6 rounded-2xl font-hud tracking-widest transition-all shadow-xl shadow-sky-500/20">SCAN</button>
             </div>
+
             <div class="flex justify-center flex-wrap gap-10 text-[10px] font-hud text-gray-500 uppercase tracking-widest">
-                <div id="quick-weather">☀️ Atmospheric Scan</div>
-                <div id="quick-holiday">Global Occasion</div>
-                <div id="quick-ganji">Zodiac Link</div>
+                <div id="quick-weather">☀️ Atmospheric Ready</div>
+                <div id="quick-holiday">Holiday Scan Ready</div>
+                <div id="quick-ganji">Zodiac Sync Ready</div>
             </div>
         </section>
 
-        <!-- [IMPORTANT] Main Archive Content (Revealed after SCAN) -->
-        <div id="vault-data" class="hidden-content space-y-32">
+        <!-- [REVEAL AREA] Everything below is hidden until SCAN -->
+        <div id="vault-data" class="space-y-32">
             
-            <!-- 1. Quiz Section -->
-            <section class="glass-card p-12 relative overflow-hidden border-l-4 border-sky-500">
+            <!-- 2. Quiz Section -->
+            <section id="section-quiz" class="glass-card p-12 relative overflow-hidden border-l-4 border-sky-500">
                 <div class="absolute -top-10 -right-10 text-[12rem] font-black text-white/5 pointer-events-none font-serif">?</div>
                 <div class="relative z-10 space-y-8">
                     <span class="tag-blue">Daily Mystery Quiz</span>
-                    <h3 id="quiz-question" class="text-3xl md:text-4xl font-bold leading-tight max-w-3xl italic">Identify the major breakthrough that happened on this day...</h3>
+                    <h3 id="quiz-question" class="text-3xl md:text-4xl font-bold leading-tight max-w-3xl italic">Identify the major breakthrough...</h3>
                     <div id="quiz-options" class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                        <!-- Options injected by JS -->
+                        <!-- JS injects buttons here -->
                     </div>
                 </div>
             </section>
 
-            <!-- 2. Hall of Fame (Birthdays & Achievements) -->
+            <!-- 3. Hall of Fame (Births & Achievements) -->
             <section class="space-y-12">
                 <h2 class="font-hud text-3xl font-black tracking-widest text-white uppercase">Hall of <span class="text-sky-500">Fame</span></h2>
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
                     <div class="glass-card p-10 space-y-6">
-                        <span class="tag-rose">Birthdays & Legacies</span>
-                        <div id="disp-births" class="text-2xl font-bold text-gray-200 uppercase">Searching...</div>
-                        <p class="text-sm text-gray-400">Discover legendary figures born on this precise date.</p>
+                        <span class="tag-pink">Birthdays & Legacies</span>
+                        <div id="disp-births" class="text-2xl font-bold text-gray-100 uppercase tracking-tight">Famous figures...</div>
+                        <p class="text-xs text-gray-500 uppercase tracking-widest">Born or passed on this day</p>
                     </div>
                     <div class="glass-card p-10 space-y-6 border-t-2 border-amber-500/30">
                         <span class="tag-blue" style="color:#fbbf24; background:rgba(251,191,36,0.1)">Achievements</span>
-                        <div id="disp-awards" class="text-2xl font-bold text-gray-200 uppercase">Awaiting Data...</div>
-                        <p class="text-sm text-gray-400">Nobel Prizes, Academy Awards, and Global recognitions.</p>
-                    </div>
-                </div>
-            </section>
-
-            <!-- 3. Culture Core (Movies, Music, Books, Games, Comics) -->
-            <section class="space-y-12">
-                <h2 class="font-hud text-3xl font-black tracking-widest text-white uppercase">Cultural <span class="text-pink-500">Core</span></h2>
-                <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-                    <!-- Cinema -->
-                    <div class="glass-card p-8 space-y-6">
-                        <span class="tag-blue">Cinema</span>
-                        <h4 id="disp-movie" class="text-xl font-black uppercase">Loading...</h4>
-                        <div class="space-y-2">
-                            <button class="w-full py-3 border border-white/10 rounded-xl text-[10px] font-hud hover:bg-white hover:text-black">WATCH TRAILER</button>
-                            <button class="w-full py-3 bo
+                        <div id="disp-awards" class="text-2xl font-bold text-gray-100 uppercase tracking-tight">Nobel & Academy awards</div>
+                        <p class="text-xs text-gray-500 uppercase tracking-widest">Recognition of excellence</p>
