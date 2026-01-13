@@ -2,112 +2,156 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>AllDay Archive | Your Daily Knowledge Vault</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AllDay Archive | Global Daily Vault</title>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;900&family=Inter:wght@300;400;700;800&display=swap" rel="stylesheet">
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;900&family=Inter:wght@300;400;700&display=swap" rel="stylesheet">
     <style>
-        body { font-family: 'Inter', sans-serif; background: #050505; color: #fff; scroll-behavior: smooth; }
+        body { font-family: 'Inter', sans-serif; background-color: #050505; color: #fff; overflow-x: hidden; scroll-behavior: smooth; }
         .font-hud { font-family: 'Orbitron', sans-serif; }
-        .glass { background: rgba(15, 23, 42, 0.8); backdrop-filter: blur(20px); border: 1px solid rgba(255, 255, 255, 0.1); border-radius: 20px; }
-        .tab-btn { padding: 10px 20px; border-radius: 10px; font-size: 10px; font-family: 'Orbitron'; border: 1px solid #333; transition: 0.3s; }
-        .tab-btn.active { background: #38bdf8; color: #000; border-color: #38bdf8; }
-        #content-area { display: none; }
+        .bg-glow { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: radial-gradient(circle at 50% 50%, #0f172a 0%, #050505 100%); z-index: -1; }
+        .glass-card { background: rgba(15, 23, 42, 0.9); backdrop-filter: blur(20px); border: 1px solid rgba(255, 255, 255, 0.1); border-radius: 24px; padding: 2rem; transition: all 0.4s ease; }
+        
+        /* 날짜 입력창 스타일 (영어권 느낌 극대화) */
+        input[type="date"] { 
+            color-scheme: dark; 
+            font-family: 'Orbitron', sans-serif;
+            background: rgba(255,255,255,0.05);
+            border: 1px solid rgba(56, 189, 248, 0.2);
+            padding: 1rem;
+            border-radius: 12px;
+            color: white;
+            font-size: 1.2rem;
+        }
+        #vault-area { display: none; }
+        .scan-button { 
+            background: #38bdf8; color: #000; font-weight: 900; 
+            padding: 1rem 3rem; border-radius: 12px; font-family: 'Orbitron';
+            letter-spacing: 2px; transition: 0.3s; cursor: pointer;
+        }
+        .scan-button:hover { background: #fff; transform: scale(1.05); }
     </style>
 </head>
-<body class="p-6 md:p-12">
-    <nav class="flex justify-between items-center mb-16 border-b border-white/5 pb-6">
-        <div class="font-hud text-xl font-black text-sky-400">ALLDAY ARCHIVE</div>
-        <div class="text-[9px] font-hud text-gray-500">GLOBAL DATA CENTER</div>
+<body>
+    <div class="bg-glow"></div>
+
+    <!-- Navigation -->
+    <nav class="fixed w-full top-0 left-0 z-[1000] px-8 py-6 flex justify-between items-center bg-black/60 backdrop-blur-md border-b border-white/5 text-sky-400 font-hud">
+        <div class="text-xl font-black uppercase">ALLDAY ARCHIVE</div>
+        <div class="text-[9px] tracking-widest uppercase">System: <span class="text-green-500">Online</span></div>
     </nav>
 
-    <main class="max-w-5xl mx-auto space-y-16">
-        <!-- Hero Search -->
-        <section class="text-center space-y-8">
-            <h1 class="text-5xl md:text-7xl font-hud font-black uppercase tracking-tight">Access <span class="text-sky-500">History</span></h1>
-            <div class="glass p-4 flex flex-col md:flex-row gap-4">
-                <input type="date" id="dateInput" class="flex-1 bg-transparent text-2xl font-hud outline-none text-center">
-                <button onclick="handleScan()" class="bg-sky-500 text-black px-12 py-4 rounded-xl font-hud font-black hover:bg-white transition-all">SCAN</button>
+    <main class="relative pt-40 pb-20 px-4 max-w-6xl mx-auto space-y-32">
+        <!-- Hero: Entry Point -->
+        <section class="text-center space-y-12">
+            <div class="space-y-4">
+                <h2 class="font-hud text-sky-500 text-xs tracking-[0.5em] uppercase">Temporal Data Link Synchronized</h2>
+                <h1 class="text-5xl md:text-8xl font-black font-hud uppercase tracking-tighter">Memory <span class="text-sky-500">Access</span></h1>
+            </div>
+            
+            <div class="glass-card max-w-3xl mx-auto flex flex-col md:flex-row items-center gap-6 shadow-2xl">
+                <div class="flex flex-col items-center gap-2 flex-1">
+                    <label class="text-[10px] font-hud text-gray-500 uppercase tracking-widest">Select Target Date</label>
+                    <input type="date" id="targetDate" class="w-full text-center">
+                </div>
+                <button onclick="handleScan()" class="scan-button w-full md:w-auto">SCAN</button>
             </div>
         </section>
 
-        <!-- Dynamic Content -->
-        <div id="content-area" class="space-y-10">
-            <!-- Category Tabs & Internal Search -->
-            <div class="flex flex-wrap justify-between items-center gap-6 glass p-6">
-                <div class="flex flex-wrap gap-2">
-                    <button class="tab-btn active" onclick="filter('all')">ALL</button>
-                    <button class="tab-btn" onclick="filter('holidays')">HOLIDAYS</button>
-                    <button class="tab-btn" onclick="filter('innovations')">TECH/INNOV</button>
-                    <button class="tab-btn" onclick="filter('arts')">ARTS/LIT</button>
-                    <button class="tab-btn" onclick="filter('pop_culture')">POP CULTURE</button>
-                </div>
-                <input type="text" id="innerSearch" onkeyup="searchWithin()" placeholder="Search within this day..." class="bg-white/5 border border-white/10 p-2 rounded-lg text-xs outline-none focus:border-sky-400 w-full md:w-64">
+        <!-- [REAL DATA REVEAL] -->
+        <div id="vault-area" class="space-y-24">
+            
+            <!-- Category Tabs (사장님이 원하셨던 필터) -->
+            <div class="flex flex-wrap justify-center gap-4 font-hud text-[10px]">
+                <button class="px-6 py-2 border border-sky-500 text-sky-400 rounded-full">ALL RECORDS</button>
+                <button class="px-6 py-2 border border-white/10 text-gray-500 rounded-full">HISTORY</button>
+                <button class="px-6 py-2 border border-white/10 text-gray-500 rounded-full">CULTURE</button>
             </div>
 
-            <!-- Result Cards -->
-            <div id="cards-container" class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                <!-- Cards will be injected here -->
+            <!-- Data Cards Grid -->
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-10">
+                <!-- Holidays -->
+                <div class="glass-card border-t-4 border-sky-500">
+                    <span class="text-sky-400 font-hud text-[10px] uppercase block mb-4">🌍 Global Holidays</span>
+                    <div id="disp-holidays" class="text-lg font-bold leading-relaxed text-gray-200"></div>
+                </div>
+                <!-- Innovations -->
+                <div class="glass-card border-t-4 border-emerald-500">
+                    <span class="text-emerald-400 font-hud text-[10px] uppercase block mb-4">⚙️ Innovations & Firsts</span>
+                    <div id="disp-innovations" class="text-lg font-bold leading-relaxed text-gray-200"></div>
+                </div>
+                <!-- Arts -->
+                <div class="glass-card border-t-4 border-purple-500">
+                    <span class="text-purple-400 font-hud text-[10px] uppercase block mb-4">🎨 Arts & Literature</span>
+                    <div id="disp-arts" class="text-lg font-bold leading-relaxed text-gray-200"></div>
+                </div>
+                <!-- Pop Culture -->
+                <div class="glass-card border-t-4 border-pink-500">
+                    <span class="text-pink-400 font-hud text-[10px] uppercase block mb-4">🎧 Pop Culture & Icons</span>
+                    <div id="disp-pop" class="text-lg font-bold leading-relaxed text-gray-200"></div>
+                </div>
             </div>
+
+            <!-- News & Trends -->
+            <section class="glass-card">
+                <h3 class="font-hud text-xl mb-8 uppercase text-sky-400">Digital Archive Search</h3>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-10">
+                    <div class="space-y-4">
+                        <p class="text-[10px] font-hud text-gray-500 uppercase tracking-widest">Trending Now (Historical)</p>
+                        <div id="disp-trends" class="text-gray-300 font-bold space-y-2"></div>
+                    </div>
+                    <div class="space-y-4">
+                        <p class="text-[10px] font-hud text-gray-500 uppercase tracking-widest">Historical Headlines</p>
+                        <div id="disp-news" class="text-gray-400 italic text-sm"></div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Footer with Donation & Wiki -->
+            <footer class="text-center space-y-12 py-20 border-t border-white/5">
+                <button onclick="window.open('https://buymeacoffee.com')" class="bg-yellow-400 text-black px-10 py-4 rounded-2xl font-black hover:bg-white transition-all">☕ BUY ME A COFFEE</button>
+                <div class="space-y-2">
+                    <p class="text-[10px] text-gray-600 font-hud uppercase tracking-[0.5em]">Global Automated History Engine © 2026</p>
+                    <p class="text-[10px] text-sky-700 font-bold uppercase">Feedback: <a href="mailto:admin@alldayarchive.com" class="underline">admin@alldayarchive.com</a></p>
+                </div>
+            </footer>
         </div>
     </main>
 
     <script>
-        const SB_URL = "https://iwgjfplrqeupfppcqmau.supabase.co";
-        const SB_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Iml3Z2pmcGxycWV1cGZwcGNxbWF1Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3Njc2ODMzODMsImV4cCI6MjA4MzI1OTM4M30.mW07xEhx-YvSx-Xe2YSUH6TpaXEwdvGdbBBcQy1sitU";
-        const supabase = supabase.createClient(SB_URL, SB_KEY);
-        let currentData = null;
+        // --- [반드시 수정] 사장님의 수파베이스 정보 ---
+        // 코랩에서 썼던 그 주소를 그대로 넣으세요.
+        const SB_URL = "https://iwgjfplrqeupfppcqmau.supabase.co"; 
+        // ⚠️ 여기는 'anon public' 키를 넣으세요! (service_role 키 아닙니다!)
+        const SB_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Iml3Z2pmcGxycWV1cGZwcGNxbWF1Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3Njc2ODMzODMsImV4cCI6MjA4MzI1OTM4M30.mW07xEhx-YvSx-Xe2YSUH6TpaXEwdvGdbBBcQy1sitU"; 
+        const sb = supabase.createClient(SB_URL, SB_KEY);
 
         async function handleScan() {
-            const dateVal = document.getElementById('dateInput').value;
-            if(!dateVal) return alert("Select Date");
-            const mDay = dateVal.substring(5);
+            const dateInput = document.getElementById('targetDate').value;
+            if(!dateInput) return alert("PLEASE SELECT A TARGET DATE.");
 
-            const { data, error } = await supabase.from('daily_archives').select('*').eq('date_id', mDay).single();
-            if(error || !data) return alert("Searching Deep Archive...");
+            // 날짜 형식 변환: 2026-01-14 -> 01-14 (사장님이 코랩에서 저장한 형식)
+            const monthDay = dateInput.substring(5, 10);
+            console.log("Searching for date_id:", monthDay);
 
-            currentData = data;
-            document.getElementById('content-area').style.display = 'block';
-            displayData('all');
-            document.getElementById('content-area').scrollIntoView({ behavior: 'smooth' });
-        }
+            // 1. 데이터 호출
+            const { data, error } = await sb.from('daily_archives').select('*').eq('date_id', monthDay).single();
 
-        function displayData(category) {
-            const container = document.getElementById('cards-container');
-            container.innerHTML = "";
+            if (error || !data) {
+                console.error("Supabase Error:", error);
+                alert("Deep Scan Error: Archive not found for this date. Check Supabase connection.");
+                return;
+            }
+
+            // 2. 화면 노출
+            const vault = document.getElementById('vault-area');
+            vault.style.display = 'block';
+
+            // 3. 데이터 맵핑 (사장님이 파이썬에서 정한 이름 그대로!)
+            document.getElementById('disp-holidays').innerText = (data.holidays || []).map(item => "• " + item.text).join("\n") || "No holidays recorded.";
+            document.getElementById('disp-innovations').innerText = (data.innovations || []).map(item => "• " + item.text).join("\n") || "Recording technological milestones...";
+            document.getElementById('disp-arts').innerText = (data.arts || []).map(item => "• " + item.text).join("\n") || "Scanning historical art records...";
+            document.getElementById('disp-pop').innerText = (data.pop_culture || []).map(item => "• " + item.text).join("\n") || "Searching cultural legends...";
             
-            // 데이터 매핑 로직 (모든 카테고리 순회)
-            const categories = ['holidays', 'innovations', 'arts', 'pop_culture'];
-            categories.forEach(cat => {
-                if(category === 'all' || category === cat) {
-                    const items = currentData[cat] || [];
-                    items.forEach(item => {
-                        container.innerHTML += `
-                            <div class="glass p-8 space-y-4 border-l-4 border-sky-500 card-item">
-                                <span class="text-[9px] font-hud text-sky-400 uppercase">${cat.replace('_',' ')}</span>
-                                <p class="text-lg font-bold leading-relaxed">${item.text || item}</p>
-                            </div>
-                        `;
-                    });
-                }
-            });
-        }
-
-        function filter(cat) {
-            const btns = document.querySelectorAll('.tab-btn');
-            btns.forEach(b => b.classList.remove('active'));
-            event.target.classList.add('active');
-            displayData(cat);
-        }
-
-        function searchWithin() {
-            const query = document.getElementById('innerSearch').value.toLowerCase();
-            const cards = document.querySelectorAll('.card-item');
-            cards.forEach(card => {
-                card.style.display = card.innerText.toLowerCase().includes(query) ? 'block' : 'none';
-            });
-        }
-    </script>
-</body>
-</html>
-
+            // Trends & News
