@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AllDay Archive | Global Daily Vault</title>
+    <title>AllDay Archive | Global Daily Knowledge Vault</title>
     <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;900&family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
@@ -13,9 +13,8 @@
         .bg-glow { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: radial-gradient(circle at 50% 50%, #0f172a 0%, #050505 100%); z-index: -1; }
         .glass-card { background: rgba(15, 23, 42, 0.85); backdrop-filter: blur(20px); border: 1px solid rgba(255, 255, 255, 0.08); border-radius: 24px; padding: 2rem; transition: all 0.4s ease; }
         .year-label { background: #38bdf8; color: #000; font-weight: 900; font-family: 'Orbitron'; padding: 2px 10px; border-radius: 6px; font-size: 14px; margin-right: 15px; min-width: 65px; text-align: center; }
-        .record-row { display: flex; align-items: flex-start; padding: 1.5rem 0; border-bottom: 1px solid rgba(255,255,255,0.05); }
         #vault-area { display: none; }
-        input[type="date"] { color-scheme: dark; font-family: 'Orbitron'; background: rgba(255,255,255,0.05); border: 1px solid #333; padding: 1rem; border-radius: 12px; font-size: 1.2rem; }
+        input[type="date"] { color-scheme: dark; font-family: 'Orbitron'; background: rgba(255,255,255,0.05); border: 1px solid #333; padding: 1rem; border-radius: 12px; }
         .nav-btn { background: rgba(56, 189, 248, 0.1); color: #38bdf8; border: 1px solid rgba(56, 189, 248, 0.3); padding: 10px 20px; border-radius: 12px; font-family: 'Orbitron'; font-size: 10px; transition: 0.3s; }
         .nav-btn:hover { background: #38bdf8; color: #000; }
     </style>
@@ -23,16 +22,20 @@
 <body>
     <div class="bg-glow"></div>
 
-    <nav class="fixed w-full z-50 px-8 py-6 flex justify-between items-center bg-black/60 backdrop-blur-md border-b border-white/5">
-        <div class="font-hud text-xl font-black text-sky-400">ALLDAY ARCHIVE</div>
-        <div class="text-[9px] font-hud text-gray-500 uppercase tracking-widest">SEO URL Sync: <span class="text-green-500">Active</span></div>
+    <nav class="fixed w-full z-50 px-8 py-6 flex justify-between items-center bg-black/60 backdrop-blur-md border-b border-white/5 font-hud">
+        <div class="text-xl font-black text-sky-400 uppercase tracking-tighter">ALLDAY ARCHIVE</div>
+        <div class="flex items-center gap-4">
+            <select id="regSelect" onchange="handleScan()" class="bg-slate-900 border border-sky-500/30 text-sky-400 text-[9px] p-2 rounded uppercase">
+                <option value="US">Region: USA/Global</option>
+                <option value="KR">Region: Korea</option>
+            </select>
+        </div>
     </nav>
 
     <main class="relative pt-40 pb-20 px-4 max-w-6xl mx-auto space-y-24">
         <section class="text-center space-y-12">
-            <h1 class="text-6xl md:text-8xl font-black font-hud uppercase tracking-tighter leading-none italic">Recalling <br><span class="text-sky-500 font-hud">The Day</span></h1>
+            <h1 class="text-6xl md:text-8xl font-black font-hud uppercase tracking-tighter leading-none italic">Recalling <br><span class="text-sky-500 font-hud uppercase">The Day</span></h1>
             
-            <!-- 날짜 탐험 네비게이션 -->
             <div class="flex flex-col items-center gap-6">
                 <div class="flex items-center gap-4">
                     <button onclick="navigateDay(-1)" class="nav-btn">◀ PREV</button>
@@ -41,55 +44,87 @@
                     </div>
                     <button onclick="navigateDay(1)" class="nav-btn">NEXT ▶</button>
                 </div>
-                <button onclick="handleScan()" class="bg-sky-500 text-black font-black px-16 py-5 rounded-2xl font-hud tracking-widest hover:bg-white transition-all uppercase shadow-2xl shadow-sky-500/20">Analyze Memory</button>
+                <button onclick="handleScan()" class="bg-sky-500 text-black font-black px-16 py-5 rounded-2xl font-hud tracking-widest hover:bg-white transition-all uppercase shadow-2xl">SCAN PORTAL</button>
             </div>
         </section>
 
         <div id="vault-area" class="space-y-24">
-            <!-- 🌍 HOLIDAYS -->
+            
+            <!-- 🌍 1. HOLIDAYS -->
             <section class="glass-card border-t-4 border-green-500">
                 <h2 class="font-hud text-xl text-green-400 mb-8 uppercase tracking-widest">🌍 Global Special Days</h2>
                 <div id="list-holidays" class="grid grid-cols-1 md:grid-cols-2 gap-4"></div>
             </section>
 
-            <!-- ⚙️ INNOVATIONS -->
+            <!-- 🎧 2. POP CULTURE (Movies & Music with Detail) -->
+            <section class="space-y-8">
+                <h2 class="font-hud text-3xl font-black tracking-widest uppercase">Cultural <span class="text-pink-500">Hits</span></h2>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-10">
+                    <!-- Movie Section -->
+                    <div class="glass-card border-t-4 border-sky-400 flex flex-col justify-between">
+                        <div>
+                            <span class="text-[10px] font-hud text-sky-400 uppercase tracking-widest block mb-4">Cinema & Box Office</span>
+                            <div id="disp-movie-rank" class="text-sm font-black text-sky-500 mb-2 uppercase">Global Rank #1</div>
+                            <div id="disp-movie-title" class="text-3xl font-black mb-4 uppercase">TITANIC (1998)</div>
+                            <p id="disp-movie-buzz" class="text-gray-400 text-sm italic mb-6">"The most talked-about film this month."</p>
+                        </div>
+                        <button onclick="window.open('https://youtube.com/results?search_query=movie+trailer')" class="w-full py-4 border border-white/10 rounded-xl font-hud text-[10px] hover:bg-white hover:text-black transition-all">WATCH OST & TRAILER</button>
+                    </div>
+                    <!-- Music Section -->
+                    <div class="glass-card border-t-4 border-pink-500 flex flex-col justify-between">
+                        <div>
+                            <span class="text-[10px] font-hud text-pink-500 uppercase tracking-widest block mb-4">Billboard / Local Charts</span>
+                            <div id="disp-music-rank" class="text-sm font-black text-pink-500 mb-2 uppercase">Chart Leader</div>
+                            <div id="disp-music-title" class="text-3xl font-black mb-4 uppercase">BELIEVE - CHER</div>
+                            <p id="disp-music-buzz" class="text-gray-400 text-sm italic mb-6">"The anthem that defined an era."</p>
+                        </div>
+                        <button onclick="window.open('https://spotify.com')" class="w-full py-4 border border-pink-500/20 rounded-xl font-hud text-[10px] text-pink-500 hover:bg-pink-500 hover:text-white transition-all">LISTEN ON SPOTIFY</button>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 🍴 3. CULINARY VAULT (Blog Links Restored) -->
+            <section class="glass-card p-12 bg-gradient-to-br from-slate-900 to-black flex flex-col lg:flex-row gap-12 items-center border-emerald-500/30">
+                <div class="flex-1 space-y-6">
+                    <span class="font-hud text-emerald-400 text-xs tracking-widest uppercase">Lost Recipe Found</span>
+                    <h3 id="disp-food-title" class="text-5xl font-black font-hud uppercase">A Royal Taste</h3>
+                    <p class="text-gray-400 text-lg leading-relaxed">Discover the original ingredients and the hidden cooking secrets behind this dish born today. The full step-by-step recipe is available on our official blog.</p>
+                    <button onclick="window.open('https://your-blog-url.blogspot.com')" class="bg-white text-black font-hud font-black px-10 py-4 rounded-xl text-[10px] hover:bg-emerald-400 transition-all uppercase">Get Full Recipe & Story (Blog)</button>
+                </div>
+            </section>
+
+            <!-- ⚙️ 4. INNOVATIONS & HISTORY -->
             <section class="glass-card border-t-4 border-emerald-500">
                 <h2 class="font-hud text-xl text-emerald-400 mb-8 uppercase tracking-widest">⚙️ Innovations & Firsts</h2>
-                <div id="list-innovations" class="space-y-2"></div>
+                <div id="list-innovations" class="space-y-4"></div>
             </section>
 
-            <!-- 🎧 CULTURAL (Music/Cinema) -->
-            <section class="grid grid-cols-1 md:grid-cols-2 gap-10">
-                <div class="glass-card border-t-4 border-sky-400">
-                    <span class="text-[10px] font-hud text-sky-400 uppercase tracking-widest block mb-4">Cinema</span>
-                    <div id="disp-movie" class="text-2xl font-bold mb-6"></div>
-                    <button onclick="window.open('https://youtube.com/results?search_query=movie+trailer')" class="w-full py-4 border border-white/10 rounded-xl font-hud text-[10px] hover:bg-white transition-all">OST PLAYLIST</button>
-                </div>
-                <div class="glass-card border-t-4 border-pink-500">
-                    <span class="text-[10px] font-hud text-pink-500 uppercase tracking-widest block mb-4">Music</span>
-                    <div id="disp-music" class="text-2xl font-bold mb-6"></div>
-                    <button onclick="window.open('https://spotify.com')" class="w-full py-4 border border-pink-500/20 rounded-xl font-hud text-[10px] text-pink-500 hover:bg-pink-500 transition-all uppercase">Open Spotify</button>
-                </div>
-            </section>
-
-            <!-- 🎂 BIRTHDAYS -->
+            <!-- 🎂 5. BIRTHDAYS -->
             <section class="glass-card border-t-4 border-pink-400">
-                <h2 class="font-hud text-xl text-pink-400 mb-8 uppercase tracking-widest">🎂 Birthdays</h2>
-                <div id="list-births" class="space-y-2"></div>
+                <h2 class="font-hud text-xl text-pink-400 mb-8 uppercase tracking-widest">🎂 Legendary Birthdays</h2>
+                <div id="list-births" class="space-y-4"></div>
             </section>
+
+            <!-- Footer: Donation & Feedback -->
+            <footer class="text-center space-y-12 py-20 border-t border-white/5">
+                <div class="space-y-4">
+                    <p class="text-[10px] font-hud text-gray-500 uppercase tracking-widest">Help us keep the archive alive</p>
+                    <button onclick="window.open('https://buymeacoffee.com')" class="bg-yellow-400 text-black px-10 py-4 rounded-2xl font-black hover:bg-white transition-all uppercase text-xs font-hud shadow-lg shadow-yellow-400/20">☕ Buy Me a Coffee</button>
+                </div>
+                <div class="space-y-2">
+                    <div class="font-hud text-sky-400 text-xl font-black">ALLDAY ARCHIVE</div>
+                    <p class="text-[9px] text-gray-700 uppercase tracking-[0.4em]">Global Automated History Engine © 2026</p>
+                    <p class="text-[10px] text-sky-900 font-bold uppercase mt-4">Feedback: <a href="mailto:admin@alldayarchive.com" class="underline">admin@alldayarchive.com</a></p>
+                </div>
+            </footer>
         </div>
     </main>
-
-    <footer class="py-20 text-center border-t border-white/5 bg-black">
-        <p class="text-[10px] text-gray-700 uppercase tracking-[0.4em]">AllDay Archive Dashboard v7.0</p>
-    </footer>
 
     <script>
         const SB_URL = "https://iwgjfplrqeupfppcqmau.supabase.co"; 
         const SB_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Iml3Z2pmcGxycWV1cGZwcGNxbWF1Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3Njc2ODMzODMsImV4cCI6MjA4MzI1OTM4M30.mW07xEhx-YvSx-Xe2YSUH6TpaXEwdvGdbBBcQy1sitU"; 
         const sb = supabase.createClient(SB_URL, SB_KEY);
 
-        // 1. 하루씩 이동하는 함수
         function navigateDay(offset) {
             const current = document.getElementById('targetDate').value || new Date().toISOString().split('T')[0];
             let date = new Date(current);
@@ -105,11 +140,10 @@
             const monthDay = dateInput.substring(5, 10);
             const year = dateInput.substring(0, 4);
 
-            // 2. SEO 주소 업데이트 (브라우저 주소창 변경)
             window.history.pushState({}, '', `/${monthDay}`);
 
             const { data, error } = await sb.from('daily_archives').select('*').eq('date_id', monthDay).single();
-            if (error || !data) return alert("Archive syncing...");
+            if (error || !data) return alert("Archive Syncing... Try another day!");
 
             document.getElementById('vault-area').style.display = 'block';
 
@@ -118,26 +152,29 @@
                 cont.innerHTML = "";
                 if(!list) return;
                 list.sort((a, b) => b.year - a.year).forEach(item => {
-                    cont.innerHTML += `<div class="record-row"><span class="year-label">${item.year}</span><span class="text-gray-300 text-sm">${item.text}</span></div>`;
+                    cont.innerHTML += `<div class="flex items-start py-4 border-b border-white/5"><span class="year-label">${item.year}</span><span class="text-gray-300 text-sm leading-relaxed">${item.text}</span></div>`;
                 });
             };
 
+            // 1. 기념일
             const hCont = document.getElementById('list-holidays');
             hCont.innerHTML = "";
             (data.holidays || []).forEach(h => {
                 hCont.innerHTML += `<div class="bg-white/5 p-4 rounded-xl text-xs font-bold text-gray-400">✦ ${h.text}</div>`;
             });
 
+            // 2. 기술/혁신 & 생일
             renderRows('list-innovations', data.innovations);
             renderRows('list-births', data.birthdays);
-            
-            document.getElementById('disp-movie').innerText = `Cinema Trends of ${year}`;
-            document.getElementById('disp-music').innerText = `Chart Hits of ${year}`;
+
+            // 3. 영화/음악/요리 정보 업데이트 (검색 연도 반영)
+            document.getElementById('disp-movie-title').innerText = `Blockbuster of ${year}`;
+            document.getElementById('disp-music-title').innerText = `Chart Hits of ${year}`;
+            document.getElementById('disp-food-title').innerText = `Flavor of ${year}`;
 
             setTimeout(() => { document.getElementById('vault-area').scrollIntoView({ behavior: 'smooth' }); }, 100);
         }
 
-        // 페이지 처음 들어왔을 때 주소창에 날짜가 있으면 바로 실행
         window.onload = () => {
             const path = window.location.pathname.replace('/','');
             if(path.includes('-')) {
