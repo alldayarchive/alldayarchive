@@ -3,109 +3,126 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AllDay Archive | Global History & Culture Search Engine</title>
+    <title>AllDay Archive | Global Daily Knowledge Vault</title>
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
     <style>
-        :root { --gold: #c5a059; --bg: #0c0e12; --card: rgba(25, 28, 35, 0.95); }
+        :root { --gold: #c5a059; --bg: #0c0e12; }
         body { font-family: 'Inter', sans-serif; background-color: var(--bg); color: #e2e8f0; scroll-behavior: smooth; overflow-x: hidden; }
         .font-serif { font-family: 'Playfair Display', serif; }
         .bg-heritage { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: radial-gradient(circle at 50% 50%, #1a1e26 0%, #0c0e12 100%); z-index: -1; }
-        .glass-card { background: var(--card); border: 1px solid rgba(197, 160, 89, 0.1); border-radius: 24px; padding: 2rem; transition: all 0.4s ease; }
-        .year-badge { border: 1px solid var(--gold); color: var(--gold); padding: 2px 8px; border-radius: 4px; font-size: 11px; font-weight: 700; min-width: 65px; text-align: center; cursor: pointer; }
-        .match-badge { background: var(--gold); color: #000; padding: 2px 8px; border-radius: 4px; font-size: 11px; font-weight: 900; }
+        .glass-card { background: rgba(25, 28, 35, 0.95); border: 1px solid rgba(197, 160, 89, 0.1); border-radius: 20px; transition: all 0.4s ease; }
+        .year-badge { border: 1px solid var(--gold); color: var(--gold); padding: 2px 8px; border-radius: 4px; font-size: 11px; font-weight: 700; min-width: 65px; text-align: center; }
+        .match-badge { background: var(--gold); color: #000; padding: 2px 8px; border-radius: 4px; font-size: 11px; font-weight: 900; box-shadow: 0 0 10px var(--gold); }
+        .local-focus { border-left: 5px solid var(--gold) !important; background: rgba(197, 160, 89, 0.15) !important; }
         #vault-area { display: none; }
-        input { background: rgba(255,255,255,0.03); border: 1px solid rgba(197, 160, 89, 0.2); padding: 1.2rem; border-radius: 12px; color: white; outline: none; transition: 0.3s; width: 100%; font-size: 1rem; }
-        input:focus { border-color: var(--gold); background: rgba(255,255,255,0.08); }
-        .scan-btn { background: var(--gold); color: #000; font-weight: 900; padding: 1.2rem; border-radius: 12px; width: 100%; text-transform: uppercase; letter-spacing: 2px; cursor: pointer; transition: 0.3s; }
-        .scan-btn:hover { background: #fff; transform: translateY(-2px); }
-        .search-hint { font-size: 10px; color: #666; margin-top: 8px; text-transform: uppercase; letter-spacing: 1px; }
+        input { background: rgba(255,255,255,0.03); border: 1px solid rgba(197, 160, 89, 0.2); padding: 1.2rem; border-radius: 12px; color: white; outline: none; transition: 0.3s; width: 100%; text-align: center; }
+        .scan-btn { background: var(--gold); color: #000; font-weight: 900; padding: 1.2rem; border-radius: 12px; width: 100%; text-transform: uppercase; letter-spacing: 2px; cursor: pointer; }
+        .nav-btn { background: rgba(255,255,255,0.05); color: var(--gold); border: 1px solid rgba(197, 160, 89, 0.3); padding: 10px 20px; border-radius: 12px; font-size: 10px; font-weight: bold; }
     </style>
 </head>
 <body>
     <div class="bg-heritage"></div>
     <nav class="fixed w-full z-50 px-10 py-6 flex justify-between items-center border-b border-white/5 bg-black/40 backdrop-blur-xl">
         <div class="text-2xl font-black text-[#c5a059] uppercase italic font-serif tracking-tighter">ALLDAY <span class="text-white font-light">ARCHIVE</span></div>
-        <div id="url-status" class="text-[9px] tracking-[0.4em] text-gray-500 uppercase font-bold border border-white/10 px-3 py-1 rounded">SEO Engine Active</div>
+        <div class="text-[9px] tracking-[0.4em] text-gray-500 uppercase font-bold border border-white/10 px-3 py-1 rounded">Official Chronicles Online</div>
     </nav>
 
-    <main class="relative pt-48 pb-20 px-6 max-w-6xl mx-auto space-y-24">
-        <!-- 🔍 Integrated Search Center -->
+    <main class="relative pt-48 pb-20 px-6 max-w-6xl mx-auto space-y-20">
+        <!-- Search Center -->
         <section class="text-center space-y-12">
-            <div class="space-y-4">
-                <h1 class="text-5xl md:text-8xl font-black text-white leading-none font-serif italic uppercase tracking-tighter">History <br><span class="text-[#c5a059]">Intelligence</span></h1>
-                <p class="text-gray-500 tracking-[0.2em] uppercase text-xs">Search anything: "Korea 1988", "London 2000 Music", or select a date.</p>
-            </div>
-
-            <div class="glass-card max-w-4xl mx-auto p-8 space-y-6 shadow-3xl">
+            <h1 class="text-5xl md:text-8xl font-black text-white leading-none font-serif italic uppercase tracking-tighter">WHAT HAPPENED <br><span class="text-[#c5a059]">TODAY?</span></h1>
+            <div class="glass-card max-w-4xl mx-auto p-8 space-y-8 shadow-3xl">
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                     <div class="text-left space-y-2">
-                        <label class="text-[10px] text-[#c5a059] uppercase font-bold ml-1 tracking-widest">Global Intelligence Search</label>
-                        <input type="text" id="smartSearch" placeholder="E.G. BRAZIL 2002 SOCCER">
-                        <p class="search-hint">AI parses: [Region] [Year] [Category]</p>
+                        <label class="text-[10px] text-[#c5a059] uppercase font-bold ml-1 tracking-widest">Territory Sync</label>
+                        <input type="text" id="countrySearch" placeholder="SEARCH COUNTRY (KOREA, USA, etc.)">
                     </div>
                     <div class="text-left space-y-2">
-                        <label class="text-[10px] text-[#c5a059] uppercase font-bold ml-1 tracking-widest">Chronological Point</label>
+                        <label class="text-[10px] text-[#c5a059] uppercase font-bold ml-1 tracking-widest">Time Point</label>
                         <input type="date" id="targetDate" class="text-white">
                     </div>
                 </div>
-                <button onclick="handleSmartSearch()" class="scan-btn">Synchronize Records</button>
+                <button onclick="handleScan()" class="scan-btn">Initiate Deep Scan</button>
+                <div class="flex justify-center gap-4">
+                    <button onclick="navigateDay(-1)" class="nav-btn hover:bg-[#c5a059] hover:text-black transition-all">◀ PREV DAY</button>
+                    <button onclick="navigateDay(1)" class="nav-btn hover:bg-[#c5a059] hover:text-black transition-all">NEXT DAY ▶</button>
+                </div>
             </div>
         </section>
 
-        <!-- Main Content Area -->
+        <!-- Result Area -->
         <div id="vault-area" class="space-y-24">
-            
-            <!-- 🏛️ Civilization Dashboard -->
+            <!-- Atmos & Zodiac -->
             <section class="grid grid-cols-1 md:grid-cols-2 gap-8">
                 <div class="glass-card p-10 border-l-2 border-[#c5a059] flex justify-between items-center">
-                    <div><span class="text-[9px] text-[#c5a059] uppercase block mb-2 tracking-widest italic">Atmosphere Archive</span><div id="disp-weather" class="text-5xl font-black italic">--°C</div></div>
-                    <div id="disp-weather-desc" class="text-[10px] text-gray-500 text-right uppercase">Climate <br>Synchronization</div>
+                    <div><span class="text-[9px] text-[#c5a059] uppercase block mb-2 tracking-widest">Atmosphere</span><div id="disp-weather" class="text-5xl font-black italic">--°C</div></div>
+                    <div id="disp-weather-desc" class="text-[10px] text-gray-500 text-right uppercase leading-relaxed">Satellite <br>Scan</div>
                 </div>
-                <div class="glass-card p-10 border-l-2 border-[#c5a059] flex justify-between items-center">
-                    <div><span class="text-[9px] text-[#c5a059] uppercase block mb-2 tracking-widest italic">Ancestral Cycle</span><div id="disp-ganji" class="text-xl font-black uppercase text-white">--</div></div>
-                    <div id="disp-zodiac" class="text-[10px] text-gray-500 text-right uppercase italic">Eastern <br>Wisdom</div>
+                <div class="glass-card p-10 border-l-2 border-[#c5a059] flex justify-between items-center text-[#c5a059]">
+                    <div><span class="text-[9px] uppercase block mb-2 tracking-widest">Ancestral Cycle</span><div id="disp-ganji" class="text-2xl font-black uppercase text-white">--</div></div>
+                    <div id="disp-zodiac" class="text-[10px] text-gray-500 text-right uppercase">Zodiac <br>Alignment</div>
                 </div>
             </section>
 
-            <!-- 🎧 WEEKLY CULTURAL SNAPSHOT -->
-            <section id="culture-section" class="space-y-12">
-                <h2 class="text-3xl font-serif text-white italic border-b border-white/5 pb-4 uppercase tracking-widest"><span class="text-[#c5a059]">Weekly</span> Cultural Pulse</h2>
+            <!-- 1. HOLIDAYS & QUIRKY DAYS -->
+            <section class="space-y-8">
+                <h2 class="text-2xl font-serif text-[#c5a059] italic border-b border-white/10 pb-4 uppercase tracking-widest">🎉 Global Holidays & Observances</h2>
+                <div id="list-holidays" class="grid grid-cols-1 md:grid-cols-2 gap-4"></div>
+            </section>
+
+            <!-- 2. POP CULTURE COMPARISON (Local vs Global) -->
+            <section class="space-y-12">
+                <h2 class="text-2xl font-serif text-white italic border-b border-white/10 pb-4 uppercase tracking-widest">Cultural <span class="text-[#c5a059]">Sync</span></h2>
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-10">
                     <div class="glass-card p-10 border-l-2 border-[#c5a059]">
-                        <span id="movie-label" class="text-[10px] text-[#c5a059] uppercase font-bold tracking-widest block mb-4">Cinema Top Chart</span>
-                        <div id="movie-local" class="text-2xl font-black uppercase mb-6 leading-tight">...</div>
-                        <button class="w-full py-4 border border-white/10 rounded-xl text-[9px] font-bold hover:bg-white hover:text-black uppercase">Watch Trailer & OST</button>
+                        <span id="movie-label" class="text-[10px] text-[#c5a059] uppercase font-bold tracking-widest block mb-4">Local Top Movie</span>
+                        <div id="movie-local" class="text-2xl font-black uppercase mb-6 leading-tight">Searching...</div>
+                        <button onclick="window.open('https://youtube.com/results?search_query=movie+trailer')" class="w-full py-4 border border-white/10 rounded-xl text-[9px] font-bold hover:bg-white hover:text-black">WATCH TRAILER & OST</button>
                     </div>
                     <div class="glass-card p-10 border-l-2 border-pink-500">
-                        <span id="music-label" class="text-[10px] text-pink-500 uppercase font-bold tracking-widest block mb-4">Billboard Global Hits</span>
-                        <div id="music-local" class="text-2xl font-black uppercase mb-6 leading-tight">...</div>
-                        <button class="w-full py-4 border border-pink-500/30 text-pink-500 rounded-lg text-[9px] font-bold hover:bg-pink-500 hover:text-white uppercase">Listen on Spotify</button>
+                        <span id="music-label" class="text-[10px] text-pink-500 uppercase font-bold tracking-widest block mb-4">Billboard Global</span>
+                        <div id="music-local" class="text-2xl font-black uppercase mb-6 leading-tight">Searching...</div>
+                        <button onclick="window.open('https://spotify.com')" class="w-full py-4 border border-pink-500/30 text-pink-500 rounded-lg text-[9px] font-bold hover:bg-pink-500 hover:text-white">LISTEN ON SPOTIFY</button>
                     </div>
                 </div>
             </section>
 
-            <!-- 🏛️ CATEGORIZED RECORDS -->
-            <div class="space-y-12">
-                <section class="space-y-8">
-                    <h2 class="text-xl font-serif text-[#c5a059] italic border-b border-white/5 pb-2 uppercase tracking-widest">Classical Arts & Heritage</h2>
-                    <div id="list-fine-arts" class="space-y-2"></div>
-                </section>
-                <section class="space-y-8">
-                    <h2 class="text-xl font-serif text-white italic border-b border-white/5 pb-2 uppercase tracking-widest">Modern Media & Gaming</h2>
-                    <div id="list-gaming" class="space-y-2"></div>
-                </section>
-                <section class="space-y-8">
-                    <h2 class="text-xl font-serif text-gray-500 italic border-b border-white/5 pb-2 uppercase tracking-widest">Timeline Chronicles</h2>
-                    <div id="list-history" class="space-y-2"></div>
-                </section>
-            </div>
+            <!-- 3. SEARCH TRENDS (Historical) -->
+            <section class="glass-card p-10 border-t-4 border-amber-500/50">
+                <div class="flex flex-col md:flex-row justify-between items-center mb-8 gap-4">
+                    <h2 class="text-xl font-serif text-amber-500 italic uppercase">📊 Historical Top 10 Search Trends</h2>
+                    <button onclick="window.open('https://alldayarchive.blogspot.com')" class="text-[9px] font-bold bg-amber-500/10 text-amber-500 border border-amber-500/30 px-6 py-2 rounded-lg hover:bg-amber-500 hover:text-black">VIEW FULL 100+ LIST ON BLOG</button>
+                </div>
+                <div id="list-trends" class="grid grid-cols-2 md:grid-cols-5 gap-4"></div>
+            </section>
+
+            <!-- 4. HISTORICAL RECORDS -->
+            <section class="space-y-10">
+                <h2 class="text-2xl font-serif text-[#c5a059] italic border-b border-white/10 pb-4">📜 Historical Records & Major Incidents</h2>
+                <div id="list-history" class="space-y-2"></div>
+            </section>
+
+            <!-- 5. BORN ON THIS DAY -->
+            <section class="space-y-10">
+                <h2 class="text-2xl font-serif text-[#c5a059] italic border-b border-white/10 pb-4">🎂 Born on this Day</h2>
+                <div id="list-births" class="space-y-2"></div>
+            </section>
+
+            <!-- 6. PASSED AWAY TODAY -->
+            <section class="space-y-10 opacity-60">
+                <h2 class="text-2xl font-serif text-gray-500 italic border-b border-white/10 pb-4">🕊️ Passed Away Today</h2>
+                <div id="list-deaths" class="space-y-2"></div>
+            </section>
 
             <!-- Footer -->
-            <footer class="py-24 text-center border-t border-white/5 bg-black/20 space-y-8">
-                <button onclick="window.open('https://your-blog-url.blogspot.com')" class="text-[#c5a059] border border-[#c5a059]/30 px-12 py-5 rounded-full text-xs hover:bg-[#c5a059] hover:text-black transition-all font-bold uppercase tracking-widest italic">Access Full Record Library (Blog)</button>
-                <p class="text-[9px] text-gray-600 uppercase tracking-[0.5em]">The Eternal Repository of Human History © 2026</p>
+            <footer class="py-24 text-center border-t border-white/5 bg-black/20 space-y-12">
+                <button onclick="window.open('https://alldayarchive.blogspot.com')" class="bg-[#c5a059] text-black px-12 py-5 rounded-full font-black text-xs hover:bg-white transition-all uppercase tracking-widest italic shadow-xl shadow-[#c5a059]/20">Unlock Original Recipes (Blog)</button>
+                <div class="pt-10 flex flex-col items-center gap-6">
+                    <button onclick="window.open('https://www.buymeacoffee.com/yourlink')" class="bg-white text-black px-10 py-4 rounded-full font-black text-[11px] hover:bg-[#c5a059] transition-all">☕ SUPPORT THE ARCHIVE</button>
+                    <p class="text-[9px] text-gray-600 uppercase tracking-[0.5em]">24/7 Universal Historical Monitoring Station © 2026</p>
+                </div>
             </footer>
         </div>
     </main>
@@ -115,99 +132,98 @@
         const SB_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Iml3Z2pmcGxycWV1cGZwcGNxbWF1Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3Njc2ODMzODMsImV4cCI6MjA4MzI1OTM4M30.mW07xEhx-YvSx-Xe2YSUH6TpaXEwdvGdbBBcQy1sitU"; 
         const sb = supabase.createClient(SB_URL, SB_KEY);
 
-        // --- 1. 지능형 스마트 검색 로직 (사장님 아이디어!) ---
-        async function handleSmartSearch() {
-            const query = document.getElementById('smartSearch').value.trim();
-            const dateInput = document.getElementById('targetDate').value;
-            
-            if (query) {
-                // 키워드에서 연도(4자리 숫자) 추출
-                const yearMatch = query.match(/\d{4}/);
-                if (yearMatch) {
-                    const year = yearMatch[0];
-                    const country = query.replace(year, '').trim();
-                    document.getElementById('countrySearch').value = country;
-                    // 날짜가 없으면 01-01로 기본 설정
-                    if(!dateInput) document.getElementById('targetDate').value = `${year}-01-01`;
-                } else {
-                    document.getElementById('countrySearch').value = query;
-                    if(!dateInput) document.getElementById('targetDate').value = "2024-01-14";
-                }
-            }
+        // 1. 세련된 간지 고유 발음 표기법
+        function getPhoneticZodiac(year) {
+            const ganjiNames = ["Gyeong-sin", "Sin-yu", "Im-sul", "Gye-hae", "Gap-ja", "Eul-chuk", "Byeong-in", "Jeong-myo", "Mu-jin", "Gi-sa", "Gyeong-oh", "Sin-mi", "Im-sin", "Gye-yu", "Gap-sul", "Eul-hae", "Byeong-ja", "Jeong-chuk", "Mu-in", "Gi-myo", "Gyeong-jin", "Sin-sa", "Im-oh", "Gye-mi", "Gap-sin", "Eul-yu", "Byeong-sul", "Jeong-hae", "Mu-ja", "Gi-chuk", "Gyeong-in", "Sin-myo", "Im-jin", "Gye-sa", "Gap-oh", "Eul-mi", "Byeong-sin", "Jeong-yu", "Mu-sul", "Gi-hae", "Gyeong-ja", "Sin-chuk", "Im-in", "Gye-myo", "Gap-jin", "Eul-sa", "Byeong-oh", "Jeong-mi", "Mu-sin", "Gi-yu", "Gyeong-sul", "Sin-hae", "Im-ja", "Gye-chuk", "Gap-in", "Eul-myo", "Byeong-jin", "Jeong-sa", "Mu-oh", "Gi-mi"];
+            const animals = ["Monkey", "Rooster", "Dog", "Pig", "Rat", "Ox", "Tiger", "Rabbit", "Dragon", "Snake", "Horse", "Sheep"];
+            const idx = (year - 0) % 60; const animalIdx = (year - 0) % 12;
+            return { name: ganjiNames[idx < 0 ? idx + 60 : idx], animal: animals[animalIdx < 0 ? animalIdx + 12 : animalIdx] };
+        }
+
+        async function fetchWeather(year, month, day, country) {
+            const coords = { 'korea': [37.56, 126.97], 'usa': [38.89, -77.03], 'japan': [35.68, 139.65] };
+            const [lat, lon] = coords[country.toLowerCase()] || [37.56, 126.97];
+            const url = `https://archive-api.open-meteo.com/v1/archive?latitude=${lat}&longitude=${lon}&start_date=${year}-${month}-${day}&end_date=${year}-${month}-${day}&daily=temperature_2m_max&timezone=GMT`;
+            try {
+                const res = await fetch(url); const d = await res.json();
+                document.getElementById('disp-weather').innerText = Math.round(d.daily.temperature_2m_max[0]) + "°C";
+            } catch { document.getElementById('disp-weather').innerText = "18°C"; }
+        }
+
+        function navigateDay(offset) {
+            const current = document.getElementById('targetDate').value || new Date().toISOString().split('T')[0];
+            let date = new Date(current); date.setDate(date.getDate() + offset);
+            document.getElementById('targetDate').value = date.toISOString().split('T')[0];
             handleScan();
         }
 
         async function handleScan() {
             const dateInput = document.getElementById('targetDate').value;
-            const country = document.getElementById('smartSearch').value || "Global";
-            if(!dateInput) return alert("Please select a date or enter a keyword.");
+            const country = document.getElementById('countrySearch').value.trim();
+            if(!dateInput) return alert("SELECT DATE");
             
-            const [y, m, d] = dateInput.split('-');
+            const y = parseInt(dateInput.substring(0, 4)); const m = dateInput.substring(5, 7); const d = dateInput.substring(8, 10);
             const md = `${m}-${d}`;
             
-            // --- 2. SEO 친화적 주소 체계 구축 (사장님 아이디어!) ---
-            // history/YYYY-MM-DD 형식으로 주소 업데이트
-            window.history.pushState({}, '', `/history/${dateInput}`);
+            // 🌐 다국어 SEO URL 업데이트
+            const countryCode = country ? country.substring(0, 2).toLowerCase() : 'gl';
+            window.history.pushState({}, '', `/${countryCode}/${md}`);
 
+            // 수파베이스 호출
             const { data, error } = await sb.from('daily_archives').select('*').eq('date_id', md).single();
             if (error || !data) return;
             document.getElementById('vault-area').style.display = 'block';
 
-            // 렌더링 로직 (기록 분류)
-            const fineArts = []; const gaming = []; const history = [];
-            const artsKeys = ['painting', 'symphony', 'sculpture', 'masterpiece', 'premiere', 'exhibition', 'composer'];
-            const gameKeys = ['released', 'game', 'nintendo', 'sega', 'playstation', 'book', 'novel', 'comic'];
-            const allItems = [...(data.holidays || []), ...(data.firsts || []), ...(data.birthdays || []), ...(data.deaths || [])];
-            
-            allItems.forEach(item => {
-                const text = item.text.toLowerCase();
-                if (artsKeys.some(k => text.includes(k))) fineArts.push(item);
-                else if (gameKeys.some(k => text.includes(k))) gaming.push(item);
-                else history.push(item);
+            const hItems = []; const rItems = [];
+            const holidayKeys = ['day', 'independence', 'festival', 'national', 'celebration', 'observance', 'world'];
+            const allEvents = [...(data.holidays || []), ...(data.firsts || [])];
+            allEvents.forEach(item => {
+                if (holidayKeys.some(k => item.text.toLowerCase().includes(k))) hItems.push(item);
+                else rItems.push(item);
             });
 
-            const render = (id, list) => {
+            const render = (id, list, isHolidays = false) => {
                 const cont = document.getElementById(id); cont.innerHTML = "";
-                if(!list || list.length === 0) return cont.innerHTML = "<p class='text-xs text-gray-600 italic'>No specific records.</p>";
-                
-                const sorted = list.sort((a, b) => {
-                    const aL = country && a.text.toLowerCase().includes(country.toLowerCase()) ? 1 : 0;
-                    const bL = country && b.text.toLowerCase().includes(country.toLowerCase()) ? 1 : 0;
-                    return bL - aL || (b.year - a.year);
-                });
-
+                if(!list || list.length === 0) return cont.innerHTML = "<p class='text-xs text-gray-600 italic'>No records found.</p>";
+                const sorted = list.sort((a, b) => (country && a.text.toLowerCase().includes(country.toLowerCase()) ? -1 : 1) || (b.year - a.year));
                 sorted.forEach(item => {
-                    const isMatch = item.year == y;
+                    const isMatch = item.year === y;
                     const isLocal = country && item.text.toLowerCase().includes(country.toLowerCase());
                     const yearDisp = item.year < 0 ? Math.abs(item.year) + " B.C." : (item.year || 'ANNUAL');
-                    cont.innerHTML += `<div class="flex items-start py-6 border-b border-white/5 ${isLocal ? 'local-highlight px-6 rounded-xl' : ''}"><span class="year-badge ${isMatch ? 'match-badge' : ''}">${yearDisp}</span><span class="${isMatch ? 'text-[#c5a059] font-bold' : (isLocal ? 'text-white font-bold' : 'text-gray-400')} text-sm leading-relaxed">${item.text}</span></div>`;
+                    if (isHolidays) {
+                        cont.innerHTML += `<div class="p-6 glass-card border-l-2 border-[#c5a059] ${isLocal?'local-highlight':''}"><span class="text-[10px] text-[#c5a059] font-bold block mb-1 uppercase">${yearDisp}</span><span class="text-sm font-bold">${item.text}</span></div>`;
+                    } else {
+                        cont.innerHTML += `<div class="flex items-start py-6 border-b border-white/5 ${isLocal ? 'local-highlight px-6' : ''}"><span class="year-badge ${isMatch ? 'match-badge' : ''}">${yearDisp}</span><span class="${isMatch ? 'text-[#c5a059] font-bold' : (isLocal ? 'text-white font-bold' : 'text-gray-400')} text-sm leading-relaxed">${item.text}</span></div>`;
+                    }
                 });
             };
 
-            render('list-fine-arts', fineArts);
-            render('list-gaming', gaming);
-            render('list-history', history);
+            render('list-holidays', hItems, true); render('list-history', rItems);
+            render('list-births', data.birthdays); render('list-deaths', data.deaths);
 
-            // 주간 문화 정보 업데이트
-            document.getElementById('movie-local').innerText = country ? `${country} Weekly Top Hit` : "Global Box Office #1";
-            document.getElementById('music-local').innerText = country ? `${country} Local Hit` : "Billboard Global Hit";
-            
-            // 간지 & 날씨
-            document.getElementById('disp-weather').innerText = "18°C";
-            document.getElementById('disp-ganji').innerText = "Syncing Cycle...";
-            
+            // 🎧 40년 전 검색어/문화 보정 로직
+            const yearInfo = {
+                "2003": { movie: "Oldboy / Lord of the Rings", music: "Where Is The Love?", trend: "Social Media Emergence" },
+                "1994": { movie: "Pulp Fiction / Lion King", music: "The Sign - Ace of Base", trend: "World Wide Web Launch" },
+                "1984": { movie: "Ghostbusters / Terminator", music: "When Doves Cry - Prince", trend: "First Macintosh PC" }
+            };
+            const info = yearInfo[y] || { movie: `Cinema Hit of ${y}`, music: `Chart Leader ${y}`, trend: `Pulse of ${y}` };
+            document.getElementById('movie-local').innerText = info.movie;
+            document.getElementById('music-local').innerText = info.music;
+            document.getElementById('disp-trend-main').innerText = info.trend;
+
+            // 📊 인기 검색어 그리드
+            const tCont = document.getElementById('list-trends'); tCont.innerHTML = "";
+            ["Tech", "Stocks", "Global News", "Sports", "Cinema", "Fashion", "Music", "Politics", "Science", "Nature"].forEach((t, i) => {
+                tCont.innerHTML += `<div class="bg-white/5 p-3 rounded-lg text-center"><span class="text-[#c5a059] text-[8px] font-black mr-2">#${i+1}</span><span class="text-[10px] font-bold uppercase">${y} ${t}</span></div>`;
+            });
+
+            const z = getPhoneticZodiac(y);
+            document.getElementById('disp-ganji').innerText = z.name;
+            document.getElementById('disp-zodiac').innerText = "Year of the " + z.animal;
+            fetchWeather(y, m, d, country || "USA");
             setTimeout(() => { document.getElementById('vault-area').scrollIntoView({ behavior: 'smooth' }); }, 100);
         }
-
-        // 페이지 로드 시 URL에서 날짜 파싱하여 자동 검색 (구글 봇 대응)
-        window.onload = () => {
-            const pathParts = window.location.pathname.split('/');
-            const dateFromUrl = pathParts[pathParts.length - 1];
-            if(dateFromUrl && dateFromUrl.includes('-')) {
-                document.getElementById('targetDate').value = dateFromUrl;
-                handleScan();
-            }
-        };
     </script>
 </body>
 </html>
