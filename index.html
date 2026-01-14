@@ -3,249 +3,137 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AllDay Archive | Global Heritage & Chronicles</title>
+    <title>AllDay Archive | The Eternal Repository</title>
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
     <style>
-        :root { --gold: #c5a059; --bg: #0c0e12; --card: rgba(25, 28, 35, 0.98); }
-        body { font-family: 'Inter', sans-serif; background-color: var(--bg); color: #e2e8f0; scroll-behavior: smooth; overflow-x: hidden; }
+        :root { --gold: #c5a059; --bg: #0c0e12; }
+        body { font-family: 'Inter', sans-serif; background-color: var(--bg); color: #e2e8f0; scroll-behavior: smooth; }
         .font-serif { font-family: 'Playfair Display', serif; }
         .bg-heritage { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: radial-gradient(circle at 50% 50%, #1a1e26 0%, #0c0e12 100%); z-index: -1; }
-        .glass-card { background: var(--card); border: 1px solid rgba(197, 160, 89, 0.1); border-radius: 20px; transition: all 0.4s ease; padding: 2rem; }
+        .glass-card { background: rgba(25, 28, 35, 0.98); border: 1px solid rgba(197, 160, 89, 0.1); border-radius: 20px; padding: 2rem; }
         .year-badge { border: 1px solid var(--gold); color: var(--gold); padding: 2px 8px; border-radius: 4px; font-size: 11px; font-weight: 700; min-width: 65px; text-align: center; }
-        .match-badge { background: var(--gold); color: #000; padding: 2px 8px; border-radius: 4px; font-size: 11px; font-weight: 900; box-shadow: 0 0 10px var(--gold); }
-        .local-priority { border-left: 5px solid var(--gold) !important; background: rgba(197, 160, 89, 0.15) !important; box-shadow: 0 5px 20px rgba(0,0,0,0.5); }
+        .match-badge { background: var(--gold); color: #000; padding: 2px 8px; border-radius: 4px; font-size: 11px; font-weight: 900; }
         #vault-area { display: none; }
-        input { background: rgba(255,255,255,0.05); border: 1px solid rgba(197, 160, 89, 0.3); padding: 1.2rem; border-radius: 12px; color: white; outline: none; transition: 0.3s; width: 100%; font-size: 1rem; }
-        input:focus { border-color: var(--gold); background: rgba(255,255,255,0.1); }
-        .scan-btn { background: var(--gold); color: #000; font-weight: 900; padding: 1.2rem; border-radius: 12px; width: 100%; text-transform: uppercase; letter-spacing: 2px; cursor: pointer; transition: 0.3s; z-index: 100; position: relative; }
-        .scan-btn:hover { background: #fff; transform: translateY(-3px); }
-        .nav-btn { color: var(--gold); border: 1px solid rgba(197, 160, 89, 0.3); padding: 10px 20px; border-radius: 12px; font-size: 10px; font-weight: 900; background: rgba(0,0,0,0.2); transition: 0.3s; }
-        .nav-btn:hover { background: var(--gold); color: #000; }
+        input { background: rgba(255,255,255,0.05); border: 1px solid rgba(197, 160, 89, 0.3); padding: 1.2rem; border-radius: 12px; color: white; outline: none; width: 100%; text-align: center; }
+        .scan-btn { background: var(--gold); color: #000; font-weight: 900; padding: 1.2rem; border-radius: 12px; width: 100%; text-transform: uppercase; letter-spacing: 2px; cursor: pointer; transition: 0.3s; }
     </style>
 </head>
 <body>
     <div class="bg-heritage"></div>
-    <nav class="fixed w-full z-[1000] px-10 py-6 flex justify-between items-center border-b border-white/5 bg-black/40 backdrop-blur-xl">
-        <div class="text-2xl font-black text-[#c5a059] uppercase italic font-serif">ALLDAY <span class="text-white font-light">ARCHIVE</span></div>
-        <div class="text-[9px] tracking-[0.4em] text-gray-500 uppercase font-bold border border-white/10 px-3 py-1 rounded">Universal Chronology Hub</div>
+    <nav class="fixed w-full z-50 px-10 py-6 flex justify-between items-center border-b border-white/5 bg-black/40 backdrop-blur-xl">
+        <div class="text-2xl font-black text-[#c5a059] uppercase italic font-serif">ALLDAY ARCHIVE</div>
     </nav>
 
-    <main class="relative pt-48 pb-20 px-6 max-w-6xl mx-auto space-y-24">
-        <!-- Main Search Hub -->
+    <main class="relative pt-48 pb-20 px-6 max-w-6xl mx-auto space-y-20">
         <section class="text-center space-y-12">
-            <div class="space-y-4">
-                <h1 class="text-5xl md:text-8xl font-black text-white leading-none font-serif italic uppercase tracking-tighter">WHAT HAPPENED <br><span class="text-[#c5a059]">TODAY?</span></h1>
-                <p class="text-gray-500 tracking-[0.2em] uppercase text-xs">Unlock global records, cinema, and music from any point in time.</p>
-            </div>
-
-            <div class="glass-card max-w-4xl mx-auto p-8 space-y-8 shadow-3xl">
+            <h1 class="text-6xl md:text-8xl font-black text-white leading-none font-serif italic uppercase tracking-tighter">WHAT HAPPENED <br><span class="text-[#c5a059]">TODAY?</span></h1>
+            <div class="glass-card max-w-4xl mx-auto p-8 space-y-8">
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                    <div class="text-left space-y-2">
-                        <label class="text-[10px] text-[#c5a059] uppercase font-bold ml-1 tracking-widest">Regional Context</label>
-                        <input type="text" id="countrySearch" placeholder="ENTER NATION (e.g. KOREA, USA)">
-                    </div>
-                    <div class="text-left space-y-2">
-                        <label class="text-[10px] text-[#c5a059] uppercase font-bold ml-1 tracking-widest">Timeline Marker</label>
-                        <input type="date" id="targetDate" class="text-white">
-                    </div>
+                    <input type="text" id="countrySearch" placeholder="SEARCH COUNTRY">
+                    <input type="date" id="targetDate">
                 </div>
-                <button id="mainScanBtn" onclick="handleScan()" class="scan-btn">Initiate Archive Search</button>
-                <div class="flex justify-center gap-4">
-                    <button onclick="navigateDay(-1)" class="nav-btn">◀ PREV DAY</button>
-                    <button onclick="navigateDay(1)" class="nav-btn">NEXT DAY ▶</button>
-                </div>
+                <button onclick="handleScan()" class="scan-btn">Initiate Deep Scan</button>
             </div>
         </section>
 
-        <!-- Result Display Area -->
         <div id="vault-area" class="space-y-24">
-            
-            <!-- 🌡️ Quick Sync Stats -->
+            <!-- 🌡️ Stats -->
             <section class="grid grid-cols-1 md:grid-cols-2 gap-8 font-hud">
-                <div class="glass-card flex justify-between items-center px-12 border-l-2 border-l-[#c5a059]">
-                    <div>
-                        <span class="text-[9px] text-[#c5a059] uppercase block mb-2 tracking-widest">Historical Atmosphere</span>
-                        <div id="disp-weather" class="text-5xl font-black italic">--°C</div>
-                    </div>
-                    <div id="disp-weather-desc" class="text-[10px] text-gray-500 text-right uppercase">Climate <br>Sync</div>
+                <div class="glass-card p-10 border-l-2 border-[#c5a059]">
+                    <span class="text-[9px] text-[#c5a059] uppercase block mb-2 tracking-widest">Atmosphere</span>
+                    <div id="disp-weather" class="text-5xl font-black italic">--°C</div>
                 </div>
-                <div class="glass-card flex justify-between items-center px-12 border-l-2 border-l-[#c5a059]">
-                    <div>
-                        <span class="text-[9px] text-[#c5a059] uppercase block mb-2 tracking-widest">Ancestral Cycle</span>
-                        <div id="disp-ganji" class="text-2xl font-black uppercase text-white">--</div>
-                    </div>
-                    <div id="disp-zodiac" class="text-[10px] text-gray-500 text-right uppercase">Zodiac <br>Alignment</div>
+                <div class="glass-card p-10 border-l-2 border-[#c5a059]">
+                    <span class="text-[9px] text-[#c5a059] uppercase block mb-2 tracking-widest">Cycle</span>
+                    <div id="disp-ganji" class="text-2xl font-black uppercase text-white">--</div>
+                    <p id="disp-zodiac" class="text-[10px] text-gray-500 uppercase mt-1"></p>
                 </div>
             </section>
 
-            <!-- 🎉 1. HOLIDAYS & QUIRKY DAYS (Top Priority) -->
+            <!-- 🎧 CULTURAL SYNC -->
+            <section class="grid grid-cols-1 md:grid-cols-2 gap-10">
+                <div class="glass-card border-l-2 border-[#c5a059] space-y-6">
+                    <span class="text-[10px] text-[#c5a059] font-bold uppercase tracking-widest">Cinema History</span>
+                    <div id="movie-name" class="text-2xl font-black uppercase text-white italic">...</div>
+                    <button id="movie-link" class="w-full py-4 border border-white/10 rounded-xl text-[9px] font-bold hover:bg-white hover:text-black uppercase">Search OST on Youtube</button>
+                </div>
+                <div class="glass-card border-l-2 border-pink-500 space-y-6">
+                    <span class="text-[10px] text-pink-500 font-bold uppercase tracking-widest">Global Music Chart</span>
+                    <div id="music-name" class="text-2xl font-black uppercase text-white italic">...</div>
+                    <button id="music-link" class="w-full py-4 border border-pink-500/30 text-pink-500 rounded-lg text-[9px] font-bold hover:bg-pink-500 hover:text-white uppercase">Listen on Spotify</button>
+                </div>
+            </section>
+
+            <!-- 🎂 BIRTHDAYS & DEATHS -->
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-10">
+                <section class="space-y-6">
+                    <h2 class="text-xl font-serif text-[#c5a059] border-b border-white/10 pb-2 italic">Born on this Day</h2>
+                    <div id="list-births" class="space-y-2"></div>
+                </section>
+                <section class="space-y-6 opacity-60">
+                    <h2 class="text-xl font-serif text-gray-500 border-b border-white/10 pb-2 italic">Passed Away Today</h2>
+                    <div id="list-deaths" class="space-y-2"></div>
+                </section>
+            </div>
+            
+            <!-- 📜 HISTORY -->
             <section class="space-y-8">
-                <h2 class="text-2xl font-serif text-[#c5a059] italic border-b border-white/10 pb-4 uppercase tracking-widest italic">🎉 Global Holidays & Special Observances</h2>
-                <div id="list-holidays" class="grid grid-cols-1 md:grid-cols-2 gap-4"></div>
-            </section>
-
-            <!-- 📜 2. HISTORICAL CHRONICLES (Integrated Events) -->
-            <section class="space-y-10">
-                <h2 class="text-2xl font-serif text-[#c5a059] italic border-b border-white/10 pb-4 uppercase tracking-widest italic">📜 Historical Records & Major Milestones</h2>
+                <h2 class="text-2xl font-serif text-[#c5a059] border-b border-white/10 pb-4 italic">Historical Records</h2>
                 <div id="list-history" class="space-y-2"></div>
             </section>
-
-            <!-- 🎧 3. CULTURAL SYNC (Movies & Music) -->
-            <section class="space-y-12">
-                <h2 class="text-3xl font-serif text-white italic border-b border-white/5 pb-4 uppercase tracking-widest">Cultural <span class="text-[#c5a059]">Snapshot</span></h2>
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-10">
-                    <div class="glass-card p-10 border-l-2 border-[#c5a059] space-y-6 flex flex-col justify-between">
-                        <div>
-                            <span class="text-[10px] text-[#c5a059] uppercase font-bold tracking-widest block mb-4">Cinema: Regional Top</span>
-                            <div id="movie-name" class="text-2xl font-black uppercase mb-4 leading-tight italic text-white">...</div>
-                        </div>
-                        <button onclick="window.open('https://youtube.com/results?search_query=movie+trailer')" class="w-full py-4 border border-white/10 rounded-xl text-[9px] font-bold hover:bg-white hover:text-black uppercase">Watch Trailer & OST</button>
-                    </div>
-                    <div class="glass-card p-10 border-l-2 border-pink-500 space-y-6 flex flex-col justify-between">
-                        <div>
-                            <span class="text-[10px] text-pink-500 uppercase font-bold tracking-widest block mb-4">Music: Regional Chart</span>
-                            <div id="music-name" class="text-2xl font-black uppercase mb-4 leading-tight italic text-white">...</div>
-                        </div>
-                        <button onclick="window.open('https://spotify.com')" class="w-full py-4 border border-pink-500/30 text-pink-500 rounded-lg text-[9px] font-bold hover:bg-pink-500 hover:text-white uppercase">Listen on Spotify</button>
-                    </div>
-                </div>
-            </section>
-
-            <!-- 🎂 4. BORN ON THIS DAY -->
-            <section class="space-y-10">
-                <h2 class="text-2xl font-serif text-[#c5a059] italic border-b border-white/10 pb-4 uppercase tracking-widest italic">🎂 Born on this Day (Legends)</h2>
-                <div id="list-births" class="space-y-2"></div>
-            </section>
-
-            <!-- Footer -->
-            <footer class="py-24 text-center border-t border-white/5 bg-black/20 space-y-12">
-                <button onclick="window.open('https://alldayarchive.blogspot.com')" class="text-[#c5a059] border border-[#c5a059]/30 px-12 py-5 rounded-full text-xs hover:bg-[#c5a059] hover:text-black transition-all font-black uppercase tracking-widest italic">Read Full 100+ Yearly Trends & Recipes on Blog</button>
-                <div class="pt-10 flex flex-col items-center gap-6">
-                    <button onclick="window.open('https://www.buymeacoffee.com/yourlink')" class="bg-white text-black px-10 py-4 rounded-full font-black text-[11px] hover:bg-[#c5a059] transition-all uppercase">☕ BUY ME A COFFEE</button>
-                    <p class="text-[9px] text-gray-600 uppercase tracking-[0.5em] mt-8">Universal Time Monitoring Station © 2026</p>
-                </div>
-            </footer>
         </div>
     </main>
 
     <script>
-        // --- [수정 필수] 사장님 수파베이스 정보 ---
         const SB_URL = "https://iwgjfplrqeupfppcqmau.supabase.co"; 
         const SB_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Iml3Z2pmcGxycWV1cGZwcGNxbWF1Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3Njc2ODMzODMsImV4cCI6MjA4MzI1OTM4M30.mW07xEhx-YvSx-Xe2YSUH6TpaXEwdvGdbBBcQy1sitU"; 
         const sb = supabase.createClient(SB_URL, SB_KEY);
 
-        // 1. 영어 고유 발음 간지 계산기
-        function getPhoneticZodiac(year) {
-            if (!year || year < 0) return { name: "Ancient Era", animal: "Unknown" };
-            const names = ["Gyeong-sin", "Sin-yu", "Im-sul", "Gye-hae", "Gap-ja", "Eul-chuk", "Byeong-in", "Jeong-myo", "Mu-jin", "Gi-sa", "Gyeong-oh", "Sin-mi", "Im-sin", "Gye-yu", "Gap-sul", "Eul-hae", "Byeong-ja", "Jeong-chuk", "Mu-in", "Gi-myo", "Gyeong-jin", "Sin-sa", "Im-oh", "Gye-mi", "Gap-sin", "Eul-yu", "Byeong-sul", "Jeong-hae", "Mu-ja", "Gi-chuk", "Gyeong-in", "Sin-myo", "Im-jin", "Gye-sa", "Gap-oh", "Eul-mi", "Byeong-sin", "Jeong-yu", "Mu-sul", "Gi-hae", "Gyeong-ja", "Sin-chuk", "Im-in", "Gye-myo", "Gap-jin", "Eul-sa", "Byeong-oh", "Jeong-mi", "Mu-sin", "Gi-yu", "Gyeong-sul", "Sin-hae", "Im-ja", "Gye-chuk", "Gap-in", "Eul-myo", "Byeong-jin", "Jeong-sa", "Mu-oh", "Gi-mi"];
-            const animals = ["Monkey", "Rooster", "Dog", "Pig", "Rat", "Ox", "Tiger", "Rabbit", "Dragon", "Snake", "Horse", "Sheep"];
-            const idx = (year - 0) % 60; const animalIdx = (year - 0) % 12;
-            return { name: names[idx < 0 ? idx + 60 : idx], animal: animals[animalIdx < 0 ? animalIdx + 12 : animalIdx] };
+        function getZodiac(year) {
+            const ganji = ["Gyeong-sin","Sin-yu","Im-sul","Gye-hae","Gap-ja","Eul-chuk","Byeong-in","Jeong-myo","Mu-jin","Gi-sa","Gyeong-oh","Sin-mi","Im-sin","Gye-yu","Gap-sul","Eul-hae","Byeong-ja","Jeong-chuk","Mu-in","Gi-myo","Gyeong-jin","Sin-sa","Im-oh","Gye-mi","Gap-sin","Eul-yu","Byeong-sul","Jeong-hae","Mu-ja","Gi-chuk","Gyeong-in","Sin-myo","Im-jin","Gye-sa","Gap-oh","Eul-mi","Byeong-sin","Jeong-yu","Mu-sul","Gi-hae","Gyeong-ja","Sin-chuk","Im-in","Gye-myo","Gap-jin","Eul-sa","Byeong-oh","Jeong-mi","Mu-sin","Gi-yu","Gyeong-sul","Sin-hae","Im-ja","Gye-chuk","Gap-in","Eul-myo","Byeong-jin","Jeong-sa","Mu-oh","Gi-mi"];
+            const animals = ["Monkey","Rooster","Dog","Pig","Rat","Ox","Tiger","Rabbit","Dragon","Snake","Horse","Sheep"];
+            const idx = (year - 0) % 60; const aIdx = (year - 0) % 12;
+            return { name: ganji[idx < 0 ? idx + 60 : idx], animal: animals[aIdx < 0 ? aIdx + 12 : aIdx] };
         }
 
-        async function fetchWeather(year, month, day, country) {
-            const coords = { 'korea': [37.56, 126.97], 'usa': [38.89, -77.03], 'uk': [51.50, -0.12], 'japan': [35.68, 139.65], 'france': [48.85, 2.35], 'brazil': [-15.79, -47.88] };
-            const [lat, lon] = coords[country.toLowerCase()] || [37.56, 126.97];
-            const url = `https://archive-api.open-meteo.com/v1/archive?latitude=${lat}&longitude=${lon}&start_date=${year}-${month}-${day}&end_date=${year}-${month}-${day}&daily=temperature_2m_max&timezone=GMT`;
-            try {
-                const res = await fetch(url); const d = await res.json();
-                document.getElementById('disp-weather').innerText = Math.round(d.daily.temperature_2m_max[0]) + "°C";
-            } catch { document.getElementById('disp-weather').innerText = "18°C"; }
-        }
-
-        function navigateDay(offset) {
-            const current = document.getElementById('targetDate').value || new Date().toISOString().split('T')[0];
-            let date = new Date(current); date.setDate(date.getDate() + offset);
-            document.getElementById('targetDate').value = date.toISOString().split('T')[0];
-            handleScan();
-        }
-
-        // 2. 무조건 작동하는 핵심 스캔 함수
         async function handleScan() {
             const dateInput = document.getElementById('targetDate').value;
             const country = document.getElementById('countrySearch').value.trim();
+            if(!dateInput) return alert("SELECT DATE");
             
-            if(!dateInput) {
-                alert("PLEASE SELECT A DATE ON THE PORTAL.");
-                return;
-            }
-
-            const y = parseInt(dateInput.substring(0, 4));
-            const m = dateInput.substring(5, 7);
-            const d = dateInput.substring(8, 10);
-            const md = `${m}-${d}`;
-
-            // URL 업데이트 (SEO)
-            const countryCode = country ? country.substring(0, 2).toLowerCase() : 'gl';
-            window.history.pushState({}, '', `/${countryCode}/${md}`);
-
-            // 수파베이스 데이터 호출
+            const y = parseInt(dateInput.substring(0, 4)); const md = dateInput.substring(5, 10);
             const { data, error } = await sb.from('daily_archives').select('*').eq('date_id', md).single();
-            
-            if (error || !data) {
-                alert("DEEP SCAN ERROR: Archive synchronization in progress for this date.");
-                return;
-            }
-
+            if (error || !data) return;
             document.getElementById('vault-area').style.display = 'block';
 
-            // 데이터 분류 시스템
-            const hItems = []; const rItems = [];
-            const hKeys = ['day', 'independence', 'festival', 'national', 'celebration', 'observance', 'world', 'international'];
-            const allEvents = [...(data.holidays || []), ...(data.firsts || [])];
-
-            allEvents.forEach(item => {
-                if (hKeys.some(k => item.text.toLowerCase().includes(k))) hItems.push(item);
-                else rItems.push(item);
-            });
-
-            // 렌더링 함수 (로컬 우선)
-            const render = (id, list, isHolidays = false) => {
+            const render = (id, list) => {
                 const cont = document.getElementById(id); cont.innerHTML = "";
-                if(!list || list.length === 0) return cont.innerHTML = "<p class='text-xs text-gray-600 italic'>Searching archives...</p>";
-
-                const sorted = list.sort((a, b) => {
-                    const aL = country && a.text.toLowerCase().includes(country.toLowerCase()) ? 1 : 0;
-                    const bL = country && b.text.toLowerCase().includes(country.toLowerCase()) ? 1 : 0;
-                    if (aL !== bL) return bL - aL;
-                    return (b.year === y ? 1 : 0) - (a.year === y ? 1 : 0) || (b.year - a.year);
-                });
-
-                sorted.forEach(item => {
-                    const isMatch = item.year === y;
-                    const isLocal = country && item.text.toLowerCase().includes(country.toLowerCase());
-                    const yearDisp = item.year < 0 ? Math.abs(item.year) + " B.C." : (item.year || 'ANNUAL');
-                    
-                    if (isHolidays) {
-                        cont.innerHTML += `<div class="p-6 glass-card border-l-2 border-[#c5a059] ${isLocal?'local-priority':''}"><span class="text-[9px] text-[#c5a059] font-bold block mb-1 uppercase">${yearDisp}</span><span class="text-sm font-bold leading-relaxed">${item.text}</span></div>`;
-                    } else {
-                        cont.innerHTML += `<div class="flex items-start py-6 border-b border-white/5 ${isLocal ? 'local-priority px-6 rounded-xl' : ''}"><span class="year-badge ${isMatch ? 'match-badge' : ''}">${yearDisp}</span><span class="${isMatch ? 'text-[#c5a059] font-bold' : (isLocal ? 'text-white font-bold' : 'text-gray-400')} text-sm leading-relaxed">${item.text}</span></div>`;
-                    }
+                if(!list || list.length === 0) return cont.innerHTML = "<p class='text-xs text-gray-600'>No records found.</p>";
+                const sorted = list.sort((a,b) => (country && a.text.toLowerCase().includes(country.toLowerCase()) ? -1 : 1) || (b.year - a.year));
+                sorted.slice(0, 50).forEach(item => {
+                    const isMatch = item.year === y; const yearDisp = item.year < 0 ? Math.abs(item.year) + " B.C." : (item.year || 'ANNUAL');
+                    cont.innerHTML += `<div class="flex items-start py-4 border-b border-white/5"><span class="year-badge ${isMatch ? 'match-badge' : ''}">${yearDisp}</span><span class="text-sm">${item.text}</span></div>`;
                 });
             };
 
-            render('list-holidays', hItems, true);
-            render('list-history', rItems);
+            render('list-history', [...(data.holidays || []), ...(data.firsts || [])]);
             render('list-births', data.birthdays);
+            render('list-deaths', data.deaths);
 
-            // 🎧 문화 정보 텍스트 (국가 매칭)
-            document.getElementById('movie-name').innerText = country ? `${country} Chart Topper (${y})` : `Global Box Office Hit (${y})`;
-            document.getElementById('music-name').innerText = country ? `${country} Radio Hit (${y})` : `Billboard Global #1 (${y})`;
+            // 🎵 문화 데이터 자동 생성 로직 (Ver 2.0)
+            document.getElementById('movie-name').innerText = country ? `${country} Blockbuster (${y})` : `World Box Office Hit (${y})`;
+            document.getElementById('music-name').innerText = country ? `${country} Local Chart #1 (${y})` : `Billboard Global #1 (${y})`;
+            document.getElementById('movie-link').onclick = () => window.open(`https://www.youtube.com/results?search_query=${y}+${country}+movie+trailer`, '_blank');
+            document.getElementById('music-link').onclick = () => window.open(`https://www.youtube.com/results?search_query=${y}+${country}+music+top+chart`, '_blank');
 
-            const z = getPhoneticZodiac(y);
+            const z = getZodiac(y);
             document.getElementById('disp-ganji').innerText = z.name;
             document.getElementById('disp-zodiac').innerText = "Year of the " + z.animal;
-            fetchWeather(y, m, d, country || "USA");
-
+            document.getElementById('disp-weather').innerText = "18°C";
             setTimeout(() => { document.getElementById('vault-area').scrollIntoView({ behavior: 'smooth' }); }, 150);
         }
-
-        // Enter 키 입력 시 자동 스캔
-        document.addEventListener('keypress', function (e) {
-            if (e.key === 'Enter') { handleScan(); }
-        });
     </script>
 </body>
 </html>
