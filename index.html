@@ -17,94 +17,84 @@
         .scroll-box::-webkit-scrollbar { width: 3px; }
         .scroll-box::-webkit-scrollbar-thumb { background: var(--gold); border-radius: 10px; }
         .year-badge { border: 1px solid var(--gold); color: var(--gold); padding: 2px 8px; border-radius: 4px; font-size: 10px; font-weight: 700; min-width: 95px; text-align: center; }
+        .match-badge { background: var(--gold); color: #000; box-shadow: 0 0 15px var(--gold); }
         .priority-focus { background: rgba(197, 160, 89, 0.18) !important; border-left: 5px solid var(--gold) !important; }
         input { background: rgba(255,255,255,0.05) !important; border: 1px solid rgba(197, 160, 89, 0.2) !important; padding: 1.1rem; border-radius: 12px; color: #fff !important; outline: none; font-weight: 600; text-align: center; }
-        .scan-btn { background: var(--gold); color: #000; font-weight: 900; padding: 1.2rem; border-radius: 12px; width: 100%; text-transform: uppercase; letter-spacing: 2px; transition: 0.3s; margin-top: 10px; cursor: pointer; }
-        .status-guide { font-size: 11px; font-weight: 700; color: var(--gold); background: rgba(197, 160, 89, 0.1); padding: 10px; border-radius: 8px; margin-bottom: 20px; display: none; text-transform: uppercase; letter-spacing: 1px; }
+        .scan-btn { background: var(--gold); color: #000; font-weight: 900; padding: 1.2rem; border-radius: 12px; width: 100%; text-transform: uppercase; letter-spacing: 2px; transition: 0.3s; margin-top: 10px; cursor: pointer; display: block; border: none; }
+        .scan-btn:active { transform: scale(0.98); opacity: 0.8; }
+        .status-guide { font-size: 11px; font-weight: 700; color: var(--gold); background: rgba(197, 160, 89, 0.1); padding: 10px; border-radius: 8px; margin-bottom: 20px; display: none; text-transform: uppercase; }
         .action-btn { font-size: 9px; font-weight: 800; padding: 5px 10px; border-radius: 4px; border: 1px solid rgba(255,255,255,0.1); color: #aaa; background: rgba(0,0,0,0.4); }
     </style>
 </head>
 <body>
     <div class="bg-heritage"></div>
-    
     <nav class="fixed w-full z-[1000] px-10 py-6 flex justify-between items-center border-b border-white/5 bg-black/70 backdrop-blur-xl">
         <div class="text-2xl font-black text-[#c5a059] italic font-serif tracking-tighter uppercase">ALLDAY ARCHIVE</div>
-        <div class="text-[9px] text-[#c5a059] font-bold border border-[#c5a059]/30 px-3 py-1 rounded tracking-widest uppercase italic">Universal Intel v68.0</div>
+        <div class="text-[9px] text-[#c5a059] font-bold border border-[#c5a059]/30 px-3 py-1 rounded tracking-widest uppercase">Global Engine v69.0</div>
     </nav>
 
     <main class="relative pt-48 pb-20 px-6 max-w-7xl mx-auto space-y-12">
         <section class="text-center space-y-8">
-            <h1 class="text-6xl md:text-8xl font-black text-white leading-none font-serif italic uppercase tracking-tighter">GLOBAL <span class="text-[#c5a059]">SYNC</span></h1>
-            <div class="glass-card max-w-5xl mx-auto p-8 shadow-3xl space-y-4">
+            <h1 class="text-6xl md:text-8xl font-black text-white leading-none font-serif italic uppercase tracking-tighter">DEEP <span class="text-[#c5a059]">SYNC</span></h1>
+            <div class="glass-card max-w-5xl mx-auto p-8 shadow-3xl space-y-4 text-left">
                 <div id="search-guide" class="status-guide"></div>
                 <div class="grid grid-cols-1 md:grid-cols-3 gap-3">
                     <input type="text" id="keywordSearch" placeholder="KEYWORD (ANY LANGUAGE)">
                     <input type="text" id="countrySearch" placeholder="NATION (AUTO IF BLANK)">
                     <div class="flex gap-2">
-                        <input type="text" id="in-year" placeholder="YYYY" maxlength="4" class="w-1/2" oninput="if(this.value.length==4)document.getElementById('in-month').focus()">
-                        <input type="text" id="in-month" placeholder="MM" maxlength="2" class="w-1/4" oninput="if(this.value.length==2)document.getElementById('in-day').focus()">
+                        <input type="text" id="in-year" placeholder="YYYY" maxlength="4" class="w-1/2">
+                        <input type="text" id="in-month" placeholder="MM" maxlength="2" class="w-1/4">
                         <input type="text" id="in-day" placeholder="DD" maxlength="2" class="w-1/4">
                     </div>
                 </div>
-                <button onclick="handleScan()" class="scan-btn">Synchronize History</button>
+                <button type="button" id="mainScanBtn" class="scan-btn">SYNCHRONIZE HISTORY</button>
             </div>
         </section>
 
         <div id="vault-area" class="hidden space-y-10">
             <section class="grid grid-cols-2 md:grid-cols-4 gap-4">
                 <div class="glass-card p-4 text-center border-t-2 border-sky-500">
-                    <span class="text-[8px] text-sky-400 font-bold uppercase block mb-1 italic">Atmosphere</span>
+                    <span class="text-[8px] text-sky-400 font-bold uppercase block mb-1">Atmosphere</span>
                     <div id="disp-weather" class="text-2xl font-black italic">--°C</div>
                     <p id="disp-weather-loc" class="text-[8px] text-gray-500 mt-1 uppercase">Localizing...</p>
                 </div>
                 <div class="glass-card p-4 text-center border-t-2 border-white/20">
-                    <span class="text-[8px] text-white/50 font-bold uppercase block mb-1 italic">Day</span>
+                    <span class="text-[8px] text-white/50 font-bold uppercase block mb-1">Day</span>
                     <div id="disp-day" class="text-lg font-black uppercase">--</div>
                 </div>
                 <div class="glass-card p-4 text-center border-t-2 border-gold">
-                    <span class="text-[8px] text-gold font-bold uppercase block mb-1 italic">Zodiac (Kanji)</span>
-                    <div id="disp-ganji" class="text-sm font-black uppercase text-white">--</div>
+                    <span class="text-[8px] text-gold font-bold uppercase block mb-1">Sexagenary Cycle (60)</span>
+                    <div id="disp-ganji" class="text-[12px] font-black uppercase text-white leading-tight">--</div>
                 </div>
                 <div class="glass-card p-4 text-center border-t-2 border-purple-500">
-                    <span class="text-[8px] text-purple-400 font-bold uppercase block mb-1 italic">Digital Archeology</span>
-                    <div id="disp-trends" class="text-[10px] font-bold text-white italic">Top Trends</div>
+                    <span class="text-[8px] text-purple-400 font-bold uppercase block mb-1">Digital Archeology</span>
+                    <div id="disp-trends" class="text-[10px] font-bold text-white italic">HISTORY SEARCHED</div>
                 </div>
             </section>
 
             <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                 <div class="glass-card border-t-4 border-red-500">
-                    <h2 class="text-lg font-serif text-red-400 mb-4 uppercase italic">🚨 Major Incidents & Politics</h2>
+                    <h2 class="text-lg font-serif text-red-400 mb-4 uppercase italic">🚨 Major Incidents</h2>
                     <div id="list-incidents" class="scroll-box"></div>
                 </div>
                 <div class="glass-card border-t-4 border-emerald-400">
-                    <h2 class="text-lg font-serif text-emerald-400 mb-4 uppercase italic">⚙️ Innovations & Firsts</h2>
+                    <h2 class="text-lg font-serif text-emerald-400 mb-4 uppercase italic">⚙️ Innovations</h2>
                     <div id="list-innovations" class="scroll-box"></div>
                 </div>
             </div>
 
             <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
                 <div class="glass-card border-t-4 border-sky-400">
-                    <span class="text-[10px] text-sky-400 font-bold uppercase block mb-4">🎬 Cinema & TV</span>
+                    <span class="text-[10px] text-sky-400 font-bold uppercase block mb-4 italic">🎬 Cinema & TV</span>
                     <div id="list-movies" class="scroll-box"></div>
                 </div>
                 <div class="glass-card border-t-4 border-pink-500">
-                    <span class="text-[10px] text-pink-400 font-bold uppercase block mb-4">🎵 Music & Arts</span>
+                    <span class="text-[10px] text-pink-400 font-bold uppercase block mb-4 italic">🎵 Music & Arts</span>
                     <div id="list-music" class="scroll-box"></div>
                 </div>
                 <div class="glass-card border-t-4 border-amber-500">
-                    <span class="text-[10px] text-amber-400 font-bold uppercase block mb-4">🎮 Gaming & Tech</span>
+                    <span class="text-[10px] text-amber-400 font-bold uppercase block mb-4 italic">🎮 Gaming & Tech</span>
                     <div id="list-gaming" class="scroll-box"></div>
-                </div>
-            </div>
-
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                <div class="glass-card border-t-4 border-orange-500">
-                    <h2 class="text-lg font-serif text-orange-400 mb-4 uppercase italic">🍴 History's Recipe</h2>
-                    <div id="list-recipes" class="scroll-box"></div>
-                </div>
-                <div class="glass-card border-t-4 border-purple-400">
-                    <h2 class="text-lg font-serif text-purple-400 mb-4 uppercase italic">🎂 Born Today</h2>
-                    <div id="list-births" class="scroll-box"></div>
                 </div>
             </div>
         </div>
@@ -112,7 +102,7 @@
         <footer class="text-center py-10 space-y-6">
             <div class="flex justify-center gap-4">
                 <button onclick="window.open('https://alldayarchive.blogspot.com')" class="bg-white text-black px-6 py-2 rounded-full font-black text-[10px] uppercase hover:bg-gold transition-all">📖 Official Blog</button>
-                <button onclick="window.open('https://buymeacoffee.com/djawjdaks8g')" class="bg-yellow-400 text-black px-6 py-2 rounded-full font-black text-[10px] uppercase hover:bg-white transition-all">☕ Support</button>
+                <button onclick="window.open('https://buymeacoffee.com/djawjdaks8g')" class="bg-[#FFDD00] text-black px-6 py-2 rounded-full font-black text-[10px] uppercase hover:bg-white transition-all">☕ Buy Me a Coffee</button>
             </div>
         </footer>
     </main>
@@ -122,9 +112,15 @@
         const SB_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Iml3Z2pmcGxycWV1cGZwcGNxbWF1Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3Njc2ODMzODMsImV4cCI6MjA4MzI1OTM4M30.mW07xEhx-YvSx-Xe2YSUH6TpaXEwdvGdbBBcQy1sitU";
         const sb = supabase.createClient(SB_URL, SB_KEY);
 
-        function getZodiac(year) {
-            const animals = ["Monkey", "Rooster", "Dog", "Pig", "Rat", "Ox", "Tiger", "Rabbit", "Dragon", "Snake", "Horse", "Sheep"];
-            return animals[year % 12] || "--";
+        // 60-Year Sexagenary Cycle Calculator (갑을병정 + 자축인묘)
+        function calculate60Cycle(year) {
+            const stems = ["Gyeong (Metal)", "Sin (Metal)", "Im (Water)", "Gye (Water)", "Gap (Wood)", "Eul (Wood)", "Byeong (Fire)", "Jeong (Fire)", "Mu (Earth)", "Gi (Earth)"];
+            const branches = ["Sin (Monkey)", "Yu (Rooster)", "Sul (Dog)", "Hae (Pig)", "Ja (Rat)", "Chuk (Ox)", "In (Tiger)", "Myo (Rabbit)", "Jin (Dragon)", "Sa (Snake)", "Oh (Horse)", "Mi (Sheep)"];
+            // 2024 is Gap-Jin (갑진년)
+            // Logic: Year ends in 4 is 'Gap'. (Year-4)%10 for stems, (Year-4)%12 for branches.
+            const sIdx = (year % 10);
+            const bIdx = (year % 12);
+            return `${stems[sIdx]}<br>${branches[bIdx]}`;
         }
 
         async function handleScan() {
@@ -138,52 +134,71 @@
             
             document.getElementById('vault-area').style.display = 'block';
 
-            // 1. Dynamic Search Guide & Country Localization
+            // 1. Localization & Weather
             let finalCo = coInput;
             if(!coInput) {
-                const geo = await fetch('https://ipapi.co/json/').then(r => r.json());
-                finalCo = geo.country_name || "South Korea";
-                guide.innerText = `Showing results based on your current location: ${finalCo}`;
+                try {
+                    const geo = await fetch('https://ipapi.co/json/').then(r => r.json());
+                    finalCo = geo.country_name || "South Korea";
+                } catch { finalCo = "South Korea"; }
+                guide.innerText = `Search Mode: Current Location Base (${finalCo})`;
             } else {
-                guide.innerText = `Showing pinpoint results for: ${finalCo}`;
+                guide.innerText = `Search Mode: Pinpoint Nation (${finalCo})`;
             }
             guide.style.display = 'block';
 
-            // 2. Weather & Stats Sync (Even for keyword-only search)
             document.getElementById('disp-weather-loc').innerText = finalCo.toUpperCase();
-            document.getElementById('disp-ganji').innerText = getZodiac(parseInt(inY));
+            document.getElementById('disp-ganji').innerHTML = calculate60Cycle(parseInt(inY));
             document.getElementById('disp-day').innerText = new Date(inY, inM-1, inD).toLocaleDateString('en-US', {weekday:'long'});
 
+            // Weather (Seoul fallback for demo)
             try {
-                const res = await fetch(`https://archive-api.open-meteo.com/v1/archive?latitude=37.56&longitude=126.97&start_date=${inY}-${inM}-${inD}&end_date=${inY}-${inM}-${inD}&daily=temperature_2m_max&timezone=auto`);
-                const weatherData = await res.json();
-                document.getElementById('disp-weather').innerText = `${Math.round(weatherData.daily.temperature_2m_max[0])}°C`;
+                const wRes = await fetch(`https://archive-api.open-meteo.com/v1/archive?latitude=37.56&longitude=126.97&start_date=${inY}-${inM}-${inD}&end_date=${inY}-${inM}-${inD}&daily=temperature_2m_max&timezone=auto`).then(r => r.json());
+                document.getElementById('disp-weather').innerText = `${Math.round(wRes.daily.temperature_2m_max[0])}°C`;
             } catch { document.getElementById('disp-weather').innerText = "18°C"; }
 
-            // 3. Data Rendering
-            const { data } = await sb.from('daily_archives').select('*').eq('date_id', `${inM}-${inD}`).single();
+            // 2. Hybrid Search Logic
+            // If year is entered, search specific date. If keyword only, search all dates matching.
+            let query = sb.from('daily_archives').select('*');
+            if (!kw && !coInput) { query = query.eq('date_id', `${inM}-${inD}`); }
+
+            const { data } = await query;
             if(!data) return;
 
-            const render = (id, list) => {
+            const render = (id, fieldName) => {
                 const cont = document.getElementById(id); cont.innerHTML = "";
-                if(!list) return;
+                let masterList = [];
+                
+                // Combine results from all days if keyword search
+                data.forEach(day => {
+                    if(day[fieldName]) {
+                        day[fieldName].forEach(item => {
+                            const matchKw = kw && (item.text.toLowerCase().includes(kw));
+                            const matchCo = coInput && (item.text.toLowerCase().includes(coInput.toLowerCase()));
+                            const matchYear = inY && (item.year == inY);
+                            
+                            // Year-only filtering for Entertainment
+                            const isEntertain = ['movies','music','gaming'].includes(fieldName);
+                            if(kw || coInput || (inY && isEntertain)) {
+                                if(matchKw || matchCo || (matchYear && isEntertain)) masterList.push({...item, dateId: day.date_id});
+                            } else if (day.date_id === `${inM}-${inD}`) {
+                                masterList.push({...item, dateId: day.date_id});
+                            }
+                        });
+                    }
+                });
 
-                // Keyword Priority Sorting
-                list.sort((a,b) => (kw && a.text.toLowerCase().includes(kw)) ? -1 : 1).forEach(item => {
+                masterList.sort((a,b) => b.year - a.year).forEach(item => {
                     const isK = kw && item.text.toLowerCase().includes(kw);
-                    const isY = item.year == inY;
-                    const dateInfo = item.month ? `[${item.month}-${item.day}]` : `[${inM}-${inD}]`;
-
                     const html = `
                         <div class="py-4 border-b border-white/5 ${isK ? 'priority-focus px-4 rounded-xl' : ''}">
                             <div class="flex items-start gap-4">
-                                <span class="year-badge ${isY ? 'match-badge' : ''}">${item.year} ${dateInfo}</span>
+                                <span class="year-badge ${item.year == inY ? 'match-badge' : ''}">${item.year} [${item.dateId || '00-00'}]</span>
                                 <div class="flex-1">
-                                    <p class="text-sm ${isK || isY ? 'text-white font-bold' : 'text-gray-400'}">${item.text}</p>
+                                    <p class="text-sm ${isK ? 'text-white font-bold' : 'text-gray-400'}">${item.text}</p>
                                     <div class="flex gap-2 mt-3">
                                         <button onclick="window.open('https://www.youtube.com/results?search_query=${encodeURIComponent(item.text)}')" class="action-btn">📺 YT</button>
-                                        <button onclick="window.open('http://googleusercontent.com/spotify.com/7{encodeURIComponent(item.text)}')" class="action-btn">🎧 SP</button>
-                                        <button onclick="window.open('https://www.amazon.com/s?tag=dedle-20&k=${encodeURIComponent(item.text)}')" class="action-btn">🛒 Shop</button>
+                                        <button onclick="window.open('http://googleusercontent.com/spotify.com/8{encodeURIComponent(item.text)}')" class="action-btn">🎧 SP</button>
                                     </div>
                                 </div>
                             </div>
@@ -192,14 +207,16 @@
                 });
             };
 
-            render('list-incidents', data.incidents);
-            render('list-innovations', data.innovations);
-            render('list-movies', data.movies);
-            render('list-music', data.music);
-            render('list-gaming', data.gaming);
-            render('list-recipes', data.recipes);
-            render('list-births', data.birthdays);
+            render('list-incidents', 'incidents');
+            render('list-innovations', 'innovations');
+            render('list-movies', 'movies');
+            render('list-music', 'music');
+            render('list-gaming', 'gaming');
         }
+
+        // Button and Enter Key Fix
+        document.getElementById('mainScanBtn').addEventListener('click', handleScan);
+        document.addEventListener('keypress', (e) => { if(e.key === 'Enter') handleScan(); });
     </script>
 </body>
 </html>
