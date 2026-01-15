@@ -3,138 +3,102 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AllDay Archive | Official World Chronicles</title>
+    
+    <!-- 🌐 Global SEO Strategy: Telling Google our multilingual structure -->
+    <link rel="alternate" hreflang="x-default" href="https://alldayarchive.com/" />
+    <link rel="alternate" hreflang="ko" href="https://alldayarchive.com/ko" />
+    <link rel="alternate" hreflang="en" href="https://alldayarchive.com/en" />
+    <link rel="alternate" hreflang="es" href="https://alldayarchive.com/es" />
+    <link rel="alternate" hreflang="pt" href="https://alldayarchive.com/br" />
+    <link rel="alternate" hreflang="ja" href="https://alldayarchive.com/jp" />
+    
+    <title>AllDay Archive | Global Heritage, Sports & Culture Search</title>
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
     <style>
-        :root { --gold: #c5a059; --bg: #0c0e12; --card: rgba(25, 28, 35, 0.98); }
+        :root { --gold: #c5a059; --bg: #0c0e12; --amazon: #ff9900; }
         body { font-family: 'Inter', sans-serif; background-color: var(--bg); color: #e2e8f0; scroll-behavior: smooth; overflow-x: hidden; }
         .font-serif { font-family: 'Playfair Display', serif; }
         .bg-heritage { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: radial-gradient(circle at 50% 50%, #1a1e26 0%, #0c0e12 100%); z-index: -1; }
-        .glass-card { background: var(--card); border: 1px solid rgba(197, 160, 89, 0.1); border-radius: 24px; padding: 2rem; transition: 0.4s; }
-        .scroll-box { height: 350px; overflow-y: auto; padding-right: 10px; scrollbar-width: thin; scrollbar-color: var(--gold) transparent; }
+        .glass-card { background: rgba(25, 28, 35, 0.98); border: 1px solid rgba(197, 160, 89, 0.1); border-radius: 24px; padding: 2rem; transition: 0.4s; }
+        .scroll-box { height: 400px; overflow-y: auto; padding-right: 10px; scrollbar-width: thin; scrollbar-color: var(--gold) transparent; }
         .scroll-box::-webkit-scrollbar { width: 3px; }
         .scroll-box::-webkit-scrollbar-thumb { background: var(--gold); }
-        .year-badge { border: 1px solid var(--gold); color: var(--gold); padding: 2px 8px; border-radius: 4px; font-size: 11px; font-weight: 700; min-width: 60px; text-align: center; }
-        .match-badge { background: var(--gold); color: #000; padding: 2px 8px; border-radius: 4px; font-size: 11px; font-weight: 900; box-shadow: 0 0 10px var(--gold); }
+        .year-badge { border: 1px solid var(--gold); color: var(--gold); padding: 2px 8px; border-radius: 4px; font-size: 11px; font-weight: 700; min-width: 65px; text-align: center; }
+        .match-badge { background: var(--gold); color: #000; padding: 2px 8px; border-radius: 4px; font-size: 11px; font-weight: 900; box-shadow: 0 0 15px var(--gold); }
+        .action-btn { font-size: 9px; font-weight: 800; padding: 5px 10px; border-radius: 6px; border: 1px solid rgba(255,255,255,0.1); color: #888; transition: 0.2s; }
+        .action-btn:hover { border-color: var(--gold); color: var(--gold); background: rgba(197, 160, 89, 0.05); }
         .priority-focus { background: rgba(197, 160, 89, 0.15) !important; border-left: 4px solid var(--gold) !important; }
         #vault-area { display: none; }
-        input { background: rgba(255,255,255,0.05); border: 1px solid rgba(197, 160, 89, 0.3); padding: 1.2rem; border-radius: 12px; color: white; outline: none; transition: 0.3s; width: 100%; text-align: center; }
-        .scan-btn { background: var(--gold); color: #000; font-weight: 900; padding: 1.2rem; border-radius: 12px; width: 100%; text-transform: uppercase; letter-spacing: 2px; cursor: pointer; }
-        .amazon-btn { background: #f3a847; color: #000; font-weight: 800; font-size: 10px; padding: 8px 16px; border-radius: 6px; display: inline-flex; align-items: center; gap: 6px; transition: 0.2s; }
-        .amazon-btn:hover { background: #ff9900; transform: translateY(-2px); }
+        input { background: rgba(255,255,255,0.05); border: 1px solid rgba(197, 160, 89, 0.3); padding: 1.2rem; border-radius: 12px; color: white; outline: none; transition: 0.3s; width: 100%; text-align: center; font-size: 1rem; }
+        .scan-btn { background: var(--gold); color: #000; font-weight: 900; padding: 1.2rem; border-radius: 12px; width: 100%; text-transform: uppercase; letter-spacing: 2px; cursor: pointer; transition: 0.3s; z-index: 100; position: relative; }
     </style>
 </head>
 <body>
     <div class="bg-heritage"></div>
-    <nav class="fixed w-full z-[1000] px-10 py-6 flex justify-between items-center border-b border-white/5 bg-black/40 backdrop-blur-xl font-serif">
-        <div class="text-2xl font-black text-[#c5a059] uppercase italic tracking-tighter">ALLDAY ARCHIVE</div>
-        <div class="text-[9px] tracking-[0.4em] text-gray-500 uppercase font-bold border border-white/10 px-3 py-1 rounded italic">Global Partner: Amazon</div>
+    <nav class="fixed w-full z-[1000] px-10 py-6 flex justify-between items-center border-b border-white/5 bg-black/40 backdrop-blur-xl">
+        <div class="text-2xl font-black text-[#c5a059] uppercase italic font-serif">ALLDAY ARCHIVE</div>
+        <div id="seo-label" class="text-[9px] tracking-[0.4em] text-gray-500 uppercase font-bold border border-white/10 px-3 py-1 rounded">Global SEO Optimized</div>
     </nav>
 
     <main class="relative pt-48 pb-20 px-6 max-w-7xl mx-auto space-y-20">
-        <!-- Hero -->
+        <!-- Intelligent Search Hub -->
         <section class="text-center space-y-12">
-            <h1 class="text-5xl md:text-8xl font-black text-white leading-none font-serif italic uppercase tracking-tighter leading-tight">HISTORY <br><span class="text-[#c5a059]">INTELLIGENCE</span></h1>
-            <div class="glass-card max-w-4xl mx-auto p-8 space-y-8 shadow-3xl">
+            <h1 class="text-5xl md:text-8xl font-black text-white leading-none font-serif italic uppercase tracking-tighter leading-tight italic">HISTORY <br><span class="text-[#c5a059]">INTELLIGENCE</span></h1>
+            <div class="glass-card max-w-5xl mx-auto p-8 space-y-8 shadow-3xl">
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                    <input type="text" id="smartSearch" placeholder="SEARCH NATION OR KEYWORD (E.G. KOREA, CAT)">
-                    <input type="date" id="targetDate" class="text-white">
+                    <div class="text-left space-y-2">
+                        <label class="text-[10px] text-[#c5a059] uppercase font-bold ml-1">Smart Search (supports all languages)</label>
+                        <input type="text" id="smartSearch" placeholder="E.G. 축구, BRAZIL, CAT, 2002">
+                    </div>
+                    <div class="text-left space-y-2">
+                        <label class="text-[10px] text-[#c5a059] uppercase font-bold ml-1">Timeline Point</label>
+                        <input type="date" id="targetDate" class="text-white">
+                    </div>
                 </div>
-                <button onclick="handleScan()" class="scan-btn shadow-2xl">Synchronize Time & Commerce</button>
+                <button onclick="handleScan()" class="scan-btn">Synchronize Global Records (Enter)</button>
             </div>
         </section>
 
-        <!-- Content Area -->
-        <div id="vault-area" class="space-y-20">
+        <!-- Result Content -->
+        <div id="vault-area" class="space-y-24">
             <!-- 🌡️ Dashboard -->
-            <section class="grid grid-cols-1 md:grid-cols-3 gap-8 text-center">
-                <div class="glass-card border-t-2 border-[#c5a059]">
-                    <span class="text-[9px] text-[#c5a059] uppercase block mb-4 italic tracking-widest text-center font-bold">Climate Sync</span>
-                    <div id="disp-weather" class="text-4xl font-black">--°C</div>
+            <section class="grid grid-cols-1 md:grid-cols-2 gap-8 text-center font-hud">
+                <div class="glass-card flex justify-between items-center px-12 border-l-2 border-l-[#c5a059]">
+                    <div class="text-left"><span class="text-[9px] text-[#c5a059] uppercase block mb-2 font-bold tracking-widest">Climate</span><div id="disp-weather" class="text-5xl font-black italic">--°C</div></div>
+                    <div id="disp-weather-desc" class="text-[10px] text-gray-500 text-right uppercase">Satellite <br>Sync</div>
                 </div>
-                <div class="glass-card border-t-2 border-[#c5a059]">
-                    <span class="text-[9px] text-[#c5a059] uppercase block mb-4 italic tracking-widest text-center font-bold">Stellar View</span>
-                    <div id="disp-constellation" class="text-xs font-bold text-white uppercase italic">Syncing...</div>
-                </div>
-                <div class="glass-card border-t-2 border-[#c5a059]">
-                    <span class="text-[9px] text-[#c5a059] uppercase block mb-4 italic tracking-widest text-center font-bold">Ancestral Cycle</span>
-                    <div id="disp-ganji" class="text-xl font-black uppercase text-white leading-tight">--</div>
-                    <p id="disp-zodiac" class="text-[10px] text-gray-500 uppercase mt-1">Eastern Wisdom</p>
+                <div class="glass-card flex justify-between items-center px-12 border-l-2 border-l-[#c5a059]">
+                    <div class="text-left text-[#c5a059]"><span class="text-[9px] uppercase block mb-2 font-bold tracking-widest">Cycle</span><div id="disp-ganji" class="text-xl font-black uppercase text-white leading-tight">--</div></div>
+                    <div id="disp-zodiac" class="text-[10px] text-gray-500 text-right uppercase">Eastern <br>Wisdom</div>
                 </div>
             </section>
 
-            <!-- 🏆 SPORTS & COMMERCE -->
-            <section class="glass-card p-8 border-t-4 border-[#c5a059]">
-                <div class="flex flex-col md:flex-row justify-between items-center mb-6 gap-4">
-                    <h2 class="text-2xl font-serif text-[#c5a059] italic uppercase tracking-widest">🏆 Sports Milestones</h2>
-                    <a id="amazon-sports" href="#" target="_blank" class="amazon-btn">🛒 Shop Sports Legends on Amazon</a>
-                </div>
-                <div id="list-sports" class="scroll-box space-y-4"></div>
+            <!-- 🏆 PRIORITY RECORDS (Keyword matches go here first) -->
+            <section id="priority-section" class="space-y-8 hidden">
+                <h2 class="text-3xl font-serif text-white italic border-b border-white/5 pb-4 uppercase tracking-widest"><span class="text-[#c5a059]">Search</span> Intelligence Results</h2>
+                <div id="list-priority" class="space-y-2"></div>
             </section>
 
-            <!-- 🎧 CULTURE & MEDIA -->
-            <section class="grid grid-cols-1 md:grid-cols-3 gap-6">
-                <div class="glass-card p-6 border-t-4 border-sky-400 flex flex-col justify-between">
-                    <div>
-                        <span class="text-[9px] text-sky-400 font-bold uppercase block mb-4">Cinema History</span>
-                        <div id="list-movies" class="scroll-box mb-4 text-sm font-bold uppercase"></div>
-                    </div>
-                    <a id="amazon-movies" href="#" target="_blank" class="amazon-btn w-full justify-center">🛒 Movie Collections</a>
-                </div>
-                <div class="glass-card p-6 border-t-4 border-pink-500 flex flex-col justify-between">
-                    <div>
-                        <span class="text-[9px] text-pink-400 font-bold uppercase block mb-4">Global Music</span>
-                        <div id="list-music" class="scroll-box mb-4 text-sm font-bold uppercase"></div>
-                    </div>
-                    <a id="amazon-music" href="#" target="_blank" class="amazon-btn w-full justify-center">🛒 Vinyl & Albums</a>
-                </div>
-                <div class="glass-card p-6 border-t-4 border-emerald-400 flex flex-col justify-between">
-                    <div>
-                        <span class="text-[9px] text-emerald-400 font-bold uppercase block mb-4">Tech & Gaming</span>
-                        <div id="list-gaming" class="scroll-box mb-4 text-sm font-bold uppercase"></div>
-                    </div>
-                    <a id="amazon-gaming" href="#" target="_blank" class="amazon-btn w-full justify-center">🛒 Retro Gear</a>
-                </div>
-            </section>
-
-            <!-- 🎉 HOLIDAYS & 🚨 INCIDENTS -->
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
-                <section class="glass-card p-8 border-t-4 border-green-500">
-                    <h2 class="text-xl font-serif text-green-400 mb-6 uppercase tracking-widest italic">🎉 Global Holidays</h2>
-                    <div id="list-holidays" class="scroll-box"></div>
+            <!-- 🎉 HOLIDAYS & 📜 HISTORY -->
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-10">
+                <section class="space-y-6">
+                    <h2 class="text-xl font-serif text-green-500 italic border-b border-white/10 pb-2 uppercase tracking-widest">🎉 Global Special Days</h2>
+                    <div id="list-holidays" class="scroll-box pr-2"></div>
                 </section>
-                <section class="glass-card p-8 border-t-4 border-red-500">
-                    <h2 class="text-xl font-serif text-red-400 mb-6 uppercase tracking-widest italic">🚨 Major Incidents</h2>
-                    <div id="list-incidents" class="scroll-box"></div>
-                </section>
-            </div>
-
-            <!-- 🎂 HALL OF FAME -->
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
-                <section class="glass-card p-8 border-t-4 border-pink-400">
-                    <h2 class="text-xl font-serif text-pink-400 mb-6 uppercase italic">🎂 Born Today</h2>
-                    <div id="list-births" class="scroll-box"></div>
-                </section>
-                <section class="glass-card p-8 border-t-4 border-gray-600 opacity-60">
-                    <h2 class="text-xl font-serif text-gray-500 mb-6 uppercase italic">🕊️ Passed Away</h2>
-                    <div id="list-deaths" class="scroll-box"></div>
+                <section class="space-y-6">
+                    <h2 class="text-xl font-serif text-[#c5a059] italic border-b border-white/10 pb-2 uppercase tracking-widest">📜 Historical Chronicles</h2>
+                    <div id="list-history" class="scroll-box pr-2"></div>
                 </section>
             </div>
 
             <!-- Footer -->
-            <footer class="py-24 text-center border-t border-white/5 bg-black/20 space-y-10">
-                <!-- ⚠️ AMAZON DISCLOSURE (MUST HAVE) -->
-                <p class="text-[10px] text-gray-500 italic max-w-2xl mx-auto px-6">
-                    As an Amazon Associate, I earn from qualifying purchases. This means if you click on a link and make a purchase, I may receive a small commission at no extra cost to you.
-                </p>
-                
-                <button onclick="window.open('https://alldayarchive.blogspot.com')" class="bg-emerald-600 text-white px-10 py-4 rounded-full font-black text-xs hover:bg-white hover:text-black transition-all shadow-xl uppercase tracking-widest">Explore Chronicles & Recipes (Blog)</button>
-                
+            <footer class="py-24 text-center border-t border-white/5 bg-black/20 space-y-12">
+                <button onclick="window.open('https://alldayarchive.blogspot.com')" class="bg-emerald-600 text-white px-12 py-5 rounded-full font-black text-xs hover:bg-white hover:text-black transition-all shadow-xl uppercase italic">Enter Official Recipe & Trend Library (Blog)</button>
                 <div class="pt-10 flex flex-col items-center gap-6">
-                    <button onclick="window.open('https://buymeacoffee.com/djawjdaks8g')" class="bg-yellow-400 text-black px-10 py-4 rounded-full font-black text-[11px] hover:bg-white transition-all uppercase">☕ BUY ME A COFFEE</button>
-                    <p class="text-[9px] text-gray-600 uppercase tracking-[0.5em] mt-8 italic">Provided by AllDay Archive Global Team © 2026</p>
+                    <button onclick="window.open('https://buymeacoffee.com/djawjdaks8g')" class="bg-yellow-400 text-black px-10 py-4 rounded-full font-black text-[11px] hover:bg-white transition-all uppercase tracking-widest">☕ BUY ME A COFFEE</button>
+                    <p class="text-[9px] text-gray-600 uppercase tracking-[0.5em] mt-8 italic">Global History Station curated by dedle © 2026</p>
                 </div>
             </footer>
         </div>
@@ -144,63 +108,80 @@
         const SB_URL = "https://iwgjfplrqeupfppcqmau.supabase.co"; 
         const SB_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Iml3Z2pmcGxycWV1cGZwcGNxbWF1Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3Njc2ODMzODMsImV4cCI6MjA4MzI1OTM4M30.mW07xEhx-YvSx-Xe2YSUH6TpaXEwdvGdbBBcQy1sitU"; 
         const sb = supabase.createClient(SB_URL, SB_KEY);
-
-        // 💡 아마존 제휴 ID 적용 완료!
         const AMAZON_ID = "dedle-20";
 
-        function getZodiac(year) {
-            const names = ["Gyeong-sin","Sin-yu","Im-sul","Gye-hae","Gap-ja","Eul-chuk","Byeong-in","Jeong-myo","Mu-jin","Gi-sa","Gyeong-oh","Sin-mi","Im-sin","Gye-yu","Gap-sul","Eul-hae","Byeong-ja","Jeong-chuk","Mu-in","Gi-myo","Gyeong-jin","Sin-sa","Im-oh","Gye-mi","Gap-sin","Eul-yu","Byeong-sul","Jeong-hae","Mu-ja","Gi-chuk","Gyeong-in","Sin-myo","Im-jin","Gye-sa","Gap-oh","Eul-mi","Byeong-sin","Jeong-yu","Mu-sul","Gi-hae","Gyeong-ja","Sin-chuk","Im-in","Gye-myo","Gap-jin","Eul-sa","Byeong-oh","Jeong-mi","Mu-sin","Gi-yu","Gyeong-sul","Sin-hae","Im-ja","Gye-chuk","Gap-in","Eul-myo","Byeong-jin","Jeong-sa","Mu-oh","Gi-mi"];
-            const animals = ["Monkey","Rooster","Dog","Pig","Rat","Ox","Tiger","Rabbit","Dragon","Snake","Horse","Sheep"];
-            const idx = (year - 0) % 60; const aIdx = (year - 0) % 12;
-            return { name: names[idx < 0 ? idx + 60 : idx], animal: animals[aIdx < 0 ? aIdx + 12 : aIdx] };
+        // 다국어 지능형 검색 사전 (축구, 고양이 등 추가)
+        const polyglotDict = {
+            "축구": "soccer football fifa uefa", "fútbol": "soccer football", "futebol": "soccer football",
+            "고양이": "cat cat day world cat day", "gato": "cat",
+            "야구": "baseball mlb kbo", "농구": "basketball nba",
+            "영화": "movie cinema film", "음악": "music song billboard chart"
+        };
+
+        function getSmartLink(type, text, year) {
+            const q = encodeURIComponent(`${year} ${text.replace(/[^\w\sㄱ-ㅎ가-힣]/g, '')}`);
+            if(type === 'yt') return `https://www.youtube.com/results?search_query=${q}+trailer+ost`;
+            if(type === 'sp') return `https://open.spotify.com/search/${q}`;
+            if(type === 'amz') return `https://www.amazon.com/s?tag=${AMAZON_ID}&k=${q}`;
+            if(type === 'blog') return `https://alldayarchive.blogspot.com/search?q=${q}`;
         }
 
         async function handleScan() {
             let dateInput = document.getElementById('targetDate').value;
             let rawQuery = document.getElementById('smartSearch').value.trim();
+            let searchQuery = polyglotDict[rawQuery.toLowerCase()] || rawQuery.toLowerCase();
+
             if(!dateInput) { dateInput = new Date().toISOString().split('T')[0]; document.getElementById('targetDate').value = dateInput; }
             const [y, m, d] = dateInput.split('-'); const md = `${m}-${d}`;
             
+            // 🌐 다국어 SEO 주소 생성 로직
+            const langCode = (/[ㄱ-ㅎ|ㅏ-ㅣ|가-힣]/.test(rawQuery)) ? 'ko' : 'en';
+            window.history.pushState({}, '', `/${langCode}/${md}`);
+            document.getElementById('seo-label').innerText = `SEO: ${langCode.toUpperCase()} Mode Active`;
+
             const { data, error } = await sb.from('daily_archives').select('*').eq('date_id', md).single();
-            if (error || !data) return alert("Deep Archive Syncing... Please try another day!");
+            if (error || !data) return alert("Archive syncing... Try Jan 1st!");
             document.getElementById('vault-area').style.display = 'block';
 
-            // 🛒 아마존 링크 실시간 생성 (dedle-20 적용)
-            const amzBase = `https://www.amazon.com/s?tag=${AMAZON_ID}&k=`;
-            const q = rawQuery || "History";
-            document.getElementById('amazon-sports').href = amzBase + q + "+sports+equipment";
-            document.getElementById('amazon-movies').href = amzBase + q + "+movie+blu-ray";
-            document.getElementById('amazon-music').href = amzBase + q + "+music+album";
-            document.getElementById('amazon-gaming').href = amzBase + q + "+video+game";
+            const priority = []; const holidays = []; const history = [];
+            const hKeys = ['day','independence','festival','national','celebration','observance','world'];
+            const allItems = [...(data.holidays || []), ...(data.firsts || []), ...(data.innovations || []), ...(data.arts || []), ...(data.pop_culture || []), ...(data.birthdays || [])];
+            
+            allItems.forEach(item => {
+                const text = item.text.toLowerCase();
+                const isKeyMatch = searchQuery && searchQuery.split(' ').some(k => text.includes(k));
+                const yearDisp = item.year < 0 ? Math.abs(item.year) + " B.C." : (item.year || 'ANNUAL');
+                const isM = item.year == y;
 
-            const render = (id, list) => {
-                const cont = document.getElementById(id); cont.innerHTML = "";
-                if(!list || list.length === 0) return cont.innerHTML = "<p class='text-xs text-gray-600 italic mt-10'>No records.</p>";
-                list.sort((a,b) => (rawQuery && a.text.toLowerCase().includes(rawQuery.toLowerCase())? -1 : 1) || (b.year - a.year)).forEach(item => {
-                    const isM = item.year == y; const isK = rawQuery && item.text.toLowerCase().includes(rawQuery.toLowerCase());
-                    const yearDisp = item.year < 0 ? Math.abs(item.year) + " B.C." : (item.year || 'ANNUAL');
-                    cont.innerHTML += `<div class="flex items-start py-5 border-b border-white/5 ${isK?'priority-focus px-4 rounded-lg':''}"><span class="year-badge ${isM?'match-badge':''}">${yearDisp}</span><span class="${isM||isK?'text-[#c5a059] font-bold':'text-gray-400'} text-sm leading-relaxed">${item.text}</span></div>`;
-                });
-            };
+                const html = `
+                    <div class="flex flex-col py-5 border-b border-white/5 ${isKeyMatch?'priority-focus px-6 rounded-xl':''}">
+                        <div class="flex items-start gap-4">
+                            <span class="year-badge ${isM?'match-badge':''}">${yearDisp}</span>
+                            <span class="${isM||isKeyMatch?'text-[#c5a059] font-bold':'text-gray-400'} text-sm leading-relaxed flex-1">${item.text}</span>
+                        </div>
+                        <div class="flex gap-2 mt-4 ml-[80px]">
+                            <button onclick="window.open('${getSmartLink('yt', item.text, item.year)}')" class="action-btn">📺 Trailer</button>
+                            <button onclick="window.open('${getSmartLink('sp', item.text, item.year)}')" class="action-btn">🎧 Music</button>
+                            <button onclick="window.open('${getSmartLink('amz', item.text, item.year)}')" class="action-btn">🛒 Shop</button>
+                            <button onclick="window.open('${getSmartLink('blog', item.text, item.year)}')" class="action-btn">📖 Story</button>
+                        </div>
+                    </div>`;
 
-            render('list-holidays', data.holidays); render('list-incidents', data.incidents);
-            render('list-sports', data.sports); render('list-movies', data.movies); 
-            render('list-music', data.music); render('list-gaming', data.gaming);
-            render('list-births', data.birthdays); render('list-deaths', data.deaths);
+                if (isKeyMatch) priority.push(html);
+                else if (hKeys.some(k => text.includes(k))) holidays.push(html);
+                else history.push(html);
+            });
 
-            const z = getZodiac(y);
-            document.getElementById('disp-ganji').innerText = z.name;
-            document.getElementById('disp-zodiac').innerText = "Year of the " + z.animal;
+            if(priority.length > 0) { document.getElementById('priority-section').classList.remove('hidden'); document.getElementById('list-priority').innerHTML = priority.join(''); }
+            document.getElementById('list-holidays').innerHTML = holidays.join('');
+            document.getElementById('list-history').innerHTML = history.join('');
+
+            document.getElementById('disp-ganji').innerText = "Syncing Cycle...";
             document.getElementById('disp-weather').innerText = "18°C";
             setTimeout(() => { document.getElementById('vault-area').scrollIntoView({ behavior: 'smooth' }); }, 150);
         }
 
-        function navigateDay(offset) {
-            const current = document.getElementById('targetDate').value || new Date().toISOString().split('T')[0];
-            let date = new Date(current); date.setDate(date.getDate() + offset);
-            document.getElementById('targetDate').value = date.toISOString().split('T')[0];
-            handleScan();
-        }
+        document.addEventListener('keypress', (e) => { if(e.key === 'Enter') handleScan(); });
     </script>
 </body>
 </html>
