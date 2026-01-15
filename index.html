@@ -8,146 +8,149 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
     <style>
-        :root { --gold: #c5a059; --bg: #0c0e12; --card: rgba(25, 28, 35, 0.98); }
+        :root { --gold: #c5a059; --bg: #0c0e12; }
         body { font-family: 'Inter', sans-serif; background-color: var(--bg); color: #e2e8f0; scroll-behavior: smooth; overflow-x: hidden; }
         .font-serif { font-family: 'Playfair Display', serif; }
         .bg-heritage { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: radial-gradient(circle at 50% 50%, #1a202c 0%, #0c0e12 100%); z-index: -1; }
-        .glass-card { background: var(--card); border: 1px solid rgba(197, 160, 89, 0.1); border-radius: 24px; padding: 2rem; }
-        .scroll-box { height: 400px; overflow-y: auto; padding-right: 10px; scrollbar-width: thin; scrollbar-color: var(--gold) transparent; }
+        .glass-card { background: rgba(25, 28, 35, 0.98); border: 1px solid rgba(197, 160, 89, 0.1); border-radius: 24px; padding: 1.5rem; transition: 0.4s; }
+        .scroll-box { height: 350px; overflow-y: auto; padding-right: 10px; scrollbar-width: thin; scrollbar-color: var(--gold) transparent; }
         .scroll-box::-webkit-scrollbar { width: 3px; }
         .scroll-box::-webkit-scrollbar-thumb { background: var(--gold); border-radius: 10px; }
-        .year-badge { border: 1px solid var(--gold); color: var(--gold); padding: 2px 8px; border-radius: 4px; font-size: 11px; font-weight: 700; min-width: 70px; text-align: center; }
+        .year-badge { border: 1px solid var(--gold); color: var(--gold); padding: 2px 8px; border-radius: 4px; font-size: 11px; font-weight: 700; min-width: 65px; text-align: center; }
         .match-badge { background: var(--gold); color: #000; padding: 2px 8px; border-radius: 4px; font-size: 11px; font-weight: 900; box-shadow: 0 0 15px var(--gold); }
-        .priority-focus { background: rgba(197, 160, 89, 0.15) !important; border-left: 4px solid var(--gold) !important; transform: scale(1.01); }
-        input { background: rgba(255,255,255,0.08) !important; border: 1px solid rgba(197, 160, 89, 0.3) !important; padding: 1.2rem; border-radius: 12px; color: #ffffff !important; outline: none; transition: 0.3s; width: 100%; text-align: center; font-size: 1rem; }
-        .scan-btn { background: var(--gold); color: #000; font-weight: 900; padding: 1.2rem; border-radius: 12px; width: 100%; text-transform: uppercase; letter-spacing: 2px; cursor: pointer; transition: 0.3s; }
+        .priority-focus { background: rgba(197, 160, 89, 0.18) !important; border-left: 5px solid var(--gold) !important; transform: scale(1.01); box-shadow: 0 10px 40px rgba(0,0,0,0.5); }
+        
+        /* ⌨️ 날짜 입력기 가독성 및 자동이동 */
+        .date-input-group { display: flex; gap: 5px; justify-content: center; }
+        .date-input-group input { width: 80px; background: rgba(255,255,255,0.08); border: 1px solid rgba(197, 160, 89, 0.3); padding: 1rem 0; border-radius: 12px; color: #fff !important; text-align: center; font-size: 1.2rem; outline: none; }
+        #in-year { width: 110px; }
+        input#smartSearch, input#countrySearch { background: rgba(255,255,255,0.08); border: 1px solid rgba(197, 160, 89, 0.3); padding: 1rem; border-radius: 12px; color: #fff !important; font-size: 1rem; outline: none; width: 100%; text-align: left; }
+
+        .scan-btn { background: var(--gold); color: #000; font-weight: 900; padding: 1.2rem; border-radius: 12px; width: 100%; text-transform: uppercase; letter-spacing: 2px; cursor: pointer; transition: 0.3s; z-index: 100; position: relative; }
+        .detail-view { display: none; padding: 1rem; margin-top: 10px; background: rgba(255,255,255,0.03); border-radius: 10px; font-size: 0.85rem; border: 1px dashed var(--gold); color: #bbb; }
+        .action-btn { font-size: 9px; font-weight: 800; padding: 5px 12px; border-radius: 6px; border: 1px solid rgba(255,255,255,0.1); color: #888; transition: 0.2s; background: rgba(0,0,0,0.3); }
         .star-map { background: radial-gradient(circle, #1e293b 0%, #000 100%); border-radius: 50%; width: 110px; height: 110px; margin: 0 auto; border: 1px solid var(--gold); position: relative; overflow: hidden; }
         .star { position: absolute; background: white; border-radius: 50%; opacity: 0.8; animation: twinkle 2s infinite; }
         @keyframes twinkle { 0%, 100% { opacity: 0.3; } 50% { opacity: 1; } }
-        .detail-view { display: none; padding: 1rem; margin-top: 10px; background: rgba(255,255,255,0.03); border-radius: 10px; font-size: 0.85rem; border: 1px dashed var(--gold); }
-        .action-btn { font-size: 9px; font-weight: 800; padding: 5px 12px; border-radius: 6px; border: 1px solid rgba(255,255,255,0.1); color: #888; transition: 0.2s; background: rgba(0,0,0,0.3); }
         #vault-area { display: none; }
     </style>
 </head>
 <body>
     <div class="bg-heritage"></div>
-    <nav class="fixed w-full z-[1000] px-10 py-6 flex justify-between items-center border-b border-white/5 bg-black/40 backdrop-blur-xl">
-        <div class="text-2xl font-black text-[#c5a059] uppercase italic font-serif">ALLDAY ARCHIVE</div>
+    <nav class="fixed w-full z-[1000] px-10 py-6 flex justify-between items-center border-b border-white/5 bg-black/40 backdrop-blur-xl font-serif">
+        <div class="text-2xl font-black text-[#c5a059] uppercase italic tracking-tighter">ALLDAY ARCHIVE</div>
         <button onclick="window.open('https://open.spotify.com/user/dedle')" class="text-[9px] font-bold text-[#1db954] border border-[#1db954]/30 px-3 py-1 rounded hover:bg-[#1db954] hover:text-black transition-all">MUSIC BY DEDLE</button>
     </nav>
 
     <main class="relative pt-48 pb-20 px-6 max-w-7xl mx-auto space-y-20">
         <!-- Intelligent Search Hub -->
         <section class="text-center space-y-12">
-            <h1 class="text-5xl md:text-8xl font-black text-white leading-none font-serif italic uppercase tracking-tighter leading-tight italic">WHAT HAPPENED <br><span class="text-[#c5a059]">TODAY?</span></h1>
-            <div class="glass-card max-w-5xl mx-auto p-8 space-y-8 shadow-3xl">
-                <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-                    <input type="text" id="smartKeyword" placeholder="KEYWORD (E.G. 축구, CAT)">
-                    <input type="text" id="smartCountry" placeholder="NATION (E.G. KOREA, BRAZIL)">
-                    <input type="date" id="targetDate" class="text-white">
+            <h1 class="text-5xl md:text-8xl font-black text-white leading-none font-serif italic uppercase tracking-tighter italic">RECALLING <br><span class="text-[#c5a059]">THE DAY</span></h1>
+            <div class="glass-card max-w-5xl mx-auto p-8 shadow-3xl space-y-6">
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <input type="text" id="smartSearch" placeholder="KEYWORD (E.G. SOCCER, GAME, ART)">
+                    <input type="text" id="countrySearch" placeholder="NATION FOCUS (E.G. KOREA, BRAZIL)">
                 </div>
-                <button id="scanBtn" onclick="handleScan()" class="scan-btn shadow-2xl">Execute Deep Archive Sync (Enter)</button>
-                <div class="flex justify-center gap-4">
-                    <button onclick="navigateDay(-1)" class="text-[10px] border border-white/10 px-6 py-2 rounded-lg hover:bg-gold hover:text-black font-bold uppercase transition-all">◀ PREV</button>
-                    <button onclick="navigateDay(1)" class="text-[10px] border border-white/10 px-6 py-2 rounded-lg hover:bg-gold hover:text-black font-bold uppercase transition-all">NEXT ▶</button>
+                <div class="date-input-group">
+                    <input type="text" id="in-year" placeholder="YYYY" maxlength="4" onkeyup="if(this.value.length==4)document.getElementById('in-month').focus()">
+                    <input type="text" id="in-month" placeholder="MM" maxlength="2" onkeyup="if(this.value.length==2)document.getElementById('in-day').focus()">
+                    <input type="text" id="in-day" placeholder="DD" maxlength="2">
                 </div>
+                <button onclick="handleScan()" class="scan-btn">Initiate Deep Archive Sync (Enter)</button>
             </div>
         </section>
 
-        <!-- Premium PDF Section -->
-        <section class="text-center">
-            <div class="glass-card bg-gradient-to-r from-[#1a1e26] to-[#0c0e12] border-gold border-opacity-30 py-10">
-                <h3 class="text-[#c5a059] font-serif italic text-2xl mb-4">Personal Pinpoint Archive</h3>
-                <p class="text-gray-400 text-sm mb-6 max-w-xl mx-auto italic">"Order a beautifully designed PDF report of your special day, including historical headlines, weather, and zodiac secrets."</p>
-                <button onclick="alert('Premium Service is coming soon!')" class="bg-white text-black font-black px-12 py-4 rounded-full hover:bg-[#c5a059] transition-all text-xs tracking-widest uppercase">DOWNLOAD CUSTOM PDF ARCHIVE ($2.99)</button>
-            </div>
-        </section>
-
-        <!-- Result Content -->
+        <!-- Result Dashboard -->
         <div id="vault-area" class="space-y-24">
-            <!-- Dashboards -->
+            <!-- 🌡️ Reality Dashboard -->
             <section class="grid grid-cols-1 md:grid-cols-3 gap-8 text-center font-hud">
-                <div class="glass-card border-t-2 border-sky-500">
+                <div class="glass-card border-t-2 border-sky-500 flex flex-col justify-center">
                     <span class="text-[9px] text-sky-400 uppercase block mb-4 italic font-bold">Past Atmosphere</span>
                     <div id="disp-weather" class="text-4xl font-black italic">--°C</div>
-                    <p id="disp-weather-loc" class="text-[9px] text-gray-500 uppercase mt-2 font-bold tracking-widest">Global Sync</p>
+                    <p id="disp-weather-loc" class="text-[9px] text-gray-500 uppercase mt-2 font-bold">Global Link</p>
                 </div>
                 <div class="glass-card border-t-2 border-[#c5a059]">
                     <span class="text-[9px] text-[#c5a059] uppercase block mb-4 italic font-bold">Stellar View</span>
                     <div class="star-map mb-2" id="star-container"></div>
-                    <div id="disp-constellation" class="text-xs font-bold text-white uppercase italic tracking-widest">Searching...</div>
+                    <div id="disp-constellation" class="text-xs font-bold text-white uppercase italic">Syncing...</div>
                 </div>
-                <div class="glass-card border-t-2 border-emerald-500 text-emerald-400">
+                <div class="glass-card border-t-2 border-emerald-500 flex flex-col justify-center text-emerald-400">
                     <span class="text-[9px] uppercase block mb-4 italic font-bold">Ancestral Cycle</span>
                     <div id="disp-ganji" class="text-lg font-black uppercase text-white leading-tight">--</div>
-                    <p id="disp-zodiac" class="text-[9px] text-gray-500 uppercase mt-1 italic font-bold">Zodiac Link</p>
+                    <p id="disp-zodiac" class="text-[9px] text-gray-500 uppercase mt-1 italic font-bold">Eastern Wisdom</p>
                 </div>
+            </section>
+
+            <!-- 🌟 PRIORITY: PINPOINT MATCHES (키워드/국가 최우선) -->
+            <section id="priority-section" class="space-y-8 hidden">
+                <h2 class="text-3xl font-serif text-white italic border-b border-white/5 pb-4 uppercase tracking-widest"><span class="text-[#c5a059]">Intelligence</span> Priority Result</h2>
+                <div id="list-priority" class="space-y-4"></div>
             </section>
 
             <!-- 🏆 SPORTS SECTION -->
             <section class="glass-card p-8 border-t-4 border-[#c5a059]">
-                <h2 class="text-2xl font-serif text-[#c5a059] italic mb-6 uppercase tracking-widest border-b border-white/5 pb-4">🏆 Sports & Olympic Milestones</h2>
+                <h2 class="text-2xl font-serif text-[#c5a059] italic mb-6 uppercase tracking-widest border-b border-white/5 pb-4 italic">🏆 Sports & Olympic Milestones</h2>
                 <div id="list-sports" class="scroll-box space-y-2"></div>
             </section>
 
-            <!-- 🚨 INCIDENTS & 🎉 HOLIDAYS -->
+            <!-- 🎉 HOLIDAYS & 🚨 INCIDENTS -->
             <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
-                <section class="glass-card p-8 border-t-4 border-red-500">
-                    <h2 class="text-xl font-serif text-red-400 mb-6 uppercase tracking-widest italic border-b border-white/5 pb-4">🚨 Major Historical Incidents</h2>
-                    <div id="list-incidents" class="scroll-box"></div>
-                </section>
                 <section class="glass-card p-8 border-t-4 border-green-500">
-                    <h2 class="text-xl font-serif text-green-400 mb-6 uppercase tracking-widest italic border-b border-white/5 pb-4">🎉 Global Holidays</h2>
+                    <h2 class="text-xl font-serif text-green-400 mb-6 uppercase tracking-widest border-b border-white/5 pb-2">🎉 Global Holidays</h2>
                     <div id="list-holidays" class="scroll-box"></div>
                 </section>
+                <section class="glass-card p-8 border-t-4 border-red-500">
+                    <h2 class="text-xl font-serif text-red-400 mb-6 uppercase tracking-widest border-b border-white/5 pb-2">🚨 Historical Incidents</h2>
+                    <div id="list-incidents" class="scroll-box"></div>
+                </section>
+            </div>
+
+            <!-- 🎬 CULTURE GRID -->
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <div class="glass-card p-6 border-t-4 border-sky-400">
+                    <span class="text-[9px] text-sky-400 font-bold uppercase block mb-4 italic tracking-widest">Cinema</span>
+                    <div id="list-movies" class="scroll-box"></div>
+                </div>
+                <div class="glass-card p-6 border-t-4 border-pink-500">
+                    <span class="text-[9px] text-pink-400 font-bold uppercase block mb-4 italic tracking-widest">Music</span>
+                    <div id="list-music" class="scroll-box"></div>
+                </div>
+                <div class="glass-card p-6 border-t-4 border-amber-500">
+                    <span class="text-[9px] text-amber-400 font-bold uppercase block mb-4 italic tracking-widest">Gaming & Media</span>
+                    <div id="list-gaming" class="scroll-box"></div>
+                </div>
             </div>
 
             <!-- ⚙️ INNOVATIONS & 🎨 ARTS -->
             <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
                 <section class="glass-card p-8 border-t-4 border-emerald-400">
-                    <h2 class="text-xl font-serif text-emerald-400 mb-6 uppercase italic border-b border-white/5 pb-4">⚙️ Innovations & Human Firsts</h2>
+                    <h2 class="text-xl font-serif text-emerald-400 mb-6 uppercase italic border-b border-white/5 pb-2">⚙️ Innovations & Firsts</h2>
                     <div id="list-innovations" class="scroll-box"></div>
                 </section>
                 <section class="glass-card p-8 border-t-4 border-purple-400">
-                    <h2 class="text-xl font-serif text-purple-400 mb-6 uppercase italic border-b border-white/5 pb-4">🎨 Arts & Literature</h2>
+                    <h2 class="text-xl font-serif text-purple-400 mb-6 uppercase italic border-b border-white/5 pb-2">🎨 Arts & Literature</h2>
                     <div id="list-arts" class="scroll-box"></div>
                 </section>
-            </div>
-
-            <!-- 🎬 CULTURE -->
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-                <div class="glass-card p-6 border-t-4 border-sky-400">
-                    <span class="text-[9px] text-sky-400 font-bold uppercase block mb-4">Cinema</span>
-                    <div id="list-movies" class="scroll-box"></div>
-                </div>
-                <div class="glass-card p-6 border-t-4 border-pink-500">
-                    <span class="text-[9px] text-pink-400 font-bold uppercase block mb-4">Music Chart</span>
-                    <div id="list-music" class="scroll-box"></div>
-                </div>
-                <div class="glass-card p-6 border-t-4 border-amber-500">
-                    <span class="text-[9px] text-amber-400 font-bold uppercase block mb-4">Gaming & Media</span>
-                    <div id="list-gaming" class="scroll-box"></div>
-                </div>
             </div>
 
             <!-- 🎂 BIRTHS & 🕊️ DEATHS -->
             <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
                 <section class="glass-card p-8 border-t-4 border-pink-400">
-                    <h2 class="text-xl font-serif text-pink-400 mb-6 uppercase italic">🎂 Born on this Day</h2>
+                    <h2 class="text-xl font-serif text-pink-400 mb-6 uppercase italic border-b border-white/5 pb-2">🎂 Born Today</h2>
                     <div id="list-births" class="scroll-box"></div>
                 </section>
                 <section class="glass-card p-8 border-t-4 border-gray-600 opacity-60">
-                    <h2 class="text-xl font-serif text-gray-500 mb-6 uppercase italic">🕊️ Passed Away</h2>
+                    <h2 class="text-xl font-serif text-gray-500 mb-6 uppercase italic border-b border-white/5 pb-2">🕊️ Passed Away Today</h2>
                     <div id="list-deaths" class="scroll-box"></div>
                 </section>
             </div>
 
             <!-- Footer -->
             <footer class="py-24 text-center border-t border-white/5 bg-black/20 space-y-12">
-                <button onclick="window.open('https://alldayarchive.blogspot.com')" class="bg-emerald-600 text-white px-10 py-4 rounded-full font-black text-xs hover:bg-white hover:text-black transition-all shadow-xl uppercase italic">Enter Recipe & Chronicles Library (Blog)</button>
+                <button onclick="window.open('https://alldayarchive.blogspot.com')" class="bg-emerald-600 text-white px-10 py-4 rounded-full font-black text-xs hover:bg-white hover:text-black transition-all shadow-xl uppercase">Visit Official Historical Blog</button>
                 <div class="pt-10 flex flex-col items-center gap-6">
-                    <button onclick="window.open('https://buymeacoffee.com/djawjdaks8g')" class="bg-yellow-400 text-black px-10 py-4 rounded-full font-black text-[11px] hover:bg-white transition-all uppercase">☕ BUY ME A COFFEE</button>
-                    <p class="text-[9px] text-gray-600 uppercase tracking-[0.5em] mt-8 italic">Universal History Monitoring © 2026</p>
+                    <button onclick="window.open('https://buymeacoffee.com/djawjdaks8g')" class="bg-yellow-400 text-black px-10 py-4 rounded-full font-black text-[11px] hover:bg-white transition-all uppercase italic">☕ BUY ME A COFFEE</button>
+                    <p class="text-[9px] text-gray-600 uppercase tracking-[0.5em] mt-8 italic">Universal Historical Monitoring Station © 2026</p>
                     <p class="text-[10px] text-sky-900 font-bold">Feedback: <a href="mailto:halftotaketo@gmail.com" class="underline">halftotaketo@gmail.com</a></p>
                 </div>
             </footer>
@@ -160,15 +163,23 @@
         const sb = supabase.createClient(SB_URL, SB_KEY);
         const AMAZON_ID = "dedle-20";
 
-        const polyDict = {"축구":"soccer football fifa world cup","야구":"baseball mlb kbo","농구":"basketball nba","올림픽":"olympic medal games","영화":"movie film cinema","음악":"music song billboard","고양이":"cat cat day world cat day"};
-
-        function getZodiac(year) {
-            const names = ["Gyeong-sin","Sin-yu","Im-sul","Gye-hae","Gap-ja","Eul-chuk","Byeong-in","Jeong-myo","Mu-jin","Gi-sa","Gyeong-oh","Sin-mi","Im-sin","Gye-yu","Gap-sul","Eul-hae","Byeong-ja","Jeong-chuk","Mu-in","Gi-myo","Gyeong-jin","Sin-sa","Im-oh","Gye-mi","Gap-sin","Eul-yu","Byeong-sul","Jeong-hae","Mu-ja","Gi-chuk","Gyeong-in","Sin-myo","Im-jin","Gye-sa","Gap-oh","Eul-mi","Byeong-sin","Jeong-yu","Mu-sul","Gi-hae","Gyeong-ja","Sin-chuk","Im-in","Gye-myo","Gap-jin","Eul-sa","Byeong-oh","Jeong-mi","Mu-sin","Gi-yu","Gyeong-sul","Sin-hae","Im-ja","Gye-chuk","Gap-in","Eul-myo","Byeong-jin","Jeong-sa","Mu-oh","Gi-mi"];
-            const idx = (year - 0) % 60; return names[idx < 0 ? idx + 60 : idx];
+        // 1. 별자리 & 스타 애니메이션
+        function updateStellar(m, d, co) {
+            const signs = ["Capricorn", "Aquarius", "Pisces", "Aries", "Taurus", "Gemini", "Cancer", "Leo", "Virgo", "Libra", "Scorpio", "Sagittarius", "Capricorn"];
+            const dates = [20, 19, 21, 20, 21, 21, 23, 23, 23, 23, 22, 22];
+            document.getElementById('disp-constellation').innerText = d < dates[m-1] ? signs[m-1] : signs[m];
+            const cont = document.getElementById('star-container'); cont.innerHTML = "";
+            for(let i=0; i<30; i++) {
+                const s = document.createElement('div'); s.className = 'star';
+                s.style.left = Math.random()*100+'%'; s.style.top = Math.random()*100+'%';
+                s.style.width = Math.random()*2+'px'; s.style.height = s.style.width;
+                cont.appendChild(s);
+            }
         }
 
-        async function fetchRealWeather(y, m, d, co) {
-            const coords = { 'korea': [37.5, 127], 'usa': [38.8, -77], 'brazil': [-15.7, -47.8], 'uk': [51.5, -0.1], 'japan': [35.6, 139] };
+        // 2. 실시간 날씨
+        async function fetchWeather(y, m, d, co) {
+            const coords = { 'korea': [37.5, 127], 'usa': [38.8, -77], 'brazil': [-15.7, -47.8], 'japan': [35.6, 139] };
             const [lat, lon] = coords[co.toLowerCase()] || [37.5, 127];
             try {
                 const res = await fetch(`https://archive-api.open-meteo.com/v1/archive?latitude=${lat}&longitude=${lon}&start_date=${y}-${m}-${d}&end_date=${y}-${m}-${d}&daily=temperature_2m_max&timezone=GMT`);
@@ -178,55 +189,48 @@
             } catch { document.getElementById('disp-weather').innerText = "18°C"; }
         }
 
-        function updateStellar(m, d, co) {
-            const signs = ["Capricorn", "Aquarius", "Pisces", "Aries", "Taurus", "Gemini", "Cancer", "Leo", "Virgo", "Libra", "Scorpio", "Sagittarius", "Capricorn"];
-            const dates = [20, 19, 21, 20, 21, 21, 23, 23, 23, 23, 22, 22];
-            document.getElementById('disp-constellation').innerText = d < dates[m-1] ? signs[m-1] : signs[m];
-            const cont = document.getElementById('star-container'); cont.innerHTML = "";
-            for(let i=0; i<40; i++) {
-                const s = document.createElement('div'); s.className = 'star';
-                s.style.left = Math.random()*100+'%'; s.style.top = Math.random()*100+'%';
-                s.style.width = Math.random()*2+'px'; s.style.height = s.style.width;
-                cont.appendChild(s);
-            }
+        function getZodiac(year) {
+            const names = ["Gyeong-sin","Sin-yu","Im-sul","Gye-hae","Gap-ja","Eul-chuk","Byeong-in","Jeong-myo","Mu-jin","Gi-sa","Gyeong-oh","Sin-mi","Im-sin","Gye-yu","Gap-sul","Eul-hae","Byeong-ja","Jeong-chuk","Mu-in","Gi-myo","Gyeong-jin","Sin-sa","Im-oh","Gye-mi","Gap-sin","Eul-yu","Byeong-sul","Jeong-hae","Mu-ja","Gi-chuk","Gyeong-in","Sin-myo","Im-jin","Gye-sa","Gap-oh","Eul-mi","Byeong-sin","Jeong-yu","Mu-sul","Gi-hae","Gyeong-ja","Sin-chuk","Im-in","Gye-myo","Gap-jin","Eul-sa","Byeong-oh","Jeong-mi","Mu-sin","Gi-yu","Gyeong-sul","Sin-hae","Im-ja","Gye-chuk","Gap-in","Eul-myo","Byeong-jin","Jeong-sa","Mu-oh","Gi-mi"];
+            const idx = (year - 0) % 60; return names[idx < 0 ? idx + 60 : idx] || "N/A";
         }
 
-        function toggleDetail(id) {
-            const el = document.getElementById(id);
-            el.style.display = el.style.display === 'block' ? 'none' : 'block';
+        function getSmartLink(type, text, year) {
+            const q = encodeURIComponent(`${year} ${text.replace(/[^\w\sㄱ-ㅎ가-힣]/g, '')}`);
+            if(type === 'yt') return `https://www.youtube.com/results?search_query=${q}+official+trailer`;
+            if(type === 'sp') return `https://open.spotify.com/search/${q}`;
+            if(type === 'amz') return `https://www.amazon.com/s?tag=${AMAZON_ID}&k=${q}`;
+            if(type === 'blog') return `https://alldayarchive.blogspot.com/search?q=${q}`;
         }
 
+        // 3. 메인 스캔 함수
         async function handleScan() {
-            let dateInput = document.getElementById('targetDate').value;
-            const rawKw = document.getElementById('smartKeyword').value.trim();
-            const co = document.getElementById('smartCountry').value.trim().toLowerCase();
-            const kw = polyDict[rawKw.toLowerCase()] || rawKw.toLowerCase();
+            const inY = document.getElementById('in-year').value;
+            const inM = document.getElementById('in-month').value || (new Date().getMonth()+1).toString().padStart(2,'0');
+            const inD = document.getElementById('in-day').value || (new Date().getDate()).toString().padStart(2,'0');
+            const kw = document.getElementById('smartSearch').value.trim().toLowerCase();
+            const co = document.getElementById('countrySearch').value.trim().toLowerCase();
+            const md = `${inM.padStart(2,'0')}-${inD.padStart(2,'0')}`;
 
-            // 💡 [해결] 날짜 미선택 시 오늘 날짜로 자동 설정
-            if(!dateInput) { dateInput = new Date().toISOString().split('T')[0]; document.getElementById('targetDate').value = dateInput; }
-            const [y, m, d] = dateInput.split('-'); const md = `${m}-${d}`;
-            
-            const { data, error } = await sb.from('daily_archives').select('*').eq('date_id', md).single();
-            if (error || !data) return alert("Archive syncing... Try Jan 1st!");
             document.getElementById('vault-area').style.display = 'block';
 
+            const { data, error } = await sb.from('daily_archives').select('*').eq('date_id', md).single();
+            if (error || !data) return alert("Archive syncing... Try Jan 1st!");
+
+            const priority = [];
             const render = (id, list, section_type) => {
                 const cont = document.getElementById(id); cont.innerHTML = "";
-                if(!list || list.length === 0) return cont.innerHTML = "<p class='text-xs text-gray-600 italic mt-4'>No records found.</p>";
+                if(!list || list.length === 0) return cont.innerHTML = "<p class='text-xs text-gray-600 mt-4 italic'>No data found.</p>";
                 
-                // 💡 [해결] 키워드/국가 매칭 우선 정렬
-                list.sort((a,b) => {
-                    const aK = (kw && a.text.toLowerCase().includes(kw)) || (co && a.text.toLowerCase().includes(co));
-                    const bK = (kw && b.text.toLowerCase().includes(kw)) || (co && b.text.toLowerCase().includes(co));
-                    if(aK !== bK) return aK ? -1 : 1;
-                    return (b.year == y) - (a.year == y) || (b.year - a.year);
-                }).forEach((item, index) => {
-                    const isM = item.year == y; 
-                    const isK = (kw && item.text.toLowerCase().includes(kw)) || (co && item.text.toLowerCase().includes(co));
-                    const yearDisp = item.year < 0 ? Math.abs(item.year) + " B.C." : (item.year || 'ANNUAL');
+                list.sort((a,b) => (b.year - a.year)).forEach((item, index) => {
+                    const text = item.text.toLowerCase();
+                    const isM = item.year == inY; const isK = (kw && text.includes(kw)) || (co && text.includes(co));
+                    const yearDisp = item.year < 0 ? Math.abs(item.year) + " B.C." : (item.year || 'SPEC');
                     const detailId = `detail-${id}-${index}`;
-                    
-                    cont.innerHTML += `
+
+                    // 💡 [해결] 정치 필터
+                    if (section_type === 'arts' && ['president','minister','party','war','kill'].some(k => text.includes(k))) return;
+
+                    const html = `
                         <div class="flex flex-col py-5 border-b border-white/5 ${isK?'priority-focus px-4 rounded-lg':''}">
                             <div class="flex items-start gap-4">
                                 <span class="year-badge ${isM?'match-badge':''}">${yearDisp}</span>
@@ -235,45 +239,51 @@
                                     <button onclick="document.getElementById('${detailId}').style.display = document.getElementById('${detailId}').style.display === 'block' ? 'none' : 'block'" class="text-[9px] text-gray-600 underline ml-2 uppercase font-bold">Detail [+]</button>
                                 </div>
                             </div>
-                            <div id="${detailId}" class="detail-view">
-                                Full data synchronized for ${item.text}. Detailed report available in our historical database.
-                            </div>
-                            <div class="flex gap-2 mt-3 ml-[80px]">
-                                <button onclick="window.open('https://www.youtube.com/results?search_query=${item.year}+${item.text}')" class="action-btn">📺 Youtube</button>
-                                <button onclick="window.open('https://www.amazon.com/s?tag=${AMAZON_ID}&k=${item.text}')" class="action-btn">🛒 Shop</button>
-                                <button onclick="window.open('https://alldayarchive.blogspot.com/search?q=${item.text}')" class="action-btn">📖 Blog</button>
+                            <div id="${detailId}" class="detail-view">Historical context synchronized via AllDay Global Library. Detailed report available on blog.</div>
+                            <div class="flex gap-2 mt-4 ml-[80px]">
+                                <button onclick="window.open('${getSmartLink('yt', item.text, item.year)}')" class="action-btn">📺 Youtube</button>
+                                <button onclick="window.open('${getSmartLink('sp', item.text, item.year)}')" class="action-btn">🎧 Spotify</button>
+                                <button onclick="window.open('${getSmartLink('amz', item.text, item.year)}')" class="action-btn">🛒 Shop</button>
+                                <button onclick="window.open('${getSmartLink('blog', item.text, item.year)}')" class="action-btn">📖 Blog</button>
                             </div>
                         </div>`;
+                    
+                    if(isK) priority.push(html);
+                    cont.innerHTML += html;
                 });
             };
 
-            // 💡 [해결] 정치 데이터 방지용 정밀 필터
-            const pol_k = ['president', 'minister', 'party', 'elected', 'signed', 'politics', 'execution', 'hanged', 'war'];
-            
-            render('list-sports', data.sports, 'sports');
+            const allEv = [...(data.holidays || []), ...(data.firsts || []), ...(data.innovations || []), ...(data.arts || []), ...(data.pop_culture || [])];
+            const sports_k = ['olympic','cup','fifa','medal','champion','nba','soccer','baseball','tennis','golf'];
+            const movie_k = ['movie','film','cinema','premiere','released','box office'];
+            const music_k = ['song','album','symphony','concert','singer','hit'];
+            const art_k = ['paint','museum','art','novel','classic','composer'];
+            const innov_k = ['invent','patent','first','tech','engine','discover'];
+
+            render('list-sports', allEv.filter(i => sports_k.some(k => i.text.toLowerCase().includes(k))), 'sports');
             render('list-holidays', data.holidays, 'holidays');
-            render('list-incidents', data.incidents, 'incidents');
-            render('list-innovations', data.innovations, 'innovations');
-            render('list-arts', data.arts.filter(i => !pol_k.some(k => i.text.toLowerCase().includes(k))), 'arts');
-            render('list-movies', data.movies, 'movies');
-            render('list-music', data.music, 'music');
-            render('list-gaming', data.gaming, 'gaming');
+            render('list-incidents', allEv.filter(i => ['war','attack','die','kill','tragedy','riot'].some(k => i.text.toLowerCase().includes(k))), 'incidents');
+            render('list-movies', allEv.filter(i => movie_k.some(k => i.text.toLowerCase().includes(k))), 'movies');
+            render('list-music', allEv.filter(i => music_k.some(k => i.text.toLowerCase().includes(k))), 'music');
+            render('list-arts', allEv.filter(i => art_k.some(k => i.text.toLowerCase().includes(k))), 'arts');
+            render('list-gaming', allEv.filter(i => ['game','nintendo','sega','playstation','comic','manga'].some(k => i.text.toLowerCase().includes(k))), 'gaming');
+            render('list-innovations', allEv.filter(i => innov_k.some(k => i.text.toLowerCase().includes(k))), 'innovations');
+            render('list-history', data.firsts.filter(i => !sports_k.some(k => i.text.toLowerCase().includes(k)) && !movie_k.some(k => i.text.toLowerCase().includes(k))), 'history');
             render('list-births', data.birthdays, 'births');
             render('list-deaths', data.deaths, 'deaths');
 
-            document.getElementById('disp-ganji').innerText = getZodiac(y);
-            fetchRealWeather(y, m, d, co || "korea");
+            if(priority.length > 0) { 
+                document.getElementById('priority-section').classList.remove('hidden'); 
+                document.getElementById('list-priority').innerHTML = priority.join(''); 
+            } else { document.getElementById('priority-section').classList.add('hidden'); }
+
+            document.getElementById('disp-ganji').innerText = inY ? getZodiac(parseInt(inY)) : "Select Year";
+            fetchRealWeather(inY || 2024, m, d, co || "korea");
             updateStellar(parseInt(m), parseInt(d), co || "korea");
             setTimeout(() => { document.getElementById('vault-area').scrollIntoView({ behavior: 'smooth' }); }, 150);
         }
 
         document.addEventListener('keypress', (e) => { if(e.key === 'Enter') handleScan(); });
-        function navigateDay(offset) {
-            const current = document.getElementById('targetDate').value || new Date().toISOString().split('T')[0];
-            let date = new Date(current); date.setDate(date.getDate() + offset);
-            document.getElementById('targetDate').value = date.toISOString().split('T')[0];
-            handleScan();
-        }
     </script>
 </body>
 </html>
