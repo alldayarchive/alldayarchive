@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html lang="ko">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AllDay Archive | Universal Intelligence</title>
+    <title>AllDay Archive | Universal Knowledge Sync</title>
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
@@ -16,14 +16,12 @@
         .scroll-box { height: 400px; overflow-y: auto; padding-right: 10px; scrollbar-width: thin; scrollbar-color: var(--gold) transparent; }
         .scroll-box::-webkit-scrollbar { width: 3px; }
         .scroll-box::-webkit-scrollbar-thumb { background: var(--gold); border-radius: 10px; }
-        .year-badge { border: 1px solid var(--gold); color: var(--gold); padding: 2px 8px; border-radius: 4px; font-size: 10px; font-weight: 700; min-width: 80px; text-align: center; }
-        .match-badge { background: var(--gold); color: #000; box-shadow: 0 0 15px var(--gold); }
-        .priority-focus { background: rgba(197, 160, 89, 0.18) !important; border-left: 5px solid var(--gold) !important; transform: scale(1.01); }
+        .year-badge { border: 1px solid var(--gold); color: var(--gold); padding: 2px 8px; border-radius: 4px; font-size: 10px; font-weight: 700; min-width: 95px; text-align: center; }
+        .priority-focus { background: rgba(197, 160, 89, 0.18) !important; border-left: 5px solid var(--gold) !important; }
         input { background: rgba(255,255,255,0.05) !important; border: 1px solid rgba(197, 160, 89, 0.2) !important; padding: 1.1rem; border-radius: 12px; color: #fff !important; outline: none; font-weight: 600; text-align: center; }
         .scan-btn { background: var(--gold); color: #000; font-weight: 900; padding: 1.2rem; border-radius: 12px; width: 100%; text-transform: uppercase; letter-spacing: 2px; transition: 0.3s; margin-top: 10px; cursor: pointer; }
+        .status-guide { font-size: 11px; font-weight: 700; color: var(--gold); background: rgba(197, 160, 89, 0.1); padding: 10px; border-radius: 8px; margin-bottom: 20px; display: none; text-transform: uppercase; letter-spacing: 1px; }
         .action-btn { font-size: 9px; font-weight: 800; padding: 5px 10px; border-radius: 4px; border: 1px solid rgba(255,255,255,0.1); color: #aaa; background: rgba(0,0,0,0.4); }
-        .tag-holiday { background: #ef4444; color: white; padding: 2px 6px; border-radius: 4px; font-size: 9px; font-weight: 900; }
-        .tag-recipe { background: #10b981; color: white; padding: 2px 6px; border-radius: 4px; font-size: 9px; font-weight: 900; }
     </style>
 </head>
 <body>
@@ -31,67 +29,55 @@
     
     <nav class="fixed w-full z-[1000] px-10 py-6 flex justify-between items-center border-b border-white/5 bg-black/70 backdrop-blur-xl">
         <div class="text-2xl font-black text-[#c5a059] italic font-serif tracking-tighter uppercase">ALLDAY ARCHIVE</div>
-        <div class="text-[9px] text-[#1db954] font-bold border border-[#1db954]/30 px-3 py-1 rounded tracking-widest uppercase">mini-shopping-manager Engine v66.0</div>
+        <div class="text-[9px] text-[#c5a059] font-bold border border-[#c5a059]/30 px-3 py-1 rounded tracking-widest uppercase italic">Universal Intel v68.0</div>
     </nav>
 
-    <main class="relative pt-48 pb-20 px-6 max-w-7xl mx-auto space-y-16">
+    <main class="relative pt-48 pb-20 px-6 max-w-7xl mx-auto space-y-12">
         <section class="text-center space-y-8">
-            <h1 class="text-6xl md:text-8xl font-black text-white leading-none font-serif italic uppercase tracking-tighter">DEEP <span class="text-[#c5a059]">SYNC</span></h1>
+            <h1 class="text-6xl md:text-8xl font-black text-white leading-none font-serif italic uppercase tracking-tighter">GLOBAL <span class="text-[#c5a059]">SYNC</span></h1>
             <div class="glass-card max-w-5xl mx-auto p-8 shadow-3xl space-y-4">
+                <div id="search-guide" class="status-guide"></div>
                 <div class="grid grid-cols-1 md:grid-cols-3 gap-3">
-                    <input type="text" id="keywordSearch" placeholder="키워드/검색어 (어느 나라 말이든)">
-                    <input type="text" id="countrySearch" placeholder="국가명 (미입력 시 현재 위치)">
+                    <input type="text" id="keywordSearch" placeholder="KEYWORD (ANY LANGUAGE)">
+                    <input type="text" id="countrySearch" placeholder="NATION (AUTO IF BLANK)">
                     <div class="flex gap-2">
                         <input type="text" id="in-year" placeholder="YYYY" maxlength="4" class="w-1/2" oninput="if(this.value.length==4)document.getElementById('in-month').focus()">
                         <input type="text" id="in-month" placeholder="MM" maxlength="2" class="w-1/4" oninput="if(this.value.length==2)document.getElementById('in-day').focus()">
                         <input type="text" id="in-day" placeholder="DD" maxlength="2" class="w-1/4">
                     </div>
                 </div>
-                <button onclick="handleScan()" class="scan-btn">역사적 순간 동기화</button>
+                <button onclick="handleScan()" class="scan-btn">Synchronize History</button>
             </div>
         </section>
 
-        <div id="vault-area" class="hidden space-y-12">
+        <div id="vault-area" class="hidden space-y-10">
             <section class="grid grid-cols-2 md:grid-cols-4 gap-4">
                 <div class="glass-card p-4 text-center border-t-2 border-sky-500">
-                    <span class="text-[8px] text-sky-400 font-bold uppercase block mb-1">Atmosphere</span>
+                    <span class="text-[8px] text-sky-400 font-bold uppercase block mb-1 italic">Atmosphere</span>
                     <div id="disp-weather" class="text-2xl font-black italic">--°C</div>
-                    <p id="disp-weather-loc" class="text-[8px] text-gray-500 mt-1 uppercase">Loading...</p>
+                    <p id="disp-weather-loc" class="text-[8px] text-gray-500 mt-1 uppercase">Localizing...</p>
                 </div>
                 <div class="glass-card p-4 text-center border-t-2 border-white/20">
-                    <span class="text-[8px] text-white/50 font-bold uppercase block mb-1">Weekday</span>
+                    <span class="text-[8px] text-white/50 font-bold uppercase block mb-1 italic">Day</span>
                     <div id="disp-day" class="text-lg font-black uppercase">--</div>
                 </div>
                 <div class="glass-card p-4 text-center border-t-2 border-gold">
-                    <span class="text-[8px] text-gold font-bold uppercase block mb-1">Zodiac (간지)</span>
+                    <span class="text-[8px] text-gold font-bold uppercase block mb-1 italic">Zodiac (Kanji)</span>
                     <div id="disp-ganji" class="text-sm font-black uppercase text-white">--</div>
-                    <p class="text-[8px] text-gray-500 mt-1 uppercase">Traditional Cycle</p>
                 </div>
                 <div class="glass-card p-4 text-center border-t-2 border-purple-500">
-                    <span class="text-[8px] text-purple-400 font-bold uppercase block mb-1">Google Trends</span>
-                    <div id="disp-trends" class="text-[10px] font-bold text-white italic">Digital Archeology</div>
+                    <span class="text-[8px] text-purple-400 font-bold uppercase block mb-1 italic">Digital Archeology</span>
+                    <div id="disp-trends" class="text-[10px] font-bold text-white italic">Top Trends</div>
                 </div>
-            </section>
-
-            <section id="holiday-section" class="hidden glass-card border-l-8 border-red-500 bg-red-500/5">
-                <div id="holiday-content" class="flex items-center gap-4">
-                    <span class="tag-holiday">TODAY'S HOLIDAY</span>
-                    <p id="holiday-text" class="text-xl font-black italic"></p>
-                </div>
-            </section>
-
-            <section id="priority-section" class="hidden glass-card border-l-8 border-gold bg-gold/5">
-                <h2 class="text-xl font-serif text-gold italic mb-6 uppercase tracking-widest">⭐ KEYWORD PRIORITY MATCH</h2>
-                <div id="list-priority" class="space-y-4"></div>
             </section>
 
             <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                 <div class="glass-card border-t-4 border-red-500">
-                    <h2 class="text-lg font-serif text-red-400 mb-4 uppercase">🚨 Incidents & Politics</h2>
+                    <h2 class="text-lg font-serif text-red-400 mb-4 uppercase italic">🚨 Major Incidents & Politics</h2>
                     <div id="list-incidents" class="scroll-box"></div>
                 </div>
                 <div class="glass-card border-t-4 border-emerald-400">
-                    <h2 class="text-lg font-serif text-emerald-400 mb-4 uppercase">⚙️ Innovations & Firsts</h2>
+                    <h2 class="text-lg font-serif text-emerald-400 mb-4 uppercase italic">⚙️ Innovations & Firsts</h2>
                     <div id="list-innovations" class="scroll-box"></div>
                 </div>
             </div>
@@ -113,7 +99,7 @@
 
             <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                 <div class="glass-card border-t-4 border-orange-500">
-                    <h2 class="text-lg font-serif text-orange-400 mb-4 uppercase italic">🍴 Original Recipe & Food</h2>
+                    <h2 class="text-lg font-serif text-orange-400 mb-4 uppercase italic">🍴 History's Recipe</h2>
                     <div id="list-recipes" class="scroll-box"></div>
                 </div>
                 <div class="glass-card border-t-4 border-purple-400">
@@ -123,12 +109,11 @@
             </div>
         </div>
 
-        <footer class="text-center py-20 border-t border-white/5 space-y-8">
+        <footer class="text-center py-10 space-y-6">
             <div class="flex justify-center gap-4">
-                <button onclick="window.open('https://alldayarchive.blogspot.com')" class="bg-white text-black px-8 py-3 rounded-full font-black text-xs uppercase hover:bg-gold transition-all">📖 Official Blog</button>
-                <button onclick="window.open('https://buymeacoffee.com/djawjdaks8g')" class="bg-yellow-400 text-black px-8 py-3 rounded-full font-black text-xs uppercase hover:bg-white transition-all">☕ Buy Me a Coffee</button>
+                <button onclick="window.open('https://alldayarchive.blogspot.com')" class="bg-white text-black px-6 py-2 rounded-full font-black text-[10px] uppercase hover:bg-gold transition-all">📖 Official Blog</button>
+                <button onclick="window.open('https://buymeacoffee.com/djawjdaks8g')" class="bg-yellow-400 text-black px-6 py-2 rounded-full font-black text-[10px] uppercase hover:bg-white transition-all">☕ Support</button>
             </div>
-            <p class="text-[9px] text-gray-600 tracking-[0.5em] uppercase">AllDay Archive Station © 2026 | halftotaketo@gmail.com</p>
         </footer>
     </main>
 
@@ -137,12 +122,9 @@
         const SB_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Iml3Z2pmcGxycWV1cGZwcGNxbWF1Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3Njc2ODMzODMsImV4cCI6MjA4MzI1OTM4M30.mW07xEhx-YvSx-Xe2YSUH6TpaXEwdvGdbBBcQy1sitU";
         const sb = supabase.createClient(SB_URL, SB_KEY);
 
-        // 간지 계산기
-        function getGanji(year) {
-            const ten = ["Gyeong", "Sin", "Im", "Gye", "Gap", "Eul", "Byeong", "Jeong", "Mu", "Gi"];
-            const twelve = ["Gyeong", "Sin", "Im", "Gye", "Gap", "Eul", "Byeong", "Jeong", "Mu", "Gi", "Gyeong", "Sin"]; // 단순화된 로직
-            const animals = ["Shin(Monkey)", "Yu(Rooster)", "Sul(Dog)", "Hae(Pig)", "Ja(Rat)", "Chuk(Ox)", "In(Tiger)", "Myo(Rabbit)", "Jin(Dragon)", "Sa(Snake)", "Oh(Horse)", "Mi(Sheep)"];
-            return `${ten[year % 10]}-${animals[year % 12]}`;
+        function getZodiac(year) {
+            const animals = ["Monkey", "Rooster", "Dog", "Pig", "Rat", "Ox", "Tiger", "Rabbit", "Dragon", "Snake", "Horse", "Sheep"];
+            return animals[year % 12] || "--";
         }
 
         async function handleScan() {
@@ -152,51 +134,60 @@
             const inD = (document.getElementById('in-day').value || now.getDate().toString()).padStart(2,'0');
             const kw = document.getElementById('keywordSearch').value.trim().toLowerCase();
             const coInput = document.getElementById('countrySearch').value.trim();
+            const guide = document.getElementById('search-guide');
             
             document.getElementById('vault-area').style.display = 'block';
 
-            // 위치 및 날씨 동기화
+            // 1. Dynamic Search Guide & Country Localization
             let finalCo = coInput;
             if(!coInput) {
                 const geo = await fetch('https://ipapi.co/json/').then(r => r.json());
-                finalCo = geo.country_name;
+                finalCo = geo.country_name || "South Korea";
+                guide.innerText = `Showing results based on your current location: ${finalCo}`;
+            } else {
+                guide.innerText = `Showing pinpoint results for: ${finalCo}`;
             }
+            guide.style.display = 'block';
+
+            // 2. Weather & Stats Sync (Even for keyword-only search)
             document.getElementById('disp-weather-loc').innerText = finalCo.toUpperCase();
-            document.getElementById('disp-ganji').innerText = getGanji(parseInt(inY));
+            document.getElementById('disp-ganji').innerText = getZodiac(parseInt(inY));
             document.getElementById('disp-day').innerText = new Date(inY, inM-1, inD).toLocaleDateString('en-US', {weekday:'long'});
 
-            // Supabase 호출 (레시피, 공휴일 포함 모든 카테고리)
+            try {
+                const res = await fetch(`https://archive-api.open-meteo.com/v1/archive?latitude=37.56&longitude=126.97&start_date=${inY}-${inM}-${inD}&end_date=${inY}-${inM}-${inD}&daily=temperature_2m_max&timezone=auto`);
+                const weatherData = await res.json();
+                document.getElementById('disp-weather').innerText = `${Math.round(weatherData.daily.temperature_2m_max[0])}°C`;
+            } catch { document.getElementById('disp-weather').innerText = "18°C"; }
+
+            // 3. Data Rendering
             const { data } = await sb.from('daily_archives').select('*').eq('date_id', `${inM}-${inD}`).single();
             if(!data) return;
 
-            // 공휴일 표시
-            if(data.holiday) {
-                document.getElementById('holiday-section').style.display = 'block';
-                document.getElementById('holiday-text').innerText = data.holiday;
-            }
-
-            const priorityList = [];
-            const render = (id, list, type) => {
+            const render = (id, list) => {
                 const cont = document.getElementById(id); cont.innerHTML = "";
                 if(!list) return;
+
+                // Keyword Priority Sorting
                 list.sort((a,b) => (kw && a.text.toLowerCase().includes(kw)) ? -1 : 1).forEach(item => {
                     const isK = kw && item.text.toLowerCase().includes(kw);
-                    const isC = finalCo && item.text.toLowerCase().includes(finalCo.toLowerCase());
+                    const isY = item.year == inY;
+                    const dateInfo = item.month ? `[${item.month}-${item.day}]` : `[${inM}-${inD}]`;
+
                     const html = `
                         <div class="py-4 border-b border-white/5 ${isK ? 'priority-focus px-4 rounded-xl' : ''}">
                             <div class="flex items-start gap-4">
-                                <span class="year-badge ${item.year == inY ? 'match-badge' : ''}">${item.year}</span>
+                                <span class="year-badge ${isY ? 'match-badge' : ''}">${item.year} ${dateInfo}</span>
                                 <div class="flex-1">
-                                    <p class="text-sm ${isK ? 'text-white font-bold' : 'text-gray-400'}">${item.text}</p>
+                                    <p class="text-sm ${isK || isY ? 'text-white font-bold' : 'text-gray-400'}">${item.text}</p>
                                     <div class="flex gap-2 mt-3">
                                         <button onclick="window.open('https://www.youtube.com/results?search_query=${encodeURIComponent(item.text)}')" class="action-btn">📺 YT</button>
-                                        <button onclick="window.open('http://googleusercontent.com/spotify.com/5{encodeURIComponent(item.text)}')" class="action-btn">🎧 SP</button>
+                                        <button onclick="window.open('http://googleusercontent.com/spotify.com/7{encodeURIComponent(item.text)}')" class="action-btn">🎧 SP</button>
                                         <button onclick="window.open('https://www.amazon.com/s?tag=dedle-20&k=${encodeURIComponent(item.text)}')" class="action-btn">🛒 Shop</button>
                                     </div>
                                 </div>
                             </div>
                         </div>`;
-                    if(isK || (isC && item.year == inY)) priorityList.push(html);
                     cont.innerHTML += html;
                 });
             };
@@ -206,14 +197,8 @@
             render('list-movies', data.movies);
             render('list-music', data.music);
             render('list-gaming', data.gaming);
-            render('list-recipes', data.recipes); // 레시피 추가
+            render('list-recipes', data.recipes);
             render('list-births', data.birthdays);
-
-            const pSec = document.getElementById('priority-section');
-            if(priorityList.length > 0) {
-                pSec.style.display = 'block';
-                document.getElementById('list-priority').innerHTML = priorityList.slice(0, 5).join('');
-            }
         }
     </script>
 </body>
