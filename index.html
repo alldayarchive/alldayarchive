@@ -3,7 +3,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AllDay Archive | Global Heritage Repository</title>
+    
+    <!-- 🌐 Global SEO: 진짜 도메인으로 검색 로봇을 부릅니다 -->
+    <link rel="canonical" href="https://alldayarchive.com/" />
+    <link rel="alternate" hreflang="x-default" href="https://alldayarchive.com/" />
+    <link rel="alternate" hreflang="ko" href="https://alldayarchive.com/ko" />
+    <link rel="alternate" hreflang="en" href="https://alldayarchive.com/en" />
+    
+    <title>AllDay Archive | World Heritage, Culture & Stellar Vault</title>
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
@@ -13,101 +20,115 @@
         .font-serif { font-family: 'Playfair Display', serif; }
         .bg-heritage { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: radial-gradient(circle at 50% 50%, #1a1e26 0%, #0c0e12 100%); z-index: -1; }
         .glass-card { background: var(--card); border: 1px solid rgba(197, 160, 89, 0.1); border-radius: 20px; transition: all 0.4s ease; padding: 2rem; }
-        .year-badge { border: 1px solid var(--gold); color: var(--gold); padding: 2px 8px; border-radius: 4px; font-size: 11px; font-weight: 700; min-width: 65px; text-align: center; }
-        .match-badge { background: var(--gold); color: #000; padding: 2px 8px; border-radius: 4px; font-size: 11px; font-weight: 900; box-shadow: 0 0 10px var(--gold); }
-        .local-focus { border-left: 5px solid var(--gold) !important; background: rgba(197, 160, 89, 0.15) !important; }
+        .year-badge { border: 1px solid var(--gold); color: var(--gold); padding: 2px 8px; border-radius: 4px; font-size: 11px; font-weight: 700; min-width: 70px; text-align: center; }
+        .match-badge { background: var(--gold); color: #000; padding: 2px 8px; border-radius: 4px; font-size: 11px; font-weight: 900; box-shadow: 0 0 15px var(--gold); }
+        .local-focus { border-left: 5px solid var(--gold) !important; background: rgba(197, 160, 89, 0.15) !important; box-shadow: 0 10px 30px rgba(0,0,0,0.5); }
         #vault-area { display: none; }
-        input { background: rgba(255,255,255,0.05); border: 1px solid rgba(197, 160, 89, 0.3); padding: 1.2rem; border-radius: 12px; color: white; outline: none; transition: 0.3s; width: 100%; text-align: center; }
-        .scan-btn { background: var(--gold); color: #000; font-weight: 900; padding: 1.2rem; border-radius: 12px; width: 100%; text-transform: uppercase; letter-spacing: 2px; cursor: pointer; }
-        .nav-btn { color: var(--gold); border: 1px solid rgba(197, 160, 89, 0.3); padding: 10px 20px; border-radius: 12px; font-size: 10px; font-weight: 900; background: rgba(0,0,0,0.2); cursor: pointer; }
+        input { background: rgba(255,255,255,0.05); border: 1px solid rgba(197, 160, 89, 0.3); padding: 1.2rem; border-radius: 12px; color: white; outline: none; transition: 0.3s; width: 100%; text-align: center; font-size: 1rem; }
+        .scan-btn { background: var(--gold); color: #000; font-weight: 900; padding: 1.2rem; border-radius: 12px; width: 100%; text-transform: uppercase; letter-spacing: 2px; cursor: pointer; transition: 0.3s; }
+        .star-map { background: radial-gradient(circle, #1e293b 0%, #000 100%); border-radius: 50%; width: 120px; height: 120px; margin: 0 auto; border: 1px solid var(--gold); position: relative; overflow: hidden; }
+        .star { position: absolute; background: white; border-radius: 50%; opacity: 0.8; animation: twinkle 2s infinite; }
+        @keyframes twinkle { 0%, 100% { opacity: 0.3; } 50% { opacity: 1; } }
     </style>
 </head>
 <body>
     <div class="bg-heritage"></div>
     <nav class="fixed w-full z-[1000] px-10 py-6 flex justify-between items-center border-b border-white/5 bg-black/40 backdrop-blur-xl">
         <div class="text-2xl font-black text-[#c5a059] uppercase italic font-serif">ALLDAY <span class="text-white font-light">ARCHIVE</span></div>
-        <div class="text-[9px] tracking-[0.4em] text-gray-500 uppercase font-bold border border-white/10 px-3 py-1 rounded">Universal Chronology Sync</div>
+        <div id="status-tag" class="text-[9px] tracking-[0.4em] text-gray-500 uppercase font-bold border border-white/10 px-3 py-1 rounded">Universal Hub Online</div>
     </nav>
 
     <main class="relative pt-48 pb-20 px-6 max-w-6xl mx-auto space-y-24">
-        <!-- Search -->
+        <!-- Search Center -->
         <section class="text-center space-y-12">
             <h1 class="text-5xl md:text-8xl font-black text-white leading-none font-serif italic uppercase tracking-tighter">WHAT HAPPENED <br><span class="text-[#c5a059]">TODAY?</span></h1>
             <div class="glass-card max-w-4xl mx-auto p-8 space-y-8 shadow-3xl">
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                     <div class="text-left space-y-2">
-                        <label class="text-[10px] text-[#c5a059] uppercase font-bold ml-1">Target Nation Focus</label>
-                        <input type="text" id="countrySearch" placeholder="SEARCH COUNTRY (e.g. KOREA, BRAZIL)">
+                        <label class="text-[10px] text-[#c5a059] uppercase font-bold ml-1 tracking-widest italic">Nation or Keyword Search</label>
+                        <input type="text" id="smartSearch" placeholder="E.G. KOREA, BRAZIL, SOCCER">
                     </div>
                     <div class="text-left space-y-2">
-                        <label class="text-[10px] text-[#c5a059] uppercase font-bold ml-1">Timeline Coordinate</label>
+                        <label class="text-[10px] text-[#c5a059] uppercase font-bold ml-1 tracking-widest italic">Timeline Point (Month/Day)</label>
                         <input type="date" id="targetDate" class="text-white">
                     </div>
                 </div>
-                <button onclick="handleScan()" class="scan-btn">Initiate Deep Archive Scan</button>
+                <button onclick="handleScan()" class="scan-btn">Synchronize Records</button>
                 <div class="flex justify-center gap-4">
-                    <button onclick="navigateDay(-1)" class="nav-btn">◀ PREV DAY</button>
-                    <button onclick="navigateDay(1)" class="nav-btn">NEXT DAY ▶</button>
+                    <button onclick="navigateDay(-1)" class="text-[10px] border border-white/10 px-4 py-2 rounded-lg hover:bg-white/5 uppercase font-bold">◀ Prev</button>
+                    <button onclick="navigateDay(1)" class="text-[10px] border border-white/10 px-4 py-2 rounded-lg hover:bg-white/5 uppercase font-bold">Next ▶</button>
                 </div>
             </div>
         </section>
 
-        <!-- Result Dashboard -->
+        <!-- Dashboard Area -->
         <div id="vault-area" class="space-y-24">
-            <!-- 🌡️ Climate & Ganji -->
-            <section class="grid grid-cols-1 md:grid-cols-2 gap-8 font-hud">
-                <div class="glass-card p-10 border-l-2 border-[#c5a059] flex justify-between items-center">
-                    <div><span class="text-[9px] text-[#c5a059] uppercase block mb-2 tracking-widest">Historical Atmosphere</span><div id="disp-weather" class="text-5xl font-black italic">--°C</div></div>
-                    <div id="disp-weather-desc" class="text-[10px] text-gray-500 text-right uppercase leading-relaxed">Local <br>Climate</div>
+            
+            <!-- 🛰️ Climate & Stellar & Zodiac -->
+            <section class="grid grid-cols-1 md:grid-cols-3 gap-8 text-center">
+                <div class="glass-card border-t-2 border-sky-500">
+                    <span class="text-[9px] text-sky-400 uppercase block mb-4 italic">Atmosphere Archive</span>
+                    <div id="disp-weather" class="text-4xl font-black italic">--°C</div>
+                    <p id="disp-weather-desc" class="text-[9px] text-gray-500 uppercase mt-2">Local Sync</p>
                 </div>
-                <div class="glass-card p-10 border-l-2 border-[#c5a059] flex justify-between items-center text-[#c5a059]">
-                    <div><span class="text-[9px] uppercase block mb-2 tracking-widest">Ancestral Cycle</span><div id="disp-ganji" class="text-xl font-black uppercase text-white leading-tight">--</div></div>
-                    <div id="disp-zodiac" class="text-[10px] text-gray-500 text-right uppercase">Zodiac <br>Alignment</div>
+                <div class="glass-card border-t-2 border-[#c5a059]">
+                    <span class="text-[9px] text-[#c5a059] uppercase block mb-4 italic">Stellar View</span>
+                    <div class="star-map mb-2" id="star-container"></div>
+                    <div id="disp-constellation" class="text-xs font-bold text-white uppercase tracking-widest">Searching...</div>
+                </div>
+                <div class="glass-card border-t-2 border-emerald-500 text-emerald-400">
+                    <span class="text-[9px] uppercase block mb-4 italic">Ancestral Cycle</span>
+                    <div id="disp-ganji" class="text-lg font-black uppercase text-white leading-tight">--</div>
+                    <p id="disp-zodiac" class="text-[9px] text-gray-500 uppercase mt-1 italic">Eastern Wisdom</p>
                 </div>
             </section>
 
             <!-- 🎉 1. HOLIDAYS & SPECIAL DAYS -->
             <section class="space-y-8">
-                <h2 class="text-2xl font-serif text-[#c5a059] italic border-b border-white/10 pb-4 uppercase tracking-widest">🎉 Global Holidays & Special Days</h2>
+                <h2 class="text-3xl font-serif text-[#c5a059] italic border-b border-white/10 pb-4 uppercase tracking-widest italic">🎉 Global Holidays & Observations</h2>
                 <div id="list-holidays" class="grid grid-cols-1 md:grid-cols-2 gap-4"></div>
             </section>
 
-            <!-- 🚨 2. HISTORICAL RECORDS -->
-            <section class="space-y-8">
-                <h2 class="text-2xl font-serif text-red-500 italic border-b border-white/10 pb-4 uppercase tracking-widest">🚨 Historical Records & Major Incidents</h2>
+            <!-- 🎧 2. WEEKLY CULTURE SYNC (Local vs Global) -->
+            <section class="space-y-12">
+                <h2 class="text-3xl font-serif text-white italic border-b border-white/5 pb-4 uppercase tracking-widest">Cultural <span class="text-[#c5a059]">Snapshot</span></h2>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-10">
+                    <div class="glass-card p-10 border-l-2 border-[#c5a059] flex flex-col justify-between">
+                        <div>
+                            <span id="movie-label" class="text-[10px] text-[#c5a059] font-bold uppercase tracking-widest block mb-4 italic">Cinema: Regional Top</span>
+                            <div id="movie-name" class="text-2xl font-black uppercase mb-4 italic text-white leading-tight">...</div>
+                        </div>
+                        <button onclick="window.open('https://youtube.com/results?search_query=movie+trailer')" class="w-full py-4 border border-white/10 rounded-xl text-[9px] font-bold hover:bg-white hover:text-black uppercase">Watch Trailer & OST</button>
+                    </div>
+                    <div class="glass-card p-10 border-l-2 border-pink-500 flex flex-col justify-between">
+                        <div>
+                            <span id="music-label" class="text-[10px] text-pink-500 font-bold uppercase tracking-widest block mb-4 italic">Music: Regional Chart</span>
+                            <div id="music-name" class="text-2xl font-black uppercase mb-4 italic text-white leading-tight">...</div>
+                        </div>
+                        <button onclick="window.open('https://spotify.com')" class="w-full py-4 border border-pink-500/30 text-pink-500 rounded-lg text-[9px] font-bold hover:bg-pink-500 hover:text-white uppercase">Listen on Spotify</button>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 📜 3. HISTORICAL CHRONICLES (Keyword & Local Priority) -->
+            <section class="space-y-10">
+                <h2 class="text-2xl font-serif text-[#c5a059] italic border-b border-white/10 pb-4 uppercase tracking-widest italic">📜 Historical Records & Major Incidents</h2>
                 <div id="list-history" class="space-y-2"></div>
             </section>
 
-            <!-- ⚙️ 3. INNOVATIONS & FIRSTS -->
-            <section class="space-y-8">
-                <h2 class="text-2xl font-serif text-emerald-400 italic border-b border-white/10 pb-4 uppercase tracking-widest">⚙️ Innovations, Firsts & Tech</h2>
-                <div id="list-innovations" class="space-y-2"></div>
-            </section>
-
-            <!-- 🎨 4. ARTS & LITERATURE -->
-            <section class="space-y-8">
-                <h2 class="text-2xl font-serif text-purple-400 italic border-b border-white/10 pb-4 uppercase tracking-widest">🎨 Masterpieces, Books & Fine Arts</h2>
-                <div id="list-arts" class="space-y-2"></div>
-            </section>
-
-            <!-- 🎂 5. HALL OF FAME (Births) -->
-            <section class="space-y-8">
-                <h2 class="text-2xl font-serif text-pink-400 italic border-b border-white/10 pb-4 uppercase tracking-widest">🎂 Born on this Day (Hall of Fame)</h2>
+            <!-- 🎂 4. BORN TODAY (Hall of Fame) -->
+            <section class="space-y-10">
+                <h2 class="text-2xl font-serif text-[#c5a059] italic border-b border-white/10 pb-4 uppercase tracking-widest italic">🎂 Born on this Day (Legends)</h2>
                 <div id="list-births" class="space-y-2"></div>
             </section>
 
-            <!-- 🕊️ 6. PASSED AWAY -->
-            <section class="space-y-8 opacity-60">
-                <h2 class="text-2xl font-serif text-gray-500 italic border-b border-white/10 pb-4 uppercase tracking-widest">🕊️ Passed Away Today (Legacy)</h2>
-                <div id="list-deaths" class="space-y-2"></div>
-            </section>
-
             <!-- Footer -->
-            <footer class="py-24 text-center border-t border-white/5 bg-black/20 space-y-8">
-                <button onclick="window.open('https://alldayarchive.blogspot.com')" class="bg-[#c5a059] text-black px-12 py-5 rounded-full font-black text-xs hover:bg-white transition-all uppercase tracking-widest italic shadow-xl">Enter Full Historical Library (Blog)</button>
+            <footer class="py-24 text-center border-t border-white/5 bg-black/20 space-y-12">
+                <button onclick="window.open('https://alldayarchive.blogspot.com')" class="bg-emerald-600 text-white px-12 py-5 rounded-full font-black text-xs hover:bg-white hover:text-black transition-all uppercase tracking-widest shadow-xl">Enter Daily Recipe & Trend Library (Blog)</button>
                 <div class="pt-10 flex flex-col items-center gap-6">
-                    <button onclick="window.open('https://buymeacoffee.com')" class="bg-white text-black px-10 py-4 rounded-full font-black text-[11px] hover:bg-[#c5a059] transition-all uppercase">☕ BUY ME A COFFEE</button>
-                    <p class="text-[9px] text-gray-600 uppercase tracking-[0.5em] mt-8">The World Archive Project © 2026</p>
+                    <button onclick="window.open('https://buymeacoffee.com/yourlink')" class="bg-white text-black px-10 py-4 rounded-full font-black text-[11px] hover:bg-[#c5a059] transition-all uppercase tracking-widest">☕ BUY ME A COFFEE</button>
+                    <p class="text-[9px] text-gray-600 uppercase tracking-[0.5em] mt-8">Universal Historical Monitoring Station © 2026</p>
+                    <p class="text-[9px] text-sky-900 font-bold">FEEDBACK: admin@alldayarchive.com</p>
                 </div>
             </footer>
         </div>
@@ -118,16 +139,19 @@
         const SB_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Iml3Z2pmcGxycWV1cGZwcGNxbWF1Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3Njc2ODMzODMsImV4cCI6MjA4MzI1OTM4M30.mW07xEhx-YvSx-Xe2YSUH6TpaXEwdvGdbBBcQy1sitU"; 
         const sb = supabase.createClient(SB_URL, SB_KEY);
 
-        function getPhoneticZodiac(year) {
-            if(!year || year < 0) return { name: "Ancient Era", animal: "Unknown" };
-            const names = ["Gyeong-sin","Sin-yu","Im-sul","Gye-hae","Gap-ja","Eul-chuk","Byeong-in","Jeong-myo","Mu-jin","Gi-sa","Gyeong-oh","Sin-mi","Im-sin","Gye-yu","Gap-sul","Eul-hae","Byeong-ja","Jeong-chuk","Mu-in","Gi-myo","Gyeong-jin","Sin-sa","Im-oh","Gye-mi","Gap-sin","Eul-yu","Byeong-sul","Jeong-hae","Mu-자","Gi-chuk","Gyeong-in","Sin-myo","Im-jin","Gye-sa","Gap-oh","Eul-mi","Byeong-sin","Jeong-yu","Mu-sul","Gi-hae","Gyeong-ja","Sin-chuk","Im-in","Gye-myo","Gap-jin","Eul-sa","Byeong-oh","Jeong-mi","Mu-sin","Gi-yu","Gyeong-sul","Sin-hae","Im-ja","Gye-chuk","Gap-in","Eul-myo","Byeong-jin","Jeong-sa","Mu-oh","Gi-mi"];
+        // 1. 한국 기념일 마스터 패치
+        const KR_PATCH = {"05-05":["Children's Day (Korea)"],"03-21":["Cancer Prevention Day (Korea)","Anti-Racism Day"],"03-01":["Independence Movement Day (Korea)"],"08-15":["Liberation Day (Korea)"]};
+
+        function getZodiac(year) {
+            if (!year || year < 0) return { name: "Ancient", animal: "Unknown" };
+            const names = ["Gyeong-sin","Sin-yu","Im-sul","Gye-hae","Gap-ja","Eul-chuk","Byeong-in","Jeong-myo","Mu-jin","Gi-sa","Gyeong-oh","Sin-mi","Im-sin","Gye-yu","Gap-sul","Eul-hae","Byeong-ja","Jeong-chuk","Mu-in","Gi-myo","Gyeong-jin","Sin-sa","Im-oh","Gye-mi","Gap-sin","Eul-yu","Byeong-sul","Jeong-hae","Mu-ja","Gi-chuk","Gyeong-in","Sin-myo","Im-jin","Gye-sa","Gap-oh","Eul-mi","Byeong-sin","Jeong-yu","Mu-sul","Gi-hae","Gyeong-ja","Sin-chuk","Im-in","Gye-myo","Gap-jin","Eul-sa","Byeong-oh","Jeong-mi","Mu-sin","Gi-yu","Gyeong-sul","Sin-hae","Im-ja","Gye-chuk","Gap-in","Eul-myo","Byeong-jin","Jeong-sa","Mu-oh","Gi-mi"];
             const animals = ["Monkey","Rooster","Dog","Pig","Rat","Ox","Tiger","Rabbit","Dragon","Snake","Horse","Sheep"];
-            const idx = (year - 0) % 60; const animalIdx = (year - 0) % 12;
-            return { name: names[idx < 0 ? idx + 60 : idx], animal: animals[animalIdx < 0 ? animalIdx + 12 : animalIdx] };
+            const idx = (year - 0) % 60; const aIdx = (year - 0) % 12;
+            return { name: names[idx < 0 ? idx + 60 : idx], animal: animals[aIdx < 0 ? aIdx + 12 : aIdx] };
         }
 
         async function fetchWeather(year, month, day, country) {
-            const coords = { 'korea': [37.56, 126.97], 'usa': [38.89, -77.03], 'uk': [51.50, -0.12], 'japan': [35.68, 139.65], 'brazil': [-15.79, -47.88] };
+            const coords = { 'korea': [37.56, 126.97], 'usa': [38.89, -77.03], 'uk': [51.50, -0.12], 'japan': [35.68, 139.65], 'france': [48.85, 2.35] };
             const [lat, lon] = coords[country.toLowerCase()] || [37.56, 126.97];
             const url = `https://archive-api.open-meteo.com/v1/archive?latitude=${lat}&longitude=${lon}&start_date=${year}-${month}-${day}&end_date=${year}-${month}-${day}&daily=temperature_2m_max&timezone=GMT`;
             try {
@@ -136,54 +160,43 @@
             } catch { document.getElementById('disp-weather').innerText = "18°C"; }
         }
 
-        async function handleScan() {
-            const dateInput = document.getElementById('targetDate').value;
-            const country = document.getElementById('countrySearch').value.trim();
-            if(!dateInput) return alert("SELECT DATE");
-            const y = parseInt(dateInput.substring(0, 4)); const md = dateInput.substring(5, 10);
-            window.history.pushState({}, '', `/${country.substring(0,2).toLowerCase() || 'gl'}/${md}`);
-
-            const { data, error } = await sb.from('daily_archives').select('*').eq('date_id', md).single();
-            if (error || !data) return alert("Still syncing archive for this date.");
-            document.getElementById('vault-area').style.display = 'block';
-
-            const render = (id, list, color) => {
-                const cont = document.getElementById(id); cont.innerHTML = "";
-                if(!list || list.length === 0) return cont.innerHTML = "<p class='text-xs text-gray-600'>No precise records.</p>";
-                const sorted = list.sort((a,b) => {
-                    const aL = country && a.text.toLowerCase().includes(country.toLowerCase()) ? 1 : 0;
-                    const bL = country && b.text.toLowerCase().includes(country.toLowerCase()) ? 1 : 0;
-                    if (aL !== bL) return bL - aL;
-                    return (b.year === y ? 1 : 0) - (a.year === y ? 1 : 0) || (b.year - a.year);
-                });
-                sorted.forEach(item => {
-                    const isM = item.year === y; const isL = country && item.text.toLowerCase().includes(country.toLowerCase());
-                    const yearDisp = item.year < 0 ? Math.abs(item.year) + " B.C." : (item.year || 'ANNUAL');
-                    cont.innerHTML += `<div class="flex items-start py-5 border-b border-white/5 ${isL ? 'local-focus px-6 rounded-xl' : ''}"><span class="year-badge ${isM ? 'match-badge' : ''}">${yearDisp}</span><span class="${isM ? 'text-[#c5a059] font-bold' : (isL ? 'text-white font-bold' : 'text-gray-400')} text-sm leading-relaxed">${item.text}</span></div>`;
-                });
-            };
-
-            // 카테고리 렌더링
-            render('list-holidays', data.holidays);
-            render('list-history', data.firsts);
-            render('list-innovations', data.innovations);
-            render('list-arts', data.arts);
-            render('list-births', data.birthdays);
-            render('list-deaths', data.deaths);
-
-            const z = getPhoneticZodiac(y);
-            document.getElementById('disp-ganji').innerText = z.name;
-            document.getElementById('disp-zodiac').innerText = "Year of the " + z.animal;
-            fetchWeather(y, md.split('-')[0], md.split('-')[1], country || "USA");
-            setTimeout(() => { document.getElementById('vault-area').scrollIntoView({ behavior: 'smooth' }); }, 150);
-        }
-
         function navigateDay(offset) {
             const current = document.getElementById('targetDate').value || new Date().toISOString().split('T')[0];
             let date = new Date(current); date.setDate(date.getDate() + offset);
             document.getElementById('targetDate').value = date.toISOString().split('T')[0];
             handleScan();
         }
-    </script>
-</body>
-</html>
+
+        async function handleScan() {
+            const dateInput = document.getElementById('targetDate').value;
+            const country = document.getElementById('smartSearch').value.trim();
+            if(!dateInput) return alert("Please select a date.");
+            
+            const y = parseInt(dateInput.substring(0, 4)); const m = dateInput.substring(5, 7); const d = dateInput.substring(8, 10);
+            const md = `${m}-${d}`;
+            
+            // 🌐 다국어 SEO URL
+            const countryCode = country ? country.substring(0, 2).toLowerCase() : 'gl';
+            window.history.pushState({}, '', `/${countryCode}/${md}`);
+
+            const { data, error } = await sb.from('daily_archives').select('*').eq('date_id', md).single();
+            if (error || !data) return;
+            document.getElementById('vault-area').style.display = 'block';
+
+            const hItems = []; const rItems = [];
+            const hKeys = ['day','independence','festival','national','celebration','observance','world','international'];
+            if(KR_PATCH[md]) KR_PATCH[md].forEach(t => hItems.push({text: t, year: "Annual"}));
+
+            [...(data.holidays || []), ...(data.firsts || [])].forEach(item => {
+                if (hKeys.some(k => item.text.toLowerCase().includes(k))) hItems.push(item);
+                else rItems.push(item);
+            });
+
+            const render = (id, list, isHolidays = false) => {
+                const cont = document.getElementById(id); cont.innerHTML = "";
+                if(!list || list.length === 0) return cont.innerHTML = "<p class='text-xs text-gray-600 italic'>Searching database...</p>";
+                const sorted = list.sort((a,b) => {
+                    const aL = country && a.text.toLowerCase().includes(country.toLowerCase()) ? 1 : 0;
+                    const bL = country && b.text.toLowerCase().includes(country.toLowerCase()) ? 1 : 0;
+                    if (aL !== bL) return bL - aL;
+                    return (b.year === y ? 1 : 0) - (a.year === y ? 1 : 0) || (b
