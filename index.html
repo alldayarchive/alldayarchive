@@ -18,12 +18,12 @@
         .scroll-box::-webkit-scrollbar-thumb { background: var(--gold); border-radius: 10px; }
         .year-badge { border: 1px solid var(--gold); color: var(--gold); padding: 2px 6px; border-radius: 4px; font-size: 10px; font-weight: 700; min-width: 95px; text-align: center; }
         .match-badge { background: var(--gold); color: #000; box-shadow: 0 0 10px var(--gold); }
-        .priority-focus { background: rgba(197, 160, 89, 0.2) !important; border-left: 5px solid var(--gold) !important; border-radius: 12px; }
+        .priority-focus { background: rgba(255, 255, 255, 0.05) !important; border-left: 5px solid var(--gold) !important; border-radius: 12px; margin-bottom: 12px; }
         input { background: rgba(255,255,255,0.05) !important; border: 1px solid rgba(197, 160, 89, 0.2) !important; padding: 1.2rem; border-radius: 12px; color: #fff !important; outline: none; font-weight: 600; text-align: center; width: 100%; }
         .scan-btn { background: var(--gold); color: #000; font-weight: 900; padding: 1.3rem; border-radius: 12px; width: 100%; text-transform: uppercase; letter-spacing: 2px; transition: 0.3s; cursor: pointer; border: none; font-size: 1.1rem; }
-        .scan-btn:hover { background: #fff; box-shadow: 0 0 30px var(--gold); }
         .action-btn { font-size: 8px; font-weight: 800; padding: 5px 8px; border-radius: 4px; border: 1px solid rgba(255,255,255,0.1); color: #aaa; background: rgba(0,0,0,0.4); text-transform: uppercase; }
         .blog-btn { background: #fff !important; color: #000 !important; font-weight: 900; border: none; }
+        .holiday-banner { background: rgba(197, 160, 89, 0.1); color: var(--gold); padding: 10px; border-radius: 8px; font-weight: 800; font-size: 12px; text-align: center; margin-bottom: 20px; text-transform: uppercase; }
     </style>
 </head>
 <body>
@@ -35,60 +35,57 @@
 
     <main class="relative pt-44 pb-20 px-6 max-w-[1600px] mx-auto space-y-12">
         <section class="text-center space-y-6">
-            <h1 class="text-6xl md:text-[115px] font-black text-white leading-none font-serif italic uppercase tracking-tighter">THE ARCHIVE <span class="text-[#c5a059]">OF TIME</span></h1>
-            <p class="text-[10px] text-gray-500 tracking-[0.6em] uppercase font-bold">Search any Keyword, Nation, or Year Across Eternity</p>
+            <h1 class="text-6xl md:text-[115px] font-black text-white leading-none font-serif italic uppercase tracking-tighter">THE ETERNAL <span class="text-[#c5a059]">ARCHIVE</span></h1>
+            <p class="text-[10px] text-gray-500 tracking-[0.6em] uppercase font-bold">Chronicles of humanity, nations, and culture.</p>
             
             <div class="glass-card max-w-5xl mx-auto p-6 mt-10 space-y-4 shadow-2xl">
-                <div id="status-guide" class="text-[11px] font-bold text-gold bg-gold/10 p-2 rounded hidden uppercase">Synchronizing All Data...</div>
                 <div class="grid grid-cols-1 md:grid-cols-3 gap-3">
-                    <input type="text" id="keywordSearch" placeholder="KEYWORD (EX: 한국, MUSIC, WAR)">
-                    <input type="text" id="countrySearch" placeholder="COUNTRY (EX: KOREA, JAPAN)">
+                    <input type="text" id="keywordSearch" placeholder="KEYWORD (Ex: 한국, Apple, 9.11)">
+                    <input type="text" id="countrySearch" placeholder="COUNTRY (Ex: Korea, USA, 日本)">
                     <div class="flex gap-2">
                         <input type="text" id="in-year" placeholder="YYYY" maxlength="4" oninput="if(this.value.length==4)document.getElementById('in-month').focus()">
                         <input type="text" id="in-month" placeholder="MM" maxlength="2" oninput="if(this.value.length==2)document.getElementById('in-day').focus()">
                         <input type="text" id="in-day" placeholder="DD" maxlength="2">
                     </div>
                 </div>
-                <button id="scanBtn" class="scan-btn">EXECUTE GLOBAL SEARCH</button>
+                <button id="scanBtn" class="scan-btn">SEARCH ACROSS TIME</button>
             </div>
         </section>
 
         <div id="vault-area" class="hidden space-y-8">
+            <div id="holiday-display" class="holiday-banner"></div>
+
             <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                 <div class="glass-card border-t-4 border-red-500">
-                    <h2 class="text-lg font-serif text-red-400 mb-4 uppercase italic">🚨 Major Incidents</h2>
-                    <div id="list-incidents" class="scroll-box"></div>
+                    <h2 class="text-lg font-serif text-red-400 mb-4 uppercase italic">🚨 History & Events</h2>
+                    <div id="list-history" class="scroll-box"></div>
                 </div>
                 <div class="glass-card border-t-4 border-emerald-400">
-                    <h2 class="text-lg font-serif text-emerald-400 mb-4 uppercase italic">⚙️ Innovations & Tech</h2>
-                    <div id="list-innovations" class="scroll-box"></div>
+                    <h2 class="text-lg font-serif text-emerald-400 mb-4 uppercase italic">⚙️ Innovation & Tech</h2>
+                    <div id="list-tech" class="scroll-box"></div>
                 </div>
                 <div class="glass-card border-t-4 border-sky-400">
-                    <h2 class="text-lg font-serif text-sky-400 mb-4 uppercase italic">🎬 Cinema & TV (Annual)</h2>
+                    <h2 class="text-lg font-serif text-sky-400 mb-4 uppercase italic">🎬 Movies & TV</h2>
                     <div id="list-movies" class="scroll-box"></div>
                 </div>
                 <div class="glass-card border-t-4 border-pink-500">
-                    <h2 class="text-lg font-serif text-pink-400 mb-4 uppercase italic">🎵 Music & Arts (Annual)</h2>
+                    <h2 class="text-lg font-serif text-pink-400 mb-4 uppercase italic">🎵 Music & Arts</h2>
                     <div id="list-music" class="scroll-box"></div>
                 </div>
                 <div class="glass-card border-t-4 border-amber-500">
-                    <h2 class="text-lg font-serif text-amber-400 mb-4 uppercase italic">🎮 Game & Novel (Annual)</h2>
+                    <h2 class="text-lg font-serif text-amber-400 mb-4 uppercase italic">🎮 Games & Novels</h2>
                     <div id="list-gaming" class="scroll-box"></div>
                 </div>
                 <div class="glass-card border-t-4 border-purple-400">
-                    <h2 class="text-lg font-serif text-purple-400 mb-4 uppercase italic">🎂 Births & 🕊️ Deaths</h2>
+                    <h2 class="text-lg font-serif text-purple-400 mb-4 uppercase italic">🎂 People (Births/Deaths)</h2>
                     <div id="list-people" class="scroll-box"></div>
-                </div>
-                <div class="glass-card border-t-4 border-orange-500 col-span-1 md:col-span-2">
-                    <h2 class="text-lg font-serif text-orange-400 mb-4 uppercase italic">🍴 World Recipes & Traditions</h2>
-                    <div id="list-recipes" class="scroll-box"></div>
                 </div>
             </div>
         </div>
 
         <footer class="text-center py-10 space-y-6">
             <div class="flex justify-center gap-4">
-                <button onclick="window.open('https://alldayarchive.blogspot.com')" class="bg-white text-black px-8 py-2 rounded-full font-black text-[10px] uppercase hover:bg-gold transition-all">📖 Visit Blog</button>
+                <button onclick="window.open('https://alldayarchive.blogspot.com')" class="bg-white text-black px-8 py-2 rounded-full font-black text-[10px] uppercase hover:bg-gold transition-all">📖 Blog Archive</button>
                 <button onclick="window.open('https://buymeacoffee.com/djawjdaks8g')" class="bg-[#FFDD00] text-black px-8 py-2 rounded-full font-black text-[10px] uppercase hover:bg-white transition-all">☕ Buy Me a Coffee</button>
             </div>
         </footer>
@@ -100,55 +97,51 @@
         const sb = supabase.createClient(SB_URL, SB_KEY);
 
         async function handleScan() {
-            const inY = document.getElementById('in-year').value;
-            const inM = document.getElementById('in-month').value;
-            const inD = document.getElementById('in-day').value;
+            const inY = document.getElementById('in-year').value.trim();
+            const inM = document.getElementById('in-month').value.trim();
+            const inD = document.getElementById('in-day').value.trim();
             const kw = document.getElementById('keywordSearch').value.trim().toLowerCase();
             const co = document.getElementById('countrySearch').value.trim().toLowerCase();
-            const guide = document.getElementById('status-guide');
             
             document.getElementById('vault-area').style.display = 'block';
-            guide.innerText = "Searching entire archive...";
-            guide.style.display = 'block';
 
-            // 모든 데이터를 다 가져와서 필터링 (강력한 검색 모드)
-            const { data } = await sb.from('daily_archives').select('*');
-            if(!data) return;
+            // 1. Fetch ALL data from Supabase for cross-searching
+            const { data, error } = await sb.from('daily_archives').select('*');
+            if(!data || error) { console.error("Data error"); return; }
 
-            const render = (id, fieldName, isEntertain = false) => {
+            const render = (id, fields) => {
                 const cont = document.getElementById(id); cont.innerHTML = "";
-                let masterList = [];
+                let matches = [];
 
                 data.forEach(day => {
-                    if(!day[fieldName]) return;
-                    day[fieldName].forEach(item => {
-                        const txt = item.text.toLowerCase();
-                        
-                        // [핵심 로직] 1. 국가/키워드가 포함되었는가? 2. 연도가 일치하는가?
-                        const matchKw = kw && txt.includes(kw);
-                        const matchCo = co && txt.includes(co);
-                        const matchYear = inY && item.year == inY;
+                    fields.forEach(f => {
+                        if(!day[f]) return;
+                        day[f].forEach(item => {
+                            const text = item.text.toLowerCase();
+                            
+                            // SEARCH LOGIC:
+                            // If Keyword/Country match OR Year match (for Entertainment) OR Specific Date Match
+                            const hasKeyword = (kw && text.includes(kw)) || (co && text.includes(co));
+                            const hasYear = inY && item.year == inY;
+                            const isSpecificDate = (inM && inD && day.date_id === `${inM}-${inD}`);
 
-                        if (matchKw || matchCo || (matchYear && isEntertain)) {
-                            masterList.push({...item, dateTag: day.date_id});
-                        } else if (!kw && !co && !inY && day.date_id === `${inM}-${inD}`) {
-                            // 아무것도 입력 안했을 때는 오늘 날짜 데이터
-                            masterList.push({...item, dateTag: day.date_id});
-                        } else if (inY && inM && inD && item.year == inY && day.date_id === `${inM}-${inD}`) {
-                            // 특정 날짜 검색 시
-                            masterList.push({...item, dateTag: day.date_id});
-                        }
+                            if (hasKeyword || (hasYear && isSpecificDate) || (hasYear && !inM && !inD) || (!kw && !co && !inY && isSpecificDate)) {
+                                matches.push({...item, dateId: day.date_id});
+                            }
+                        });
                     });
                 });
 
-                masterList.sort((a,b) => b.year - a.year).forEach(item => {
+                // Remove duplicates and Sort
+                const unique = [...new Map(matches.map(m => [m.text, m])).values()];
+                unique.sort((a,b) => b.year - a.year).forEach(item => {
                     cont.innerHTML += `
-                        <div class="py-4 border-b border-white/5 priority-focus px-4 mb-2">
-                            <div class="flex items-start gap-4">
-                                <span class="year-badge match-badge">${item.year} [${item.dateTag}]</span>
+                        <div class="py-4 border-b border-white/5 priority-focus px-4">
+                            <div class="flex items-start gap-3">
+                                <span class="year-badge match-badge">${item.year} [${item.dateId}]</span>
                                 <div class="flex-1">
-                                    <p class="text-[14px] text-white font-bold">${item.text}</p>
-                                    <div class="flex flex-wrap gap-2 mt-3">
+                                    <p class="text-[14px] text-white font-bold leading-relaxed">${item.text}</p>
+                                    <div class="flex gap-2 mt-3">
                                         <button onclick="window.open('https://www.youtube.com/results?search_query=${encodeURIComponent(item.text)}')" class="action-btn">📺 YT</button>
                                         <button onclick="window.open('https://alldayarchive.blogspot.com/search?q=${encodeURIComponent(item.text)}')" class="action-btn blog-btn">📖 BLOG</button>
                                     </div>
@@ -156,32 +149,24 @@
                             </div>
                         </div>`;
                 });
-                if(masterList.length === 0) cont.innerHTML = "<p class='text-gray-600 text-xs p-4'>No matching records found.</p>";
+                if(unique.length === 0) cont.innerHTML = "<p class='text-gray-700 text-[10px] p-4 italic'>No data found for this segment.</p>";
             };
 
-            render('list-incidents', 'incidents');
-            render('list-innovations', 'innovations');
-            render('list-movies', 'movies', true);
-            render('list-music', 'music', true);
-            render('list-gaming', 'gaming', true);
-            render('list-recipes', 'recipes');
+            // Execute rendering
+            render('list-history', ['incidents']);
+            render('list-tech', ['innovations']);
+            render('list-movies', ['movies']);
+            render('list-music', ['music']);
+            render('list-gaming', ['gaming']);
+            render('list-people', ['birthdays', 'deaths']);
             
-            // Birth/Death combined
-            const pCont = document.getElementById('list-people'); pCont.innerHTML = "";
-            let peopleList = [];
-            data.forEach(day => {
-                [...(day.birthdays || []), ...(day.deaths || [])].forEach(p => {
-                    if (p.text.toLowerCase().includes(kw) || p.text.toLowerCase().includes(co) || p.year == inY) {
-                        peopleList.push({...p, dateTag: day.date_id});
-                    }
-                });
-            });
-            peopleList.sort((a,b) => b.year - a.year).forEach(p => {
-                pCont.innerHTML += `<div class="py-3 text-[13px] text-gray-300 border-b border-white/5"><b>${p.year} [${p.dateTag}]</b>: ${p.text}</div>`;
-            });
+            // Holiday Logic
+            const todayData = data.find(d => d.date_id === `${inM}-${inD}`);
+            document.getElementById('holiday-display').innerText = todayData ? `TODAY'S NOTE: ${todayData.holiday}` : "GLOBAL HISTORY ARCHIVE MODE";
         }
 
-        document.getElementById('scanBtn').addEventListener('click', handleScan);
+        // Button Click & Enter Key Bindings
+        document.getElementById('scanBtn').onclick = handleScan;
         document.addEventListener('keypress', (e) => { if(e.key === 'Enter') handleScan(); });
     </script>
 </body>
