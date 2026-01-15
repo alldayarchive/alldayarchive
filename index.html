@@ -199,4 +199,34 @@
                     const aL = country && a.text.toLowerCase().includes(country.toLowerCase()) ? 1 : 0;
                     const bL = country && b.text.toLowerCase().includes(country.toLowerCase()) ? 1 : 0;
                     if (aL !== bL) return bL - aL;
-                    return (b.year === y ? 1 : 0) - (a.year === y ? 1 : 0) || (b
+                    return (b.year === y ? 1 : 0) - (a.year === y ? 1 : 0) || (b.year - a.year);
+                });
+                sorted.forEach(item => {
+                    const isM = item.year === y; const isL = country && item.text.toLowerCase().includes(country.toLowerCase());
+                    const yearDisp = item.year < 0 ? Math.abs(item.year) + " B.C." : (item.year || 'SPEC');
+                    if (isHolidays) {
+                        cont.innerHTML += `<div class="p-6 glass-card border-l-2 border-[#c5a059] mb-4 ${isL?'local-focus':''}"><span class="text-[9px] text-[#c5a059] font-bold block mb-1 uppercase tracking-widest">${yearDisp}</span><span class="text-sm font-bold leading-relaxed">${item.text}</span></div>`;
+                    } else {
+                        cont.innerHTML += `<div class="flex items-start py-6 border-b border-white/5 ${isL ? 'local-focus px-6 rounded-xl' : ''}"><span class="year-badge ${isM ? 'match-badge' : ''}">${yearDisp}</span><span class="${isM ? 'text-[#c5a059] font-bold' : (isL ? 'text-white font-bold' : 'text-gray-400')} text-sm leading-relaxed">${item.text}</span></div>`;
+                    }
+                });
+            };
+
+            render('list-holidays', hItems, true); render('list-history', rItems);
+            render('list-births', data.birthdays);
+
+            const monthText = ["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"][parseInt(m)-1];
+            document.getElementById('movie-label').innerText = `Cinema: Top of ${monthText} ${y}`;
+            document.getElementById('music-label').innerText = `Sound: Chart of ${monthText} ${y}`;
+            document.getElementById('movie-name').innerText = country ? `${country} Weekly Top Hit` : "Global Box Office #1";
+            document.getElementById('music-name').innerText = country ? `${country} Local Chart #1` : "Billboard Global Hit";
+
+            const z = getZodiac(y);
+            document.getElementById('disp-ganji').innerText = z.name;
+            document.getElementById('disp-zodiac').innerText = "Year of the " + z.animal;
+            fetchWeather(y, m, d, country || "USA");
+            setTimeout(() => { document.getElementById('vault-area').scrollIntoView({ behavior: 'smooth' }); }, 150);
+        }
+    </script>
+</body>
+</html>
