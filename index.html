@@ -16,99 +16,94 @@
         .scroll-box { height: 400px; overflow-y: auto; padding-right: 10px; scrollbar-width: thin; scrollbar-color: var(--gold) transparent; }
         .scroll-box::-webkit-scrollbar { width: 3px; }
         .scroll-box::-webkit-scrollbar-thumb { background: var(--gold); border-radius: 10px; }
-        .year-badge { border: 1px solid var(--gold); color: var(--gold); padding: 2px 8px; border-radius: 4px; font-size: 10px; font-weight: 700; min-width: 85px; text-align: center; display: inline-block; }
-        .priority-focus { background: rgba(197, 160, 89, 0.15) !important; border-left: 4px solid var(--gold) !important; border-radius: 12px; margin-bottom: 15px; padding: 15px !important; }
-        input { background: rgba(255,255,255,0.05) !important; border: 1px solid rgba(197, 160, 89, 0.2) !important; padding: 1rem; border-radius: 12px; color: #fff !important; text-align: center; font-weight: 800; outline: none; width: 100%; }
+        .year-badge { border: 1px solid var(--gold); color: var(--gold); padding: 2px 8px; border-radius: 4px; font-size: 11px; font-weight: 900; min-width: 60px; text-align: center; }
+        .priority-focus { background: rgba(197, 160, 89, 0.2) !important; border: 2px solid var(--gold) !important; border-radius: 12px; margin-bottom: 15px; padding: 15px !important; }
+        input { background: rgba(255,255,255,0.05) !important; border: 1px solid rgba(197, 160, 89, 0.2) !important; padding: 1rem; border-radius: 12px; color: #fff !important; text-align: center; font-weight: 800; outline: none; }
         .scan-btn { background: var(--gold); color: #000; font-weight: 900; padding: 1.2rem; border-radius: 12px; width: 100%; text-transform: uppercase; letter-spacing: 2px; transition: 0.3s; margin-top: 15px; cursor: pointer; }
-        .action-btn { font-size: 8px; font-weight: 800; padding: 4px 6px; border-radius: 4px; border: 1px solid rgba(255,255,255,0.1); color: #aaa; background: rgba(0,0,0,0.4); text-transform: uppercase; }
-        .blog-btn { background: #fff !important; color: #000 !important; font-weight: 900; border: none; }
-        .star-map { background: radial-gradient(circle, #1e293b 0%, #000 100%); border-radius: 50%; width: 60px; height: 60px; margin: 0 auto; border: 1px solid var(--gold); position: relative; overflow: hidden; }
-        .star { position: absolute; background: white; border-radius: 50%; animation: twinkle 2s infinite; }
-        @keyframes twinkle { 0%, 100% { opacity: 0.3; } 50% { opacity: 1; } }
+        .action-btn { font-size: 9px; font-weight: 800; padding: 5px 8px; border-radius: 4px; border: 1px solid rgba(255,255,255,0.1); color: #aaa; background: rgba(0,0,0,0.4); }
+        .blog-btn { background: #fff !important; color: #000 !important; font-weight: 900; }
+        .latest-tag { background: #ef4444; color: #fff; font-size: 8px; padding: 2px 5px; border-radius: 3px; font-weight: 900; margin-left: 5px; animation: pulse 2s infinite; }
+        @keyframes pulse { 0% { opacity: 1; } 50% { opacity: 0.5; } 100% { opacity: 1; } }
     </style>
 </head>
 <body>
     <div class="bg-heritage"></div>
     <nav class="fixed w-full z-[1000] px-10 py-6 flex justify-between items-center border-b border-white/5 bg-black/60 backdrop-blur-xl">
         <div class="text-2xl font-black text-[#c5a059] italic font-serif tracking-tighter uppercase">ALLDAY ARCHIVE</div>
-        <div class="text-[9px] text-[#c5a059] font-bold border border-[#c5a059]/30 px-3 py-1 rounded tracking-widest uppercase italic italic">Global Intelligence Station</div>
+        <div class="text-[9px] text-[#c5a059] font-bold border border-[#c5a059]/30 px-3 py-1 rounded tracking-widest uppercase italic">2026 Live Intelligence Station</div>
     </nav>
 
     <main class="relative pt-48 pb-20 px-6 max-w-7xl mx-auto space-y-16">
         <section class="text-center space-y-10">
             <h1 class="text-7xl md:text-9xl font-black text-white leading-none font-serif italic uppercase tracking-tighter">THE ETERNAL <span class="text-[#c5a059]">ARCHIVE</span></h1>
-            <div class="glass-card max-w-4xl mx-auto p-8 shadow-3xl space-y-6">
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                    <input type="text" id="smartSearch" placeholder="KEYWORD OR NATION (KOREA, APPLE, NASA)">
-                    <div class="flex gap-2">
+            <div class="glass-card max-w-5xl mx-auto p-8 shadow-3xl space-y-6">
+                <div class="grid grid-cols-1 md:grid-cols-4 gap-4">
+                    <input type="text" id="keywordSearch" placeholder="KEYWORD (Ex: Apple, War)">
+                    <input type="text" id="countrySearch" placeholder="NATION (Ex: Korea, USA)">
+                    <div class="flex gap-2 col-span-2">
                         <input type="text" id="in-year" placeholder="YYYY" maxlength="4" class="w-1/2">
                         <input type="text" id="in-month" placeholder="MM" maxlength="2" class="w-1/4">
                         <input type="text" id="in-day" placeholder="DD" maxlength="2" class="w-1/4">
                     </div>
                 </div>
-                <button onclick="handleScan()" class="scan-btn">Execute Deep Search (Enter)</button>
+                <button onclick="handleScan()" class="scan-btn">Initiate Global Sync (Enter)</button>
             </div>
         </section>
 
         <div id="vault-area" class="hidden space-y-12">
             <section class="grid grid-cols-2 md:grid-cols-5 gap-4">
                 <div class="glass-card p-4 text-center border-t-2 border-sky-500">
-                    <span class="text-[8px] text-sky-400 font-bold uppercase block mb-1 italic">Atmosphere</span>
-                    <div id="disp-weather" class="text-xl font-black">--°C</div>
+                    <span class="text-[8px] text-sky-400 font-bold uppercase block mb-1">Atmosphere</span>
+                    <div id="disp-weather" class="text-xl font-black italic">--°C</div>
                 </div>
                 <div class="glass-card p-4 text-center border-t-2 border-white/20">
-                    <span class="text-[8px] text-white/50 font-bold uppercase block mb-1 italic">Day Profile</span>
+                    <span class="text-[8px] text-white/50 font-bold uppercase block mb-1">Day Profile</span>
                     <div id="disp-day" class="text-lg font-black uppercase">--</div>
                 </div>
                 <div class="glass-card p-4 text-center border-t-2 border-gold">
-                    <span class="text-[8px] text-gold font-bold uppercase block mb-1 italic">Stellar View</span>
-                    <div class="star-map mb-1" id="star-container"></div>
-                    <div id="disp-const" class="text-[10px] font-bold italic uppercase">--</div>
+                    <span class="text-[8px] text-gold font-bold uppercase block mb-1">Ancestral Cycle</span>
+                    <div id="disp-ganji" class="text-xs font-black text-white uppercase leading-tight">--</div>
                 </div>
-                <div class="glass-card p-4 text-center border-t-2 border-emerald-500">
-                    <span class="text-[8px] text-emerald-400 font-bold uppercase block mb-1 italic">Ancestral Cycle</span>
-                    <div id="disp-ganji" class="text-xs font-black text-white leading-tight uppercase">--</div>
+                <div class="glass-card p-4 text-center border-t-2 border-purple-500">
+                    <span class="text-[8px] text-purple-400 font-bold uppercase block mb-1">Zodiac</span>
+                    <div id="disp-const" class="text-lg font-black italic uppercase">--</div>
                 </div>
                 <div class="glass-card p-4 text-center border-t-2 border-red-500">
-                    <span class="text-[8px] text-red-400 font-bold uppercase block mb-1 italic">Special Day</span>
-                    <div id="disp-holiday" class="text-xs font-black uppercase italic">--</div>
+                    <span class="text-[8px] text-red-400 font-bold uppercase block mb-1">International Holiday</span>
+                    <div id="disp-holiday" class="text-xs font-black uppercase italic text-white">--</div>
                 </div>
             </section>
 
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
                 <div class="glass-card border-t-4 border-red-500">
-                    <h2 class="text-lg font-serif text-red-400 mb-4 uppercase italic">🚨 History & Politics</h2>
+                    <h2 class="text-xl font-serif text-red-400 mb-6 uppercase italic tracking-widest">🚨 History & Global Incidents</h2>
                     <div id="list-incidents" class="scroll-box"></div>
                 </div>
-                <div class="glass-card border-t-4 border-emerald-400">
-                    <h2 class="text-lg font-serif text-emerald-400 mb-4 uppercase italic">⚙️ Innovations & Firsts</h2>
+                <div class="glass-card border-t-4 border-emerald-500">
+                    <h2 class="text-xl font-serif text-emerald-400 mb-6 uppercase italic tracking-widest">⚙️ Innovations & New Tech</h2>
                     <div id="list-innovations" class="scroll-box"></div>
                 </div>
                 <div class="glass-card border-t-4 border-sky-400">
-                    <h2 class="text-lg font-serif text-sky-400 mb-4 uppercase italic">🎬 Cinema & TV (Annual Release)</h2>
+                    <h2 class="text-xl font-serif text-sky-400 mb-6 uppercase italic tracking-widest">🎬 Cinema & TV (Latest Release)</h2>
                     <div id="list-movies" class="scroll-box"></div>
                 </div>
                 <div class="glass-card border-t-4 border-pink-500">
-                    <h2 class="text-lg font-serif text-pink-400 mb-4 uppercase italic">🎵 Music & Arts (Annual Chart)</h2>
+                    <h2 class="text-xl font-serif text-pink-400 mb-6 uppercase italic tracking-widest">🎵 Music & Pop Culture (Weekly)</h2>
                     <div id="list-music" class="scroll-box"></div>
                 </div>
-                <div class="glass-card border-t-4 border-amber-500">
-                    <h2 class="text-lg font-serif text-amber-400 mb-4 uppercase italic">🎮 Gaming & Novel (Annual)</h2>
+                <div class="glass-card border-t-4 border-amber-500 col-span-1 md:col-span-2">
+                    <h2 class="text-xl font-serif text-amber-400 mb-6 uppercase italic tracking-widest">🎮 Gaming & Literature</h2>
                     <div id="list-gaming" class="scroll-box"></div>
-                </div>
-                <div class="glass-card border-t-4 border-purple-400">
-                    <h2 class="text-lg font-serif text-purple-400 mb-4 uppercase italic">🎂 People (Births/Deaths)</h2>
-                    <div id="list-people" class="scroll-box"></div>
                 </div>
             </div>
         </div>
 
-        <footer class="text-center py-20 border-t border-white/5 space-y-8">
-            <div class="flex justify-center gap-4">
-                <button onclick="window.open('https://alldayarchive.blogspot.com')" class="bg-white text-black px-8 py-3 rounded-full font-black text-xs uppercase hover:bg-gold transition-all">📖 Visit Official Blog</button>
-                <button onclick="window.open('https://buymeacoffee.com/djawjdaks8g')" class="bg-yellow-400 text-black px-8 py-3 rounded-full font-black text-xs uppercase hover:bg-white transition-all">☕ Buy Me a Coffee</button>
+        <footer class="text-center py-20 border-t border-white/5 space-y-10">
+            <div class="flex justify-center gap-6">
+                <button onclick="window.open('https://alldayarchive.blogspot.com')" class="bg-white text-black px-10 py-4 rounded-full font-black text-xs uppercase hover:bg-gold transition-all shadow-xl">📖 Visit Official Blog</button>
+                <button onclick="window.open('https://buymeacoffee.com/djawjdaks8g')" class="bg-yellow-400 text-black px-10 py-4 rounded-full font-black text-xs uppercase hover:bg-white transition-all shadow-xl">☕ Buy Me a Coffee</button>
             </div>
-            <p class="text-[9px] text-gray-600 tracking-[0.5em] uppercase italic italic">Universal History Station © 2026</p>
+            <p class="text-[10px] text-gray-600 tracking-[0.5em] uppercase italic italic">Universal History Station © 2026 | Powered by Global Archive</p>
         </footer>
     </main>
 
@@ -117,61 +112,59 @@
         const SB_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Iml3Z2pmcGxycWV1cGZwcGNxbWF1Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3Njc2ODMzODMsImV4cCI6MjA4MzI1OTM4M30.mW07xEhx-YvSx-Xe2YSUH6TpaXEwdvGdbBBcQy1sitU";
         const sb = supabase.createClient(SB_URL, SB_KEY);
 
-        function getZodiac(year) {
-            const names = ["Gyeong-sin","Sin-yu","Im-sul","Gye-hae","Gap-ja","Eul-chuk","Byeong-in","Jeong-myo","Mu-jin","Gi-sa","Gyeong-oh","Sin-mi","Im-sin","Gye-yu","Gap-sul","Eul-hae","Byeong-ja","Jeong-chuk","Mu-in","Gi-myo","Gyeong-jin","Sin-sa","Im-oh","Gye-mi","Gap-sin","Eul-yu","Byeong-sul","Jeong-hae","Mu-ja","Gi-chuk","Gyeong-in","Sin-myo","Im-jin","Gye-sa","Gap-oh","Eul-mi","Byeong-sin","Jeong-yu","Mu-sul","Gi-hae","Gyeong-자","Sin-chuk","Im-in","Gye-myo","Gap-jin","Eul-sa","Byeong-oh","Jeong-mi","Mu-sin","Gi-yu","Gyeong-sul","Sin-hae","Im-ja","Gye-chuk","Gap-in","Eul-myo","Byeong-jin","Jeong-sa","Mu-oh","Gi-mi"];
-            return names[(year - 0) % 60] || "Ancient Cycle";
-        }
-
         async function handleScan() {
-            const now = new Date();
-            const inY = document.getElementById('in-year').value || now.getFullYear();
-            const inM = (document.getElementById('in-month').value || (now.getMonth()+1).toString()).padStart(2,'0');
-            const inD = (document.getElementById('in-day').value || (now.getDate()).toString()).padStart(2,'0');
-            const kw = document.getElementById('smartSearch').value.toLowerCase();
+            const today = new Date();
+            const inY = document.getElementById('in-year').value || today.getFullYear();
+            const inM = (document.getElementById('in-month').value || (today.getMonth()+1).toString()).padStart(2,'0');
+            const inD = (document.getElementById('in-day').value || (today.getDate()).toString()).padStart(2,'0');
+            const kw = document.getElementById('keywordSearch').value.trim().toLowerCase();
+            const co = document.getElementById('countrySearch').value.trim().toLowerCase();
             const md = `${inM}-${inD}`;
 
             document.getElementById('vault-area').classList.remove('hidden');
             document.getElementById('disp-day').innerText = new Date(inY, inM-1, inD).toLocaleDateString('en-US', {weekday:'long'});
-            document.getElementById('disp-ganji').innerText = getZodiac(parseInt(inY));
             
             const { data } = await sb.from('daily_archives').select('*').eq('date_id', md).single();
-            if(!data) return;
+            if(!data) return alert("Archive Not Found for this Date.");
 
-            document.getElementById('disp-holiday').innerText = data.holiday || "Universal Day";
+            document.getElementById('disp-holiday').innerText = data.holiday || "Special Archive Day";
 
             const render = (id, fields) => {
                 const cont = document.getElementById(id); cont.innerHTML = "";
-                let matches = [];
-                let others = [];
+                let priorityItems = [];
+                let otherItems = [];
 
                 fields.forEach(f => {
                     if(!data[f]) return;
                     data[f].forEach(item => {
                         const txt = item.text.toLowerCase();
-                        // 최신일 기준: 키워드나 국가가 맞거나 연도가 오늘 연도와 같으면 우선순위
-                        const isMatch = kw && (txt.includes(kw) || (kw === '한국' && txt.includes('korea')));
-                        const isLatest = item.year == inY;
+                        // [사장님 요청] 최신일(2026/2025) 기준 우선순위 + 키워드/국가 매칭
+                        const isMatch = (kw && txt.includes(kw)) || (co && (txt.includes(co) || txt.includes('korea')));
+                        const isLatest = item.year == 2026 || item.year == 2025; // 최신 콘텐츠 태그
 
                         const html = `
-                            <div class="py-4 border-b border-white/5 ${isMatch ? 'priority-focus' : 'px-4'}">
+                            <div class="py-5 border-b border-white/5 ${(isMatch || isLatest) ? 'priority-focus' : 'px-4'}">
                                 <div class="flex items-start gap-4">
-                                    <span class="year-badge ${isLatest ? 'match-badge' : ''}">${item.year}</span>
+                                    <div class="flex flex-col items-center gap-1">
+                                        <span class="year-badge">${item.year}</span>
+                                        ${isLatest ? '<span class="latest-tag">NEW</span>' : ''}
+                                    </div>
                                     <div class="flex-1">
-                                        <p class="text-[14px] ${isMatch ? 'text-white font-bold' : 'text-gray-400'}">${item.text}</p>
-                                        <div class="flex flex-wrap gap-2 mt-3">
-                                            <button onclick="window.open('https://www.youtube.com/results?search_query=${encodeURIComponent(item.text)}') " class="action-btn">📺 YT</button>
-                                            <button onclick="window.open('https://open.spotify.com/search/${encodeURIComponent(item.text)}') " class="action-btn">🎧 SP</button>
-                                            <button onclick="window.open('https://www.amazon.com/s?k=${encodeURIComponent(item.text)}') " class="action-btn">🛒 AMZ</button>
-                                            <button onclick="window.open('https://alldayarchive.blogspot.com/search?q=${encodeURIComponent(item.text)}')" class="action-btn blog-btn">📖 BLOG</button>
+                                        <p class="text-[15px] ${(isMatch || isLatest) ? 'text-white font-black' : 'text-gray-400'}">${item.text}</p>
+                                        <div class="flex flex-wrap gap-2 mt-4">
+                                            <button onclick="window.open('https://www.youtube.com/results?search_query=${encodeURIComponent(item.year + " " + item.text)}')" class="action-btn">📺 YouTube</button>
+                                            <button onclick="window.open('https://open.spotify.com/search/${encodeURIComponent(item.text)}')" class="action-btn">🎧 Spotify</button>
+                                            <button onclick="window.open('https://www.amazon.com/s?k=${encodeURIComponent(item.text)}')" class="action-btn">🛒 Amazon</button>
+                                            <button onclick="window.open('https://alldayarchive.blogspot.com/search?q=${encodeURIComponent(item.text)}')" class="action-btn blog-btn">📖 Blog</button>
                                         </div>
                                     </div>
                                 </div>
                             </div>`;
-                        if(isMatch) matches.push(html);
-                        else others.push(html);
+                        if(isMatch || isLatest) priorityItems.push(html);
+                        else otherItems.push(html);
                     });
                 });
-                cont.innerHTML = [...matches, ...others].join('') || "<p class='text-[10px] p-4 italic'>No data found.</p>";
+                cont.innerHTML = [...priorityItems, ...otherItems].join('') || "<p class='text-[10px] p-4 italic'>No recent records.</p>";
             };
 
             render('list-incidents', ['incidents']);
@@ -179,7 +172,6 @@
             render('list-movies', ['movies']);
             render('list-music', ['music']);
             render('list-gaming', ['gaming']);
-            render('list-people', ['birthdays', 'deaths']);
             
             document.getElementById('vault-area').scrollIntoView({ behavior: 'smooth' });
         }
