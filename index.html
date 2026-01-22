@@ -1,728 +1,337 @@
 <!DOCTYPE html>
-
 <html lang="en">
-
 <head>
-
     <meta charset="UTF-8">
-
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
     <title id="seo-title">AllDay Archive | Global Intelligence & Premium Vault</title>
-
     <meta id="seo-desc" name="description" content="Discover global history, sports, law, and culture archives.">
-
     
-
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
-
     <script src="https://cdn.tailwindcss.com"></script>
-
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-
     <style>
-
-        :root { --gold: #F5C97A; --bg: #0c0e12; --text-body: #E2E2E2; --text-sub: #B5B5B5; --text-meta: #8A8A8A; }
-
+        :root { --gold: #F5C97A; --bg: #0c0e12; --text-main: #E5E7EB; --text-sub: #9CA3AF; --text-meta: #6B7280; }
         
-
-        body { font-family: 'Inter', sans-serif; background-color: var(--bg); color: var(--text-body); font-size: 16px; line-height: 1.65; scroll-behavior: smooth; overflow-x: hidden; }
-
+        body { font-family: 'Inter', sans-serif; background-color: var(--bg); color: var(--text-main); font-size: 16px; line-height: 1.65; scroll-behavior: smooth; overflow-x: hidden; }
         .font-serif { font-family: 'Playfair Display', serif; }
-
         .bg-heritage { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: radial-gradient(circle at 50% 50%, #1a202c 0%, #0c0e12 100%); z-index: -1; }
-
         
-
         .glass-card { background: rgba(25, 28, 35, 0.98); border: 1px solid rgba(245, 201, 122, 0.15); border-radius: 24px; padding: 2rem; transition: 0.4s; }
-
         .scroll-box { height: 380px; overflow-y: auto; padding-right: 10px; scrollbar-width: thin; scrollbar-color: var(--gold) transparent; }
-
         .scroll-box::-webkit-scrollbar { width: 3px; }
-
         .scroll-box::-webkit-scrollbar-thumb { background: var(--gold); border-radius: 10px; }
 
-
-
         @media (max-width: 640px) {
-
             .scroll-box span { font-size: 15.5px !important; line-height: 1.7 !important; }
-
         }
 
-
-
         a { color: var(--gold); font-weight: 700; text-decoration: none; transition: 0.2s; }
-
         a:hover { color: #FFDFA3; text-decoration: underline; }
-
         .priority-focus a { color: #60A5FA !important; } 
-
-
 
         .ad-placeholder { min-height: 250px; background: rgba(255,255,255,0.02); border: 1px dashed rgba(255,255,255,0.1); display: flex; align-items: center; justify-content: center; color: var(--text-meta); font-size: 11px; text-transform: uppercase; letter-spacing: 2px; margin: 2rem 0; border-radius: 12px; }
 
-
-
         .premium-pdf-btn { background: linear-gradient(to right, #c5a059, #F5C97A); color: #000; font-weight: 900; padding: 0.8rem 1.5rem; border-radius: 50px; font-size: 12px; transition: 0.3s; cursor: pointer; text-transform: uppercase; letter-spacing: 1px; }
-
         .year-badge { border: 1px solid var(--gold); color: var(--gold); padding: 2px 8px; border-radius: 4px; font-size: 11px; font-weight: 700; min-width: 80px; text-align: center; }
-
         .match-badge { background: var(--gold); color: #000; padding: 2px 8px; border-radius: 4px; font-size: 11px; font-weight: 900; }
-
         .priority-focus { background: rgba(245, 201, 122, 0.18) !important; border-left: 5px solid var(--gold) !important; transform: scale(1.01); box-shadow: 0 10px 40px rgba(0,0,0,0.5); }
-
         
-
         input, select { background: rgba(255,255,255,0.1) !important; border: 1px solid rgba(245, 201, 122, 0.3) !important; padding: 1.1rem; border-radius: 12px; color: #fff !important; outline: none; transition: 0.3s; width: 100%; text-align: center; font-size: 1rem; }
-
         .date-hub input { width: 85px; font-size: 1.2rem; }
-
         #in-year { width: 110px; }
-
         .scan-btn { background: var(--gold); color: #000; font-weight: 900; padding: 1.2rem; border-radius: 12px; width: 100%; text-transform: uppercase; letter-spacing: 2px; cursor: pointer; transition: 0.3s; z-index: 100; position: relative; }
-
         .action-btn { font-size: 9px; font-weight: 800; padding: 5px 12px; border: 1px solid rgba(255,255,255,0.1); border-radius: 6px; color: var(--text-sub); background: rgba(0,0,0,0.3); margin-top: 5px; cursor: pointer; }
-
         .detail-view { display: none; padding: 1rem; margin-top: 10px; background: rgba(255,255,255,0.03); border-radius: 12px; font-size: 14px; color: #B5B5B5; border: 1px dashed var(--gold); text-align: left; }
-
-        
-
-        .sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0,0,0,0); border: 0; }
-
-        
-
-        .star-map { background: radial-gradient(circle, #1e293b 0%, #000 100%); border-radius: 50%; width: 100px; height: 100px; margin: 0 auto; border: 1px solid var(--gold); position: relative; overflow: hidden; }
-
-        .star { position: absolute; background: white; border-radius: 50%; opacity: 0.8; animation: twinkle 2s infinite; }
-
-        #vault-area { display: none; }
-
     </style>
-
 </head>
-
 <body>
-
     <div class="bg-heritage"></div>
-
     
-
-    <section class="sr-only">
-
-        <h2>Global Historical Events by Date</h2>
-
-        <h3 id="seo-sports">Sports Milestones and Olympics Records</h3>
-
-        <h3 id="seo-law">Law, Justice and Constitutional History</h3>
-
-        <h3 id="seo-incidents">Major Incidents and Political Tragedies</h3>
-
-        <h3 id="seo-finance">Finance, Wealth and Economic History</h3>
-
-        <h3 id="seo-holidays">Holidays and Cultural Observances</h3>
-
-        <h3 id="seo-births">Births and Deaths of Famous Figures</h3>
-
-    </section>
-
-
-
     <nav class="fixed w-full z-[1000] px-10 py-6 flex justify-between items-center border-b border-white/5 bg-black/40 backdrop-blur-xl">
-
         <div class="text-2xl font-black text-[#F5C97A] uppercase italic tracking-tighter">ALLDAY ARCHIVE</div>
-
         <button onclick="window.open('https://buymeacoffee.com/djawjdaks8g')" class="text-[9px] font-bold text-white border border-white/30 px-3 py-1 rounded hover:bg-white transition-all">☕ BUY ME A COFFEE</button>
-
     </nav>
 
-
-
     <main class="relative pt-48 pb-20 px-6 max-w-7xl mx-auto space-y-20 text-center">
-
-        <!-- Search Center -->
-
+        <!-- Search Section -->
         <section class="space-y-12 text-center">
-
             <h1 class="text-5xl md:text-8xl font-black text-white leading-none font-serif italic uppercase tracking-tighter leading-tight italic">HISTORY <br><span class="text-[#F5C97A]">INTELLIGENCE</span></h1>
-
             <div class="glass-card max-w-5xl mx-auto p-8 shadow-3xl space-y-6">
-
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-
-                    <input type="text" id="smartSearch" placeholder="KEYWORD (E.G. NASA, CAT, NINTENDO)" style="text-align: left; padding-left: 20px;">
-
-                    <select id="countrySelect" style="text-align-last: center;"><option value="">SELECT NATION (AUTO DETECT)</option></select>
-
+                    <input type="text" id="smartSearch" placeholder="KEYWORD (E.G. NASA, CAT, 축구)" style="text-align: left; padding-left: 20px;">
+                    <input type="text" id="countrySearch" placeholder="NATION FOCUS (E.G. KOREA, BRAZIL)" style="text-align: left; padding-left: 20px;">
                 </div>
-
                 <div class="date-hub flex gap-2 justify-center">
-
                     <input type="text" id="in-year" placeholder="YYYY" maxlength="4" oninput="if(this.value.length==4)document.getElementById('in-month').focus()">
-
                     <input type="text" id="in-month" placeholder="MM" maxlength="2" oninput="if(this.value.length==2)document.getElementById('in-day').focus()">
-
                     <input type="text" id="in-day" placeholder="DD" maxlength="2">
-
                 </div>
-
                 <button id="scanBtn" onclick="handleScan()" class="scan-btn shadow-2xl uppercase">Synchronize Intelligence (Enter)</button>
-
             </div>
-
         </section>
 
-
-
         <div id="vault-area" class="space-y-24">
-
-            <!-- HUD -->
-
+            <!-- 🏷️ Information Header (Status-Ready) -->
             <div class="flex justify-center gap-4 text-[10px] font-bold uppercase tracking-widest text-[#F5C97A] italic">
-
-                <span id="p-kw">Keyword: None</span> | <span id="p-co">Nation: Global</span> | <span id="p-dt">Period: Today</span>
-
+                <span id="p-kw">Keyword: None</span> | <span id="p-co">Nation: --</span> | <span id="p-dt">Period: Today</span>
             </div>
 
-
-
-            <!-- Dash -->
-
-            <section class="grid grid-cols-1 md:grid-cols-4 gap-6 text-center font-hud">
-
+            <!-- Dash HUD -->
+            <section class="grid grid-cols-1 md:grid-cols-4 gap-6 text-center">
                 <div class="glass-card border-t-2 border-sky-500 flex flex-col justify-center py-8"><span class="text-[9px] text-sky-400 uppercase block mb-4 font-bold">Atmosphere</span><div id="disp-weather" class="text-4xl font-black italic">--°C</div></div>
-
                 <div class="glass-card border-t-2 border-white/20 flex flex-col justify-center py-8 text-gray-400"><span class="text-[9px] uppercase block mb-4 font-bold">Day of Week</span><div id="disp-day" class="text-xl font-black text-white leading-tight uppercase">--</div></div>
-
                 <div class="glass-card border-t-2 border-[#F5C97A] flex flex-col justify-center py-8"><span class="text-[9px] text-[#F5C97A] uppercase block mb-4 font-bold">Stellar View</span><div class="star-map mb-2" id="star-container"></div><div id="disp-constellation" class="text-xs font-bold text-white uppercase italic tracking-widest">--</div></div>
-
                 <div class="glass-card border-t-2 border-emerald-500 flex flex-col justify-center py-8 text-emerald-400"><span class="text-[9px] uppercase block mb-4 font-bold">Ancestral Cycle</span><div id="disp-ganji" class="text-lg font-black uppercase text-white leading-tight">--</div></div>
-
             </section>
-
-
 
             <!-- ⭐ PRIORITY SECTION -->
-
             <section id="priority-section" class="space-y-4 hidden text-left">
-
                 <div class="flex justify-between items-end border-b border-white/5 pb-2">
-
                     <h2 class="text-3xl font-serif text-white italic uppercase tracking-widest"><span class="text-[#F5C97A]">Intelligence</span> Priority Result</h2>
-
                     <div class="flex flex-col items-end gap-1">
-
                         <button onclick="alert('Preparing Premium Archive Report...')" class="premium-pdf-btn">📄 Export Verified Records (PDF)</button>
-
                         <p class="text-[10px] text-gray-500 italic">Country • Year • Keyword curated archive</p>
-
                     </div>
-
                 </div>
-
-                <p class="text-xs italic text-gray-500 italic">Historically significant records prioritized by strict keyword and date matching.</p>
-
                 <div id="list-priority" class="space-y-4"></div>
-
             </section>
 
-
-
-            <!-- 🏆 SPORTS -->
-
+            <!-- Categories -->
             <section class="glass-card p-8 border-t-4 border-[#F5C97A] text-left">
-
-                <h2 class="text-2xl font-serif text-[#F5C97A] italic mb-6 uppercase tracking-widest border-b border-white/5 pb-4 font-bold italic">🏆 Sports & Olympic Milestones</h2>
-
+                <h2 class="text-2xl font-serif text-[#F5C97A] italic mb-6 uppercase tracking-widest border-b border-white/5 pb-4 font-bold">🏆 Sports & Olympic Milestones</h2>
                 <div id="list-sports" class="scroll-box space-y-2"></div>
-
             </section>
-
-
-
-            <!-- ⚖️ LAW & JUSTICE -->
 
             <section class="glass-card p-8 border-t-4 border-slate-500 text-left">
-
-                <h2 class="text-2xl font-serif text-slate-400 mb-6 uppercase tracking-widest border-b border-white/5 pb-4 font-bold italic">⚖️ Law & Justice</h2>
-
+                <h2 class="text-2xl font-serif text-slate-400 mb-6 uppercase tracking-widest border-b border-white/5 pb-4 font-bold">⚖️ Law & Justice</h2>
                 <div id="list-law" class="scroll-box space-y-2"></div>
-
             </section>
 
-
-
             <div class="grid grid-cols-1 md:grid-cols-3 gap-8 text-left">
-
                 <section class="glass-card p-6 border-t-4 border-red-500"><h2 class="text-xl font-serif text-red-400 mb-6 uppercase font-bold italic">🚨 Major Incidents</h2><div id="list-incidents" class="scroll-box"></div></section>
-
-                <section class="glass-card p-6 border-t-4 border-emerald-500">
-
-                    <div class="flex justify-between items-center mb-6">
-
-                        <h2 class="text-xl font-serif text-emerald-400 uppercase font-bold italic">📈 Finance</h2>
-
-                        <button onclick="alert('Annual Finance PDF Available')" class="text-[8px] border border-emerald-500/30 px-2 py-1 text-emerald-400 uppercase rounded">Financial PDF</button>
-
-                    </div>
-
-                    <div id="list-finance" class="scroll-box"></div>
-
-                </section>
-
+                <section class="glass-card p-6 border-t-4 border-emerald-500"><h2 class="text-xl font-serif text-emerald-400 mb-6 uppercase font-bold italic">📈 Finance Records</h2><div id="list-finance" class="scroll-box"></div></section>
                 <section class="glass-card p-6 border-t-4 border-green-500"><h2 class="text-xl font-serif text-green-400 mb-6 uppercase font-bold italic">🎉 Global Holidays</h2><div id="list-holidays" class="scroll-box"></div></section>
-
             </div>
-
-
 
             <div class="ad-placeholder">Sponsored Content Area</div>
 
-
-
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 text-left">
-
                 <div class="glass-card p-6 border-t-4 border-sky-400"><h3>🎬 Movies</h3><div id="list-movies" class="scroll-box h-[250px]"></div></div>
-
-                <div class="glass-card p-6 border-t-4 border-pink-500"><h3>🎵 Music</h3><div id="list-music" class="scroll-box h-[250px]"></div></div>
-
+                <div class="glass-card p-6 border-t-4 border-pink-500"><h3>🎵 Music Charts</h3><div id="list-music" class="scroll-box h-[250px]"></div></div>
                 <div class="glass-card p-6 border-t-4 border-amber-500"><h3>🎮 Gaming</h3><div id="list-gaming" class="scroll-box h-[250px]"></div></div>
-
                 <div class="glass-card p-6 border-t-4 border-emerald-400"><h3>📚 Literature</h3><div id="list-books" class="scroll-box h-[250px]"></div></div>
-
             </div>
 
-
-
-            <!-- ⚙️ INNOVATIONS & 🎨 ARTS -->
-
             <div class="grid grid-cols-1 md:grid-cols-2 gap-8 text-left">
-
-                <section class="glass-card p-8 border-t-4 border-amber-400"><h2>⚙️ Innovations</h2><div id="list-innovations" class="scroll-box"></div></section>
-
-                <section class="glass-card p-8 border-t-4 border-purple-400"><h2>🎨 Fine Arts</h2><div id="list-arts" class="scroll-box"></div></section>
-
-            </div>
-
-
-
-            <section class="glass-card p-8 border-t-4 border-emerald-600 text-left"><h2>🍴 Gastronomy</h2><div id="list-food" class="scroll-box"></div></section>
-
-
-
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-8 text-left">
-
                 <section class="glass-card p-8 border-t-4 border-pink-400"><h3>🎂 Born Today</h3><div id="list-births" class="scroll-box"></div></section>
-
                 <section class="glass-card p-8 border-t-4 border-gray-600 opacity-60"><h3>🕊️ Passed Away</h3><div id="list-deaths" class="scroll-box"></div></section>
-
             </div>
-
-
 
             <footer class="py-24 text-center border-t border-white/5 bg-black/20 space-y-12">
-
-                <div class="flex flex-col items-center gap-4">
-
-                    <button onclick="window.open('https://alldayarchive.blogspot.com')" class="bg-emerald-600 text-white px-10 py-4 rounded-full font-black text-xs hover:bg-white hover:text-black transition-all shadow-xl uppercase italic">Enter Recipe & Chronicles Library (Blog)</button>
-
-                    <button class="premium-pdf-btn" onclick="alert('Preparing Extended Year Archive PDF...')">📄 Download Extended Year Archive</button>
-
-                </div>
-
-                <div class="pt-10 flex flex-col items-center gap-6 text-center">
-
-                    <p class="text-[9px] text-gray-600 uppercase tracking-[0.5em] mt-8 italic font-sans">Discovery Engine curated by dedle © 2026</p>
-
+                <button onclick="window.open('https://alldayarchive.blogspot.com')" class="bg-emerald-600 text-white px-10 py-4 rounded-full font-black text-xs hover:bg-white hover:text-black transition-all shadow-xl uppercase italic tracking-widest">Enter Chronicles Library (Blog)</button>
+                <div class="pt-10 flex flex-col items-center gap-6">
+                    <p class="text-[9px] text-gray-600 uppercase tracking-[0.5em] italic">Discovery Engine curated by dedle © 2026</p>
                     <p class="text-[10px] text-sky-900 font-bold uppercase">Feedback: halftotaketo@gmail.com</p>
-
                 </div>
-
             </footer>
-
         </div>
-
     </main>
 
-
-
     <script>
-
         const SB_URL = "https://iwgjfplrqeupfppcqmau.supabase.co"; 
-
         const SB_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Iml3Z2pmcGxycWV1cGZwcGNxbWF1Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3Njc2ODMzODMsImV4cCI6MjA4MzI1OTM4M30.mW07xEhx-YvSx-Xe2YSUH6TpaXEwdvGdbBBcQy1sitU"; 
-
         const sb = supabase.createClient(SB_URL, SB_KEY);
-
         const AMAZON_ID = "dedle-20";
+        const DEFAULT_COUNTRY = navigator.language?.slice(-2).toUpperCase() || "US";
 
         let isScanning = false;
-
         let COUNTRIES = [];
-
         let countriesLoaded = false;
-
         const CACHE = {};
 
-
-
+        // 1. 국가 데이터 로드 (API)
         fetch("https://restcountries.com/v3.1/all").then(r => r.json()).then(data => {
-
             COUNTRIES = data.map(c => ({ code: c.cca2, canonical: c.name.common, names: [c.name.common, ...(c.altSpellings||[]), ...(Object.values(c.name.nativeName||{}).map(n=>n.common))].map(v=>v.toLowerCase()) }));
-
-            const select = document.getElementById("countrySelect");
-
-            COUNTRIES.sort((a,b)=>a.code.localeCompare(b.code)).forEach(c => {
-
-                const opt = document.createElement("option"); opt.value = c.code; opt.textContent = c.code + " - " + c.canonical.toUpperCase();
-
-                select.appendChild(opt);
-
-            });
-
             countriesLoaded = true;
-
         });
 
-
-
         function escapeHTML(str) { return String(str).replace(/[&<>"']/g, m => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[m])); }
-
         function autoLink(text) {
-
             const kws = ["NASA","Google","Apple","Microsoft","Olympics","World Cup","Bitcoin","Stock","War","President","King","Queen"];
-
             let res = escapeHTML(text);
-
             kws.forEach(k => {
-
                 const reg = new RegExp(`\\b(${k})\\b`, "gi");
-
                 res = res.replace(reg, `<a href="javascript:void(0)" onclick="searchKW('${k}')">$1</a>`);
-
             });
-
             return res;
-
         }
-
         function searchKW(w) { document.getElementById('smartSearch').value = w; handleScan(); }
-
+        
         function getZodiac(year) {
-
             const names = ["Gyeong-sin","Sin-yu","Im-sul","Gye-hae","Gap-ja","Eul-chuk","Byeong-in","Jeong-myo","Mu-jin","Gi-sa","Gyeong-oh","Sin-mi","Im-sin","Gye-yu","Gap-sul","Eul-hae","Byeong-ja","Jeong-chuk","Mu-in","Gi-myo","Gyeong-jin","Sin-sa","Im-oh","Gye-mi","Gap-sin","Eul-yu","Byeong-sul","Jeong-hae","Mu-ja","Gi-chuk","Gyeong-in","Sin-myo","Im-jin","Gye-sa","Gap-oh","Eul-mi","Byeong-sin","Jeong-yu","Mu-sul","Gi-hae","Gyeong-ja","Sin-chuk","Im-in","Gye-myo","Gap-jin","Eul-sa","Byeong-oh","Jeong-mi","Mu-sin","Gi-yu","Gyeong-sul","Sin-hae","Im-ja","Gye-chuk","Gap-in","Eul-myo","Byeong-jin","Jeong-sa","Mu-oh","Gi-mi"];
-
             const idx = (year - 0) % 60; return names[idx < 0 ? idx + 60 : idx] || "N/A";
-
         }
-
-
 
         async function fetchRealWeather(y, m, d, co) {
-
             const coords = { 'KR': [37.5, 127], 'US': [38.8, -77], 'UK': [51.5, -0.1], 'JP': [35.6, 139] };
-
             const [lat, lon] = coords[co] || [37.5, 127];
-
             try {
-
                 const res = await fetch(`https://archive-api.open-meteo.com/v1/archive?latitude=${lat}&longitude=${lon}&start_date=${y}-${m}-${d}&end_date=${y}-${m}-${d}&daily=temperature_2m_max&timezone=GMT`);
-
                 const dr = await res.json();
-
                 document.getElementById('disp-weather').innerText = Math.round(dr.daily.temperature_2m_max[0]) + "°C";
-
             } catch { document.getElementById('disp-weather').innerText = "18°C"; }
-
         }
-
-
 
         async function handleScan() {
-
             if (isScanning || !countriesLoaded) return;
-
             isScanning = true;
 
-
-
             const inY = document.getElementById('in-year').value;
-
             const inM = document.getElementById('in-month').value || (new Date().getMonth()+1).toString().padStart(2,'0');
-
             const inD = document.getElementById('in-day').value || (new Date().getDate()).toString().padStart(2,'0');
-
             const kwInput = document.getElementById('smartSearch').value.trim().toLowerCase();
+            const coInput = document.getElementById('countrySearch').value.trim().toLowerCase();
 
-            const selectedCo = document.getElementById("countrySelect").value;
-
-            
-
-            const weatherYear = inY || new Date().getFullYear();
-
-            const md = `${inM.padStart(2,'0')}-${inD.padStart(2,'0')}`;
-
-            
-
+            // 💡 [비즈니스 로직] 국가 결정 (Auto vs Manual)
             let detectedCo = "";
+            let isAutoCountry = true;
 
-            if (kwInput.length > 3) {
-
-                for (const c of COUNTRIES) { if (c.names.some(n => kwInput.includes(n))) { detectedCo = c.code; break; } }
-
+            if (coInput) {
+                for (const c of COUNTRIES) { 
+                    if (c.names.some(n => coInput.includes(n))) { 
+                        detectedCo = c.code; 
+                        isAutoCountry = false;
+                        break; 
+                    } 
+                }
             }
 
-            const finalCo = selectedCo || detectedCo || (navigator.language.slice(-2).toUpperCase()) || "US";
+            const finalCo = detectedCo || DEFAULT_COUNTRY;
+            const md = `${inM.padStart(2,'0')}-${inD.padStart(2,'0')}`;
+            const weatherYear = inY || new Date().getFullYear();
 
+            // 🔴 [수정 포인트 1] URL 구조 최적화 (Auto vs Nation Code)
+            const urlCo = isAutoCountry ? 'auto' : finalCo.toLowerCase();
+            window.history.replaceState({}, "", `/${urlCo}/${md}`);
 
-
+            // UI Feedback
             document.getElementById('p-kw').innerText = `Keyword: ${kwInput || 'None'}`;
-
-            document.getElementById('p-co').innerText = `Nation: ${finalCo}`;
-
+            document.getElementById('p-co').innerText = `Nation: ${finalCo} ${isAutoCountry ? '(Auto)' : '(Manual)'}`;
             document.getElementById('p-dt').innerText = `Period: ${inY || 'All'}-${md}`;
 
-
-
-            window.history.replaceState({}, "", `/${finalCo.toLowerCase()}/${md}`);
-
-
-
             const cKey = `${md}_${finalCo}_${kwInput}_${inY}`;
-
             if (CACHE[cKey]) { renderAll(CACHE[cKey], inY, finalCo, kwInput, md); isScanning = false; return; }
 
-
-
-            let q = sb.from('daily_archives').select('*').eq('date_id', md);
-
-            if (inY) q = q.eq('year', inY);
-
-            const { data, error } = await q.order('country_code', { ascending: false });
-
-            
-
+            // 🟠 [참고] 현재는 MVP 단계이므로 날짜 기반 전체 데이터를 가져와 클라이언트에서 정렬합니다.
+            const { data, error } = await sb.from('daily_archives').select('*').eq('date_id', md).order('country_code', { ascending: false });
             if (error || !data) { alert("Searching archive..."); isScanning = false; return; }
 
-
-
             CACHE[cKey] = data;
-
             renderAll(data, inY, finalCo, kwInput, md);
-
             isScanning = false;
-
         }
 
-
-
         function renderAll(data, inY, finalCo, kw, md) {
-
             document.getElementById('vault-area').style.display = 'block';
-
             const priority = [];
-
-            const amzSuffix = { movies: "blu-ray dvd", music: "vinyl album", gaming: "video game", books: "novel", sports: "gear", finance: "wealth book", law: "legal document" };
-
-
+            const amzSuffix = { movies: "blu-ray dvd", music: "vinyl album", gaming: "video game", books: "novel", sports: "gear", finance: "wealth book" };
 
             const render = (id, list, section_type) => {
-
                 const cont = document.getElementById(id); cont.innerHTML = "";
-
                 if(!list || list.length === 0) return cont.innerHTML = "<p class='text-xs text-gray-600 mt-4 italic'>Archive synced.</p>";
-
                 
-
                 const sorted = list.sort((a,b) => {
-
                     const aCo = (a.country_code === finalCo);
-
                     const bCo = (b.country_code === finalCo);
-
                     if (aCo !== bCo) return aCo ? -1 : 1;
-
                     return (b.year == inY) - (a.year == inY) || (b.year - a.year);
-
                 });
-
-
 
                 let globalHeaderAdded = false;
 
-
-
                 sorted.forEach((item, index) => {
-
                     const tL = item.text.toLowerCase();
-
                     const isM = inY && item.year == inY; 
-
                     const kws = kw.split(/\s+/).filter(k => k.length > 0);
-
                     const isK = kws.length > 0 && kws.every(k => tL.includes(k));
-
                     const isCoMatch = (item.country_code === finalCo);
-
                     
-
                     if (!kw && !isCoMatch && !globalHeaderAdded) {
-
-                        cont.innerHTML += `<p class="text-[11px] text-gray-500 italic mt-8 mb-2">Showing global records on the same date after national results.</p><h3 class="text-[10px] uppercase tracking-widest text-gray-600 mb-4 border-b border-white/5 pb-1">🌍 Global Records (${md})</h3>`;
-
+                        cont.innerHTML += `<p class="text-[11px] text-gray-500 italic mt-8 mb-2">Global records following national results.</p><h3 class="text-[10px] uppercase tracking-widest text-gray-600 mb-4 border-b border-white/5 pb-1 text-left">🌍 Global Intelligence (${md})</h3>`;
                         globalHeaderAdded = true;
-
                     }
 
-
-
-                    const sp_k = ['olympic','cup','fifa','medal','soccer','baseball','basketball','tournament'];
-
-                    const mv_k = ['movie','film','cinema','box office','premiere'];
-
-                    const mu_k = ['song','album','music','billboard','symphony'];
-
-                    const gm_k = ['game','nintendo','sega','playstation','xbox','comic'];
-
+                    const sp_k = ['olympic','cup','fifa','medal','soccer','baseball','basketball','football'];
+                    const mv_k = ['movie','film','cinema','box office'];
+                    const mu_k = ['song','album','music','billboard','chart'];
+                    const gm_k = ['game','nintendo','sega','playstation','xbox','comic','pixel'];
                     const bk_k = ['book','novel','published','author'];
-
-                    const fn_k = ['stock','market','finance','money','wealth','bank','economic'];
-
-                    const pol_k = ['war','riot','kill','murder','attack'];
-
+                    const fn_k = ['stock','market','finance','money','wealth','bank','trade'];
+                    const pol_k = ['war','riot','kill','murder','attack','tragedy'];
                     const lw_k = ['court','verdict','ruling','supreme','lawsuit','enacted','amendment','constitution','legislation'];
 
-
-
                     if (section_type === 'sports' && !sp_k.some(k => tL.includes(k))) return;
-
                     if (section_type === 'movies' && !mv_k.some(k => tL.includes(k))) return;
-
                     if (section_type === 'music' && !mu_k.some(k => tL.includes(k))) return;
-
                     if (section_type === 'gaming' && !gm_k.some(k => tL.includes(k))) return;
-
                     if (section_type === 'books' && !bk_k.some(k => tL.includes(k))) return;
-
                     if (section_type === 'finance' && !fn_k.some(k => tL.includes(k))) return;
-
                     if (section_type === 'law' && !lw_k.some(k => tL.includes(k))) return;
-
                     if (section_type === 'incidents' && !pol_k.some(k => tL.includes(k))) return;
 
-                    if (section_type === 'arts' && (pol_k.some(k => tL.includes(k)) || lw_k.some(k => tL.includes(k)))) return;
-
-
-
                     const yearDisp = item.year < 0 ? Math.abs(item.year) + " B.C." : (item.year || 'SPEC');
-
                     const detailId = `detail-${id}-${index}`;
-
                     const q = encodeURIComponent(`${item.year} ${item.text.replace(/[^\w\sㄱ-ㅎ가-힣]/g, '')}`);
-
                     const amzQ = encodeURIComponent(`${item.text.split(',')[0]} ${amzSuffix[section_type] || ""}`);
 
-
-
                     const html = `
-
                         <div class="flex flex-col py-5 border-b border-white/5 ${isK && isM && isCoMatch ? 'priority-focus px-4 rounded-lg':''}">
-
                             <div class="flex items-start gap-4">
-
                                 <span class="year-badge ${isM?'match-badge':''}">${yearDisp}</span>
-
                                 <div class="flex-1 text-left">
-
                                     <span style="color: #E2E2E2;">${autoLink(item.text)}</span>
-
                                     <button onclick="document.getElementById('${detailId}').style.display = document.getElementById('${detailId}').style.display === 'block' ? 'none' : 'block'" class="text-[9px] text-gray-500 underline ml-2 uppercase font-bold tracking-widest cursor-pointer">Detail [+]</button>
-
                                 </div>
-
                             </div>
-
-                            <div id="${detailId}" class="detail-view">Intelligence verified via AllDay Global Satellite. Full story on Blog.</div>
-
+                            <div id="${detailId}" class="detail-view">Historical record verified via AllDay Global Satellite.</div>
                             <div class="flex gap-2 mt-4 ml-[80px]">
-
                                 <button onclick="window.open('https://www.youtube.com/results?search_query=${q}+official')" class="action-btn">📺 Youtube</button>
-
                                 <button onclick="window.open('https://www.amazon.com/s?tag=${AMAZON_ID}&k=${amzQ}')" class="action-btn">🛒 Shop</button>
-
                             </div>
-
                         </div>`;
-
                     if(isK && isM && isCoMatch) priority.push(html);
-
                     cont.innerHTML += html;
-
                 });
-
             };
 
-
-
             const allE = data.flatMap(d => [...(d.firsts || []), ...(d.holidays || [])]);
-
             render('list-sports', allE, 'sports'); render('list-incidents', allE, 'incidents'); render('list-law', allE, 'law');
-
-            render('list-finance', allE, 'finance'); render('list-holidays', data.holidays, 'holidays'); render('list-movies', allE, 'movies');
-
-            render('list-music', allE, 'music'); render('list-gaming', allE, 'gaming'); render('list-books', allE, 'books');
-
-            render('list-innovations', allE, 'innovations'); render('list-arts', allE, 'arts');
-
+            render('list-finance', allE, 'finance'); render('list-holidays', data.flatMap(d=>d.holidays||[]), 'holidays'); 
+            render('list-movies', allE, 'movies'); render('list-music', allE, 'music'); render('list-gaming', allE, 'gaming');
+            render('list-books', allE, 'books');
             
-
             document.getElementById('list-births').innerHTML = data.flatMap(d=>d.birthdays||[]).map(b => `<div class="py-4 border-b border-white/5 text-left"><span class="year-badge">${b.year}</span><span style="color: #E2E2E2;" class="text-sm ml-4">${escapeHTML(b.text)}</span></div>`).join('');
-
             document.getElementById('list-deaths').innerHTML = data.flatMap(d=>d.deaths||[]).map(d => `<div class="py-4 border-b border-white/5 text-left"><span class="year-badge">${d.year}</span><span style="color: #E2E2E2;" class="text-sm ml-4">${escapeHTML(d.text)}</span></div>`).join('');
 
-
-
             if(priority.length > 0) { document.getElementById('priority-section').classList.remove('hidden'); document.getElementById('list-priority').innerHTML = [...new Set(priority)].slice(0,5).join(''); }
-
             else { document.getElementById('priority-section').classList.add('hidden'); }
 
-
-
             const dayNames = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
-
             const weatherYear = inY || new Date().getFullYear();
-
             document.getElementById('disp-day').innerText = dayNames[new Date(`${weatherYear}-${md}`).getDay()];
-
             document.getElementById('disp-ganji').innerText = inY ? getZodiac(parseInt(inY)) : "Syncing...";
-
             fetchRealWeather(weatherYear, md.split('-')[0], md.split('-')[1], finalCo);
-
             
-
             const cont = document.getElementById('star-container'); cont.innerHTML = "";
-
             for(let i=0; i<30; i++) {
-
                 const s = document.createElement('div'); s.className = 'star';
-
                 s.style.left = Math.random()*100+'%'; s.style.top = Math.random()*100+'%';
-
                 s.style.width = Math.random()*2+'px'; s.style.height = s.style.width;
-
                 cont.appendChild(s);
-
             }
-
             setTimeout(() => { document.getElementById('vault-area').scrollIntoView({ behavior: 'smooth' }); }, 150);
-
         }
-
-        document.addEventListener('keypress', (e) => { if(e.key === 'Enter') handleScan(); });
-
+        document.addEventListener('keydown', (e) => { if(e.key === 'Enter') handleScan(); });
     </script>
-
 </body>
-
 </html>
-
