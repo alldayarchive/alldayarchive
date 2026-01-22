@@ -1,317 +1,727 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AllDay Archive | Global Intelligence & Stellar Vault</title>
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
-    <script src="https://cdn.tailwindcss.com"></script>
-    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-    <style>
-        :root { --gold: #c5a059; --bg: #0c0e12; }
-        body { font-family: 'Inter', sans-serif; background-color: var(--bg); color: #e2e8f0; scroll-behavior: smooth; overflow-x: hidden; }
-        .font-serif { font-family: 'Playfair Display', serif; }
-        .bg-heritage { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: radial-gradient(circle at 50% 50%, #1a202c 0%, #0c0e12 100%); z-index: -1; }
-        .glass-card { background: rgba(25, 28, 35, 0.98); border: 1px solid rgba(197, 160, 89, 0.1); border-radius: 24px; padding: 2rem; transition: 0.4s; }
-        .scroll-box { height: 350px; overflow-y: auto; padding-right: 10px; scrollbar-width: thin; scrollbar-color: var(--gold) transparent; }
-        .scroll-box::-webkit-scrollbar { width: 3px; }
-        .scroll-box::-webkit-scrollbar-thumb { background: var(--gold); border-radius: 10px; }
-        .year-badge { border: 1px solid var(--gold); color: var(--gold); padding: 2px 8px; border-radius: 4px; font-size: 11px; font-weight: 700; min-width: 85px; text-align: center; }
-        .match-badge { background: var(--gold); color: #000; padding: 2px 8px; border-radius: 4px; font-size: 11px; font-weight: 900; box-shadow: 0 0 15px var(--gold); }
-        .priority-card { background: rgba(197, 160, 89, 0.2) !important; border: 2px solid var(--gold) !important; transform: scale(1.02); box-shadow: 0 15px 40px rgba(0,0,0,0.6); }
-        
-        .date-hub { display: flex; gap: 5px; justify-content: center; }
-        .date-hub input { width: 85px; background: rgba(255,255,255,0.1); border: 1px solid rgba(197, 160, 89, 0.4); padding: 1rem 0; border-radius: 12px; color: #fff !important; text-align: center; font-size: 1.2rem; outline: none; }
-        #in-year { width: 110px; }
-        input#smartKeyword, input#countrySearch { background: rgba(255,255,255,0.1); border: 1px solid rgba(197, 160, 89, 0.3); padding: 1.1rem; border-radius: 12px; color: #fff !important; text-align: left; padding-left: 20px; outline: none; width: 100%; font-size: 1rem; }
-        input::placeholder { color: rgba(255,255,255,0.3); }
 
-        .scan-btn { background: var(--gold); color: #000; font-weight: 900; padding: 1.2rem; border-radius: 12px; width: 100%; text-transform: uppercase; letter-spacing: 2px; cursor: pointer; transition: 0.3s; z-index: 100; position: relative; margin-top: 15px; }
-        .action-btn { font-size: 9px; font-weight: 800; padding: 5px 12px; border-radius: 6px; border: 1px solid rgba(255,255,255,0.1); color: #888; transition: 0.2s; background: rgba(0,0,0,0.3); margin-top: 5px; cursor: pointer; display: inline-flex; align-items: center; gap: 4px; }
-        .action-btn:hover { border-color: var(--gold); color: var(--gold); }
-        .star-map { background: radial-gradient(circle, #1e293b 0%, #000 100%); border-radius: 50%; width: 110px; height: 110px; margin: 0 auto; border: 1px solid var(--gold); position: relative; overflow: hidden; }
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title id="seo-title">AllDay Archive | Global Intelligence & Premium Vault</title>
+
+    <meta id="seo-desc" name="description" content="Discover global history, sports, law, and culture archives.">
+
+    
+
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
+
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+    <style>
+
+        :root { --gold: #F5C97A; --bg: #0c0e12; --text-body: #E2E2E2; --text-sub: #B5B5B5; --text-meta: #8A8A8A; }
+
+        
+
+        body { font-family: 'Inter', sans-serif; background-color: var(--bg); color: var(--text-body); font-size: 16px; line-height: 1.65; scroll-behavior: smooth; overflow-x: hidden; }
+
+        .font-serif { font-family: 'Playfair Display', serif; }
+
+        .bg-heritage { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: radial-gradient(circle at 50% 50%, #1a202c 0%, #0c0e12 100%); z-index: -1; }
+
+        
+
+        .glass-card { background: rgba(25, 28, 35, 0.98); border: 1px solid rgba(245, 201, 122, 0.15); border-radius: 24px; padding: 2rem; transition: 0.4s; }
+
+        .scroll-box { height: 380px; overflow-y: auto; padding-right: 10px; scrollbar-width: thin; scrollbar-color: var(--gold) transparent; }
+
+        .scroll-box::-webkit-scrollbar { width: 3px; }
+
+        .scroll-box::-webkit-scrollbar-thumb { background: var(--gold); border-radius: 10px; }
+
+
+
+        @media (max-width: 640px) {
+
+            .scroll-box span { font-size: 15.5px !important; line-height: 1.7 !important; }
+
+        }
+
+
+
+        a { color: var(--gold); font-weight: 700; text-decoration: none; transition: 0.2s; }
+
+        a:hover { color: #FFDFA3; text-decoration: underline; }
+
+        .priority-focus a { color: #60A5FA !important; } 
+
+
+
+        .ad-placeholder { min-height: 250px; background: rgba(255,255,255,0.02); border: 1px dashed rgba(255,255,255,0.1); display: flex; align-items: center; justify-content: center; color: var(--text-meta); font-size: 11px; text-transform: uppercase; letter-spacing: 2px; margin: 2rem 0; border-radius: 12px; }
+
+
+
+        .premium-pdf-btn { background: linear-gradient(to right, #c5a059, #F5C97A); color: #000; font-weight: 900; padding: 0.8rem 1.5rem; border-radius: 50px; font-size: 12px; transition: 0.3s; cursor: pointer; text-transform: uppercase; letter-spacing: 1px; }
+
+        .year-badge { border: 1px solid var(--gold); color: var(--gold); padding: 2px 8px; border-radius: 4px; font-size: 11px; font-weight: 700; min-width: 80px; text-align: center; }
+
+        .match-badge { background: var(--gold); color: #000; padding: 2px 8px; border-radius: 4px; font-size: 11px; font-weight: 900; }
+
+        .priority-focus { background: rgba(245, 201, 122, 0.18) !important; border-left: 5px solid var(--gold) !important; transform: scale(1.01); box-shadow: 0 10px 40px rgba(0,0,0,0.5); }
+
+        
+
+        input, select { background: rgba(255,255,255,0.1) !important; border: 1px solid rgba(245, 201, 122, 0.3) !important; padding: 1.1rem; border-radius: 12px; color: #fff !important; outline: none; transition: 0.3s; width: 100%; text-align: center; font-size: 1rem; }
+
+        .date-hub input { width: 85px; font-size: 1.2rem; }
+
+        #in-year { width: 110px; }
+
+        .scan-btn { background: var(--gold); color: #000; font-weight: 900; padding: 1.2rem; border-radius: 12px; width: 100%; text-transform: uppercase; letter-spacing: 2px; cursor: pointer; transition: 0.3s; z-index: 100; position: relative; }
+
+        .action-btn { font-size: 9px; font-weight: 800; padding: 5px 12px; border: 1px solid rgba(255,255,255,0.1); border-radius: 6px; color: var(--text-sub); background: rgba(0,0,0,0.3); margin-top: 5px; cursor: pointer; }
+
+        .detail-view { display: none; padding: 1rem; margin-top: 10px; background: rgba(255,255,255,0.03); border-radius: 12px; font-size: 14px; color: #B5B5B5; border: 1px dashed var(--gold); text-align: left; }
+
+        
+
+        .sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0,0,0,0); border: 0; }
+
+        
+
+        .star-map { background: radial-gradient(circle, #1e293b 0%, #000 100%); border-radius: 50%; width: 100px; height: 100px; margin: 0 auto; border: 1px solid var(--gold); position: relative; overflow: hidden; }
+
         .star { position: absolute; background: white; border-radius: 50%; opacity: 0.8; animation: twinkle 2s infinite; }
-        @keyframes twinkle { 0%, 100% { opacity: 0.3; } 50% { opacity: 1; } }
+
         #vault-area { display: none; }
+
     </style>
+
 </head>
+
 <body>
+
     <div class="bg-heritage"></div>
-    <nav class="fixed w-full z-[1000] px-10 py-6 flex justify-between items-center border-b border-white/5 bg-black/40 backdrop-blur-xl font-serif">
-        <div class="text-2xl font-black text-[#c5a059] uppercase italic tracking-tighter">ALLDAY ARCHIVE</div>
-        <div onclick="window.open('https://open.spotify.com/user/dedle')" class="text-[9px] text-[#1db954] cursor-pointer font-bold uppercase tracking-[0.2em] border border-[#1db954]/30 px-3 py-1 rounded">Music Network</div>
+
+    
+
+    <section class="sr-only">
+
+        <h2>Global Historical Events by Date</h2>
+
+        <h3 id="seo-sports">Sports Milestones and Olympics Records</h3>
+
+        <h3 id="seo-law">Law, Justice and Constitutional History</h3>
+
+        <h3 id="seo-incidents">Major Incidents and Political Tragedies</h3>
+
+        <h3 id="seo-finance">Finance, Wealth and Economic History</h3>
+
+        <h3 id="seo-holidays">Holidays and Cultural Observances</h3>
+
+        <h3 id="seo-births">Births and Deaths of Famous Figures</h3>
+
+    </section>
+
+
+
+    <nav class="fixed w-full z-[1000] px-10 py-6 flex justify-between items-center border-b border-white/5 bg-black/40 backdrop-blur-xl">
+
+        <div class="text-2xl font-black text-[#F5C97A] uppercase italic tracking-tighter">ALLDAY ARCHIVE</div>
+
+        <button onclick="window.open('https://buymeacoffee.com/djawjdaks8g')" class="text-[9px] font-bold text-white border border-white/30 px-3 py-1 rounded hover:bg-white transition-all">☕ BUY ME A COFFEE</button>
+
     </nav>
 
+
+
     <main class="relative pt-48 pb-20 px-6 max-w-7xl mx-auto space-y-20 text-center">
-        <!-- Search -->
-        <section class="space-y-12">
-            <h1 class="text-5xl md:text-8xl font-black text-white leading-none font-serif italic uppercase tracking-tighter leading-tight italic">DECODE <br><span class="text-[#c5a059]">THE HISTORY</span></h1>
+
+        <!-- Search Center -->
+
+        <section class="space-y-12 text-center">
+
+            <h1 class="text-5xl md:text-8xl font-black text-white leading-none font-serif italic uppercase tracking-tighter leading-tight italic">HISTORY <br><span class="text-[#F5C97A]">INTELLIGENCE</span></h1>
+
             <div class="glass-card max-w-5xl mx-auto p-8 shadow-3xl space-y-6">
+
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                    <input type="text" id="smartKeyword" placeholder="KEYWORD (E.G. MOVIE, CAT, GAME)">
-                    <input type="text" id="smartCountry" placeholder="NATION (E.G. KOREA, BRAZIL, USA)">
+
+                    <input type="text" id="smartSearch" placeholder="KEYWORD (E.G. NASA, CAT, NINTENDO)" style="text-align: left; padding-left: 20px;">
+
+                    <select id="countrySelect" style="text-align-last: center;"><option value="">SELECT NATION (AUTO DETECT)</option></select>
+
                 </div>
-                <div class="date-hub">
+
+                <div class="date-hub flex gap-2 justify-center">
+
                     <input type="text" id="in-year" placeholder="YYYY" maxlength="4" oninput="if(this.value.length==4)document.getElementById('in-month').focus()">
+
                     <input type="text" id="in-month" placeholder="MM" maxlength="2" oninput="if(this.value.length==2)document.getElementById('in-day').focus()">
+
                     <input type="text" id="in-day" placeholder="DD" maxlength="2">
+
                 </div>
-                <button id="scanBtn" onclick="handleScan()" class="scan-btn shadow-2xl">Initiate Universal Intelligence Sync (Enter)</button>
+
+                <button id="scanBtn" onclick="handleScan()" class="scan-btn shadow-2xl uppercase">Synchronize Intelligence (Enter)</button>
+
             </div>
+
         </section>
 
-        <!-- Result Content -->
+
+
         <div id="vault-area" class="space-y-24">
-            <!-- 🌡️ Dash -->
+
+            <!-- HUD -->
+
+            <div class="flex justify-center gap-4 text-[10px] font-bold uppercase tracking-widest text-[#F5C97A] italic">
+
+                <span id="p-kw">Keyword: None</span> | <span id="p-co">Nation: Global</span> | <span id="p-dt">Period: Today</span>
+
+            </div>
+
+
+
+            <!-- Dash -->
+
             <section class="grid grid-cols-1 md:grid-cols-4 gap-6 text-center font-hud">
-                <div class="glass-card border-t-2 border-sky-500 flex flex-col justify-center">
-                    <span class="text-[9px] text-sky-400 uppercase block mb-4 font-bold tracking-widest">Atmosphere</span>
-                    <div id="disp-weather" class="text-4xl font-black italic">--°C</div>
-                    <p id="disp-weather-loc" class="text-[9px] text-gray-500 uppercase mt-2 font-bold italic">Satellite Sync</p>
-                </div>
-                <div class="glass-card border-t-2 border-white/20 flex flex-col justify-center">
-                    <span class="text-[9px] text-white/50 uppercase block mb-4 italic font-bold">Day of Week</span>
-                    <div id="disp-day" class="text-2xl font-black text-white leading-tight uppercase">--</div>
-                </div>
-                <div class="glass-card border-t-2 border-[#c5a059]">
-                    <span class="text-[9px] text-[#c5a059] uppercase block mb-4 font-bold tracking-widest">Stellar View</span>
-                    <div class="star-map mb-2" id="star-container"></div>
-                    <div id="disp-constellation" class="text-xs font-bold text-white uppercase italic">Syncing...</div>
-                </div>
-                <div class="glass-card border-t-2 border-emerald-500 flex flex-col justify-center text-emerald-400">
-                    <span class="text-[9px] uppercase block mb-4 italic font-bold">Ancestral Cycle</span>
-                    <div id="disp-ganji" class="text-lg font-black uppercase text-white leading-tight">--</div>
-                    <p id="disp-zodiac" class="text-[9px] text-gray-500 uppercase mt-1 italic font-bold">Eastern Wisdom</p>
-                </div>
+
+                <div class="glass-card border-t-2 border-sky-500 flex flex-col justify-center py-8"><span class="text-[9px] text-sky-400 uppercase block mb-4 font-bold">Atmosphere</span><div id="disp-weather" class="text-4xl font-black italic">--°C</div></div>
+
+                <div class="glass-card border-t-2 border-white/20 flex flex-col justify-center py-8 text-gray-400"><span class="text-[9px] uppercase block mb-4 font-bold">Day of Week</span><div id="disp-day" class="text-xl font-black text-white leading-tight uppercase">--</div></div>
+
+                <div class="glass-card border-t-2 border-[#F5C97A] flex flex-col justify-center py-8"><span class="text-[9px] text-[#F5C97A] uppercase block mb-4 font-bold">Stellar View</span><div class="star-map mb-2" id="star-container"></div><div id="disp-constellation" class="text-xs font-bold text-white uppercase italic tracking-widest">--</div></div>
+
+                <div class="glass-card border-t-2 border-emerald-500 flex flex-col justify-center py-8 text-emerald-400"><span class="text-[9px] uppercase block mb-4 font-bold">Ancestral Cycle</span><div id="disp-ganji" class="text-lg font-black uppercase text-white leading-tight">--</div></div>
+
             </section>
 
-            <!-- ⭐ 1순위: PINPOINT MATCHES (키워드/국가 최우선) -->
-            <section id="priority-section" class="space-y-8 hidden text-left">
-                <h2 class="text-3xl font-serif text-white italic border-b border-white/5 pb-4 uppercase tracking-widest"><span class="text-[#c5a059]">Intelligence</span> Pinpoint Match</h2>
+
+
+            <!-- ⭐ PRIORITY SECTION -->
+
+            <section id="priority-section" class="space-y-4 hidden text-left">
+
+                <div class="flex justify-between items-end border-b border-white/5 pb-2">
+
+                    <h2 class="text-3xl font-serif text-white italic uppercase tracking-widest"><span class="text-[#F5C97A]">Intelligence</span> Priority Result</h2>
+
+                    <div class="flex flex-col items-end gap-1">
+
+                        <button onclick="alert('Preparing Premium Archive Report...')" class="premium-pdf-btn">📄 Export Verified Records (PDF)</button>
+
+                        <p class="text-[10px] text-gray-500 italic">Country • Year • Keyword curated archive</p>
+
+                    </div>
+
+                </div>
+
+                <p class="text-xs italic text-gray-500 italic">Historically significant records prioritized by strict keyword and date matching.</p>
+
                 <div id="list-priority" class="space-y-4"></div>
+
             </section>
 
-            <!-- 🏆 SPORTS SECTION (독립) -->
-            <section class="glass-card p-8 border-t-4 border-[#c5a059] text-left">
-                <h2 class="text-2xl font-serif text-[#c5a059] italic mb-6 uppercase tracking-widest border-b border-white/5 pb-4">🏆 Sports & Olympic Milestones</h2>
+
+
+            <!-- 🏆 SPORTS -->
+
+            <section class="glass-card p-8 border-t-4 border-[#F5C97A] text-left">
+
+                <h2 class="text-2xl font-serif text-[#F5C97A] italic mb-6 uppercase tracking-widest border-b border-white/5 pb-4 font-bold italic">🏆 Sports & Olympic Milestones</h2>
+
                 <div id="list-sports" class="scroll-box space-y-2"></div>
+
             </section>
 
-            <!-- 🚨 INCIDENTS & 🎉 HOLIDAYS -->
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-8 text-left">
-                <section class="glass-card p-8 border-t-4 border-red-500">
-                    <h2 class="text-xl font-serif text-red-400 mb-6 uppercase tracking-widest border-b border-white/5 pb-2">🚨 Historical Incidents</h2>
-                    <div id="list-incidents" class="scroll-box"></div>
+
+
+            <!-- ⚖️ LAW & JUSTICE -->
+
+            <section class="glass-card p-8 border-t-4 border-slate-500 text-left">
+
+                <h2 class="text-2xl font-serif text-slate-400 mb-6 uppercase tracking-widest border-b border-white/5 pb-4 font-bold italic">⚖️ Law & Justice</h2>
+
+                <div id="list-law" class="scroll-box space-y-2"></div>
+
+            </section>
+
+
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8 text-left">
+
+                <section class="glass-card p-6 border-t-4 border-red-500"><h2 class="text-xl font-serif text-red-400 mb-6 uppercase font-bold italic">🚨 Major Incidents</h2><div id="list-incidents" class="scroll-box"></div></section>
+
+                <section class="glass-card p-6 border-t-4 border-emerald-500">
+
+                    <div class="flex justify-between items-center mb-6">
+
+                        <h2 class="text-xl font-serif text-emerald-400 uppercase font-bold italic">📈 Finance</h2>
+
+                        <button onclick="alert('Annual Finance PDF Available')" class="text-[8px] border border-emerald-500/30 px-2 py-1 text-emerald-400 uppercase rounded">Financial PDF</button>
+
+                    </div>
+
+                    <div id="list-finance" class="scroll-box"></div>
+
                 </section>
-                <section class="glass-card p-8 border-t-4 border-green-500">
-                    <h2 class="text-xl font-serif text-green-400 mb-6 uppercase tracking-widest border-b border-white/5 pb-2">🎉 Global Holidays & Celebrations</h2>
-                    <div id="list-holidays" class="scroll-box"></div>
-                </section>
+
+                <section class="glass-card p-6 border-t-4 border-green-500"><h2 class="text-xl font-serif text-green-400 mb-6 uppercase font-bold italic">🎉 Global Holidays</h2><div id="list-holidays" class="scroll-box"></div></section>
+
             </div>
 
-            <!-- 🎬 CULTURE GRID (Movies, Music, Gaming) -->
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-6 text-left">
-                <div class="glass-card p-6 border-t-4 border-sky-400">
-                    <span class="text-[9px] text-sky-400 font-bold uppercase block mb-4">Cinema History</span>
-                    <div id="list-movies" class="scroll-box"></div>
-                </div>
-                <div class="glass-card p-6 border-t-4 border-pink-500">
-                    <span class="text-[9px] text-pink-400 font-bold uppercase block mb-4">Music Chart Hits</span>
-                    <div id="list-music" class="scroll-box"></div>
-                </div>
-                <div class="glass-card p-6 border-t-4 border-amber-500">
-                    <span class="text-[9px] text-amber-400 font-bold uppercase block mb-4">Gaming & Media</span>
-                    <div id="list-gaming" class="scroll-box"></div>
-                </div>
+
+
+            <div class="ad-placeholder">Sponsored Content Area</div>
+
+
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 text-left">
+
+                <div class="glass-card p-6 border-t-4 border-sky-400"><h3>🎬 Movies</h3><div id="list-movies" class="scroll-box h-[250px]"></div></div>
+
+                <div class="glass-card p-6 border-t-4 border-pink-500"><h3>🎵 Music</h3><div id="list-music" class="scroll-box h-[250px]"></div></div>
+
+                <div class="glass-card p-6 border-t-4 border-amber-500"><h3>🎮 Gaming</h3><div id="list-gaming" class="scroll-box h-[250px]"></div></div>
+
+                <div class="glass-card p-6 border-t-4 border-emerald-400"><h3>📚 Literature</h3><div id="list-books" class="scroll-box h-[250px]"></div></div>
+
             </div>
+
+
 
             <!-- ⚙️ INNOVATIONS & 🎨 ARTS -->
+
             <div class="grid grid-cols-1 md:grid-cols-2 gap-8 text-left">
-                <section class="glass-card p-8 border-t-4 border-emerald-400">
-                    <h2 class="text-xl font-serif text-emerald-400 mb-6 uppercase border-b border-white/5 pb-2 tracking-widest">⚙️ Innovations & Firsts</h2>
-                    <div id="list-innovations" class="scroll-box"></div>
-                </section>
-                <section class="glass-card p-8 border-t-4 border-purple-400">
-                    <h2 class="text-xl font-serif text-purple-400 mb-6 uppercase border-b border-white/5 pb-2 tracking-widest">🎨 Fine Arts & Literature</h2>
-                    <div id="list-arts" class="scroll-box"></div>
-                </section>
+
+                <section class="glass-card p-8 border-t-4 border-amber-400"><h2>⚙️ Innovations</h2><div id="list-innovations" class="scroll-box"></div></section>
+
+                <section class="glass-card p-8 border-t-4 border-purple-400"><h2>🎨 Fine Arts</h2><div id="list-arts" class="scroll-box"></div></section>
+
             </div>
 
-            <!-- 🎂 BIRTHDAYS & 🕊️ DEATHS -->
+
+
+            <section class="glass-card p-8 border-t-4 border-emerald-600 text-left"><h2>🍴 Gastronomy</h2><div id="list-food" class="scroll-box"></div></section>
+
+
+
             <div class="grid grid-cols-1 md:grid-cols-2 gap-8 text-left">
-                <section class="glass-card p-8 border-t-4 border-pink-400">
-                    <h2 class="text-xl font-serif text-pink-400 mb-6 uppercase italic">🎂 Born Today</h2>
-                    <div id="list-births" class="scroll-box"></div>
-                </section>
-                <section class="glass-card p-8 border-t-4 border-gray-600 opacity-60">
-                    <h2 class="text-xl font-serif text-gray-500 mb-6 uppercase italic">🕊️ Passed Away</h2>
-                    <div id="list-deaths" class="scroll-box"></div>
-                </section>
+
+                <section class="glass-card p-8 border-t-4 border-pink-400"><h3>🎂 Born Today</h3><div id="list-births" class="scroll-box"></div></section>
+
+                <section class="glass-card p-8 border-t-4 border-gray-600 opacity-60"><h3>🕊️ Passed Away</h3><div id="list-deaths" class="scroll-box"></div></section>
+
             </div>
 
-            <!-- Footer & Blog -->
+
+
             <footer class="py-24 text-center border-t border-white/5 bg-black/20 space-y-12">
-                <div class="space-y-4">
-                    <button onclick="window.open('https://alldayarchive.blogspot.com')" class="bg-emerald-600 text-white px-10 py-4 rounded-full font-black text-xs hover:bg-white hover:text-black transition-all shadow-xl uppercase italic">Unlock Official Chronicles & Recipes (Blog)</button>
+
+                <div class="flex flex-col items-center gap-4">
+
+                    <button onclick="window.open('https://alldayarchive.blogspot.com')" class="bg-emerald-600 text-white px-10 py-4 rounded-full font-black text-xs hover:bg-white hover:text-black transition-all shadow-xl uppercase italic">Enter Recipe & Chronicles Library (Blog)</button>
+
+                    <button class="premium-pdf-btn" onclick="alert('Preparing Extended Year Archive PDF...')">📄 Download Extended Year Archive</button>
+
                 </div>
-                <div class="pt-10 flex flex-col items-center gap-6">
-                    <button onclick="window.open('https://buymeacoffee.com/djawjdaks8g')" class="bg-yellow-400 text-black px-10 py-4 rounded-full font-black text-[12px] hover:bg-white transition-all uppercase">☕ BUY ME A COFFEE</button>
-                    <p class="text-[9px] text-gray-600 uppercase tracking-[0.5em] mt-8 italic">Universal History Discover Station © 2026</p>
-                    <p class="text-[10px] text-sky-900 font-bold uppercase tracking-widest">Feedback: halftotaketo@gmail.com</p>
+
+                <div class="pt-10 flex flex-col items-center gap-6 text-center">
+
+                    <p class="text-[9px] text-gray-600 uppercase tracking-[0.5em] mt-8 italic font-sans">Discovery Engine curated by dedle © 2026</p>
+
+                    <p class="text-[10px] text-sky-900 font-bold uppercase">Feedback: halftotaketo@gmail.com</p>
+
                 </div>
+
             </footer>
+
         </div>
+
     </main>
 
+
+
     <script>
+
         const SB_URL = "https://iwgjfplrqeupfppcqmau.supabase.co"; 
-        const SB_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Iml3Z2pmcGxycWV1cGZwcGNxbWF1Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3Njc2ODMzODMsImV4cCI6MjA4MzI1OTM4M30.mW07xEhx-YvSx-Xe2YSUH6TpaXEwdvGdbBBcQy1sitU"; 
+
+        const SB_KEY = "여기에_수파베이스_ANON_PUBLIC_키_입력"; 
+
         const sb = supabase.createClient(SB_URL, SB_KEY);
+
         const AMAZON_ID = "dedle-20";
 
-        // 1. 동적 요일 & 별자리 & 날씨 연동
-        async function fetchRealWeather(y, m, d, co) {
-            const coords = { 'korea': [37.5, 127], 'usa': [38.8, -77], 'brazil': [-15.7, -47.8], 'uk': [51.5, -0.1], 'japan': [35.6, 139] };
-            const [lat, lon] = coords[co.toLowerCase()] || [37.5, 127];
-            try {
-                const res = await fetch(`https://archive-api.open-meteo.com/v1/archive?latitude=${lat}&longitude=${lon}&start_date=${y}-${m}-${d}&end_date=${y}-${m}-${d}&daily=temperature_2m_max&timezone=GMT`);
-                const data = await res.json();
-                document.getElementById('disp-weather').innerText = Math.round(data.daily.temperature_2m_max[0]) + "°C";
-                document.getElementById('disp-weather-loc').innerText = `${co.toUpperCase()} SYNC (${y})`;
-            } catch { document.getElementById('disp-weather').innerText = "18°C"; }
+        let isScanning = false;
+
+        let COUNTRIES = [];
+
+        let countriesLoaded = false;
+
+        const CACHE = {};
+
+
+
+        fetch("https://restcountries.com/v3.1/all").then(r => r.json()).then(data => {
+
+            COUNTRIES = data.map(c => ({ code: c.cca2, canonical: c.name.common, names: [c.name.common, ...(c.altSpellings||[]), ...(Object.values(c.name.nativeName||{}).map(n=>n.common))].map(v=>v.toLowerCase()) }));
+
+            const select = document.getElementById("countrySelect");
+
+            COUNTRIES.sort((a,b)=>a.code.localeCompare(b.code)).forEach(c => {
+
+                const opt = document.createElement("option"); opt.value = c.code; opt.textContent = c.code + " - " + c.canonical.toUpperCase();
+
+                select.appendChild(opt);
+
+            });
+
+            countriesLoaded = true;
+
+        });
+
+
+
+        function escapeHTML(str) { return String(str).replace(/[&<>"']/g, m => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[m])); }
+
+        function autoLink(text) {
+
+            const kws = ["NASA","Google","Apple","Microsoft","Olympics","World Cup","Bitcoin","Stock","War","President","King","Queen"];
+
+            let res = escapeHTML(text);
+
+            kws.forEach(k => {
+
+                const reg = new RegExp(`\\b(${k})\\b`, "gi");
+
+                res = res.replace(reg, `<a href="javascript:void(0)" onclick="searchKW('${k}')">$1</a>`);
+
+            });
+
+            return res;
+
         }
 
-        function createStars(m, d) {
-            const signs = ["Capricorn", "Aquarius", "Pisces", "Aries", "Taurus", "Gemini", "Cancer", "Leo", "Virgo", "Libra", "Scorpio", "Sagittarius", "Capricorn"];
-            const dates = [20, 19, 21, 20, 21, 21, 23, 23, 23, 23, 22, 22];
-            document.getElementById('disp-constellation').innerText = d < dates[m-1] ? signs[m-1] : signs[m];
-            const cont = document.getElementById('star-container'); cont.innerHTML = "";
-            for(let i=0; i<35; i++) {
-                const s = document.createElement('div'); s.className = 'star';
-                s.style.left = Math.random()*100+'%'; s.style.top = Math.random()*100+'%';
-                s.style.width = Math.random()*2+'px'; s.style.height = s.style.width;
-                cont.appendChild(s);
-            }
-        }
+        function searchKW(w) { document.getElementById('smartSearch').value = w; handleScan(); }
 
         function getZodiac(year) {
+
             const names = ["Gyeong-sin","Sin-yu","Im-sul","Gye-hae","Gap-ja","Eul-chuk","Byeong-in","Jeong-myo","Mu-jin","Gi-sa","Gyeong-oh","Sin-mi","Im-sin","Gye-yu","Gap-sul","Eul-hae","Byeong-ja","Jeong-chuk","Mu-in","Gi-myo","Gyeong-jin","Sin-sa","Im-oh","Gye-mi","Gap-sin","Eul-yu","Byeong-sul","Jeong-hae","Mu-ja","Gi-chuk","Gyeong-in","Sin-myo","Im-jin","Gye-sa","Gap-oh","Eul-mi","Byeong-sin","Jeong-yu","Mu-sul","Gi-hae","Gyeong-ja","Sin-chuk","Im-in","Gye-myo","Gap-jin","Eul-sa","Byeong-oh","Jeong-mi","Mu-sin","Gi-yu","Gyeong-sul","Sin-hae","Im-ja","Gye-chuk","Gap-in","Eul-myo","Byeong-jin","Jeong-sa","Mu-oh","Gi-mi"];
+
             const idx = (year - 0) % 60; return names[idx < 0 ? idx + 60 : idx] || "N/A";
+
         }
 
-        // 2. 통합 렌더링 엔진 (Ranking & Filtering)
-        function renderCategorized(id, list, type, kw, co, inY, md) {
-            const cont = document.getElementById(id); cont.innerHTML = "";
-            if(!list || list.length === 0) return cont.innerHTML = "<p class='text-xs text-gray-600 mt-4 italic'>Archive synced.</p>";
-            
-            const sp_k = ['olympic','cup','fifa','medal','soccer','baseball','basketball','nba','final','champion'];
-            const mv_k = ['movie','film','cinema','box office','premiere'];
-            const mu_k = ['song','album','symphony','concert','singer','chart','billboard'];
-            const gm_k = ['game','nintendo','sega','playstation','comic','manga','novel'];
-            const in_k = ['invent','patent','first','tech','engine','discover','launch','print','groundbreaking','completion'];
-            const fd_k = ['cook','dish','recipe','eat','food','restaurant','chef','served'];
-            const pol_k = ['president','minister','party','elected','war','riot','kill','tragedy','shooting','assassination'];
 
-            const priority = [];
-            
-            list.sort((a,b) => (b.year - a.year)).forEach((item, index) => {
-                const text = item.text.toLowerCase();
-                const isM = inY && item.year == inY; 
-                const isK = (kw && text.includes(kw)) || (co && text.includes(co));
-                
-                // 분류 필터링
-                if (type === 'sports' && !sp_k.some(k => text.includes(k))) return;
-                if (type === 'movies' && !mv_k.some(k => text.includes(k))) return;
-                if (type === 'music' && !mu_k.some(k => text.includes(k))) return;
-                if (type === 'gaming' && !gm_k.some(k => text.includes(k))) return;
-                if (type === 'food' && !fd_k.some(k => text.includes(k))) return;
-                if (type === 'innovations' && (!in_k.some(k => text.includes(k)) || sp_k.some(k => text.includes(k)))) return;
-                if (type === 'incidents' && !['war','attack','die','kill','tragedy','riot','crash','murder','shooting'].some(k => text.includes(k))) return;
-                if (type === 'arts' && (pol_k.some(k => text.includes(k)) || mv_k.some(k => text.includes(k)) || mu_k.some(k => text.includes(k)))) return;
 
-                const yearDisp = item.year < 0 ? Math.abs(item.year) + " B.C." : (item.year || 'SPEC');
-                const detailId = `detail-${id}-${index}`;
-                const q = encodeURIComponent(`${item.year} ${item.text.replace(/[^\w\sㄱ-ㅎ가-힣]/g, '')}`);
+        async function fetchRealWeather(y, m, d, co) {
 
-                const html = `
-                    <div class="flex flex-col py-5 border-b border-white/5 ${isK?'priority-focus px-4 rounded-lg':''}">
-                        <div class="flex items-start gap-4 text-left">
-                            <span class="year-badge ${isM?'match-badge':''}">${yearDisp} [${md}]</span>
-                            <div class="flex-1">
-                                <span class="${isM||isK?'text-[#c5a059] font-bold':'text-gray-400'} text-sm leading-relaxed">${item.text}</span>
-                                <button onclick="document.getElementById('${detailId}').style.display = document.getElementById('${detailId}').style.display === 'block' ? 'none' : 'block'" class="text-[9px] text-gray-600 underline ml-2 uppercase font-bold tracking-widest">Detail [+]</button>
-                            </div>
-                        </div>
-                        <div id="${detailId}" class="detail-view text-left">Historical context verified via AllDay Global Satellite. Full story on blog.</div>
-                        <div class="flex gap-2 mt-4 ml-[80px]">
-                            <button onclick="window.open('https://www.youtube.com/results?search_query=${q}+official')" class="action-btn">📺 Youtube</button>
-                            <button onclick="window.open('https://open.spotify.com/search/${q}')" class="action-btn">🎧 Spotify</button>
-                            <button onclick="window.open('https://www.amazon.com/s?tag=${AMAZON_ID}&k=${q}')" class="action-btn">🛒 Shop</button>
-                            <button onclick="window.open('https://alldayarchive.blogspot.com/search?q=${q}')" class="action-btn">📖 Blog</button>
-                        </div>
-                    </div>`;
-                
-                if(isK) priority.push(html);
-                cont.innerHTML += html;
-            });
-            return priority;
+            const coords = { 'KR': [37.5, 127], 'US': [38.8, -77], 'UK': [51.5, -0.1], 'JP': [35.6, 139] };
+
+            const [lat, lon] = coords[co] || [37.5, 127];
+
+            try {
+
+                const res = await fetch(`https://archive-api.open-meteo.com/v1/archive?latitude=${lat}&longitude=${lon}&start_date=${y}-${m}-${d}&end_date=${y}-${m}-${d}&daily=temperature_2m_max&timezone=GMT`);
+
+                const dr = await res.json();
+
+                document.getElementById('disp-weather').innerText = Math.round(dr.daily.temperature_2m_max[0]) + "°C";
+
+            } catch { document.getElementById('disp-weather').innerText = "18°C"; }
+
         }
+
+
 
         async function handleScan() {
+
+            if (isScanning || !countriesLoaded) return;
+
+            isScanning = true;
+
+
+
             const inY = document.getElementById('in-year').value;
+
             const inM = document.getElementById('in-month').value || (new Date().getMonth()+1).toString().padStart(2,'0');
+
             const inD = document.getElementById('in-day').value || (new Date().getDate()).toString().padStart(2,'0');
-            const kw = document.getElementById('smartSearch').value.trim().toLowerCase();
-            const co = document.getElementById('smartCountry').value.trim().toLowerCase();
+
+            const kwInput = document.getElementById('smartSearch').value.trim().toLowerCase();
+
+            const selectedCo = document.getElementById("countrySelect").value;
+
+            
+
+            const weatherYear = inY || new Date().getFullYear();
+
             const md = `${inM.padStart(2,'0')}-${inD.padStart(2,'0')}`;
 
-            const { data, error } = await sb.from('daily_archives').select('*').eq('date_id', md).single();
-            if (error || !data) return alert("Searching deep archive...");
+            
+
+            let detectedCo = "";
+
+            if (kwInput.length > 3) {
+
+                for (const c of COUNTRIES) { if (c.names.some(n => kwInput.includes(n))) { detectedCo = c.code; break; } }
+
+            }
+
+            const finalCo = selectedCo || detectedCo || (navigator.language.slice(-2).toUpperCase()) || "US";
+
+
+
+            document.getElementById('p-kw').innerText = `Keyword: ${kwInput || 'None'}`;
+
+            document.getElementById('p-co').innerText = `Nation: ${finalCo}`;
+
+            document.getElementById('p-dt').innerText = `Period: ${inY || 'All'}-${md}`;
+
+
+
+            window.history.replaceState({}, "", `/${finalCo.toLowerCase()}/${md}`);
+
+
+
+            const cKey = `${md}_${finalCo}_${kwInput}_${inY}`;
+
+            if (CACHE[cKey]) { renderAll(CACHE[cKey], inY, finalCo, kwInput, md); isScanning = false; return; }
+
+
+
+            let q = sb.from('daily_archives').select('*').eq('date_id', md);
+
+            if (inY) q = q.eq('year', inY);
+
+            const { data, error } = await q.order('country_code', { ascending: false });
+
+            
+
+            if (error || !data) { alert("Searching archive..."); isScanning = false; return; }
+
+
+
+            CACHE[cKey] = data;
+
+            renderAll(data, inY, finalCo, kwInput, md);
+
+            isScanning = false;
+
+        }
+
+
+
+        function renderAll(data, inY, finalCo, kw, md) {
+
             document.getElementById('vault-area').style.display = 'block';
 
-            const allEv = [...(data.holidays || []), ...(data.firsts || [])];
-            let allPriority = [];
+            const priority = [];
 
-            allPriority = allPriority.concat(renderCategorized('list-sports', allEv, 'sports', kw, co, inY, md));
-            renderCategorized('list-holidays', data.holidays, 'holidays', kw, co, inY, md);
-            allPriority = allPriority.concat(renderCategorized('list-incidents', allEv, 'incidents', kw, co, inY, md));
-            allPriority = allPriority.concat(renderCategorized('list-food', allEv, 'food', kw, co, inY, md));
-            allPriority = allPriority.concat(renderCategorized('list-movies', allEv, 'movies', kw, co, inY, md));
-            allPriority = allPriority.concat(renderCategorized('list-music', allEv, 'music', kw, co, inY, md));
-            allPriority = allPriority.concat(renderCategorized('list-gaming', allEv, 'gaming', kw, co, inY, md));
-            allPriority = allPriority.concat(renderCategorized('list-innovations', allEv, 'innovations', kw, co, inY, md));
-            allPriority = allPriority.concat(renderCategorized('list-arts', allEv, 'arts', kw, co, inY, md));
+            const amzSuffix = { movies: "blu-ray dvd", music: "vinyl album", gaming: "video game", books: "novel", sports: "gear", finance: "wealth book", law: "legal document" };
+
+
+
+            const render = (id, list, section_type) => {
+
+                const cont = document.getElementById(id); cont.innerHTML = "";
+
+                if(!list || list.length === 0) return cont.innerHTML = "<p class='text-xs text-gray-600 mt-4 italic'>Archive synced.</p>";
+
+                
+
+                const sorted = list.sort((a,b) => {
+
+                    const aCo = (a.country_code === finalCo);
+
+                    const bCo = (b.country_code === finalCo);
+
+                    if (aCo !== bCo) return aCo ? -1 : 1;
+
+                    return (b.year == inY) - (a.year == inY) || (b.year - a.year);
+
+                });
+
+
+
+                let globalHeaderAdded = false;
+
+
+
+                sorted.forEach((item, index) => {
+
+                    const tL = item.text.toLowerCase();
+
+                    const isM = inY && item.year == inY; 
+
+                    const kws = kw.split(/\s+/).filter(k => k.length > 0);
+
+                    const isK = kws.length > 0 && kws.every(k => tL.includes(k));
+
+                    const isCoMatch = (item.country_code === finalCo);
+
+                    
+
+                    if (!kw && !isCoMatch && !globalHeaderAdded) {
+
+                        cont.innerHTML += `<p class="text-[11px] text-gray-500 italic mt-8 mb-2">Showing global records on the same date after national results.</p><h3 class="text-[10px] uppercase tracking-widest text-gray-600 mb-4 border-b border-white/5 pb-1">🌍 Global Records (${md})</h3>`;
+
+                        globalHeaderAdded = true;
+
+                    }
+
+
+
+                    const sp_k = ['olympic','cup','fifa','medal','soccer','baseball','basketball','tournament'];
+
+                    const mv_k = ['movie','film','cinema','box office','premiere'];
+
+                    const mu_k = ['song','album','music','billboard','symphony'];
+
+                    const gm_k = ['game','nintendo','sega','playstation','xbox','comic'];
+
+                    const bk_k = ['book','novel','published','author'];
+
+                    const fn_k = ['stock','market','finance','money','wealth','bank','economic'];
+
+                    const pol_k = ['war','riot','kill','murder','attack'];
+
+                    const lw_k = ['court','verdict','ruling','supreme','lawsuit','enacted','amendment','constitution','legislation'];
+
+
+
+                    if (section_type === 'sports' && !sp_k.some(k => tL.includes(k))) return;
+
+                    if (section_type === 'movies' && !mv_k.some(k => tL.includes(k))) return;
+
+                    if (section_type === 'music' && !mu_k.some(k => tL.includes(k))) return;
+
+                    if (section_type === 'gaming' && !gm_k.some(k => tL.includes(k))) return;
+
+                    if (section_type === 'books' && !bk_k.some(k => tL.includes(k))) return;
+
+                    if (section_type === 'finance' && !fn_k.some(k => tL.includes(k))) return;
+
+                    if (section_type === 'law' && !lw_k.some(k => tL.includes(k))) return;
+
+                    if (section_type === 'incidents' && !pol_k.some(k => tL.includes(k))) return;
+
+                    if (section_type === 'arts' && (pol_k.some(k => tL.includes(k)) || lw_k.some(k => tL.includes(k)))) return;
+
+
+
+                    const yearDisp = item.year < 0 ? Math.abs(item.year) + " B.C." : (item.year || 'SPEC');
+
+                    const detailId = `detail-${id}-${index}`;
+
+                    const q = encodeURIComponent(`${item.year} ${item.text.replace(/[^\w\sㄱ-ㅎ가-힣]/g, '')}`);
+
+                    const amzQ = encodeURIComponent(`${item.text.split(',')[0]} ${amzSuffix[section_type] || ""}`);
+
+
+
+                    const html = `
+
+                        <div class="flex flex-col py-5 border-b border-white/5 ${isK && isM && isCoMatch ? 'priority-focus px-4 rounded-lg':''}">
+
+                            <div class="flex items-start gap-4">
+
+                                <span class="year-badge ${isM?'match-badge':''}">${yearDisp}</span>
+
+                                <div class="flex-1 text-left">
+
+                                    <span style="color: #E2E2E2;">${autoLink(item.text)}</span>
+
+                                    <button onclick="document.getElementById('${detailId}').style.display = document.getElementById('${detailId}').style.display === 'block' ? 'none' : 'block'" class="text-[9px] text-gray-500 underline ml-2 uppercase font-bold tracking-widest cursor-pointer">Detail [+]</button>
+
+                                </div>
+
+                            </div>
+
+                            <div id="${detailId}" class="detail-view">Intelligence verified via AllDay Global Satellite. Full story on Blog.</div>
+
+                            <div class="flex gap-2 mt-4 ml-[80px]">
+
+                                <button onclick="window.open('https://www.youtube.com/results?search_query=${q}+official')" class="action-btn">📺 Youtube</button>
+
+                                <button onclick="window.open('https://www.amazon.com/s?tag=${AMAZON_ID}&k=${amzQ}')" class="action-btn">🛒 Shop</button>
+
+                            </div>
+
+                        </div>`;
+
+                    if(isK && isM && isCoMatch) priority.push(html);
+
+                    cont.innerHTML += html;
+
+                });
+
+            };
+
+
+
+            const allE = data.flatMap(d => [...(d.firsts || []), ...(d.holidays || [])]);
+
+            render('list-sports', allE, 'sports'); render('list-incidents', allE, 'incidents'); render('list-law', allE, 'law');
+
+            render('list-finance', allE, 'finance'); render('list-holidays', data.holidays, 'holidays'); render('list-movies', allE, 'movies');
+
+            render('list-music', allE, 'music'); render('list-gaming', allE, 'gaming'); render('list-books', allE, 'books');
+
+            render('list-innovations', allE, 'innovations'); render('list-arts', allE, 'arts');
+
             
-            // 생일/기일
-            const bCont = document.getElementById('list-births'); bCont.innerHTML = (data.birthdays || []).map(b => `<div class="py-4 border-b border-white/5"><span class="year-badge">${b.year}</span><span class="text-gray-300 text-sm">${b.text}</span></div>`).join('');
-            const dCont = document.getElementById('list-deaths'); dCont.innerHTML = (data.deaths || []).map(d => `<div class="py-4 border-b border-white/5"><span class="year-badge">${d.year}</span><span class="text-gray-400 text-sm">${d.text}</span></div>`).join('');
 
-            // 우선순위 섹션 노출
-            if(allPriority.length > 0) {
-                document.getElementById('priority-section').classList.remove('hidden');
-                document.getElementById('list-priority').innerHTML = [...new Set(allPriority)].slice(0,5).join('');
-            } else { document.getElementById('priority-section').classList.add('hidden'); }
+            document.getElementById('list-births').innerHTML = data.flatMap(d=>d.birthdays||[]).map(b => `<div class="py-4 border-b border-white/5 text-left"><span class="year-badge">${b.year}</span><span style="color: #E2E2E2;" class="text-sm ml-4">${escapeHTML(b.text)}</span></div>`).join('');
+
+            document.getElementById('list-deaths').innerHTML = data.flatMap(d=>d.deaths||[]).map(d => `<div class="py-4 border-b border-white/5 text-left"><span class="year-badge">${d.year}</span><span style="color: #E2E2E2;" class="text-sm ml-4">${escapeHTML(d.text)}</span></div>`).join('');
+
+
+
+            if(priority.length > 0) { document.getElementById('priority-section').classList.remove('hidden'); document.getElementById('list-priority').innerHTML = [...new Set(priority)].slice(0,5).join(''); }
+
+            else { document.getElementById('priority-section').classList.add('hidden'); }
+
+
 
             const dayNames = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
-            document.getElementById('disp-day').innerText = inY ? dayNames[new Date(`${inY}-${inM}-${inD}`).getDay()] : "Today";
-            document.getElementById('disp-ganji').innerText = inY ? getZodiac(parseInt(inY)) : "Chronicle Sync";
-            fetchRealWeather(inY || 2024, inM, inD, co || "korea");
-            updateStellar(parseInt(inM), parseInt(inD));
+
+            const weatherYear = inY || new Date().getFullYear();
+
+            document.getElementById('disp-day').innerText = dayNames[new Date(`${weatherYear}-${md}`).getDay()];
+
+            document.getElementById('disp-ganji').innerText = inY ? getZodiac(parseInt(inY)) : "Syncing...";
+
+            fetchRealWeather(weatherYear, md.split('-')[0], md.split('-')[1], finalCo);
+
+            
+
+            const cont = document.getElementById('star-container'); cont.innerHTML = "";
+
+            for(let i=0; i<30; i++) {
+
+                const s = document.createElement('div'); s.className = 'star';
+
+                s.style.left = Math.random()*100+'%'; s.style.top = Math.random()*100+'%';
+
+                s.style.width = Math.random()*2+'px'; s.style.height = s.style.width;
+
+                cont.appendChild(s);
+
+            }
+
             setTimeout(() => { document.getElementById('vault-area').scrollIntoView({ behavior: 'smooth' }); }, 150);
+
         }
 
-        function navigateDay(offset) {
-            const y = document.getElementById('in-year').value || 2024;
-            const m = document.getElementById('in-month').value || 1;
-            const d = document.getElementById('in-day').value || 1;
-            let date = new Date(y, m-1, d);
-            date.setDate(date.getDate() + offset);
-            document.getElementById('in-year').value = date.getFullYear();
-            document.getElementById('in-month').value = (date.getMonth()+1).toString().padStart(2,'0');
-            document.getElementById('in-day').value = date.getDate().toString().padStart(2,'0');
-            handleScan();
-        }
         document.addEventListener('keypress', (e) => { if(e.key === 'Enter') handleScan(); });
+
     </script>
+
 </body>
+
 </html>
