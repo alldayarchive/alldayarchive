@@ -27,16 +27,9 @@
 
         a { color: var(--gold); font-weight: 700; text-decoration: none; transition: 0.2s; }
         a:hover { color: #FFDFA3; text-decoration: underline; }
-        .priority-focus a { color: #60A5FA !important; } 
-
-        .ad-placeholder { min-height: 250px; background: rgba(255,255,255,0.02); border: 1px dashed rgba(255,255,255,0.1); display: flex; align-items: center; justify-content: center; color: var(--text-meta); font-size: 11px; text-transform: uppercase; letter-spacing: 2px; margin: 2rem 0; border-radius: 12px; }
-
-        .premium-pdf-btn { background: linear-gradient(to right, #c5a059, #F5C97A); color: #000; font-weight: 900; padding: 0.8rem 1.5rem; border-radius: 50px; font-size: 12px; transition: 0.3s; cursor: pointer; text-transform: uppercase; letter-spacing: 1px; }
-        .year-badge { border: 1px solid var(--gold); color: var(--gold); padding: 2px 8px; border-radius: 4px; font-size: 11px; font-weight: 700; min-width: 80px; text-align: center; }
-        .match-badge { background: var(--gold); color: #000; padding: 2px 8px; border-radius: 4px; font-size: 11px; font-weight: 900; }
         .priority-focus { background: rgba(245, 201, 122, 0.18) !important; border-left: 5px solid var(--gold) !important; transform: scale(1.01); box-shadow: 0 10px 40px rgba(0,0,0,0.5); }
         
-        input, select { background: rgba(255,255,255,0.1) !important; border: 1px solid rgba(245, 201, 122, 0.3) !important; padding: 1.1rem; border-radius: 12px; color: #fff !important; outline: none; transition: 0.3s; width: 100%; text-align: center; font-size: 1rem; }
+        input { background: rgba(255,255,255,0.1) !important; border: 1px solid rgba(245, 201, 122, 0.3) !important; padding: 1.1rem; border-radius: 12px; color: #fff !important; outline: none; transition: 0.3s; width: 100%; text-align: center; font-size: 1rem; }
         .date-hub input { width: 85px; font-size: 1.2rem; }
         #in-year { width: 110px; }
         .scan-btn { background: var(--gold); color: #000; font-weight: 900; padding: 1.2rem; border-radius: 12px; width: 100%; text-transform: uppercase; letter-spacing: 2px; cursor: pointer; transition: 0.3s; z-index: 100; position: relative; }
@@ -46,23 +39,14 @@
         
         .star-map { background: radial-gradient(circle, #1e293b 0%, #000 100%); border-radius: 50%; width: 100px; height: 100px; margin: 0 auto; border: 1px solid var(--gold); position: relative; overflow: hidden; }
         .star { position: absolute; background: white; border-radius: 50%; opacity: 0.8; animation: twinkle 2s infinite; }
+        .year-badge { border: 1px solid var(--gold); color: var(--gold); padding: 2px 8px; border-radius: 4px; font-size: 11px; font-weight: 700; min-width: 80px; text-align: center; }
+        .match-badge { background: var(--gold); color: #000; padding: 2px 8px; border-radius: 4px; font-size: 11px; font-weight: 900; }
         #vault-area { display: none; }
     </style>
 </head>
 <body>
     <div class="bg-heritage"></div>
     
-    <!-- 🌐 SEO Hidden Block -->
-    <section class="sr-only">
-        <h2>Global Historical Events by Date</h2>
-        <h3>Sports Milestones and Olympics Records</h3>
-        <h3>Law, Justice and Constitutional History</h3>
-        <h3>Major Incidents and Political Tragedies</h3>
-        <h3>Finance, Wealth and Economic History</h3>
-        <h3>Holidays and Cultural Observances</h3>
-        <h3>Births and Deaths on This Day</h3>
-    </section>
-
     <nav class="fixed w-full z-[1000] px-10 py-6 flex justify-between items-center border-b border-white/5 bg-black/40 backdrop-blur-xl">
         <div class="text-2xl font-black text-[#F5C97A] uppercase italic tracking-tighter">ALLDAY ARCHIVE</div>
         <button onclick="window.open('https://buymeacoffee.com/djawjdaks8g')" class="text-[9px] font-bold text-white border border-white/30 px-3 py-1 rounded hover:bg-white transition-all">☕ BUY ME A COFFEE</button>
@@ -78,8 +62,8 @@
                     <input type="text" id="countrySearch" placeholder="NATION FOCUS (E.G. KOREA, BRAZIL)" style="text-align: left; padding-left: 20px;">
                 </div>
                 <div class="date-hub flex gap-2 justify-center">
-                    <input type="text" id="in-year" placeholder="YYYY" maxlength="4" oninput="if(this.value.length==4)document.getElementById('in-month').focus()">
-                    <input type="text" id="in-month" placeholder="MM" maxlength="2" oninput="if(this.value.length==2)document.getElementById('in-day').focus()">
+                    <input type="text" id="in-year" placeholder="YYYY" maxlength="4">
+                    <input type="text" id="in-month" placeholder="MM" maxlength="2">
                     <input type="text" id="in-day" placeholder="DD" maxlength="2">
                 </div>
                 <button id="scanBtn" onclick="handleScan()" class="scan-btn shadow-2xl uppercase">Synchronize Intelligence (Enter)</button>
@@ -87,53 +71,39 @@
         </section>
 
         <div id="vault-area" class="space-y-24">
-            <div class="flex justify-center gap-4 text-[10px] font-bold uppercase tracking-widest text-[#F5C97A] italic">
-                <span id="p-kw">Keyword: None</span> | <span id="p-co">Nation: Global</span> | <span id="p-dt">Period: Today</span>
-            </div>
+            <div id="status-bar" class="flex justify-center gap-4 text-[10px] font-bold uppercase tracking-widest text-[#F5C97A] italic"></div>
 
-            <!-- Dash -->
+            <!-- Dash HUD -->
             <section class="grid grid-cols-1 md:grid-cols-4 gap-6 text-center font-hud">
                 <div class="glass-card border-t-2 border-sky-500 flex flex-col justify-center py-8"><span class="text-[9px] text-sky-400 uppercase block mb-4 font-bold">Atmosphere</span><div id="disp-weather" class="text-4xl font-black italic">--°C</div></div>
                 <div class="glass-card border-t-2 border-white/20 flex flex-col justify-center py-8 text-gray-400"><span class="text-[9px] uppercase block mb-4 font-bold">Day of Week</span><div id="disp-day" class="text-xl font-black text-white leading-tight uppercase">--</div></div>
-                <div class="glass-card border-t-2 border-[#F5C97A] flex flex-col justify-center py-8"><span class="text-[9px] text-[#F5C97A] uppercase block mb-4 font-bold">Stellar View</span><div class="star-map mb-2" id="star-container"></div><div id="disp-constellation" class="text-xs font-bold text-white uppercase italic tracking-widest">--</div></div>
+                <div class="glass-card border-t-2 border-[#F5C97A] flex flex-col justify-center py-8"><span class="text-[9px] text-[#F5C97A] uppercase block mb-4 font-bold">Stellar View</span><div class="star-map mb-2" id="star-container"></div></div>
                 <div class="glass-card border-t-2 border-emerald-500 flex flex-col justify-center py-8 text-emerald-400"><span class="text-[9px] uppercase block mb-4 font-bold">Ancestral Cycle</span><div id="disp-ganji" class="text-lg font-black uppercase text-white leading-tight">--</div></div>
             </section>
 
             <!-- ⭐ PRIORITY SECTION -->
             <section id="priority-section" class="space-y-4 hidden text-left">
-                <div class="flex justify-between items-end border-b border-white/5 pb-2">
-                    <h2 class="text-3xl font-serif text-white italic uppercase tracking-widest"><span class="text-[#F5C97A]">Intelligence</span> Priority Result</h2>
-                    <div class="flex flex-col items-end gap-1">
-                        <button onclick="alert('Preparing Premium Archive Report...')" class="premium-pdf-btn">📄 Export Verified Records (PDF)</button>
-                        <p class="text-[10px] text-gray-500 italic">Country • Year • Keyword curated archive</p>
-                    </div>
-                </div>
-                <p class="text-xs italic text-gray-500">Results prioritized by keyword relevance and country match.</p>
+                <h2 class="text-3xl font-serif text-white italic uppercase tracking-widest"><span class="text-[#F5C97A]">Intelligence</span> Priority Result</h2>
                 <div id="list-priority" class="space-y-4"></div>
             </section>
 
-            <!-- 🏆 SPORTS -->
+            <!-- Categories (Full Restore) -->
             <section class="glass-card p-8 border-t-4 border-[#F5C97A] text-left">
                 <h2 class="text-2xl font-serif text-[#F5C97A] italic mb-6 uppercase tracking-widest border-b border-white/5 pb-4 font-bold italic">🏆 Sports & Olympic Milestones</h2>
                 <div id="list-sports" class="scroll-box space-y-2"></div>
             </section>
 
-            <!-- ⚖️ LAW & JUSTICE -->
             <section class="glass-card p-8 border-t-4 border-slate-500 text-left">
                 <h2 class="text-2xl font-serif text-slate-400 mb-6 uppercase tracking-widest border-b border-white/5 pb-4 font-bold italic text-left">⚖️ Law & Justice</h2>
                 <div id="list-law" class="scroll-box space-y-2"></div>
             </section>
 
-            <!-- INCIDENT / FINANCE / HOLIDAY -->
             <div class="grid grid-cols-1 md:grid-cols-3 gap-8 text-left">
                 <section class="glass-card p-6 border-t-4 border-red-500"><h2 class="text-xl font-serif text-red-400 mb-6 uppercase font-bold italic">🚨 Major Incidents</h2><div id="list-incidents" class="scroll-box"></div></section>
                 <section class="glass-card p-6 border-t-4 border-emerald-500"><h2 class="text-xl font-serif text-emerald-400 mb-6 uppercase font-bold italic">📈 Finance Records</h2><div id="list-finance" class="scroll-box"></div></section>
                 <section class="glass-card p-6 border-t-4 border-green-500"><h2 class="text-xl font-serif text-green-400 mb-6 uppercase font-bold italic text-left">🎉 Global Holidays</h2><div id="list-holidays" class="scroll-box"></div></section>
             </div>
 
-            <div class="ad-placeholder">Sponsored Content Area</div>
-
-            <!-- CULTURE GRID -->
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 text-left">
                 <div class="glass-card p-6 border-t-4 border-sky-400"><h3>🎬 Movies</h3><div id="list-movies" class="scroll-box h-[250px]"></div></div>
                 <div class="glass-card p-6 border-t-4 border-pink-500"><h3>🎵 Music Charts</h3><div id="list-music" class="scroll-box h-[250px]"></div></div>
@@ -141,15 +111,11 @@
                 <div class="glass-card p-6 border-t-4 border-emerald-400"><h3>📚 Literature</h3><div id="list-books" class="scroll-box h-[250px]"></div></div>
             </div>
 
-            <!-- 🎂 BIRTHDAYS & 🕊️ DEATHS -->
             <div class="grid grid-cols-1 md:grid-cols-2 gap-8 text-left">
                 <section class="glass-card p-8 border-t-4 border-pink-400"><h3>🎂 Born Today</h3><div id="list-births" class="scroll-box"></div></section>
                 <section class="glass-card p-8 border-t-4 border-gray-600 opacity-60"><h3>🕊️ Passed Away</h3><div id="list-deaths" class="scroll-box"></div></section>
             </div>
 
-            <div class="ad-placeholder">Recommended Resources Area</div>
-
-            <!-- ⚙️ INNOVATIONS & 🎨 ARTS -->
             <div class="grid grid-cols-1 md:grid-cols-2 gap-8 text-left">
                 <section class="glass-card p-8 border-t-4 border-amber-400"><h3>⚙️ Innovations</h3><div id="list-innovations" class="scroll-box"></div></section>
                 <section class="glass-card p-8 border-t-4 border-purple-400"><h3>🎨 Arts</h3><div id="list-arts" class="scroll-box"></div></section>
@@ -157,19 +123,16 @@
 
             <section class="glass-card p-8 border-t-4 border-emerald-600 text-left"><h3>🍴 Gastronomy</h3><div id="list-food" class="scroll-box"></div></section>
 
-            <footer class="py-24 text-center border-t border-white/5 bg-black/20 space-y-12">
-                <button onclick="window.open('https://alldayarchive.blogspot.com')" class="bg-emerald-600 text-white px-10 py-4 rounded-full font-black text-xs hover:bg-white hover:text-black transition-all shadow-xl uppercase italic tracking-widest">Enter Recipe & Chronicles Library (Blog)</button>
-                <div class="pt-10 flex flex-col items-center gap-6 text-center">
-                    <p class="text-[9px] text-gray-600 uppercase tracking-[0.5em] mt-8 italic font-sans">Discovery Engine curated by dedle © 2026</p>
-                    <p class="text-[10px] text-sky-900 font-bold uppercase">Feedback: halftotaketo@gmail.com</p>
-                </div>
+            <footer class="py-24 text-center border-t border-white/5 opacity-50">
+                <p class="text-[9px] uppercase tracking-[0.5em] italic">Discovery Engine curated by dedle © 2026</p>
             </footer>
         </div>
     </main>
 
     <script>
+        // ⚠️ API KEY 및 URL 확인 필수
         const SB_URL = "https://iwgjfplrqeupfppcqmau.supabase.co"; 
-        const SB_KEY = "여기에_수파베이스_ANON_PUBLIC_키_입력"; 
+        const SB_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Iml3Z2pmcGxycWV1cGZwcGNxbWF1Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3Njc2ODMzODMsImV4cCI6MjA4MzI1OTM4M30.mW07xEhx-YvSx-Xe2YSUH6TpaXEwdvGdbBBcQy1sitU"; 
         const sb = supabase.createClient(SB_URL, SB_KEY);
         const AMAZON_ID = "dedle-20";
         const DEFAULT_COUNTRY = navigator.language?.slice(-2).toUpperCase() || "US";
@@ -179,11 +142,19 @@
         let countriesLoaded = false;
         const CACHE = {};
 
-        // 1. 국가 데이터 로드
-        fetch("https://restcountries.com/v3.1/all").then(r => r.json()).then(data => {
-            COUNTRIES = data.map(c => ({ code: c.cca2, canonical: c.name.common, names: [c.name.common, ...(c.altSpellings||[]), ...(Object.values(c.name.nativeName||{}).map(n=>n.common))].map(v=>v.toLowerCase()) }));
-            countriesLoaded = true;
-        });
+        // 1. 국가 데이터 로드 (에러 방지 추가)
+        fetch("https://restcountries.com/v3.1/all")
+            .then(r => r.ok ? r.json() : [])
+            .then(data => {
+                if(Array.isArray(data)) {
+                    COUNTRIES = data.map(c => ({ 
+                        code: c.cca2, 
+                        names: [c.name.common, ...(c.altSpellings||[])].map(v=>v.toLowerCase()) 
+                    }));
+                }
+                countriesLoaded = true;
+                console.log("Countries system initialized.");
+            }).catch(() => { countriesLoaded = true; });
 
         function escapeHTML(str) { return String(str).replace(/[&<>"']/g, m => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[m])); }
         function autoLink(text) {
@@ -197,7 +168,7 @@
         }
         function searchKW(w) { document.getElementById('smartSearch').value = w; handleScan(); }
         function getZodiac(year) {
-            const names = ["Gyeong-sin","Sin-yu","Im-sul","Gye-hae","Gap-ja","Eul-chuk","Byeong-in","Jeong-myo","Mu-jin","Gi-sa","Gyeong-oh","Sin-mi","Im-sin","Gye-yu","Gap-sul","Eul-hae","Byeong-ja","Jeong-축","Mu-in","Gi-myo","Gyeong-jin","Sin-sa","Im-oh","Gye-mi","Gap-sin","Eul-yu","Byeong-sul","Jeong-hae","Mu-ja","Gi-chuk","Gyeong-in","Sin-myo","Im-jin","Gye-sa","Gap-oh","Eul-mi","Byeong-sin","Jeong-yu","Mu-sul","Gi-hae","Gyeong-ja","Sin-chuk","Im-in","Gye-myo","Gap-jin","Eul-sa","Byeong-oh","Jeong-mi","Mu-sin","Gi-yu","Gyeong-sul","Sin-hae","Im-ja","Gye-chuk","Gap-in","Eul-myo","Byeong-jin","Jeong-sa","Mu-oh","Gi-mi"];
+            const names = ["Gyeong-sin","Sin-yu","Im-sul","Gye-hae","Gap-ja","Eul-chuk","Byeong-in","Jeong-myo","Mu-jin","Gi-sa","Gyeong-oh","Sin-mi","Im-sin","Gye-yu","Gap-sul","Eul-hae","Byeong-ja","Jeong-축","Mu-in","Gi-myo","Gyeong-jin","Sin-sa","Im-oh","Gye-mi","Gap-sin","Eul-yu","Byeong-sul","Jeong-hae","Mu-ja","Gi-chuk","Gyeong-in","Sin-myo","Im-jin","Gye-sa","Gap-oh","Eul-mi","Byeong-sin","Jeong-yu","Mu-sul","Gi-hae","Gyeong-ja","Sin-chuk","Im-in","Gye-myo","Gap-jin","Eul-sa","Byeong-oh","Jeong-mi","Mu-sin","Gi-yu","Gyeong-sul","Sin-hae","Im-자","Gye-chuk","Gap-in","Eul-myo","Byeong-jin","Jeong-sa","Mu-oh","Gi-mi"];
             const idx = (year - 0) % 60; return names[idx < 0 ? idx + 60 : idx] || "N/A";
         }
 
@@ -216,159 +187,138 @@
             isScanning = true;
 
             const inY = document.getElementById('in-year').value;
-            const inM = document.getElementById('in-month').value || (new Date().getMonth()+1).toString().padStart(2,'0');
-            const inD = document.getElementById('in-day').value || (new Date().getDate()).toString().padStart(2,'0');
-            const kwInput = document.getElementById('smartSearch').value.trim().toLowerCase();
+            const inM = (document.getElementById('in-month').value || (new Date().getMonth()+1).toString()).padStart(2,'0');
+            const inD = (document.getElementById('in-day').value || (new Date().getDate()).toString()).padStart(2,'0');
+            const kw = document.getElementById('smartSearch').value.trim().toLowerCase();
             const coInput = document.getElementById('countrySearch').value.trim().toLowerCase();
 
-            // 💡 [비즈니스 로직 수정] 국가 결정 (Auto vs Manual)
+            // 국가 결정 (Auto vs Manual)
             let detectedCo = "";
-            let isAutoCountry = true;
-
+            let isAuto = true;
             if (coInput) {
-                for (const c of COUNTRIES) { 
-                    if (c.names.some(n => coInput.includes(n))) { 
-                        detectedCo = c.code; 
-                        isAutoCountry = false; 
-                        break; 
-                    } 
-                }
+                const found = COUNTRIES.find(c => c.names.some(n => coInput.includes(n)));
+                if (found) { detectedCo = found.code; isAuto = false; }
             }
-
             const finalCo = detectedCo || DEFAULT_COUNTRY;
-            const md = `${inM.padStart(2,'0')}-${inD.padStart(2,'0')}`;
-            const weatherYear = inY || new Date().getFullYear();
+            const md = `${inM}-${inD}`;
 
-            // 🔴 [수정] URL 구조 변경 (Auto / Manual 구분)
-            const urlCo = isAutoCountry ? 'auto' : finalCo.toLowerCase();
+            // URL 구조 변경 (auto vs 국가코드)
+            const urlCo = isAuto ? 'auto' : finalCo.toLowerCase();
             window.history.replaceState({}, "", `/${urlCo}/${md}`);
 
-            document.getElementById('p-kw').innerText = `Keyword: ${kwInput || 'None'}`;
-            document.getElementById('p-co').innerText = `Nation: ${finalCo} ${isAutoCountry ? '(Auto)' : '(Manual)'}`;
-            document.getElementById('p-dt').innerText = `Period: ${inY || 'All'}-${md}`;
+            document.getElementById('status-bar').innerText = `Keyword: ${kw || 'None'} | Nation: ${finalCo} ${isAuto ? '(Auto)' : '(Manual)'} | Period: ${inY || 'ALL'}-${md}`;
 
-            const cKey = `${md}_${finalCo}_${kwInput}_${inY}`;
-            if (CACHE[cKey]) { renderAll(CACHE[cKey], inY, finalCo, kwInput, md); isScanning = false; return; }
+            const cKey = `${md}_${finalCo}_${kw}_${inY}`;
+            if (CACHE[cKey]) { renderAll(CACHE[cKey], inY, finalCo, kw, md); isScanning = false; return; }
 
-            const { data, error } = await sb.from('daily_archives').select('*').eq('date_id', md).order('country_code', { ascending: false });
-            if (error || !data) { alert("Searching archive..."); isScanning = false; return; }
+            const { data, error } = await sb.from('daily_archives').select('*').eq('date_id', md);
+            if (error || !data || data.length === 0) { 
+                alert("Searching archive... (Check date format in DB: MM-DD)"); 
+                isScanning = false; return; 
+            }
 
             CACHE[cKey] = data;
-            renderAll(data, inY, finalCo, kwInput, md);
+            renderAll(data, inY, finalCo, kw, md);
             isScanning = false;
         }
 
         function renderAll(data, inY, finalCo, kw, md) {
             document.getElementById('vault-area').style.display = 'block';
             const priority = [];
-            const amzSuffix = { movies: "blu-ray dvd", music: "vinyl album", gaming: "video game", books: "novel", sports: "gear", finance: "wealth book" };
 
             const render = (id, list, section_type) => {
                 const cont = document.getElementById(id); cont.innerHTML = "";
-                if(!list || list.length === 0) return cont.innerHTML = "<p class='text-xs text-gray-600 mt-4 italic'>Archive synced.</p>";
                 
-                const sorted = list.sort((a,b) => {
-                    const aCo = (a.country_code === finalCo);
-                    const bCo = (b.country_code === finalCo);
+                // 키워드가 있으면 필터링, 없으면 전체
+                let filtered = list.filter(item => !kw || item.text.toLowerCase().includes(kw));
+
+                const cats = {
+                    sports: ['olympic','cup','medal','soccer','baseball','basketball','match','won','final','athlete'],
+                    law: ['court','law','judge','ruling','verdict','legal','supreme','enacted','amendment','rights','constitution','legislation'],
+                    incidents: ['war','attack','riot','crash','fire','tragedy','disaster','killed','bomb','explosion','murder'],
+                    finance: ['stock','market','bank','finance','money','wealth','economy','trade','price','billion'],
+                    movies: ['movie','film','cinema','oscar','starring','box office','directed','actor'],
+                    music: ['song','album','music','billboard','singer','concert','chart'],
+                    gaming: ['game','nintendo','sega','playstation','xbox','released','console'],
+                    books: ['book','novel','published','author','writer'],
+                    innovations: ['invention','discovery','nasa','space','science','technology','patented','first'],
+                    arts: ['art','painting','exhibition','museum','sculpture','cultural'],
+                    food: ['food','recipe','gastronomy','cuisine','dish','restaurant','taste']
+                };
+
+                // 날짜만 쳤을 때 카테고리별 자동 분류
+                if (!kw && cats[section_type]) {
+                    filtered = filtered.filter(item => cats[section_type].some(k => item.text.toLowerCase().includes(k)));
+                }
+
+                if(filtered.length === 0) return cont.innerHTML = "<p class='text-[10px] text-gray-700 mt-2 italic'>Synced.</p>";
+
+                filtered.sort((a,b) => {
+                    const aCo = a.country_code === finalCo;
+                    const bCo = b.country_code === finalCo;
                     if (aCo !== bCo) return aCo ? -1 : 1;
                     return (b.year == inY) - (a.year == inY) || (b.year - a.year);
-                });
-
-                let globalHeaderAdded = false;
-
-                sorted.forEach((item, index) => {
-                    const tL = item.text.toLowerCase();
-                    const isM = inY && item.year == inY; 
-                    const kws = kw.split(/\s+/).filter(k => k.length > 0);
-                    const isK = kws.length > 0 && kws.every(k => tL.includes(k));
-                    const isCoMatch = (item.country_code === finalCo);
-                    
-                    // 필터링 강화: 키워드가 있으면 키워드 포함 위주
-                    if (kw && !tL.includes(kw)) return;
-
-                    if (!kw && !isCoMatch && !globalHeaderAdded) {
-                        cont.innerHTML += `<p class="text-[11px] text-gray-500 italic mt-8 mb-2">Showing global records after national results.</p><h3 class="text-[10px] uppercase tracking-widest text-gray-600 mb-4 border-b border-white/5 pb-1 text-left">🌍 Global Intelligence (${md})</h3>`;
-                        globalHeaderAdded = true;
-                    }
-
-                    // 카테고리 필터 키워드
-                    const sp_k = ['olympic','cup','fifa','medal','soccer','baseball','basketball','match','won','final'];
-                    const mv_k = ['movie','film','cinema','box office','directed','oscar'];
-                    const mu_k = ['song','album','music','billboard','concert','singer'];
-                    const gm_k = ['game','nintendo','sega','playstation','xbox','comic','pixel','released'];
-                    const bk_k = ['book','novel','published','author','writer'];
-                    const fn_k = ['stock','market','finance','money','wealth','bank','trade','price'];
-                    const pol_k = ['war','riot','kill','murder','attack','tragedy','disaster','crash'];
-                    const lw_k = ['court','verdict','ruling','supreme','lawsuit','enacted','amendment','constitution','legislation','judge'];
-
-                    if (section_type === 'sports' && !sp_k.some(k => tL.includes(k))) return;
-                    if (section_type === 'movies' && !mv_k.some(k => tL.includes(k))) return;
-                    if (section_type === 'music' && !mu_k.some(k => tL.includes(k))) return;
-                    if (section_type === 'gaming' && !gm_k.some(k => tL.includes(k))) return;
-                    if (section_type === 'books' && !bk_k.some(k => tL.includes(k))) return;
-                    if (section_type === 'finance' && !fn_k.some(k => tL.includes(k))) return;
-                    if (section_type === 'law' && !lw_k.some(k => tL.includes(k))) return;
-                    if (section_type === 'arts' && pol_k.some(k => tL.includes(k))) return;
-                    if (section_type === 'incidents' && !pol_k.some(k => tL.includes(k))) return;
-
-                    const yearDisp = item.year < 0 ? Math.abs(item.year) + " B.C." : (item.year || 'SPEC');
-                    const detailId = `detail-${id}-${index}`;
-                    const q = encodeURIComponent(`${item.year} ${item.text.replace(/[^\w\sㄱ-ㅎ가-힣]/g, '')}`);
-                    const amzQ = encodeURIComponent(`${item.text.split(',')[0]} ${amzSuffix[section_type] || ""}`);
+                }).forEach((item, idx) => {
+                    const isCo = item.country_code === finalCo;
+                    const isY = inY && item.year == inY;
+                    const detailId = `det-${id}-${idx}`;
 
                     const html = `
-                        <div class="flex flex-col py-5 border-b border-white/5 ${isK && isM && isCoMatch ? 'priority-focus px-4 rounded-lg':''}">
+                        <div class="flex flex-col py-5 border-b border-white/5 ${isCo && isY && kw ? 'priority-focus px-4 rounded-lg' : ''}">
                             <div class="flex items-start gap-4">
-                                <span class="year-badge ${isM?'match-badge':''}">${yearDisp}</span>
-                                <div class="flex-1 text-left">
+                                <span class="year-badge ${isY ? 'match-badge' : ''}">${item.year || 'SPEC'}</span>
+                                <div class="flex-1 text-left text-sm">
                                     <span style="color: #E2E2E2;">${autoLink(item.text)}</span>
-                                    <button onclick="document.getElementById('${detailId}').style.display = document.getElementById('${detailId}').style.display === 'block' ? 'none' : 'block'" class="text-[9px] text-gray-500 underline ml-2 uppercase font-bold tracking-widest cursor-pointer">Detail [+]</button>
+                                    <button onclick="document.getElementById('${detailId}').style.display = 'block'" class="text-[9px] text-gray-500 underline ml-2 uppercase font-bold tracking-widest cursor-pointer">Detail [+]</button>
                                 </div>
                             </div>
-                            <div id="${detailId}" class="detail-view">Historical record verified via AllDay Global Satellite. Full story on Blog.</div>
+                            <div id="${detailId}" class="detail-view">Historical intelligence record verified for ${md}. Extended details available in Blog.</div>
                             <div class="flex gap-2 mt-4 ml-[80px]">
-                                <button onclick="window.open('https://www.youtube.com/results?search_query=${q}+official')" class="action-btn">📺 Youtube</button>
-                                <button onclick="window.open('https://www.amazon.com/s?tag=${AMAZON_ID}&k=${amzQ}')" class="action-btn">🛒 Shop</button>
+                                <button onclick="window.open('https://www.youtube.com/results?search_query=${encodeURIComponent(item.text)}')" class="action-btn">📺 Youtube</button>
+                                <button onclick="window.open('https://www.amazon.com/s?tag=${AMAZON_ID}&k=${encodeURIComponent(item.text)}')" class="action-btn">🛒 Shop</button>
                             </div>
                         </div>`;
-                    if(isK && isM && isCoMatch) priority.push(html);
+                    if (isCo && isY && kw) priority.push(html);
                     cont.innerHTML += html;
                 });
             };
 
             const allE = data.flatMap(d => [...(d.firsts || []), ...(d.holidays || [])]);
-            
-            // 모든 섹션 렌더링 호출 (원본 유지)
-            render('list-sports', allE, 'sports'); 
-            render('list-incidents', allE, 'incidents'); 
+
+            // 모든 섹션 렌더링 (원본 유지)
+            render('list-sports', allE, 'sports');
             render('list-law', allE, 'law');
-            render('list-finance', allE, 'finance'); 
-            render('list-holidays', data.flatMap(d=>d.holidays||[]), 'holidays'); 
-            render('list-movies', allE, 'movies'); 
-            render('list-music', allE, 'music'); 
+            render('list-incidents', allE, 'incidents');
+            render('list-finance', allE, 'finance');
+            render('list-holidays', data.flatMap(d=>d.holidays||[]), 'holidays');
+            render('list-movies', allE, 'movies');
+            render('list-music', allE, 'music');
             render('list-gaming', allE, 'gaming');
-            render('list-books', allE, 'books'); 
-            render('list-innovations', allE, 'innovations'); 
+            render('list-books', allE, 'books');
+            render('list-innovations', allE, 'innovations');
             render('list-arts', allE, 'arts');
             render('list-food', allE, 'food');
 
-            document.getElementById('list-births').innerHTML = data.flatMap(d=>d.birthdays||[]).map(b => `<div class="py-4 border-b border-white/5 text-left text-body"><span class="year-badge">${b.year}</span><span style="color: #E2E2E2;" class="text-sm ml-4">${escapeHTML(b.text)}</span></div>`).join('');
-            document.getElementById('list-deaths').innerHTML = data.flatMap(d=>d.deaths||[]).map(d => `<div class="py-4 border-b border-white/5 text-left text-body"><span class="year-badge">${d.year}</span><span style="color: #E2E2E2;" class="text-sm ml-4">${escapeHTML(d.text)}</span></div>`).join('');
+            document.getElementById('list-births').innerHTML = data.flatMap(d=>d.birthdays||[]).map(b => `<div class="py-2 border-b border-white/5 text-left text-sm"><span class="year-badge mr-4">${b.year}</span>${b.text}</div>`).join('') || "No records.";
+            document.getElementById('list-deaths').innerHTML = data.flatMap(d=>d.deaths||[]).map(d => `<div class="py-2 border-b border-white/5 text-left text-sm"><span class="year-badge mr-4">${d.year}</span>${d.text}</div>`).join('') || "No records.";
 
-            if(priority.length > 0) { document.getElementById('priority-section').classList.remove('hidden'); document.getElementById('list-priority').innerHTML = [...new Set(priority)].slice(0,5).join(''); }
-            else { document.getElementById('priority-section').classList.add('hidden'); }
+            if (priority.length > 0) {
+                document.getElementById('priority-section').classList.remove('hidden');
+                document.getElementById('list-priority').innerHTML = [...new Set(priority)].slice(0, 5).join('');
+            } else {
+                document.getElementById('priority-section').classList.add('hidden');
+            }
 
-            const dayNames = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
             const weatherYear = inY || new Date().getFullYear();
-            document.getElementById('disp-day').innerText = dayNames[new Date(`${weatherYear}-${md}`).getDay()];
-            document.getElementById('disp-ganji').innerText = inY ? getZodiac(parseInt(inY)) : "Syncing...";
+            document.getElementById('disp-day').innerText = ["Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"][new Date(`${weatherYear}-${md}`).getDay()];
+            document.getElementById('disp-ganji').innerText = inY ? getZodiac(parseInt(inY)) : "--";
             fetchRealWeather(weatherYear, md.split('-')[0], md.split('-')[1], finalCo);
             
             const contS = document.getElementById('star-container'); contS.innerHTML = "";
             for(let i=0; i<30; i++) {
                 const s = document.createElement('div'); s.className = 'star';
                 s.style.left = Math.random()*100+'%'; s.style.top = Math.random()*100+'%';
-                s.style.width = Math.random()*2+'px'; s.style.height = s.style.width;
+                s.style.width = '2px'; s.style.height = '2px';
                 contS.appendChild(s);
             }
             setTimeout(() => { document.getElementById('vault-area').scrollIntoView({ behavior: 'smooth' }); }, 150);
