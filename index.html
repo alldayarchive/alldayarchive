@@ -36,17 +36,29 @@
         .match-badge { background: var(--gold); color: #000; padding: 2px 8px; border-radius: 4px; font-size: 11px; font-weight: 900; }
         .priority-focus { background: rgba(245, 201, 122, 0.18) !important; border-left: 5px solid var(--gold) !important; transform: scale(1.01); box-shadow: 0 10px 40px rgba(0,0,0,0.5); }
         
-        input, select { background: rgba(255,255,255,0.1) !important; border: 1px solid rgba(245, 201, 122, 0.3) !important; padding: 1.1rem; border-radius: 12px; color: #fff !important; outline: none; transition: 0.3s; width: 100%; text-align: center; font-size: 1rem; }
+        input { background: rgba(255,255,255,0.1) !important; border: 1px solid rgba(245, 201, 122, 0.3) !important; padding: 1.1rem; border-radius: 12px; color: #fff !important; outline: none; transition: 0.3s; width: 100%; text-align: center; font-size: 1rem; }
         .date-hub input { width: 85px; font-size: 1.2rem; }
         #in-year { width: 110px; }
         .scan-btn { background: var(--gold); color: #000; font-weight: 900; padding: 1.2rem; border-radius: 12px; width: 100%; text-transform: uppercase; letter-spacing: 2px; cursor: pointer; transition: 0.3s; z-index: 100; position: relative; }
         .action-btn { font-size: 9px; font-weight: 800; padding: 5px 12px; border: 1px solid rgba(255,255,255,0.1); border-radius: 6px; color: var(--text-sub); background: rgba(0,0,0,0.3); margin-top: 5px; cursor: pointer; }
         .detail-view { display: none; padding: 1rem; margin-top: 10px; background: rgba(255,255,255,0.03); border-radius: 12px; font-size: 14px; color: #B5B5B5; border: 1px dashed var(--gold); text-align: left; }
+        
+        .star-map { background: radial-gradient(circle, #1e293b 0%, #000 100%); border-radius: 50%; width: 100px; height: 100px; margin: 0 auto; border: 1px solid var(--gold); position: relative; overflow: hidden; }
+        .star { position: absolute; background: white; border-radius: 50%; opacity: 0.8; animation: twinkle 2s infinite; }
+        #vault-area { display: none; }
+        .sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0,0,0,0); border: 0; }
     </style>
 </head>
 <body>
     <div class="bg-heritage"></div>
     
+    <!-- 🌐 SEO Block -->
+    <section class="sr-only">
+        <h2>Global Historical Events by Date</h2>
+        <h3>Sports Milestones and Olympics Records</h3>
+        <h3>Law, Justice and Constitutional History</h3>
+    </section>
+
     <nav class="fixed w-full z-[1000] px-10 py-6 flex justify-between items-center border-b border-white/5 bg-black/40 backdrop-blur-xl">
         <div class="text-2xl font-black text-[#F5C97A] uppercase italic tracking-tighter">ALLDAY ARCHIVE</div>
         <button onclick="window.open('https://buymeacoffee.com/djawjdaks8g')" class="text-[9px] font-bold text-white border border-white/30 px-3 py-1 rounded hover:bg-white transition-all">☕ BUY ME A COFFEE</button>
@@ -55,7 +67,7 @@
     <main class="relative pt-48 pb-20 px-6 max-w-7xl mx-auto space-y-20 text-center">
         <!-- Search Section -->
         <section class="space-y-12 text-center">
-            <h1 class="text-5xl md:text-8xl font-black text-white leading-none font-serif italic uppercase tracking-tighter leading-tight italic">HISTORY <br><span class="text-[#F5C97A]">INTELLIGENCE</span></h1>
+            <h1 class="text-5xl md:text-8xl font-black text-white leading-none font-serif italic uppercase tracking-tighter italic">HISTORY <br><span class="text-[#F5C97A]">INTELLIGENCE</span></h1>
             <div class="glass-card max-w-5xl mx-auto p-8 shadow-3xl space-y-6">
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                     <input type="text" id="smartSearch" placeholder="KEYWORD (E.G. NASA, CAT, 축구)" style="text-align: left; padding-left: 20px;">
@@ -71,7 +83,6 @@
         </section>
 
         <div id="vault-area" class="space-y-24">
-            <!-- 🏷️ Information Header (Status-Ready) -->
             <div class="flex justify-center gap-4 text-[10px] font-bold uppercase tracking-widest text-[#F5C97A] italic">
                 <span id="p-kw">Keyword: None</span> | <span id="p-co">Nation: --</span> | <span id="p-dt">Period: Today</span>
             </div>
@@ -96,7 +107,7 @@
                 <div id="list-priority" class="space-y-4"></div>
             </section>
 
-            <!-- Categories -->
+            <!-- Main Categories -->
             <section class="glass-card p-8 border-t-4 border-[#F5C97A] text-left">
                 <h2 class="text-2xl font-serif text-[#F5C97A] italic mb-6 uppercase tracking-widest border-b border-white/5 pb-4 font-bold">🏆 Sports & Olympic Milestones</h2>
                 <div id="list-sports" class="scroll-box space-y-2"></div>
@@ -107,6 +118,7 @@
                 <div id="list-law" class="scroll-box space-y-2"></div>
             </section>
 
+            <!-- Incident / Finance / Holiday Grid -->
             <div class="grid grid-cols-1 md:grid-cols-3 gap-8 text-left">
                 <section class="glass-card p-6 border-t-4 border-red-500"><h2 class="text-xl font-serif text-red-400 mb-6 uppercase font-bold italic">🚨 Major Incidents</h2><div id="list-incidents" class="scroll-box"></div></section>
                 <section class="glass-card p-6 border-t-4 border-emerald-500"><h2 class="text-xl font-serif text-emerald-400 mb-6 uppercase font-bold italic">📈 Finance Records</h2><div id="list-finance" class="scroll-box"></div></section>
@@ -115,6 +127,7 @@
 
             <div class="ad-placeholder">Sponsored Content Area</div>
 
+            <!-- Culture Grid -->
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 text-left">
                 <div class="glass-card p-6 border-t-4 border-sky-400"><h3>🎬 Movies</h3><div id="list-movies" class="scroll-box h-[250px]"></div></div>
                 <div class="glass-card p-6 border-t-4 border-pink-500"><h3>🎵 Music Charts</h3><div id="list-music" class="scroll-box h-[250px]"></div></div>
@@ -122,10 +135,18 @@
                 <div class="glass-card p-6 border-t-4 border-emerald-400"><h3>📚 Literature</h3><div id="list-books" class="scroll-box h-[250px]"></div></div>
             </div>
 
+            <!-- Birth / Death Grid -->
             <div class="grid grid-cols-1 md:grid-cols-2 gap-8 text-left">
                 <section class="glass-card p-8 border-t-4 border-pink-400"><h3>🎂 Born Today</h3><div id="list-births" class="scroll-box"></div></section>
                 <section class="glass-card p-8 border-t-4 border-gray-600 opacity-60"><h3>🕊️ Passed Away</h3><div id="list-deaths" class="scroll-box"></div></section>
             </div>
+
+            <!-- Innovations & Arts & Food -->
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8 text-left">
+                <section class="glass-card p-8 border-t-4 border-amber-400"><h3>⚙️ Innovations</h3><div id="list-innovations" class="scroll-box"></div></section>
+                <section class="glass-card p-8 border-t-4 border-purple-400"><h3>🎨 Arts</h3><div id="list-arts" class="scroll-box"></div></section>
+            </div>
+            <section class="glass-card p-8 border-t-4 border-emerald-600 text-left"><h3>🍴 Gastronomy</h3><div id="list-food" class="scroll-box"></div></section>
 
             <footer class="py-24 text-center border-t border-white/5 bg-black/20 space-y-12">
                 <button onclick="window.open('https://alldayarchive.blogspot.com')" class="bg-emerald-600 text-white px-10 py-4 rounded-full font-black text-xs hover:bg-white hover:text-black transition-all shadow-xl uppercase italic tracking-widest">Enter Chronicles Library (Blog)</button>
@@ -149,9 +170,8 @@
         let countriesLoaded = false;
         const CACHE = {};
 
-        // 1. 국가 데이터 로드 (API)
         fetch("https://restcountries.com/v3.1/all").then(r => r.json()).then(data => {
-            COUNTRIES = data.map(c => ({ code: c.cca2, canonical: c.name.common, names: [c.name.common, ...(c.altSpellings||[]), ...(Object.values(c.name.nativeName||{}).map(n=>n.common))].map(v=>v.toLowerCase()) }));
+            COUNTRIES = data.map(c => ({ code: c.cca2, names: [c.name.common, ...(c.altSpellings||[]), ...(Object.values(c.name.nativeName||{}).map(n=>n.common))].map(v=>v.toLowerCase()) }));
             countriesLoaded = true;
         });
 
@@ -192,7 +212,6 @@
             const kwInput = document.getElementById('smartSearch').value.trim().toLowerCase();
             const coInput = document.getElementById('countrySearch').value.trim().toLowerCase();
 
-            // 💡 [비즈니스 로직] 국가 결정 (Auto vs Manual)
             let detectedCo = "";
             let isAutoCountry = true;
 
@@ -208,13 +227,9 @@
 
             const finalCo = detectedCo || DEFAULT_COUNTRY;
             const md = `${inM.padStart(2,'0')}-${inD.padStart(2,'0')}`;
-            const weatherYear = inY || new Date().getFullYear();
-
-            // 🔴 [수정 포인트 1] URL 구조 최적화 (Auto vs Nation Code)
             const urlCo = isAutoCountry ? 'auto' : finalCo.toLowerCase();
             window.history.replaceState({}, "", `/${urlCo}/${md}`);
 
-            // UI Feedback
             document.getElementById('p-kw').innerText = `Keyword: ${kwInput || 'None'}`;
             document.getElementById('p-co').innerText = `Nation: ${finalCo} ${isAutoCountry ? '(Auto)' : '(Manual)'}`;
             document.getElementById('p-dt').innerText = `Period: ${inY || 'All'}-${md}`;
@@ -222,9 +237,12 @@
             const cKey = `${md}_${finalCo}_${kwInput}_${inY}`;
             if (CACHE[cKey]) { renderAll(CACHE[cKey], inY, finalCo, kwInput, md); isScanning = false; return; }
 
-            // 🟠 [참고] 현재는 MVP 단계이므로 날짜 기반 전체 데이터를 가져와 클라이언트에서 정렬합니다.
             const { data, error } = await sb.from('daily_archives').select('*').eq('date_id', md).order('country_code', { ascending: false });
-            if (error || !data) { alert("Searching archive..."); isScanning = false; return; }
+            if (error || !data || data.length === 0) { 
+                alert("Searching archive... (Data might be empty for this date)"); 
+                isScanning = false; 
+                return; 
+            }
 
             CACHE[cKey] = data;
             renderAll(data, inY, finalCo, kwInput, md);
@@ -234,50 +252,51 @@
         function renderAll(data, inY, finalCo, kw, md) {
             document.getElementById('vault-area').style.display = 'block';
             const priority = [];
-            const amzSuffix = { movies: "blu-ray dvd", music: "vinyl album", gaming: "video game", books: "novel", sports: "gear", finance: "wealth book" };
+            const amzSuffix = { movies: "blu-ray", music: "album", gaming: "game", books: "book", sports: "gear", innovations: "tech" };
 
             const render = (id, list, section_type) => {
                 const cont = document.getElementById(id); cont.innerHTML = "";
-                if(!list || list.length === 0) return cont.innerHTML = "<p class='text-xs text-gray-600 mt-4 italic'>Archive synced.</p>";
                 
-                const sorted = list.sort((a,b) => {
+                // [필터 로직 강화] 키워드가 있으면 키워드 포함 위주, 없으면 국가/연도순
+                const filtered = list.filter(item => {
+                    if (kw) return item.text.toLowerCase().includes(kw);
+                    return true;
+                });
+
+                if(filtered.length === 0) return cont.innerHTML = "<p class='text-[10px] text-gray-700 mt-4 italic'>No specific records found in this category.</p>";
+                
+                const sorted = filtered.sort((a,b) => {
                     const aCo = (a.country_code === finalCo);
                     const bCo = (b.country_code === finalCo);
                     if (aCo !== bCo) return aCo ? -1 : 1;
                     return (b.year == inY) - (a.year == inY) || (b.year - a.year);
                 });
 
-                let globalHeaderAdded = false;
-
                 sorted.forEach((item, index) => {
                     const tL = item.text.toLowerCase();
                     const isM = inY && item.year == inY; 
-                    const kws = kw.split(/\s+/).filter(k => k.length > 0);
-                    const isK = kws.length > 0 && kws.every(k => tL.includes(k));
                     const isCoMatch = (item.country_code === finalCo);
-                    
-                    if (!kw && !isCoMatch && !globalHeaderAdded) {
-                        cont.innerHTML += `<p class="text-[11px] text-gray-500 italic mt-8 mb-2">Global records following national results.</p><h3 class="text-[10px] uppercase tracking-widest text-gray-600 mb-4 border-b border-white/5 pb-1 text-left">🌍 Global Intelligence (${md})</h3>`;
-                        globalHeaderAdded = true;
+
+                    // 각 카테고리별 핵심 키워드 (없으면 전체 뿌림)
+                    const cats = {
+                        sports: ['olympic','cup','medal','soccer','baseball','basketball','match','won','final'],
+                        law: ['court','law','judge','ruling','verdict','legal','supreme','enacted','amendment','rights'],
+                        incidents: ['war','attack','riot','crash','fire','tragedy','disaster','killed','bomb','death'],
+                        finance: ['stock','market','bank','finance','money','wealth','economy','trade','price'],
+                        movies: ['movie','film','cinema','oscar','starring','box office','directed'],
+                        music: ['song','album','music','billboard','singer','concert','chart'],
+                        gaming: ['game','nintendo','sega','playstation','xbox','released','console'],
+                        books: ['book','novel','published','author','writer','literary'],
+                        innovations: ['invention','discovery','nasa','space','science','technology','patented','first time'],
+                        arts: ['art','painting','exhibition','museum','sculpture','cultural'],
+                        food: ['food','recipe','gastronomy','cuisine','dish','restaurant','taste']
+                    };
+
+                    // 섹션 타입이 정의된 경우에만 필터링 수행
+                    if (cats[section_type] && !kw) {
+                        const match = cats[section_type].some(k => tL.includes(k));
+                        if (!match) return; 
                     }
-
-                    const sp_k = ['olympic','cup','fifa','medal','soccer','baseball','basketball','football'];
-                    const mv_k = ['movie','film','cinema','box office'];
-                    const mu_k = ['song','album','music','billboard','chart'];
-                    const gm_k = ['game','nintendo','sega','playstation','xbox','comic','pixel'];
-                    const bk_k = ['book','novel','published','author'];
-                    const fn_k = ['stock','market','finance','money','wealth','bank','trade'];
-                    const pol_k = ['war','riot','kill','murder','attack','tragedy'];
-                    const lw_k = ['court','verdict','ruling','supreme','lawsuit','enacted','amendment','constitution','legislation'];
-
-                    if (section_type === 'sports' && !sp_k.some(k => tL.includes(k))) return;
-                    if (section_type === 'movies' && !mv_k.some(k => tL.includes(k))) return;
-                    if (section_type === 'music' && !mu_k.some(k => tL.includes(k))) return;
-                    if (section_type === 'gaming' && !gm_k.some(k => tL.includes(k))) return;
-                    if (section_type === 'books' && !bk_k.some(k => tL.includes(k))) return;
-                    if (section_type === 'finance' && !fn_k.some(k => tL.includes(k))) return;
-                    if (section_type === 'law' && !lw_k.some(k => tL.includes(k))) return;
-                    if (section_type === 'incidents' && !pol_k.some(k => tL.includes(k))) return;
 
                     const yearDisp = item.year < 0 ? Math.abs(item.year) + " B.C." : (item.year || 'SPEC');
                     const detailId = `detail-${id}-${index}`;
@@ -285,7 +304,7 @@
                     const amzQ = encodeURIComponent(`${item.text.split(',')[0]} ${amzSuffix[section_type] || ""}`);
 
                     const html = `
-                        <div class="flex flex-col py-5 border-b border-white/5 ${isK && isM && isCoMatch ? 'priority-focus px-4 rounded-lg':''}">
+                        <div class="flex flex-col py-5 border-b border-white/5 ${kw && tL.includes(kw) && isCoMatch ? 'priority-focus px-4 rounded-lg':''}">
                             <div class="flex items-start gap-4">
                                 <span class="year-badge ${isM?'match-badge':''}">${yearDisp}</span>
                                 <div class="flex-1 text-left">
@@ -293,41 +312,59 @@
                                     <button onclick="document.getElementById('${detailId}').style.display = document.getElementById('${detailId}').style.display === 'block' ? 'none' : 'block'" class="text-[9px] text-gray-500 underline ml-2 uppercase font-bold tracking-widest cursor-pointer">Detail [+]</button>
                                 </div>
                             </div>
-                            <div id="${detailId}" class="detail-view">Historical record verified via AllDay Global Satellite.</div>
+                            <div id="${detailId}" class="detail-view">Verified Intelligence Record for ${md}. Extended chronicles available on Blog.</div>
                             <div class="flex gap-2 mt-4 ml-[80px]">
-                                <button onclick="window.open('https://www.youtube.com/results?search_query=${q}+official')" class="action-btn">📺 Youtube</button>
+                                <button onclick="window.open('https://www.youtube.com/results?search_query=${q}')" class="action-btn">📺 Youtube</button>
                                 <button onclick="window.open('https://www.amazon.com/s?tag=${AMAZON_ID}&k=${amzQ}')" class="action-btn">🛒 Shop</button>
                             </div>
                         </div>`;
-                    if(isK && isM && isCoMatch) priority.push(html);
+                    
+                    if(kw && tL.includes(kw) && isCoMatch && isM) priority.push(html);
                     cont.innerHTML += html;
                 });
             };
 
             const allE = data.flatMap(d => [...(d.firsts || []), ...(d.holidays || [])]);
-            render('list-sports', allE, 'sports'); render('list-incidents', allE, 'incidents'); render('list-law', allE, 'law');
-            render('list-finance', allE, 'finance'); render('list-holidays', data.flatMap(d=>d.holidays||[]), 'holidays'); 
-            render('list-movies', allE, 'movies'); render('list-music', allE, 'music'); render('list-gaming', allE, 'gaming');
+
+            // 모든 섹션 렌더링 호출
+            render('list-sports', allE, 'sports');
+            render('list-law', allE, 'law');
+            render('list-incidents', allE, 'incidents');
+            render('list-finance', allE, 'finance');
+            render('list-holidays', data.flatMap(d=>d.holidays||[]), 'holidays');
+            render('list-movies', allE, 'movies');
+            render('list-music', allE, 'music');
+            render('list-gaming', allE, 'gaming');
             render('list-books', allE, 'books');
+            render('list-innovations', allE, 'innovations');
+            render('list-arts', allE, 'arts');
+            render('list-food', allE, 'food');
             
-            document.getElementById('list-births').innerHTML = data.flatMap(d=>d.birthdays||[]).map(b => `<div class="py-4 border-b border-white/5 text-left"><span class="year-badge">${b.year}</span><span style="color: #E2E2E2;" class="text-sm ml-4">${escapeHTML(b.text)}</span></div>`).join('');
-            document.getElementById('list-deaths').innerHTML = data.flatMap(d=>d.deaths||[]).map(d => `<div class="py-4 border-b border-white/5 text-left"><span class="year-badge">${d.year}</span><span style="color: #E2E2E2;" class="text-sm ml-4">${escapeHTML(d.text)}</span></div>`).join('');
+            // Births & Deaths
+            document.getElementById('list-births').innerHTML = data.flatMap(d=>d.birthdays||[]).map(b => `<div class="py-4 border-b border-white/5 text-left"><span class="year-badge">${b.year}</span><span style="color: #E2E2E2;" class="text-sm ml-4">${escapeHTML(b.text)}</span></div>`).join('') || "No records.";
+            document.getElementById('list-deaths').innerHTML = data.flatMap(d=>d.deaths||[]).map(d => `<div class="py-4 border-b border-white/5 text-left"><span class="year-badge">${d.year}</span><span style="color: #E2E2E2;" class="text-sm ml-4">${escapeHTML(d.text)}</span></div>`).join('') || "No records.";
 
-            if(priority.length > 0) { document.getElementById('priority-section').classList.remove('hidden'); document.getElementById('list-priority').innerHTML = [...new Set(priority)].slice(0,5).join(''); }
-            else { document.getElementById('priority-section').classList.add('hidden'); }
+            // Priority
+            if(priority.length > 0) { 
+                document.getElementById('priority-section').classList.remove('hidden'); 
+                document.getElementById('list-priority').innerHTML = [...new Set(priority)].slice(0,5).join(''); 
+            } else { 
+                document.getElementById('priority-section').classList.add('hidden'); 
+            }
 
-            const dayNames = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
+            // HUD Data
             const weatherYear = inY || new Date().getFullYear();
+            const dayNames = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
             document.getElementById('disp-day').innerText = dayNames[new Date(`${weatherYear}-${md}`).getDay()];
-            document.getElementById('disp-ganji').innerText = inY ? getZodiac(parseInt(inY)) : "Syncing...";
+            document.getElementById('disp-ganji').innerText = inY ? getZodiac(parseInt(inY)) : "--";
             fetchRealWeather(weatherYear, md.split('-')[0], md.split('-')[1], finalCo);
             
-            const cont = document.getElementById('star-container'); cont.innerHTML = "";
+            const contS = document.getElementById('star-container'); contS.innerHTML = "";
             for(let i=0; i<30; i++) {
                 const s = document.createElement('div'); s.className = 'star';
                 s.style.left = Math.random()*100+'%'; s.style.top = Math.random()*100+'%';
                 s.style.width = Math.random()*2+'px'; s.style.height = s.style.width;
-                cont.appendChild(s);
+                contS.appendChild(s);
             }
             setTimeout(() => { document.getElementById('vault-area').scrollIntoView({ behavior: 'smooth' }); }, 150);
         }
