@@ -40,9 +40,6 @@
 
         .ad-area { min-height: 120px; background: rgba(255,255,255,0.02); border: 1px dashed rgba(255,255,255,0.1); display: flex; align-items: center; justify-content: center; color: var(--text-meta); font-size: 10px; text-transform: uppercase; letter-spacing: 4px; border-radius: 16px; margin: 2rem 0; }
 
-        .detail-view { display: none; padding: 1rem; margin-top: 10px; background: rgba(255,255,255,0.03); border-radius: 12px; font-size: 13px; color: #B5B5B5; border: 1px dashed var(--gold); text-align: left; line-height: 1.6; }
-        .pack-buy-btn { font-size: 9px; background: rgba(245, 201, 122, 0.1); color: var(--gold); border: 1px solid var(--gold); padding: 2px 8px; border-radius: 20px; float: right; cursor: pointer; }
-
         .star-map { background: radial-gradient(circle, #1e293b 0%, #000 100%); border-radius: 50%; width: 100px; height: 100px; margin: 0 auto; border: 1px solid var(--gold); position: relative; overflow: hidden; }
         .star { position: absolute; background: white; border-radius: 50%; opacity: 0.8; animation: twinkle 2s infinite; }
         #vault-area { display: none; }
@@ -56,13 +53,13 @@
     </nav>
 
     <main class="relative pt-48 pb-20 px-6 max-w-7xl mx-auto space-y-12 text-center">
-        <!-- Search Section -->
+        <!-- Search -->
         <section class="space-y-10">
             <h1 class="text-6xl md:text-9xl font-black text-white leading-none font-serif italic uppercase tracking-tighter italic">HISTORY <br><span class="text-[#F5C97A]">INTELLIGENCE</span></h1>
             <div class="glass-card max-w-5xl mx-auto p-8 shadow-3xl space-y-6">
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                    <input type="text" id="smartSearch" placeholder="KEYWORD (E.G. NASA, WAR, 축구)" style="text-align: left; padding-left: 20px;">
-                    <input type="text" id="countrySearch" placeholder="NATION FOCUS (EMPTY = AUTO)" style="text-align: left; padding-left: 20px;">
+                    <input type="text" id="smartSearch" placeholder="KEYWORD (E.G. NASA, WAR, CAT...)" style="text-align: left; padding-left: 20px;">
+                    <input type="text" id="countrySearch" placeholder="NATION (E.G. KOREA, BRAZIL, USA...)" style="text-align: left; padding-left: 20px;">
                 </div>
                 <div class="date-hub flex gap-3 justify-center">
                     <input type="text" id="in-year" placeholder="YYYY" maxlength="4" oninput="if(this.value.length==4)document.getElementById('in-month').focus()">
@@ -77,7 +74,7 @@
         <div class="ad-area">Sponsored Intelligence Content (TOP)</div>
 
         <div id="vault-area" class="space-y-20">
-            <!-- HUD Dash -->
+            <!-- HUD -->
             <section class="grid grid-cols-1 md:grid-cols-4 gap-6 text-center">
                 <div class="glass-card border-t-2 border-sky-500 py-8"><span class="text-[9px] text-sky-400 uppercase font-bold">Atmosphere</span><div id="disp-weather" class="text-4xl font-black italic mt-2">--°C</div></div>
                 <div class="glass-card border-t-2 border-white/20 py-8"><span class="text-[9px] uppercase font-bold">Day of Week</span><div id="disp-day" class="text-xl font-black text-white mt-2 uppercase">--</div></div>
@@ -85,26 +82,24 @@
                 <div class="glass-card border-t-2 border-emerald-500 py-8"><span class="text-[9px] text-emerald-400 uppercase font-bold">Ancestral Cycle</span><div id="disp-ganji" class="text-lg font-black text-white mt-2">--</div></div>
             </section>
 
-            <!-- ⭐ PRIORITY SECTION -->
+            <!-- ⭐ PRIORITY & PDF SECTION -->
             <section id="priority-section" class="space-y-4 hidden text-left">
                 <div class="flex justify-between items-center border-b border-white/5 pb-4">
                     <h2 class="text-3xl font-serif text-white italic uppercase tracking-widest"><span class="text-[#F5C97A]">Intelligence</span> Priority Result</h2>
-                    <button onclick="window.open('https://your-store.com')" class="premium-pdf-btn">📄 Get Full Archive PDF (2026 Edition)</button>
+                    <button onclick="window.open('https://your-pdf-store.com')" class="premium-pdf-btn">📄 Get Verified Archive PDF (Full Access)</button>
                 </div>
                 <div id="list-priority" class="space-y-4"></div>
             </section>
 
             <!-- 🏆 SPORTS -->
             <section class="glass-card p-8 border-t-4 border-[#F5C97A] text-left">
-                <button onclick="alert('Redirecting to Sports Pack PDF...')" class="pack-buy-btn">Sports Pack PDF →</button>
-                <h2 class="text-2xl font-serif text-[#F5C97A] italic mb-6 uppercase tracking-widest border-b border-white/5 pb-4 font-bold italic">🏆 Sports & Olympic Milestones</h2>
+                <h2 class="text-2xl font-serif text-[#F5C97A] italic mb-6 uppercase tracking-widest border-b border-white/5 pb-4 font-bold">🏆 Sports & Olympic Milestones</h2>
                 <div id="list-sports" class="scroll-box space-y-4"></div>
             </section>
 
             <!-- ⚖️ LAW & JUSTICE (WIDE) -->
             <section class="glass-card p-8 border-t-4 border-slate-500 text-left">
-                <button onclick="alert('Redirecting to Justice Pack PDF...')" class="pack-buy-btn">Justice Pack PDF →</button>
-                <h2 class="text-2xl font-serif text-slate-400 mb-6 uppercase tracking-widest border-b border-white/5 pb-4 font-bold italic text-left">⚖️ Law & Justice</h2>
+                <h2 class="text-2xl font-serif text-slate-400 mb-6 uppercase tracking-widest border-b border-white/5 pb-4 font-bold">⚖️ Law & Justice</h2>
                 <div id="list-law" class="scroll-box space-y-4"></div>
             </section>
 
@@ -113,15 +108,13 @@
 
             <!-- 📈 FINANCE (WIDE) -->
             <section class="glass-card p-8 border-t-4 border-emerald-500 text-left">
-                <button onclick="alert('Redirecting to Finance Pack PDF...')" class="pack-buy-btn">Finance Pack PDF →</button>
-                <h2 class="text-2xl font-serif text-emerald-400 mb-6 uppercase tracking-widest border-b border-white/5 pb-4 font-bold italic">📈 Finance & Wealth Records</h2>
+                <h2 class="text-2xl font-serif text-emerald-400 mb-6 uppercase tracking-widest border-b border-white/5 pb-4 font-bold">📈 Finance & Wealth Records</h2>
                 <div id="list-finance" class="scroll-box space-y-4"></div>
             </section>
 
-            <!-- INCIDENT / HOLIDAY -->
             <div class="grid grid-cols-1 md:grid-cols-2 gap-8 text-left">
                 <section class="glass-card p-6 border-t-4 border-red-500"><h2 class="text-xl font-serif text-red-400 mb-6 uppercase font-bold italic">🚨 Major Incidents</h2><div id="list-incidents" class="scroll-box"></div></section>
-                <section class="glass-card p-6 border-t-4 border-green-500"><h2 class="text-xl font-serif text-green-400 mb-6 uppercase font-bold italic text-left">🎉 Global Holidays</h2><div id="list-holidays" class="scroll-box"></div></section>
+                <section class="glass-card p-6 border-t-4 border-green-500"><h2 class="text-xl font-serif text-green-400 mb-6 uppercase font-bold italic">🎉 Global Holidays</h2><div id="list-holidays" class="scroll-box"></div></section>
             </div>
 
             <!-- CULTURE GRID -->
@@ -132,13 +125,12 @@
                 <div class="glass-card p-6 border-t-4 border-emerald-400"><h3>📚 Literature</h3><div id="list-books" class="scroll-box h-[250px]"></div></div>
             </div>
 
-            <!-- 🎂 BIRTHDAYS & 🕊️ DEATHS -->
+            <!-- BIRTHS/DEATHS -->
             <div class="grid grid-cols-1 md:grid-cols-2 gap-8 text-left">
                 <section class="glass-card p-8 border-t-4 border-pink-400"><h3>🎂 Born Today</h3><div id="list-births" class="scroll-box"></div></section>
                 <section class="glass-card p-8 border-t-4 border-gray-600 opacity-60"><h3>🕊️ Passed Away</h3><div id="list-deaths" class="scroll-box"></div></section>
             </div>
 
-            <!-- ⚙️ INNOVATIONS & 🎨 ARTS -->
             <div class="grid grid-cols-1 md:grid-cols-2 gap-8 text-left">
                 <section class="glass-card p-8 border-t-4 border-amber-400"><h3>⚙️ Innovations</h3><div id="list-innovations" class="scroll-box"></div></section>
                 <section class="glass-card p-8 border-t-4 border-purple-400"><h3>🎨 Arts</h3><div id="list-arts" class="scroll-box"></div></section>
@@ -181,7 +173,7 @@
         });
 
         function getZodiac(year) {
-            const names = ["Gyeong-sin","Sin-yu","Im-sul","Gye-hae","Gap-ja","Eul-chuk","Byeong-in","Jeong-myo","Mu-jin","Gi-sa","Gyeong-oh","Sin-mi","Im-sin","Gye-yu","Gap-sul","Eul-hae","Byeong-ja","Jeong-축","Mu-in","Gi-myo","Gyeong-jin","Sin-sa","Im-oh","Gye-mi","Gap-sin","Eul-yu","Byeong-sul","Jeong-hae","Mu-자","Gi-chuk","Gyeong-in","Sin-myo","Im-jin","Gye-sa","Gap-oh","Eul-mi","Byeong-sin","Jeong-yu","Mu-sul","Gi-hae","Gyeong-자","Sin-chuk","Im-in","Gye-myo","Gap-jin","Eul-sa","Byeong-oh","Jeong-mi","Mu-sin","Gi-yu","Gyeong-sul","Sin-hae","Im-ja","Gye-축","Gap-in","Eul-myo","Byeong-jin","Jeong-sa","Mu-oh","Gi-mi"];
+            const names = ["Gyeong-sin","Sin-yu","Im-sul","Gye-hae","Gap-ja","Eul-chuk","Byeong-in","Jeong-myo","Mu-jin","Gi-sa","Gyeong-oh","Sin-mi","Im-sin","Gye-yu","Gap-sul","Eul-hae","Byeong-ja","Jeong-축","Mu-in","Gi-myo","Gyeong-jin","Sin-sa","Im-oh","Gye-mi","Gap-sin","Eul-yu","Byeong-sul","Jeong-hae","Mu-ja","Gi-chuk","Gyeong-in","Sin-myo","Im-jin","Gye-sa","Gap-oh","Eul-mi","Byeong-sin","Jeong-yu","Mu-sul","Gi-hae","Gyeong-ja","Sin-chuk","Im-in","Gye-myo","Gap-jin","Eul-sa","Byeong-oh","Jeong-mi","Mu-sin","Gi-yu","Gyeong-sul","Sin-hae","Im-ja","Gye-축","Gap-in","Eul-myo","Byeong-jin","Jeong-sa","Mu-oh","Gi-mi"];
             const idx = (year - 0) % 60; return names[idx < 0 ? idx + 60 : idx] || "N/A";
         }
 
@@ -205,7 +197,7 @@
             const kw = document.getElementById('smartSearch').value.trim().toLowerCase();
             const coInput = document.getElementById('countrySearch').value.trim().toLowerCase();
 
-            // 💡 [7번] 국가 판별 (자동 vs 수동)
+            // 💡 국가 판별 (자동 vs 수동)
             let detectedCo = "";
             let isAuto = true;
             if (coInput) {
@@ -214,64 +206,74 @@
             }
             const finalCo = detectedCo || DEFAULT_COUNTRY;
             
-            // 💡 [6번] 유연한 쿼리 로직
+            // 💡 [유연한 검색 로직] 키워드/연도/월/일 어떤 조합으로도 작동
             let query = sb.from('daily_archives').select('*');
-            if (inM !== "00" && inD !== "00") query = query.eq('date_id', `${inM}-${inD}`);
-            else if (inM !== "00") query = query.like('date_id', `${inM}-%`);
-            else if (kw) query = query.like('date_id', `${(new Date().getMonth()+1).toString().padStart(2,'0')}-%`);
+            
+            if (inM !== "00" && inD !== "00") {
+                query = query.eq('date_id', `${inM}-${inD}`); // 특정 일자
+            } else if (inM !== "00") {
+                query = query.like('date_id', `${inM}-%`); // 특정 월 전체 (Rich Archive)
+            } else if (kw) {
+                const curM = (new Date().getMonth()+1).toString().padStart(2,'0');
+                query = query.like('date_id', `${curM}-%`); // 월/일 없으면 이번 달 내에서 키워드 필터링
+            }
 
             const urlCo = isAuto ? 'auto' : finalCo.toLowerCase();
-            window.history.replaceState({}, "", `/${urlCo}/${inM}-${inD}`);
+            const urlDt = (inM !== "00") ? `${inM}-${inD}` : "all";
+            window.history.replaceState({}, "", `/${urlCo}/${urlDt}`);
 
             const { data, error } = await query.order('date_id', {ascending: true});
 
-            if (!error && data) renderAll(data, inY, finalCo, kw);
-            else alert("Synced Empty Archive.");
+            if (!error && data) {
+                renderAll(data, inY, finalCo, kw, inM);
+            } else {
+                alert("Search Synced Error or Empty Archive.");
+            }
             isScanning = false;
         }
 
-        function toggleDetail(id) {
-            const el = document.getElementById(id);
-            el.style.display = (el.style.display === 'block') ? 'none' : 'block';
-        }
-
-        function renderAll(data, inY, finalCo, kw) {
+        function renderAll(data, inY, finalCo, kw, searchM) {
             document.getElementById('vault-area').style.display = 'block';
             const priorityList = [];
-            const amzSuffix = { movies: "blu-ray", music: "vinyl", gaming: "video game", books: "novel", sports: "gear" };
+            const amzSuffix = { movies: "blu-ray", music: "vinyl", gaming: "video game", books: "novel", sports: "gear", innovations: "gadget" };
 
             const render = (id, list, type) => {
                 const cont = document.getElementById(id); cont.innerHTML = "";
-                let filtered = list.filter(item => !kw || item.text.toLowerCase().includes(kw));
                 
+                // 키워드 필터링
+                let filtered = list.filter(item => !kw || item.text.toLowerCase().includes(kw));
+
                 const cats = {
                     sports: ['olympic','cup','medal','soccer','baseball','basketball','match','won','final'],
-                    law: ['court','law','judge','ruling','verdict','legal','supreme','enacted','amendment','rights','constitution'],
+                    law: ['court','law','judge','ruling','verdict','legal','supreme','enacted','amendment','constitution','rights'],
                     finance: ['stock','market','bank','finance','money','wealth','economy','trade','price','billion','invest'],
                     incidents: ['war','attack','riot','crash','fire','tragedy','disaster','killed','bomb','death','murder'],
-                    movies: ['movie','film','cinema','oscar','directed'],
-                    music: ['song','album','music','billboard','singer','concert','chart'],
+                    movies: ['movie','film','cinema','oscar','starring','box office','directed'],
+                    music: ['song','album','music','billboard','singer','concert','chart','spotify','vinyl'],
                     gaming: ['game','nintendo','sega','playstation','xbox','released'],
                     books: ['book','novel','published','author','writer'],
-                    innovations: ['invention','discovery','nasa','science','technology'],
-                    arts: ['art','painting','exhibition','museum','sculpture'],
-                    food: ['food','recipe','gastronomy','cuisine','dish']
+                    innovations: ['invention','discovery','nasa','space','science','technology','patented','first'],
+                    arts: ['art','painting','exhibition','museum','sculpture','cultural'],
+                    food: ['food','recipe','gastronomy','cuisine','dish','restaurant']
                 };
 
-                if (!kw && cats[type]) filtered = filtered.filter(item => cats[type].some(k => item.text.toLowerCase().includes(k)));
+                if (!kw && cats[type]) {
+                    filtered = filtered.filter(item => cats[type].some(k => item.text.toLowerCase().includes(k)));
+                }
 
-                if(filtered.length === 0) { cont.innerHTML = "<p class='text-[10px] text-gray-700 mt-2 italic'>Synced monthly intelligence...</p>"; return; }
+                if(filtered.length === 0) {
+                    cont.innerHTML = "<p class='text-[10px] text-gray-700 mt-2 italic'>Synced monthly intelligence...</p>";
+                    return;
+                }
 
-                // 💡 [6번] 정렬 로직 (내 국가 우선 -> 글로벌)
                 filtered.sort((a,b) => {
                     if (a.country_code === finalCo && b.country_code !== finalCo) return -1;
                     if (a.country_code !== finalCo && b.country_code === finalCo) return 1;
                     return (b.year == inY) - (a.year == inY) || (b.year - a.year);
-                }).forEach((item, idx) => {
+                }).forEach(item => {
                     const isCo = item.country_code === finalCo;
                     const isY = inY && item.year == inY;
                     const q = encodeURIComponent(item.text);
-                    const detailId = `detail-${type}-${idx}`;
 
                     const html = `
                         <div class="py-4 border-b border-white/5 ${isCo && isY && kw ? 'priority-focus px-4 rounded-lg' : ''}">
@@ -280,17 +282,11 @@
                                     <span class="day-label">${item.date_id}</span>
                                     <span class="year-badge ${isY ? 'match-badge' : ''}">${item.year || 'SPEC'}</span>
                                 </div>
-                                <div class="flex-1 text-left">
-                                    <div class="text-sm text-[#E2E2E2] leading-relaxed">
-                                        ${item.text} 
-                                        <button onclick="toggleDetail('${detailId}')" class="text-[10px] text-[#F5C97A] font-black ml-2 cursor-pointer">[+] Detail</button>
-                                    </div>
-                                    <div id="${detailId}" class="detail-view">
-                                        Detailed background analysis. <a href="https://alldayarchive.blogspot.com/search?q=${q}" target="_blank" class="underline">Full Story on Blog</a>
-                                    </div>
+                                <div class="flex-1">
+                                    <div class="text-sm text-[#E2E2E2] leading-relaxed">${item.text}</div>
                                     <div class="flex flex-wrap gap-2 mt-3">
                                         <button onclick="window.open('https://www.youtube.com/results?search_query=${q}')" class="action-btn">📺 Youtube</button>
-                                        <button onclick="window.open('https://www.amazon.com/s?tag=${AMAZON_ID}&k=${q}')" class="action-btn">🛒 Amazon</button>
+                                        <button onclick="window.open('https://www.amazon.com/s?tag=${AMAZON_ID}&k=${q}+${amzSuffix[type]||""}')" class="action-btn">🛒 Amazon</button>
                                         <button onclick="window.open('https://open.spotify.com/search/${q}')" class="action-btn">🎵 Spotify</button>
                                         <button onclick="window.open('https://alldayarchive.blogspot.com/search?q=${q}')" class="action-btn">📄 Blog</button>
                                     </div>
@@ -307,20 +303,28 @@
                 return events.map(e => ({ ...e, date_id: d.date_id, country_code: d.country_code }));
             });
 
-            // 렌더링 호출
-            render('list-sports', allEvents, 'sports'); render('list-law', allEvents, 'law'); render('list-finance', allEvents, 'finance');
-            render('list-incidents', allEvents, 'incidents'); render('list-holidays', data.flatMap(d=>(d.holidays||[]).map(h=>({...h, date_id:d.date_id}))), 'holidays');
-            render('list-movies', allEvents, 'movies'); render('list-music', allEvents, 'music'); render('list-gaming', allEvents, 'gaming');
-            render('list-books', allEvents, 'books'); render('list-innovations', allEvents, 'innovations'); render('list-arts', allEvents, 'arts');
+            render('list-sports', allEvents, 'sports');
+            render('list-law', allEvents, 'law');
+            render('list-finance', allEvents, 'finance');
+            render('list-incidents', allEvents, 'incidents');
+            render('list-holidays', data.flatMap(d=>(d.holidays||[]).map(h=>({...h, date_id:d.date_id}))), 'holidays');
+            render('list-movies', allEvents, 'movies');
+            render('list-music', allEvents, 'music');
+            render('list-gaming', allEvents, 'gaming');
+            render('list-books', allEvents, 'books');
+            render('list-innovations', allEvents, 'innovations');
+            render('list-arts', allEvents, 'arts');
             render('list-food', allEvents, 'food');
 
-            document.getElementById('list-births').innerHTML = data.flatMap(d=>(d.birthdays||[]).map(b=>({...b, date_id:d.date_id}))).map(b => `<div class="py-2 border-b border-white/5 text-left text-[11px]"><span class="day-label">${b.date_id}</span><span class="year-badge mr-2">${b.year}</span> ${b.text}</div>`).join('') || "No records.";
-            document.getElementById('list-deaths').innerHTML = data.flatMap(d=>(d.deaths||[]).map(de=>({...de, date_id:d.date_id}))).map(d => `<div class="py-2 border-b border-white/5 text-left text-[11px]"><span class="day-label">${d.date_id}</span><span class="year-badge mr-2">${d.year}</span> ${d.text}</div>`).join('') || "No records.";
+            document.getElementById('list-births').innerHTML = data.flatMap(d=>(d.birthdays||[]).map(b=>({...b, date_id:d.date_id}))).map(b => `<div class="py-2 border-b border-white/5 text-[11px]"><span class="day-label">${b.date_id}</span><span class="year-badge mr-2">${b.year}</span> ${b.text}</div>`).join('');
+            document.getElementById('list-deaths').innerHTML = data.flatMap(d=>(d.deaths||[]).map(de=>({...de, date_id:d.date_id}))).map(d => `<div class="py-2 border-b border-white/5 text-[11px]"><span class="day-label">${d.date_id}</span><span class="year-badge mr-2">${d.year}</span> ${d.text}</div>`).join('');
 
             if (priorityList.length > 0) {
                 document.getElementById('priority-section').classList.remove('hidden');
                 document.getElementById('list-priority').innerHTML = priorityList.slice(0, 5).join('');
-            } else { document.getElementById('priority-section').classList.add('hidden'); }
+            } else {
+                document.getElementById('priority-section').classList.add('hidden');
+            }
 
             const weatherYear = inY || new Date().getFullYear();
             const weatherMD = (data[0]?.date_id || "01-01").split('-');
@@ -329,7 +333,7 @@
             fetchRealWeather(weatherYear, weatherMD[0], weatherMD[1], finalCo);
             
             const contS = document.getElementById('star-container'); contS.innerHTML = "";
-            for(let i=0; i<30; i++) {
+            for(let i=0; i<25; i++) {
                 const s = document.createElement('div'); s.className = 'star';
                 s.style.left = Math.random()*100+'%'; s.style.top = Math.random()*100+'%';
                 s.style.width = '2px'; s.style.height = '2px';
