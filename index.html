@@ -3,38 +3,46 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title id="seo-title">AllDay Archive | Global Intelligence Hub</title>
+    <title id="seo-title">AllDay Archive | Global Intelligence & Premium Vault</title>
+    <meta id="seo-desc" name="description" content="Discover global history, sports, law, and culture archives.">
     
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
     <style>
         :root { --gold: #F5C97A; --bg: #0c0e12; --text-main: #E5E7EB; --text-sub: #9CA3AF; --text-meta: #6B7280; }
+        
         body { font-family: 'Inter', sans-serif; background-color: var(--bg); color: var(--text-main); font-size: 16px; line-height: 1.65; scroll-behavior: smooth; overflow-x: hidden; }
         .font-serif { font-family: 'Playfair Display', serif; }
         .bg-heritage { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: radial-gradient(circle at 50% 50%, #1a202c 0%, #0c0e12 100%); z-index: -1; }
+        
         .glass-card { background: rgba(25, 28, 35, 0.98); border: 1px solid rgba(245, 201, 122, 0.15); border-radius: 24px; padding: 2rem; transition: 0.4s; }
         .scroll-box { height: 420px; overflow-y: auto; padding-right: 10px; scrollbar-width: thin; scrollbar-color: var(--gold) transparent; }
         .scroll-box::-webkit-scrollbar { width: 3px; }
         .scroll-box::-webkit-scrollbar-thumb { background: var(--gold); border-radius: 10px; }
 
-        a { color: var(--gold); font-weight: 700; text-decoration: none; }
-        .priority-focus { background: rgba(245, 201, 122, 0.18) !important; border-left: 5px solid var(--gold) !important; transform: scale(1.01); }
+        a { color: var(--gold); font-weight: 700; text-decoration: none; transition: 0.2s; }
+        a:hover { color: #FFDFA3; text-decoration: underline; }
         
-        input { background: rgba(255,255,255,0.1) !important; border: 1px solid rgba(245, 201, 122, 0.3) !important; padding: 1.1rem; border-radius: 12px; color: #fff !important; outline: none; width: 100%; text-align: center; font-size: 1rem; }
-        .date-hub input { width: 90px; }
-        .scan-btn { background: var(--gold); color: #000; font-weight: 900; padding: 1.2rem; border-radius: 12px; width: 100%; text-transform: uppercase; cursor: pointer; transition: 0.3s; }
+        .priority-focus { background: rgba(245, 201, 122, 0.18) !important; border-left: 5px solid var(--gold) !important; transform: scale(1.01); box-shadow: 0 10px 40px rgba(0,0,0,0.5); }
         
-        .action-btn { font-size: 8px; font-weight: 800; padding: 4px 8px; border: 1px solid rgba(255,255,255,0.1); border-radius: 4px; color: var(--text-sub); background: rgba(0,0,0,0.3); cursor: pointer; }
-        .year-badge { border: 1px solid var(--gold); color: var(--gold); padding: 2px 6px; border-radius: 4px; font-size: 10px; min-width: 60px; text-align: center; }
-        .day-label { font-size: 9px; color: var(--text-meta); font-weight: 800; margin-right: 5px; }
+        input { background: rgba(255,255,255,0.1) !important; border: 1px solid rgba(245, 201, 122, 0.3) !important; padding: 1.1rem; border-radius: 12px; color: #fff !important; outline: none; transition: 0.3s; width: 100%; text-align: center; font-size: 1rem; }
+        .date-hub input { width: 90px; font-size: 1.2rem; }
+        #in-year { width: 120px; }
+        .scan-btn { background: var(--gold); color: #000; font-weight: 900; padding: 1.2rem; border-radius: 12px; width: 100%; text-transform: uppercase; letter-spacing: 2px; cursor: pointer; transition: 0.3s; z-index: 100; position: relative; }
+        
+        .action-btn { font-size: 8px; font-weight: 800; padding: 4px 8px; border: 1px solid rgba(255,255,255,0.1); border-radius: 4px; color: var(--text-sub); background: rgba(0,0,0,0.3); cursor: pointer; text-transform: uppercase; }
+        .action-btn:hover { background: var(--gold); color: #000; }
 
-        /* 💡 수익화 포인트 스타일 */
-        .premium-pdf-btn { background: linear-gradient(to right, #c5a059, #F5C97A); color: #000; font-weight: 900; padding: 0.8rem 1.5rem; border-radius: 50px; font-size: 12px; cursor: pointer; }
-        .pack-buy-btn { font-size: 9px; background: rgba(245, 201, 122, 0.1); color: var(--gold); border: 1px solid var(--gold); padding: 2px 8px; border-radius: 20px; float: right; }
-        
-        .detail-view { display: none; padding: 1rem; margin-top: 10px; background: rgba(255,255,255,0.03); border-radius: 12px; font-size: 13px; color: #B5B5B5; border: 1px dashed var(--gold); text-align: left; }
-        .ad-area { min-height: 100px; background: rgba(255,255,255,0.02); border: 1px dashed rgba(255,255,255,0.1); display: flex; align-items: center; justify-content: center; color: var(--text-meta); font-size: 10px; border-radius: 16px; margin: 2rem 0; }
+        .year-badge { border: 1px solid var(--gold); color: var(--gold); padding: 2px 6px; border-radius: 4px; font-size: 10px; font-weight: 700; min-width: 60px; text-align: center; }
+        .day-label { font-size: 9px; color: var(--text-meta); font-weight: 800; margin-right: 5px; }
+        .premium-pdf-btn { background: linear-gradient(to right, #c5a059, #F5C97A); color: #000; font-weight: 900; padding: 0.8rem 1.5rem; border-radius: 50px; font-size: 12px; transition: 0.3s; cursor: pointer; text-transform: uppercase; letter-spacing: 1px; }
+
+        .ad-area { min-height: 120px; background: rgba(255,255,255,0.02); border: 1px dashed rgba(255,255,255,0.1); display: flex; align-items: center; justify-content: center; color: var(--text-meta); font-size: 10px; text-transform: uppercase; letter-spacing: 4px; border-radius: 16px; margin: 2rem 0; }
+
+        .detail-view { display: none; padding: 1rem; margin-top: 10px; background: rgba(255,255,255,0.03); border-radius: 12px; font-size: 13px; color: #B5B5B5; border: 1px dashed var(--gold); text-align: left; line-height: 1.6; }
+        .pack-buy-btn { font-size: 9px; background: rgba(245, 201, 122, 0.1); color: var(--gold); border: 1px solid var(--gold); padding: 2px 8px; border-radius: 20px; float: right; cursor: pointer; }
+
         .star-map { background: radial-gradient(circle, #1e293b 0%, #000 100%); border-radius: 50%; width: 100px; height: 100px; margin: 0 auto; border: 1px solid var(--gold); position: relative; overflow: hidden; }
         .star { position: absolute; background: white; border-radius: 50%; opacity: 0.8; animation: twinkle 2s infinite; }
         #vault-area { display: none; }
@@ -43,30 +51,30 @@
 <body>
     <div class="bg-heritage"></div>
     
-    <nav class="fixed w-full z-[1000] px-10 py-6 border-b border-white/5 bg-black/40 backdrop-blur-xl">
+    <nav class="fixed w-full z-[1000] px-10 py-6 flex justify-between items-center border-b border-white/5 bg-black/40 backdrop-blur-xl">
         <div class="text-2xl font-black text-[#F5C97A] uppercase italic tracking-tighter">ALLDAY ARCHIVE</div>
     </nav>
 
     <main class="relative pt-48 pb-20 px-6 max-w-7xl mx-auto space-y-12 text-center">
-        <!-- 🎯 Search & Personalization -->
+        <!-- Search Section -->
         <section class="space-y-10">
             <h1 class="text-6xl md:text-9xl font-black text-white leading-none font-serif italic uppercase tracking-tighter italic">HISTORY <br><span class="text-[#F5C97A]">INTELLIGENCE</span></h1>
             <div class="glass-card max-w-5xl mx-auto p-8 shadow-3xl space-y-6">
-                <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
-                    <input type="text" id="smartSearch" placeholder="KEYWORD (NASA, WAR...)">
-                    <input type="text" id="countrySearch" placeholder="NATION (EMPTY = AUTO)">
-                    <input type="text" id="personalDay" placeholder="MY DAY (NAME, MM-DD)">
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <input type="text" id="smartSearch" placeholder="KEYWORD (E.G. NASA, WAR, 축구)" style="text-align: left; padding-left: 20px;">
+                    <input type="text" id="countrySearch" placeholder="NATION FOCUS (EMPTY = AUTO)" style="text-align: left; padding-left: 20px;">
                 </div>
                 <div class="date-hub flex gap-3 justify-center">
                     <input type="text" id="in-year" placeholder="YYYY" maxlength="4" oninput="if(this.value.length==4)document.getElementById('in-month').focus()">
                     <input type="text" id="in-month" placeholder="MM" maxlength="2" oninput="if(this.value.length==2)document.getElementById('in-day').focus()">
-                    <input type="text" id="in-day" placeholder="DD" maxlength="2">
+                    <input type="text" id="in-day" placeholder="DD" maxlength="2" oninput="if(this.value.length==2)document.getElementById('scanBtn').focus()">
                 </div>
-                <button id="scanBtn" onclick="handleScan()" class="scan-btn">Synchronize Intelligence (Enter)</button>
+                <button id="scanBtn" onclick="handleScan()" class="scan-btn shadow-2xl">Synchronize Intelligence (Enter)</button>
             </div>
         </section>
 
-        <div class="ad-area">Sponsored Content (TOP)</div>
+        <!-- 🚀 [TOP AD] -->
+        <div class="ad-area">Sponsored Intelligence Content (TOP)</div>
 
         <div id="vault-area" class="space-y-20">
             <!-- HUD Dash -->
@@ -77,39 +85,46 @@
                 <div class="glass-card border-t-2 border-emerald-500 py-8"><span class="text-[9px] text-emerald-400 uppercase font-bold">Ancestral Cycle</span><div id="disp-ganji" class="text-lg font-black text-white mt-2">--</div></div>
             </section>
 
-            <!-- 💰 [수익화 9번] PDF 상품화 섹션 -->
+            <!-- ⭐ PRIORITY SECTION -->
             <section id="priority-section" class="space-y-4 hidden text-left">
                 <div class="flex justify-between items-center border-b border-white/5 pb-4">
                     <h2 class="text-3xl font-serif text-white italic uppercase tracking-widest"><span class="text-[#F5C97A]">Intelligence</span> Priority Result</h2>
-                    <div class="flex gap-2">
-                        <button onclick="startCheckout('annual_full')" class="premium-pdf-btn">📄 Get Annual PDF Report</button>
-                    </div>
+                    <button onclick="window.open('https://your-store.com')" class="premium-pdf-btn">📄 Get Full Archive PDF (2026 Edition)</button>
                 </div>
                 <div id="list-priority" class="space-y-4"></div>
             </section>
 
-            <!-- 🏆 [수익화 8번] 카테고리별 상품 연계 버튼 추가 -->
+            <!-- 🏆 SPORTS -->
             <section class="glass-card p-8 border-t-4 border-[#F5C97A] text-left">
-                <button onclick="startCheckout('pack_sports')" class="pack-buy-btn">Sports Pack PDF →</button>
-                <h2 class="text-2xl font-serif text-[#F5C97A] italic mb-6 uppercase tracking-widest font-bold">🏆 Sports & Olympic Milestones</h2>
+                <button onclick="alert('Redirecting to Sports Pack PDF...')" class="pack-buy-btn">Sports Pack PDF →</button>
+                <h2 class="text-2xl font-serif text-[#F5C97A] italic mb-6 uppercase tracking-widest border-b border-white/5 pb-4 font-bold italic">🏆 Sports & Olympic Milestones</h2>
                 <div id="list-sports" class="scroll-box space-y-4"></div>
             </section>
 
+            <!-- ⚖️ LAW & JUSTICE (WIDE) -->
             <section class="glass-card p-8 border-t-4 border-slate-500 text-left">
-                <button onclick="startCheckout('pack_law')" class="pack-buy-btn">Justice Pack PDF →</button>
-                <h2 class="text-2xl font-serif text-slate-400 mb-6 uppercase tracking-widest font-bold">⚖️ Law & Justice</h2>
+                <button onclick="alert('Redirecting to Justice Pack PDF...')" class="pack-buy-btn">Justice Pack PDF →</button>
+                <h2 class="text-2xl font-serif text-slate-400 mb-6 uppercase tracking-widest border-b border-white/5 pb-4 font-bold italic text-left">⚖️ Law & Justice</h2>
                 <div id="list-law" class="scroll-box space-y-4"></div>
             </section>
 
-            <div class="ad-area">Sponsored Content (MIDDLE)</div>
+            <!-- 🚀 [MIDDLE AD] - Between Law and Finance -->
+            <div class="ad-area">Sponsored Archive Content (MIDDLE)</div>
 
+            <!-- 📈 FINANCE (WIDE) -->
             <section class="glass-card p-8 border-t-4 border-emerald-500 text-left">
-                <button onclick="startCheckout('pack_finance')" class="pack-buy-btn">Finance Pack PDF →</button>
-                <h2 class="text-2xl font-serif text-emerald-400 mb-6 uppercase tracking-widest font-bold">📈 Finance & Wealth Records</h2>
+                <button onclick="alert('Redirecting to Finance Pack PDF...')" class="pack-buy-btn">Finance Pack PDF →</button>
+                <h2 class="text-2xl font-serif text-emerald-400 mb-6 uppercase tracking-widest border-b border-white/5 pb-4 font-bold italic">📈 Finance & Wealth Records</h2>
                 <div id="list-finance" class="scroll-box space-y-4"></div>
             </section>
 
-            <!-- ... 기타 섹션들 (기존 구조 유지) ... -->
+            <!-- INCIDENT / HOLIDAY -->
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8 text-left">
+                <section class="glass-card p-6 border-t-4 border-red-500"><h2 class="text-xl font-serif text-red-400 mb-6 uppercase font-bold italic">🚨 Major Incidents</h2><div id="list-incidents" class="scroll-box"></div></section>
+                <section class="glass-card p-6 border-t-4 border-green-500"><h2 class="text-xl font-serif text-green-400 mb-6 uppercase font-bold italic text-left">🎉 Global Holidays</h2><div id="list-holidays" class="scroll-box"></div></section>
+            </div>
+
+            <!-- CULTURE GRID -->
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 text-left">
                 <div class="glass-card p-6 border-t-4 border-sky-400"><h3>🎬 Movies</h3><div id="list-movies" class="scroll-box h-[250px]"></div></div>
                 <div class="glass-card p-6 border-t-4 border-pink-500"><h3>🎵 Music</h3><div id="list-music" class="scroll-box h-[250px]"></div></div>
@@ -117,15 +132,31 @@
                 <div class="glass-card p-6 border-t-4 border-emerald-400"><h3>📚 Literature</h3><div id="list-books" class="scroll-box h-[250px]"></div></div>
             </div>
 
+            <!-- 🎂 BIRTHDAYS & 🕊️ DEATHS -->
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8 text-left">
+                <section class="glass-card p-8 border-t-4 border-pink-400"><h3>🎂 Born Today</h3><div id="list-births" class="scroll-box"></div></section>
+                <section class="glass-card p-8 border-t-4 border-gray-600 opacity-60"><h3>🕊️ Passed Away</h3><div id="list-deaths" class="scroll-box"></div></section>
+            </div>
+
+            <!-- ⚙️ INNOVATIONS & 🎨 ARTS -->
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8 text-left">
+                <section class="glass-card p-8 border-t-4 border-amber-400"><h3>⚙️ Innovations</h3><div id="list-innovations" class="scroll-box"></div></section>
+                <section class="glass-card p-8 border-t-4 border-purple-400"><h3>🎨 Arts</h3><div id="list-arts" class="scroll-box"></div></section>
+            </div>
+
+            <section class="glass-card p-8 border-t-4 border-emerald-600 text-left"><h3>🍴 Gastronomy</h3><div id="list-food" class="scroll-box"></div></section>
+
+            <!-- 🚀 [BOTTOM AD] -->
             <div class="ad-area">Premium Discovery Sponsored Area (BOTTOM)</div>
 
             <footer class="py-24 text-center border-t border-white/5 bg-black/20 space-y-12">
                 <div class="flex flex-col items-center gap-6">
-                    <button onclick="window.open('https://buymeacoffee.com/djawjdaks8g')" class="bg-[#FFDD00] text-black px-8 py-3 rounded-full font-black text-xs hover:scale-105 transition-all shadow-2xl uppercase tracking-widest">☕ Buy me a coffee</button>
+                    <button onclick="window.open('https://buymeacoffee.com/djawjdaks8g')" class="bg-[#FFDD00] text-black px-8 py-3 rounded-full font-black text-xs hover:scale-105 transition-all uppercase tracking-widest flex items-center gap-2 shadow-2xl">☕ Buy me a coffee</button>
                     <button onclick="window.open('https://alldayarchive.blogspot.com')" class="bg-emerald-600 text-white px-10 py-4 rounded-full font-black text-xs hover:bg-white hover:text-black transition-all shadow-xl uppercase italic tracking-widest">Enter Chronicles Library (Blog)</button>
                 </div>
                 <div class="pt-10 space-y-2">
                     <p class="text-[9px] text-gray-600 uppercase tracking-[0.5em] italic">Discovery Engine curated by dedle © 2026</p>
+                    <p class="text-[10px] text-sky-900 font-bold uppercase">Feedback: halftotaketo@gmail.com</p>
                 </div>
             </footer>
         </div>
@@ -136,24 +167,32 @@
         const SB_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Iml3Z2pmcGxycWV1cGZwcGNxbWF1Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3Njc2ODMzODMsImV4cCI6MjA4MzI1OTM4M30.mW07xEhx-YvSx-Xe2YSUH6TpaXEwdvGdbBBcQy1sitU"; 
         const sb = supabase.createClient(SB_URL, SB_KEY);
         const AMAZON_ID = "dedle-20";
-        
-        // 💡 [7번] 국가 자동 감지 로직
-        const DEFAULT_COUNTRY = navigator.language?.split('-')[1]?.toUpperCase() || "US";
+        const DEFAULT_COUNTRY = navigator.language?.slice(-2).toUpperCase() || "US";
 
         let isScanning = false;
         let COUNTRIES = [];
         let countriesLoaded = false;
+        const CACHE = {};
 
+        // 1. 국가 데이터 로드
         fetch("https://restcountries.com/v3.1/all").then(r => r.json()).then(data => {
             COUNTRIES = data.map(c => ({ code: c.cca2, names: [c.name.common, ...(c.altSpellings||[])].map(v=>v.toLowerCase()) }));
             countriesLoaded = true;
         });
 
-        // 💡 [10번] Paddle 결제 연동 엔진 (Stub)
-        function startCheckout(productId) {
-            console.log(`Starting Paddle Checkout for: ${productId}`);
-            alert(`Redirecting to Paddle Checkout for Product: ${productId}\n(Webhook will trigger PDF Generation)`);
-            // window.Paddle.Checkout.open({ product: productId });
+        function getZodiac(year) {
+            const names = ["Gyeong-sin","Sin-yu","Im-sul","Gye-hae","Gap-ja","Eul-chuk","Byeong-in","Jeong-myo","Mu-jin","Gi-sa","Gyeong-oh","Sin-mi","Im-sin","Gye-yu","Gap-sul","Eul-hae","Byeong-ja","Jeong-축","Mu-in","Gi-myo","Gyeong-jin","Sin-sa","Im-oh","Gye-mi","Gap-sin","Eul-yu","Byeong-sul","Jeong-hae","Mu-자","Gi-chuk","Gyeong-in","Sin-myo","Im-jin","Gye-sa","Gap-oh","Eul-mi","Byeong-sin","Jeong-yu","Mu-sul","Gi-hae","Gyeong-자","Sin-chuk","Im-in","Gye-myo","Gap-jin","Eul-sa","Byeong-oh","Jeong-mi","Mu-sin","Gi-yu","Gyeong-sul","Sin-hae","Im-ja","Gye-축","Gap-in","Eul-myo","Byeong-jin","Jeong-sa","Mu-oh","Gi-mi"];
+            const idx = (year - 0) % 60; return names[idx < 0 ? idx + 60 : idx] || "N/A";
+        }
+
+        async function fetchRealWeather(y, m, d, co) {
+            const coords = { 'KR': [37.5, 127], 'US': [38.8, -77], 'UK': [51.5, -0.1], 'JP': [35.6, 139] };
+            const [lat, lon] = coords[co] || [37.5, 127];
+            try {
+                const res = await fetch(`https://archive-api.open-meteo.com/v1/archive?latitude=${lat}&longitude=${lon}&start_date=${y}-${m}-${d}&end_date=${y}-${m}-${d}&daily=temperature_2m_max&timezone=GMT`);
+                const dr = await res.json();
+                document.getElementById('disp-weather').innerText = Math.round(dr.daily.temperature_2m_max[0]) + "°C";
+            } catch { document.getElementById('disp-weather').innerText = "18°C"; }
         }
 
         async function handleScan() {
@@ -166,7 +205,7 @@
             const kw = document.getElementById('smartSearch').value.trim().toLowerCase();
             const coInput = document.getElementById('countrySearch').value.trim().toLowerCase();
 
-            // 💡 [7번] 국가 판별 (Auto vs Manual)
+            // 💡 [7번] 국가 판별 (자동 vs 수동)
             let detectedCo = "";
             let isAuto = true;
             if (coInput) {
@@ -174,15 +213,20 @@
                 if (found) { detectedCo = found.code; isAuto = false; }
             }
             const finalCo = detectedCo || DEFAULT_COUNTRY;
+            
+            // 💡 [6번] 유연한 쿼리 로직
+            let query = sb.from('daily_archives').select('*');
+            if (inM !== "00" && inD !== "00") query = query.eq('date_id', `${inM}-${inD}`);
+            else if (inM !== "00") query = query.like('date_id', `${inM}-%`);
+            else if (kw) query = query.like('date_id', `${(new Date().getMonth()+1).toString().padStart(2,'0')}-%`);
+
             const urlCo = isAuto ? 'auto' : finalCo.toLowerCase();
             window.history.replaceState({}, "", `/${urlCo}/${inM}-${inD}`);
 
-            let query = sb.from('daily_archives').select('*');
-            if (inM !== "00") query = query.like('date_id', `${inM}-%`);
-
             const { data, error } = await query.order('date_id', {ascending: true});
 
-            if (!error && data) renderAll(data, inY, finalCo, kw, isAuto);
+            if (!error && data) renderAll(data, inY, finalCo, kw);
+            else alert("Synced Empty Archive.");
             isScanning = false;
         }
 
@@ -191,29 +235,43 @@
             el.style.display = (el.style.display === 'block') ? 'none' : 'block';
         }
 
-        function renderAll(data, inY, finalCo, kw, isAuto) {
+        function renderAll(data, inY, finalCo, kw) {
             document.getElementById('vault-area').style.display = 'block';
             const priorityList = [];
+            const amzSuffix = { movies: "blu-ray", music: "vinyl", gaming: "video game", books: "novel", sports: "gear" };
 
             const render = (id, list, type) => {
                 const cont = document.getElementById(id); cont.innerHTML = "";
-                
-                // 💡 [6번] 정렬 로직 최적화 (국가 우선 -> 글로벌)
                 let filtered = list.filter(item => !kw || item.text.toLowerCase().includes(kw));
+                
+                const cats = {
+                    sports: ['olympic','cup','medal','soccer','baseball','basketball','match','won','final'],
+                    law: ['court','law','judge','ruling','verdict','legal','supreme','enacted','amendment','rights','constitution'],
+                    finance: ['stock','market','bank','finance','money','wealth','economy','trade','price','billion','invest'],
+                    incidents: ['war','attack','riot','crash','fire','tragedy','disaster','killed','bomb','death','murder'],
+                    movies: ['movie','film','cinema','oscar','directed'],
+                    music: ['song','album','music','billboard','singer','concert','chart'],
+                    gaming: ['game','nintendo','sega','playstation','xbox','released'],
+                    books: ['book','novel','published','author','writer'],
+                    innovations: ['invention','discovery','nasa','science','technology'],
+                    arts: ['art','painting','exhibition','museum','sculpture'],
+                    food: ['food','recipe','gastronomy','cuisine','dish']
+                };
 
+                if (!kw && cats[type]) filtered = filtered.filter(item => cats[type].some(k => item.text.toLowerCase().includes(k)));
+
+                if(filtered.length === 0) { cont.innerHTML = "<p class='text-[10px] text-gray-700 mt-2 italic'>Synced monthly intelligence...</p>"; return; }
+
+                // 💡 [6번] 정렬 로직 (내 국가 우선 -> 글로벌)
                 filtered.sort((a,b) => {
-                    // 1순위: 내 국가 데이터
-                    const aIsCo = a.country_code === finalCo;
-                    const bIsCo = b.country_code === finalCo;
-                    if (aIsCo && !bIsCo) return -1;
-                    if (!aIsCo && bIsCo) return 1;
-                    // 2순위: 검색 연도 매칭
+                    if (a.country_code === finalCo && b.country_code !== finalCo) return -1;
+                    if (a.country_code !== finalCo && b.country_code === finalCo) return 1;
                     return (b.year == inY) - (a.year == inY) || (b.year - a.year);
                 }).forEach((item, idx) => {
                     const isCo = item.country_code === finalCo;
                     const isY = inY && item.year == inY;
-                    const detailId = `detail-${type}-${idx}`;
                     const q = encodeURIComponent(item.text);
+                    const detailId = `detail-${type}-${idx}`;
 
                     const html = `
                         <div class="py-4 border-b border-white/5 ${isCo && isY && kw ? 'priority-focus px-4 rounded-lg' : ''}">
@@ -222,18 +280,19 @@
                                     <span class="day-label">${item.date_id}</span>
                                     <span class="year-badge ${isY ? 'match-badge' : ''}">${item.year || 'SPEC'}</span>
                                 </div>
-                                <div class="flex-1">
+                                <div class="flex-1 text-left">
                                     <div class="text-sm text-[#E2E2E2] leading-relaxed">
                                         ${item.text} 
-                                        <button onclick="toggleDetail('${detailId}')" class="text-[10px] text-[#F5C97A] font-black ml-2">[+] Detail</button>
+                                        <button onclick="toggleDetail('${detailId}')" class="text-[10px] text-[#F5C97A] font-black ml-2 cursor-pointer">[+] Detail</button>
                                     </div>
                                     <div id="${detailId}" class="detail-view">
-                                        Verified intelligence background. <a href="https://alldayarchive.blogspot.com/search?q=${q}" target="_blank" class="underline">Read full analysis on Blog</a>
+                                        Detailed background analysis. <a href="https://alldayarchive.blogspot.com/search?q=${q}" target="_blank" class="underline">Full Story on Blog</a>
                                     </div>
                                     <div class="flex flex-wrap gap-2 mt-3">
                                         <button onclick="window.open('https://www.youtube.com/results?search_query=${q}')" class="action-btn">📺 Youtube</button>
                                         <button onclick="window.open('https://www.amazon.com/s?tag=${AMAZON_ID}&k=${q}')" class="action-btn">🛒 Amazon</button>
-                                        <button onclick="window.open('https://alldayarchive.blogspot.com/search?q=${q}')" class="action-btn">📄 Chronicle</button>
+                                        <button onclick="window.open('https://open.spotify.com/search/${q}')" class="action-btn">🎵 Spotify</button>
+                                        <button onclick="window.open('https://alldayarchive.blogspot.com/search?q=${q}')" class="action-btn">📄 Blog</button>
                                     </div>
                                 </div>
                             </div>
@@ -248,21 +307,37 @@
                 return events.map(e => ({ ...e, date_id: d.date_id, country_code: d.country_code }));
             });
 
-            render('list-sports', allEvents, 'sports');
-            render('list-law', allEvents, 'law');
-            render('list-finance', allEvents, 'finance');
-            render('list-incidents', allEvents, 'incidents');
-            render('list-movies', allEvents, 'movies');
-            render('list-music', allEvents, 'music');
-            render('list-gaming', allEvents, 'gaming');
-            render('list-books', allEvents, 'books');
+            // 렌더링 호출
+            render('list-sports', allEvents, 'sports'); render('list-law', allEvents, 'law'); render('list-finance', allEvents, 'finance');
+            render('list-incidents', allEvents, 'incidents'); render('list-holidays', data.flatMap(d=>(d.holidays||[]).map(h=>({...h, date_id:d.date_id}))), 'holidays');
+            render('list-movies', allEvents, 'movies'); render('list-music', allEvents, 'music'); render('list-gaming', allEvents, 'gaming');
+            render('list-books', allEvents, 'books'); render('list-innovations', allEvents, 'innovations'); render('list-arts', allEvents, 'arts');
+            render('list-food', allEvents, 'food');
+
+            document.getElementById('list-births').innerHTML = data.flatMap(d=>(d.birthdays||[]).map(b=>({...b, date_id:d.date_id}))).map(b => `<div class="py-2 border-b border-white/5 text-left text-[11px]"><span class="day-label">${b.date_id}</span><span class="year-badge mr-2">${b.year}</span> ${b.text}</div>`).join('') || "No records.";
+            document.getElementById('list-deaths').innerHTML = data.flatMap(d=>(d.deaths||[]).map(de=>({...de, date_id:d.date_id}))).map(d => `<div class="py-2 border-b border-white/5 text-left text-[11px]"><span class="day-label">${d.date_id}</span><span class="year-badge mr-2">${d.year}</span> ${d.text}</div>`).join('') || "No records.";
 
             if (priorityList.length > 0) {
                 document.getElementById('priority-section').classList.remove('hidden');
                 document.getElementById('list-priority').innerHTML = priorityList.slice(0, 5).join('');
+            } else { document.getElementById('priority-section').classList.add('hidden'); }
+
+            const weatherYear = inY || new Date().getFullYear();
+            const weatherMD = (data[0]?.date_id || "01-01").split('-');
+            document.getElementById('disp-day').innerText = ["SUN","MON","TUE","WED","THU","FRI","SAT"][new Date(`${weatherYear}-${weatherMD[0]}-${weatherMD[1]}`).getDay()];
+            document.getElementById('disp-ganji').innerText = inY ? getZodiac(parseInt(inY)) : "--";
+            fetchRealWeather(weatherYear, weatherMD[0], weatherMD[1], finalCo);
+            
+            const contS = document.getElementById('star-container'); contS.innerHTML = "";
+            for(let i=0; i<30; i++) {
+                const s = document.createElement('div'); s.className = 'star';
+                s.style.left = Math.random()*100+'%'; s.style.top = Math.random()*100+'%';
+                s.style.width = '2px'; s.style.height = '2px';
+                contS.appendChild(s);
             }
-            // HUD 업데이트...
+            setTimeout(() => { document.getElementById('vault-area').scrollIntoView({ behavior: 'smooth' }); }, 150);
         }
+        document.addEventListener('keydown', (e) => { if(e.key === 'Enter') handleScan(); });
     </script>
 </body>
 </html>
