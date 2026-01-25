@@ -1,19 +1,34 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <!-- Google Tag Manager -->
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+})(window,document,'script','dataLayer','GTM-MFWLKQ7B');</script>
+<!-- End Google Tag Manager -->
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>AllDay Archive | Global Intelligence & Premium Vault</title>
     
-    <!-- 🚀 광고 최적화: 탑 광고 (Lazy Load 없음) -->
-    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-여기에_애드센스_ID" crossorigin="anonymous"></script>
+    <!-- 🌐 [SEO] 구글 서치콘솔 인증 -->
+    <meta name="google-site-verification" content="Y1tnVUzXiTj0LthauJuHS3DkMpxo8D1olmatbrfhld0">
+    
+    <!-- 📊 [Analytics] 구글 애널리틱스 (GA4) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=여기에_G-로_시작하는_아이디_입력"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', '여기에_G-로_시작하는_아이디_입력');
+    </script>
 
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-    
     <style>
-        /* 사장님의 원본 스타일 100% 보존 */
+        /* 사장님의 원본 스타일 (절대 유지) */
         :root { --gold: #c5a059; --bg: #0c0e12; }
         body { font-family: 'Inter', sans-serif; background-color: var(--bg); color: #e2e8f0; scroll-behavior: smooth; overflow-x: hidden; }
         .font-serif { font-family: 'Playfair Display', serif; }
@@ -24,7 +39,6 @@
         .scroll-box::-webkit-scrollbar-thumb { background: var(--gold); border-radius: 10px; }
         .year-badge { border: 1px solid var(--gold); color: var(--gold); padding: 2px 8px; border-radius: 4px; font-size: 11px; font-weight: 700; min-width: 80px; text-align: center; }
         .match-badge { background: var(--gold); color: #000; padding: 2px 8px; border-radius: 4px; font-size: 11px; font-weight: 900; box-shadow: 0 0 15px var(--gold); }
-        .priority-focus { background: rgba(197, 160, 89, 0.18) !important; border-left: 4px solid var(--gold) !important; transform: scale(1.01); box-shadow: 0 10px 40px rgba(0,0,0,0.5); }
         input, select { background: rgba(255,255,255,0.1) !important; border: 1px solid rgba(197, 160, 89, 0.3) !important; padding: 1.1rem; border-radius: 12px; color: #fff !important; outline: none; transition: 0.3s; width: 100%; text-align: center; font-size: 1.1rem; }
         .date-hub input { width: 85px; }
         #in-year { width: 110px; }
@@ -35,24 +49,25 @@
         .star { position: absolute; background: white; border-radius: 50%; opacity: 0.8; animation: twinkle 2s infinite; }
         @keyframes twinkle { 0%, 100% { opacity: 0.3; } 50% { opacity: 1; } }
         
-        /* 🛡️ 광고칸 최적화 */
-        .ad-slot { min-height: 120px; background: rgba(255,255,255,0.02); border: 1px dashed rgba(197, 160, 89, 0.2); border-radius: 20px; display: flex; align-items: center; justify-content: center; margin: 2rem 0; color: #444; font-size: 10px; }
+        /* 🛡️ 광고 슬롯 */
+        .ad-slot { min-height: 120px; background: rgba(255,255,255,0.02); border: 1px dashed rgba(197, 160, 89, 0.2); border-radius: 20px; display: flex; align-items: center; justify-content: center; margin: 2rem 0; color: #c5a059; font-size: 10px; font-weight: bold; text-transform: uppercase; letter-spacing: 2px; }
         #vault-area { display: none; }
     </style>
 </head>
 <body>
+    <!-- Google Tag Manager (noscript) -->
+<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-MFWLKQ7B"
+height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+<!-- End Google Tag Manager (noscript) -->
     <div class="bg-heritage"></div>
     <nav class="fixed w-full z-[1000] px-10 py-6 flex justify-between items-center border-b border-white/5 bg-black/40 backdrop-blur-xl font-serif text-[#c5a059]">
         <div class="text-2xl font-black uppercase italic tracking-tighter">ALLDAY ARCHIVE</div>
         <button onclick="window.open('https://open.spotify.com/user/dedle')" class="text-[9px] font-bold text-[#1db954] border border-[#1db954]/30 px-3 py-1 rounded">MUSIC HUB</button>
     </nav>
 
-    <main class="relative pt-48 pb-20 px-6 max-w-7xl mx-auto space-y-20 text-center">
+    <main class="relative pt-48 pb-20 px-6 max-w-7xl mx-auto space-y-16 text-center">
         <!-- 🚀 TOP AD -->
-        <div class="ad-slot">
-            <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-여기에_ID" data-ad-slot="TOP_ID" data-ad-format="auto"></ins>
-            <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
-        </div>
+        <div class="ad-slot">Sponsored Intelligence - Premium Partner Section</div>
 
         <!-- Search -->
         <section class="space-y-12">
@@ -72,72 +87,72 @@
         </section>
 
         <div id="vault-area" class="space-y-24">
-            
-            <!-- 🌡️ Reality Dash (HUD 복구) -->
+            <!-- 🌡️ Reality Dash (HUD) -->
             <section class="grid grid-cols-1 md:grid-cols-4 gap-6 text-center">
-                <div class="glass-card border-t-2 border-sky-500 flex flex-col justify-center">
+                <div class="glass-card border-t-2 border-sky-500 py-8 flex flex-col justify-center">
                     <span class="text-[9px] text-sky-400 uppercase block mb-4 italic font-bold">Atmosphere</span>
                     <div id="disp-weather" class="text-4xl font-black italic">--°C</div>
                 </div>
-                <div class="glass-card border-t-2 border-white/20 flex flex-col justify-center">
+                <div class="glass-card border-t-2 border-white/20 py-8 flex flex-col justify-center">
                     <span class="text-[9px] text-white/50 uppercase block mb-4 italic font-bold">Day of week</span>
-                    <div id="disp-day" class="text-xl font-black text-white uppercase leading-tight">--</div>
+                    <div id="disp-day" class="text-xl font-black text-white uppercase">--</div>
                 </div>
-                <div class="glass-card border-t-2 border-[#c5a059]">
+                <div class="glass-card border-t-2 border-[#c5a059] py-8">
                     <span class="text-[9px] text-[#c5a059] uppercase block mb-4 italic font-bold">Stellar Archive</span>
                     <div class="star-map mb-2" id="star-container"></div>
                     <div id="disp-constellation" class="text-xs font-bold text-white uppercase italic">Archive Sync</div>
                 </div>
-                <div class="glass-card border-t-2 border-emerald-500 flex flex-col justify-center text-emerald-400">
-                    <span class="text-[9px] uppercase block mb-4 italic font-bold">Ancestral Cycle</span>
+                <div class="glass-card border-t-2 border-emerald-500 py-8 flex flex-col justify-center">
+                    <span class="text-[9px] uppercase block mb-4 italic font-bold text-emerald-400">Ancestral Cycle</span>
                     <div id="disp-ganji" class="text-lg font-black uppercase text-white">--</div>
+                    <p id="disp-zodiac" class="text-[9px] text-gray-500 uppercase mt-1 italic font-bold">Eastern Wisdom</p>
                 </div>
             </section>
 
-            <!-- ⚖️ Law & Finance -->
+            <!-- 📰 Pulse Section -->
+            <section class="glass-card border-t-4 border-gold text-left">
+                <h2 id="pulse-title" class="text-2xl font-serif italic mb-4 text-gold">Chronicle Pulse</h2>
+                <div id="pulse-content" class="flex flex-wrap gap-2"></div>
+            </section>
+
+            <!-- ⚖️ Law & Finance (Single Columns) -->
             <div class="space-y-12">
-                <section class="glass-card border-t-4 border-slate-500 text-left">
-                    <h3 class="text-2xl font-black uppercase mb-6 italic">⚖️ Law & Justice Verdicts</h3>
-                    <div id="list-law" class="scroll-box space-y-6"></div>
-                </section>
-
-                <!-- 🚀 MIDDLE AD -->
-                <div class="ad-slot" style="min-height: 250px; border: 1px solid var(--gold);">
-                    <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-여기에_ID" data-ad-slot="MID_ID" data-ad-format="rectangle"></ins>
-                    <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
-                </div>
-
-                <section class="glass-card border-t-4 border-emerald-500 text-left">
-                    <h3 class="text-2xl font-black uppercase text-emerald-400 mb-6 italic">📈 Finance & Market Pulse</h3>
-                    <div id="list-finance" class="scroll-box space-y-6"></div>
-                </section>
+                <section class="glass-card border-t-4 border-slate-500 text-left"><h3>⚖️ Law & Justice Verdicts</h3><div id="list-law" class="scroll-box space-y-6"></div></section>
                 
-                <section class="glass-card border-t-4 border-red-500 text-left">
-                    <h3 class="text-2xl font-black uppercase text-red-400 mb-6 italic">💉 Medical Milestones</h3>
-                    <div id="list-medical" class="scroll-box space-y-6"></div>
-                </section>
+                <!-- 🚀 MIDDLE AD -->
+                <div class="ad-slot" style="min-height: 250px; border: 1px solid var(--gold);">High-Value Sponsored Partner Intelligence</div>
+                
+                <section class="glass-card border-t-4 border-emerald-500 text-left"><h3>📈 Finance & Market Pulse</h3><div id="list-finance" class="scroll-box space-y-6"></div></section>
             </div>
 
-            <!-- Culture Grid -->
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 text-left">
-                <div class="glass-card border-t-4 border-sky-400"><h3>🎬 Movies</h3><div id="list-movies" class="scroll-box h-[250px]"></div></div>
-                <div class="glass-card border-t-4 border-pink-500"><h3>🎵 Music</h3><div id="list-music" class="scroll-box h-[250px]"></div></div>
-                <div class="glass-card border-t-4 border-amber-500"><h3>🎮 Gaming</h3><div id="list-gaming" class="scroll-box h-[250px]"></div></div>
-                <div class="glass-card border-t-4 border-emerald-400"><h3>🍴 Food</h3><div id="list-food" class="scroll-box h-[250px]"></div></div>
+            <!-- Grid Layout (2 Columns) - 사장님 요청: 넉넉하게 2열로 배치 -->
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8 text-left">
+                <div class="glass-card border-t-4 border-red-500"><h3>💉 Medical Milestones</h3><div id="list-medical" class="scroll-box"></div></div>
+                <div class="glass-card border-t-4 border-[#c5a059]"><h3>🏆 Sports Milestones</h3><div id="list-sports" class="scroll-box"></div></div>
+                <div class="glass-card border-t-4 border-sky-400"><h3>🎬 Movies</h3><div id="list-movies" class="scroll-box"></div></div>
+                <div class="glass-card border-t-4 border-pink-500"><h3>🎵 Music</h3><div id="list-music" class="scroll-box"></div></div>
+                <div class="glass-card border-t-4 border-amber-500"><h3>🎮 Gaming</h3><div id="list-gaming" class="scroll-box"></div></div>
+                <div class="glass-card border-t-4 border-emerald-400"><h3>📚 Literature</h3><div id="list-books" class="scroll-box"></div></div>
+                <div class="glass-card border-t-4 border-orange-400"><h3>⚙️ Innovations (최초의 기록)</h3><div id="list-innovations" class="scroll-box"></div></div>
+                <div class="glass-card border-t-4 border-purple-400"><h3>🎨 Arts & Culture</h3><div id="list-arts" class="scroll-box"></div></div>
+                <div class="glass-card border-t-4 border-green-500"><h3>🎉 Global Holidays (기념일)</h3><div id="list-holidays" class="scroll-box"></div></div>
+                <div class="glass-card border-t-4 border-yellow-600"><h3>🍴 Gastronomy (레시피)</h3><div id="list-food" class="scroll-box"></div></div>
+                <div class="glass-card border-t-4 border-pink-300"><h3>🎂 Born Today</h3><div id="list-births" class="scroll-box"></div></div>
+                <div class="glass-card border-t-4 border-gray-600 opacity-80"><h3>🕊️ Passed Away</h3><div id="list-deaths" class="scroll-box"></div></div>
             </div>
 
             <!-- 🚀 BOTTOM AD -->
-            <div class="ad-slot">
-                <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-여기에_ID" data-ad-slot="BOT_ID" data-ad-format="auto"></ins>
-                <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
-            </div>
+            <div class="ad-slot">Global Context Recommended Intelligence</div>
 
             <!-- Footer -->
             <footer class="py-24 text-center border-t border-white/5 space-y-12">
                 <div class="flex flex-col items-center gap-6">
-                    <button onclick="window.open('https://buymeacoffee.com/djawjdaks8g')" class="bg-[#c5a059] text-black px-10 py-4 rounded-full font-black text-xs uppercase">☕ BUY ME A COFFEE</button>
-                    <button onclick="window.open('https://alldayarchive.blogspot.com')" class="text-[#c5a059] border border-[#c5a059] px-10 py-4 rounded-full font-black text-xs uppercase">📖 EXPLORE BLOG</button>
-                    <p class="text-[9px] text-gray-600 uppercase tracking-[0.5em] italic">Intelligence curated by dedle © 2026</p>
+                    <button onclick="window.open('https://amzn.to/4q3F1LR')" class="master-btn" style="background: var(--gold); color: #000; padding: 1rem 3rem; border-radius: 50px; font-weight: 900;">🛒 VISIT OFFICIAL SHOP</button>
+                    <div class="flex gap-4">
+                        <button onclick="window.open('https://buymeacoffee.com/djawjdaks8g')" class="footer-link-btn border border-gold px-6 py-2 rounded-full text-gold font-bold">☕ BUY ME A COFFEE</button>
+                        <button onclick="window.open('https://alldayarchive.blogspot.com')" class="footer-link-btn border border-gold px-6 py-2 rounded-full text-gold font-bold">📖 EXPLORE BLOG</button>
+                    </div>
+                    <p class="text-[9px] text-gray-600 uppercase tracking-[0.5em] italic font-bold">Universal History Intelligence curated by dedle © 2026</p>
                 </div>
             </footer>
         </div>
@@ -147,10 +162,16 @@
         const SB_URL = "https://iwgjfplrqeupfppcqmau.supabase.co"; 
         const SB_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Iml3Z2pmcGxycWV1cGZwcGNxbWF1Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3Njc2ODMzODMsImV4cCI6MjA4MzI1OTM4M30.mW07xEhx-YvSx-Xe2YSUH6TpaXEwdvGdbBBcQy1sitU"; 
         const sb = supabase.createClient(SB_URL, SB_KEY);
-        const AMAZON_ID = "dedle-20";
+        const AMAZON_URL = "https://amzn.to/4q3F1LR";
+
+        // HUD: 간지년 계산
+        function getZodiac(year) {
+            const names = ["Gyeong-sin","Sin-yu","Im-sul","Gye-hae","Gap-ja","Eul-chuk","Byeong-in","Jeong-myo","Mu-jin","Gi-sa","Gyeong-oh","Sin-mi","Im-sin","Gye-yu","Gap-sul","Eul-hae","Byeong-ja","Jeong-chuk","Mu-in","Gi-myo","Gyeong-jin","Sin-sa","Im-oh","Gye-mi","Gap-sin","Eul-yu","Byeong-sul","Jeong-hae","Mu-ja","Gi-축","Gyeong-in","Sin-myo","Im-jin","Gye-sa","Gap-oh","Eul-mi","Byeong-sin","Jeong-yu","Mu-sul","Gi-hae","Gyeong-ja","Sin-chuk","Im-in","Gye-myo","Gap-jin","Eul-sa","Byeong-oh","Jeong-mi","Mu-sin","Gi-yu","Gyeong-sul","Sin-hae","Im-자","Gye-chuk","Gap-in","Eul-myo","Byeong-jin","Jeong-사","Mu-oh","Gi-mi"];
+            const idx = (year - 0) % 60; return names[idx < 0 ? idx + 60 : idx];
+        }
 
         async function fetchRealWeather(y, m, d, co) {
-            const coords = { 'KR': [37.5, 127], 'US': [38.8, -77], 'BR': [-15.7, -47.8], 'UK': [51.5, -0.1], 'JP': [35.6, 139] };
+            const coords = { 'KR': [37.5, 127], 'US': [38.8, -77], 'UK': [51.5, -0.1], 'JP': [35.6, 139] };
             const [lat, lon] = coords[co] || [37.5, 127];
             try {
                 const res = await fetch(`https://archive-api.open-meteo.com/v1/archive?latitude=${lat}&longitude=${lon}&start_date=${y}-${m}-${d}&end_date=${y}-${m}-${d}&daily=temperature_2m_max&timezone=GMT`);
@@ -159,70 +180,54 @@
             } catch { document.getElementById('disp-weather').innerText = "18°C"; }
         }
 
-        function updateStellar() {
-            const cont = document.getElementById('star-container'); cont.innerHTML = "";
-            for(let i=0; i<30; i++) {
-                const s = document.createElement('div'); s.className = 'star';
-                s.style.left = Math.random()*100+'%'; s.style.top = Math.random()*100+'%';
-                s.style.width = Math.random()*2+'px'; s.style.height = s.style.width;
-                cont.appendChild(s);
-            }
-        }
-
         async function handleScan() {
-            const inY = document.getElementById('in-year').value;
-            const inM = (document.getElementById('in-month').value || (new Date().getMonth()+1).toString()).padStart(2,'0');
-            const inD = (document.getElementById('in-day').value || (new Date().getDate()).toString()).padStart(2,'0');
-            const kw = document.getElementById('smartSearch').value.trim().toLowerCase();
-            const co = document.getElementById('countrySearch').value.trim().toUpperCase() || "US";
+            const inYI = document.getElementById('in-year'); const inMI = document.getElementById('in-month');
+            const inDI = document.getElementById('in-day'); const skI = document.getElementById('smartSearch'); const coI = document.getElementById('countrySearch');
+            
+            const inY = inYI.value;
+            const inM = (inMI.value || (new Date().getMonth()+1).toString()).padStart(2,'0');
+            const inD = (inDI.value || (new Date().getDate()).toString()).padStart(2,'0');
+            const kw = skI.value.trim().toLowerCase();
+            const co = coI.value.trim().toUpperCase() || "US";
             const md = `${inM}-${inD}`;
 
             document.getElementById('vault-area').style.display = 'block';
 
-            // 1. 당일 데이터와 한 달 치 데이터 동시 호출 (보충용)
             const { data: dayData } = await sb.from('daily_archives').select('*').eq('date_id', md).single();
             const { data: monthData } = await sb.from('daily_archives').select('*').like('date_id', `${inM}-%`);
 
             const render = (id, type) => {
                 const cont = document.getElementById(id); cont.innerHTML = "";
-                let list = [];
-                if(dayData && dayData[type]) list = [...dayData[type]];
+                let list = (dayData && dayData[type]) ? [...dayData[type]] : [];
 
-                // 💡 [Proximity] 데이터 보충 로직 (한 달 치)
+                // 💡 [Proximity] 데이터 보충 (한 달치)
                 if (list.length < 5 && monthData) {
                     monthData.forEach(row => {
                         if(row.date_id !== md) {
-                            (row[type] || []).forEach(item => {
-                                if(!list.some(e => e.text === item.text)) { item.pDate = row.date_id; list.push(item); }
-                            });
+                            (row[type] || []).forEach(item => { if(!list.some(e=>e.text===item.text)) { item.pD = row.date_id; list.push(item); }});
                         }
                     });
                 }
 
-                // 정렬 (사장님 요청: 로컬 국가 위로, 연도 일치 위로)
                 list.sort((a,b) => {
                     const aCo = a.text.includes(co); const bCo = b.text.includes(co);
                     if(aCo !== bCo) return aCo ? -1 : 1;
                     return (b.year == inY) - (a.year == inY) || b.year - a.year;
-                });
-
-                list.slice(0, 30).forEach((item, idx) => {
+                }).filter(it => !kw || it.text.toLowerCase().includes(kw)).slice(0, 30).forEach((item, idx) => {
                     const sId = `story-${type}-${idx}`;
                     const q = encodeURIComponent(item.text);
+                    const pTag = item.pD ? `<span class="text-[9px] opacity-30 ml-2">[${item.pD}]</span>` : "";
                     const status = item.status ? `<span class="status-badge ${item.status}">${item.status}</span>` : "";
-                    const pTag = item.pDate ? `<span class="text-[9px] opacity-30 ml-2 italic">[${item.pDate}]</span>` : "";
 
                     cont.innerHTML += `
                         <div class="py-5 border-b border-white/5">
-                            <div class="flex items-start gap-4">
+                            <div class="flex items-start gap-4 text-left">
                                 <span class="year-badge ${item.year==inY?'match-badge':''}">${item.year}</span>
                                 <div class="flex-1">
                                     <p class="text-[15.5px]">${status}${item.text}${pTag}<span class="action-btn ml-2" onclick="document.getElementById('${sId}').style.display = document.getElementById('${sId}').style.display === 'block' ? 'none' : 'block'">[+] STORY</span></p>
-                                    <div id="${sId}" class="story-content">
-                                        <p>Chronicler's Report for ${item.year}: Detailed historical analysis indicates this event was a pivotal milestone. <a href="https://alldayarchive.blogspot.com" target="_blank" class="text-[#c5a059] underline italic">Explore Full Archive →</a></p>
-                                    </div>
+                                    <div id="${sId}" class="story-content"><p>Report: Historical milestone for ${item.year}. <a href="https://alldayarchive.blogspot.com" target="_blank" class="text-gold underline italic">Full Archive →</a></p></div>
                                     <div class="flex gap-2 mt-3">
-                                        <button onclick="window.open('https://www.amazon.com/s?k=${q}&tag=${AMAZON_ID}')" class="action-btn">🛒 Amazon</button>
+                                        <button onclick="window.open('${AMAZON_URL}')" class="action-btn">🛒 Shop</button>
                                         <button onclick="window.open('https://open.spotify.com/search/${q}')" class="action-btn">🎧 Spotify</button>
                                         <button onclick="window.open('https://www.youtube.com/results?search_query=${q}')" class="action-btn">📺 YouTube</button>
                                         <button onclick="window.open('https://alldayarchive.blogspot.com/search?q=${q}')" class="action-btn">📖 Blog</button>
@@ -233,26 +238,34 @@
                 });
             };
 
-            // 모든 섹션 렌더링
-            render('list-law', 'law_cases'); render('list-finance', 'finance'); render('list-medical', 'medical');
-            render('list-movies', 'movies'); render('list-music', 'music'); render('list-gaming', 'gaming'); render('list-food', 'food');
+            // 15단 카테고리 호출
+            const cats = ['law_cases','finance','medical','sports','movies','music','gaming','literature','innovations','arts','holidays','food','birthdays','deaths'];
+            const targetIds = ['list-law','list-finance','list-medical','list-sports','list-movies','list-music','list-gaming','list-books','list-innovations','list-arts','list-holidays','list-food','list-births','list-deaths'];
+            cats.forEach((c, i) => render(targetIds[i], c));
 
-            // HUD 복구
+            // Pulse 렌더링
+            const pulseData = dayData || (monthData ? monthData[0] : null);
+            const pCont = document.getElementById('pulse-content'); pCont.innerHTML = "";
+            if(pulseData) {
+                if(inY && parseInt(inY) >= 2000) {
+                    document.getElementById('pulse-title').innerText = `🔥 Trending in ${inY}`;
+                    (pulseData.trending_keywords || []).slice(0, 10).forEach(k => { pCont.innerHTML += `<span class="px-3 py-1 bg-gold/10 border border-gold/30 rounded-full text-[11px] font-bold text-gold"># ${k}</span>`; });
+                } else {
+                    document.getElementById('pulse-title').innerText = `📰 Headlines (${inY || 'History'})`;
+                    (pulseData.newspaper_headlines || []).slice(0, 5).forEach(h => { pCont.innerHTML += `<div class="w-full border-l-2 border-gold pl-4 py-1 text-sm text-left"><span class="text-gold font-bold">${h.year} :</span> ${h.text}</div>`; });
+                }
+            }
+
+            // HUD & 초기화
             document.getElementById('disp-day').innerText = new Date(`${inY || 2024}-${md}`).toLocaleDateString('en-US', {weekday:'long'});
-            document.getElementById('disp-ganji').innerText = inY ? "Synced" : "--";
+            document.getElementById('disp-ganji').innerText = inY ? getZodiac(parseInt(inY)) : "Synced";
             fetchRealWeather(inY || 2024, inM, inD, co);
-            updateStellar();
-
-            // 💡 [UX] 사장님 요청: 검색 후 입력창 비우기
-            document.getElementById('smartSearch').value = '';
-            document.getElementById('countrySearch').value = '';
-            document.getElementById('in-year').value = '';
-            document.getElementById('in-month').value = '';
-            document.getElementById('in-day').value = '';
+            
+            // 입력창 비우기
+            inYI.value=''; inMI.value=''; inDI.value=''; skI.value=''; coI.value='';
 
             window.scrollTo({ top: document.getElementById('vault-area').offsetTop - 100, behavior: 'smooth' });
         }
-
         document.addEventListener('keydown', (e) => { if(e.key === 'Enter') handleScan(); });
     </script>
 </body>
