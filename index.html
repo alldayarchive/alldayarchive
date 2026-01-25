@@ -12,28 +12,20 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>AllDay Archive | Global Intelligence & Premium Vault</title>
     
-    <!-- 🌐 [SEO] 구글 서치콘솔 인증 -->
     <meta name="google-site-verification" content="Y1tnVUzXiTj0LthauJuHS3DkMpxo8D1olmatbrfhld0">
     
-    <!-- 📊 [Analytics] 구글 애널리틱스 (GA4) -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=여기에_G-로_시작하는_아이디_입력"></script>
-    <script>
-        window.dataLayer = window.dataLayer || [];
-        function gtag(){dataLayer.push(arguments);}
-        gtag('js', new Date());
-        gtag('config', '여기에_G-로_시작하는_아이디_입력');
-    </script>
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-여기에_ID" crossorigin="anonymous"></script>
 
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
     <style>
-        :root { --gold: #c5a059; --bg: #0c0e12; }
+        :root { --gold: #c5a059; --bg: #0c0e12; --coffee: #FFDD00; }
         body { font-family: 'Inter', sans-serif; background-color: var(--bg); color: #e2e8f0; scroll-behavior: smooth; overflow-x: hidden; }
         .font-serif { font-family: 'Playfair Display', serif; }
         .bg-heritage { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: radial-gradient(circle at 50% 50%, #1a202c 0%, #0c0e12 100%); z-index: -1; }
         .glass-card { background: rgba(25, 28, 35, 0.98); border: 1px solid rgba(197, 160, 89, 0.1); border-radius: 24px; padding: 2rem; transition: 0.4s; }
-        .scroll-box { height: 380px; overflow-y: auto; padding-right: 10px; scrollbar-width: thin; scrollbar-color: var(--gold) transparent; }
+        .scroll-box { height: 400px; overflow-y: auto; padding-right: 10px; scrollbar-width: thin; scrollbar-color: var(--gold) transparent; }
         .scroll-box::-webkit-scrollbar { width: 3px; }
         .scroll-box::-webkit-scrollbar-thumb { background: var(--gold); border-radius: 10px; }
         .year-badge { border: 1px solid var(--gold); color: var(--gold); padding: 2px 8px; border-radius: 4px; font-size: 11px; font-weight: 700; min-width: 80px; text-align: center; }
@@ -48,9 +40,15 @@
         .star { position: absolute; background: white; border-radius: 50%; opacity: 0.8; animation: twinkle 2s infinite; }
         @keyframes twinkle { 0%, 100% { opacity: 0.3; } 50% { opacity: 1; } }
         
+        /* 🛡️ 광고 슬롯 */
         .ad-slot { min-height: 120px; background: rgba(255,255,255,0.02); border: 1px dashed rgba(197, 160, 89, 0.2); border-radius: 20px; display: flex; align-items: center; justify-content: center; margin: 2rem 0; color: #c5a059; font-size: 10px; font-weight: bold; text-transform: uppercase; letter-spacing: 2px; }
         .status-badge { font-size: 9px; font-weight: 900; padding: 2px 6px; border-radius: 3px; margin-right: 8px; text-transform: uppercase; }
         .win { background: #065f46; color: #34d399; } .lost { background: #991b1b; color: #fca5a5; }
+        
+        /* 노란색 커피 버튼 */
+        .coffee-btn { background: var(--coffee); color: #000; font-weight: 900; padding: 12px 30px; border-radius: 50px; font-size: 12px; transition: 0.3s; }
+        .coffee-btn:hover { transform: scale(1.05); box-shadow: 0 0 15px var(--coffee); }
+
         #vault-area { display: none; }
     </style>
 </head>
@@ -68,7 +66,7 @@
         <!-- 🚀 TOP AD -->
         <div class="ad-slot">Sponsored Intelligence - Premium Partner Section</div>
 
-        <!-- Search Area -->
+        <!-- Search -->
         <section class="space-y-12">
             <h1 class="text-5xl md:text-8xl font-black text-white leading-none font-serif italic uppercase tracking-tighter">DECODE <br><span class="text-[#c5a059]">HISTORY</span></h1>
             <div class="glass-card max-w-5xl mx-auto p-8 shadow-3xl space-y-6">
@@ -94,7 +92,7 @@
                 </div>
                 <div class="glass-card border-t-2 border-white/20 py-8 flex flex-col justify-center">
                     <span class="text-[9px] text-white/50 uppercase block mb-4 italic font-bold">Day of week</span>
-                    <div id="disp-day" class="text-xl font-black text-white uppercase">--</div>
+                    <div id="disp-day" class="text-xl font-black text-white uppercase leading-tight">--</div>
                 </div>
                 <div class="glass-card border-t-2 border-[#c5a059] py-8">
                     <span class="text-[9px] text-[#c5a059] uppercase block mb-4 italic font-bold">Stellar Archive</span>
@@ -114,11 +112,12 @@
                 <div id="pulse-content" class="flex flex-wrap gap-2"></div>
             </section>
 
-            <!-- Specialized Columns (Single Wide) -->
+            <!-- Specialized Single Columns -->
             <div class="space-y-12">
                 <section class="glass-card border-t-4 border-slate-500 text-left"><h3>⚖️ Law & Justice Verdicts</h3><div id="list-law" class="scroll-box space-y-6"></div></section>
                 <div class="ad-slot" style="min-height: 250px; border: 1px solid var(--gold);">High-Value Sponsored Partner Intelligence</div>
                 <section class="glass-card border-t-4 border-emerald-500 text-left"><h3>📈 Finance & Market Pulse</h3><div id="list-finance" class="scroll-box space-y-6"></div></section>
+                <section class="glass-card border-t-4 border-red-700 text-left"><h3>🚨 Major Incidents & Tragedies</h3><div id="list-incidents" class="scroll-box space-y-6"></div></section>
             </div>
 
             <!-- Main Categories (2 Columns) -->
@@ -143,10 +142,9 @@
             <!-- Footer -->
             <footer class="py-24 text-center border-t border-white/5 space-y-12">
                 <div class="flex flex-col items-center gap-6">
-                    <button onclick="window.open('https://amzn.to/4q3F1LR')" class="master-btn" style="background: var(--gold); color: #000; padding: 1rem 3rem; border-radius: 50px; font-weight: 900;">🛒 VISIT OFFICIAL SHOP</button>
-                    <div class="flex gap-4">
-                        <button onclick="window.open('https://buymeacoffee.com/djawjdaks8g')" class="footer-link-btn border border-gold px-6 py-2 rounded-full text-gold font-bold">☕ BUY ME A COFFEE</button>
-                        <button onclick="window.open('https://alldayarchive.blogspot.com')" class="footer-link-btn border border-gold px-6 py-2 rounded-full text-gold font-bold">📖 EXPLORE BLOG</button>
+                    <div class="flex gap-6 items-center">
+                        <button onclick="window.open('https://buymeacoffee.com/djawjdaks8g')" class="coffee-btn">☕ BUY ME A COFFEE</button>
+                        <button onclick="window.open('https://alldayarchive.blogspot.com')" class="footer-link-btn border border-gold px-10 py-3 rounded-full text-gold font-bold uppercase text-[11px]">📖 EXPLORE BLOG</button>
                     </div>
                     <p class="text-[9px] text-gray-600 uppercase tracking-[0.5em] italic font-bold">Universal History Intelligence curated by dedle © 2026</p>
                 </div>
@@ -161,7 +159,7 @@
         const AMAZON_URL = "https://amzn.to/4q3F1LR";
 
         function getZodiac(year) {
-            const names = ["Gyeong-sin","Sin-yu","Im-sul","Gye-hae","Gap-ja","Eul-chuk","Byeong-in","Jeong-myo","Mu-jin","Gi-sa","Gyeong-oh","Sin-mi","Im-sin","Gye-yu","Gap-sul","Eul-hae","Byeong-ja","Jeong-축","Mu-in","Gi-myo","Gyeong-jin","Sin-sa","Im-oh","Gye-mi","Gap-sin","Eul-yu","Byeong-sul","Jeong-hae","Mu-ja","Gi-chuk","Gyeong-in","Sin-myo","Im-jin","Gye-sa","Gap-oh","Eul-mi","Byeong-sin","Jeong-yu","Mu-sul","Gi-hae","Gyeong-ja","Sin-축","Im-in","Gye-myo","Gap-jin","Eul-sa","Byeong-oh","Jeong-mi","Mu-sin","Gi-yu","Gyeong-sul","Sin-hae","Im-자","Gye-chuk","Gap-in","Eul-myo","Byeong-jin","Jeong-사","Mu-oh","Gi-mi"];
+            const names = ["Gyeong-sin","Sin-yu","Im-sul","Gye-hae","Gap-ja","Eul-chuk","Byeong-in","Jeong-myo","Mu-jin","Gi-sa","Gyeong-oh","Sin-mi","Im-sin","Gye-yu","Gap-sul","Eul-hae","Byeong-ja","Jeong-축","Mu-in","Gi-myo","Gyeong-jin","Sin-sa","Im-oh","Gye-mi","Gap-sin","Eul-yu","Byeong-sul","Jeong-hae","Mu-ja","Gi-축","Gyeong-in","Sin-myo","Im-jin","Gye-sa","Gap-oh","Eul-mi","Byeong-sin","Jeong-yu","Mu-sul","Gi-hae","Gyeong-ja","Sin-축","Im-in","Gye-myo","Gap-jin","Eul-sa","Byeong-oh","Jeong-mi","Mu-sin","Gi-yu","Gyeong-sul","Sin-hae","Im-자","Gye-chuk","Gap-in","Eul-myo","Byeong-jin","Jeong-사","Mu-oh","Gi-mi"];
             const idx = (year - 0) % 60; return names[idx < 0 ? idx + 60 : idx];
         }
 
@@ -176,8 +174,7 @@
         }
 
         function updateStellar() {
-            const cont = document.getElementById('star-container');
-            cont.innerHTML = "";
+            const cont = document.getElementById('star-container'); cont.innerHTML = "";
             for(let i=0; i<35; i++) {
                 const s = document.createElement('div'); s.className = 'star';
                 s.style.left = Math.random()*100+'%'; s.style.top = Math.random()*100+'%';
@@ -206,7 +203,6 @@
                 const cont = document.getElementById(id); cont.innerHTML = "";
                 let list = (dayData && dayData[type]) ? [...dayData[type]] : [];
 
-                // 💡 [Proximity] 데이터 보충 로직 (섞임 방지 필터링 추가)
                 if (list.length < 5 && monthData) {
                     monthData.forEach(row => {
                         if(row.date_id !== md) {
@@ -217,15 +213,11 @@
                     });
                 }
 
-                // 💡 [1년치 제한 로직] 연도 입력 시 해당 연도 중심, 미입력 시 최신 30개
                 list.sort((a,b) => {
                     const aCo = a.text.includes(co); const bCo = b.text.includes(co);
                     if(aCo !== bCo) return aCo ? -1 : 1;
                     return (b.year == inY) - (a.year == inY) || b.year - a.year;
-                }).filter(it => !kw || it.text.toLowerCase().includes(kw));
-
-                // 최종 출력물 30개로 제한 (칸 벗어남 방지)
-                list.slice(0, 30).forEach((item, idx) => {
+                }).filter(it => !kw || it.text.toLowerCase().includes(kw)).slice(0, 30).forEach((item, idx) => {
                     const sId = `story-${type}-${idx}`;
                     const q = encodeURIComponent(item.text);
                     const pTag = item.pD ? `<span class="text-[9px] opacity-30 ml-2 italic">[${item.pD}]</span>` : "";
@@ -237,9 +229,7 @@
                                 <span class="year-badge ${item.year==inY?'match-badge':''}">${item.year}</span>
                                 <div class="flex-1 overflow-hidden">
                                     <p class="text-[15.5px] leading-relaxed break-words">${status}${item.text}${pTag}<span class="action-btn ml-2" onclick="document.getElementById('${sId}').style.display = document.getElementById('${sId}').style.display === 'block' ? 'none' : 'block'">[+] STORY</span></p>
-                                    <div id="${sId}" class="story-content hidden mt-3 p-4 bg-white/5 border-l border-gold text-sm text-gray-400">
-                                        Historical Insight: This milestone in ${item.year} defined its era. <a href="https://alldayarchive.blogspot.com" target="_blank" class="text-gold underline">Full Library →</a>
-                                    </div>
+                                    <div id="${sId}" class="detail-view">Historical Fact: This milestone in ${item.year} defined its era. <a href="https://alldayarchive.blogspot.com" target="_blank" class="text-gold underline">Full Library →</a></div>
                                     <div class="flex gap-2 mt-3 flex-wrap">
                                         <button onclick="window.open('${AMAZON_URL}')" class="action-btn">🛒 Shop</button>
                                         <button onclick="window.open('https://open.spotify.com/search/${q}')" class="action-btn">🎧 Spotify</button>
@@ -252,11 +242,15 @@
                 });
             };
 
-            // 15단 카테고리 맵핑 (섞임 방지)
-            const map = { 'list-law':'law_cases', 'list-finance':'finance', 'list-medical':'medical', 'list-sports':'sports', 'list-movies':'movies', 'list-music':'music', 'list-gaming':'gaming', 'list-books':'literature', 'list-innovations':'innovations', 'list-arts':'arts', 'list-holidays':'holidays', 'list-food':'food', 'list-births':'birthdays', 'list-deaths':'deaths' };
+            const map = { 
+                'list-law':'law_cases', 'list-finance':'finance', 'list-incidents':'incidents', 
+                'list-medical':'medical', 'list-sports':'sports', 'list-movies':'movies', 
+                'list-music':'music', 'list-gaming':'gaming', 'list-books':'literature', 
+                'list-innovations':'innovations', 'list-arts':'arts', 'list-holidays':'holidays', 
+                'list-food':'food', 'list-births':'birthdays', 'list-deaths':'deaths' 
+            };
             Object.keys(map).forEach(id => render(id, map[id]));
 
-            // Pulse (인기검색어/뉴스) 렌더링
             const pCont = document.getElementById('pulse-content'); pCont.innerHTML = "";
             const pulseData = dayData || (monthData ? monthData[0] : null);
             if(pulseData) {
@@ -269,13 +263,11 @@
                 }
             }
 
-            // HUD 업데이트 및 별자리 호출
             document.getElementById('disp-day').innerText = new Date(`${inY || 2024}-${md}`).toLocaleDateString('en-US', {weekday:'long'});
             document.getElementById('disp-ganji').innerText = inY ? getZodiac(parseInt(inY)) : "Synced";
             fetchRealWeather(inY || 2024, inM, inD, co);
-            updateStellar(); // 💡 별자리 성도 함수 호출
+            updateStellar();
             
-            // 입력창 비우기 (UX 개선)
             inYI.value=''; inMI.value=''; inDI.value=''; skI.value=''; coI.value='';
             window.scrollTo({ top: document.getElementById('vault-area').offsetTop - 100, behavior: 'smooth' });
         }
