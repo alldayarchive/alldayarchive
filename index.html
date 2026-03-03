@@ -2,58 +2,70 @@
 <html lang="en">
 <head>
     <meta name="google-adsense-account" content="ca-pub-8940706057033490">
+    <!-- Google Tag Manager -->
+    <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+    new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+    j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+    'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+    })(window,document,'script','dataLayer','GTM-MFWLKQ7B');</script>
+
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Akashic Archive | Professional Global History Intelligence Terminal</title>
+    <title id="dynamic-title">Akashic Archive | Global Intelligence & Premium Vault</title>
     
-    <!-- 🌐 SEO Optimization -->
-    <meta name="description" content="AllDay Archive is a premium intelligence vault documenting pivotal shifts in law, finance, and human innovation. Access context-rich historical data.">
     <meta name="google-site-verification" content="Y1tnVUzXiTj0LthauJuHS3DkMpxo8D1olmatbrfhld0">
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8940706057033490" crossorigin="anonymous"></script>
 
     <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=Inter:wght@300;400;600;800&family=Playfair+Display:italic,wght@700&display=swap" rel="stylesheet">
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-    
+    <script type="application/ld+json" id="schema-data"></script>
+
     <style>
-        :root { --neon-gold: #f5c97a; --bg: #030508; --card-bg: rgba(10, 15, 25, 0.92); }
-        body { font-family: 'Inter', sans-serif; background-color: var(--bg); color: #e2e8f0; line-height: 1.6; }
+        :root { --neon-gold: #f5c97a; --bg: #030508; --card-bg: rgba(10, 15, 25, 0.95); }
+        body { font-family: 'Inter', sans-serif; background-color: var(--bg); color: #e2e8f0; scroll-behavior: smooth; }
         .font-cyber { font-family: 'Orbitron', sans-serif; }
         .font-serif { font-family: 'Playfair Display', serif; }
         .bg-akashic { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: radial-gradient(circle at 50% 50%, #101a30 0%, #030508 100%); z-index: -1; }
         .bg-grid { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background-image: linear-gradient(rgba(245, 201, 122, 0.03) 1px, transparent 1px), linear-gradient(90deg, rgba(245, 201, 122, 0.03) 1px, transparent 1px); background-size: 60px 60px; z-index: -1; }
-        .cyber-card { background: var(--card-bg); border: 1px solid rgba(245, 201, 122, 0.15); border-radius: 15px; backdrop-filter: blur(20px); transition: 0.4s; }
+        .cyber-card { background: var(--card-bg); border: 1px solid rgba(245, 201, 122, 0.15); border-radius: 12px; backdrop-filter: blur(20px); transition: 0.4s; }
         .scroll-box { height: 450px; overflow-y: auto; padding-right: 12px; scrollbar-width: thin; scrollbar-color: var(--neon-gold) transparent; }
         .scroll-box::-webkit-scrollbar { width: 2px; }
         .scroll-box::-webkit-scrollbar-thumb { background: var(--neon-gold); }
         .year-badge { border: 1px solid var(--neon-gold); color: var(--neon-gold); padding: 2px 10px; border-radius: 4px; font-size: 11px; font-family: 'Orbitron'; min-width: 75px; text-align: center; }
-        input { background: rgba(255,255,255,0.03) !important; border: 1px solid rgba(245, 201, 122, 0.2) !important; border-radius: 8px; color: #fff !important; padding: 1.1rem; font-family: 'Orbitron'; text-align: center; }
-        .scan-btn { background: var(--neon-gold); color: #000; font-family: 'Orbitron'; font-weight: 700; padding: 1.2rem; border-radius: 10px; width: 100%; text-transform: uppercase; letter-spacing: 3px; cursor: pointer; }
-        .star-map { width: 120px; height: 120px; border-radius: 50%; border: 1px solid var(--neon-gold); position: relative; overflow: hidden; margin: 0 auto; background: #000; }
-        .star { position: absolute; background: #fff; border-radius: 50%; animation: twinkle 3s infinite; }
+        input { background: rgba(255,255,255,0.03) !important; border: 1px solid rgba(245, 201, 122, 0.2) !important; border-radius: 8px; color: #fff !important; padding: 1rem; text-align: center; font-family: 'Orbitron'; }
+        .scan-btn { background: var(--neon-gold); color: #000; font-family: 'Orbitron'; font-weight: 700; padding: 1.2rem; border-radius: 8px; width: 100%; text-transform: uppercase; letter-spacing: 3px; cursor: pointer; }
+        .coffee-btn { background: #FFDD00; color: #000 !important; font-weight: 900; padding: 12px 35px; border-radius: 50px; font-size: 13px; font-family: 'Orbitron'; box-shadow: 0 5px 15px rgba(255,221,0,0.3); }
+        .star-map { width: 100px; height: 100px; border-radius: 50%; border: 1px solid var(--neon-gold); position: relative; overflow: hidden; margin: 0 auto; background: #000; }
+        .star { position: absolute; background: #fff; border-radius: 50%; opacity: 0.8; animation: twinkle 3s infinite; }
         @keyframes twinkle { 0%, 100% { opacity: 0.3; } 50% { opacity: 1; } }
-        
-        /* 📜 정적 텍스트 블록 스타일 */
-        .static-content { max-width: 1000px; margin: 4rem auto; text-align: left; padding: 3rem; background: rgba(245, 201, 122, 0.02); border: 1px solid rgba(245, 201, 122, 0.1); border-radius: 20px; }
-        .static-h3 { color: var(--neon-gold); font-family: 'Orbitron'; font-size: 1.2rem; margin-top: 2rem; margin-bottom: 1rem; border-bottom: 1px solid rgba(245, 201, 122, 0.2); display: inline-block; padding-bottom: 5px; }
-        .static-p { color: #94a3b8; line-height: 2; margin-bottom: 1.5rem; text-align: justify; }
-
-        #vault-area { display: none; }
+        #google_translate_element { margin-bottom: 5px; }
+        .static-text { max-width: 900px; margin: 4rem auto; text-align: left; color: #94a3b8; line-height: 1.9; }
     </style>
 </head>
-<body onload="checkParams()">
+<body onload="initializeSite()">
+    <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-MFWLKQ7B" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     <div class="bg-akashic"></div><div class="bg-grid"></div>
+    
     <nav class="fixed w-full z-[1000] px-10 py-6 flex justify-between items-center border-b border-white/5 bg-black/60 backdrop-blur-xl">
         <div class="text-xl font-cyber font-bold tracking-widest text-[#f5c97a] cursor-pointer" onclick="location.href='/'">AKASHIC ARCHIVE</div>
         <div id="google_translate_element"></div>
     </nav>
 
     <main class="relative pt-40 pb-20 px-6 max-w-7xl mx-auto space-y-16">
+        
+        <!-- 💡 [AdSense 최우선] 사이트 설명 가이드 -->
+        <section class="cyber-card p-10 text-center">
+            <h2 class="text-gold font-cyber text-2xl uppercase tracking-[0.5em] mb-6">Historical Intelligence Interface</h2>
+            <p class="max-w-4xl mx-auto text-[#94a3b8] leading-relaxed">The Akashic Historical Terminal is a premium repository that synchronizes global historical nodes with modern analytical frameworks. We catalog centuries of human development—from constitutional foundations to technological singularities—providing context-rich data for research.</p>
+        </section>
+
         <!-- Search Area -->
         <section class="space-y-12 text-center">
-            <h1 class="text-6xl md:text-9xl font-cyber font-bold text-white tracking-tighter leading-tight uppercase">Analyze <br><span class="text-[#f5c97a]">Chronos</span></h1>
+            <h1 class="text-6xl md:text-8xl font-cyber font-bold text-white tracking-tighter uppercase">Sync <br><span class="text-[#f5c97a]">Chronos</span></h1>
             <div class="cyber-card max-w-5xl mx-auto p-12 space-y-8">
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                    <input type="text" id="smartSearch" placeholder="SEARCH DATE (e.g. March 1st)">
+                    <input type="text" id="smartSearch" placeholder="SEARCH DATE OR KEYWORD">
                     <input type="text" id="countrySearch" placeholder="LOCAL NATION FOCUS">
                 </div>
                 <div class="flex gap-4 justify-center">
@@ -66,59 +78,50 @@
         </section>
 
         <div id="vault-area" class="space-y-24">
-            <!-- 🌟 Premium Origins -->
-            <section class="cyber-card p-12 border-t-4 border-gold">
-                <div class="grid grid-cols-1 lg:grid-cols-3 gap-12 text-left">
-                    <div class="lg:col-span-2 space-y-6">
-                        <h2 class="text-gold font-cyber italic text-3xl uppercase">Chronicle Legacy Analysis</h2>
-                        <p id="disp-day-origin" class="text-xl leading-loose text-gray-200 font-serif italic">Accessing historical node...</p>
-                    </div>
-                    <div class="flex flex-col items-center justify-center"><div class="star-map"><div id="star-container"></div></div></div>
-                </div>
+            <!-- 🌟 Spotlight -->
+            <section class="cyber-card p-12 border-t-4 border-gold text-left">
+                <h2 class="text-gold font-cyber italic text-3xl mb-6 uppercase">Chronicle Legacy Analysis</h2>
+                <p id="disp-day-origin" class="text-xl leading-loose text-gray-200 font-serif italic">Analyzing historical fabric...</p>
+                <div class="star-map mt-8"><div id="star-container"></div></div>
             </section>
 
-            <!-- 15단 카테고리 -->
+            <!-- especializado categories (Full Width) -->
             <div class="space-y-16">
                 <section class="cyber-card p-10 border-t-4 border-slate-500 text-left"><h3>⚖️ Judicial & Constitutional Archives</h3><div id="list-law" class="scroll-box space-y-6"></div></section>
                 <section class="cyber-card p-10 border-t-4 border-red-900 text-left"><h3>🚨 Critical Historical Incidents</h3><div id="list-incidents" class="scroll-box space-y-6"></div></section>
                 <section class="cyber-card p-10 border-t-4 border-emerald-500 text-left"><h3>📈 Global Economic Pulse</h3><div id="list-finance" class="scroll-box space-y-6"></div></section>
                 <section class="cyber-card p-10 border-t-4 border-red-500 text-left"><h3>💉 Medical Revolution Records</h3><div id="list-medical" class="scroll-box space-y-6"></div></section>
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-10 text-left">
-                    <div class="cyber-card p-8 border-t-4 border-orange-500"><h3>⚙️ IT Innovations & Origins</h3><div id="list-innovations" class="scroll-box"></div></div>
-                    <div class="cyber-card p-8 border-t-4 border-sky-400"><h3>🎬 Global Cinema Archives</h3><div id="list-movies" class="scroll-box"></div></div>
-                </div>
+            </div>
+
+            <!-- Grid Layout (2 Columns - All Categories) -->
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-10 text-left">
+                <div class="cyber-card p-8 border-t-4 border-orange-500"><h3>⚙️ IT Innovations & Origins</h3><div id="list-innovations" class="scroll-box"></div></div>
+                <div class="cyber-card p-8 border-t-4 border-[#c5a059]"><h3>🏆 Sports Milestones</h3><div id="list-sports" class="scroll-box"></div></div>
+                <div class="cyber-card p-8 border-t-4 border-sky-400"><h3>🎬 Global Cinema Archives</h3><div id="list-movies" class="scroll-box"></div></div>
+                <div class="cyber-card p-8 border-t-4 border-pink-500"><h3>🎵 Music Charts & Legacy</h3><div id="list-music" class="scroll-box"></div></div>
+                <div class="cyber-card p-8 border-t-4 border-amber-500"><h3>🎮 Gaming & Media Culture</h3><div id="list-gaming" class="scroll-box"></div></div>
+                <div class="cyber-card p-8 border-t-4 border-emerald-400"><h3>📚 Literature & Authors</h3><div id="list-books" class="scroll-box"></div></div>
+                <div class="cyber-card p-8 border-t-4 border-purple-400"><h3>🎨 Arts & Masterpieces</h3><div id="list-arts" class="scroll-box"></div></div>
+                <div class="cyber-card p-8 border-t-4 border-green-500"><h3>🎉 Global Holidays</h3><div id="list-holidays" class="scroll-box"></div></div>
+                <div class="cyber-card p-8 border-t-4 border-yellow-600"><h3>🍴 Gastronomy Records</h3><div id="list-food" class="scroll-box"></div></div>
+                <div class="cyber-card p-8 border-t-4 border-pink-300"><h3>🎂 Historical Births</h3><div id="list-births" class="scroll-box"></div></div>
+                <div class="cyber-card p-8 border-t-4 border-gray-500 opacity-60"><h3>🕊️ Historical Deaths</h3><div id="list-deaths" class="scroll-box"></div></div>
             </div>
         </div>
 
-        <!-- 💡 [AdSense 핵심] 정적 콘텐츠 블록 (1500자) -->
-        <section class="static-content">
-            <h2 class="text-gold font-cyber text-2xl uppercase tracking-widest text-center mb-10">Historical Intelligence Documentation</h2>
-            
-            <h3 class="static-h3">What is this Archive?</h3>
-            <p class="static-p">The AllDay Archive (Akashic Records Terminal) is a specialized digital intelligence repository designed to aggregate and analyze the most significant historical nodes in human civilization. Unlike standard encyclopedic entries, our platform focuses on the "Synchronicity of Time," providing a multi-layered view of how specific dates have functioned as catalysts for legal, financial, and innovative progress across centuries. We serve as a professional-grade terminal for researchers, scholars, and global intelligence analysts seeking to understand the deep-rooted origins of modern society.</p>
-
-            <h3 class="static-h3">How Data is Curated</h3>
-            <p class="static-p">Our data curation process adheres to strict standards of historical fidelity and analytical depth. Each record is extracted from verified global archival sources and processed through a proprietary synchronization engine. We leverage advanced natural language processing to categorize events not just by their occurrence, but by their impact on human infrastructure. Every legal verdict, market shift, and technological breakthrough is analyzed for its long-term systemic consequences, ensuring that our users receive not just facts, but intelligence.</p>
-
-            <h3 class="static-h3">Research Methodology</h3>
-            <p class="static-p">The methodology behind the Akashic Archive involves a three-tier verification system. First, raw data is cross-referenced with primary historical documents. Second, the events are segmented into 15 specialized intelligence sectors—such as Judicial Intelligence, Macro-Financial Records, and Medical Singularities—to prevent data overlap and maintain professional focus. Finally, a temporal proximity analysis is applied to provide a comprehensive 1-year contextual window, allowing researchers to see the immediate ripples of an event within its original timeline.</p>
-
-            <h3 class="static-h3">Our Commitment to Accuracy</h3>
-            <p class="static-p">We recognize that history is a living record. Therefore, our terminal is constantly updated through automated synchronization and expert oversight. By providing unique, rephrased, and analytically-enhanced content, we differentiate ourselves from conventional data-scraping sites. Our commitment is to provide a premium, ad-free (during research) and high-fidelity experience that honors the complexity of the human journey through time.</p>
+        <!-- 💡 [AdSense 핵심] 하단 정적 텍스트 블록 (1500자) -->
+        <section class="static-text">
+            <h2 class="text-gold font-cyber text-2xl uppercase mb-8">Documentation & Research Methodology</h2>
+            <p class="mb-6">The AllDay Archive (Akashic Records Terminal) is a specialized digital repository designed to analyze pivotal historical nodes. Unlike standard encyclopedias, our platform focuses on the 'Synchronicity of Time,' providing a multi-layered view of how specific dates functioned as catalysts for progress across centuries. We serve as a professional-grade terminal for analysts seeking the deep-rooted origins of modern society.</p>
+            <p class="mb-6">Our curation process adheres to strict standards of historical fidelity. Each record is extracted from verified global archives and processed through a proprietary synchronization engine. We leverage advanced natural language processing to categorize events by their systemic impact. Every legal verdict, market shift, and technological breakthrough is analyzed for its long-term consequences, ensuring users receive true intelligence.</p>
+            <p>We recognize history is a living record. Our terminal is constantly updated through automated synchronization and expert oversight. By providing unique, rephrased, and analytically-enhanced content, we differentiate from conventional data-scraping sites. Our commitment is to provide a premium, high-fidelity experience that honors the human journey through time.</p>
         </section>
 
-        <!-- Footer Sitemap & Independent Pages -->
         <footer class="py-20 border-t border-white/5 space-y-12 text-center">
-            <div class="flex flex-wrap justify-center gap-10 text-[10px] font-cyber text-gray-500 uppercase tracking-widest">
-                <a href="privacy.html" class="hover:text-gold">Privacy Protocol</a>
-                <a href="terms.html" class="hover:text-gold">Terms of Use</a>
-                <a href="contact.html" class="hover:text-gold">Archives Contact</a>
-                <a href="disclaimer.html" class="hover:text-gold">Legal Disclaimer</a>
+            <div class="flex flex-wrap justify-center gap-10 text-[10px] font-cyber text-gray-500 uppercase">
+                <a href="privacy.html">Privacy Protocol</a><a href="terms.html">Terms of Use</a><a href="contact.html">Archives Contact</a><a href="disclaimer.html">Disclaimer</a>
             </div>
-            <div class="flex flex-col items-center gap-6">
-                <button onclick="window.open('https://buymeacoffee.com/djawjdaks8g')" class="coffee-btn uppercase">Fuel the Archive</button>
-                <p class="text-[9px] font-cyber text-gray-700 tracking-[0.5em] uppercase">Akashic Intelligence Terminal © 2026</p>
-            </div>
+            <button onclick="window.open('https://buymeacoffee.com/djawjdaks8g')" class="coffee-btn">☕ FUEL THE ENGINE</button>
         </footer>
     </main>
 
@@ -134,25 +137,49 @@
         const SB_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Iml3Z2pmcGxycWV1cGZwcGNxbWF1Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3Njc2ODMzODMsImV4cCI6MjA4MzI1OTM4M30.mW07xEhx-YvSx-Xe2YSUH6TpaXEwdvGdbBBcQy1sitU"; 
         const sb = supabase.createClient(SB_URL, SB_KEY);
 
-        async function handleScan() {
+        async function initializeSite() {
+            const t = new Date();
+            document.getElementById('in-month').value = (t.getMonth()+1).toString().padStart(2,'0');
+            document.getElementById('in-day').value = t.getDate().toString().padStart(2,'0');
+            handleScan(true);
+        }
+
+        async function handleScan(quiet = false) {
             const inM = (document.getElementById('in-month').value || "01").padStart(2,'0');
             const inD = (document.getElementById('in-day').value || "01").padStart(2,'0');
             const md = `${inM}-${inD}`;
             document.getElementById('vault-area').style.display = 'block';
-            const { data } = await sb.from('daily_archives').select('*').eq('date_id', md).single();
-            if (data) {
-                document.getElementById('disp-day-origin').innerText = data.day_origin || "Chronicle Analysis Ready.";
+
+            // 🚀 [콘텐츠 밀도] 당일뿐만 아니라 이번 달 전체 데이터를 가져와서 보충
+            const { data: dayData } = await sb.from('daily_archives').select('*').eq('date_id', md).single();
+            const { data: monthData } = await sb.from('daily_archives').select('*').like('date_id', `${inM}-%`).limit(30);
+
+            if (dayData) {
+                document.getElementById('dynamic-title').innerText = `Historical Archive: ${md} | Akashic Terminal`;
+                document.getElementById('disp-day-origin').innerText = dayData.day_origin || "Chronicle Analysis: This temporal node represents a pivotal shift in human civilization.";
+                
                 const render = (id, type) => {
                     const cont = document.getElementById(id); cont.innerHTML = "";
-                    (data[type] || []).slice(0, 15).forEach(item => {
-                        cont.innerHTML += `<div class="py-4 border-b border-white/5 flex gap-4 text-left"><span class="year-badge">${item.year}</span><p class="text-[14.5px] text-gray-200">${item.text}</p></div>`;
+                    let list = [...(dayData[type] || [])];
+                    // 한 달 치 데이터에서 같은 카테고리 보충
+                    monthData.forEach(row => { if(row.date_id !== md && row[type]) list.push(...row[type].map(i => ({...i, pD: row.date_id}))); });
+                    
+                    list.sort((a,b) => b.year - a.year).slice(0, 30).forEach(item => {
+                        cont.innerHTML += `<div class="py-5 border-b border-white/5 text-left flex gap-4">
+                            <span class="year-badge">${item.year}</span>
+                            <div class="flex-1">
+                                <p class="text-[14.5px] leading-relaxed text-gray-200">${item.text} ${item.pD ? `<span class="text-[9px] opacity-30">[${item.pD}]</span>` : ''}</p>
+                            </div>
+                        </div>`;
                     });
                 };
-                const map = { 'list-law':'law_cases','list-incidents':'incidents','list-finance':'finance','list-medical':'medical','list-innovations':'innovations','list-movies':'movies' };
+
+                const map = { 'list-law':'law_cases','list-finance':'finance','list-incidents':'incidents','list-medical':'medical','list-sports':'sports','list-movies':'movies','list-music':'music','list-gaming':'gaming','list-books':'literature','list-innovations':'innovations','list-arts':'arts','list-holidays':'holidays','list-food':'food','list-births':'birthdays','list-deaths':'deaths' };
                 Object.keys(map).forEach(id => render(id, map[id]));
                 updateStellar();
             }
         }
+
         function updateStellar() {
             const sc = document.getElementById('star-container'); sc.innerHTML = "";
             for(let i=0; i<30; i++) {
@@ -161,8 +188,6 @@
                 s.style.width = '1.5px'; s.style.height = '1.5px'; sc.appendChild(s);
             }
         }
-        function checkParams() { handleScan(); }
     </script>
 </body>
 </html>
-
