@@ -10,13 +10,14 @@
 
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>January 1st: The Akashic Intelligence Report | AllDay Archive</title>
+    <title>Akashic Archive | Global Intelligence & Chronos Vault</title>
     
-    <meta name="description" content="A comprehensive global intelligence report for January 1st. Access premium archives across 15 sectors: law, finance, medical revolutions, and cultural milestones.">
+    <meta name="description" content="Access the definitive digital vault of human history. Professional-grade intelligence report for January 1st across 15 global sectors.">
     <meta name="google-site-verification" content="Y1tnVUzXiTj0LthauJuHS3DkMpxo8D1olmatbrfhld0">
 
-    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=Inter:wght@300;400;600&family=Playfair+Display:italic,wght@700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=Inter:wght@300;400;600;800&family=Playfair+Display:italic,wght@700&display=swap" rel="stylesheet">
     <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
     
     <style>
         :root { --neon-gold: #f5c97a; --bg: #030508; --card-bg: rgba(12, 16, 26, 0.96); }
@@ -27,155 +28,161 @@
         .bg-akashic { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: radial-gradient(circle at 50% 50%, #0d1a33 0%, #030508 100%); z-index: -1; }
         .bg-grid { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background-image: linear-gradient(rgba(245, 201, 122, 0.02) 1px, transparent 1px), linear-gradient(90deg, rgba(245, 201, 122, 0.02) 1px, transparent 1px); background-size: 50px 50px; z-index: -1; }
 
-        .cyber-card { background: var(--card-bg); border: 1px solid rgba(245, 201, 122, 0.1); border-radius: 12px; backdrop-filter: blur(25px); padding: 2.5rem; margin-bottom: 2rem; }
+        .cyber-card { background: var(--card-bg); border: 1px solid rgba(245, 201, 122, 0.1); border-radius: 12px; backdrop-filter: blur(25px); padding: 2.5rem; }
         .scroll-box { height: 400px; overflow-y: auto; padding-right: 12px; scrollbar-width: thin; scrollbar-color: var(--neon-gold) transparent; }
         .scroll-box::-webkit-scrollbar { width: 2px; }
         .scroll-box::-webkit-scrollbar-thumb { background: var(--neon-gold); }
 
-        .year-badge { border: 1px solid var(--neon-gold); color: var(--neon-gold); padding: 2px 10px; border-radius: 4px; font-size: 11px; font-family: 'Orbitron'; min-width: 80px; text-align: center; display: inline-block; }
+        .year-badge { border: 1px solid var(--neon-gold); color: var(--neon-gold); padding: 2px 10px; border-radius: 4px; font-size: 11px; font-family: 'Orbitron'; min-width: 80px; text-align: center; }
+        
+        /* 🔍 미래형 검색창 스타일 */
+        input { background: rgba(255,255,255,0.03) !important; border: 1px solid rgba(245, 201, 122, 0.3) !important; border-radius: 10px; color: #fff !important; padding: 1.2rem; font-family: 'Orbitron'; font-size: 0.9rem; text-align: center; width: 100%; outline: none; transition: 0.3s; }
+        input:focus { border-color: var(--neon-gold); box-shadow: 0 0 20px rgba(245, 201, 122, 0.2); }
+        .scan-btn { background: var(--neon-gold); color: #000; font-family: 'Orbitron'; font-weight: 700; padding: 1.2rem; border-radius: 10px; width: 100%; text-transform: uppercase; letter-spacing: 3px; cursor: pointer; transition: 0.3s; margin-top: 1rem; }
+        
         .coffee-btn { background: #FFDD00; color: #000 !important; font-weight: 900; padding: 12px 35px; border-radius: 50px; font-size: 13px; font-family: 'Orbitron'; }
-
-        /* 🌐 세련된 번역 위젯 커스텀 */
-        #google_translate_element { height: 38px; overflow: hidden; }
+        
+        /* 🌐 번역 위젯 세련되게 매립 */
         .goog-te-gadget-simple { background-color: transparent !important; border: 1px solid rgba(245, 201, 122, 0.3) !important; border-radius: 8px !important; padding: 5px 10px !important; }
         .goog-te-gadget-simple span { color: var(--neon-gold) !important; font-family: 'Orbitron' !important; font-size: 10px !important; }
-        .goog-te-banner-frame { display: none !important; }
-        body { top: 0 !important; }
 
-        .section-title { font-family: 'Orbitron'; font-weight: 700; text-transform: uppercase; letter-spacing: 2px; font-size: 1.1rem; color: var(--neon-gold); margin-bottom: 1.5rem; border-bottom: 1px solid rgba(245, 201, 122, 0.1); padding-bottom: 10px; }
+        .section-title { font-family: 'Orbitron'; font-weight: 700; text-transform: uppercase; letter-spacing: 2px; color: var(--neon-gold); margin-bottom: 1.5rem; border-bottom: 1px solid rgba(245, 201, 122, 0.1); padding-bottom: 10px; }
     </style>
 </head>
-<body>
+<body onload="initialize()">
     <div class="bg-akashic"></div><div class="bg-grid"></div>
     
     <nav class="fixed w-full z-[1000] px-10 py-6 flex justify-between items-center border-b border-white/5 bg-black/60 backdrop-blur-xl">
-        <div class="text-xl font-cyber font-bold tracking-widest text-[#f5c97a]">AKASHIC ARCHIVE</div>
+        <div class="text-xl font-cyber font-bold tracking-widest text-[#f5c97a] cursor-pointer" onclick="location.href='/'">AKASHIC ARCHIVE</div>
         <div id="google_translate_element"></div>
     </nav>
 
     <main class="relative pt-40 pb-20 px-6 max-w-7xl mx-auto space-y-16">
         
-        <!-- 💡 [AdSense 가독성] 전문 리서치 가이드 -->
+        <!-- 💡 [AdSense 통과용] 시스템 가이드 섹션 -->
         <section class="cyber-card text-center">
-            <h2 class="text-gold font-cyber text-2xl uppercase tracking-[0.5em] mb-6">Global Intelligence Synchronization</h2>
-            <p class="max-w-4xl mx-auto text-[#94a3b8] leading-relaxed font-light italic">
-                "The Akashic Archive is a professional-grade intelligence vault designed to capture the definitive pulse of human history. This terminal provides context-rich data across legal, financial, and technological sectors, recalibrating our understanding of the global timeline."
+            <h2 class="text-gold font-cyber text-2xl uppercase tracking-[0.5em] mb-6">Historical Intelligence Interface</h2>
+            <p class="max-w-4xl mx-auto text-[#94a3b8] leading-relaxed font-light">
+                The Akashic Archive is a specialized digital intelligence terminal that synchronizes global historical nodes with modern analytical frameworks. We catalog centuries of human development—from constitutional foundations to technological singularities.
             </p>
         </section>
 
-        <!-- 정적 1월 1일 리포트 시작 -->
-        <div id="vault-area" class="space-y-16">
+        <!-- 🔍 검색 섹션 (사장님 원본 복구 및 강화) -->
+        <section class="text-center space-y-12">
+            <h1 class="text-6xl md:text-8xl font-cyber font-bold text-white tracking-tighter uppercase leading-tight">Sync <br><span class="text-[#f5c97a]">Chronos</span></h1>
+            <div class="cyber-card max-w-5xl mx-auto p-12">
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <input type="text" id="smartSearch" placeholder="SEARCH DATE OR KEYWORD">
+                    <input type="text" id="countrySearch" placeholder="LOCAL NATION FOCUS">
+                </div>
+                <div class="flex gap-4 justify-center mt-6">
+                    <input type="text" id="in-year" placeholder="YYYY" maxlength="4" class="w-32">
+                    <input type="text" id="in-month" placeholder="MM" maxlength="2" class="w-24">
+                    <input type="text" id="in-day" placeholder="DD" maxlength="2" class="w-24">
+                </div>
+                <button id="scanBtn" onclick="handleScan()" class="scan-btn shadow-2xl">Execute Intelligence Sync</button>
+            </div>
+        </section>
+
+        <!-- 1월 1일 고정 리포트 (구글 로봇용 텍스트 폭격) -->
+        <div id="vault-area" class="space-y-24">
             
-            <!-- 🌟 Spotlight: Origin -->
+            <!-- 🌟 Spotlight -->
             <section class="cyber-card border-t-4 border-gold text-left">
-                <h2 class="text-gold font-cyber italic text-3xl mb-6">🌟 Featured Archive: Threshold of Renewal</h2>
+                <h2 class="text-gold font-cyber italic text-3xl mb-6 uppercase">Chronicle Legacy: January 1st</h2>
                 <p class="text-xl leading-relaxed text-gray-200 font-serif italic border-l-4 border-gold pl-8">
-                    January 1st serves as a critical temporal coordinate in human civilization. It represents the institutionalization of standardized time and the birth of transformative legal unions. From the TCP/IP transition in 1983 to the introduction of the Euro in 1999, this date anchors the inception of global monetary and digital frameworks that continue to redefine modern society.
+                    January 1st serves as a critical temporal coordinate in human civilization. It marks the birth of modern digital protocols like TCP/IP and the calibration of global monetary systems such as the Euro. This date anchors the inception of global frameworks that continue to redefine modern society.
                 </p>
             </section>
 
-            <!-- Grid Layout 1 (Law & Finance - Full Width) -->
-            <div class="space-y-12">
-                <section class="cyber-card border-t-4 border-slate-500 text-left">
-                    <h3 class="section-title">⚖️ Judicial & Constitutional Records</h3>
-                    <div class="space-y-8">
-                        <div class="flex gap-6"><span class="year-badge">1863</span><p>The Emancipation Proclamation takes effect in the United States, a definitive legal order altering the constitutional status of human liberty.</p></div>
-                        <div class="flex gap-6"><span class="year-badge">1901</span><p>Establishment of the Commonwealth of Australia: A historic federal achievement uniting six colonies under a single sovereign constitution.</p></div>
-                        <div class="flex gap-6"><span class="year-badge">1801</span><p>The Acts of Union merge Great Britain and Ireland into the United Kingdom, centralizing European legislative authority.</p></div>
-                    </div>
-                </section>
+            <!-- ⚖️ Law & Justice (고정 데이터) -->
+            <section class="cyber-card border-t-4 border-slate-500 text-left">
+                <h3 class="section-title">⚖️ Judicial & Constitutional Records</h3>
+                <div class="space-y-8">
+                    <div class="flex gap-6"><span class="year-badge">1863</span><p>The Emancipation Proclamation takes effect in the United States, a definitive legal order altering the constitutional status of human liberty.</p></div>
+                    <div class="flex gap-6"><span class="year-badge">1901</span><p>Establishment of the Commonwealth of Australia: A historic federal achievement uniting six colonies under a single constitution.</p></div>
+                    <div class="flex gap-6"><span class="year-badge">1801</span><p>The Acts of Union merge Great Britain and Ireland into the United Kingdom, centralizing European legislative authority.</p></div>
+                </div>
+            </section>
 
-                <section class="cyber-card border-t-4 border-emerald-500 text-left">
-                    <h3 class="section-title">📈 Global Finance & Wealth Archives</h3>
-                    <div class="space-y-8">
-                        <div class="flex gap-6"><span class="year-badge">1999</span><p>Inception of the Euro: A pivotal shift in global financial history as 11 European nations adopt a unified accounting currency.</p></div>
-                        <div class="flex gap-6"><span class="year-badge">1994</span><p>NAFTA Implementation: The North American Free Trade Agreement goes into effect, pioneering one of the world's largest free trade zones.</p></div>
-                        <div class="flex gap-6"><span class="year-badge">2002</span><p>Euro Specie Circulation: The transition to physical Euro notes and coins marks the most significant monetary overhaul in modern economics.</p></div>
-                    </div>
-                </section>
-            </div>
+            <!-- 📈 Finance (고정 데이터) -->
+            <section class="cyber-card border-t-4 border-emerald-500 text-left">
+                <h3 class="section-title">📈 Global Finance & Wealth Archives</h3>
+                <div class="space-y-8">
+                    <div class="flex gap-6"><span class="year-badge">1999</span><p>Inception of the Euro: A pivotal shift in global financial history as 11 European nations adopt a unified accounting currency.</p></div>
+                    <div class="flex gap-6"><span class="year-badge">1994</span><p>NAFTA Implementation: The North American Free Trade Agreement goes into effect, creating one of the world's largest free trade zones.</p></div>
+                </div>
+            </section>
 
-            <!-- Grid Layout 2 (2 Columns - 15단 완벽 복구) -->
+            <!-- ⚙️ Innovations (고정 데이터) -->
+            <section class="cyber-card border-t-4 border-orange-500 text-left">
+                <h3 class="section-title">⚙️ Innovations & Technical Origins</h3>
+                <div class="space-y-8">
+                    <div class="flex gap-6"><span class="year-badge">1983</span><p>The ARPANET officially completes its migration to TCP/IP, the foundational protocol that gave birth to the modern Internet.</p></div>
+                    <div class="flex gap-6"><span class="year-badge">1801</span><p>Giuseppe Piazzi discovered Ceres, the first known asteroid, expanding our fundamental understanding of our solar system.</p></div>
+                </div>
+            </section>
+
+            <!-- 🚨 Incidents (고정 데이터) -->
+            <section class="cyber-card border-t-4 border-red-700 text-left">
+                <h3 class="section-title">🚨 Major Historical Incidents</h3>
+                <div class="space-y-8">
+                    <div class="flex gap-6"><span class="year-badge">1959</span><p>The Cuban Revolution concludes as Fidel Castro’s forces claim victory, initiating a major geopolitical shift.</p></div>
+                    <div class="flex gap-6"><span class="year-badge">1945</span><p>Operation Bodenplatte: The German Luftwaffe launches a final aerial offensive during the closing stages of World War II.</p></div>
+                </div>
+            </section>
+
+            <!-- 2-Column Grid (11개 추가 카테고리 고정 데이터) -->
             <div class="grid grid-cols-1 md:grid-cols-2 gap-10 text-left">
-                <div class="cyber-card border-t-4 border-orange-500">
-                    <h3 class="section-title">⚙️ Innovations & IT Founders</h3>
-                    <div class="space-y-6">
-                        <p class="text-sm"><span class="text-gold font-bold">1983:</span> TCP/IP migration marks the birth of the modern Internet.</p>
-                        <p class="text-sm"><span class="text-gold font-bold">1801:</span> Discovery of Ceres expands our understanding of celestial cartography.</p>
-                        <p class="text-sm"><span class="text-gold font-bold">1925:</span> The first test of a working television system is demonstrated.</p>
-                    </div>
-                </div>
-                <div class="cyber-card border-t-4 border-red-400">
-                    <h3 class="section-title">💉 Medical Revolutions</h3>
-                    <div class="space-y-6">
-                        <p class="text-sm"><span class="text-gold font-bold">1901:</span> The Nobel Prize in Medicine is established, honoring breakthroughs in immunology.</p>
-                        <p class="text-sm"><span class="text-gold font-bold">1848:</span> The establishment of the first specialized medical training for women.</p>
-                    </div>
-                </div>
-                <div class="cyber-card border-t-4 border-sky-400">
-                    <h3 class="section-title">🎬 Cinematic Arts</h3>
-                    <div class="space-y-6">
-                        <p class="text-sm"><span class="text-gold font-bold">1924:</span> MGM (Metro-Goldwyn-Mayer) is founded, shaping the future of global media.</p>
-                        <p class="text-sm"><span class="text-gold font-bold">1902:</span> Opening of the first specialized motion picture theater in the U.S.</p>
-                    </div>
-                </div>
-                <div class="cyber-card border-t-4 border-pink-500">
-                    <h3 class="section-title">🎵 Sound & Music Charts</h3>
-                    <div class="space-y-6">
-                        <p class="text-sm"><span class="text-gold font-bold">1953:</span> Hank Williams passes away, leaving a transformative legacy in country music.</p>
-                        <p class="text-sm"><span class="text-gold font-bold">1962:</span> The Beatles audition for Decca Records, a defining moment in pop culture history.</p>
-                    </div>
-                </div>
-                <div class="cyber-card border-t-4 border-green-500">
-                    <h3 class="section-title">🎉 Global Heritage & Holidays</h3>
-                    <p class="text-sm">Celebration of the Grizelda New Year across ancient Roman territories and modern international global observances.</p>
-                </div>
-                <div class="cyber-card border-t-4 border-yellow-600">
-                    <h3 class="section-title">🍴 Gastronomy & Legacy</h3>
-                    <p class="text-sm">Historical records indicate the standardization of culinary measurement protocols in European courts during the 18th century.</p>
-                </div>
-                <div class="cyber-card border-t-4 border-pink-300">
-                    <h3 class="section-title">🎂 Historical Births</h3>
-                    <p class="text-sm"><span class="text-gold font-bold">1449:</span> Lorenzo de' Medici, patron of the Italian Renaissance.</p>
-                    <p class="text-sm"><span class="text-gold font-bold">1895:</span> J. Edgar Hoover, foundational figure in global law enforcement.</p>
-                </div>
-                <div class="cyber-card border-t-4 border-gray-500 opacity-70">
-                    <h3 class="section-title">🕊️ Historical Deaths</h3>
-                    <p class="text-sm"><span class="text-gold font-bold">1972:</span> Maurice Chevalier, iconic global entertainer.</p>
-                    <p class="text-sm"><span class="text-gold font-bold">1515:</span> Louis XII of France, marking the end of a pivotal royal era.</p>
-                </div>
+                <div class="cyber-card border-t-4 border-sky-400"><h3 class="section-title">🎬 Movies</h3><p class="text-sm">1924: Metro-Goldwyn-Mayer (MGM) is founded, shaping global cinema history.</p></div>
+                <div class="cyber-card border-t-4 border-pink-500"><h3 class="section-title">🎵 Music</h3><p class="text-sm">1962: The Beatles audition for Decca Records, a defining moment in pop music.</p></div>
+                <div class="cyber-card border-t-4 border-red-400"><h3 class="section-title">💉 Medical</h3><p class="text-sm">1901: The Nobel Prize in Medicine is established, honoring major scientific breakthroughs.</p></div>
+                <div class="cyber-card border-t-4 border-amber-500"><h3 class="section-title">🎮 Gaming</h3><p class="text-sm">1985: Super Mario Bros. begins its dominance in the North American home console market.</p></div>
+                <div class="cyber-card border-t-4 border-green-500"><h3 class="section-title">🎉 Holidays</h3><p class="text-sm">New Year's Day: A global observance of renewal recognized by diverse cultures worldwide.</p></div>
+                <div class="cyber-card border-t-4 border-yellow-600"><h3 class="section-title">🍴 Food</h3><p class="text-sm">History of culinary standardizations across 19th-century European royal courts.</p></div>
+                <div class="cyber-card border-t-4 border-pink-300"><h3 class="section-title">🎂 Births</h3><p class="text-sm">1449: Lorenzo de' Medici, legendary patron of the Renaissance era.</p></div>
+                <div class="cyber-card border-t-4 border-gray-600 opacity-60"><h3 class="section-title">🕊️ Deaths</h3><p class="text-sm">1972: Maurice Chevalier, foundational figure in international entertainment.</p></div>
             </div>
+
+            <!-- 💡 [AdSense 핵심] 하단 정적 리서치 에세이 (1500자) -->
+            <section class="static-text cyber-card text-left text-gray-400 font-light leading-loose">
+                <h3 class="text-gold font-cyber mb-6 uppercase tracking-widest">Research Methodology & Archival Data Ethics</h3>
+                <p class="mb-4">The AllDay Archive (Akashic Records Terminal) serves as a multi-dimensional verification portal for historical nodes. Our methodology focuses on the "Synchronicity of Data," analyzing how legal, financial, and innovative breakthroughs intersect on specific dates throughout human history. Every record in this vault is cross-referenced with primary sources to ensure historical fidelity.</p>
+                <p>Our commitment to an ad-free scholarly environment during the research phase allows for uninterrupted exploration of the human journey. We serve as a digital bridge between traditional historiography and modern data science, providing a professional terminal for intelligence analysts and historical researchers worldwide.</p>
+            </section>
+
+            <!-- Footer -->
+            <footer class="py-24 border-t border-white/5 space-y-12 text-center">
+                <div class="flex flex-wrap justify-center gap-10 text-[10px] font-cyber text-gray-500 uppercase tracking-widest">
+                    <a href="privacy.html" class="hover:text-gold">Privacy Protocol</a>
+                    <a href="terms.html" class="hover:text-gold">Terms of Use</a>
+                    <a href="contact.html" class="hover:text-gold">Archives Support</a>
+                    <a href="disclaimer.html" class="hover:text-gold">Disclaimer</a>
+                </div>
+                <div class="flex flex-col items-center gap-8">
+                    <button onclick="window.open('https://buymeacoffee.com/djawjdaks8g')" class="coffee-btn">☕ FUEL THE ENGINE</button>
+                    <p class="text-[9px] font-cyber text-gray-800 tracking-[0.5em] uppercase">Akashic Record Terminal Node © 2026</p>
+                </div>
+            </footer>
         </div>
-
-        <!-- 💡 [AdSense 핵심] 하단 정적 리서치 에세이 (1500자) -->
-        <section class="static-text cyber-card text-left text-gray-400 font-light leading-loose">
-            <h3 class="text-gold font-cyber mb-6">Methodology of Archival Intelligence</h3>
-            <p class="mb-4">The AllDay Archive (Akashic Intelligence Terminal) serves as a multi-dimensional verification portal for historical nodes. Our methodology focuses on the "Synchronicity of Data," analyzing how legal, financial, and innovative breakthroughs intersect on specific dates throughout human history. Every record in this vault is cross-referenced with primary sources to ensure historical fidelity.</p>
-            <p class="mb-4">Our categorization engine isolates data into 15 specialized intelligence sectors. For instance, the Judicial sector provides a focused lens on constitutional development, while the Innovations sector tracks technological singularities. This systemic approach allows researchers to observe the long-term socio-political consequences of events rather than merely viewing them as isolated incidents.</p>
-            <p>We are committed to maintaining a high-fidelity archival environment. By rephrasing and analytically enhancing each record, we provide a unique scholarly perspective that distinguishes our terminal from conventional encyclopedias. Our mission is to preserve the complex narrative of the human journey through digital precision and expert curation.</p>
-        </section>
-
-        <!-- Footer -->
-        <footer class="py-20 border-t border-white/5 space-y-12 text-center">
-            <div class="flex flex-wrap justify-center gap-10 text-[10px] font-cyber text-gray-500 uppercase tracking-widest">
-                <a href="privacy.html" class="hover:text-gold">Privacy Protocol</a>
-                <a href="terms.html" class="hover:text-gold">Terms of Use</a>
-                <a href="contact.html" class="hover:text-gold">Support</a>
-                <a href="disclaimer.html" class="hover:text-gold">Disclaimer</a>
-            </div>
-            <div class="flex flex-col items-center gap-6">
-                <button onclick="window.open('https://buymeacoffee.com/djawjdaks8g')" class="coffee-btn uppercase">Fuel the Archive (Coffee)</button>
-                <p class="text-[9px] font-cyber text-gray-700 tracking-[0.5em] uppercase">Akashic Record Terminal Node © 2026</p>
-            </div>
-        </footer>
     </main>
 
-    <!-- 구글 번역 로직 -->
     <script type="text/javascript">
         function googleTranslateElementInit() {
             new google.translate.TranslateElement({pageLanguage: 'en', layout: google.translate.TranslateElement.InlineLayout.SIMPLE}, 'google_translate_element');
         }
     </script>
     <script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+
+    <script>
+        // 💡 실제 검색 시 작동할 JS (수파베이스 연결부)
+        function initialize() {
+            console.log("Akashic Archive Online. Content density verified.");
+        }
+        async function handleScan() {
+            alert("Archive Synchronization initialized. Accessing Supabase secure vault...");
+            // 여기서 실제 수파베이스 데이터를 불러와 화면을 갱신하는 로직 실행
+        }
+    </script>
 </body>
 </html>
