@@ -1,260 +1,236 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <!-- Google Tag Manager -->
-    <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
-    new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
-    j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
-    'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
-    })(window,document,'script','dataLayer','GTM-MFWLKQ7B');</script>
-
+    <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src='https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);})(window,document,'script','dataLayer','GTM-MFWLKQ7B');</script>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>The Akashic Archive | Global History Intelligence & Analytical Matrix</title>
-    
-    <meta name="description" content="A premium 12-month digital library of human history. Explore professional intelligence reports across 17 specialized sectors in a cosmic archival environment.">
+    <title>Akashic Archive | The Definitive 12-Month Global Intelligence Matrix</title>
+    <meta name="description" content="A professional-grade 12-month digital library of human history. Explore extensive archival reports across 17 specialized intelligence sectors.">
     <meta name="google-site-verification" content="Y1tnVUzXiTj0LthauJuHS3DkMpxo8D1olmatbrfhld0">
-    
-    <!-- 🛑 AdSense Script (광고 박스는 제거됨) -->
     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8940706057033490" crossorigin="anonymous"></script>
-
     <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=Inter:wght@300;400;600;800&family=Playfair+Display:italic,wght@700&display=swap" rel="stylesheet">
     <script src="https://cdn.tailwindcss.com"></script>
-    
     <style>
         :root { --neon-gold: #f5c97a; --bg: #010204; --card-bg: rgba(10, 14, 22, 0.98); }
         body { font-family: 'Inter', sans-serif; background-color: var(--bg); color: #e2e8f0; line-height: 2.1; overflow-x: hidden; }
         .font-cyber { font-family: 'Orbitron', sans-serif; }
         .font-serif { font-family: 'Playfair Display', serif; }
-        
         .bg-nebula { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: radial-gradient(circle at 50% 50%, #0d1a33 0%, #010204 100%); z-index: -2; }
         .bg-grid { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background-image: linear-gradient(rgba(245, 201, 122, 0.04) 1.5px, transparent 1.5px), linear-gradient(90deg, rgba(245, 201, 122, 0.04) 1.5px, transparent 1.5px); background-size: 60px 60px; z-index: -1; }
-
-        .cyber-card { background: var(--card-bg); border: 1px solid rgba(245, 201, 122, 0.15); border-radius: 24px; backdrop-filter: blur(40px); padding: 3rem; margin-bottom: 5rem; box-shadow: 0 0 50px rgba(0,0,0,0.9); }
-        
-        .node-selector { display: flex; justify-content: center; gap: 12px; margin: 4rem 0; flex-wrap: wrap; }
+        .cyber-card { background: var(--card-bg); border: 1px solid rgba(245, 201, 122, 0.15); border-radius: 24px; backdrop-filter: blur(40px); padding: 3rem; margin-bottom: 5rem; box-shadow: 0 0 60px rgba(0,0,0,0.9); }
         .node-btn { font-family: 'Orbitron'; font-size: 10px; padding: 12px 24px; border: 1px solid rgba(245, 201, 122, 0.2); border-radius: 50px; color: var(--neon-gold); cursor: pointer; transition: 0.4s; background: rgba(0,0,0,0.3); }
         .node-btn.active { background: var(--neon-gold); color: #000; box-shadow: 0 0 25px var(--neon-gold); font-weight: 800; }
-
         .report-section { display: none; animation: slideIn 0.7s ease-out; }
         .report-section.active { display: block; }
         @keyframes slideIn { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
-
         .year-badge { border: 1px solid var(--neon-gold); color: var(--neon-gold); padding: 4px 15px; border-radius: 4px; font-size: 12px; font-family: 'Orbitron'; min-width: 95px; text-align: center; display: inline-block; margin-bottom: 15px; background: rgba(245, 201, 122, 0.05); }
-        .editorial-p { text-align: justify; color: #cbd5e1; font-size: 1.15rem; margin-bottom: 3rem; }
         .category-title { font-family: 'Orbitron'; color: #fff; font-size: 1.4rem; margin-top: 4rem; margin-bottom: 1.5rem; text-transform: uppercase; letter-spacing: 4px; border-left: 5px solid var(--neon-gold); padding-left: 20px; }
-
-        .coffee-btn { background: #FFDD00; color: #000 !important; font-weight: 900; padding: 18px 50px; border-radius: 100px; font-size: 14px; font-family: 'Orbitron'; box-shadow: 0 5px 25px rgba(255,221,0,0.4); }
         #google_translate_element { background: rgba(255,255,255,0.05); padding: 8px; border-radius: 12px; border: 1px solid rgba(245, 201, 122, 0.2); }
     </style>
 </head>
-<body>
-    <div class="bg-akashic"></div><div class="bg-grid"></div>
-    
+<body onload="initialize()">
+    <div class="bg-nebula"></div><div class="bg-grid"></div>
     <nav class="fixed w-full z-[1000] px-12 py-10 flex justify-between items-center border-b border-white/5 bg-black/70 backdrop-blur-3xl">
-        <div class="text-3xl font-cyber font-bold tracking-[0.5em] text-[#f5c97a] cursor-pointer" onclick="location.href='/'">AKASHIC ARCHIVE</div>
+        <div class="text-3xl font-cyber font-bold tracking-[0.5em] text-[#f5c97a]">AKASHIC ARCHIVE</div>
         <div id="google_translate_element"></div>
     </nav>
 
     <main class="relative pt-64 pb-40 px-10 max-w-7xl mx-auto space-y-32">
-        
         <section class="cyber-card text-center">
-            <h1 class="text-gold font-cyber text-4xl uppercase tracking-[0.8em] mb-12">Universal Chronos Terminal</h1>
-            <p class="editorial-p max-w-5xl mx-auto leading-loose text-lg">
-                The <strong>Akashic Archive</strong> is a high-fidelity digital repository designed to synchronize disparate historical nodes. This report presents a 12-month analytical synthesis of our global intelligence matrix.
+            <h1 class="text-gold font-cyber text-4xl uppercase tracking-[0.8em] mb-12">Universal Chronos Matrix</h1>
+            <p class="max-w-5xl mx-auto leading-loose text-gray-400 text-lg">
+                Welcome to the world's most sophisticated digital repository. The <strong>Akashic Archive</strong> synchronizes 12 months of global historical nodes into a high-fidelity intelligence matrix. Explore our curated professional reports across 17 specialized sectors.
             </p>
-            
-            <div class="node-selector">
-                <button class="node-btn active" onclick="showNode(1)">NODE_01 (JAN)</button>
-                <button class="node-btn" onclick="showNode(2)">NODE_02 (FEB)</button>
-                <button class="node-btn" onclick="showNode(3)">NODE_03 (MAR)</button>
-                <button class="node-btn" onclick="showNode(4)">NODE_04 (APR)</button>
-                <button class="node-btn" onclick="showNode(5)">NODE_05 (MAY)</button>
-                <button class="node-btn" onclick="showNode(6)">NODE_06 (JUN)</button>
-                <button class="node-btn" onclick="showNode(7)">NODE_07 (JUL)</button>
-                <button class="node-btn" onclick="showNode(8)">NODE_08 (AUG)</button>
-                <button class="node-btn" onclick="showNode(9)">NODE_09 (SEP)</button>
-                <button class="node-btn" onclick="showNode(10)">NODE_10 (OCT)</button>
-                <button class="node-btn" onclick="showNode(11)">NODE_11 (NOV)</button>
-                <button class="node-btn" onclick="showNode(12)">NODE_12 (DEC)</button>
+            <div class="flex justify-center gap-4 mt-12 flex-wrap" id="node-selector">
+                <button class="node-btn active" onclick="showNode(1)">JAN</button>
+                <button class="node-btn" onclick="showNode(2)">FEB</button>
+                <button class="node-btn" onclick="showNode(3)">MAR</button>
+                <button class="node-btn" onclick="showNode(4)">APR</button>
+                <button class="node-btn" onclick="showNode(5)">MAY</button>
+                <button class="node-btn" onclick="showNode(6)">JUN</button>
+                <button class="node-btn" onclick="showNode(7)">JUL</button>
+                <button class="node-btn" onclick="showNode(8)">AUG</button>
+                <button class="node-btn" onclick="showNode(9)">SEP</button>
+                <button class="node-btn" onclick="showNode(10)">OCT</button>
+                <button class="node-btn" onclick="showNode(11)">NOV</button>
+                <button class="node-btn" onclick="showNode(12)">DEC</button>
             </div>
         </section>
 
-        <!-- 🚀 1월부터 12월까지 실제 데이터가 이 안에 모두 들어있습니다. -->
         <div id="chronos-vault">
-            
-            <!-- JANUARY -->
+            <!-- NODE 01: JANUARY -->
             <div id="node-1" class="report-section active">
                 <section class="cyber-card">
                     <h2 class="font-cyber text-gold text-3xl mb-12 uppercase tracking-widest text-center">JANUARY: THE THRESHOLD OF SYSTEMS</h2>
-                    <p class="editorial-p">January represents the foundational threshold for global standardization. Historically, this temporal coordinate anchors the birth of transformative digital protocols and the calibration of international monetary systems. In 1983, the technical migration to TCP/IP marked the operational birth of the Internet, while 1999 saw the introduction of the Euro, challenging the existing hegemony of reserve currencies.</p>
-                    
+                    <p class="text-justify text-gray-300 mb-10">January serves as the primary temporal coordinate for global standardization and institutional renewal. This month anchors the birth of modern digital protocols and the calibration of international monetary systems. In <strong>1863</strong>, the legal landscape of human liberty was forever redefined, while <strong>1983</strong> marked the operational birth of the Internet, enabling universal data synchronization across global networks.</p>
                     <h3 class="category-title">⚖️ Judicial Intelligence</h3>
                     <div class="space-y-8">
-                        <div><span class="year-badge">1863.01.01</span><p class="text-gray-300 text-lg">President Abraham Lincoln issued the Emancipation Proclamation, a definitive legal order altering the constitutional status of human liberty.</p></div>
-                        <div><span class="year-badge">1901.01.01</span><p class="text-gray-300 text-lg">The Commonwealth of Australia was officially established, marking a historic achievement in federalist constitutional law.</p></div>
+                        <div><span class="year-badge">1863.01.01</span><p class="text-gray-300">The Emancipation Proclamation: A definitive legal order issued by Abraham Lincoln that fundamentally redefined constitutional human rights in the United States.</p></div>
+                        <div><span class="year-badge">1901.01.01</span><p class="text-gray-300">Federation of Australia: The merger of six colonies under one sovereign federal constitution, marking a historic achievement in constitutional law.</p></div>
                     </div>
-
                     <h3 class="category-title">📈 Finance & Wealth</h3>
                     <div class="space-y-8">
-                        <div><span class="year-badge">1999.01.01</span><p class="text-gray-300 text-lg">The Euro accounting currency is introduced, recalibrating European capital integration and challenging international reserve structures.</p></div>
+                        <div><span class="year-badge">1999.01.01</span><p class="text-gray-300">Inception of the Euro: A massive recalibration of global monetary systems, establishing a unified economic frontier for eleven nations.</p></div>
                     </div>
+                    <h3 class="category-title">🕵️ Criminal Records</h3>
+                    <div><span class="year-badge">1924.01.01</span><p class="text-gray-300">J. Edgar Hoover's foundational reforms began, initializing specialized identification systems that defined global law enforcement standards.</p></div>
                 </section>
             </div>
 
-            <!-- FEBRUARY -->
+            <!-- NODE 02: FEBRUARY -->
             <div id="node-2" class="report-section">
                 <section class="cyber-card">
                     <h2 class="font-cyber text-gold text-3xl mb-12 uppercase tracking-widest text-center">FEBRUARY: SCIENTIFIC LEAPS & MEDIA</h2>
-                    <p class="editorial-p">February archives the acceleration of communication logistics. From the standardization of modern postal systems in 1852 to the founding of YouTube in 2005, this node represents the democratization of information and the automation of human cultural exchange.</p>
-                    
-                    <h3 class="category-title">⚙️ IT Innovations</h3>
+                    <p class="text-justify text-gray-300 mb-10">February archives the acceleration of communication logistics and computational dawn. From the <strong>1852</strong> standardization of global postal systems to the <strong>1946</strong> unveiling of ENIAC, this month represents the democratization of information and the automation of human intelligence processing.</p>
+                    <h3 class="category-title">⚙️ Innovations & IT</h3>
                     <div class="space-y-8">
-                        <div><span class="year-badge">1946.02.14</span><p class="text-gray-300 text-lg">The ENIAC computer was unveiled at the University of Pennsylvania, signaling the dawn of the electronic computational age.</p></div>
-                        <div><span class="year-badge">2005.02.14</span><p class="text-gray-300 text-lg">Founding of YouTube: A digital hegemony shift that revolutionized information consumption and cultural democratization.</p></div>
+                        <div><span class="year-badge">1946.02.14</span><p class="text-gray-300">ENIAC Unveiling: The world's first electronic general-purpose computer was dedicated, signaling the start of the digital computational era.</p></div>
+                        <div><span class="year-badge">2005.02.14</span><p class="text-gray-300">Founding of YouTube: A digital hegemony shift that revolutionized information consumption and cultural democratization via video synchronization.</p></div>
                     </div>
+                    <h3 class="category-title">🎬 Cinematic Arts</h3>
+                    <div><span class="year-badge">1895.02.13</span><p class="text-gray-300">The Lumière brothers patented the Cinématographe, a technical milestone that birthed the global cinematic industry.</p></div>
                 </section>
             </div>
 
-            <!-- MARCH -->
+            <!-- NODE 03: MARCH -->
             <div id="node-3" class="report-section">
                 <section class="cyber-card">
-                    <h2 class="font-cyber text-gold text-3xl mb-12 uppercase tracking-widest text-center">MARCH: SOVEREIGNTY & RIGHTS</h2>
-                    <p class="editorial-p">March is historically synchronized with the awakening of national sovereignty. The 1919 March 1st Movement catalyzed global decolonization efforts, while Jonas Salk’s 1953 vaccine success redefined global health protocols.</p>
+                    <h2 class="font-cyber text-gold text-3xl mb-12 uppercase tracking-widest text-center">MARCH: SOVEREIGNTY & CIVIL RIGHTS</h2>
+                    <p class="text-justify text-gray-300 mb-10">March represents the historical pulse of civil resistance and national awakening. It archives the pivotal moments when collective demands for sovereignty reshaped the global map. The <strong>1919 March 1st Movement</strong> catalyzed global decolonization, while <strong>1953</strong> saw a paradigm shift in global health security.</p>
                     <h3 class="category-title">🏛️ National Sovereignty</h3>
-                    <div class="space-y-8">
-                        <div><span class="year-badge">1919.03.01</span><p class="text-gray-300 text-lg">The March 1st Declaration: A monumental achievement in civil resistance that inspired national identity movements across Asia and Africa.</p></div>
-                    </div>
+                    <div><span class="year-badge">1919.03.01</span><p class="text-gray-300">The March 1st Declaration: A monumental achievement in non-violent civil resistance that inspired national identity movements across Asia.</p></div>
+                    <h3 class="category-title">💉 Medical Singularities</h3>
+                    <div><span class="year-badge">1953.03.26</span><p class="text-gray-300">Jonas Salk announced the polio vaccine success, marking a scientific triumph in global preventative medicine protocols.</p></div>
                 </section>
             </div>
 
-            <!-- APRIL -->
+            <!-- NODE 04: APRIL -->
             <div id="node-4" class="report-section">
                 <section class="cyber-card">
-                    <h2 class="font-cyber text-gold text-3xl mb-12 uppercase tracking-widest text-center">APRIL: GLOBAL ALLIANCES & EXPLORATION</h2>
-                    <p class="editorial-p">April marks the institutionalization of collective security and the expansion of innovative corporate power. The founding of NATO in 1949 and Apple Inc. in 1976 represent the intersection of geopolitics and technical entrepreneurship.</p>
+                    <h2 class="font-cyber text-gold text-3xl mb-12 uppercase tracking-widest text-center">APRIL: GLOBAL ALLIANCES & BRANDS</h2>
+                    <p class="text-justify text-gray-300 mb-10">April archives the institutionalization of collective security and the expansion of innovative corporate power. The founding of <strong>NATO in 1949</strong> and <strong>Apple Inc. in 1976</strong> represent the intersection of geopolitics and technical entrepreneurship.</p>
                     <h3 class="category-title">🏷️ Brand Genealogy</h3>
-                    <div class="space-y-8">
-                        <div><span class="year-badge">1976.04.01</span><p class="text-gray-300 text-lg">Apple Computer was established by Steve Jobs and Steve Wozniak, catalyzing the personal computing revolution.</p></div>
-                    </div>
+                    <div><span class="year-badge">1976.04.01</span><p class="text-gray-300">Apple Computer established: Steve Jobs and Steve Wozniak catalyzed the personal computing revolution, defining a new era of commercial branding.</p></div>
+                    <h3 class="category-title">🌍 Global Alliances</h3>
+                    <div><span class="year-badge">1949.04.04</span><p class="text-gray-300">Founding of NATO: The North Atlantic Treaty was signed, creating a definitive framework for Western collective defense and security.</p></div>
                 </section>
             </div>
 
-            <!-- MAY -->
+            <!-- NODE 05: MAY -->
             <div id="node-5" class="report-section">
                 <section class="cyber-card">
-                    <h2 class="font-cyber text-gold text-3xl mb-12 uppercase tracking-widest text-center">MAY: INFRASTRUCTURE & GLOBAL HEALTH</h2>
-                    <p class="editorial-p">May archives the zenith of architectural ambition and the founding of major health protocols. The 1931 completion of the Empire State Building and the 1948 establishment of the WHO defined modern structural and biological standards.</p>
-                    <h3 class="category-title">💉 Medical Singularity</h3>
-                    <div class="space-y-8">
-                        <div><span class="year-badge">1948.05.14</span><p class="text-gray-300 text-lg">Establishment of the World Health Organization (WHO), centralizing global medical research and health security responses.</p></div>
-                    </div>
+                    <h2 class="font-cyber text-gold text-3xl mb-12 uppercase tracking-widest text-center">MAY: INFRASTRUCTURE & BIOLOGY</h2>
+                    <p class="text-justify text-gray-300 mb-10">May archives the zenith of architectural ambition and the founding of major health protocols. The <strong>1931</strong> completion of the Empire State Building and the <strong>1948</strong> establishment of the WHO defined modern structural and biological standards.</p>
+                    <h3 class="category-title">⚙️ Innovations</h3>
+                    <div><span class="year-badge">1931.05.01</span><p class="text-gray-300">The Empire State Building was dedicated in New York, a milestone in civil engineering that stood as the world's tallest structure for decades.</p></div>
+                    <h3 class="category-title">💉 Medical Frontiers</h3>
+                    <div><span class="year-badge">1948.05.14</span><p class="text-gray-300">Establishment of the World Health Organization (WHO), centralizing global medical research and health security responses for the collective human race.</p></div>
                 </section>
             </div>
 
-            <!-- JUNE -->
+            <!-- NODE 06: JUNE -->
             <div id="node-6" class="report-section">
                 <section class="cyber-card">
-                    <h2 class="font-cyber text-gold text-3xl mb-12 uppercase tracking-widest text-center">JUNE: LIBERTY & INTERNATIONAL ORDER</h2>
-                    <p class="editorial-p">June is the coordinate for human rights and post-war diplomacy. From the 1215 Magna Carta to the 1945 UN Charter, this month archives the legal frameworks designed to maintain global equilibrium and civil order.</p>
-                    <h3 class="category-title">⚖️ Legal Frameworks</h3>
-                    <div class="space-y-8">
-                        <div><span class="year-badge">1215.06.15</span><p class="text-gray-300 text-lg">The Magna Carta was sealed, establishing the foundational principle that no one is above the law, even the sovereign ruler.</p></div>
-                    </div>
+                    <h2 class="font-cyber text-gold text-3xl mb-12 uppercase tracking-widest text-center">JUNE: LIBERTY & DIPLOMACY</h2>
+                    <p class="text-justify text-gray-300 mb-10">June is the coordinate for human rights and post-war diplomacy. From the <strong>1215 Magna Carta</strong> to the <strong>1945 UN Charter</strong>, this month archives the legal frameworks designed to maintain global equilibrium and civil order.</p>
+                    <h3 class="category-title">⚖️ Judicial Records</h3>
+                    <div><span class="year-badge">1215.06.15</span><p class="text-gray-300">The Magna Carta was sealed: A foundational legal milestone establishing that no sovereign is above the law, anchoring the future of human liberty.</p></div>
+                    <h3 class="category-title">🏛️ Global Order</h3>
+                    <div><span class="year-badge">1945.06.26</span><p class="text-gray-300">Signing of the UN Charter: Representatives of 50 nations established a framework for international cooperation and peace maintenance.</p></div>
                 </section>
             </div>
-
-            <!-- JULY -->
+            <!-- NODE 07: JULY -->
             <div id="node-7" class="report-section">
                 <section class="cyber-card">
                     <h2 class="font-cyber text-gold text-3xl mb-12 uppercase tracking-widest text-center">JULY: INTERSTELLAR AMBITION</h2>
-                    <p class="editorial-p">July marks the moment human civilization transitioned into a spacefaring species. The 1969 Apollo 11 Lunar Landing serves as the ultimate singularity where human intelligence expanded beyond the terrestrial biosphere.</p>
-                    <h3 class="category-title">⚙️ Innovations</h3>
-                    <div class="space-y-8">
-                        <div><span class="year-badge">1969.07.20</span><p class="text-gray-300 text-lg">Human beings first set foot on the Lunar surface, redefined our technological limits and innovative scope for eternity.</p></div>
-                    </div>
+                    <p class="text-justify text-gray-300 mb-10">July marks the moment human civilization transitioned into a spacefaring species. The <strong>1969 Apollo 11 Lunar Landing</strong> serves as the ultimate singularity where human intelligence physically expanded beyond the terrestrial biosphere.</p>
+                    <h3 class="category-title">⚙️ Innovations & Space</h3>
+                    <div><span class="year-badge">1969.07.20</span><p class="text-gray-300">The Apollo 11 Lunar Landing: A historic milestone representing the first time human beings set foot on another celestial body, redefining our technological limits.</p></div>
+                    <h3 class="category-title">🏷️ Brand Genealogy</h3>
+                    <div><span class="year-badge">1903.07.23</span><p class="text-gray-300">Ford Motor Company sold its first car: The sale of the Model A marked the inception of mass-production commercial branding in the logistics sector.</p></div>
                 </section>
             </div>
 
-            <!-- AUGUST -->
+            <!-- NODE 08: AUGUST -->
             <div id="node-8" class="report-section">
                 <section class="cyber-card">
                     <h2 class="font-cyber text-gold text-3xl mb-12 uppercase tracking-widest text-center">AUGUST: THE ATOMIC AGE & LOGISTICS</h2>
-                    <p class="editorial-p">August represents the recalibration of energy and global trade. The completion of the Panama Canal in 1914 and the atomic milestones of 1945 significantly altered the speed of commerce and the scale of global conflict.</p>
+                    <p class="text-justify text-gray-300 mb-10">August represents the recalibration of energy and global trade. The completion of the <strong>Panama Canal in 1914</strong> and the atomic milestones of <strong>1945</strong> significantly altered the speed of commerce and the scale of human conflict.</p>
                     <h3 class="category-title">🚨 Historical Incidents</h3>
-                    <div class="space-y-8">
-                        <div><span class="year-badge">1914.08.15</span><p class="text-gray-300 text-lg">Opening of the Panama Canal: A logistical masterwork that fundamentally shortened global maritime trade routes.</p></div>
-                    </div>
+                    <div><span class="year-badge">1914.08.15</span><p class="text-gray-300">Opening of the Panama Canal: A logistical masterwork that fundamentally shortened global maritime trade routes, connecting the Atlantic and Pacific oceans.</p></div>
+                    <h3 class="category-title">📈 Economic Shifts</h3>
+                    <div><span class="year-badge">1971.08.15</span><p class="text-gray-300">The Nixon Shock: The United States unilaterally ended the direct convertibility of the US dollar to gold, reshaping the global financial architecture.</p></div>
                 </section>
             </div>
 
-            <!-- SEPTEMBER -->
+            <!-- NODE 09: SEPTEMBER -->
             <div id="node-9" class="report-section">
                 <section class="cyber-card">
                     <h2 class="font-cyber text-gold text-3xl mb-12 uppercase tracking-widest text-center">SEPTEMBER: SECURITY & GEOPOLITICS</h2>
-                    <p class="editorial-p">September serves as a critical node for international security protocols. From the founding of Google in 1998 to the 9/11 attacks in 2001, this node archives the shifts in surveillance, law, and digital search paradigms.</p>
-                    <h3 class="category-title">📈 Economic Intelligence</h3>
-                    <div class="space-y-8">
-                        <div><span class="year-badge">1998.09.04</span><p class="text-gray-300 text-lg">Founding of Google Inc.: The inception of a digital intelligence hegemony that organized the world's information for the coming century.</p></div>
-                    </div>
+                    <p class="text-justify text-gray-300 mb-10">September serves as a critical node for international security protocols and digital intelligence. From the <strong>1998 founding of Google</strong> to the <strong>2001 9/11 attacks</strong>, this node archives massive shifts in surveillance and information access.</p>
+                    <h3 class="category-title">🚨 Critical Tragedies</h3>
+                    <div><span class="year-badge">2001.09.11</span><p class="text-gray-300">The September 11 Attacks: A tragic singularity that reshaped global security protocols, international law, and 21st-century geopolitics.</p></div>
+                    <h3 class="category-title">⚙️ IT Innovations</h3>
+                    <div><span class="year-badge">1998.09.04</span><p class="text-gray-300">Founding of Google Inc.: The inception of a digital intelligence hegemony that organized the world's information for the modern century.</p></div>
                 </section>
             </div>
 
-            <!-- OCTOBER -->
+            <!-- NODE 10: OCTOBER -->
             <div id="node-10" class="report-section">
                 <section class="cyber-card">
-                    <h2 class="font-cyber text-gold text-3xl mb-12 uppercase tracking-widest text-center">OCTOBER: FINANCIAL CRISIS & CRISIS MGMT</h2>
-                    <p class="editorial-p">October archives the volatility of global capital. The 1929 Stock Market Crash and the 1945 founding of the United Nations represent the dual nature of economic collapse and the pursuit of institutional peace.</p>
+                    <h2 class="font-cyber text-gold text-3xl mb-12 uppercase tracking-widest text-center">OCTOBER: CRISIS & COOPERATION</h2>
+                    <p class="text-justify text-gray-300 mb-10">October archives the volatility of global capital and the pursuit of institutional peace. The <strong>1929 Stock Market Crash</strong> and the <strong>1945 founding of the UN</strong> represent the dual nature of economic collapse and collective rebuilding.</p>
                     <h3 class="category-title">📉 Macro-Financial Records</h3>
-                    <div class="space-y-8">
-                        <div><span class="year-badge">1929.10.29</span><p class="text-gray-300 text-lg">Black Tuesday: The definitive stock market crash that initiated the Great Depression and reshaped global economic policies for decades.</p></div>
-                    </div>
+                    <div><span class="year-badge">1929.10.29</span><p class="text-gray-300">Black Tuesday: The definitive stock market crash that initiated the Great Depression, prompting a global recalibration of financial regulations.</p></div>
+                    <h3 class="category-title">🌍 Global Institutions</h3>
+                    <div><span class="year-badge">1945.10.24</span><p class="text-gray-300">United Nations Day: The official inception of the UN, established to prevent future global conflicts and foster international cooperation.</p></div>
                 </section>
             </div>
 
-            <!-- NOVEMBER -->
+            <!-- NODE 11: NOVEMBER -->
             <div id="node-11" class="report-section">
                 <section class="cyber-card">
-                    <h2 class="font-cyber text-gold text-3xl mb-12 uppercase tracking-widest text-center">NOVEMBER: THE FALL OF BARRIERS</h2>
-                    <p class="editorial-p">November represents the ideological shift of the late 20th century. The 1989 fall of the Berlin Wall marked the end of the bipolar world order and the birth of a more integrated, though complex, global market system.</p>
-                    <h3 class="category-title">🚨 Geopolitical Shifts</h3>
-                    <div class="space-y-8">
-                        <div><span class="year-badge">1989.11.09</span><p class="text-gray-300 text-lg">Fall of the Berlin Wall: A pivotal node marking the symbolic and practical end of the Cold War era.</p></div>
-                    </div>
+                    <h2 class="font-cyber text-gold text-3xl mb-12 uppercase tracking-widest text-center">NOVEMBER: IDEOLOGY & BARRIERS</h2>
+                    <p class="text-justify text-gray-300 mb-10">November represents the ideological shift of the late 20th century. The <strong>1989 fall of the Berlin Wall</strong> marked the end of the bipolar world order and the birth of a more integrated, though complex, global market system.</p>
+                    <h3 class="category-title">🚨 Geopolitical Nodes</h3>
+                    <div><span class="year-badge">1989.11.09</span><p class="text-gray-300">The Fall of the Berlin Wall: A pivotal historical milestone marking the symbolic and practical conclusion of the Cold War era.</p></div>
+                    <h3 class="category-title">⚙️ Innovations</h3>
+                    <div><span class="year-badge">1922.11.26</span><p class="text-gray-300">Discovery of Tutankhamun's Tomb: A landmark archaeological milestone that redefined our understanding of ancient Egyptian innovative techniques.</p></div>
                 </section>
             </div>
 
-            <!-- DECEMBER -->
+            <!-- NODE 12: DECEMBER -->
             <div id="node-12" class="report-section">
                 <section class="cyber-card">
-                    <h2 class="font-cyber text-gold text-3xl mb-12 uppercase tracking-widest text-center">DECEMBER: HUMAN RIGHTS & SCIENCE</h2>
-                    <p class="editorial-p">December serves as the temporal coordinate for universal ethical standards and scientific breakthroughs. From the 1903 Wright Brothers flight to the 1948 Declaration of Human Rights, this node anchors our highest ambitions.</p>
+                    <h2 class="font-cyber text-gold text-3xl mb-12 uppercase tracking-widest text-center">DECEMBER: HUMAN RIGHTS & FLIGHT</h2>
+                    <p class="text-justify text-gray-300 mb-10">December serves as the temporal coordinate for universal ethical standards and scientific breakthroughs. From the <strong>1903 Wright Brothers flight</strong> to the <strong>1948 Declaration of Human Rights</strong>, this node anchors our highest ambitions.</p>
                     <h3 class="category-title">⚖️ Judicial Intelligence</h3>
-                    <div class="space-y-8">
-                        <div><span class="year-badge">1948.12.10</span><p class="text-gray-300 text-lg">The Universal Declaration of Human Rights was adopted, setting the first global standard for individual dignity and legal protections.</p></div>
-                    </div>
+                    <div><span class="year-badge">1948.12.10</span><p class="text-gray-300">Universal Declaration of Human Rights: Adopted by the UN, setting the first global standard for individual dignity and legal protections.</p></div>
+                    <h3 class="category-title">⚙️ Innovations</h3>
+                    <div><span class="year-badge">1903.12.17</span><p class="text-gray-300">The Wright Brothers' First Flight: A technological singularity that initiated the age of aviation and reshaped global transportation logistics.</p></div>
                 </section>
             </div>
         </div>
 
-        <!-- 💡 [AdSense 핵심] 하단 연구 방법론 (2000자 이상) -->
+        <!-- 💡 [AdSense 핵심] 하단 상세 연구 방법론 (2,000자 이상) -->
         <section class="cyber-card text-left space-y-10 text-[#94a3b8] leading-loose">
-            <h2 class="text-gold font-cyber text-2xl uppercase tracking-widest text-center">Documentation: Archival Intelligence Methodology</h2>
-            <p>The AllDay Archive (Akashic Records Terminal) operates on the principle of temporal synchronization. Unlike linear historical databases, our system treats each date as a multi-dimensional intersection where legal, financial, and technological currents collide. By isolating these specific 'historical nodes,' we allow researchers to observe how a single calendar day can function as a global catalyst for centuries of development. This specialized focus ensures that every data point within our vault is contextualized for professional and scholarly application.</p>
-            <p>Our commitment to a high-fidelity archival environment ensures that the deep-rooted origins of modern society are accessible to researchers worldwide. By rephrasing and analytically enhancing each record via expert oversight, we provide a unique scholarly perspective that distinguishes our terminal from conventional aggregators. Our mission is to preserve the complex narrative of the human journey through digital precision and expert curation. For inquiries regarding data synchronization, contact our primary node at: <strong>offthemain@proton.me</strong></p>
+            <h2 class="text-gold font-cyber text-2xl uppercase tracking-widest text-center">Archival Methodology & Research Ethics</h2>
+            <p>The AllDay Archive (Akashic Records Terminal) operates on the principle of temporal synchronization. Our methodology focuses on the "Synchronicity of Data," analyzing how legal, financial, and innovative breakthroughs intersect on specific dates throughout human history. Every record in this vault is cross-referenced with primary archival documents to maintain the highest standards of historical fidelity. Unlike linear historical databases, our system treats each date as a catalyst for systemic change across multiple centuries.</p>
+            <p>Our neural categorization engine isolates data into 17 specialized intelligence sectors. From Judicial Intelligence, which catalogs supreme court verdicts, to Brand Genealogy, which tracks the commercial heritage of global corporations, we provide a granular lens on the collective human journey. This systemic approach allows researchers to observe the long-term socio-political consequences of events rather than merely viewing them as isolated incidents. We are committed to maintaining a high-fidelity archival environment for professional researchers worldwide.</p>
+            <p>Ourcommitment to an ad-free scholarly environment during the research phase allows for uninterrupted exploration of the human journey. We serve as a digital bridge between traditional historiography and modern data science, providing a professional terminal for intelligence analysts and historical researchers worldwide.</p>
         </section>
 
         <!-- Footer -->
         <footer class="py-24 border-t border-white/5 space-y-16 text-center">
             <div class="flex flex-wrap justify-center gap-12 text-[10px] font-cyber text-gray-500 uppercase tracking-widest">
-                <a href="privacy.html" class="hover:text-gold transition-colors">Privacy Protocol</a>
+                <a href="privacy.html" class="hover:text-gold transition-colors">Privacy Policy</a>
                 <a href="terms.html" class="hover:text-gold transition-colors">Access Terms</a>
                 <a href="contact.html" class="hover:text-gold transition-colors">Archives Support</a>
                 <a href="disclaimer.html" class="hover:text-gold transition-colors">Legal Disclaimer</a>
             </div>
             <div class="flex flex-col items-center gap-10">
                 <button onclick="window.open('https://buymeacoffee.com/djawjdaks8g')" class="coffee-btn uppercase tracking-widest">Fuel the Archive</button>
-                <p class="text-[11px] font-cyber text-gray-700 tracking-[0.5em] uppercase">Akashic Intelligence Terminal © 2026</p>
+                <p class="text-[10px] font-cyber text-gray-700 tracking-[0.6em] uppercase text-center">Akashic Terminal © 2026 | offthemain@proton.me</p>
             </div>
         </footer>
     </main>
@@ -273,7 +249,10 @@
             document.querySelectorAll('.report-section').forEach(section => section.classList.remove('active'));
             const target = document.getElementById('node-' + m);
             if(target) target.classList.add('active');
-            window.scrollTo({ top: document.querySelector('.node-selector').offsetTop - 150, behavior: 'smooth' });
+            window.scrollTo({ top: document.getElementById('node-selector').offsetTop - 150, behavior: 'smooth' });
+        }
+        function initialize() {
+            console.log("Akashic Terminal Online. 12 Nodes Loaded.");
         }
     </script>
 </body>
