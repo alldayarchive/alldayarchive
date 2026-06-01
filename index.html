@@ -4,436 +4,54 @@
     <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src='https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);})(window,document,'script','dataLayer','GTM-MFWLKQ7B');</script>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Akashic Archive | Absolute Intelligence Matrix</title>
-    
-    <meta name="description" content="A professional-grade digital library of human history. Explore extensive archival reports across 17 specialized sectors in a cosmic environment.">
+    <title>Akashic Archive | Global History Intelligence Terminal</title>
+    <meta name="description" content="Access the premier digital vault of human history. 12 months of high-density intelligence reports covering law, finance, and innovation.">
     <meta name="google-site-verification" content="Y1tnVUzXiTj0LthauJuHS3DkMpxo8D1olmatbrfhld0">
-    
-    <!-- 🛑 AdSense Script -->
-    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8940706057033490" crossorigin="anonymous"></script>
-
-    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=Inter:wght@300;400;600;800&family=Playfair+Display:italic,wght@700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
     <script src="https://cdn.tailwindcss.com"></script>
-    
     <style>
-        :root { --neon-gold: #f5c97a; --bg: #010203; --card-bg: rgba(8, 12, 22, 0.98); }
-        body { font-family: 'Inter', sans-serif; background-color: var(--bg); color: #e2e8f0; line-height: 2.3; overflow-x: hidden; }
+        :root { --neon-gold: #f5c97a; --bg: #010204; --card-bg: rgba(10, 14, 22, 0.98); }
+        body { font-family: 'Inter', sans-serif; background-color: var(--bg); color: #e2e8f0; line-height: 1.8; overflow-x: hidden; }
         .font-cyber { font-family: 'Orbitron', sans-serif; }
-        .font-serif { font-family: 'Playfair Display', serif; }
-        
-        /* 🌌 초고화질 디지털 우주 배경 */
-        .bg-akashic { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: radial-gradient(circle at 50% 50%, #0a1b3a 0%, #010203 100%); z-index: -2; }
-        .bg-grid { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background-image: linear-gradient(rgba(245, 201, 122, 0.05) 1.5px, transparent 1.5px), linear-gradient(90deg, rgba(245, 201, 122, 0.05) 1.5px, transparent 1.5px); background-size: 80px 80px; z-index: -1; }
-
-        .cyber-card { background: var(--card-bg); border: 1px solid rgba(245, 201, 122, 0.15); border-radius: 30px; backdrop-filter: blur(50px); padding: 5rem; margin-bottom: 6rem; box-shadow: 0 0 80px rgba(0,0,0,0.9); }
-        
-        .node-btn { font-family: 'Orbitron'; font-size: 11px; padding: 15px 30px; border: 1px solid rgba(245, 201, 122, 0.2); border-radius: 5px; color: var(--neon-gold); cursor: pointer; transition: 0.5s; background: rgba(0,0,0,0.5); letter-spacing: 2px; }
-        .node-btn.active { background: var(--neon-gold); color: #000; box-shadow: 0 0 30px var(--neon-gold); font-weight: 900; }
-
-        .report-section { display: none; }
-        .report-section.active { display: block; animation: portalIn 1s ease-out; }
-        @keyframes portalIn { from { opacity: 0; filter: brightness(2); transform: scale(0.98); } to { opacity: 1; filter: brightness(1); transform: scale(1); } }
-
-        .editorial-h2 { font-family: 'Orbitron'; font-size: 2.5rem; color: var(--neon-gold); margin-bottom: 3rem; text-align: center; letter-spacing: 10px; }
-        .essay-p { text-align: justify; color: #a0aec0; font-size: 1.2rem; margin-bottom: 3rem; text-indent: 2rem; }
-        .highlight { color: #fff; font-weight: 700; border-bottom: 1px solid var(--neon-gold); }
-        
-        .category-block { border-left: 2px solid var(--neon-gold); padding-left: 3rem; margin: 5rem 0; }
-        .cat-h3 { font-family: 'Orbitron'; color: #fff; font-size: 1.6rem; text-transform: uppercase; letter-spacing: 5px; margin-bottom: 2rem; }
-        .event-detail { margin-bottom: 4rem; }
-        .year-label { font-family: 'Orbitron'; color: var(--neon-gold); font-size: 14px; font-weight: 800; background: rgba(245, 201, 122, 0.1); padding: 5px 15px; border-radius: 5px; margin-bottom: 1rem; display: inline-block; }
+        .bg-nebula { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: radial-gradient(circle at 50% 50%, #081225 0%, #010204 100%); z-index: -2; }
+        .bg-grid { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background-image: linear-gradient(rgba(245, 201, 122, 0.04) 1.5px, transparent 1.5px), linear-gradient(90deg, rgba(245, 201, 122, 0.04) 1.5px, transparent 1.5px); background-size: 60px 60px; z-index: -1; }
+        .cyber-card { background: var(--card-bg); border: 1px solid rgba(245, 201, 122, 0.15); border-radius: 20px; backdrop-filter: blur(40px); padding: 3rem; margin-bottom: 5rem; box-shadow: 0 0 50px rgba(0,0,0,0.9); transition: 0.5s; }
+        .node-link { display: block; padding: 2rem; background: rgba(255,255,255,0.02); border: 1px solid rgba(245, 201, 122, 0.2); border-radius: 15px; text-align: center; transition: 0.4s; text-decoration: none; color: var(--neon-gold); font-family: 'Orbitron'; }
+        .node-link:hover { background: var(--neon-gold); color: #000; transform: translateY(-10px); box-shadow: 0 0 30px var(--neon-gold); }
     </style>
 </head>
 <body>
-    <div class="bg-akashic"></div><div class="bg-grid"></div>
-    
-    <nav class="fixed w-full z-[1000] px-12 py-10 flex justify-between items-center border-b border-white/5 bg-black/80 backdrop-blur-3xl">
-        <div class="text-3xl font-cyber font-bold tracking-[0.6em] text-[#f5c97a]">AKASHIC ARCHIVE</div>
-        <div id="google_translate_element"></div>
+    <div class="bg-nebula"></div><div class="bg-grid"></div>
+    <nav class="fixed w-full z-[1000] px-12 py-8 flex justify-between items-center border-b border-white/5 bg-black/70 backdrop-blur-3xl">
+        <div class="text-2xl font-cyber font-bold tracking-[0.4em] text-[#f5c97a]">AKASHIC ARCHIVE</div>
     </nav>
-
-    <main class="relative pt-64 pb-40 px-12 max-w-7xl mx-auto space-y-40">
+    <main class="relative pt-60 pb-40 px-10 max-w-7xl mx-auto">
+        <section class="cyber-card text-center">
+            <h1 class="text-gold font-cyber text-4xl uppercase tracking-[0.8em] mb-12">Universal Intelligence Matrix</h1>
+            <p class="text-gray-400 text-lg leading-loose mb-16">The Akashic Archive is a high-fidelity digital repository. Select a temporal node below to access professional historical intelligence across 17 specialized sectors.</p>
+            
+            <div class="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-6">
+                <a href="month-01.html" class="node-link">NODE_01<br>JANUARY</a>
+                <a href="month-02.html" class="node-link">NODE_02<br>FEBRUARY</a>
+                <a href="month-03.html" class="node-link">NODE_03<br>MARCH</a>
+                <a href="month-04.html" class="node-link">NODE_04<br>APRIL</a>
+                <a href="month-05.html" class="node-link">NODE_05<br>MAY</a>
+                <a href="month-06.html" class="node-link">NODE_06<br>JUNE</a>
+                <a href="month-07.html" class="node-link">NODE_07<br>JULY</a>
+                <a href="month-08.html" class="node-link">NODE_08<br>AUGUST</a>
+                <a href="month-09.html" class="node-link">NODE_09<br>SEPTEMBER</a>
+                <a href="month-10.html" class="node-link">NODE_10<br>OCTOBER</a>
+                <a href="month-11.html" class="node-link">NODE_11<br>NOVEMBER</a>
+                <a href="month-12.html" class="node-link">NODE_12<br>DECEMBER</a>
+            </div>
+        </section>
         
-        <!-- 💡 [Part 1] 지능형 시스템 서문 (3000자급 초고밀도 에세이) -->
-        <section class="cyber-card">
-            <h1 class="text-gold font-cyber text-5xl uppercase tracking-[1em] mb-20 text-center text-glow">Intelligence Matrix</h1>
-            <div class="space-y-12">
-                <p class="essay-p">The <strong>Akashic Archive</strong> functions as the definitive digital terminal for human synchronization, representing an unprecedented leap in historical data forensics. Our platform is meticulously engineered to transcend linear chronological documentation, instead offering a multi-dimensional intersection where legal precedents, financial fluctuations, and technological singularities collide. We operate on the principle of 'Data Fidelity,' ensuring that every temporal node—specific dates that have functioned as catalysts for global change—is cross-referenced with primary archival documents and enriched through professional scholarly curation.</p>
-                <p class="essay-p">In this cybernetic environment, history is treated as a living, interconnected grid. We isolate 17 specialized intelligence sectors, allowing researchers to observe how a single legislative act in the 18th century can influence modern capital flow or digital surveillance protocols today. Our commitment is to provide a high-fidelity archival environment that honors the immense complexity of the human journey, transforming raw historical events into refined strategic intelligence for the global community of analysts and scholars.</p>
+        <footer class="text-center opacity-30 text-[10px] uppercase tracking-widest font-cyber">
+            <div class="flex justify-center gap-8 mb-10">
+                <a href="privacy.html">Privacy</a><a href="terms.html">Terms</a><a href="contact.html">Contact</a>
             </div>
-            
-            <div class="node-selector flex justify-center gap-4 mt-20 flex-wrap" id="node-selector">
-                <button class="node-btn active" onclick="showNode(1)">NODE_01 (JAN)</button>
-                <button class="node-btn" onclick="showNode(2)">NODE_02 (FEB)</button>
-                <button class="node-btn" onclick="showNode(3)">NODE_03 (MAR)</button>
-                <button class="node-btn" onclick="showNode(4)">NODE_04 (APR)</button>
-                <button class="node-btn" onclick="showNode(5)">NODE_05 (MAY)</button>
-                <button class="node-btn" onclick="showNode(6)">NODE_06 (JUN)</button>
-                <button class="node-btn" onclick="showNode(7)">NODE_07 (JUL)</button>
-                <button class="node-btn" onclick="showNode(8)">NODE_08 (AUG)</button>
-                <button class="node-btn" onclick="showNode(9)">NODE_09 (SEP)</button>
-                <button class="node-btn" onclick="showNode(10)">NODE_10 (OCT)</button>
-                <button class="node-btn" onclick="showNode(11)">NODE_11 (NOV)</button>
-                <button class="node-btn" onclick="showNode(12)">NODE_12 (DEC)</button>
-            </div>
-        </section>
-
-        <!-- 🚀 12개 노드 데이터 폭격 (1월~3월 고밀도 리포트) -->
-        <div id="chronos-vault">
-            
-            <!-- JANUARY NODE: 1,500 WORDS ANALYTICAL REPORT -->
-            <div id="node-1" class="report-section active">
-                <section class="cyber-card">
-                    <h2 class="editorial-h2">JANUARY: THE GENESIS OF GLOBAL SYSTEMS</h2>
-                    <p class="essay-p">January represents the foundational threshold of modern modernity, a temporal coordinate synchronized with the institutionalization of universal standards. Historically, this month archives the birth of transformative digital protocols and the recalibration of global monetary systems. We analyze January not merely as a start to the year, but as the <span class="highlight">foundational singularity</span> where human civilization resets its trajectory across legal and economic frontiers.</p>
-                    
-                    <div class="category-block">
-                        <h3 class="cat-h3">⚖️ Judicial Intelligence: Human Liberty</h3>
-                        <div class="event-detail">
-                            <span class="year-label">1863.01.01</span>
-                            <p class="text-gray-300 text-xl leading-loose">The Emancipation Proclamation: President Abraham Lincoln issued this definitive legal order, fundamentally altering the constitutional status of human liberty. Our archival analysis indicates that this was not just a political act, but a systemic judicial pivot that redefined the legal framework of freedom across the Western theater, anchoring human dignity into the core of democratic jurisprudence.</p>
-                        </div>
-                        <div class="event-detail">
-                            <span class="year-label">1901.01.01</span>
-                            <p class="text-gray-300 text-xl leading-loose">Federation of Australia: The merger of six separate colonies into a single sovereign federal nation. This constitutional achievement serves as a primary reference node for federalist legal architecture, demonstrating how disparate legislative bodies can unify under a singular democratic mandate.</p>
-                        </div>
-                    </div>
-
-                    <div class="category-block">
-                        <h3 class="cat-h3">📈 Macro-Financial Recalibration</h3>
-                        <div class="event-detail">
-                            <span class="year-label">1999.01.01</span>
-                            <p class="text-gray-300 text-xl leading-loose">Inception of the Euro: A monumental shift in global financial architecture. Eleven European nations adopted a unified accounting currency, challenging the existing hegemony of international reserve structures and initiating an era of unprecedented cross-border capital synchronization. Our data forensics highlights the long-term impact on global market stability and trade dynamics.</p>
-                        </div>
-                    </div>
-
-                    <div class="category-block">
-                        <h3 class="cat-h3">⚙️ Technological Singularities</h3>
-                        <div class="event-detail">
-                            <span class="year-label">1983.01.01</span>
-                            <p class="text-gray-300 text-xl leading-loose">The TCP/IP Migration: The ARPANET officially switched to TCP/IP protocols, marking the operational birth of the modern Internet. This technical milestone enabled universal data exchange and birthed the digital information age, forever altering how human intelligence is organized and shared globally.</p>
-                        </div>
-                    </div>
-                    <!-- (이런 식으로 한 카테고리당 에세이를 5개 이상씩 배치하여 1,500자를 넘김) -->
-                </section>
-            </div>
-
-            <!-- FEBRUARY NODE -->
-            <div id="node-2" class="report-section">
-                <section class="cyber-card">
-                    <h2 class="editorial-h2">FEBRUARY: MEDIA GENESIS & COMPUTATION</h2>
-                    <p class="essay-p">February archives the acceleration of communication logistics and the birth of new digital media paradigms. This temporal node represents the democratization of information and the transition from physical logistics to the <span class="highlight">automation of cultural exchange</span>. Our research focuses on how the 19th-century postal reforms synchronized with 21st-century digital platforms to create a seamless global intelligence loop.</p>
-                    
-                    <div class="category-block">
-                        <h3 class="cat-h3">🎬 Media & Cultural Hegemony</h3>
-                        <div class="event-detail">
-                            <span class="year-label">2005.02.14</span>
-                            <p class="text-gray-300 text-xl leading-loose">The Founding of YouTube: A landmark singularity in digital media history. This event catalyzed the democratization of video content, allowing every individual to become a broadcast node. This cultural hegemony shift fundamentally reshaped how human history is recorded, archived, and consumed in the 21st century.</p>
-                        </div>
-                    </div>
-
-                    <div class="category-block">
-                        <h3 class="cat-h3">⚙️ Computational Foundations</h3>
-                        <div class="event-detail">
-                            <span class="year-label">1946.02.14</span>
-                            <p class="text-gray-300 text-xl leading-loose">The ENIAC Dedication: The world's first electronic general-purpose computer was officially unveiled. Our analytical framework views ENIAC as the catalyst for the industrialization of data processing, paving the way for the future of Artificial Intelligence and modern algorithmic governance.</p>
-                        </div>
-                    </div>
-                </section>
-            </div>
-
-            <!-- MARCH NODE -->
-            <div id="node-3" class="report-section">
-                <section class="cyber-card">
-                    <h2 class="editorial-h2">MARCH: SOVEREIGNTY & BIOLOGICAL SECURITY</h2>
-                    <p class="essay-p">March is historically synchronized with the awakening of national sovereignty and the expansion of biological health security. It is a period defined by the collective demand for legal autonomy and the scientific conquest of infectious diseases. Our March archives provide a granular look at the <span class="highlight">intersection of civil resistance and clinical triumph</span>.</p>
-                    
-                    <div class="category-block">
-                        <h3 class="cat-h3">🏛️ National Sovereignty Nodes</h3>
-                        <div class="event-detail">
-                            <span class="year-label">1919.03.01</span>
-                            <p class="text-gray-300 text-xl leading-loose">The March 1st Declaration: A monumental milestone in non-violent civil resistance. This declaration of independence in Korea catalyzed global decolonization efforts, providing a sophisticated ethical framework for sovereign movements across Asia and Africa in the post-imperial era.</p>
-                        </div>
-                    </div>
-
-                    <div class="category-block">
-                        <h3 class="cat-h3">💉 Medical Revolutions</h3>
-                        <div class="event-detail">
-                            <span class="year-label">1953.03.26</span>
-                            <p class="text-gray-300 text-xl leading-loose">Polio Vaccine Announcement: Jonas Salk's scientific triumph initiated a global paradigm shift in preventative medicine. Our research indicates that this milestone established the modern health security protocols that continue to protect the global population from biological vulnerabilities.</p>
-                        </div>
-                    </div>
-                </section>
-            </div>
-            <!-- NODE 04: APRIL - GLOBAL ALLIANCES & COMMERCIAL GENEALOGY -->
-            <div id="node-4" class="report-section">
-                <section class="cyber-card">
-                    <h2 class="editorial-h2">APRIL: GEOPOLITICAL NODES & INNOVATION</h2>
-                    <p class="essay-p">April archives the formal institutionalization of collective human security and the strategic expansion of consumer technical power. This temporal node represents the dual trajectory of 20th-century progress: the establishment of sovereign defense frameworks and the birth of entrepreneurial singularities that redefined modern commerce. Our April records focus on the <span class="highlight">synchronicity of geopolitical stability and digital branding</span>, providing a granular view of the systems that safeguard and connect our global society.</p>
-                    
-                    <div class="category-block">
-                        <h3 class="cat-h3">🌍 International Geopolitical Archives</h3>
-                        <div class="event-detail">
-                            <span class="year-label">1949.04.04</span>
-                            <p class="text-gray-300 text-xl leading-loose">The Signing of the North Atlantic Treaty: The foundational act that established NATO (North Atlantic Treaty Organization). Our archival analysis views this not merely as a military alliance, but as a definitive legal recalibration of Western collective security. By anchoring the principle of mutual defense into a formal international treaty, this node established the structural equilibrium that prevented major systemic conflict across the European theater for decades, essentially defining the modern era's diplomatic architecture.</p>
-                        </div>
-                        <div class="event-detail">
-                            <span class="year-label">1955.04.18</span>
-                            <p class="text-gray-300 text-xl leading-loose">The Bandung Conference: The inception of the Non-Aligned Movement, representing a pivotal shift in the global diplomatic matrix. This event gave a sovereign voice to the 'Global South,' challenging the bipolar hegemony of the Cold War and introducing a multi-polar perspective to international law and territorial recognition protocols.</p>
-                        </div>
-                    </div>
-
-                    <div class="category-block">
-                        <h3 class="cat-h3">🏷️ Brand Genealogy & Commerce</h3>
-                        <div class="event-detail">
-                            <span class="year-label">1976.04.01</span>
-                            <p class="text-gray-300 text-xl leading-loose">The Establishment of Apple Inc.: In a garage in Cupertino, Steve Jobs and Steve Wozniak catalyzed a commercial revolution. Our research categorizes this as a 'Consumer Singularity'—the moment personal computing transitioned from a niche technical prototype to a global lifestyle brand. This commercial genealogy redefined the intersection of design and functionality, setting the standard for Silicon Valley’s innovative dominance for the next half-century.</p>
-                        </div>
-                    </div>
-                </section>
-            </div>
-
-            <!-- NODE 05: MAY - INFRASTRUCTURE & BIOLOGICAL INTELLIGENCE -->
-            <div id="node-5" class="report-section">
-                <section class="cyber-card">
-                    <h2 class="editorial-h2">MAY: ZENITH OF AMBITION & GLOBAL HEALTH</h2>
-                    <p class="essay-p">May serves as the archival coordinate for the highest architectural ambitions and the formalization of global biological intelligence. This month archives the moments human civilization physically reached for the sky and scientifically organized to protect its own survival. From the completion of monumental structures to the birth of health security protocols, May represents the <span class="highlight">centralization of human structural and biological governance</span>.</p>
-                    
-                    <div class="category-block">
-                        <h3 class="cat-h3">⚙️ Structural Engineering Milestones</h3>
-                        <div class="event-detail">
-                            <span class="year-label">1931.05.01</span>
-                            <p class="text-gray-300 text-xl leading-loose">The Empire State Building Dedication: A pinnacle of industrial-age civil engineering. Standing as the world's tallest structure for 40 years, this building was more than an architectural achievement; it was a psychological milestone for global urban development. Our data forensics indicates that its rapid construction served as a definitive case study in logistical synchronization and steel-frame innovative efficiency, reshaping the vertical identity of modern metropolises.</p>
-                        </div>
-                    </div>
-
-                    <div class="category-block">
-                        <h3 class="cat-h3">💉 Biological Security & Health Intelligence</h3>
-                        <div class="event-detail">
-                            <span class="year-label">1948.05.14</span>
-                            <p class="text-gray-300 text-xl leading-loose">Establishment of the World Health Organization (WHO): A critical node in the history of clinical governance. By centralizing medical research and biosecurity responses, the WHO established the first global framework for eradicating infectious diseases. Our analysis highlights how this institutional birth enabled the synchronization of international vaccine protocols, fundamentally extending the average human life expectancy across every continent.</p>
-                        </div>
-                    </div>
-                </section>
-            </div>
-
-            <!-- NODE 06: JUNE - LIBERTY & INTERNATIONAL ORDER -->
-            <div id="node-6" class="report-section">
-                <section class="cyber-card">
-                    <h2 class="editorial-h2">JUNE: THE PRIMAL DECREE OF SOVEREIGNTY</h2>
-                    <p class="essay-p">June is historically recognized as the primary temporal coordinate for the codification of human liberty and the post-war international equilibrium. This month serves as the root of modern individual rights and the legislative frameworks designed to prevent global catastrophe. In this node, we examine the <span class="highlight">foundational contracts</span> that redefined the relationship between the sovereign state and the individual citizen.</p>
-                    
-                    <div class="category-block">
-                        <h3 class="cat-h3">⚖️ Judicial Foundations of Individual Rights</h3>
-                        <div class="event-detail">
-                            <span class="year-label">1215.06.15</span>
-                            <p class="text-gray-300 text-xl leading-loose">The Sealing of the Magna Carta: A foundational legal singularity. This document established the revolutionary precedent that no ruler—regardless of perceived divine right—is above the law. Our scholarly research views the Magna Carta as the primal source of constitutionalism, providing the legal DNA for subsequent documents such as the US Bill of Rights and the Universal Declaration of Human Rights.</p>
-                        </div>
-                    </div>
-
-                    <div class="category-block">
-                        <h3 class="cat-h3">🏛️ International Order & UN Charters</h3>
-                        <div class="event-detail">
-                            <span class="year-label">1945.06.26</span>
-                            <p class="text-gray-300 text-xl leading-loose">Signing of the United Nations Charter: Representatives of 50 nations convened in San Francisco to anchor a new era of diplomacy. This temporal node marked the transition from a state of total war to a state of institutionalized cooperation. Our archival analysis focuses on how this charter established the first global mechanism for dispute resolution, recalibrating the human journey toward a collective, rule-based international system.</p>
-                        </div>
-                    </div>
-                </section>
-            </div>
-            <!-- NODE 07: JULY - INTERSTELLAR AMBITION & SOVEREIGN RECALIBRATION -->
-            <div id="node-7" class="report-section">
-                <section class="cyber-card">
-                    <h2 class="editorial-h2">JULY: THE ZENITH OF HUMAN EXPLORATION</h2>
-                    <p class="essay-p">July marks the supreme temporal coordinate for human interstellar ambition and the definitive recalibration of sovereign identity. Historically, this month archives the precise moment when human civilization transitioned from a terrestrial species into a spacefaring entity. It is a period defined by the <span class="highlight">conquest of the impossible</span>—where technological singularities enabled the physical expansion of human intelligence beyond the Earth's biosphere. Our July records analyze these nodes as catalysts for a new global consciousness and innovative trajectory.</p>
-                    
-                    <div class="category-block">
-                        <h3 class="cat-h3">⚙️ Interstellar Innovations & Technical Singularities</h3>
-                        <div class="event-detail">
-                            <span class="year-badge">1969.07.20</span>
-                            <p class="text-gray-300 text-xl leading-loose">The Apollo 11 Lunar Landing: A transformative milestone in the history of human intelligence. When Neil Armstrong and Buzz Aldrin set foot on the lunar surface, it was not merely a mission success but a systemic leap for the entire human race. Our archival analysis focuses on the 'Apollo Singularity'—the massive synchronization of engineering, physics, and computational prowess that proved human ambition could transcend planetary boundaries. This event fundamentally shifted the innovative landscape, catalyzing the subsequent development of global satellite networks and modern aerospace logistics.</p>
-                        </div>
-                    </div>
-
-                    <div class="category-block">
-                        <h3 class="cat-h3">🏛️ Judicial Foundations of National Sovereignty</h3>
-                        <div class="event-detail">
-                            <span class="year-badge">1776.07.04</span>
-                            <p class="text-gray-300 text-xl leading-loose">The Adoption of the Declaration of Independence: A pivotal legal document that codified the inherent right to self-governance. Beyond its political impact, our scholarly research highlights its role as a judicial catalyst that challenged imperial legal structures. By anchoring governance in the 'consent of the governed,' this temporal node provided the constitutional blueprint for modern democratic institutions worldwide, influencing legislative authority and individual rights frameworks across multiple centuries.</p>
-                        </div>
-                    </div>
-                </section>
-            </div>
-
-            <!-- NODE 08: AUGUST - LOGISTICAL MASTERY & ECONOMIC SHIFTS -->
-            <div id="node-8" class="report-section">
-                <section class="cyber-card">
-                    <h2 class="editorial-h2">AUGUST: LOGISTICS & THE NEW MONETARY ORDER</h2>
-                    <p class="essay-p">August represents the archival coordinate for the mastery of global logistics and the radical restructuring of international economic equilibrium. This month chronicles the moments human civilization physically shortened the world through engineering and redefined the value of capital through systemic policy shifts. From the opening of massive maritime gateways to the decoupling of currency from gold, August serves as the <span class="highlight">calibration point for modern global commerce</span>.</p>
-                    
-                    <div class="category-block">
-                        <h3 class="cat-h3">🏗️ Logistical Engineering & Global Trade</h3>
-                        <div class="event-detail">
-                            <span class="year-badge">1914.08.15</span>
-                            <p class="text-gray-300 text-xl leading-loose">The Opening of the Panama Canal: An industrial-age masterpiece that fundamentally altered global maritime logistics. By connecting the Atlantic and Pacific oceans, this engineering singularity reduced transit distances by thousands of miles, effectively accelerating the speed of global trade. Our forensics indicate that the Panama Canal was the primary catalyst for the 20th-century boom in inter-oceanic commerce, establishing the foundational infrastructure for modern supply chain synchronization.</p>
-                        </div>
-                    </div>
-
-                    <div class="category-block">
-                        <h3 class="cat-h3">📈 Macro-Financial Recalibration (The Nixon Shock)</h3>
-                        <div class="event-detail">
-                            <span class="year-badge">1971.08.15</span>
-                            <p class="text-gray-300 text-xl leading-loose">The Unilateral Termination of the Gold Standard: In a historic move known as the 'Nixon Shock,' the United States ended the direct convertibility of the US dollar into gold. Our financial intelligence team categorizes this as the most significant monetary pivot of the modern era. This node birthed the current 'Fiat Currency' paradigm, fundamentally changing the nature of inflation, central bank policy, and global wealth distribution mechanisms for every sovereign nation in the world.</p>
-                        </div>
-                    </div>
-                </section>
-            </div>
-
-            <!-- NODE 09: SEPTEMBER - SECURITY PARADIGMS & DIGITAL INTELLIGENCE -->
-            <div id="node-9" class="report-section">
-                <section class="cyber-card">
-                    <h2 class="editorial-h2">SEPTEMBER: SECURITY NODES & INFORMATION HEGEMONY</h2>
-                    <p class="essay-p">September serves as a critical node for the evolution of international security protocols and the birth of modern digital intelligence hegemony. It archives the tragic singularities that forced a global re-evaluation of forensic surveillance and the innovative breakthroughs that organized the world's collective knowledge. This period is defined by the <span class="highlight">recalibration of human safety and search paradigms</span>, providing a granular view of how modern society manages both physical risk and digital data.</p>
-                    
-                    <div class="category-block">
-                        <h3 class="cat-h3">🚨 Geopolitical Tragedies & Judicial Responses</h3>
-                        <div class="event-detail">
-                            <span class="year-badge">2001.09.11</span>
-                            <p class="text-gray-300 text-xl leading-loose">The September 11 Attacks: A profound temporal node that fundamentally reshaped 21st-century geopolitics. Beyond the immense human loss, our archival research focuses on the systemic legislative shifts triggered by this event, such as the Patriot Act and the global harmonization of anti-terrorism protocols. This node marked the transition into an era of intensified forensic surveillance and redefined the legal boundaries between individual privacy and national security security on a global scale.</p>
-                        </div>
-                    </div>
-
-                    <div class="category-block">
-                        <h3 class="cat-h3">⚙️ IT Singularities & Information Architecture</h3>
-                        <div class="event-detail">
-                            <span class="year-badge">1998.09.04</span>
-                            <p class="text-gray-300 text-xl leading-loose">The Founding of Google Inc.: The inception of a digital intelligence hegemony. By introducing a proprietary algorithm to organize the world's disparate data, Google redefined how the human species accesses and synchronizes knowledge. Our analysis views this node as the birth of 'Search-Based Civilization,' where information accessibility became the primary driver for innovation, commerce, and historical documentation.</p>
-                        </div>
-                    </div>
-                </section>
-            </div>
-            <!-- NODE 10: OCTOBER - FINANCIAL VOLATILITY & INSTITUTIONAL PEACE -->
-            <div id="node-10" class="report-section">
-                <section class="cyber-card">
-                    <h2 class="editorial-h2">OCTOBER: THE DUALITY OF CRASH & COOPERATION</h2>
-                    <p class="essay-p">October represents a critical archival coordinate for the radical volatility of global capital and the subsequent pursuit of institutionalized international peace. This temporal node is defined by the <span class="highlight">recalibration of human trust</span>—both in the abstract value of currency and in the collective ability to prevent systemic warfare. Our October records analyze the stock market singularities that birthed modern financial regulation and the diplomatic acts that established the current world order.</p>
-                    
-                    <div class="category-block">
-                        <h3 class="cat-h3">📉 Macro-Financial Records & Market Crashes</h3>
-                        <div class="event-detail">
-                            <span class="year-badge">1929.10.29</span>
-                            <p class="text-gray-300 text-xl leading-loose">Black Tuesday: The definitive collapse of the New York Stock Exchange. This event was not merely a market correction but a systemic failure that catalyzed the Great Depression. Our financial intelligence team views this node as the primary driver for the creation of the SEC (Securities and Exchange Commission) and the subsequent synchronization of global banking regulations. The ripples of this crash forced a fundamental re-evaluation of speculative capital, leading to the birth of modern macro-economic oversight and the eventual adoption of Keynesian stimulus frameworks.</p>
-                        </div>
-                    </div>
-
-                    <div class="category-block">
-                        <h3 class="cat-h3">🏛️ Global Order & Institutional Diplomacy</h3>
-                        <div class="event-detail">
-                            <span class="year-badge">1945.10.24</span>
-                            <p class="text-gray-300 text-xl leading-loose">The Official Inception of the United Nations: A transformative milestone in the history of international law. Following the catastrophic failure of the League of Nations, the UN Charter provided a new legal and diplomatic matrix for global governance. This temporal node established the foundational protocols for collective security, human rights mediation, and international development synchronization, anchoring a multi-polar equilibrium designed to prevent total systemic collapse in the atomic age.</p>
-                        </div>
-                    </div>
-                </section>
-            </div>
-
-            <!-- NODE 11: NOVEMBER - IDEOLOGICAL COLLAPSE & ANCIENT INTELLIGENCE -->
-            <div id="node-11" class="report-section">
-                <section class="cyber-card">
-                    <h2 class="editorial-h2">NOVEMBER: THE FALL OF BARRIERS & DISCOVERY</h2>
-                    <p class="essay-p">November archives the ideological shifts of the late 20th century and the rediscovery of ancient human intelligence. This month serves as a coordinate for the dissolution of physical and psychological walls, signaling a transition toward a more integrated global market and a deeper understanding of our prehistoric innovative roots. We analyze these nodes as the <span class="highlight">unification of disparate human timelines</span>.</p>
-                    
-                    <div class="category-block">
-                        <h3 class="cat-h3">🚨 Geopolitical Singularities & Systemic Shifts</h3>
-                        <div class="event-detail">
-                            <span class="year-badge">1989.11.09</span>
-                            <p class="text-gray-300 text-xl leading-loose">The Fall of the Berlin Wall: A pivotal node that marked the symbolic and practical conclusion of the Cold War. Our archival analysis identifies this moment as the primary catalyst for the 'End of History'—a period where liberal democratic frameworks and globalized capital flow became the dominant paradigms. The destruction of this barrier triggered a massive synchronization of Eastern and Western European markets, fundamentally altering global trade logistics and redefining the innovative scope of post-Soviet geopolitical nodes.</p>
-                        </div>
-                    </div>
-
-                    <div class="category-block">
-                        <h3 class="cat-h3">⚙️ Archeological Sync & Ancient Innovation</h3>
-                        <div class="event-detail">
-                            <span class="year-badge">1922.11.26</span>
-                            <p class="text-gray-300 text-xl leading-loose">The Discovery of Tutankhamun's Tomb: A landmark archaeological milestone that provided a high-fidelity look at the innovative techniques of the 18th Dynasty of Egypt. Beyond its cultural value, our research focuses on the forensic intelligence gleaned from the burial artifacts, which redefined our understanding of ancient metallurgy, complex logistics, and the origins of hierarchical social structures. This node bridges the gap between ancient intelligence and modern archival methodology.</p>
-                        </div>
-                    </div>
-                </section>
-            </div>
-
-            <!-- NODE 12: DECEMBER - ETHICAL STANDARDIZATION & AVIATION LEAPS -->
-            <div id="node-12" class="report-section">
-                <section class="cyber-card">
-                    <h2 class="editorial-h2">DECEMBER: THE ZENITH OF ETHICS & AMBITION</h2>
-                    <p class="essay-p">December serves as the temporal coordinate for the universal standardization of human ethics and the physical mastery of the skies. This node anchors our highest scholarly ambitions, documenting the moments human intelligence physically ascended and ethically organized for the collective good. From the birth of aviation to the declaration of universal rights, December represents the <span class="highlight">final calibration of the human spirit</span> before each temporal reset.</p>
-                    
-                    <div class="category-block">
-                        <h3 class="cat-h3">⚖️ Judicial Intelligence & Universal Ethics</h3>
-                        <div class="event-detail">
-                            <span class="year-badge">1948.12.10</span>
-                            <p class="text-gray-300 text-xl leading-loose">Adoption of the Universal Declaration of Human Rights: A foundational legal singularity. For the first time in history, the international community codified the inherent dignity and equal rights of all members of the human family. Our archival research views this document as the supreme judicial framework that redefined the sovereignty of the individual over the state, influencing subsequent national constitutions and international law for nearly a century.</p>
-                        </div>
-                    </div>
-
-                    <div class="category-block">
-                        <h3 class="cat-h3">⚙️ Technical Singularities & Aviation Birth</h3>
-                        <div class="event-detail">
-                            <span class="year-badge">1903.12.17</span>
-                            <p class="text-gray-300 text-xl leading-loose">The Wright Brothers' First Flight: A technological milestone that initiated the age of aviation. This singular event at Kitty Hawk proved that human-controlled, powered flight was a physical reality, effectively collapsing global transit distances. Our analytics highlight this node as the catalyst for the subsequent aerospace boom, revolutionizing global logistics, warfare, and the eventual synchronization of interstellar exploration ambitions.</p>
-                        </div>
-                    </div>
-                </section>
-            </div>
-        </div>
-
-        <!-- 💡 [AdSense 핵심] 하단 상세 연구 방법론 에세이 (총 3,000자 이상의 텍스트 폭격) -->
-        <section class="cyber-card text-left space-y-12 text-[#94a3b8] leading-loose">
-            <h2 class="text-gold font-cyber text-3xl uppercase tracking-widest text-center">Archival Methodology & Neural Synchronization</h2>
-            <p class="text-lg">The AllDay Archive (Akashic Records Terminal) represents the pinnacle of digital historical forensics. Our methodology is built upon the principle of 'Temporal Node Isolation'—a process where specific dates are analyzed not merely for the events they contain, but for their function as catalysts in the broader trajectory of human civilization. Unlike standard linear databases, our system treats history as an interconnected matrix of 17 specialized intelligence sectors. From Judicial Foundations to Brand Genealogy, every record is processed through an analytical lens designed to reveal the systemic impact of each milestone.</p>
-            
-            <p class="text-lg">Our commitment to data integrity involves a multi-dimensional verification protocol. Each entry is cross-referenced with primary historical documents, parliamentary records, and international economic data. By rephrasing and analytically enhancing each record via expert AI curation, we provide a unique scholarly perspective that distinguishes our terminal from conventional information aggregators. We believe that history is a living record, and by documenting the synchronicity of data across centuries, we offer a transparent gateway to the deep-rooted origins of modern society.</p>
-            
-            <p class="text-lg">In our final synthesis, we recognize that the human journey is a continuous cycle of renewal and 도약. The Akashic Archive serves as the digital sanctuary for this journey, providing researchers and intelligence analysts with a high-fidelity interface for exploring the complex currents that define our global identity. Our mission is to preserve this collective intelligence for future generations, ensuring that the legacy of every pivotal moment is documented with professional depth and scholarly precision. For archival corrections or professional inquiries, please contact our primary node at: <strong>offthemain@proton.me</strong></p>
-        </section>
-
-        <!-- Footer -->
-        <footer class="py-32 border-t border-white/10 space-y-20 text-center">
-            <div class="flex flex-wrap justify-center gap-16 text-[10px] font-cyber text-gray-500 uppercase tracking-[0.4em]">
-                <a href="privacy.html" class="hover:text-gold transition-colors">Privacy Protocol</a>
-                <a href="terms.html" class="hover:text-gold transition-colors">Access Terms</a>
-                <a href="contact.html" class="hover:text-gold transition-colors">Archives Support</a>
-                <a href="disclaimer.html" class="hover:text-gold transition-colors">Legal Disclaimer</a>
-            </div>
-            <div class="flex flex-col items-center gap-10">
-                <button onclick="window.open('https://buymeacoffee.com/djawjdaks8g')" class="coffee-btn uppercase tracking-widest shadow-2xl">Fuel the Intelligence Engine</button>
-                <p class="text-[10px] font-cyber text-gray-700 tracking-[0.6em] uppercase">Akashic Record Terminal © 2026 | offthemain@proton.me</p>
-            </div>
+            Akashic Record Terminal © 2026 | offthemain@proton.me
         </footer>
     </main>
-
-    <!-- 구글 무료 번역 위젯 -->
-    <script type="text/javascript">
-        function googleTranslateElementInit() {
-            new google.translate.TranslateElement({pageLanguage: 'en', layout: google.translate.TranslateElement.InlineLayout.SIMPLE}, 'google_translate_element');
-        }
-    </script>
-    <script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
-
-    <script>
-        function showNode(m) {
-            // 버튼 활성화 토글
-            document.querySelectorAll('.node-btn').forEach(btn => btn.classList.remove('active'));
-            event.target.classList.add('active');
-
-            // 콘텐츠 전환
-            document.querySelectorAll('.report-section').forEach(section => section.classList.remove('active'));
-            const target = document.getElementById('node-' + m);
-            if(target) target.classList.add('active');
-            
-            // 부드러운 스크롤 이동
-            window.scrollTo({ top: document.getElementById('node-selector').offsetTop - 150, behavior: 'smooth' });
-        }
-        function initialize() {
-            console.log("Akashic Terminal Online. 12 Temporal Nodes Synced.");
-        }
-    </script>
 </body>
 </html>
