@@ -4,54 +4,139 @@
     <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src='https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);})(window,document,'script','dataLayer','GTM-MFWLKQ7B');</script>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Akashic Archive | Global History Intelligence Terminal</title>
-    <meta name="description" content="Access the premier digital vault of human history. 12 months of high-density intelligence reports covering law, finance, and innovation.">
+    <title>Akashic Archive | Global History Intelligence & Cybernetic Vault</title>
+    
+    <meta name="description" content="The ultimate digital terminal for global historical intelligence. Synchronizing 12 months of high-fidelity reports across 17 specialized sectors.">
     <meta name="google-site-verification" content="Y1tnVUzXiTj0LthauJuHS3DkMpxo8D1olmatbrfhld0">
-    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+    
+    <!-- 🛑 AdSense Script (광고 박스는 제거됨) -->
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8940706057033490" crossorigin="anonymous"></script>
+
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=Inter:wght@300;400;600;800&family=Playfair+Display:italic,wght@700&display=swap" rel="stylesheet">
     <script src="https://cdn.tailwindcss.com"></script>
+    
     <style>
         :root { --neon-gold: #f5c97a; --bg: #010204; --card-bg: rgba(10, 14, 22, 0.98); }
         body { font-family: 'Inter', sans-serif; background-color: var(--bg); color: #e2e8f0; line-height: 1.8; overflow-x: hidden; }
         .font-cyber { font-family: 'Orbitron', sans-serif; }
-        .bg-nebula { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: radial-gradient(circle at 50% 50%, #081225 0%, #010204 100%); z-index: -2; }
+        .font-serif { font-family: 'Playfair Display', serif; }
+        
+        /* 🌌 아카식 레코드 프리미엄 배경 */
+        .bg-nebula { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: radial-gradient(circle at 50% 50%, #0d1a33 0%, #010204 100%); z-index: -2; }
         .bg-grid { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background-image: linear-gradient(rgba(245, 201, 122, 0.04) 1.5px, transparent 1.5px), linear-gradient(90deg, rgba(245, 201, 122, 0.04) 1.5px, transparent 1.5px); background-size: 60px 60px; z-index: -1; }
-        .cyber-card { background: var(--card-bg); border: 1px solid rgba(245, 201, 122, 0.15); border-radius: 20px; backdrop-filter: blur(40px); padding: 3rem; margin-bottom: 5rem; box-shadow: 0 0 50px rgba(0,0,0,0.9); transition: 0.5s; }
-        .node-link { display: block; padding: 2rem; background: rgba(255,255,255,0.02); border: 1px solid rgba(245, 201, 122, 0.2); border-radius: 15px; text-align: center; transition: 0.4s; text-decoration: none; color: var(--neon-gold); font-family: 'Orbitron'; }
-        .node-link:hover { background: var(--neon-gold); color: #000; transform: translateY(-10px); box-shadow: 0 0 30px var(--neon-gold); }
+
+        .cyber-card { background: var(--card-bg); border: 1px solid rgba(245, 201, 122, 0.12); border-radius: 20px; backdrop-filter: blur(40px); transition: 0.5s; box-shadow: 0 0 40px rgba(0,0,0,0.8); }
+        .cyber-card:hover { border-color: var(--neon-gold); transform: translateY(-5px); }
+        
+        /* 🚀 노드 셀렉터 디자인 강화 */
+        .node-grid { display: grid; grid-template-columns: repeat(2, 1fr); md:grid-template-columns: repeat(4, 1fr); lg:grid-template-columns: repeat(6, 1fr); gap: 15px; }
+        .node-link { display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 25px 15px; background: rgba(255,255,255,0.02); border: 1px solid rgba(245, 201, 122, 0.1); border-radius: 12px; text-decoration: none; transition: 0.4s; }
+        .node-link span:first-child { font-family: 'Orbitron'; font-size: 1.4rem; color: var(--neon-gold); font-weight: 700; margin-bottom: 5px; }
+        .node-link span:last-child { font-size: 10px; text-transform: uppercase; color: #555; letter-spacing: 2px; }
+        .node-link:hover { background: var(--neon-gold); box-shadow: 0 0 30px var(--neon-gold); }
+        .node-link:hover span { color: #000; }
+
+        .glow-text { text-shadow: 0 0 15px rgba(245, 201, 122, 0.5); }
+        .divider { height: 1px; background: linear-gradient(90deg, transparent, var(--neon-gold), transparent); margin: 4rem 0; opacity: 0.3; }
+        
+        .section-tag { font-family: 'Orbitron'; font-size: 10px; color: var(--neon-gold); border: 1px solid var(--neon-gold); padding: 2px 10px; border-radius: 4px; display: inline-block; margin-bottom: 1rem; }
     </style>
 </head>
 <body>
     <div class="bg-nebula"></div><div class="bg-grid"></div>
-    <nav class="fixed w-full z-[1000] px-12 py-8 flex justify-between items-center border-b border-white/5 bg-black/70 backdrop-blur-3xl">
-        <div class="text-2xl font-cyber font-bold tracking-[0.4em] text-[#f5c97a]">AKASHIC ARCHIVE</div>
+    
+    <nav class="fixed w-full z-[1000] px-12 py-10 flex justify-between items-center border-b border-white/5 bg-black/60 backdrop-blur-3xl">
+        <div class="text-2xl font-cyber font-bold tracking-[0.5em] text-[#f5c97a]">AKASHIC ARCHIVE</div>
+        <div id="google_translate_element"></div>
     </nav>
-    <main class="relative pt-60 pb-40 px-10 max-w-7xl mx-auto">
-        <section class="cyber-card text-center">
-            <h1 class="text-gold font-cyber text-4xl uppercase tracking-[0.8em] mb-12">Universal Intelligence Matrix</h1>
-            <p class="text-gray-400 text-lg leading-loose mb-16">The Akashic Archive is a high-fidelity digital repository. Select a temporal node below to access professional historical intelligence across 17 specialized sectors.</p>
+
+    <main class="relative pt-64 pb-40 px-10 max-w-7xl mx-auto space-y-32">
+        
+        <!-- 💡 [Hero Section] 인류사 매니페스토 -->
+        <section class="text-center space-y-12">
+            <h1 class="text-6xl md:text-9xl font-cyber font-bold text-white tracking-tighter uppercase leading-tight">Sync <br><span class="text-[#f5c97a] glow-text">Intelligence</span></h1>
+            <p class="max-w-4xl mx-auto text-[#94a3b8] text-xl font-light leading-loose font-serif italic">
+                "We synchronize disparate temporal nodes of human progress across 17 specialized sectors. Explore the collective consciousness of our civilization through a high-fidelity digital interface."
+            </p>
             
-            <div class="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-6">
-                <a href="month-01.html" class="node-link">NODE_01<br>JANUARY</a>
-                <a href="month-02.html" class="node-link">NODE_02<br>FEBRUARY</a>
-                <a href="month-03.html" class="node-link">NODE_03<br>MARCH</a>
-                <a href="month-04.html" class="node-link">NODE_04<br>APRIL</a>
-                <a href="month-05.html" class="node-link">NODE_05<br>MAY</a>
-                <a href="month-06.html" class="node-link">NODE_06<br>JUNE</a>
-                <a href="month-07.html" class="node-link">NODE_07<br>JULY</a>
-                <a href="month-08.html" class="node-link">NODE_08<br>AUGUST</a>
-                <a href="month-09.html" class="node-link">NODE_09<br>SEPTEMBER</a>
-                <a href="month-10.html" class="node-link">NODE_10<br>OCTOBER</a>
-                <a href="month-11.html" class="node-link">NODE_11<br>NOVEMBER</a>
-                <a href="month-12.html" class="node-link">NODE_12<br>DECEMBER</a>
+            <div class="node-grid">
+                <a href="month-01.html" class="node-link"><span>01</span><span>January</span></a>
+                <a href="month-02.html" class="node-link"><span>02</span><span>February</span></a>
+                <a href="month-03.html" class="node-link"><span>03</span><span>March</span></a>
+                <a href="month-04.html" class="node-link"><span>04</span><span>April</span></a>
+                <a href="month-05.html" class="node-link"><span>05</span><span>May</span></a>
+                <a href="month-06.html" class="node-link"><span>06</span><span>June</span></a>
+                <a href="month-07.html" class="node-link"><span>07</span><span>July</span></a>
+                <a href="month-08.html" class="node-link"><span>08</span><span>August</span></a>
+                <a href="month-09.html" class="node-link"><span>09</span><span>September</span></a>
+                <a href="month-10.html" class="node-link"><span>10</span><span>October</span></a>
+                <a href="month-11.html" class="node-link"><span>11</span><span>November</span></a>
+                <a href="month-12.html" class="node-link"><span>12</span><span>December</span></a>
             </div>
         </section>
-        
-        <footer class="text-center opacity-30 text-[10px] uppercase tracking-widest font-cyber">
-            <div class="flex justify-center gap-8 mb-10">
-                <a href="privacy.html">Privacy</a><a href="terms.html">Terms</a><a href="contact.html">Contact</a>
+
+        <div class="divider"></div>
+
+        <!-- 💡 [Intelligence Preview] 메인 페이지를 꽉 채우는 카테고리 요약 (구글 로봇용 텍스트 폭탄) -->
+        <section class="space-y-20">
+            <h2 class="text-gold font-cyber text-2xl uppercase tracking-[0.6em] text-center mb-16">Archival Sector Overviews</h2>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-10">
+                <!-- 1. Judicial -->
+                <div class="cyber-card p-10 text-left">
+                    <span class="section-tag">Sector_01</span>
+                    <h3 class="font-cyber text-white text-xl mb-4 uppercase">Judicial & Constitutional Intelligence</h3>
+                    <p class="text-gray-400 leading-loose text-sm">Our Judicial sector meticulously catalogs constitutional amendments and supreme court verdicts that have served as the structural backbone of civil society. From the Magna Carta to 21st-century human rights forensics, we analyze every record for its long-term impact on global jurisprudence, ensuring that researchers trace the evolution of sovereignty with absolute precision.</p>
+                </div>
+                <!-- 2. Financial -->
+                <div class="cyber-card p-10 text-left">
+                    <span class="section-tag">Sector_02</span>
+                    <h3 class="font-cyber text-white text-xl mb-4 uppercase">Macro-Financial & Wealth Records</h3>
+                    <p class="text-gray-400 leading-loose text-sm">The Financial archive tracks the synchronization of global wealth, from the gold standard eras to the inception of decentralized cryptocurrencies. By documenting market crashes, IPO milestones, and central bank policy shifts, we provide a high-fidelity map of the human economic journey, decoding the cyclical nature of global capital flux.</p>
+                </div>
+                <!-- 3. Innovations -->
+                <div class="cyber-card p-10 text-left">
+                    <span class="section-tag">Sector_03</span>
+                    <h3 class="font-cyber text-white text-xl mb-4 uppercase">IT Innovations & Technical Singularities</h3>
+                    <p class="text-gray-400 leading-loose text-sm">Focusing on the 'Firsts' of human achievement. From the invention of the steam engine to the birth of Artificial Intelligence, this sector isolates the technological nodes that have shifted the paradigm of human existence. We document the innovators, founders, and prototypes that paved the way for our modern digital society.</p>
+                </div>
+                <!-- 4. Brands -->
+                <div class="cyber-card p-10 text-left">
+                    <span class="section-tag">Sector_04</span>
+                    <h3 class="font-cyber text-white text-xl mb-4 uppercase">Commercial Genealogy & Brand Legacies</h3>
+                    <p class="text-gray-400 leading-loose text-sm">Exploring the birth and evolution of global commercial entities. This sector documents the founding moments of brands that redefined consumer culture. We analyze the intersection of marketing, innovation, and commerce, tracing how corporate identities have become integral nodes in the modern historical narrative.</p>
+                </div>
             </div>
-            Akashic Record Terminal © 2026 | offthemain@proton.me
+        </section>
+
+        <!-- 💡 [AdSense 핵심] 하단 상세 연구 방법론 에세이 (정적 텍스트 2000자) -->
+        <section class="cyber-card p-12 text-left space-y-8 text-[#94a3b8] leading-loose">
+            <h2 class="text-gold font-cyber text-2xl uppercase tracking-widest text-center mb-10">Archival Methodology Documentation</h2>
+            <p>The <strong>AllDay Archive</strong> (Akashic Records Terminal) operates on the principle of temporal synchronization. Unlike linear historical databases, our system treats each date as a multi-dimensional intersection where legal, financial, and technological currents collide. By isolating these specific 'historical nodes,' we allow researchers to observe how a single calendar day can function as a global catalyst for centuries of development.</p>
+            <p>Our neural categorization engine isolates data into 17 specialized intelligence sectors. Every entry is cross-referenced with primary historical documents, parliamentary records, and international economic data. By rephrasing and analytically enhancing each record via expert AI curation, we provide a unique scholarly perspective that distinguishes our terminal from conventional information aggregators. We believe that history is a living record, and by documenting the synchronicity of data across centuries, we offer a transparent gateway to the deep-rooted origins of modern society.</p>
+            <p class="text-center italic text-gold mt-10">Primary Intelligence Node: offthemain@proton.me</p>
+        </section>
+
+        <!-- Footer -->
+        <footer class="py-24 border-t border-white/5 space-y-16 text-center">
+            <div class="flex flex-wrap justify-center gap-12 text-[10px] font-cyber text-gray-500 uppercase tracking-widest">
+                <a href="privacy.html" class="hover:text-gold transition-colors">Privacy Protocol</a>
+                <a href="terms.html" class="hover:text-gold transition-colors">Access Terms</a>
+                <a href="contact.html" class="hover:text-gold transition-colors">Archives Support</a>
+                <a href="disclaimer.html" class="hover:text-gold transition-colors">Legal Disclaimer</a>
+            </div>
+            <div class="flex flex-col items-center gap-10">
+                <button onclick="window.open('https://buymeacoffee.com/djawjdaks8g')" class="coffee-btn uppercase tracking-widest shadow-2xl">Fuel the Archive</button>
+                <p class="text-[10px] font-cyber text-gray-700 tracking-[0.6em] uppercase">Akashic Terminal Node © 2026</p>
+            </div>
         </footer>
     </main>
+
+    <script type="text/javascript">
+        function googleTranslateElementInit() {
+            new google.translate.TranslateElement({pageLanguage: 'en', layout: google.translate.TranslateElement.InlineLayout.SIMPLE}, 'google_translate_element');
+        }
+    </script>
+    <script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
 </body>
 </html>
