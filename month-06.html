@@ -3,407 +3,481 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Node 03: March Archival Intelligence | Akashic Archive</title>
-    
-    <!-- 🚀 글로벌 포털 SEO 최적화 -->
-    <meta name="description" content="A premium 12-month digital library of human history. Node 03: March highlights sovereign awakenings, judicial breakthroughs, and technical singularities.">
-    <meta name="google-site-verification" content="Y1tnVUzXiTj0LthauJuHS3DkMpxo8D1olmatbrfhld0">
-
-    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=Inter:wght@300;400;600;800&family=Playfair+Display:italic,wght@700&display=swap" rel="stylesheet">
+    <title>Node 06: June Archival Intelligence | Part I (01-15)</title>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Inter:wght@300;400;600&family=Playfair+Display:ital,wght@0,700;1,700&display=swap" rel="stylesheet">
     <script src="https://cdn.tailwindcss.com"></script>
-    
     <style>
         :root { --neon-gold: #f5c97a; --bg: #010204; --card-bg: rgba(10, 14, 22, 0.98); }
-        body { font-family: 'Inter', sans-serif; background-color: var(--bg); color: #e2e8f0; line-height: 2.2; }
+        body { background: var(--bg); color: #e2e8f0; font-family: 'Inter', sans-serif; line-height: 2.2; }
         .font-cyber { font-family: 'Orbitron', sans-serif; }
-        .font-serif { font-family: 'Playfair Display', serif; }
-        
-        /* 🌌 아카식 레코드 우주 배경 */
-        .bg-akashic { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: radial-gradient(circle at 50% 50%, #0d1a33 0%, #010204 100%); z-index: -2; }
-        .bg-grid { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background-image: linear-gradient(rgba(245, 201, 122, 0.04) 1.5px, transparent 1.5px), linear-gradient(90deg, rgba(245, 201, 122, 0.04) 1.5px, transparent 1.5px); background-size: 60px 60px; z-index: -1; }
-
-        .report-card { background: var(--card-bg); border: 1px solid rgba(245, 201, 122, 0.15); border-radius: 24px; padding: 4rem; margin-bottom: 5rem; box-shadow: 0 0 60px rgba(0,0,0,0.9); transition: 0.5s; }
-        .day-header { font-family: 'Orbitron'; color: var(--neon-gold); font-size: 2.8rem; letter-spacing: 12px; border-bottom: 2px solid var(--neon-gold); margin-bottom: 3rem; padding-bottom: 15px; text-align: center; }
-        .category-h3 { font-family: 'Orbitron'; color: #fff; font-size: 1.5rem; margin-top: 4.5rem; margin-bottom: 1.5rem; text-transform: uppercase; letter-spacing: 5px; border-left: 6px solid var(--neon-gold); padding-left: 25px; }
-        .essay-p { text-align: justify; color: #a0aec0; font-size: 1.15rem; margin-bottom: 2.5rem; text-indent: 1.5rem; }
-        .year-badge { font-family: 'Orbitron'; color: var(--neon-gold); font-weight: 800; background: rgba(245, 201, 122, 0.12); padding: 6px 18px; border-radius: 5px; margin-right: 20px; font-size: 15px; }
-        .back-btn { color: var(--neon-gold); text-decoration: none; font-family: 'Orbitron'; font-size: 12px; margin-bottom: 5rem; display: inline-block; border: 1px solid var(--neon-gold); padding: 15px 35px; border-radius: 50px; transition: 0.4s; }
-        .back-btn:hover { background: var(--neon-gold); color: #000; box-shadow: 0 0 30px var(--neon-gold); }
+        .bg-grid { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background-image: linear-gradient(rgba(245, 201, 122, 0.03) 1px, transparent 1px), linear-gradient(90deg, rgba(245, 201, 122, 0.03) 1px, transparent 1px); background-size: 80px 80px; z-index: -1; }
+        .report-card { background: var(--card-bg); border: 1px solid rgba(245, 201, 122, 0.1); border-radius: 24px; padding: 5rem; margin-bottom: 8rem; box-shadow: 0 40px 100px rgba(0,0,0,0.9); transition: 0.5s; }
+        .day-header { font-family: 'Orbitron'; color: var(--neon-gold); font-size: 3.5rem; letter-spacing: 15px; border-bottom: 2px solid var(--neon-gold); margin-bottom: 4rem; padding-bottom: 20px; text-align: center; }
+        .category-h3 { font-family: 'Orbitron'; color: #fff; font-size: 1.6rem; margin-top: 5rem; margin-bottom: 2rem; text-transform: uppercase; letter-spacing: 4px; border-left: 5px solid var(--neon-gold); padding-left: 25px; }
+        .essay-p { text-align: justify; color: #a0aec0; font-size: 1.2rem; margin-bottom: 3rem; text-indent: 2rem; line-height: 2.4; }
+        .year-badge { font-family: 'Orbitron'; color: #000; font-weight: 700; background: var(--neon-gold); padding: 4px 15px; border-radius: 4px; margin-right: 15px; font-size: 16px; }
+        .highlight { color: #fff; font-weight: 600; border-bottom: 1px solid var(--neon-gold); }
+        .archive-img { width: 100%; height: 550px; object-fit: cover; border-radius: 15px; margin: 4rem 0; border: 1px solid rgba(245, 201, 122, 0.2); filter: brightness(0.8); transition: 0.5s; }
+        .archive-img:hover { filter: brightness(1) contrast(1.1); }
     </style>
 </head>
 <body>
-    <!-- 12개 파일 공통 상단 디자인 -->
-<div class="bg-akashic"></div><div class="bg-grid"></div>
+    <div class="bg-grid"></div>
 
-<nav class="fixed w-full z-[1000] px-10 py-6 flex justify-between items-center border-b border-white/5 bg-black/60 backdrop-blur-xl">
-    <div class="text-xl font-cyber font-bold text-[#f5c97a] cursor-pointer" onclick="location.href='index.html'">AKASHIC ARCHIVE</div>
-    <a href="index.html" style="color:#f5c97a; font-family:Orbitron; font-size:10px; text-decoration:none; border:1px solid #f5c97a; padding:5px 15px; border-radius:5px;">BACK_TO_HUB</a>
-</nav>
-
-<main class="relative pt-40 pb-20 px-8 max-w-5xl mx-auto">
-    <!-- 🖼️ 이 달의 핵심 이미지 (아래 리스트에서 골라 넣으세요) -->
-    <div class="cyber-card p-0 overflow-hidden mb-12">
-        <img src="[https://images.unsplash.com/photo-1589829545856-d10d557cf95f?auto=format&fit=crop&w=1200&q=80]" alt="Monthly Archive Hero" class="w-full h-[450px] object-cover opacity-80">
-        <div class="p-10">
-            <h1 class="text-gold font-cyber text-4xl uppercase tracking-widest mb-4">[MONTH NAME] Intelligence Report</h1>
-            <p class="text-gray-400 italic">"Synchronizing human progress through the lens of the Akashic Terminal."</p>
+    <nav class="fixed w-full z-[1000] px-12 py-8 flex justify-between items-center bg-black/60 backdrop-blur-xl border-b border-white/5">
+        <div class="text-2xl font-cyber font-bold text-[#f5c97a] tracking-tighter cursor-pointer" onclick="location.href='index.html'">AKASHIC ARCHIVE // NODE_06</div>
+        <div class="flex gap-6">
+            <span class="font-cyber text-gray-500 text-xs mt-2">CHRONOLOGICAL_SYNC: JUNE_P1</span>
+            <a href="index.html" class="font-cyber text-[#f5c97a] border border-[#f5c97a] px-5 py-2 rounded hover:bg-[#f5c97a] hover:text-black transition-all text-xs">BACK_TO_HUB</a>
         </div>
-    </div>
-
-    <!-- 💡 기존에 작성하신 1,500자 텍스트는 이 아래에 그대로 둡니다 -->
-    <div class="cyber-card">
-        [기존 텍스트 내용들...]
-    </div>
-</main>
-    <div class="bg-akashic"></div><div class="bg-grid"></div>
-    
-    <main class="relative pt-20 pb-20 px-8 max-w-6xl mx-auto">
-        <a href="index.html" class="back-btn">← TERMINAL_RECON</a>
-        
-        <h1 class="font-cyber text-5xl text-center text-white mb-24 uppercase tracking-[0.7em]">March Node Analysis</h1>
-<!-- NODE 06: JUNE - THE ARCHITECTURE OF LIBERTY & STRATEGIC EQUILIBRIUM -->
-            <div id="node-6" class="report-section">
-                <section class="cyber-card">
-                    <h2 class="editorial-h2">JUNE: THE PRIMAL DECREE OF GLOBAL ORDER</h2>
-                    <p class="essay-p">June serves as the supreme temporal coordinate for the <span class="highlight">codification of human rights</span> and the radical recalibration of global strategic logistics. Historically, this month archives the moments when human civilization legally restricted absolute power through constitutional foundations and when the most massive synchronization of military capital was initialized to restore continental equilibrium. From the 1215 Magna Carta to the 1944 D-Day landings, June anchors the spirit of 'Systemic Liberation,' providing a granular look at the human struggle to define the boundaries of authority and freedom.</p>
-                    
-                    <!-- 💡 JUNE 01 -->
-                    <div class="report-card">
-                        <div class="day-header">JUNE_01</div>
-                        <h3 class="category-title">🌐 Digital Media Intelligence: The CNN Singularity</h3>
-                        <p class="essay-p"><span class="year-badge">1980</span>Launch of CNN (Cable News Network): Ted Turner initialized the world's first 24-hour news cycle. Our archival forensics identify this as a 'Media Hegemony Singularity.' By synchronizing global events with real-time satellite broadcasting, CNN fundamentally altered the human cognitive response to information. This node established the primordial protocols for 'Continuous Information Flow,' effectively anchoring the birth of the modern 24/7 digital awareness matrix and redefining global political branding.</p>
-                        
-                        <h3 class="category-title">⚖️ Judicial Intelligence: International Law</h3>
-                        <p class="essay-p"><span class="year-badge">2001</span>Crown Prince Dipendra of Nepal: A tragic node in monarchical succession law. The systemic collapse of the Nepalese royal lineage triggered a massive recalibration of South Asian geopolitical stability. Our research views this as a case study in 'Dynastic Forensic Vulnerability,' where the sudden termination of a sovereign node forced a total systemic overhaul of national governance protocols.</p>
-                    </div>
-
-                    <!-- 💡 JUNE 02 -->
-                    <div class="report-card">
-                        <div class="day-header">JUNE_02</div>
-                        <h3 class="category-title">🏛️ Judicial Intelligence: The Birth of the Italian Republic</h3>
-                        <p class="essay-p"><span class="year-badge">1946</span>The Italian Institutional Referendum: Following the terminal collapse of fascism, the Italian people voted to abolish the monarchy. This node archives the formal initialization of the Italian Republic. Our scholarly research identifies this as a 'Constitutional Singularity'—the legal transition from hereditary command to a representative democratic matrix. This recalibration provided the structural DNA for post-war Southern European stability and the synchronization of Mediterranean legislative authority.</p>
-
-                        <h3 class="category-title">🏷️ Brand Genealogy: Queen Elizabeth II Coronation</h3>
-                        <p class="essay-p"><span class="year-badge">1953</span>Coronation of Elizabeth II: A supreme node in the history of institutional branding. Historically synchronized with the birth of mass-media television culture, her coronation was the first global event to be broadcast to a synchronized international audience. This event served as a definitive case study in 'Sovereign Symbolism,' anchoring the psychological continuity of the Commonwealth through the lens of early technical broadcasting.</p>
-                    </div>
-
-                    <!-- 💡 JUNE 03 -->
-                    <div class="report-card">
-                        <div class="day-header">JUNE_03</div>
-                        <h3 class="category-title">🛰️ Interstellar Intelligence: Ed White’s Spacewalk</h3>
-                        <p class="essay-p"><span class="year-badge">1965</span>The Gemini 4 Mission: Ed White became the first American to perform an Extra-Vehicular Activity (EVA). This temporal node archives the extreme psychological and technical limits of the human-machine interface in microgravity. By physically exiting the spacecraft, White proved the viability of synchronized human intervention in the vacuum of space, establishing the primordial protocols for orbital innovative repair and the eventual synchronization of lunar habitat research.</p>
-
-                        <h3 class="category-h3">📈 Macro-Financial Records</h3>
-                        <p class="essay-p"><span class="year-badge">1885</span>Founding of the first major regional industrial banks, providing a data node for subsequent transcontinental capital synchronization and the innovative financing of late-19th century rail logistics.</p>
-                    </div>
-
-                    <!-- 💡 JUNE 04 -->
-                    <div class="report-card">
-                        <div class="day-header">JUNE_04</div>
-                        <h3 class="category-title">🚨 Critical Tragedies & Judicial Responses: Tiananmen</h3>
-                        <p class="essay-p"><span class="year-badge">1989</span>The Tiananmen Square Protests: A tragic singularity in the history of civil sovereignty. The terminal suppression of the student-led movement forced a global re-evaluation of the boundaries between state-sponsored force and individual political expression. Our archival research focus on the subsequent 'Geopolitical Recalibration'—a period where Western innovative and capital flows to the East were fundamentally synchronized with human rights diplomacy for the first time.</p>
-
-                        <h3 class="category-title">⚙️ Innovations: The First Hot Air Balloon</h3>
-                        <p class="essay-p"><span class="year-badge">1783</span>The Montgolfier Brothers’ Demonstration: The first public flight of an unmanned hot air balloon. This technical milestone served as the primordial ancestor to the modern aerospace matrix. By proving that human artifacts could achieve lift through thermal synchronization, this node initiated the trajectory of vertical innovative ambition, fundamentally altering our understanding of atmospheric logistics.</p>
-                    </div>
-
-                    <!-- 💡 JUNE 05 -->
-                    <div class="report-card">
-                        <div class="day-header">JUNE_05</div>
-                        <h3 class="category-title">🌍 Innovations in Resource Governance: World Environment Day</h3>
-                        <p class="essay-p"><span class="year-badge">1972</span>Initialization of World Environment Day: Following the Stockholm Conference on the Human Environment. This node archives the first global attempt to synchronize international administrative attention with planetary biosecurity. It established the protocols for global ecological monitoring and anchored the principle of 'Collective Terrestrial Sustainability' into the legislative DNA of every sovereign nation.</p>
-
-                        <h3 class="category-title">🚨 Geopolitical Singularities: Six-Day War</h3>
-                        <p class="essay-p"><span class="year-badge">1967</span>Inception of the Six-Day War: A definitive node in Middle Eastern military forensics. The synchronized preemptive strikes by Israeli forces recalibrated the regional geopolitical matrix in less than 150 hours. This event forced a total systemic overhaul of global energy logistics and established new standards for high-fidelity tactical synchronization in modern desert-theater conflict.</p>
-                    </div>
-
-                    <!-- 💡 JUNE 06 -->
-                    <div class="report-card">
-                        <div class="day-header">JUNE_06</div>
-                        <h3 class="category-title">🚨 Critical Tragedies & Strategic Mastery: D-Day</h3>
-                        <p class="essay-p"><span class="year-badge">1944</span>The Normandy Landings (Operation Overlord): The most massive synchronization of maritime, aerial, and land-based logistics in human history. Our analytical terminal categorizes this as the 'Logistical Singularity' of the 20th century. By landing 156,000 troops across five beaches, the Allied forces initiated the terminal collapse of the Nazi administrative matrix. This node established new standards for multinational military synchronization and redefined the scale of innovative strategic planning forever.</p>
-
-                        <h3 class="category-title">⚙️ IT Singularities: The Tetris Node</h3>
-                        <p class="essay-p"><span class="year-badge">1984</span>The Launch of Tetris: Alexey Pajitnov initialized the most significant cognitive brand in gaming history. Our forensics identify this as a 'Logic Singularity' in software. By synchronizing simple geometric patterns with addictive reward-loops, Tetris pioneered the protocols for global digital media distribution during the late-Cold War era, fundamentally altering the commercial genealogy of the digital entertainment matrix.</p>
-                    </div>
-
-                    <!-- 💡 JUNE 07 -->
-                    <div class="report-card">
-                        <div class="day-header">JUNE_07</div>
-                        <p class="essay-p">June 7th archives the birth of <span class="text-white font-bold">Modern Indian Non-Violent Resistance</span> and the zenith of 19th-century colonial maritime discovery. It is a day defined by the initial psychological sparks of the individual who would eventually recalibrate global civil rights through non-violent intellectual energy.</p>
-
-                        <h3 class="category-title">⚖️ Judicial Intelligence: The Gandhi Singularity</h3>
-                        <p class="essay-p"><span class="year-badge">1893</span>Mohandas Gandhi’s First Act of Civil Disobedience: After being thrown off a train in South Africa for refusing to move from a whites-only compartment. Our scholarly research views this as the 'Moral Genesis Node.' This event served as the primary catalyst for Gandhi’s development of Satyagraha, providing the ethical and legal blueprint for every subsequent non-violent revolutionary movement in the 20th-century geopolitical matrix.</p>
-                    </div>
-
-                    <!-- 💡 JUNE 08 -->
-                    <div class="report-card">
-                        <div class="day-header">JUNE_08</div>
-                        <h3 class="category-title">🛰️ Interstellar Intelligence: Venus Transit</h3>
-                        <p class="essay-p"><span class="year-badge">2004</span>The Transit of Venus: The first such celestial synchronization in 122 years. This astronomical node provided a high-fidelity case study in 'Planetary Parallax Forensics.' By observing the transit, astronomers were able to refine the mathematical distance between Earth and the Sun, recalibrating our fundamental understanding of the solar system’s innovative architecture and anchoring future deep-space navigation protocols.</p>
-
-                        <h3 class="category-title">📚 Literature & Forensics: 1984</h3>
-                        <p class="essay-p"><span class="year-badge">1949</span>Publication of George Orwell’s Nineteen Eighty-Four: A supreme node in the history of political literature. Orwell’s work served as a technical singularity in 'Predictive Societal Forensics.' By introducing concepts like 'Big Brother' and 'Newspeak,' he provided the narrative framework for modern society's struggle with state-sponsored digital surveillance and algorithmic information control.</p>
-                    </div>
-
-                    <!-- 💡 JUNE 09 -->
-                    <div class="report-card">
-                        <div class="day-header">JUNE_09</div>
-                        <h3 class="category-title">🎬 Cinematic Brand Genealogy: Donald Duck</h3>
-                        <p class="essay-p"><span class="year-badge">1934</span>Debut of Donald Duck: Disney initialized a commercial legacy that would redefine animated emotional intelligence. Our forensics identify this as a 'Character Branding Singularity.' By synchronizing flawed human temperaments with mass-market technical animation, Disney created a case study in global brand-building that fundamentally altered the consumer capital flow of the family-media industry.</p>
-
-                        <h3 class="category-h3">⚙️ Technical Milestones in Logic</h3>
-                        <p class="essay-p"><span class="year-badge">1959</span>Launch of the USS George Washington: The world's first ballistic missile submarine. This structural singularity represented a definitive leap in nuclear innovative logistics, establishing the 'Sub-Surface Deterrent' protocols that anchored the global strategic equilibrium during the atomic age.</p>
-                    </div>
-
-                    <!-- 💡 JUNE 10 -->
-                    <div class="report-card">
-                        <div class="day-header">JUNE_10</div>
-                        <p class="essay-p">June 10th archives the birth of <span class="text-white font-bold">Standardized Alcoholism Recovery Intelligence</span> and the zenith of early 20th-century environmental innovative engineering. It is a day defined by the technical victory over biological addiction and the innovative mapping of new transcontinental logistical conduits.</p>
-
-                        <h3 class="category-title">💉 Medical Singularities: Alcoholics Anonymous</h3>
-                        <p class="essay-p"><span class="year-badge">1935</span>Founding of Alcoholics Anonymous (AA): Dr. Bob Smith and Bill Wilson initialized the 12-step protocol. Our archival terminal categorizes this as a 'Social-Medical Singularity.' By synchronizing peer-based counseling with spiritual discipline, AA established the first global framework for addiction forensics, fundamentally altering the trajectory of behavioral health security and public welfare law.</p>
-
-                        <h3 class="category-h3">⚖️ Judicial Intelligence: The Equal Pay Act</h3>
-                        <p class="essay-p"><span class="year-badge">1963</span>Signing of the Equal Pay Act: President Kennedy legalized the prohibition of wage discrimination based on sex. This legal node represents a critical shift in social jurisprudence, marking the institutionalization of gender-based economic parity within the modern labor matrix and forcing a total systemic recalibration of Western employment law.</p>
-                    </div>
-
-                  <!-- 💡 JUNE 11 -->
-                    <div class="report-card">
-                        <div class="day-header">JUNE_11</div>
-                        <p class="essay-p">June 11th archives the supreme node of <span class="text-white font-bold">Constitutional Drafting Intelligence</span> and the birth of modern cinematic biological forensics. Historically, this date anchors the moments human civilization legally formalized its demand for independence and when the technical standard for simulated prehistoric life reached its 20th-century zenith.</p>
-                        
-                        <h3 class="category-title">⚖️ Judicial Intelligence: The Committee of Five</h3>
-                        <p class="essay-p"><span class="year-badge">1776</span>Formation of the Declaration Committee: The Continental Congress appointed Jefferson, Adams, Franklin, Livingston, and Sherman to draft the Declaration of Independence. Our archival forensics identify this as a 'Sovereign Synchronization Singularity.' This node represent the first formal move toward codifying natural law into a revolutionary legislative framework, effectively establishing the primordial protocols for modern democratic statecraft and the synchronization of global anti-colonial movements.</p>
-                        
-                        <h3 class="category-title">🎬 Cinematic Innovations: Jurassic Park</h3>
-                        <p class="essay-p"><span class="year-badge">1993</span>Premiere of Jurassic Park: A technical milestone in the history of simulated visual intelligence. By synchronizing high-fidelity CGI with physical animatronics, Steven Spielberg pioneered new standards in digital biological reconstruction. This node established the foundational protocols for modern media branding, fundamentally altering the commercial genealogy of the global blockbuster matrix.</p>
-                    </div>
-
-                    <!-- 💡 JUNE 12 -->
-                    <div class="report-card">
-                        <div class="day-header">JUNE_12</div>
-                        <p class="essay-p">June 12th serves as the coordinate for <span class="text-white font-bold">Marital Judicial Equity</span> and the zenith of Cold War rhetorical forensics. Historically, this date anchors the moment the state legally recognized the sanctity of cross-racial unions and when the most iconic demand for ideological deconstruction was initialized at the Berlin frontier.</p>
-
-                        <h3 class="category-title">⚖️ Judicial Intelligence: Loving v. Virginia</h3>
-                        <p class="essay-p"><span class="year-badge">1967</span>Supreme Court Ruling on Interracial Marriage: In a landmark decision, the court declared all laws prohibiting interracial marriage unconstitutional. Our scholarly research views this node as a definitive recalibration of the 14th Amendment. By anchoring the 'Right to Marry' into the constitutional matrix, this decision forced a total systemic overhaul of domestic civil rights law and provided the judicial DNA for future marriage equality litigation.</p>
-
-                        <h3 class="category-title">🏛️ Geopolitical Nodes: Reagan at the Wall</h3>
-                        <p class="essay-p"><span class="year-badge">1887</span>"Tear Down This Wall!": Ronald Reagan delivered this seminal node in the history of diplomatic forensics at the Brandenburg Gate. Our analytical terminal categorizes this rhetoric as a 'Strategic Singularity.' By synchronizing psychological pressure with geopolitical demand, Reagan provided the intellectual framework for the eventual collapse of the bipolar world order, fundamentally altering the trajectory of global innovative and capital flows.</p>
-                    </div>
-
-                    <!-- 💡 JUNE 13 -->
-                    <div class="report-card">
-                        <div class="day-header">JUNE_13</div>
-                        <p class="essay-p">June 13th archives the birth of <span class="text-white font-bold">Procedural Judicial Safeguards</span> and the supreme node of interstellar navigational discovery. It is a day defined by the formalization of individual rights during detention and the moment a human artifact first transcended the boundaries of our planetary system.</p>
-
-                        <h3 class="category-title">⚖️ Judicial Intelligence: Miranda v. Arizona</h3>
-                        <p class="essay-p"><span class="year-badge">1966</span>The Miranda Rights Ruling: The US Supreme Court established that criminal suspects must be informed of their constitutional rights before interrogation. Our archival forensics identify this as a 'Systemic Accountability Singularity.' This node established the primordial protocols for modern law enforcement conduct, anchoring the legal legitimacy of individual silence and legal counsel into the global judicial matrix.</p>
-
-                        <h3 class="category-title">🛰️ Interstellar Intelligence: Pioneer 10</h3>
-                        <p class="essay-p"><span class="year-badge">1983</span>Pioneer 10 Leaves the Solar System: The first human-made object to pass the orbit of the furthest planet. This temporal node archives the extreme innovative limits of 20th-century aerospace engineering. Pioneer 10 provided the first high-fidelity technical images of Jupiter and established the foundational protocols for deep-space synchronization, anchoring the future of interstellar data-mapping.</p>
-                    </div>
-
-                    <!-- 💡 JUNE 14 -->
-                    <div class="report-card">
-                        <div class="day-header">JUNE_14</div>
-                        <p class="essay-p">June 14th represents a dual singularity: the <span class="text-white font-bold">Genesis of Modern Neuropathological Forensics</span> and the birth of American national symbolic branding. Historically, this date anchors the moment a devastating cognitive disease was first identified and when the first formal mechanism for national identity synchronization was initialized.</p>
-
-                        <h3 class="category-title">💉 Medical Singularities: Alzheimer's Genesis</h3>
-                        <p class="essay-p"><span class="year-badge">1906</span>First Case of Alzheimer's Disease Identified: Dr. Alois Alzheimer presented the case of Auguste Deter. This node archives the birth of 'Neuro-Forensic Intelligence.' By synchronizing clinical observation with histological research, Alzheimer pioneered the protocols for modern geriatric medicine, providing the essential baseline for all future global research into neurodegenerative synchronization.</p>
-
-                        <h3 class="category-title">🏛️ National Branding: Flag Day</h3>
-                        <p class="essay-p"><span class="year-badge">1777</span>Adoption of the 'Stars and Stripes': The Continental Congress initialized the official flag of the United States. Our archival research views this as a case study in 'Sovereign Symbolism.' By creating a unified visual language for the new republic, this node established the protocols for national brand-building, fundamentally altering the trajectory of American cultural synchronization.</p>
-                    </div>
-
-                    <!-- 💡 JUNE 15 -->
-                    <div class="report-card">
-                        <div class="day-header">JUNE_15</div>
-                        <p class="essay-p">June 15th serves as the supreme coordinate for <span class="text-white font-bold">Foundational Constitutional Jurisprudence</span> and the birth of 20th-century high-capacity software branding. Historically, this date anchors the moment absolute power was first legally restricted and when the first formal mechanism for modern office-based digital synchronization faced its global debut.</p>
-
-                        <h3 class="category-title">⚖️ Judicial Intelligence: The Magna Carta</h3>
-                        <p class="essay-p"><span class="year-badge">1215</span>The Sealing of the Magna Carta: At Runnymede, King John was forced to sign the Great Charter. Our analytical terminal identifies this as the 'Primal Singularity' of Western law. This node established the revolutionary precedent that no ruler is above the law. It provided the legal DNA for every subsequent constitutional framework, anchoring the future of individual rights and the synchronization of global democratic governance.</p>
-
-                        <h3 class="category-title">⚙️ IT Singularities: Windows 98</h3>
-                        <p class="essay-p"><span class="year-badge">1998</span>Launch of Windows 98: Microsoft initialized a more stable, internet-integrated technical standard for personal computing. This node archives a 'Logistical Singularity' in home digital use. By synchronizing the web browser with the operating system, Windows 98 effectively anchored the digital hegemony of Microsoft and redefined the commercial genealogy of 21st-century software branding.</p>
-                    </div>
-
-                    <!-- 💡 JUNE 16 -->
-                    <div class="report-card">
-                        <div class="day-header">JUNE_16</div>
-                        <p class="essay-p">June 16th archives the birth of <span class="text-white font-bold">Modern Industrial-Scale Branding</span> and the zenith of 20th-century feminine interstellar ambition. It is a day defined by the inception of a commercial hegemony that redefined retail logistics and the moment human life first transcended gender barriers in the vacuum of space.</p>
-
-                        <h3 class="category-title">🏷️ Brand Genealogy: Ford Motor Company</h3>
-                        <p class="essay-p"><span class="year-badge">1903</span>Founding of Ford Motor Company: Henry Ford initialized a commercial legacy that would dominate global transportation for a century. Our forensics identify this as the 'Production Singularity.' By eventually synchronizing assembly-line technical standards with middle-class capital, Ford pioneered the commercial genealogy of 'Systemic Branding,' fundamentally altering global labor dynamics and retail innovative design.</p>
-
-                        <h3 class="category-title">🛰️ Interstellar Intelligence: Valentina Tereshkova</h3>
-                        <p class="essay-p"><span class="year-badge">1963</span>First Woman in Space: Valentina Tereshkova performed 48 orbits of the Earth on Vostok 6. This node archives a significant shift in the history of aerospace parity. Her mission proved that high-fidelity orbital logistics were not limited by biological gender, establishing the foundational protocols for female inclusion in future extra-planetary research and innovative mission management.</p>
-                    </div>
-
-                    <!-- 💡 JUNE 17 -->
-                    <div class="report-card">
-                        <div class="day-header">JUNE_17</div>
-                        <p class="essay-p">June 17th represents the temporal coordinate for <span class="text-white font-bold">Executive Criminal Forensics</span> and the zenith of 19th-century symbolic structural engineering. It is a day marked by the initialization of a constitutional crisis that redefined the boundaries of presidential accountability and the physical arrival of the most iconic brand for liberty.</p>
-
-                        <h3 class="category-title">🕵️ Forensic & Criminal History: Watergate</h3>
-                        <p class="essay-p"><span class="year-badge">1972</span>The Watergate Break-in: Initialized a tragic singularity in the history of political forensics. Five individuals were arrested at the DNC headquarters. Our archival analysis views this as the birth of 'Modern Investigative Accountability.' The subsequent forensic and judicial trail forced a total systemic overhaul of US executive oversight laws and redefined the legal concept of 'Obstruction of Justice' in the global matrix.</p>
-
-                        <h3 class="category-title">⚙️ Innovations: Statue of Liberty Arrival</h3>
-                        <p class="essay-p"><span class="year-badge">1885</span>Arrival of the Statue of Liberty in NY: A pinnacle of 19th-century structural synchronization. Beyond its artistic value, our data forensics indicate the statue’s internal iron framework (engineered by Eiffel) served as a case study in high-altitude innovative stability, anchoring the future of synchronized urban architectural branding.</p>
-                    </div>
-
-                    <!-- 💡 JUNE 18 -->
-                    <div class="report-card">
-                        <div class="day-header">JUNE_18</div>
-                        <p class="essay-p">June 18th archives the <span class="text-white font-bold">Terminal Collapse of Napoleonic Sovereignty</span> and the zenith of 20th-century American feminine aerospace achievement. It is a day defined by the final military singularity of the 19th century and the moment the US synchronized its gender demographics with orbital research.</p>
-
-                        <h3 class="category-title">🚨 Critical Tragedies & Geopolitical Nodes: Waterloo</h3>
-                        <p class="essay-p"><span class="year-badge">1815</span>The Battle of Waterloo: A definitive node in European diplomatic forensics. The defeat of Napoleon forced a total systemic re-evaluation of the 'Balance of Power.' This node marked the transition into the 'Concert of Europe' era, establishing the foundational protocols for a century of synchronized multi-lateral diplomacy and legislative peace maintenance.</p>
-
-                        <h3 class="category-title">🛰️ Interstellar Intelligence: Sally Ride</h3>
-                        <p class="essay-p"><span class="year-badge">1983</span>First American Woman in Space: Sally Ride launched on the Space Shuttle Challenger. This node archives the maturity of Western aerospace parity synchronization. Ride’s mission established the protocols for integrated mission-specialist logistics, proving that high-fidelity scientific research in orbit was a collaborative human effort transcending previous innovative barriers.</p>
-                    </div>
-
-                    <!-- 💡 JUNE 19 -->
-                    <div class="report-card">
-                        <div class="day-header">JUNE_19</div>
-                        <p class="essay-p">June 19th serves as the supreme coordinate for <span class="text-white font-bold">Universal Emancipation Intelligence</span> and the formalization of early 20th-century aviation logistics. Historically, this date anchors the moment legal freedom was finally synchronized with physical reality in the United States and when the first formal mechanism for trans-global air-speed records was initialized.</p>
-
-                        <h3 class="category-title">⚖️ Judicial Intelligence: Juneteenth</h3>
-                        <p class="essay-p"><span class="year-badge">1865</span>Juneteenth: The arrival of federal troops in Galveston, Texas, to enforce the legal freedom of all enslaved people. Our archival forensics identify this as a 'Jurisdictional Singularity'—the moment executive order finally met logistical enforcement. This node recalibrated the social and economic matrix of the South, providing the constitutional momentum for the subsequent Reconstruction-era legislative framework.</p>
-
-                        <h3 class="category-title">⚙️ Innovations: First 24-Hour Race</h3>
-                        <p class="essay-p"><span class="year-badge">1923</span>The First 24 Hours of Le Mans: A pinnacle of industrial-age mechanical endurance forensics. By synchronizing high-speed engineering with continuous biological performance, this node established new standards for automotive innovative reliability and established a global brand for technical durability research.</p>
-                    </div>
-
-                    <!-- 💡 JUNE 20 -->
-                    <div class="report-card">
-                        <div class="day-header">JUNE_20</div>
-                        <p class="essay-p">June 20th archives the birth of <span class="text-white font-bold">Modern Institutional Humanitarianism</span> and the supreme recalibration of 19th-century monarchical statecraft. Historically, this date anchors the moment global society legally recognized the rights of the displaced and when the longest-reigning era of the British administrative matrix was initialized.</p>
-
-                        <h3 class="category-title">⚖️ Judicial Intelligence: World Refugee Day</h3>
-                        <p class="essay-p"><span class="year-badge">2001/Annual</span>Initialization of World Refugee Day: Established by the UN. This node archives the formal recognition of 'Human Displacement Forensics' as a global legislative priority. Our research views this as the primary catalyst for the synchronization of international asylum law and the recalibration of humanitarian logistical protocols across sovereign boundaries.</p>
-
-                        <h3 class="category-title">🏛️ Geopolitical Nodes: Queen Victoria Node</h3>
-                        <p class="essay-p"><span class="year-badge">1837</span>Accession of Queen Victoria: A definitive node in the history of institutional branding. Her 63-year reign synchronized the Industrial Revolution with the expansion of the British Empire. This node served as a case study in 'Sovereign Consistency,' anchoring the stability of the global economic matrix and providing the structural DNA for the Victorian-era innovative explosion.</p>
-                    </div>
-
-                  <!-- 💡 JUNE 21 -->
-                    <div class="report-card">
-                        <div class="day-header">JUNE_21</div>
-                        <p class="essay-p">June 21st archives the supreme node of <span class="text-white font-bold">Temporal & Celestial Recalibration</span> and the tragic node of intellectual suppression. It is a day defined by the physical synchronization of Earth’s axial tilt and the judicial forced recantation of a primary scientific innovator, providing a granular view of the friction between empirical intelligence and institutional hegemony.</p>
-                        
-                        <h3 class="category-title">📅 Innovations: The Summer Solstice Node</h3>
-                        <p class="essay-p"><span class="year-badge">Astronomic</span>The Summer Solstice: Historically synchronized with ancient innovative festivals and the legal start of agricultural cycles. This node represent the human attempt to align administrative calendars with the immutable biological pulses of the planet. Our archival forensics identify this as a testament to the persistent human desire to maintain global systemic order against the 'Celestial Drift,' ensuring global logistical equilibrium through synchronized seasonal timing.</p>
-                        
-                        <h3 class="category-title">⚖️ Judicial Intelligence: The Galileo Node</h3>
-                        <p class="essay-p"><span class="year-badge">1633</span>Galileo Galilei's Forced Recantation: Following a definitive trial by the Roman Inquisition. This node archives the most iconic conflict between state-sponsored dogma and empirical forensics. The subsequent legal silencing of the heliocentric model forced a total systemic delay in European scientific synchronization, providing a grim case study in how judicial overreach can hinder the trajectory of human innovative intelligence for centuries.</p>
-                    </div>
-
-                    <!-- 💡 JUNE 22 -->
-                    <div class="report-card">
-                        <div class="day-header">JUNE_22</div>
-                        <p class="essay-p">June 22nd serves as the coordinate for <span class="text-white font-bold">Strategic Logistical Expansion</span> and the formalization of modern federal investigative authority. Historically, this date anchors the moment human conflict reached its most massive land-based synchronization and when the executive standard for centralized justice was legally initialized.</p>
-
-                        <h3 class="category-title">🚨 Critical Geopolitical Milestones: Barbarossa</h3>
-                        <p class="essay-p"><span class="year-badge">1941</span>Launch of Operation Barbarossa: Nazi Germany initialized the largest land invasion in human history. This node archives a 'Logistical Singularity' in military forensics. The synchronization of 3 million troops across a 1,800-mile front forced a total global re-evaluation of continental warfare. Our research highlights this event as the primary catalyst for the eventual terminal collapse of the Axis administrative matrix, fundamentally altering the trajectory of 20th-century security law.</p>
-
-                        <h3 class="category-title">⚖️ Judicial Intelligence: US Department of Justice</h3>
-                        <p class="essay-p"><span class="year-badge">1870</span>Act to Establish the Department of Justice: President Grant signed the bill to centralize federal law enforcement. This legal node represents a critical shift in social jurisprudence, marking the institutionalization of a singular executive body to manage national legal affairs. It provided the structural DNA for modern federal investigative protocols and the synchronization of national security intelligence.</p>
-                    </div>
-
-                    <!-- 💡 JUNE 23 -->
-                    <div class="report-card">
-                        <div class="day-header">JUNE_23</div>
-                        <p class="essay-p">June 23rd represents the supreme coordinate for <span class="text-white font-bold">Computational Intelligence Origins</span> and the birth of modern gender-based educational parity. It is perhaps the most significant node for 'Intelligence & Equality' synchronization in the 20th century, archiving the birth of the individual who decrypted the biological-machine barrier and the legal act that dismantled academic gender barriers.</p>
-
-                        <h3 class="category-title">⚙️ IT Singularities: The Turing Node</h3>
-                        <p class="essay-p"><span class="year-badge">1912</span>Birth of Alan Turing: The primary architect of modern computing and artificial intelligence. Turing’s work served as a 'Cognitive Singularity.' By introducing the Turing Machine and pioneering wartime cryptanalysis (Enigma), he redefined the physical framework of information. Our analysis views this node as the definitive transition point into the digital age, providing the theoretical protocols for synchronized global algorithmic governance and modern data forensics.</p>
-
-                        <h3 class="category-title">⚖️ Judicial Intelligence: Title IX</h3>
-                        <p class="essay-p"><span class="year-badge">1972</span>Signing of Title IX: A landmark singularity in social law. This node archives the formalization of gender equality in federally funded education. Our scholarly research views this as a definitive recalibration of the educational matrix, anchoring the principle of 'Gender Parity' into the legislative DNA of sovereign institutions and fundamentally altering the commercial genealogy of global athletic branding.</p>
-                    </div>
-
-                    <!-- 💡 JUNE 24 -->
-                    <div class="report-card">
-                        <div class="day-header">JUNE_24</div>
-                        <p class="essay-p">June 24th archives the birth of <span class="text-white font-bold">Standardized Secret Societies</span> and the tragic node of high-fidelity 20th-century maritime failure. It is a day defined by the inception of institutionalized brotherhoods and the innovational mapping of catastrophic marine logistics, providing a granular view of human organizational and physical vulnerability.</p>
-
-                        <h3 class="category-title">🎨 Arts & Cultural Intelligence: Grand Lodge</h3>
-                        <p class="essay-p"><span class="year-badge">1717</span>Founding of the Premier Grand Lodge of England: A landmark node in the history of organizational forensics. By synchronizing disparate local guilds into a singular administrative matrix, Freemasonry pioneered the protocols for 'Global Social Branding,' fundamentally altering the trajectory of enlightenment-era political and innovative networking.</p>
-
-                        <h3 class="category-title">🚨 Critical Tragedies: Sinking of the SS Champlain</h3>
-                        <p class="essay-p"><span class="year-badge">1940</span>Destruction of the SS Champlain: A tragic singularity in maritime logistics during WWII. The loss of this synchronized troop transport forced a global re-evaluation of naval escort law and established new standards for wartime maritime safety and innovative hull-protection protocols.</p>
-                    </div>
-
-                    <!-- 💡 JUNE 25 -->
-                    <div class="report-card">
-                        <div class="day-header">JUNE_25</div>
-                        <p class="essay-p">June 25th represents a dual singularity: the <span class="text-white font-bold">Genesis of Cold War Kinetic Conflict</span> and the terminal collapse of the 20th century’s most significant musical brand icon. Historically, this date anchors the moment an ideological divide turned into physical warfare and when the commercial genealogy of pop-culture suffered its most massive systemic shock.</p>
-
-                        <h3 class="category-title">🚨 Geopolitical Tragedies: The Korean War</h3>
-                        <p class="essay-p"><span class="year-badge">1950</span>Initialization of the Korean War: Northern forces crossed the 38th parallel. This node archives a significant shift in 20th-century international law and UN-led defensive doctrines. Our forensics focus on the massive synchronization of multinational military capital and the subsequent recalibration of East Asian geopolitical boundaries, fundamentally altering the trajectory of global security forensics and ideological containment.</p>
-
-                        <h3 class="category-title">🎵 Sound & Vibration: The Jackson Node</h3>
-                        <p class="essay-p"><span class="year-badge">2009</span>Death of Michael Jackson: The terminal coordinate for the world's most significant cultural branding node. Jackson’s life established the theoretical protocols for the 'Global Super-Pop' era. His legacy serves as a milestone in the cultural synchronization of music, dance, and commercial retail branding, anchoring the future of synchronized global media research.</p>
-                    </div>
-
-                    <!-- 💡 JUNE 26 -->
-                    <div class="report-card">
-                        <div class="day-header">JUNE_26</div>
-                        <p class="essay-p">June 26th serves as the supreme coordinate for <span class="text-white font-bold">Global Institutional Recalibration</span> and the birth of modern high-fidelity literary branding. Historically, this date anchors the moments when human civilization legally finalized its second attempt at global peace and when the technical standard for 21st-century magical realism was initialized.</p>
-
-                        <h3 class="category-title">⚖️ Judicial Intelligence: The UN Charter</h3>
-                        <p class="essay-p"><span class="year-badge">1945</span>Signing of the United Nations Charter: Representatives of 50 nations established a framework for international cooperation. Our archival forensics identify this as the 'Diplomatic Singularity.' This node provided the constitutional DNA for every subsequent global peacekeeping mission and established the primordial protocols for modern human rights mediation and international judicial oversight.</p>
-
-                        <h3 class="category-title">🏷️ Brand Genealogy: Harry Potter Node</h3>
-                        <p class="essay-p"><span class="year-badge">1997</span>Publication of Harry Potter and the Philosopher's Stone: J.K. Rowling initialized a commercial legacy. Our analytical terminal categorizes this as the 'Literary Singularity' of the digital age. By synchronizing archetypal mythology with mass-market retail logistics, Harry Potter pioneered the commercial genealogy of 'Trans-Media Franchising,' fundamentally altering global consumption patterns and digital innovative design.</p>
-                    </div>
-
-                    <!-- 💡 JUNE 27 -->
-                    <div class="report-card">
-                        <div class="day-header">JUNE_27</div>
-                        <p class="essay-p">June 27th archives the birth of <span class="text-white font-bold">Automated Capital Access</span> and the supreme node of biological innovative resilience. Historically, this date anchors the moment financial liquidity became available 24/7 and when the standard for human communication transcended biological sensory barriers.</p>
-
-                        <h3 class="category-title">📈 Macro-Financial Intelligence: The ATM Node</h3>
-                        <p class="essay-p"><span class="year-badge">1967</span>Initialization of the first ATM: Installed by Barclays Bank in London. This technical milestone served as the primordial ancestor to modern digital banking. By synchronizing personal PIN verification with physical cash logistics, the ATM fundamentally altered the speed of capital flow, effectively democratizing consumer access to liquid assets and anchoring the birth of the 21st-century digital financial matrix.</p>
-
-                        <h3 class="category-title">📚 Innovations in Resilience: Helen Keller</h3>
-                        <p class="essay-p"><span class="year-badge">1880</span>Birth of Helen Keller: A supreme node in the history of cognitive innovation. Keller’s life served as a case study in 'Linguistic Resilience.' By synchronizing tactile intelligence with complex abstract language, she pioneered the role of the 'Global Advocate for Accessibility,' fundamentally altering the judicial and cultural trajectory of disability rights law.</p>
-                    </div>
-
-                    <!-- 💡 JUNE 28 -->
-                    <div class="report-card">
-                        <div class="day-header">JUNE_28</div>
-                        <p class="essay-p">June 28th represents the archival coordinate for the <span class="text-white font-bold">Dual Trajectory of World War Governance</span>. It is a day defined by the terminal collapse of a major imperial lineage and the formal legislative attempt to rebuild a shattered global equilibrium, providing a granular view of judicial success and strategic failure.</p>
-
-                        <h3 class="category-title">🚨 Geopolitical Singularities: Sarajevo Node</h3>
-                        <p class="essay-p"><span class="year-badge">1914</span>Assassination of Archduke Franz Ferdinand: A tragic singularity that triggered the first global systemic collapse (WWI). This temporal node archives the extreme fragility of early 20th-century diplomatic synchronization. The subsequent forensic analysis became a case study in 'Alliance Cascading,' providing the essential baseline for future collective security protocols.</p>
-
-                        <h3 class="category-title">⚖️ Judicial Intelligence: Treaty of Versailles</h3>
-                        <p class="essay-p"><span class="year-badge">1919</span>Signing of the Treaty of Versailles: Formally ending WWI. This legal node represents a critical shift in international jurisprudence. While anchoring the League of Nations, its harsh economic mandates recalibrated the global fiscal matrix in a way that ensured future systemic volatility, proving that judicial retribution must be synchronized with economic reality for long-term stability.</p>
-                    </div>
-
-                    <!-- 💡 JUNE 29 -->
-                    <div class="report-card">
-                        <div class="day-header">JUNE_29</div>
-                        <p class="essay-p">June 29th serves as the coordinate for <span class="text-white font-bold">Mobile Digital Hegemony</span> and the zenith of 19th-century high-altitude innovative engineering. Historically, this date anchors the moment human intelligence first physically launched the world's most dominant personal technical interface and when the first formal mechanism for trans-global air-speed records faced its ultimate test.</p>
-
-                        <h3 class="category-title">⚙️ IT Singularities: iPhone Retail Node</h3>
-                        <p class="essay-p"><span class="year-badge">2007</span>First iPhone Sales Initialized: Our archival forensics identify this as the 'Commercial Cognitive Singularity.' By synchronizing a phone, a music player, and a mobile web terminal into a single high-fidelity device, this launch fundamentally altered the human motor-cognitive interface, effectively democratizing mobile intelligence and anchoring the future of global app-based capital flow.</p>
-                    </div>
-
-                    <!-- 💡 JUNE 30 -->
-                    <div class="report-card">
-                        <div class="day-header">JUNE_30</div>
-                        <p class="essay-p">June 30th archives the birth of <span class="text-white font-bold">Sovereign Jurisdictional Reversion</span> and the tragic node of high-fidelity atmospheric forensics. Historically, this date anchors the moments when a global financial hub legally shifted its sovereign epicenter and when a major terrestrial LANDFORM suffered a systemic celestial shock.</p>
-
-                        <h3 class="category-title">🏛️ Geopolitical Nodes: Hong Kong Handover</h3>
-                        <p class="essay-p"><span class="year-badge">1997</span>Transfer of Sovereignty of Hong Kong: After 156 years of British administration, jurisdiction was reverted to China. This legal act recalibrated the geopolitical equilibrium of East Asia, establishing the foundational protocols for 'One Country, Two Systems' and anchoring the future of synchronized international financial law within a multi-polar matrix.</p>
-
-                        <h3 class="category-title">⚙️ Technical Singularities: Tunguska Node</h3>
-                        <p class="essay-p"><span class="year-badge">1908</span>The Tunguska Event: A massive explosion in Siberia, likely caused by a bolide airburst. This temporal node archives the extreme psychological and physical limits of planetary defense forensics. The subsequent scientific synchronization of data from this event provided the essential baseline for modern asteroid-impact innovative research and biosecurity protocols.</p>
-                    </div>
-
-                </section>
-            </div> <!-- 6월 서고 봉인 -->
+    </nav>
+
+    <main class="relative pt-56 pb-20 px-8 max-w-6xl mx-auto">
+        <header class="text-center mb-40">
+            <h1 class="font-cyber text-6xl text-white mb-10 uppercase tracking-[0.4em]">June Intelligence <br><span class="text-gold opacity-50 text-3xl tracking-[0.2em]">Liberty & Strategic Equilibrium</span></h1>
+            <p class="max-w-3xl mx-auto text-gray-400 italic text-xl leading-relaxed">"Systematically archiving the codification of human rights and the radical recalibration of global strategic logistics. From Magna Carta to the Normandy landings."</p>
+        </header>
+
+        <!-- 💡 JUNE 01 -->
+        <div class="report-card">
+            <div class="day-header">JUNE_01</div>
+            <p class="essay-p">June 1st serves as the supreme temporal coordinate for the <span class="highlight">institutionalization of real-time information</span> and the tragic node of dynastic volatility. Historically, this date anchors the moments when the global media matrix transitioned into a 24-hour cycle, redefining the human cognitive interface with reality.</p>
+            
+            <img src="https://images.unsplash.com/photo-1495020689067-958852a7765e?auto=format&fit=crop&w=1200&q=80" alt="News and Media Broadcast" class="archive-img">
+
+            <h3 class="category-h3">🌐 Digital Media Intelligence: The CNN Singularity</h3>
+            <p class="essay-p"><span class="year-badge">1980</span>Launch of CNN (Cable News Network): Ted Turner initialized the world's first 24-hour news cycle. Our archival forensics identify this as a 'Media Hegemony Singularity.' By synchronizing global events with real-time satellite broadcasting, CNN fundamentally altered the human cognitive response to information. This node established the primordial protocols for 'Continuous Information Flow,' effectively anchoring the birth of the modern 24/7 digital awareness matrix and redefining global political branding.</p>
+            
+            <h3 class="category-h3">⚖️ Judicial Intelligence: International Law</h3>
+            <p class="essay-p"><span class="year-badge">2001</span>Nepal Royal Massacre: A tragic node in monarchical succession law. The systemic collapse of the Nepalese royal lineage triggered a massive recalibration of South Asian geopolitical stability. Our research views this as a case study in 'Dynastic Forensic Vulnerability,' where the sudden termination of a sovereign node forced a total systemic overhaul of national governance protocols.</p>
+        </div>
+
+        <!-- 💡 JUNE 02 -->
+        <div class="report-card">
+            <div class="day-header">JUNE_02</div>
+            <p class="essay-p">June 2nd archives the foundational calibration of <span class="highlight">Republican Sovereignty</span> and the zenith of mid-20th century institutional branding. It is a day defined by the abolition of hereditary command and the initial technical pulses of synchronized international television broadcasting.</p>
+
+            <h3 class="category-h3">🏛️ Judicial Intelligence: Birth of the Italian Republic</h3>
+            <p class="essay-p"><span class="year-badge">1946</span>Italian Institutional Referendum: Following the collapse of fascism, the Italian people voted to abolish the monarchy. This node archives the formal initialization of the Italian Republic. Our research identifies this as a 'Constitutional Singularity'—the legal transition from hereditary command to a representative democratic matrix. This recalibration provided the structural DNA for post-war European stability.</p>
+
+            <h3 class="category-h3">🏷️ Brand Genealogy: Queen Elizabeth II Coronation</h3>
+            <p class="essay-p"><span class="year-badge">1953</span>Coronation of Elizabeth II: A supreme node in the history of institutional branding. Historically synchronized with the birth of mass-media television culture, her coronation was the first global event broadcast to a synchronized international audience. This event served as a definitive case study in 'Sovereign Symbolism,' anchoring the psychological continuity of the Commonwealth matrix.</p>
+        </div>
+
+        <!-- 💡 JUNE 03 -->
+        <div class="report-card">
+            <div class="day-header">JUNE_03</div>
+            <p class="essay-p">June 3rd represents a supreme node in the history of <span class="highlight">Extra-Vehicular Ambition</span> and the zenith of industrial-age capital synchronization. Historically, this date anchors the moment human life first physically stepped into the orbital vacuum under a democratic flag.</p>
+
+            <img src="https://images.unsplash.com/photo-1446776811953-b23d57bd21aa?auto=format&fit=crop&w=1200&q=80" alt="Space Exploration Spacewalk" class="archive-img">
+
+            <h3 class="category-h3">🛰️ Interstellar Intelligence: Ed White’s Spacewalk</h3>
+            <p class="essay-p"><span class="year-badge">1965</span>Gemini 4 Mission: Ed White became the first American to perform an Extra-Vehicular Activity (EVA). This temporal node archives the extreme psychological and technical limits of the human-machine interface in microgravity. By physically exiting the spacecraft, White proved the viability of synchronized human intervention in space, establishing protocols for all future orbital innovative repair and lunar habitat research.</p>
+
+            <h3 class="category-h3">📈 Macro-Financial Records: Industrial Banking</h3>
+            <p class="essay-p"><span class="year-badge">1885</span>Founding of major regional industrial banks. This node provided the structural DNA for transcontinental capital synchronization and the innovative financing of late-19th century rail logistics, fundamentally altering the trajectory of global commercial capital flow.</p>
+        </div>
+
+        <!-- 💡 JUNE 04 -->
+        <div class="report-card">
+            <div class="day-header">JUNE_04</div>
+            <p class="essay-p">June 4th serves as the coordinate for <span class="highlight">Civil Sovereignty Resistance</span> and the birth of modern aerospace logistics. Historically, this date anchors a controversial judicial conflict in East Asia and the first successful human mastery of thermal atmospheric lift.</p>
+
+            <h3 class="category-h3">🚨 Critical Tragedies & Judicial Responses: Tiananmen</h3>
+            <p class="essay-p"><span class="year-badge">1989</span>Tiananmen Square Protests: A tragic singularity in the history of civil sovereignty. The terminal suppression of the student-led movement forced a global re-evaluation of the boundaries between state-sponsored force and individual political expression. This node served as a primary catalyst for the synchronization of human rights diplomacy within the global diplomatic matrix.</p>
+
+            <h3 class="category-h3">⚙️ Innovations: The First Hot Air Balloon</h3>
+            <p class="essay-p"><span class="year-badge">1783</span>Montgolfier Brothers’ Demonstration: The first public flight of an unmanned hot air balloon. This technical milestone served as the primordial ancestor to the modern aerospace matrix. By achievement lift through thermal synchronization, this node initiated the trajectory of vertical innovative ambition, fundamentally altering our understanding of atmospheric logistics.</p>
+        </div>
+
+        <!-- 💡 JUNE 05 -->
+        <div class="report-card">
+            <div class="day-header">JUNE_05</div>
+            <p class="essay-p">June 5th archives the birth of <span class="highlight">Global Terrestrial Sustainability</span> and the zenith of mid-20th century tactical synchronization. It is a day defined by the institutionalization of planetary biosecurity and the innovative mapping of modern desert-theater conflict.</p>
+
+            <h3 class="category-h3">🌍 Innovations: World Environment Day</h3>
+            <p class="essay-p"><span class="year-badge">1972</span>Initialization of World Environment Day: Following the Stockholm Conference. This node archives the first global attempt to synchronize international administrative attention with ecological preservation. It established the protocols for global ecological monitoring and anchored the principle of 'Collective Sustainability' into the legislative DNA of sovereign nations.</p>
+
+            <h3 class="category-h3">🚨 Geopolitical Singularities: Six-Day War</h3>
+            <p class="essay-p"><span class="year-badge">1967</span>Inception of the Six-Day War: A definitive node in Middle Eastern military forensics. The synchronized preemptive strikes recalibrated the regional geopolitical matrix in less than 150 hours. This event forced a total systemic overhaul of global energy logistics and established new standards for high-fidelity tactical synchronization.</p>
+        </div>
+
+        <!-- 💡 JUNE 06 -->
+        <div class="report-card">
+            <div class="day-header">JUNE_06</div>
+            <p class="essay-p">June 6th represents the archival coordinate for the <span class="highlight">Supreme Logistical Singularity</span> and the birth of modern cognitive entertainment branding. It is a day defined by the most massive synchronization of military capital in history and the launch of a logic-based digital hegemony.</p>
+
+            <img src="https://images.unsplash.com/photo-1506126613408-eca07ce68773?auto=format&fit=crop&w=1200&q=80" alt="Normandy D-Day Coast" class="archive-img">
+
+            <h3 class="category-h3">🚨 Strategic Mastery: D-Day</h3>
+            <p class="essay-p"><span class="year-badge">1944</span>The Normandy Landings (Operation Overlord): The most massive synchronization of maritime, aerial, and land-based logistics in human history. By landing 156,000 troops across five beaches, the Allied forces initiated the terminal collapse of the Nazi administrative matrix. This node established new standards for multinational military synchronization and innovative strategic planning.</p>
+
+            <h3 class="category-h3">⚙️ IT Singularities: The Tetris Node</h3>
+            <p class="essay-p"><span class="year-badge">1984</span>The Launch of Tetris: Alexey Pajitnov initialized the most significant cognitive brand in gaming history. Our forensics identify this as a 'Logic Singularity' in software. By synchronizing simple geometric patterns with reward-loops, Tetris pioneered the protocols for global digital media distribution, fundamentally altering the commercial genealogy of the digital entertainment matrix.</p>
+        </div>
+
+        <!-- 💡 JUNE 07 -->
+        <div class="report-card">
+            <div class="day-header">JUNE_07</div>
+            <p class="essay-p">June 7th archives the birth of <span class="highlight">Modern Non-Violent Resistance</span> and the initial psychological sparks of global civil rights movements. Historically, this date anchors the moment an individual moral imperative challenged systemic imperial inequality.</p>
+
+            <h3 class="category-h3">⚖️ Judicial Intelligence: The Gandhi Singularity</h3>
+            <p class="essay-p"><span class="year-badge">1893</span>Mohandas Gandhi’s First Act of Civil Disobedience: After being thrown off a train in South Africa. Our research views this as the 'Moral Genesis Node.' This event served as the primary catalyst for Gandhi’s development of Satyagraha, providing the ethical and legal blueprint for non-violent revolutionary movements in the 20th-century geopolitical matrix.</p>
+        </div>
+
+        <!-- 💡 JUNE 08 -->
+        <div class="report-card">
+            <div class="day-header">JUNE_08</div>
+            <p class="essay-p">June 8th serves as the coordinate for <span class="highlight">Predictive Societal Forensics</span> and the zenith of 21st-century planetary parallax measurement. It is a day defined by the publication of a supreme literary warning and the synchronization of celestial observation.</p>
+
+            <img src="https://images.unsplash.com/photo-1507842217343-583bb7270b66?auto=format&fit=crop&w=1200&q=80" alt="Old Library Books" class="archive-img">
+
+            <h3 class="category-h3">📚 Literature & Forensics: 1984</h3>
+            <p class="essay-p"><span class="year-badge">1949</span>Publication of George Orwell’s 'Nineteen Eighty-Four': A supreme node in political literature. Orwell’s work served as a technical singularity in 'Predictive Societal Forensics.' By introducing concepts like 'Big Brother' and 'Newspeak,' he provided the narrative framework for society's struggle with state-sponsored surveillance and algorithmic information control.</p>
+
+            <h3 class="category-h3">🛰️ Interstellar Intelligence: Venus Transit</h3>
+            <p class="essay-p"><span class="year-badge">2004</span>The Transit of Venus: The first such celestial synchronization in 122 years. This astronomical node allowed scientists to refine the mathematical distance between Earth and the Sun, recalibrating our fundamental understanding of the solar system’s innovative architecture.</p>
+        </div>
+
+        <!-- 💡 JUNE 09 -->
+        <div class="report-card">
+            <div class="day-header">JUNE_09</div>
+            <p class="essay-p">June 9th archives the birth of <span class="highlight">Character Branding Singularities</span> and the zenith of industrial-age nuclear logistics. Historically, this date anchors the moments when a cultural icon redefined animated intelligence and when a new standard for naval deterrent was initialized.</p>
+
+            <h3 class="category-h3">🎬 Cinematic Brand Genealogy: Donald Duck</h3>
+            <p class="essay-p"><span class="year-badge">1934</span>Debut of Donald Duck: Disney initialized a commercial legacy that redefined animated emotional intelligence. By synchronizing flawed human temperaments with mass-market technical animation, Disney created a case study in global brand-building that fundamentally altered the consumer capital flow of family-media.</p>
+
+            <h3 class="category-h3">⚙️ Technical Milestones: Nuclear Submarine</h3>
+            <p class="essay-p"><span class="year-badge">1959</span>Launch of the USS George Washington: The world's first ballistic missile submarine. This structural singularity represented a definitive leap in nuclear innovative logistics, establishing the 'Sub-Surface Deterrent' protocols that anchored the global strategic equilibrium during the atomic age.</p>
+        </div>
+
+        <!-- 💡 JUNE 10 -->
+        <div class="report-card">
+            <div class="day-header">JUNE_10</div>
+            <p class="essay-p">June 10th represents the temporal node for <span class="highlight">Behavioral Health Security</span> and the formalization of economic gender parity. It is a day defined by the victory over biological addiction and the innovative mapping of fair labor law.</p>
+
+            <h3 class="category-h3">💉 Medical Singularities: Alcoholics Anonymous</h3>
+            <p class="essay-p"><span class="year-badge">1935</span>Founding of Alcoholics Anonymous (AA): Initialized the 12-step protocol. Our archival terminal categorizes this as a 'Social-Medical Singularity.' By synchronizing peer-based counseling with spiritual discipline, AA established the first global framework for addiction forensics, fundamentally altering the trajectory of public welfare law.</p>
+
+            <h3 class="category-h3">⚖️ Judicial Intelligence: The Equal Pay Act</h3>
+            <p class="essay-p"><span class="year-badge">1963</span>Signing of the Equal Pay Act: President Kennedy legalized the prohibition of wage discrimination based on sex. This legal node represents a critical shift in social jurisprudence, marking the institutionalization of gender-based economic parity within the modern labor matrix.</p>
+        </div>
+
+        <!-- 💡 JUNE 11 -->
+        <div class="report-card">
+            <div class="day-header">JUNE_11</div>
+            <p class="essay-p">June 11th archives the supreme node of <span class="highlight">Revolutionary Sovereignty Codification</span> and the birth of modern digital biological forensics. Historically, this date anchors the moments human civilization legally formalized its demand for liberty.</p>
+            
+            <img src="https://images.unsplash.com/photo-1599839619722-397514118834?auto=format&fit=crop&w=1200&q=80" alt="Historical Document Archival" class="archive-img">
+
+            <h3 class="category-h3">⚖️ Judicial Intelligence: The Committee of Five</h3>
+            <p class="essay-p"><span class="year-badge">1776</span>Declaration Committee Formation: The Continental Congress appointed Jefferson, Adams, and Franklin to draft the Declaration of Independence. This node represent the first formal move toward codifying natural law into a revolutionary legislative framework, effectively establishing the primordial protocols for modern democratic statecraft.</p>
+            
+            <h3 class="category-h3">🎬 Cinematic Innovations: Jurassic Park</h3>
+            <p class="essay-p"><span class="year-badge">1993</span>Premiere of Jurassic Park: A technical milestone in simulated visual intelligence. By synchronizing high-fidelity CGI with physical animatronics, Steven Spielberg pioneered new standards in digital biological reconstruction, fundamentally altering the commercial genealogy of the global blockbuster matrix.</p>
+        </div>
+
+        <!-- 💡 JUNE 12 -->
+        <div class="report-card">
+            <div class="day-header">JUNE_12</div>
+            <p class="essay-p">June 12th serves as the coordinate for <span class="highlight">Marital Judicial Equity</span> and the zenith of Cold War rhetorical forensics. Historically, this date anchors the moment the state legally recognized the sanctity of cross-racial unions.</p>
+
+            <h3 class="category-h3">⚖️ Judicial Intelligence: Loving v. Virginia</h3>
+            <p class="essay-p"><span class="year-badge">1967</span>Supreme Court Ruling on Interracial Marriage: In a landmark decision, the court declared laws prohibiting interracial marriage unconstitutional. By anchoring the 'Right to Marry' into the constitutional matrix, this decision forced a total systemic overhaul of domestic civil rights law and provided the judicial DNA for future equality litigation.</p>
+
+            <h3 class="category-h3">🏛️ Geopolitical Nodes: Reagan at the Wall</h3>
+            <p class="essay-p"><span class="year-badge">1987</span>"Tear Down This Wall!": Ronald Reagan delivered this seminal node in diplomatic forensics at the Berlin Wall. Our terminal categorizes this as a 'Strategic Singularity.' By synchronizing psychological pressure with geopolitical demand, Reagan provided the intellectual framework for the eventual collapse of the bipolar world order.</p>
+        </div>
+
+        <!-- 💡 JUNE 13 -->
+        <div class="report-card">
+            <div class="day-header">JUNE_13</div>
+            <p class="essay-p">June 13th archives the birth of <span class="highlight">Procedural Judicial Safeguards</span> and the supreme node of interstellar navigational discovery. It is a day defined by the formalization of individual rights during detention and the moment a human artifact first passed the furthest planetary orbit.</p>
+
+            <h3 class="category-h3">⚖️ Judicial Intelligence: Miranda v. Arizona</h3>
+            <p class="essay-p"><span class="year-badge">1966</span>The Miranda Rights Ruling: The US Supreme Court established that criminal suspects must be informed of their constitutional rights before interrogation. This node established the primordial protocols for modern law enforcement conduct, anchoring the legal legitimacy of individual silence and legal counsel into the global judicial matrix.</p>
+
+            <h3 class="category-h3">🛰️ Interstellar Intelligence: Pioneer 10</h3>
+            <p class="essay-p"><span class="year-badge">1983</span>Pioneer 10 Leaves the Solar System: The first human-made object to pass the orbit of the furthest planet. This temporal node archives the extreme innovative limits of 20th-century aerospace engineering and established the foundational protocols for deep-space synchronization.</p>
+        </div>
+
+        <!-- 💡 JUNE 14 -->
+        <div class="report-card">
+            <div class="day-header">JUNE_14</div>
+            <p class="essay-p">June 14th represents a dual singularity: the <span class="highlight">Genesis of Modern Neuropathological Forensics</span> and the birth of American national symbolic branding. Historically, this date anchors the moment a devastating cognitive disease was identified.</p>
+
+            <h3 class="category-h3">💉 Medical Singularities: Alzheimer's Genesis</h3>
+            <p class="essay-p"><span class="year-badge">1906</span>Identification of Alzheimer's Disease: Dr. Alois Alzheimer presented the first case. This node archives the birth of 'Neuro-Forensic Intelligence.' By synchronizing clinical observation with histological research, Alzheimer pioneered protocols for geriatric medicine, providing the essential baseline for all future global research into neurodegenerative synchronization.</p>
+
+            <h3 class="category-h3">🏛️ National Branding: Flag Day</h3>
+            <p class="essay-p"><span class="year-badge">1777</span>Adoption of the 'Stars and Stripes': The Continental Congress initialized the official flag of the United States. This node established the protocols for national brand-building and sovereign symbolism, fundamentally altering the trajectory of American cultural synchronization.</p>
+        </div>
+
+        <!-- 💡 JUNE 15 -->
+        <div class="report-card">
+            <div class="day-header">JUNE_15</div>
+            <p class="essay-p">June 15th serves as the supreme coordinate for <span class="highlight">Foundational Constitutional Jurisprudence</span> and the birth of internet-integrated software branding. Historically, this date anchors the moment absolute power was first legally restricted.</p>
+
+            <img src="https://images.unsplash.com/photo-1589829545856-d10d557cf95f?auto=format&fit=crop&w=1200&q=80" alt="Justice and Gavel" class="archive-img">
+
+            <h3 class="category-h3">⚖️ Judicial Intelligence: The Magna Carta</h3>
+            <p class="essay-p"><span class="year-badge">1215</span>Sealing of the Magna Carta: At Runnymede, King John was forced to sign the Great Charter. Our analytical terminal identifies this as the 'Primal Singularity' of Western law. This node established the revolutionary precedent that no ruler is above the law, providing the legal DNA for every subsequent constitutional framework and global democratic governance.</p>
+
+            <h3 class="category-h3">⚙️ IT Singularities: Windows 98</h3>
+            <p class="essay-p"><span class="year-badge">1998</span>Launch of Windows 98: Microsoft initialized a more stable, internet-integrated technical standard for personal computing. This node archives a 'Logistical Singularity' in home digital use, effectively anchoring the digital hegemony of Microsoft and redefining the commercial genealogy of 21st-century software branding.</p>
+        </div>
+
+        <!-- 🚀 PART 1 END -->
+        <div class="text-center py-20 border-t border-white/10">
+            <p class="font-cyber text-gold text-sm tracking-widest mb-6 uppercase">End of June Part I Synchronization</p>
+            <p class="text-gray-500 italic">"The architecture of liberty continues. Proceed to Part II for the remaining nodes of June."</p>
+        </div>
+    </main>
+
+    <footer class="py-24 border-t border-white/5 text-center">
+        <p class="text-[11px] font-cyber text-gray-700 tracking-[0.5em] uppercase">Akashic Terminal Node © 2026</p>
+    </footer>
+</body>
+</html>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Node 06: June Archival Intelligence | Part II (16-30)</title>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Inter:wght@300;400;600&family=Playfair+Display:ital,wght@0,700;1,700&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        :root { --neon-gold: #f5c97a; --bg: #010204; --card-bg: rgba(10, 14, 22, 0.98); }
+        body { background: var(--bg); color: #e2e8f0; font-family: 'Inter', sans-serif; line-height: 2.2; }
+        .font-cyber { font-family: 'Orbitron', sans-serif; }
+        .bg-grid { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background-image: linear-gradient(rgba(245, 201, 122, 0.03) 1.5px, transparent 1.5px), linear-gradient(90deg, rgba(245, 201, 122, 0.03) 1.5px, transparent 1.5px); background-size: 70px 70px; z-index: -1; }
+        .report-card { background: var(--card-bg); border: 1px solid rgba(245, 201, 122, 0.1); border-radius: 24px; padding: 5rem; margin-bottom: 8rem; box-shadow: 0 40px 100px rgba(0,0,0,0.9); transition: 0.4s; }
+        .report-card:hover { border-color: var(--neon-gold); }
+        .day-header { font-family: 'Orbitron'; color: var(--neon-gold); font-size: 3.5rem; letter-spacing: 15px; border-bottom: 2px solid var(--neon-gold); margin-bottom: 4rem; padding-bottom: 20px; text-align: center; }
+        .category-h3 { font-family: 'Orbitron'; color: #fff; font-size: 1.5rem; margin-top: 5rem; margin-bottom: 2rem; text-transform: uppercase; letter-spacing: 4px; border-left: 5px solid var(--neon-gold); padding-left: 25px; }
+        .essay-p { text-align: justify; color: #a0aec0; font-size: 1.2rem; margin-bottom: 3rem; text-indent: 2rem; line-height: 2.4; }
+        .year-badge { font-family: 'Orbitron'; color: #000; font-weight: 700; background: var(--neon-gold); padding: 4px 15px; border-radius: 4px; margin-right: 15px; font-size: 16px; }
+        .highlight { color: #fff; font-weight: 600; border-bottom: 1px solid var(--neon-gold); }
+        .archive-img { width: 100%; height: 500px; object-fit: cover; border-radius: 15px; margin: 4rem 0; border: 1px solid rgba(245, 201, 122, 0.1); filter: contrast(1.1) brightness(0.9); transition: 0.5s; }
+        .archive-img:hover { filter: brightness(1); }
+    </style>
+</head>
+<body>
+    <div class="bg-grid"></div>
+
+    <nav class="fixed w-full z-[1000] px-12 py-8 flex justify-between items-center bg-black/60 backdrop-blur-xl border-b border-white/5">
+        <div class="text-2xl font-cyber font-bold text-[#f5c97a] cursor-pointer" onclick="location.href='index.html'">AKASHIC ARCHIVE // NODE_06</div>
+        <div class="flex gap-4">
+            <span class="font-cyber text-gray-500 text-[10px] mt-2">JUNE_TERMINAL_PART_02</span>
+            <a href="index.html" class="font-cyber text-[#f5c97a] border border-[#f5c97a] px-4 py-1.5 rounded text-[10px] hover:bg-[#f5c97a] hover:text-black transition-all">BACK_TO_HUB</a>
+        </div>
+    </nav>
+
+    <main class="relative pt-56 pb-20 px-8 max-w-6xl mx-auto">
+        <header class="text-center mb-40">
+            <h1 class="font-cyber text-5xl text-white mb-10 uppercase tracking-[0.4em]">June Intelligence <br><span class="text-gold opacity-50 text-2xl tracking-[0.2em]">Part II: Days 16 - 30</span></h1>
+            <p class="max-w-3xl mx-auto text-gray-400 italic text-lg leading-relaxed">"Continuing the forensic synchronization of June—archiving the birth of industrial mobility, executive accountability, and the global peace-time matrix."</p>
+        </header>
+
+        <!-- 💡 JUNE 16 -->
+        <div class="report-card">
+            <div class="day-header">JUNE_16</div>
+            <p class="essay-p">June 16th archives the birth of <span class="highlight">Modern Industrial-Scale Branding</span> and the zenith of 20th-century feminine interstellar ambition. It is a day defined by the inception of a commercial hegemony that redefined retail logistics and the moment human life first transcended gender barriers in orbital mechanics.</p>
+
+            <img src="https://images.unsplash.com/photo-1542281286-9e0a16bb7366?auto=format&fit=crop&w=1200&q=80" alt="Vintage Ford Car Assembly" class="archive-img">
+
+            <h3 class="category-h3">🏷️ Brand Genealogy: Ford Motor Company</h3>
+            <p class="essay-p"><span class="year-badge">1903</span>Founding of Ford Motor Company: Henry Ford initialized a commercial legacy that would dominate global transportation for over a century. Our archival forensics identify this as the 'Production Singularity.' By eventually synchronizing assembly-line technical standards with middle-class capital, Ford pioneered the commercial genealogy of 'Systemic Branding,' fundamentally altering global labor dynamics and retail innovative design.</p>
+
+            <h3 class="category-h3">🛰️ Interstellar Intelligence: Valentina Tereshkova</h3>
+            <p class="essay-p"><span class="year-badge">1963</span>First Woman in Space: Valentina Tereshkova performed 48 orbits of the Earth on Vostok 6. This node archives a significant shift in the history of aerospace parity. Her mission proved that high-fidelity orbital logistics were not limited by biological gender, establishing the foundational protocols for female inclusion in future extra-planetary research.</p>
+        </div>
+
+        <!-- 💡 JUNE 17 -->
+        <div class="report-card">
+            <div class="day-header">JUNE_17</div>
+            <p class="essay-p">June 17th represents the temporal coordinate for <span class="highlight">Executive Criminal Forensics</span> and the zenith of 19th-century symbolic structural engineering. It is a day marked by the initialization of a constitutional crisis that redefined presidential accountability.</p>
+
+            <h3 class="category-h3">🕵️ Forensic History: The Watergate Break-in</h3>
+            <p class="essay-p"><span class="year-badge">1972</span>Watergate Scandal Initialization: Five individuals were arrested at the Democratic National Committee headquarters. Our archival analysis views this as the birth of 'Modern Investigative Accountability.' The subsequent forensic trail forced a total systemic overhaul of executive oversight laws and redefined the legal concept of 'Obstruction of Justice' in the global matrix.</p>
+
+            <h3 class="category-h3">⚙️ Innovations: Statue of Liberty Arrival</h3>
+            <p class="essay-p"><span class="year-badge">1885</span>Arrival of the Statue of Liberty: The disassembled gift from France arrived in New York Harbor. Beyond its artistic value, our data forensics indicate the statue’s internal iron framework (engineered by Eiffel) served as a case study in high-altitude innovative stability, anchoring the future of synchronized urban architectural branding.</p>
+        </div>
+
+        <!-- 💡 JUNE 18 -->
+        <div class="report-card">
+            <div class="day-header">JUNE_18</div>
+            <p class="essay-p">June 18th archives the <span class="highlight">Terminal Collapse of Napoleonic Sovereignty</span> and the zenith of 20th-century feminine aerospace achievement. It is a day defined by the final military singularity of the 19th century.</p>
+
+            <img src="https://images.unsplash.com/photo-1517976487492-5750f3195933?auto=format&fit=crop&w=1200&q=80" alt="Space Shuttle Launch" class="archive-img">
+
+            <h3 class="category-h3">🚨 Geopolitical Nodes: The Battle of Waterloo</h3>
+            <p class="essay-p"><span class="year-badge">1815</span>Battle of Waterloo: A definitive node in European diplomatic forensics. The final defeat of Napoleon forced a total systemic re-evaluation of the 'Balance of Power.' This node marked the transition into the 'Concert of Europe' era, establishing the foundational protocols for a century of synchronized multi-lateral diplomacy.</p>
+
+            <h3 class="category-h3">🛰️ Interstellar Intelligence: Sally Ride</h3>
+            <p class="essay-p"><span class="year-badge">1983</span>First American Woman in Space: Sally Ride launched on the Space Shuttle Challenger. This node archives the maturity of Western aerospace parity synchronization. Ride’s mission established protocols for integrated mission-specialist logistics, proving that high-fidelity scientific research in orbit was a collaborative human effort.</p>
+        </div>
+
+        <!-- 💡 JUNE 19 -->
+        <div class="report-card">
+            <div class="day-header">JUNE_19</div>
+            <p class="essay-p">June 19th serves as the supreme coordinate for <span class="highlight">Universal Emancipation Intelligence</span> and the formalization of early 20th-century mechanical endurance. Historically, this date anchors the moment legal freedom was synchronized with physical reality.</p>
+
+            <h3 class="category-h3">⚖️ Judicial Intelligence: Juneteenth</h3>
+            <p class="essay-p"><span class="year-badge">1865</span>Juneteenth Declaration: Federal troops arrived in Galveston, Texas, to enforce the legal freedom of all enslaved people. Our forensics identify this as a 'Jurisdictional Singularity'—the moment executive order met logistical enforcement. This node recalibrated the social and economic matrix of the US South, providing momentum for subsequent civil rights legislative frameworks.</p>
+
+            <h3 class="category-h3">⚙️ Innovations: Le Mans Genesis</h3>
+            <p class="essay-p"><span class="year-badge">1923</span>The First 24 Hours of Le Mans: A pinnacle of industrial-age mechanical endurance forensics. By synchronizing high-speed engineering with continuous biological performance, this node established new standards for automotive innovative reliability and durability research.</p>
+        </div>
+
+        <!-- 💡 JUNE 20 -->
+        <div class="report-card">
+            <div class="day-header">JUNE_20</div>
+            <p class="essay-p">June 20th archives the birth of <span class="highlight">Modern Institutional Humanitarianism</span> and the supreme recalibration of 19th-century monarchical statecraft. It anchors the moments when global society recognized the rights of the displaced.</p>
+
+            <h3 class="category-h3">⚖️ Judicial Intelligence: World Refugee Day</h3>
+            <p class="essay-p"><span class="year-badge">2001</span>Initialization of World Refugee Day: Established by the United Nations, this node archives the formal recognition of 'Human Displacement Forensics' as a global priority. Our research views this as the primary catalyst for the synchronization of international asylum law across sovereign boundaries.</p>
+
+            <h3 class="category-h3">🏛️ Geopolitical Nodes: Queen Victoria Node</h3>
+            <p class="essay-p"><span class="year-badge">1837</span>Accession of Queen Victoria: A definitive node in the history of institutional branding. Her 63-year reign synchronized the Industrial Revolution with the expansion of the British Empire, anchoring the stability of the global economic matrix and Victorian-era innovative explosion.</p>
+        </div>
+
+        <!-- 💡 JUNE 21 -->
+        <div class="report-card">
+            <div class="day-header">JUNE_21</div>
+            <p class="essay-p">June 21st archives the supreme node of <span class="highlight">Temporal & Celestial Recalibration</span> and the tragic node of intellectual suppression. It is a day defined by the physical synchronization of Earth’s axial tilt and the judicial silencing of scientific truth.</p>
+            
+            <h3 class="category-h3">📅 Innovations: The Summer Solstice</h3>
+            <p class="essay-p"><span class="year-badge">Astronomic</span>The Summer Solstice: Historically synchronized with ancient innovative festivals, this node represent the human attempt to align administrative calendars with the immutable biological pulses of the planet, ensuring global logistical equilibrium through synchronized timing.</p>
+            
+            <h3 class="category-h3">⚖️ Judicial Intelligence: The Galileo Recantation</h3>
+            <p class="essay-p"><span class="year-badge">1633</span>Galileo Galilei's Forced Recantation: Following a trial by the Inquisition. This node archives the most iconic conflict between state-sponsored dogma and empirical forensics. The legal silencing of the heliocentric model forced a total systemic delay in European scientific synchronization for centuries.</p>
+        </div>
+
+        <!-- 💡 JUNE 22 -->
+        <div class="report-card">
+            <div class="day-header">JUNE_22</div>
+            <p class="essay-p">June 22nd serves as the coordinate for <span class="highlight">Strategic Logistical Expansion</span> and the formalization of modern federal investigative authority. Historically, this date anchors the most massive land-based synchronization of human conflict.</p>
+
+            <img src="https://images.unsplash.com/photo-1589829545856-d10d557cf95f?auto=format&fit=crop&w=1200&q=80" alt="Justice and Gavel Law" class="archive-img">
+
+            <h3 class="category-h3">🚨 Geopolitical Milestones: Operation Barbarossa</h3>
+            <p class="essay-p"><span class="year-badge">1941</span>Launch of Barbarossa: Nazi Germany initialized the largest land invasion in human history. This node archives a 'Logistical Singularity.' The synchronization of millions of troops across a massive front forced a total global re-evaluation of continental warfare and fundamentally altered the trajectory of 20th-century security law.</p>
+
+            <h3 class="category-h3">⚖️ Judicial Intelligence: US Department of Justice</h3>
+            <p class="essay-p"><span class="year-badge">1870</span>Establishment of the DOJ: President Grant signed the bill to centralize federal law enforcement. This legal node represents the institutionalization of a singular executive body to manage national legal affairs, providing the structural DNA for modern federal investigative protocols.</p>
+        </div>
+
+        <!-- 💡 JUNE 23 -->
+        <div class="report-card">
+            <div class="day-header">JUNE_23</div>
+            <p class="essay-p">June 23rd represents the supreme coordinate for <span class="highlight">Computational Intelligence Origins</span> and the birth of modern gender-based educational parity. It is perhaps the most significant node for 'Intelligence & Equality' in the 20th century.</p>
+
+            <h3 class="category-h3">⚙️ IT Singularities: The Turing Node</h3>
+            <p class="essay-p"><span class="year-badge">1912</span>Birth of Alan Turing: The primary architect of modern computing and AI. Turing’s work served as a 'Cognitive Singularity.' By introducing the Turing Machine and pioneering wartime cryptanalysis, he redefined the physical framework of information and established protocols for synchronized global algorithmic governance.</p>
+
+            <h3 class="category-h3">⚖️ Judicial Intelligence: Title IX</h3>
+            <p class="essay-p"><span class="year-badge">1972</span>Signing of Title IX: A landmark singularity in social law. This node archives the formalization of gender equality in education. Our research views this as a definitive recalibration of the educational matrix, anchoring 'Gender Parity' into the legislative DNA of sovereign institutions.</p>
+        </div>
+
+        <!-- 💡 JUNE 24 -->
+        <div class="report-card">
+            <div class="day-header">JUNE_24</div>
+            <p class="essay-p">June 24th archives the birth of <span class="highlight">Standardized Secret Societies</span> and the tragic node of maritime failure. It is a day defined by the inception of institutionalized brotherhoods and catastrophic marine logistics.</p>
+
+            <h3 class="category-h3">🎨 Arts & Cultural Intelligence: Freemasonry</h3>
+            <p class="essay-p"><span class="year-badge">1717</span>Founding of the Grand Lodge: A landmark node in organizational forensics. By synchronizing disparate local guilds into a singular administrative matrix, Freemasonry pioneered the protocols for 'Global Social Branding' and enlightenment-era political networking.</p>
+
+            <h3 class="category-h3">🚨 Critical Tragedies: Sinking of the SS Champlain</h3>
+            <p class="essay-p"><span class="year-badge">1940</span>Destruction of the SS Champlain: A tragic singularity in maritime logistics during WWII. The loss of this transport vessel forced a global re-evaluation of naval escort law and established new standards for wartime maritime safety innovative protocols.</p>
+        </div>
+
+        <!-- 💡 JUNE 25 -->
+        <div class="report-card">
+            <div class="day-header">JUNE_25</div>
+            <p class="essay-p">June 25th represents a dual singularity: the <span class="highlight">Genesis of Cold War Kinetic Conflict</span> and the terminal collapse of the 20th century’s most significant musical brand icon.</p>
+
+            <img src="https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?auto=format&fit=crop&w=1200&q=80" alt="Music and Culture" class="archive-img">
+
+            <h3 class="category-h3">🚨 Geopolitical Tragedies: The Korean War</h3>
+            <p class="essay-p"><span class="year-badge">1950</span>Initialization of the Korean War: Northern forces crossed the 38th parallel. This node archives a significant shift in UN-led defensive doctrines. Our forensics focus on the massive synchronization of multinational military capital and the recalibration of East Asian geopolitical boundaries.</p>
+
+            <h3 class="category-h3">🎵 Sound & Vibration: Michael Jackson Node</h3>
+            <p class="essay-p"><span class="year-badge">2009</span>Death of Michael Jackson: The terminal coordinate for the world's most significant cultural branding node. Jackson’s life established the theoretical protocols for the 'Global Super-Pop' era, anchoring the future of synchronized global media research.</p>
+        </div>
+
+        <!-- 💡 JUNE 26 -->
+        <div class="report-card">
+            <div class="day-header">JUNE_26</div>
+            <p class="essay-p">June 26th serves as the supreme coordinate for <span class="highlight">Global Institutional Recalibration</span> and the birth of modern high-fidelity literary branding. It anchors the second attempt at global peace.</p>
+
+            <h3 class="category-h3">⚖️ Judicial Intelligence: The UN Charter</h3>
+            <p class="essay-p"><span class="year-badge">1945</span>Signing of the UN Charter: Representatives of 50 nations established a framework for cooperation. This 'Diplomatic Singularity' provided the constitutional DNA for all peacekeeping missions and established protocols for modern international judicial oversight.</p>
+
+            <h3 class="category-h3">🏷️ Brand Genealogy: Harry Potter Node</h3>
+            <p class="essay-p"><span class="year-badge">1997</span>Publication of Harry Potter: J.K. Rowling initialized a commercial legacy that our terminal categorizes as the 'Literary Singularity' of the digital age. By synchronizing archetypal mythology with retail logistics, it pioneered the commercial genealogy of 'Trans-Media Franchising.'</p>
+        </div>
+
+        <!-- 💡 JUNE 27 -->
+        <div class="report-card">
+            <div class="day-header">JUNE_27</div>
+            <p class="essay-p">June 27th archives the birth of <span class="highlight">Automated Capital Access</span> and the supreme node of biological innovative resilience. Historically, it anchors the moment financial liquidity became available 24/7.</p>
+
+            <img src="https://images.unsplash.com/photo-1554224155-6726b3ff858f?auto=format&fit=crop&w=1200&q=80" alt="Banking and Finance" class="archive-img">
+
+            <h3 class="category-h3">📈 Macro-Financial Intelligence: The ATM Node</h3>
+            <p class="essay-p"><span class="year-badge">1967</span>First ATM Initialization: Installed by Barclays Bank in London. This node served as the primordial ancestor to modern digital banking. By synchronizing PIN verification with cash logistics, the ATM altered the speed of capital flow and anchored the birth of the 21st-century digital financial matrix.</p>
+
+            <h3 class="category-h3">📚 Innovations in Resilience: Helen Keller</h3>
+            <p class="essay-p"><span class="year-badge">1880</span>Birth of Helen Keller: A supreme node in cognitive innovation. Her life served as a case study in 'Linguistic Resilience,' fundamentally altering the judicial and cultural trajectory of global disability rights law through synchronized tactile intelligence.</p>
+        </div>
+
+        <!-- 💡 JUNE 28 -->
+        <div class="report-card">
+            <div class="day-header">JUNE_28</div>
+            <p class="essay-p">June 28th represents the archival coordinate for the <span class="highlight">Dual Trajectory of World War Governance</span>. It is a day defined by imperial collapse and the legislative attempt to rebuild global equilibrium.</p>
+
+            <h3 class="category-h3">🚨 Geopolitical Singularities: Sarajevo Node</h3>
+            <p class="essay-p"><span class="year-badge">1914</span>Assassination of Archduke Franz Ferdinand: A tragic singularity that triggered WWI. This temporal node archives the extreme fragility of early 20th-century diplomatic synchronization, providing a case study in 'Alliance Cascading' and security protocols.</p>
+
+            <h3 class="category-h3">⚖️ Judicial Intelligence: Treaty of Versailles</h3>
+            <p class="essay-p"><span class="year-badge">1919</span>Signing of the Treaty of Versailles: Formally ending WWI. This legal node recalibrated the global fiscal matrix but proved that judicial retribution must be synchronized with economic reality to ensure long-term stability.</p>
+        </div>
+
+        <!-- 💡 JUNE 29 -->
+        <div class="report-card">
+            <div class="day-header">JUNE_29</div>
+            <p class="essay-p">June 29th serves as the coordinate for <span class="highlight">Mobile Digital Hegemony</span>. Historically, this date anchors the moment human intelligence physically launched the world's most dominant personal technical interface.</p>
+
+            <h3 class="category-h3">⚙️ IT Singularities: iPhone Retail Node</h3>
+            <p class="essay-p"><span class="year-badge">2007</span>First iPhone Sales: Our forensics identify this as the 'Commercial Cognitive Singularity.' By synchronizing a phone, a music player, and a mobile web terminal into a single high-fidelity device, this launch fundamentally altered the human motor-cognitive interface and anchored global app-based capital flow.</p>
+        </div>
+
+        <!-- 💡 JUNE 30 -->
+        <div class="report-card">
+            <div class="day-header">JUNE_30</div>
+            <p class="essay-p">June 30th archives the birth of <span class="highlight">Sovereign Jurisdictional Reversion</span> and the tragic node of high-fidelity atmospheric forensics. Historically, it anchors the shift of a global financial hub's sovereign epicenter.</p>
+
+            <img src="https://images.unsplash.com/photo-1532187875605-2fe35952016a?auto=format&fit=crop&w=1200&q=80" alt="Hong Kong Handover Bridge" class="archive-img">
+
+            <h3 class="category-h3">🏛️ Geopolitical Nodes: Hong Kong Handover</h3>
+            <p class="essay-p"><span class="year-badge">1997</span>Transfer of Sovereignty of Hong Kong: Jurisdiction reverted from Britain to China. This legal act recalibrated the geopolitical equilibrium of East Asia, establishing the protocols for 'One Country, Two Systems' and anchoring the future of synchronized international financial law.</p>
+
+            <h3 class="category-h3">⚙️ Technical Singularities: Tunguska Node</h3>
+            <p class="essay-p"><span class="year-badge">1908</span>The Tunguska Event: A massive airburst in Siberia. This node archives the extreme limits of planetary defense forensics. The scientific synchronization of data from this event provided the baseline for modern asteroid-impact innovative research.</p>
+        </div>
+
+        <!-- 🚀 CONCLUSION -->
+        <div class="text-center py-20 border-t border-white/10">
+            <p class="font-cyber text-gold text-sm tracking-widest mb-6 uppercase">June Archival Synchronization Complete</p>
+            <p class="text-gray-500 italic">"Node 06 finalized and logged. System preparing for the transition to the intelligence of July."</p>
+        </div>
+    </main>
+
+    <footer class="py-24 border-t border-white/5 text-center">
+        <p class="text-[11px] font-cyber text-gray-700 tracking-[0.5em] uppercase">Akashic Terminal Node // June Node Finalized</p>
+    </footer>
+</body>
+</html>
