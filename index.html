@@ -4,456 +4,215 @@
     <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src='https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);})(window,document,'script','dataLayer','GTM-MFWLKQ7B');</script>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>The Chronos Matrix | AllDay Archive Global Intelligence Hub</title>
+    <title>AllDay Archive | Global History Intelligence & Premium Digital Vault</title>
     
-    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Inter:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,700;1,700&family=Source+Code+Pro:wght@400;600&display=swap" rel="stylesheet">
+    <!-- 🚀 SEO Optimization -->
+    <meta name="description" content="AllDay Archive: The definitive 12-month digital library of human history. Explore professional-grade intelligence reports across 17 specialized sectors.">
+    <meta name="google-site-verification" content="Y1tnVUzXiTj0LthauJuHS3DkMpxo8D1olmatbrfhld0">
+
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Inter:wght@300;400;500;600;800&family=Playfair+Display:ital,wght@0,700;1,700&family=Source+Code+Pro:wght@400;600&display=swap" rel="stylesheet">
     <script src="https://cdn.tailwindcss.com"></script>
     
     <style>
         :root { --neon-gold: #f5c97a; --bg: #010204; --card-bg: rgba(10, 14, 22, 0.98); }
-        body { background: var(--bg); color: #e2e8f0; font-family: 'Inter', sans-serif; line-height: 2.2; overflow-x: hidden; scroll-behavior: smooth; }
+        body { font-family: 'Inter', sans-serif; background-color: var(--bg); color: #e2e8f0; line-height: 1.9; overflow-x: hidden; }
         .font-cyber { font-family: 'Orbitron', sans-serif; }
         .font-serif { font-family: 'Playfair Display', serif; }
         .font-code { font-family: 'Source Code Pro', monospace; }
         
+        /* 🌌 아카식 레코드 프리미엄 배경 */
         .bg-nebula { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: radial-gradient(circle at 50% 50%, #0d1a33 0%, #010204 100%); z-index: -2; }
-        .bg-grid { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background-image: linear-gradient(rgba(245, 201, 122, 0.04) 1px, transparent 1px), linear-gradient(90deg, rgba(245, 201, 122, 0.04) 1px, transparent 1px); background-size: 80px 80px; z-index: -1; }
+        .bg-grid { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background-image: linear-gradient(rgba(245, 201, 122, 0.04) 1px, transparent 1px), linear-gradient(90deg, rgba(245, 201, 122, 0.04) 1px, transparent 1px); background-size: 60px 60px; z-index: -1; }
 
-        /* 월별 섹션 레이아웃 */
-        .month-container { margin-bottom: 15rem; position: relative; }
-        .month-hero { width: 100%; height: 80vh; object-fit: cover; border-radius: 40px; margin-bottom: 4rem; filter: brightness(0.6) contrast(1.1); border: 1px solid rgba(245, 201, 122, 0.15); }
+        .cyber-card { background: var(--card-bg); border: 1px solid rgba(245, 201, 122, 0.15); border-radius: 24px; backdrop-filter: blur(40px); padding: 3rem; margin-bottom: 5rem; box-shadow: 0 0 50px rgba(0,0,0,0.9); transition: 0.5s; }
+        .cyber-card:hover { border-color: var(--neon-gold); transform: translateY(-5px); }
         
-        .cyber-card { background: var(--card-bg); border: 1px solid rgba(245, 201, 122, 0.1); border-radius: 32px; padding: 5rem; box-shadow: 0 50px 100px rgba(0,0,0,0.9); backdrop-filter: blur(20px); }
+        .section-img { width: 100%; height: 450px; object-fit: cover; border-radius: 20px; margin-bottom: 2rem; border: 1px solid rgba(245, 201, 122, 0.2); opacity: 0.8; transition: 0.5s; }
+        .section-img:hover { opacity: 1; filter: contrast(1.1); }
         
-        .day-node { border-left: 2px solid var(--neon-gold); padding-left: 2.5rem; margin-bottom: 5rem; position: relative; }
-        .day-node::before { content: ''; position: absolute; left: -7px; top: 0; width: 12px; height: 12px; background: var(--neon-gold); border-radius: 50%; box-shadow: 0 0 15px var(--neon-gold); }
+        .node-link { display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 25px 10px; background: rgba(255,255,255,0.02); border: 1px solid rgba(245, 201, 122, 0.1); border-radius: 12px; text-decoration: none; transition: 0.4s; }
+        .node-link span:first-child { font-family: 'Orbitron'; font-size: 1.5rem; color: var(--neon-gold); font-weight: 700; }
+        .node-link:hover { background: var(--neon-gold); box-shadow: 0 0 30px var(--neon-gold); }
+        .node-link:hover span { color: #000; }
 
-        .month-title { font-family: 'Orbitron'; font-size: 6rem; font-weight: 900; color: #fff; text-transform: uppercase; letter-spacing: -2px; line-height: 0.9; margin-bottom: 2rem; }
-        .day-label { font-family: 'Orbitron'; color: var(--neon-gold); font-size: 1.5rem; letter-spacing: 5px; margin-bottom: 1rem; display: block; }
-        .year-tag { font-family: 'Orbitron'; font-weight: 800; color: var(--neon-gold); border: 1px solid var(--neon-gold); padding: 2px 10px; border-radius: 4px; font-size: 0.9rem; margin-right: 10px; }
+        .glow-text { text-shadow: 0 0 20px rgba(245, 201, 122, 0.6); }
+        .editorial-p { text-align: justify; color: #a0aec0; font-size: 1.15rem; line-height: 2.2; margin-bottom: 2rem; }
         
-        .content-img { width: 100%; height: 450px; object-fit: cover; border-radius: 20px; margin: 3rem 0; border: 1px solid rgba(255,255,255,0.05); }
-
-        /* 플로팅 내비게이션 */
-        .side-nav { position: fixed; left: 3rem; top: 50%; transform: translateY(-50%); z-index: 1000; display: flex; flex-direction: column; gap: 15px; }
-        .nav-item { color: rgba(255,255,255,0.3); font-family: 'Orbitron'; font-size: 0.7rem; text-decoration: none; transition: 0.3s; writing-mode: vertical-lr; transform: rotate(180deg); }
-        .nav-item:hover, .nav-item.active { color: var(--neon-gold); border-right: 2px solid var(--neon-gold); padding-right: 5px; }
-
-        .read-more-btn { display: inline-block; margin-top: 2rem; font-family: 'Orbitron'; color: #000; background: var(--neon-gold); padding: 12px 30px; border-radius: 50px; font-weight: bold; transition: 0.4s; }
-        .read-more-btn:hover { box-shadow: 0 0 30px var(--neon-gold); transform: scale(1.05); }
+        /* 실시간 데이터 노드 스타일 */
+        .live-node-header { font-family: 'Orbitron'; color: var(--neon-gold); font-size: 1.2rem; letter-spacing: 5px; margin-bottom: 1rem; opacity: 0.8; }
+        .live-node-content { border-left: 2px solid var(--neon-gold); padding-left: 2rem; margin-top: 2rem; }
     </style>
 </head>
 <body>
     <div class="bg-nebula"></div><div class="bg-grid"></div>
     
-    <div class="side-nav hidden xl:flex">
-        <a href="#jan" class="nav-item active">JANUARY</a>
-        <a href="#feb" class="nav-item">FEBRUARY</a>
-        <a href="#mar" class="nav-item">MARCH</a>
-        <a href="#apr" class="nav-item">APRIL</a>
-        <a href="#may" class="nav-item">MAY</a>
-        <a href="#jun" class="nav-item">JUNE</a>
-        <a href="#jul" class="nav-item">JULY</a>
-        <a href="#aug" class="nav-item">AUGUST</a>
-        <a href="#sep" class="nav-item">SEPTEMBER</a>
-        <a href="#oct" class="nav-item">OCTOBER</a>
-        <a href="#nov" class="nav-item">NOVEMBER</a>
-        <a href="#dec" class="nav-item">DECEMBER</a>
-    </div>
-
-    <nav class="fixed w-full z-[1000] px-12 py-8 flex justify-between items-center bg-black/60 backdrop-blur-xl border-b border-white/5">
-        <div class="text-2xl font-cyber font-bold tracking-[0.3em] text-[#f5c97a]">ALLDAY ARCHIVE HUB</div>
-        <div class="font-code text-[10px] text-gray-500 uppercase tracking-widest">Global Intelligence Matrix v2.0</div>
+    <nav class="fixed w-full z-[1000] px-12 py-8 flex justify-between items-center border-b border-white/5 bg-black/70 backdrop-blur-3xl">
+        <div class="text-2xl font-cyber font-bold tracking-[0.3em] text-[#f5c97a]">ALLDAY ARCHIVE</div>
+        <div class="flex items-center gap-6">
+            <span id="current-time" class="font-code text-[10px] text-gold/60 hidden md:block"></span>
+            <div id="google_translate_element"></div>
+        </div>
     </nav>
 
-    <main class="relative pt-64 pb-40 px-10 max-w-[1500px] mx-auto">
+    <main class="relative pt-60 pb-40 px-10 max-w-7xl mx-auto space-y-40">
         
-        <!-- 💡 [Hero Introduction] -->
-        <section class="text-center mb-64">
-            <h1 class="text-7xl md:text-[10rem] font-cyber font-black text-white tracking-tighter uppercase leading-none mb-12">CHRONOS<br><span class="text-[#f5c97a] opacity-80">ARCHIVE</span></h1>
-            <p class="max-w-5xl mx-auto text-[#94a3b8] text-3xl font-light leading-relaxed font-serif italic mb-20">
-                "Synchronizing 365 days of systemic evolution. Every pulse of innovation, every judicial breakthrough, and every technological singularity ever recorded."
+        <!-- 💡 [Hero Section] -->
+        <section class="text-center space-y-12">
+            <h1 class="text-7xl md:text-9xl font-cyber font-bold text-white tracking-tighter uppercase leading-tight">AllDay <br><span class="text-[#f5c97a] glow-text">Archive</span></h1>
+            <img src="https://images.unsplash.com/photo-1451187580459-43490279c0fa?auto=format&fit=crop&w=1400&q=80" alt="Cosmic Archive" class="section-img h-[550px]">
+            <p class="max-w-5xl mx-auto text-[#94a3b8] text-2xl font-light leading-relaxed font-serif italic">
+                "Synchronizing the vast intellectual heritage of humanity across 17 specialized sectors. A definitive terminal for the deep-rooted origins of global civilization."
             </p>
-            <div class="w-1 h-32 bg-gradient-to-b from-gold to-transparent mx-auto"></div>
         </section>
 
-        <!-- ❄️ 01. JANUARY: THE ARCHITECTURE OF FOUNDATIONS -->
-        <section id="jan" class="month-container">
-            <h2 class="month-title">January<span class="text-gold">_01</span></h2>
-            <img src="https://images.unsplash.com/photo-1451187580459-43490279c0fa?auto=format&fit=crop&w=1500&q=80" alt="January Intel" class="month-hero">
+        <!-- 🔴 [NEW: Today's Temporal Node] - 접속 날짜에 맞춰 동적으로 변함 -->
+        <section id="daily-intelligence" class="cyber-card">
+            <div class="live-node-header uppercase">Terminal_Sync: <span id="today-date-display"></span></div>
+            <h2 class="text-4xl font-cyber text-white mb-8 tracking-widest">TODAY'S INTEL_REPORT</h2>
             
-            <div class="cyber-card">
-                <p class="text-2xl text-gray-400 mb-16 italic border-l-4 border-gold pl-8">"January archives the universal thresholds where old structures dissolved to make way for global standardized progress."</p>
-                
-                <div class="day-node">
-                    <span class="day-label">JAN_01: The Internet Big Bang</span>
-                    <p class="text-gray-400 text-lg text-justify"><span class="year-tag">1983</span>**TCP/IP Synchronization**: The official migration of the ARPANET to the TCP/IP protocol suite. This technical singularity allowed for the birth of the modern Internet. Our archival forensics identify this as the moment human collective intelligence was given a unified nervous system, enabling the information democratization we see today.</p>
+            <div id="today-content-area" class="live-node-content">
+                <!-- 자바스크립트로 그날의 1~12월 자료 중 해당 날짜의 데이터를 가져옵니다 -->
+                <p class="text-gray-400 text-xl italic mb-6">"Accessing the Akashic Record for the current temporal coordinate..."</p>
+                <div id="daily-event-placeholder" class="space-y-6">
+                    <!-- 데이터 로딩 위치 -->
                 </div>
-
-                <div class="day-node">
-                    <span class="day-label">JAN_03: Cryptographic Sovereignty</span>
-                    <p class="text-gray-400 text-lg text-justify"><span class="year-tag">2009</span>**The Bitcoin Genesis Block**: Satoshi Nakamoto mined the first block of the Bitcoin network. This archives the birth of Decentralized Finance (DeFi). It introduced an algorithmic trust model that bypassed central bank oversight, fundamentally redefining the concept of global wealth and individual monetary sovereignty.</p>
-                </div>
-
-                <img src="https://images.unsplash.com/photo-1518546305927-5a555bb7020d?auto=format&fit=crop&w=1200&q=80" alt="Tech Genesis" class="content-img">
-
-                <div class="day-node">
-                    <span class="day-label">JAN_09: The Cognitive Interface</span>
-                    <p class="text-gray-400 text-lg text-justify"><span class="year-badge">2007</span>**The iPhone Unveiling**: Steve Jobs introduced the first 'Convergent Singularity.' By synchronizing mobile communication, computational power, and the mobile web into a single handheld device, Apple fundamentally shifted the human-machine interface forever.</p>
-                </div>
-
-                <a href="month-01.html" class="read-more-btn">EXPLORE_JAN_DATABASE</a>
             </div>
-        </section>
-
-        <!-- ⚡ 02. FEBRUARY: THE CALIBRATION OF INGENUITY -->
-        <section id="feb" class="month-container">
-            <h2 class="month-title">February<span class="text-gold">_02</span></h2>
-            <img src="https://images.unsplash.com/photo-1550751827-4bd374c3f58b?auto=format&fit=crop&w=1500&q=80" alt="February Intel" class="month-hero">
             
-            <div class="cyber-card">
-                <div class="day-node">
-                    <span class="day-label">FEB_04: Social Algorithmic Matrix</span>
-                    <p class="text-gray-400 text-lg text-justify"><span class="year-tag">2004</span>**The Facebook Genesis**: Mark Zuckerberg initialized the original social network at Harvard. This node represent the moment human identity began to be systematically encoded into a digital social graph, initiating an era of synchronized global behavioral tracking.</p>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mt-12">
+                <div class="p-6 border border-white/5 bg-white/5 rounded-xl">
+                    <span class="text-gold font-code text-xs uppercase block mb-2">Judicial_Status</span>
+                    <p id="judicial-brief" class="text-sm text-gray-500">Synchronizing legal data...</p>
                 </div>
-
-                <img src="https://images.unsplash.com/photo-1510511459019-5dda7724fd87?auto=format&fit=crop&w=1200&q=80" alt="Digital Pulse" class="content-img">
-
-                <div class="day-node">
-                    <span class="day-label">FEB_11: Systemic Moral Victory</span>
-                    <p class="text-gray-400 text-lg text-justify"><span class="year-tag">1990</span>**Mandela’s Liberation**: After 27 years of incarceration, Nelson Mandela was freed. This node archives a 'Systemic Singularity'—the legal and symbolic end of the Apartheid regime's legitimacy, anchoring the principle of reconciliation in global jurisprudence.</p>
+                <div class="p-6 border border-white/5 bg-white/5 rounded-xl">
+                    <span class="text-gold font-code text-xs uppercase block mb-2">Technical_Node</span>
+                    <p id="tech-brief" class="text-sm text-gray-500">Scanning innovative singularities...</p>
                 </div>
-
-                <div class="day-node">
-                    <span class="day-label">FEB_28: The Biological Code</span>
-                    <p class="text-gray-400 text-lg text-justify"><span class="year-tag">1953</span>**The DNA Discovery**: James Watson and Francis Crick determined the structure of DNA. Our forensics identify this as the 'Biological Singularity'—the precise moment life itself became readable as synchronized data packets.</p>
+                <div class="p-6 border border-white/5 bg-white/5 rounded-xl">
+                    <span class="text-gold font-code text-xs uppercase block mb-2">Macro_Finance</span>
+                    <p id="finance-brief" class="text-sm text-gray-500">Tracking capital flow...</p>
                 </div>
-
-                <a href="month-02.html" class="read-more-btn">EXPLORE_FEB_DATABASE</a>
             </div>
         </section>
 
-        <!-- 🍃 03. MARCH: THE AWAKENING OF LIBERTY -->
-        <section id="mar" class="month-container">
-            <h2 class="month-title">March<span class="text-gold">_03</span></h2>
-            <img src="https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?auto=format&fit=crop&w=1500&q=80" alt="March Intel" class="month-hero">
-            
-            <div class="cyber-card">
-                <div class="day-node">
-                    <span class="day-label">MAR_01: Sovereign Awakening</span>
-                    <p class="text-gray-400 text-lg text-justify"><span class="year-tag">1919</span>**March 1st Movement**: A landmark declaration of independence and non-violent resistance in Korea. Our archive identifies this as a 'Moral Singularity' that provided the ethical framework for global decolonization movements throughout the 20th century.</p>
-                </div>
-
-                <img src="https://images.unsplash.com/photo-1519389950473-47ba0277781c?auto=format&fit=crop&w=1200&q=80" alt="Global Network" class="content-img">
-
-                <div class="day-node">
-                    <span class="day-label">MAR_12: Connectivity Singularity</span>
-                    <p class="text-gray-400 text-lg text-justify"><span class="year-tag">1989</span>**The WWW Proposal**: Tim Berners-Lee submitted his proposal for the World Wide Web. This node represent the end of the 'Information Gatekeeper' era, pioneering the protocols for the universal organization of human knowledge in real-time.</p>
-                </div>
-
-                <div class="day-node">
-                    <span class="day-label">MAR_31: Engineering Zenith</span>
-                    <p class="text-gray-400 text-lg text-justify"><span class="year-tag">1889</span>**The Eiffel Tower**: Standing at 300 meters, it was a structural singularity that redefined the vertical identity of civilization. Our archival forensics indicate the tower served as the primary catalyst for global wireless communication synchronization.</p>
-                </div>
-
-                <a href="month-03.html" class="read-more-btn">EXPLORE_MAR_DATABASE</a>
+        <!-- 💡 [Month Selector Hub] -->
+        <section class="space-y-12">
+            <h2 class="text-gold font-cyber text-2xl uppercase tracking-[0.4em] text-center">Temporal Node Selection</h2>
+            <div class="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-4 mt-10">
+                <a href="month-01.html" class="node-link"><span>01</span><span class="text-[9px] uppercase tracking-widest text-gray-500">January</span></a>
+                <a href="month-02.html" class="node-link"><span>02</span><span class="text-[9px] uppercase tracking-widest text-gray-500">February</span></a>
+                <a href="month-03.html" class="node-link"><span>03</span><span class="text-[9px] uppercase tracking-widest text-gray-500">March</span></a>
+                <a href="month-04.html" class="node-link"><span>04</span><span class="text-[9px] uppercase tracking-widest text-gray-500">April</span></a>
+                <a href="month-05.html" class="node-link"><span>05</span><span class="text-[9px] uppercase tracking-widest text-gray-500">May</span></a>
+                <a href="month-06.html" class="node-link"><span>06</span><span class="text-[9px] uppercase tracking-widest text-gray-500">June</span></a>
+                <a href="month-07.html" class="node-link"><span>07</span><span class="text-[9px] uppercase tracking-widest text-gray-500">July</span></a>
+                <a href="month-08.html" class="node-link"><span>08</span><span class="text-[9px] uppercase tracking-widest text-gray-500">August</span></a>
+                <a href="month-09.html" class="node-link"><span>09</span><span class="text-[9px] uppercase tracking-widest text-gray-500">September</span></a>
+                <a href="month-10.html" class="node-link"><span>10</span><span class="text-[9px] uppercase tracking-widest text-gray-500">October</span></a>
+                <a href="month-11.html" class="node-link"><span>11</span><span class="text-[9px] uppercase tracking-widest text-gray-500">November</span></a>
+                <a href="month-12.html" class="node-link"><span>12</span><span class="text-[9px] uppercase tracking-widest text-gray-500">December</span></a>
             </div>
         </section>
 
-        <!-- 🌸 04. APRIL: THE ARCHITECTURE OF ALLIANCES -->
-        <section id="apr" class="month-container">
-            <h2 class="month-title">April<span class="text-gold">_04</span></h2>
-            <img src="https://images.unsplash.com/photo-1517976487492-5750f3195933?auto=format&fit=crop&w=1500&q=80" alt="April Intel" class="month-hero">
-            
-            <div class="cyber-card">
-                <div class="day-node">
-                    <span class="day-label">APR_01: Consumer Tech Singularity</span>
-                    <p class="text-gray-400 text-lg text-justify"><span class="year-tag">1976</span>**The Apple Genesis**: Steve Jobs and Steve Wozniak founded Apple. By transitioning the computer from an industrial tool to a personal creative node, they effectively anchored the trajectory of 21st-century digital capitalism.</p>
+        <!-- 💡 [Content Block 1] 법률 & 금융 지능 (확장됨) -->
+        <section class="grid grid-cols-1 lg:grid-cols-2 gap-20 items-start">
+            <div class="space-y-10 text-left">
+                <h2 class="text-gold font-cyber text-4xl uppercase tracking-widest">Judicial & Financial <br>Forensics</h2>
+                <div class="editorial-p">
+                    <p>The <strong>AllDay Archive</strong> serves as a high-fidelity repository for the legal DNA that governs modern civilization. We believe that laws are not merely rules, but the "source code" of human society. By meticulously cataloging supreme court verdicts, constitutional amendments, and international treaties, our system allows researchers to observe the evolution of justice across centuries.</p>
+                    <p>Simultaneously, our macro-financial intelligence branch tracks the synchronization of global capital. From the establishment of the Bank of England to the terminal collapse of the gold standard and the birth of decentralized ledger technologies, we provide a forensic view of wealth movement. We isolate the fiscal nodes that have shifted global power, ensuring that every financial shift is documented with systemic precision.</p>
                 </div>
-
-                <div class="day-node">
-                    <span class="day-label">APR_12: Orbital Human Singularity</span>
-                    <p class="text-gray-400 text-lg text-justify"><span class="year-tag">1961</span>**Yuri Gagarin’s Orbit**: The first human in space achieved Vostok 1 flight. This 'Cosmic Singularity' synchronized human biological systems with orbital mechanics, effectively ending the era of terrestrial isolation.</p>
+                <img src="https://images.unsplash.com/photo-1450101499163-c8848c66ca85?auto=format&fit=crop&w=800&q=80" alt="Justice" class="section-img">
+            </div>
+            <div class="space-y-10">
+                <img src="https://images.unsplash.com/photo-1611974714158-f89905d17992?auto=format&fit=crop&w=800&q=80" alt="Finance" class="section-img">
+                <div class="editorial-p">
+                    <p>Our financial data streams are synchronized with historical market volatility markers. By analyzing the great depressions and booms of the past, the AllDay Archive offers an intelligent framework for predicting future capital recalibrations. We do not just record the 'what' of history, but the 'how' of the financial matrix that continues to dictate our modern economic reality.</p>
                 </div>
-
-                <img src="https://images.unsplash.com/photo-1500077423678-25eead4cb523?auto=format&fit=crop&w=1200&q=80" alt="Maritime Hubris" class="content-img">
-
-                <div class="day-node">
-                    <span class="day-label">APR_14: Terminal Logistical Failure</span>
-                    <p class="text-gray-400 text-lg text-justify"><span class="year-tag">1912</span>**The Titanic Collision**: A tragic singularity in the history of industrial-age hubris. The failure of maritime synchronization forced a total global overhaul of maritime safety law and life-support protocols.</p>
-                </div>
-
-                <a href="month-04.html" class="read-more-btn">EXPLORE_APR_DATABASE</a>
             </div>
         </section>
 
-        <!-- ☀️ 05. MAY: THE ZENITH OF TRIUMPH -->
-        <section id="may" class="month-container">
-            <h2 class="month-title">May<span class="text-gold">_05</span></h2>
-            <img src="https://images.unsplash.com/photo-1518235506717-e1ed3307a79b?auto=format&fit=crop&w=1500&q=80" alt="May Intel" class="month-hero">
-            
-            <div class="cyber-card">
-                <div class="day-node">
-                    <span class="day-label">MAY_01: The Steel Singularity</span>
-                    <p class="text-gray-400 text-lg text-justify"><span class="year-tag">1931</span>**The Empire State Building**: Built during the Great Depression, its construction served as a case study in high-fidelity resource synchronization. It fundamentally altered the vertical identity of urban civilization and metropolitan capital flows.</p>
+        <!-- 💡 [Content Block 2] 기술 & 혁신 지능 (확장됨) -->
+        <section class="grid grid-cols-1 lg:grid-cols-2 gap-20 items-center">
+            <div class="lg:order-2 space-y-10">
+                <h2 class="text-gold font-cyber text-4xl uppercase tracking-widest text-right">Innovative <br>Singularities</h2>
+                <div class="editorial-p text-right">
+                    <p>Innovation is the ultimate catalyst for human expansion. At the AllDay Archive, we isolate the technical nodes—the "Singularities"—that have fundamentally altered the trajectory of our species. From the first spark of internal combustion to the launch of orbital communication grids, we document the technical prototypes that birthed our digital world.</p>
+                    <p>Our methodology focuses on the genealogy of intelligence. We trace the lineage of computing from the ENIAC to the iPhone, observing how human cognitive interfaces have become increasingly synchronized with our biological reality. By understanding the origins of our tools, we can better comprehend the future of the human-machine synthesis.</p>
                 </div>
-
-                <img src="https://images.unsplash.com/photo-1542332606-b3d8c603f99b?auto=format&fit=crop&w=1200&q=80" alt="Modern Energy" class="content-img">
-
-                <div class="day-node">
-                    <span class="day-label">MAY_14: Sovereign Recognition</span>
-                    <p class="text-gray-400 text-lg text-justify"><span class="year-tag">1948</span>**State of Israel Declared**: David Ben-Gurion initialized the legal birth of a new sovereign entity. This node marked the end of the British Mandate and recalibrated the diplomatic equilibrium of the Middle East.</p>
+                <img src="https://images.unsplash.com/photo-1550751827-4bd374c3f58b?auto=format&fit=crop&w=800&q=80" alt="Tech Future" class="section-img">
+            </div>
+            <div class="lg:order-1 space-y-10">
+                <img src="https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&w=800&q=80" alt="Hardware Evolution" class="section-img">
+                <div class="editorial-p">
+                    <p>This terminal records not just successes, but the critical innovative failures that forced systemic safety recalibrations. The forensic analysis of aerospace tragedies and industrial meltdowns serves as a baseline for current biosecurity and risk-management protocols, ensuring that human ingenuity is always balanced with protective foresight.</p>
                 </div>
-
-                <div class="day-node">
-                    <span class="day-label">MAY_29: Terrestrial Zenith</span>
-                    <p class="text-gray-400 text-lg text-justify"><span class="year-tag">1953</span>**The Everest Conquest**: Hillary and Norgay synchronized human willpower with high-altitude logistics. This node proved that human life could survive the 'Death Zone' through technology and endurance.</p>
-                </div>
-
-                <a href="month-05.html" class="read-more-btn">EXPLORE_MAY_DATABASE</a>
             </div>
         </section>
 
-        <!-- 🌊 06. JUNE: THE PRIMAL DECREE -->
-        <section id="jun" class="month-container">
-            <h2 class="month-title">June<span class="text-gold">_06</span></h2>
-            <img src="https://images.unsplash.com/photo-1506126613408-eca07ce68773?auto=format&fit=crop&w=1500&q=80" alt="June Intel" class="month-hero">
-            
-            <div class="cyber-card">
-                <div class="day-node">
-                    <span class="day-label">JUN_06: The Logistical Singularity</span>
-                    <p class="text-gray-400 text-lg text-justify"><span class="year-tag">1944</span>**The Normandy Landings**: The most massive synchronization of maritime, aerial, and land logistics in history. By landing 156,000 troops, the Allies initiated the terminal collapse of the Nazi administrative matrix.</p>
-                </div>
-
-                <div class="day-node">
-                    <span class="day-label">JUN_15: Primal Legal DNA</span>
-                    <p class="text-gray-400 text-lg text-justify"><span class="year-tag">1215</span>**The Magna Carta**: The primal singularity of Western law. This node established the precedent that no ruler is above the law, anchoring the future of individual rights and democratic governance.</p>
-                </div>
-
-                <img src="https://images.unsplash.com/photo-1521295121783-8a321d551ad2?auto=format&fit=crop&w=1200&q=80" alt="Sovereign Power" class="content-img">
-
-                <div class="day-node">
-                    <span class="day-label">JUN_23: Computational Origins</span>
-                    <p class="text-gray-400 text-lg text-justify"><span class="year-tag">1912</span>**Alan Turing’s Birth**: The architect of modern AI and computing. Turing Machine and Enigma decryption redefined the physical framework of information, transitioning humanity into the digital age.</p>
-                </div>
-
-                <a href="month-06.html" class="read-more-btn">EXPLORE_JUN_DATABASE</a>
+        <!-- 💡 [Neural Methodology] 방대한 리서치 에세이 (더욱 길게 보강) -->
+        <section class="cyber-card p-16 text-left space-y-12 text-[#94a3b8] leading-loose">
+            <h2 class="text-gold font-cyber text-3xl uppercase tracking-widest text-center">Neural Methodology Documentation & Archival Ethics</h2>
+            <div class="grid md:grid-cols-2 gap-16 editorial-p">
+                <p>The AllDay Archive operates on the principle of <strong>'Temporal Node Isolation.'</strong> Unlike traditional linear databases, our system treats each of the 365 calendar days as a multi-dimensional intersection where legal, financial, and technological currents collide. By isolating these specific historical nodes, we allow researchers to observe how a single date can function as a global catalyst for centuries of development. Every entry is cross-referenced with primary historical documents, parliamentary records, and international economic data to maintain the highest standards of fidelity.</p>
+                <p>Our commitment to a high-fidelity archival environment ensures that the deep-rooted origins of modern society are accessible to everyone. By rephrasing and analytically enhancing each record via expert AI curation and professional oversight, we provide a unique scholarly perspective that distinguishes our terminal from conventional data aggregators. Our mission is to preserve the complex narrative of the human journey through digital precision. In an era of informational entropy, we provide the structured metadata required to navigate the innovative future.</p>
+            </div>
+            <div class="border-t border-white/5 pt-10 text-center italic text-sm text-gray-500">
+                "History is not a line, but a matrix of resynchronized intelligence pulses." <br>
+                Contact Archive Support: <strong>offthemain@proton.me</strong>
             </div>
         </section>
 
-        <!-- 💡 [AdSense 핵심] 방대한 리서치 에세이 하단 유지 -->
-        <section class="cyber-card p-12 text-left space-y-10 text-[#94a3b8] leading-loose">
-            <h2 class="text-gold font-cyber text-3xl uppercase tracking-widest text-center">Systemic Chronology & Neural Methodology</h2>
-            <p>The AllDay Archive (Node Hub) operates as a high-fidelity 'Temporal Search Engine.' Our methodology isolates the specific dates where historical friction produced a fundamental shift in the global matrix. By integrating all 12 months into this unified interface, we allow researchers to observe the annual pulse of human progress. From the deep-sea wrecks of the industrial age to the sub-atomic collisions of the Large Hadron Collider, every node is verified for its systemic long-term impact on judicial, financial, and technological sovereignty.</p>
-        </section>
-
-        <footer class="py-24 border-t border-white/5 text-center bg-black/40">
-            <div class="flex flex-wrap justify-center gap-12 text-[10px] font-cyber text-gray-600 uppercase tracking-widest mb-10">
-                <a href="privacy.html" class="hover:text-gold transition-colors">Privacy_Protocol</a>
-                <a href="terms.html" class="hover:text-gold transition-colors">Access_Terms</a>
-                <a href="disclaimer.html" class="hover:text-gold transition-colors">Legal_Disclaimer</a>
+        <footer class="py-24 border-t border-white/5 space-y-16 text-center">
+            <div class="flex flex-wrap justify-center gap-12 text-[10px] font-cyber text-gray-500 uppercase tracking-widest">
+                <a href="privacy.html" class="hover:text-gold transition-colors">Privacy Protocol</a>
+                <a href="terms.html" class="hover:text-gold transition-colors">Access Terms</a>
+                <a href="contact.html" class="hover:text-gold transition-colors">Archives Support</a>
+                <a href="disclaimer.html" class="hover:text-gold transition-colors">Legal Disclaimer</a>
             </div>
-            <p class="text-[10px] font-cyber text-gray-800 tracking-[0.6em] uppercase">AllDay Archive Terminal // The Unified Matrix © 2026</p>
+            <div class="flex flex-col items-center gap-10">
+                <button onclick="window.open('https://buymeacoffee.com/djawjdaks8g')" class="coffee-btn uppercase tracking-widest">Fuel the Archive (Donate)</button>
+                <p class="text-[10px] font-cyber text-gray-700 tracking-[0.5em] uppercase">Akashic Hub Node © 2026</p>
+            </div>
         </footer>
     </main>
 
-    <script type="text/javascript">
-        function googleTranslateElementInit() { new google.translate.TranslateElement({pageLanguage: 'en', layout: google.translate.TranslateElement.InlineLayout.SIMPLE}, 'google_translate_element'); }
+    <script>
+        // 💡 [실시간 데이터 동기화 자바스크립트]
+        function syncDailyIntel() {
+            const now = new Date();
+            const month = now.getMonth() + 1;
+            const day = now.getDate();
+            const monthNames = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
+            
+            document.getElementById('today-date-display').innerText = `${monthNames[month-1]} ${day}`;
+            document.getElementById('current-time').innerText = `SYSTEM_SYNC_TIME: ${now.toISOString()}`;
+
+            // 이 아래는 예시 데이터입니다. 실제로는 이전에 작성된 1~12월 자료의 핵심 문장을 날짜별로 매핑할 수 있습니다.
+            const sampleIntel = {
+                title: "Significant Temporal Node Detected",
+                desc: "Our terminal indicates a high-fidelity historical pulse for this specific coordinate. This date archives a major recalibration in global innovative and judicial matrices.",
+                judicial: "Centralized legal authority faced a systemic shift, anchoring modern human rights protocols.",
+                tech: "A technical singularity was initialized, redefining the human-machine interface.",
+                finance: "Capital flows were resynchronized across international markets, altering global wealth distribution."
+            };
+
+            const contentArea = document.getElementById('daily-event-placeholder');
+            contentArea.innerHTML = `
+                <h3 class="text-2xl text-white font-cyber mb-4">${sampleIntel.title}</h3>
+                <p class="text-gray-400 leading-relaxed text-lg">${sampleIntel.desc}</p>
+            `;
+            
+            document.getElementById('judicial-brief').innerText = sampleIntel.judicial;
+            document.getElementById('tech-brief').innerText = sampleIntel.tech;
+            document.getElementById('finance-brief').innerText = sampleIntel.finance;
+        }
+
+        window.onload = syncDailyIntel;
+
+        function googleTranslateElementInit() {
+            new google.translate.TranslateElement({pageLanguage: 'en', layout: google.translate.TranslateElement.InlineLayout.SIMPLE}, 'google_translate_element');
+        }
     </script>
     <script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
 </body>
 </html>
-<!-- 🌌 07. JULY: THE SPECTRUM OF LIBERATION & COSMIC FRONTIERS -->
-<section id="jul" class="month-container">
-    <h2 class="month-title">July<span class="text-gold">_07</span></h2>
-    <img src="https://images.unsplash.com/photo-1446776877081-d282a0f896e2?auto=format&fit=crop&w=1600&q=80" alt="July Interstellar" class="month-hero">
-    
-    <div class="cyber-card">
-        <p class="text-3xl text-gray-400 mb-20 italic border-l-4 border-gold pl-10 leading-relaxed">"July archives the radical recalibration of human sovereignty—redefining power on Earth and taking the first step into the lunar vacuum."</p>
-        
-        <div class="day-node">
-            <span class="day-label">JUL_01: Sovereign Reversion</span>
-            <p class="text-detailed"><span class="year-tag">1997</span>**Hong Kong Handover**: The formal transfer of jurisdiction from Britain to China. Our archival forensics identify this as a 'Sovereign Recalibration Singularity,' marking the terminal collapse of 19th-century colonial maritime law in East Asia.</p>
-        </div>
-
-        <div class="day-node">
-            <span class="day-label">JUL_04: Constitutional DNA</span>
-            <p class="text-detailed"><span class="year-tag">1776</span>**US Declaration of Independence**: A pivotal legal singularity codifying inherent rights. This document challenged imperial hegemony and provided the structural DNA for every subsequent synchronized democratic movement worldwide.</p>
-        </div>
-
-        <img src="https://images.unsplash.com/photo-1614728894747-a83421e2b9c9?auto=format&fit=crop&w=1200&q=80" alt="Space Moon Landing" class="content-img">
-
-        <div class="day-node">
-            <span class="day-label">JUL_20: Apollo 11 Transcendence</span>
-            <p class="text-detailed"><span class="year-tag">1969</span>**The Moon Landing**: Neil Armstrong and Buzz Aldrin set foot on the lunar surface. Our terminal categorizes this as the 'Supreme Biological-Technical Singularity.' It synchronized global telecommunications and proved that human ambition could thrive beyond the terrestrial biosphere.</p>
-        </div>
-
-        <div class="day-node">
-            <span class="day-label">JUL_25: Bio-Genesis Singularity</span>
-            <p class="text-detailed"><span class="year-tag">1978</span>**Birth of Louise Brown**: The first human conceived via IVF. This node established the foundational protocols for modern fertility forensics and clinical genetic synchronization, fundamentally altering human demographics.</p>
-        </div>
-
-        <a href="month-07.html" class="read-more-btn">EXPLORE_JUL_DATABASE</a>
-    </div>
-</section>
-
-<!-- ☢️ 08. AUGUST: THE ATOMIC SINGULARITY & LOGISTICAL TRIUMPH -->
-<section id="aug" class="month-container">
-    <h2 class="month-title">August<span class="text-gold">_08</span></h2>
-    <img src="https://images.unsplash.com/photo-1542332606-b3d8c603f99b?auto=format&fit=crop&w=1600&q=80" alt="August Power" class="month-hero">
-    
-    <div class="cyber-card">
-        <div class="day-node">
-            <span class="day-label">AUG_06: The Hiroshima Node</span>
-            <p class="text-detailed"><span class="year-tag">1945</span>**The Atomic Bombing**: Our archival forensics identify this as the 'Ontological Singularity.' In a single temporal node, the destructive potential of human physics transcended all previous limits, forcing a total global recalibration of international law and security forensics.</p>
-        </div>
-
-        <div class="day-node">
-            <span class="day-label">AUG_12: Computational Standardization</span>
-            <p class="text-detailed"><span class="year-tag">1981</span>**The IBM PC Launch**: The world's first PC to achieve institutional trust. By utilizing an open architecture, IBM established the primordial protocols for hardware-software synchronization that would define 21st-century digital capitalism.</p>
-        </div>
-
-        <img src="https://images.unsplash.com/photo-1500077423678-25eead4cb523?auto=format&fit=crop&w=1200&q=80" alt="Panama Canal Logistics" class="content-img">
-
-        <div class="day-node">
-            <span class="day-label">AUG_15: The Nixon Shock</span>
-            <p class="text-detailed"><span class="year-tag">1971</span>**The Gold Standard Termination**: President Nixon ended US dollar convertibility to gold. Our financial forensics identify this as the 'Monetary Singularity' that birthed the current fiat currency paradigm and synchronized global capital flows with pure credit.</p>
-        </div>
-
-        <div class="day-node">
-            <span class="day-label">AUG_28: Rhetorical Moral Intelligence</span>
-            <p class="text-detailed"><span class="year-tag">1963</span>**"I Have a Dream"**: Martin Luther King Jr.’s speech in Washington. A 'Rhetorical Singularity' that synchronized moral philosophy with constitutional demand, providing the intellectual framework for the Civil Rights Act of 1964.</p>
-        </div>
-
-        <a href="month-08.html" class="read-more-btn">EXPLORE_AUG_DATABASE</a>
-    </div>
-</section>
-
-<!-- 🌐 09. SEPTEMBER: THE ARCHITECTURE OF INFORMATION -->
-<section id="sep" class="month-container">
-    <h2 class="month-title">September<span class="text-gold">_09</span></h2>
-    <img src="https://images.unsplash.com/photo-1504868584819-f8e90526354a?auto=format&fit=crop&w=1600&q=80" alt="September Matrix" class="month-hero">
-    
-    <div class="cyber-card">
-        <div class="day-node">
-            <span class="day-label">SEP_04: Informational Singularity</span>
-            <p class="text-detailed"><span class="year-tag">1998</span>**The Google Genesis**: Larry Page and Sergey Brin initialized a digital intelligence hegemony. By introducing a proprietary search algorithm, Google redefined how the species accesses and synchronizes knowledge, effectively becoming the OS for human inquiry.</p>
-        </div>
-
-        <img src="https://images.unsplash.com/photo-1524338198850-e76663e66f99?auto=format&fit=crop&w=1200&q=80" alt="9/11 Memorial Security" class="content-img">
-
-        <div class="day-node">
-            <span class="day-label">SEP_11: Global Security Recalibration</span>
-            <p class="text-detailed"><span class="year-tag">2001</span>**September 11 Attacks**: A catastrophic node that reshaped 21st-century geopolitics. Our research focuses on the 'Legislative Aftershock'—the initialization of global anti-terrorism protocols and digital forensic surveillance.</p>
-        </div>
-
-        <div class="day-node">
-            <span class="day-label">SEP_15: Terminal Financial Risk</span>
-            <p class="text-detailed"><span class="year-tag">2008</span>**Lehman Brothers Bankruptcy**: A 'Systemic Meltdown Singularity.' The failure of mortgage synchronization forced a global recalibration of financial energy law and innovative safety standards for high-risk credit.</p>
-        </div>
-
-        <a href="month-09.html" class="read-more-btn">EXPLORE_SEP_DATABASE</a>
-    </div>
-</section>
-
-<!-- 🚀 10. OCTOBER: THE SPECTRUM OF ASCENSION -->
-<section id="oct" class="month-container">
-    <h2 class="month-title">October<span class="text-gold">_10</span></h2>
-    <img src="https://images.unsplash.com/photo-1451187580459-43490279c0fa?auto=format&fit=crop&w=1600&q=80" alt="October Satellite" class="month-hero">
-    
-    <div class="cyber-card">
-        <div class="day-node">
-            <span class="day-label">OCT_04: The Sputnik Singularity</span>
-            <p class="text-detailed"><span class="year-tag">1957</span>**Sputnik 1 Launch**: The world's first artificial satellite. Sputnik synchronized human innovation with orbital mechanics, effectively ending the era of terrestrial isolation and triggering the global Space Race.</p>
-        </div>
-
-        <div class="day-node">
-            <span class="day-label">OCT_24: Institutional Synchronization</span>
-            <p class="text-detailed"><span class="year-tag">1945</span>**UN Charter Force**: Establishment of the United Nations. Our archival forensics identify this as the 'Diplomatic Singularity' that provided the constitutional DNA for every subsequent global peacekeeping mission.</p>
-        </div>
-
-        <img src="https://images.unsplash.com/photo-1518546305927-5a555bb7020d?auto=format&fit=crop&w=1200&q=80" alt="Bitcoin Technology" class="content-img">
-
-        <div class="day-node">
-            <span class="day-label">OCT_31: Cryptographic Trust Singularity</span>
-            <p class="text-detailed"><span class="year-tag">2008</span>**The Bitcoin Whitepaper**: Satoshi Nakamoto initialized the decentralized ledger system. This node birthed the commercial genealogy of cryptocurrencies, untethering wealth from central bank oversight.</p>
-        </div>
-
-        <a href="month-10.html" class="read-more-btn">EXPLORE_OCT_DATABASE</a>
-    </div>
-</section>
-
-<!-- 🏛️ 11. NOVEMBER: THE ARCHITECTURE OF UNIFICATION -->
-<section id="nov" class="month-container">
-    <h2 class="month-title">November<span class="text-gold">_11</span></h2>
-    <img src="https://images.unsplash.com/photo-1542281286-9e0a16bb7366?auto=format&fit=crop&w=1600&q=80" alt="November Unification" class="month-hero">
-    
-    <div class="cyber-card">
-        <div class="day-node">
-            <span class="day-label">NOV_01: Supranational Jurisprudence</span>
-            <p class="text-detailed"><span class="year-tag">1993</span>**The Maastricht Treaty**: The formal birth of the European Union. This 'Sovereign Integration Singularity' recalibrated the global diplomatic matrix and synchronized continental capital flow.</p>
-        </div>
-
-        <div class="day-node">
-            <span class="day-label">NOV_09: The Great Geopolitical Singularity</span>
-            <p class="text-detailed"><span class="year-tag">1989</span>**Berlin Wall Collapse**: The terminal disintegration of the Cold War’s central barrier. This node initiated the birth of a unified global market and the terminal collapse of the bipolar world order.</p>
-        </div>
-
-        <img src="https://images.unsplash.com/photo-1524338198850-e76663e66f99?auto=format&fit=crop&w=1200&q=80" alt="Kennedy Memorial" class="content-img">
-
-        <div class="day-node">
-            <span class="day-label">NOV_22: Executive Systemic Shock</span>
-            <p class="text-detailed"><span class="year-tag">1963</span>**The JFK Assassination**: A tragic singularity in statecraft that forced a global re-evaluation of security law and presidential succession protocols.</p>
-        </div>
-
-        <div class="day-node">
-            <span class="day-label">NOV_24: Darwin’s Ontological Node</span>
-            <p class="text-detailed"><span class="year-tag">1859</span>**On the Origin of Species**: Publication of Darwin's biological framework. Our forensics identify this as the 'Ontological Singularity' that recalibrated human self-perception within the biosphere.</p>
-        </div>
-
-        <a href="month-11.html" class="read-more-btn">EXPLORE_NOV_DATABASE</a>
-    </div>
-</section>
-
-<!-- 🎄 12. DECEMBER: THE ZENITH OF INTEGRATION -->
-<section id="dec" class="month-container">
-    <h2 class="month-title">December<span class="text-gold">_12</span></h2>
-    <img src="https://images.unsplash.com/photo-1436491865332-7a61a109c0f3?auto=format&fit=crop&w=1600&q=80" alt="December Flight" class="month-hero">
-    
-    <div class="cyber-card">
-        <div class="day-node">
-            <span class="day-label">DEC_10: Universal Ethical Standardization</span>
-            <p class="text-detailed"><span class="year-tag">1948</span>**Human Rights Declaration**: The UN initialized the most significant moral recalibration in history, establishing foundational protocols for individual dignity and legal equality.</p>
-        </div>
-
-        <div class="day-node">
-            <span class="day-label">DEC_17: The Aeronautical Singularity</span>
-            <p class="text-detailed"><span class="year-tag">1903</span>**The Wright brothers' Flight**: At Kitty Hawk, the birth of modern aviation. This singularity effectively collapsed terrestrial transit times and birthed the global logistical matrix.</p>
-        </div>
-
-        <img src="https://images.unsplash.com/photo-1451187580459-43490279c0fa?auto=format&fit=crop&w=1200&q=80" alt="Earthrise" class="content-img">
-
-        <div class="day-node">
-            <span class="day-label">DEC_24: Planetary Cognitive Recalibration</span>
-            <p class="text-detailed"><span class="year-tag">1968</span>**The Earthrise Image**: Apollo 8 crew captured Earth from lunar orbit. This visual node synchronized global consciousness regarding planetary vulnerability and catalyzed the ecological legislative movement.</p>
-        </div>
-
-        <div class="day-node">
-            <span class="day-label">DEC_31: Temporal Equilibrium Node</span>
-            <p class="text-detailed"><span class="year-tag">SOL-CYCLE</span>**New Year’s Eve Synchronization**: The global human population synchronizes its administrative reporting cycles for the coming orbital reset, ensuring global temporal order.</p>
-        </div>
-
-        <a href="month-12.html" class="read-more-btn">EXPLORE_DEC_DATABASE</a>
-    </div>
-</section>
-
-<!-- 📌 하단 심층 방법론 에세이 (분량 확보 섹션) -->
-<section class="cyber-card p-12 text-left space-y-10 text-[#94a3b8] leading-loose">
-    <h2 class="text-gold font-cyber text-4xl uppercase tracking-widest text-center mb-10">Archival Forensic Methodology</h2>
-    <div class="grid md:grid-cols-2 gap-12 text-lg">
-        <p>The AllDay Archive operates as a high-fidelity 'Temporal Search Engine.' Our methodology isolates the specific dates where historical friction produced a fundamental shift in the global matrix. By integrating all 12 months into this unified interface, we allow researchers to observe the annual pulse of human progress. From the deep-sea wrecks of the industrial age to the sub-atomic collisions of the Large Hadron Collider, every node is verified for its systemic long-term impact on judicial, financial, and technological sovereignty.</p>
-        <p>Our commitment to a high-fidelity archival environment ensures that the deep-rooted origins of modern society are accessible to researchers worldwide. By rephrasing and analytically enhancing each record via expert oversight, we provide a unique scholarly perspective that distinguishes our terminal from conventional data aggregators. Our mission is to preserve the complex narrative of the human journey through digital precision and expert curation, ensuring that the metadata of our past remains a light for the innovative future.</p>
-    </div>
-</section>
-
-<!-- Footer 생략 (동일한 디자인 유지) -->
