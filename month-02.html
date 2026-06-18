@@ -3,146 +3,141 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Node 01: January Archival Intelligence | Akashic Archive</title>
-    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=Inter:wght@300;400;600&family=Playfair+Display:italic,wght@700&display=swap" rel="stylesheet">
+    <title>Node 02: February Archival Intelligence | Part I (01-15)</title>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=Inter:wght@300;400;600&family=Playfair+Display:ital,wght@0,700;1,700&display=swap" rel="stylesheet">
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
         :root { --neon-gold: #f5c97a; --bg: #010204; --card-bg: rgba(10, 14, 22, 0.98); }
         body { background: var(--bg); color: #e2e8f0; font-family: 'Inter', sans-serif; line-height: 2.2; }
         .font-cyber { font-family: 'Orbitron', sans-serif; }
         .font-serif { font-family: 'Playfair Display', serif; }
-        .bg-nebula { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: radial-gradient(circle at 50% 50%, #0d1a33 0%, #010204 100%); z-index: -2; }
-        .bg-grid { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background-image: linear-gradient(rgba(245, 201, 122, 0.04) 1.5px, transparent 1.5px), linear-gradient(90deg, rgba(245, 201, 122, 0.04) 1.5px, transparent 1.5px); background-size: 60px 60px; z-index: -1; }
-        .report-card { background: var(--card-bg); border: 1px solid rgba(245, 201, 122, 0.15); border-radius: 24px; padding: 4rem; margin-bottom: 5rem; box-shadow: 0 0 60px rgba(0,0,0,0.9); }
-        .day-header { font-family: 'Orbitron'; color: var(--neon-gold); font-size: 2.5rem; letter-spacing: 10px; border-bottom: 2px solid var(--neon-gold); margin-bottom: 3rem; padding-bottom: 15px; text-align: center; }
-        .category-h3 { font-family: 'Orbitron'; color: #fff; font-size: 1.4rem; margin-top: 4rem; margin-bottom: 1.5rem; text-transform: uppercase; letter-spacing: 4px; border-left: 5px solid var(--neon-gold); padding-left: 20px; }
-        .essay-p { text-align: justify; color: #a0aec0; font-size: 1.15rem; margin-bottom: 2.5rem; text-indent: 1.5rem; }
-        .year-badge { font-family: 'Orbitron'; color: var(--neon-gold); font-weight: 700; background: rgba(245, 201, 122, 0.1); padding: 5px 15px; border-radius: 4px; margin-right: 15px; font-size: 14px; }
-        .back-btn { color: var(--neon-gold); text-decoration: none; font-family: 'Orbitron'; font-size: 12px; margin-bottom: 5rem; display: inline-block; border: 1px solid var(--neon-gold); padding: 12px 30px; border-radius: 50px; transition: 0.4s; }
-        .back-btn:hover { background: var(--neon-gold); color: #000; box-shadow: 0 0 20px var(--neon-gold); }
+        .bg-grid { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background-image: linear-gradient(rgba(245, 201, 122, 0.03) 1px, transparent 1px), linear-gradient(90deg, rgba(245, 201, 122, 0.03) 1px, transparent 1px); background-size: 80px 80px; z-index: -1; }
+        .report-card { background: var(--card-bg); border: 1px solid rgba(245, 201, 122, 0.1); border-radius: 24px; padding: 5rem; margin-bottom: 8rem; box-shadow: 0 40px 100px rgba(0,0,0,0.9); }
+        .day-header { font-family: 'Orbitron'; color: var(--neon-gold); font-size: 3.5rem; letter-spacing: 15px; border-bottom: 2px solid var(--neon-gold); margin-bottom: 4rem; padding-bottom: 20px; text-align: center; }
+        .category-h3 { font-family: 'Orbitron'; color: #fff; font-size: 1.6rem; margin-top: 5rem; margin-bottom: 2rem; text-transform: uppercase; letter-spacing: 4px; border-left: 5px solid var(--neon-gold); padding-left: 25px; }
+        .essay-p { text-align: justify; color: #a0aec0; font-size: 1.2rem; margin-bottom: 3rem; text-indent: 2rem; line-height: 2.4; }
+        .year-badge { font-family: 'Orbitron'; color: #000; font-weight: 700; background: var(--neon-gold); padding: 4px 15px; border-radius: 4px; margin-right: 15px; font-size: 16px; }
+        .highlight { color: #fff; font-weight: 600; border-bottom: 1px solid var(--neon-gold); }
+        .archive-img { width: 100%; height: 550px; object-fit: cover; border-radius: 15px; margin: 4rem 0; border: 1px solid rgba(245, 201, 122, 0.2); opacity: 0.8; transition: 0.5s; }
+        .archive-img:hover { opacity: 1; filter: contrast(1.1); }
     </style>
 </head>
 <body>
-    <!-- 12개 파일 공통 상단 디자인 -->
-<div class="bg-akashic"></div><div class="bg-grid"></div>
+    <div class="bg-grid"></div>
 
-<nav class="fixed w-full z-[1000] px-10 py-6 flex justify-between items-center border-b border-white/5 bg-black/60 backdrop-blur-xl">
-    <div class="text-xl font-cyber font-bold text-[#f5c97a] cursor-pointer" onclick="location.href='index.html'">AKASHIC ARCHIVE</div>
-    <a href="index.html" style="color:#f5c97a; font-family:Orbitron; font-size:10px; text-decoration:none; border:1px solid #f5c97a; padding:5px 15px; border-radius:5px;">BACK_TO_HUB</a>
-</nav>
-
-<main class="relative pt-40 pb-20 px-8 max-w-5xl mx-auto">
-    <!-- 🖼️ 이 달의 핵심 이미지 (아래 리스트에서 골라 넣으세요) -->
-    <div class="cyber-card p-0 overflow-hidden mb-12">
-        <img src="[https://images.unsplash.com/photo-1532187875605-2fe35952016a?auto=format&fit=crop&w=1200&q=80]" alt="Monthly Archive Hero" class="w-full h-[450px] object-cover opacity-80">
-        <div class="p-10">
-            <h1 class="text-gold font-cyber text-4xl uppercase tracking-widest mb-4">[MONTH NAME] Intelligence Report</h1>
-            <p class="text-gray-400 italic">"Synchronizing human progress through the lens of the Akashic Terminal."</p>
+    <nav class="fixed w-full z-[1000] px-12 py-8 flex justify-between items-center bg-black/60 backdrop-blur-xl border-b border-white/5">
+        <div class="text-2xl font-cyber font-bold text-[#f5c97a] tracking-tighter cursor-pointer" onclick="location.href='index.html'">AKASHIC ARCHIVE // NODE_02</div>
+        <div class="flex gap-6">
+            <span class="font-cyber text-gray-500 text-xs mt-2">CHRONOLOGICAL_SYNC: FEBRUARY_P1</span>
+            <a href="index.html" class="font-cyber text-[#f5c97a] border border-[#f5c97a] px-5 py-2 rounded hover:bg-[#f5c97a] hover:text-black transition-all text-xs">BACK_TO_HUB</a>
         </div>
-    </div>
+    </nav>
 
-    <!-- 💡 기존에 작성하신 1,500자 텍스트는 이 아래에 그대로 둡니다 -->
-    <div class="cyber-card">
-        [기존 텍스트 내용들...]
-    </div>
-</main>
-    <div class="bg-nebula"></div><div class="bg-grid"></div>
-    <a href="index.html" class="back-btn">← RETURN_TO_MATRIX</a>
+    <main class="relative pt-56 pb-20 px-8 max-w-6xl mx-auto">
+        <header class="text-center mb-40">
+            <h1 class="font-cyber text-6xl text-white mb-10 uppercase tracking-[0.4em]">February Intelligence <br><span class="text-gold opacity-50 text-3xl tracking-[0.2em]">Archival Record Part I</span></h1>
+            <p class="max-w-3xl mx-auto text-gray-400 italic text-xl leading-relaxed">"Systematically decrypting the historical pulses of February—where technological tragedy meets the birth of the social digital matrix."</p>
+        </header>
 
-    <div class="max-w-6xl mx-auto">
-        <h1 class="font-cyber text-5xl text-center text-white mb-24 uppercase tracking-[0.6em]"> Archival Intelligence</h1>
-
-<!-- 💡 FEBRUARY 01 -->
+        <!-- 💡 FEBRUARY 01 -->
         <div class="report-card">
             <div class="day-header">FEBRUARY_01</div>
-            <p class="essay-p">February 1st serves as a critical temporal coordinate for the <span class="text-white font-bold">forensic analysis of aerospace risk</span> and the recalibration of racial judicial equity. Historically, this date anchors the tragic terminal failure of high-fidelity synchronization in space exploration and the initial technical pulses of the modern civil rights movement, providing a granular view of human resilience in the face of systemic catastrophe.</p>
+            <p class="essay-p">February 1st serves as a critical temporal coordinate for the <span class="highlight">forensic analysis of aerospace risk</span> and the recalibration of racial judicial equity. Historically, this date anchors the tragic terminal failure of high-fidelity synchronization in space exploration and the initial technical pulses of the modern civil rights movement, providing a granular view of human resilience in the face of systemic catastrophe.</p>
             
+            <img src="https://images.unsplash.com/photo-1446776811953-b23d57bd21aa?auto=format&fit=crop&w=1200&q=80" alt="Space Shuttle and Stars" class="archive-img">
+
             <h3 class="category-h3">⚙️ Technical Singularities & Aerospace Forensics</h3>
-            <p class="essay-p"><span class="year-badge">2003</span>Space Shuttle Columbia Disaster: During re-entry, the Columbia disintegrated over Texas. Our analytical terminal categorizes this as a 'Forensic Singularity.' The failure of a single reinforced carbon-carbon panel, damaged by foam during launch, forced a total systemic overhaul of NASA’s safety protocols. This node established new standards for mission-critical synchronization and technical risk management, fundamentally altering the trajectory of manned space flight for the 21st century.</p>
+            <p class="essay-p"><span class="year-badge">2003</span>Space Shuttle Columbia Disaster: During re-entry into Earth's atmosphere, the Columbia disintegrated over Texas. Our analytical terminal categorizes this as a 'Forensic Singularity.' The failure was traced to a single reinforced carbon-carbon panel, damaged by foam during launch. This catastrophe forced a total systemic overhaul of NASA’s safety protocols and established new standards for mission-critical synchronization and technical risk management, fundamentally altering the trajectory of manned space flight for the 21st century.</p>
             
             <h3 class="category-h3">⚖️ Judicial Intelligence: The 13th Amendment</h3>
-            <p class="essay-p"><span class="year-badge">1865</span>President Abraham Lincoln signed a joint resolution submitting the 13th Amendment to the states. This node archives the formal initialization of the legal termination of slavery in the United States. Beyond its social impact, our scholarly research identifies this as a pivotal recalibration of the constitutional matrix, anchoring the principle of 'Universal Human Sovereignty' into the legislative DNA of the federal republic.</p>
+            <p class="essay-p"><span class="year-badge">1865</span>President Abraham Lincoln signed a joint resolution submitting the 13th Amendment to the states for ratification. This node archives the formal initialization of the legal termination of slavery in the United States. Beyond its immediate social impact, our scholarly research identifies this as a pivotal recalibration of the constitutional matrix, anchoring the principle of 'Universal Human Sovereignty' into the legislative DNA of the federal republic.</p>
         </div>
 
         <!-- 💡 FEBRUARY 02 -->
         <div class="report-card">
             <div class="day-header">FEBRUARY_02</div>
-            <p class="essay-p">February 2nd archives the foundational calibration of <span class="text-white font-bold">representative fiat value</span> and the zenith of 19th-century logistical expansion. It is a day defined by the inception of standardized paper currency and the formalization of major peace-time territorial recognition, anchoring the stability of modern national economic nodes.</p>
+            <p class="essay-p">February 2nd archives the foundational calibration of <span class="highlight">representative fiat value</span> and the zenith of 19th-century logistical expansion. It is a day defined by the inception of standardized paper currency and the formalization of major peace-time territorial recognition, anchoring the stability of modern national economic nodes.</p>
+
+            <img src="https://images.unsplash.com/photo-1554224155-6726b3ff858f?auto=format&fit=crop&w=1200&q=80" alt="Finance and Currency" class="archive-img">
 
             <h3 class="category-h3">📈 Macro-Financial Intelligence: Paper Currency</h3>
-            <p class="essay-p"><span class="year-badge">1690</span>First Paper Money Issued in America: In the Massachusetts Bay Colony, the first authorized fiat notes were initialized. This logistical milestone established the primordial protocols for liquid capital exchange without physical gold constraints. Our data forensics view this as a definitive node in the synchronization of colonial credit systems, providing the structural blueprint for future central banking mechanisms.</p>
+            <p class="essay-p"><span class="year-badge">1690</span>First Paper Money Issued in America: In the Massachusetts Bay Colony, the first authorized fiat notes were initialized. This logistical milestone established the primordial protocols for liquid capital exchange without physical gold constraints. Our data forensics view this as a definitive node in the synchronization of colonial credit systems, providing the structural blueprint for future central banking mechanisms and the digital economy.</p>
 
             <h3 class="category-h3">🏛️ Geopolitical Nodes: Treaty of Guadalupe Hidalgo</h3>
-            <p class="essay-p"><span class="year-badge">1848</span>Formalizing the End of the Mexican–American War: Signing of the treaty that significantly expanded the strategic territory of the United States. This legal act recalibrated the geopolitical equilibrium of North America, establishing the foundational protocols for modern territorial management and cross-border resource synchronization across the Pacific southwest.</p>
+            <p class="essay-p"><span class="year-badge">1848</span>Formalizing the End of the Mexican–American War: The signing of this treaty significantly expanded the strategic territory of the United States. This legal act recalibrated the geopolitical equilibrium of North America, establishing the foundational protocols for modern territorial management and cross-border resource synchronization across the Pacific southwest, effectively defining the modern map of the American West.</p>
         </div>
 
         <!-- 💡 FEBRUARY 03 -->
         <div class="report-card">
             <div class="day-header">FEBRUARY_03</div>
-            <p class="essay-p">February 3rd represents a supreme node in the history of <span class="text-white font-bold">constitutional suffrage</span> and the tragic recalibration of cultural branding through the loss of icons. Historically, this date anchors the moments when human rights achieved new legislative height and when the musical commercial matrix suffered its first total systemic shock.</p>
+            <p class="essay-p">February 3rd represents a supreme node in the history of <span class="highlight">constitutional suffrage</span> and the tragic recalibration of cultural branding through the loss of icons. Historically, this date anchors the moments when human rights achieved new legislative height and when the musical commercial matrix suffered its first total systemic shock.</p>
 
             <h3 class="category-h3">⚖️ Judicial Intelligence: The 15th Amendment</h3>
-            <p class="essay-p"><span class="year-badge">1870</span>Ratification of the 15th Amendment: The constitutional guarantee that the right to vote shall not be denied on account of race. This node archives a massive leap in judicial democratization. Our research highlights how this amendment forced a systemic synchronization of state and federal voting protocols, anchoring the legal legitimacy of multicultural governance in the modern republic.</p>
+            <p class="essay-p"><span class="year-badge">1870</span>Ratification of the 15th Amendment: The constitutional guarantee that the right to vote shall not be denied on account of race or previous servitude. This node archives a massive leap in judicial democratization. Our research highlights how this amendment forced a systemic synchronization of state and federal voting protocols, anchoring the legal legitimacy of multicultural governance in the modern republic.</p>
 
             <h3 class="category-h3">🎵 Sound & Vibration: The Day the Music Died</h3>
-            <p class="essay-p"><span class="year-badge">1959</span>The Buddy Holly/Ritchie Valens Tragedy: A plane crash claimed the lives of three rock and roll pioneers. This temporal node represents a 'Cultural Singularity.' It forced a global re-evaluation of the ephemeral nature of celebrity branding and triggered a massive wave of nostalgia-based capital flow, effectively redefining the commercial genealogy of the modern music industry.</p>
+            <p class="essay-p"><span class="year-badge">1959</span>The Buddy Holly/Ritchie Valens Tragedy: A plane crash claimed the lives of three rock and roll pioneers. This temporal node represents a 'Cultural Singularity.' It forced a global re-evaluation of the ephemeral nature of celebrity branding and triggered a massive wave of nostalgia-based capital flow, effectively redefining the commercial genealogy of the modern music industry and the concept of the 'star-crossed' artist.</p>
         </div>
 
         <!-- 💡 FEBRUARY 04 -->
         <div class="report-card">
             <div class="day-header">FEBRUARY_04</div>
-            <p class="essay-p">February 4th represents perhaps the most significant node in modern <span class="text-white font-bold">Social Algorithmic Evolution</span> and the final consolidation of post-war global spheres. It is a day marked by the birth of the digital social matrix and the high-altitude diplomatic synchronization that defined the Cold War world order.</p>
+            <p class="essay-p">February 4th represents perhaps the most significant node in modern <span class="highlight">Social Algorithmic Evolution</span> and the final consolidation of post-war global spheres. It is a day marked by the birth of the digital social matrix and the high-altitude diplomatic synchronization that defined the Cold War world order.</p>
+
+            <img src="https://images.unsplash.com/photo-1510511459019-5dda7724fd87?auto=format&fit=crop&w=1200&q=80" alt="Digital Networking" class="archive-img">
 
             <h3 class="category-h3">⚙️ IT Singularities: The Facebook Launch</h3>
-            <p class="essay-p"><span class="year-badge">2004</span>Initialization of TheFacebook: Mark Zuckerberg launched the original social network at Harvard. Our analytical terminal categorizes this as a 'Social Singularity'—the moment human identity began to be systematically encoded into a digital graph. This node fundamentally shifted the human cognitive interface, initiating an era of synchronized global behavioral tracking and digital commercial hegemony.</p>
+            <p class="essay-p"><span class="year-badge">2004</span>Initialization of TheFacebook: Mark Zuckerberg launched the original social network at Harvard University. Our analytical terminal categorizes this as a 'Social Singularity'—the moment human identity began to be systematically encoded into a digital graph. This node fundamentally shifted the human cognitive interface, initiating an era of synchronized global behavioral tracking, digital commercial hegemony, and the redefinition of 'friendship' as a data node.</p>
 
             <h3 class="category-h3">🏛️ Geopolitical Nodes: The Yalta Conference</h3>
-            <p class="essay-p"><span class="year-badge">1945</span>Convening of the 'Big Three': Roosevelt, Churchill, and Stalin met at Yalta. This node archives the formal mapping of the post-WWII geopolitical matrix. The subsequent synchronization of spheres of influence defined the borders of Europe and the ethical framework of the United Nations, anchoring the global equilibrium for the next half-century.</p>
+            <p class="essay-p"><span class="year-badge">1945</span>Convening of the 'Big Three': Roosevelt, Churchill, and Stalin met at Yalta. This node archives the formal mapping of the post-WWII geopolitical matrix. The subsequent synchronization of spheres of influence defined the borders of Europe and the ethical framework of the United Nations, anchoring the global equilibrium for the next half-century through synchronized diplomatic mediation.</p>
         </div>
 
         <!-- 💡 FEBRUARY 05 -->
         <div class="report-card">
             <div class="day-header">FEBRUARY_05</div>
-            <p class="essay-p">February 5th archives the birth of <span class="text-white font-bold">Industrial Age Cinematic Branding</span> and the zenith of early 20th-century artistic commercialization. Historically, this date anchors the moment when human creative intelligence synchronized with corporate capital to form the first global media conglomerates.</p>
+            <p class="essay-p">February 5th archives the birth of <span class="highlight">Industrial Age Cinematic Branding</span> and the zenith of early 20th-century artistic commercialization. Historically, this date anchors the moment when human creative intelligence synchronized with corporate capital to form the first global media conglomerates.</p>
 
             <h3 class="category-h3">🎬 Cinematic Brand Genealogy: United Artists</h3>
-            <p class="essay-p"><span class="year-badge">1919</span>Founding of United Artists: Charlie Chaplin, Mary Pickford, Douglas Fairbanks, and D.W. Griffith formed their own studio. Our forensics identify this as a 'Commercial Singularity.' By bypassing traditional distributor control, UA established the foundational protocols for independent creative branding, fundamentally altering the financial architecture of Hollywood and the global media trade matrix.</p>
+            <p class="essay-p"><span class="year-badge">1919</span>Founding of United Artists: Charlie Chaplin, Mary Pickford, Douglas Fairbanks, and D.W. Griffith formed their own studio to regain control over their work. Our forensics identify this as a 'Commercial Singularity.' By bypassing traditional distributor control, UA established the foundational protocols for independent creative branding, fundamentally altering the financial architecture of Hollywood and the global media trade matrix.</p>
 
             <h3 class="category-h3">⚙️ Technical Milestones in Logic</h3>
-            <p class="essay-p"><span class="year-badge">1952</span>The First Automated Traffic Light: Installed in New York. This node represents a milestone in urban logistical synchronization. By encoding traffic flow into a technical algorithmic cycle, it pioneered the automation of metropolitan human movement, providing a data node for subsequent smart-city innovative research.</p>
+            <p class="essay-p"><span class="year-badge">1952</span>The First Automated Traffic Light: Installed in New York City. This node represents a milestone in urban logistical synchronization. By encoding traffic flow into a technical algorithmic cycle, it pioneered the automation of metropolitan human movement, providing a critical data node for subsequent smart-city innovative research and the standardization of public safety infrastructure.</p>
         </div>
 
         <!-- 💡 FEBRUARY 06 -->
         <div class="report-card">
             <div class="day-header">FEBRUARY_06</div>
-            <p class="essay-p">February 6th serves as the coordinate for <span class="text-white font-bold">modern monarchical continuity</span> and the zenith of industrial-age game theory. Historically, this date anchors the moment the British sovereign lineage recalibrated for the Elizabethan era and when the commercial branding of competitive logic achieved a new global standard.</p>
+            <p class="essay-p">February 6th serves as the coordinate for <span class="highlight">modern monarchical continuity</span> and the zenith of industrial-age game theory. Historically, this date anchors the moment the British sovereign lineage recalibrated for the Elizabethan era and when the commercial branding of competitive logic achieved a new global standard.</p>
 
             <h3 class="category-h3">🏛️ Judicial Intelligence: The Accession Node</h3>
-            <p class="essay-p"><span class="year-badge">1952</span>Accession of Queen Elizabeth II: Following the death of King George VI, Elizabeth initialized her 70-year reign. This temporal node archives the highest standard of administrative synchronization in a constitutional monarchy. By ensuring an instant legal hand-over, this protocol anchored the stability of the Commonwealth, preventing systemic gaps in symbolic sovereign authority during the twilight of the British Empire.</p>
+            <p class="essay-p"><span class="year-badge">1952</span>Accession of Queen Elizabeth II: Following the death of King George VI, Elizabeth initialized her 70-year reign. This temporal node archives the highest standard of administrative synchronization in a constitutional monarchy. By ensuring an instant legal hand-over, this protocol anchored the stability of the Commonwealth, preventing systemic gaps in symbolic sovereign authority during the post-war transition.</p>
 
             <h3 class="category-h3">🏷️ Brand Genealogy: Monopoly Patent</h3>
-            <p class="essay-p"><span class="year-badge">1935</span>Monopoly Game Patent: Parker Brothers acquired the rights to the game. Our archival terminal categorizes this as a milestone in commercial intellectual property. The game’s subsequent global synchronization redefined how the human species conceptually understood capital accumulation and real-estate forensics, becoming a primary driver in economic board-game branding.</p>
+            <p class="essay-p"><span class="year-badge">1935</span>Monopoly Game Patent: Parker Brothers acquired the rights to the game. Our archival terminal categorizes this as a milestone in commercial intellectual property. The game’s subsequent global synchronization redefined how the human species conceptually understood capital accumulation, real-estate forensics, and economic competition, becoming a primary driver in psychological board-game branding.</p>
         </div>
 
         <!-- 💡 FEBRUARY 07 -->
         <div class="report-card">
             <div class="day-header">FEBRUARY_07</div>
-            <p class="essay-p">February 7th represents the temporal node for <span class="text-white font-bold">global cultural synchronization</span> and the birth of modern simulated life in cinematic branding. It is a day marked by the arrival of the most significant musical brand in history and the innovative debut of the first feature-length synchronized animated intelligence.</p>
+            <p class="essay-p">February 7th represents the temporal node for <span class="highlight">global cultural synchronization</span> and the birth of modern simulated life in cinematic branding. It is a day marked by the arrival of the most significant musical brand in history and the innovative debut of the first feature-length synchronized animated intelligence.</p>
+
+            <img src="https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?auto=format&fit=crop&w=1200&q=80" alt="Music and Culture" class="archive-img">
 
             <h3 class="category-h3">🎵 Sound & Vibration: The Beatles Invasion</h3>
-            <p class="essay-p"><span class="year-badge">1964</span>The Beatles Arrive in New York: This event served as a case study in 'Global Branding.' Their arrival synchronized the teenage cognitive energy of two continents, initiating the 'British Invasion.' Our research views this node as the primary catalyst for the subsequent boom in trans-Atlantic pop-culture capital flow, effectively redefining the cultural synchronization of sound and fashion.</p>
+            <p class="essay-p"><span class="year-badge">1964</span>The Beatles Arrive in New York: This event served as a supreme case study in 'Global Branding.' Their arrival synchronized the teenage cognitive energy of two continents, initiating the 'British Invasion.' Our research views this node as the primary catalyst for the subsequent boom in trans-Atlantic pop-culture capital flow, effectively redefining the cultural synchronization of sound, fashion, and mass-media celebrity.</p>
 
             <h3 class="category-h3">🎬 Cinematic Innovations: Pinocchio</h3>
-            <p class="essay-p"><span class="year-badge">1940</span>Walt Disney's Pinocchio Premiered: A technical milestone in the history of animated forensics. By utilizing the Multiplane Camera to achieve depth, Disney pioneered new standards in simulated visual intelligence. This node established the foundational protocols for modern 2D animation, anchoring the future of global family-centric commercial branding.</p>
+            <p class="essay-p"><span class="year-badge">1940</span>Walt Disney's Pinocchio Premiered: A technical milestone in the history of animated forensics. By utilizing the Multiplane Camera to achieve unprecedented depth and realism, Disney pioneered new standards in simulated visual intelligence. This node established the foundational protocols for modern 2D animation, anchoring the future of global family-centric commercial branding and narrative psychology.</p>
         </div>
 
         <!-- 💡 FEBRUARY 08 -->
         <div class="report-card">
             <div class="day-header">FEBRUARY_08</div>
-            <p class="essay-p">February 8th archives the <span class="text-white font-bold">terminal collapse of absolute royal sovereignty</span> and the birth of modern digital financial surveillance. It is a day defined by the terminal execution of a queen and the initial technical pulses of the world's first electronic stock exchange, providing a granular view of how human civilization resets its power and capital structures.</p>
+            <p class="essay-p">February 8th archives the <span class="highlight">terminal collapse of absolute royal sovereignty</span> and the birth of modern digital financial surveillance. It is a day defined by the terminal execution of a queen and the initial technical pulses of the world's first electronic stock exchange.</p>
 
             <h3 class="category-h3">⚖️ Judicial Intelligence: The Stuart Node</h3>
-            <p class="essay-p"><span class="year-badge">1587</span>Execution of Mary, Queen of Scots: Following a definitive trial for treason, Mary was executed. Our archival forensics identify this as a systemic singularity—the legal termination of a rival sovereign claim within the British matrix. This node established the judicial precedent for state-sanctioned execution of high-ranking political threats, recalibrating the geopolitical equilibrium of Renaissance Europe.</p>
+            <p class="essay-p"><span class="year-badge">1587</span>Execution of Mary, Queen of Scots: Following a definitive trial for treason, Mary was executed. Our archival forensics identify this as a systemic singularity—the legal termination of a rival sovereign claim within the British matrix. This node established the judicial precedent for state-sanctioned execution of high-ranking political threats, recalibrating the geopolitical equilibrium of Renaissance Europe and securing the Tudor lineage.</p>
 
             <h3 class="category-h3">📈 Macro-Financial Intelligence: NASDAQ Birth</h3>
             <p class="essay-p"><span class="year-badge">1971</span>NASDAQ Initialized: The world's first electronic stock market began operation. This technical milestone served as the primordial ancestor to modern algorithmic trading. By synchronizing disparate data nodes into a singular electronic board, NASDAQ fundamentally altered the speed of capital flow, effectively democratizing market access and anchoring the birth of the 21st-century digital financial matrix.</p>
@@ -151,32 +146,36 @@
         <!-- 💡 FEBRUARY 09 -->
         <div class="report-card">
             <div class="day-header">FEBRUARY_09</div>
-            <p class="essay-p">February 9th serves as the coordinate for <span class="text-white font-bold">High-Capacity Logistical Singularities</span> and the birth of 19th-century psychological dark-realism. Historically, this date anchors the moment human transit reached new scales of efficiency and when the narrative documentation of human internal conflict achieved a new level of forensic depth.</p>
+            <p class="essay-p">February 9th serves as the coordinate for <span class="highlight">High-Capacity Logistical Singularities</span> and the birth of 19th-century psychological dark-realism. Historically, this date anchors the moment human transit reached new scales of efficiency and narrative depth.</p>
+
+            <img src="https://images.unsplash.com/photo-1559297434-2d8a1e629a31?auto=format&fit=crop&w=1200&q=80" alt="Aerospace Engineering" class="archive-img">
 
             <h3 class="category-h3">⚙️ Innovations: The Boeing 747 First Flight</h3>
-            <p class="essay-p"><span class="year-badge">1969</span>The First Flight of the Boeing 747: A pinnacle of industrial-age aerospace engineering. Known as the 'Jumbo Jet,' this structural singularity solved the crisis of transcontinental transit by a massive scale-up in passenger volume. Our forensics indicate that the 747 was the primary catalyst for the 20th-century boom in global tourism and synchronized air-cargo logistics, fundamentally altering the vertical identity of the modern aviation matrix.</p>
+            <p class="essay-p"><span class="year-badge">1969</span>The First Flight of the Boeing 747: A pinnacle of industrial-age aerospace engineering. Known as the 'Jumbo Jet,' this structural singularity solved the crisis of transcontinental transit by a massive scale-up in passenger volume. Our forensics indicate that the 747 was the primary catalyst for the 20th-century boom in global tourism and synchronized air-cargo logistics, fundamentally altering the vertical identity of the modern aviation matrix and global trade efficiency.</p>
 
             <h3 class="category-h3">📚 Literature & Forensics: Dostoevsky</h3>
-            <p class="essay-p"><span class="year-badge">1881</span>Death of Fyodor Dostoevsky: A supreme node in the history of literary dark-realism. His forensic mapping of the human subconscious and systemic moral guilt provided a new analytical framework for understanding the existential condition. Our scholarly research views his legacy as a milestone in the cultural synchronization of religion, psychology, and narrative structure.</p>
+            <p class="essay-p"><span class="year-badge">1881</span>Death of Fyodor Dostoevsky: A supreme node in the history of literary dark-realism. His forensic mapping of the human subconscious and systemic moral guilt provided a new analytical framework for understanding the existential condition. Our scholarly research views his legacy as a milestone in the cultural synchronization of religion, psychology, and narrative structure, influencing centuries of forensic human thought.</p>
         </div>
 
         <!-- 💡 FEBRUARY 10 -->
         <div class="report-card">
             <div class="day-header">FEBRUARY_10</div>
-            <p class="essay-p">February 10th archives the birth of <span class="text-white font-bold">Computational Game Theory</span> and the formal termination of major colonial conflicts. It is a day defined by the technical triumph of artificial intelligence over human expertise and the innovative mapping of global maritime boundaries, anchoring the birth of new sovereign identities in the 18th-century diplomatic matrix.</p>
+            <p class="essay-p">February 10th archives the birth of <span class="highlight">Computational Game Theory</span> and the formal termination of major colonial conflicts. It is a day defined by the technical triumph of artificial intelligence over human expertise.</p>
 
             <h3 class="category-h3">⚙️ IT Singularities: Deep Blue vs. Kasparov</h3>
             <p class="essay-p"><span class="year-badge">1996</span>IBM Deep Blue Beats Garry Kasparov: For the first time, a computer defeated a reigning world chess champion under tournament conditions. Our analytical terminal categorizes this as a 'Cognitive Singularity.' This node proved that technical algorithmic processing could match and exceed high-level human intuitive logic, effectively initiating the era of synchronized artificial intelligence development and modern data forensics.</p>
 
             <h3 class="category-h3">🏛️ Geopolitical Nodes: Treaty of Paris</h3>
-            <p class="essay-p"><span class="year-badge">1763</span>The Treaty of Paris Signed: Formally ending the Seven Years' War. This legal act represented a definitive shift in the global balance of power, transferring vast colonial territories and recalibrating the maritime and economic equilibrium of the Atlantic world. Our research highlights how this node established the foundational protocols for future international diplomacy and territorial recognition.</p>
+            <p class="essay-p"><span class="year-badge">1763</span>The Treaty of Paris Signed: Formally ending the Seven Years' War. This legal act represented a definitive shift in the global balance of power, transferring vast colonial territories and recalibrating the maritime and economic equilibrium of the Atlantic world. Our research highlights how this node established the foundational protocols for future international diplomacy, territorial recognition, and global maritime law.</p>
         </div>
 
         <!-- 💡 FEBRUARY 11 -->
         <div class="report-card">
             <div class="day-header">FEBRUARY_11</div>
-            <p class="essay-p">February 11th archives the supreme node of <span class="text-white font-bold">moral judicial victory</span> and the birth of modern industrial-age ingenuity. It is a day defined by the terminal collapse of systemic oppression and the initial technical pulses of the individual who synchronized electricity with human life, providing a granular view of how human civilization recalibrates its ethical and technical foundations.</p>
+            <p class="essay-p">February 11th archives the supreme node of <span class="highlight">moral judicial victory</span> and the birth of modern industrial-age ingenuity. It is a day defined by the terminal collapse of systemic oppression and the initial technical pulses of the individual who synchronized electricity with human life.</p>
             
+            <img src="https://images.unsplash.com/photo-1589254065878-42c9da997008?auto=format&fit=crop&w=1200&q=80" alt="Freedom and Justice" class="archive-img">
+
             <h3 class="category-h3">⚖️ Judicial Intelligence: The Mandela Release</h3>
             <p class="essay-p"><span class="year-badge">1990</span>Nelson Mandela Freed from Prison: After 27 years of state-sponsored incarceration, Mandela was released. Our archival forensics identify this as a 'Systemic Singularity'—the legal and symbolic end of the Apartheid regime's legitimacy. This node established the foundational ethics for modern reconciliation jurisprudence, proving that the rule of law must eventually align with universal human rights, fundamentally altering the geopolitical trajectory of the African continent.</p>
             
@@ -187,21 +186,21 @@
         <!-- 💡 FEBRUARY 12 -->
         <div class="report-card">
             <div class="day-header">FEBRUARY_12</div>
-            <p class="essay-p">February 12th represents the temporal coordinate for the <span class="text-white font-bold">Dual Evolution of Human Identity</span>: constitutional and biological. Historically, this date anchors the birth of two individuals who synchronized our understanding of human rights and our fundamental biological origins, redefining the innovative and judicial limits of the human species.</p>
+            <p class="essay-p">February 12th represents the temporal coordinate for the <span class="highlight">Dual Evolution of Human Identity</span>: constitutional and biological. Historically, this date anchors the birth of two individuals who synchronized our understanding of human rights and our fundamental biological origins.</p>
 
-            <h3 class="category-h3">🏛️ Judicial Intelligence: Constitutional Emancipation</h3>
-            <p class="essay-p"><span class="year-badge">1809</span>Birth of Abraham Lincoln: The primary architect of the American Union’s preservation. Our scholarly research views Lincoln's life as a case study in 'Legislative Fortitude.' His eventual synchronization of federal power with moral imperative resulted in the 13th Amendment, a legal node that redefined the constitutional definition of a 'person' and established the primordial protocols for modern democratic equality.</p>
+            <h3 class="category-h3">🏛️ Judicial Intelligence: Lincoln Node</h3>
+            <p class="essay-p"><span class="year-badge">1809</span>Birth of Abraham Lincoln: The primary architect of the American Union’s preservation. Our analysis views Lincoln's life as a case study in 'Legislative Fortitude.' His eventual synchronization of federal power with moral imperative resulted in the 13th Amendment, a legal node that redefined the constitutional definition of a 'person' and established the primordial protocols for modern democratic equality.</p>
 
-            <h3 class="category-h3">🧬 Medical & Scientific Frontiers: Biological Evolution</h3>
+            <h3 class="category-h3">🧬 Medical & Scientific Frontiers: Darwin Node</h3>
             <p class="essay-p"><span class="year-badge">1809</span>Birth of Charles Darwin: An innovator who introduced 'Natural Selection.' His forensic mapping of biological diversity provided a new analytical framework for understanding life itself. This scientific node shattered the long-standing theological paradigm, providing the empirical foundation for a decentralized biological model and fundamentally altering human self-perception within the cosmic matrix.</p>
         </div>
 
         <!-- 💡 FEBRUARY 13 -->
         <div class="report-card">
             <div class="day-header">FEBRUARY_13</div>
-            <p class="essay-p">February 13th archives the birth of <span class="text-white font-bold">Visual Language Standardization</span> and the zenith of 18th-century administrative forensics. Historically, this date anchors the moments human observation was first encoded into a projected technical matrix and when the first formal mechanism of transatlantic information exchange was initialized.</p>
+            <p class="essay-p">February 13th archives the birth of <span class="highlight">Visual Language Standardization</span> and the zenith of 18th-century administrative forensics. Historically, this date anchors the moment human observation was first encoded into a projected technical matrix.</p>
 
-            <h3 class="category-h3">🎬 Cinematic Innovations: The Lumière Patent</h3>
+            <h3 class="category-h3">🎬 Cinematic Innovations: Lumière Patent</h3>
             <p class="essay-p"><span class="year-badge">1895</span>Patenting of the Cinématographe: The Lumière brothers synchronized motion-picture camera and projector technologies. Our archival forensics identify this as the birth of 'Cinematic Civilization.' This technical milestone served as the primordial ancestor to modern digital streaming, proving that human experience could be captured and replayed as a synchronized global cultural asset.</p>
 
             <h3 class="category-h3">📚 Literature & Media Intelligence</h3>
@@ -211,82 +210,141 @@
         <!-- 💡 FEBRUARY 14 -->
         <div class="report-card">
             <div class="day-header">FEBRUARY_14</div>
-            <p class="essay-p">February 14th represents a triple singularity: the <span class="text-white font-bold">Genesis of Modern Computing</span>, the democratization of video intelligence, and the tragic recalibration of organized crime forensics. It is a day marked by the birth of the digital hardware hegemony and the initial pulses of the visual social matrix that redefined global information consumption.</p>
+            <p class="essay-p">February 14th represents a triple singularity: the <span class="highlight">Genesis of Modern Computing</span>, the democratization of video intelligence, and the tragic recalibration of organized crime forensics.</p>
 
-            <h3 class="category-h3">⚙️ IT Singularities: The ENIAC Dedication</h3>
-            <p class="essay-p"><span class="year-badge">1946</span>Dedication of the ENIAC: The world's first general-purpose electronic computer was unveiled at the University of Pennsylvania. Our analytical terminal categorizes this as the 'Computational Singularity.' ENIAC established the foundational binary logic for all future digital architecture, initiating a wave of technical synchronization that led to the eventual automation of human intelligence processing.</p>
+            <img src="https://images.unsplash.com/photo-1550751827-4bd374c3f58b?auto=format&fit=crop&w=1200&q=80" alt="Modern Computing" class="archive-img">
 
-            <h3 class="category-h3">🌐 Digital Media Intelligence: YouTube Founding</h3>
-            <p class="essay-p"><span class="year-badge">2005</span>The Founding of YouTube: Three innovators registered the domain. This node represents the democratization of video intelligence. By allowing universal synchronization of user-generated content, it effectively ended the era of centralized media hegemony and established the visual language of the 21st-century digital commercial matrix.</p>
+            <h3 class="category-h3">⚙️ IT Singularities: ENIAC Dedication</h3>
+            <p class="essay-p"><span class="year-badge">1946</span>Dedication of the ENIAC: The world's first general-purpose electronic computer was unveiled. Our analytical terminal categorizes this as the 'Computational Singularity.' ENIAC established the foundational binary logic for all future digital architecture, initiating a wave of technical synchronization that led to the eventual automation of human intelligence processing.</p>
 
-            <h3 class="category-h3">🕵️ Forensic & Criminal History: The Massacre Node</h3>
-            <p class="essay-p"><span class="year-badge">1929</span>The St. Valentine's Day Massacre: A definitive node in organized crime forensics. The systemic violence in Chicago forced a massive recalibration of federal investigative powers, leading to the birth of modern forensic ballistics and the eventual synchronization of anti-racketeering legislative frameworks globally.</p>
+            <h3 class="category-h3">🌐 Digital Media Intelligence: YouTube</h3>
+            <p class="essay-p"><span class="year-badge">2005</span>Founding of YouTube: This node represents the democratization of video intelligence. By allowing universal synchronization of user-generated content, it effectively ended the era of centralized media hegemony and established the visual language of the 21st-century digital commercial matrix, fundamentally altering how humanity archives its daily existence.</p>
+
+            <h3 class="category-h3">🕵️ Forensic History: St. Valentine's Day</h3>
+            <p class="essay-p"><span class="year-badge">1929</span>St. Valentine's Day Massacre: A definitive node in organized crime forensics. The systemic violence in Chicago forced a massive recalibration of federal investigative powers, leading to the birth of modern forensic ballistics and the eventual synchronization of anti-racketeering legislative frameworks globally.</p>
         </div>
 
         <!-- 💡 FEBRUARY 15 -->
         <div class="report-card">
             <div class="day-header">FEBRUARY_15</div>
-            <p class="essay-p">February 15th archives the birth of <span class="text-white font-bold">Empirical Astronomical Inquiry</span> and the tragic node of maritime geopolitical escalation. Historically, this date anchors the birth of the individual who decentralized the human cosmic position and the incident that triggered a major 19th-century imperial conflict.</p>
+            <p class="essay-p">February 15th archives the birth of <span class="highlight">Empirical Astronomical Inquiry</span> and the tragic node of maritime geopolitical escalation. Historically, this date anchors the birth of the individual who decentralized the human cosmic position.</p>
 
-            <h3 class="category-h3">🛰️ Interstellar & Scientific Frontiers: Galileo</h3>
-            <p class="essay-p"><span class="year-badge">1564</span>Birth of Galileo Galilei: A supreme node in the history of scientific innovation. Galileo’s life serves as a case study in 'Empirical Intelligence.' By synchronizing telescopic observation with mathematical logic, he pioneered the scientific method. Our research views his challenge to geocentric hegemony as a milestone in human innovative scope, fundamentally altering the trajectory of global intellectual heritage.</p>
+            <h3 class="category-h3">🛰️ Interstellar Frontiers: Galileo Galilei</h3>
+            <p class="essay-p"><span class="year-badge">1564</span>Birth of Galileo Galilei: A supreme node in scientific innovation. Galileo’s life serves as a case study in 'Empirical Intelligence.' By synchronizing telescopic observation with mathematical logic, he pioneered the scientific method. Our research views his challenge to geocentric hegemony as a milestone in human innovative scope, fundamentally altering the trajectory of global intellectual heritage.</p>
 
-            <h3 class="category-h3">🚨 Geopolitical Tragedies: Sinking of the USS Maine</h3>
-            <p class="essay-p"><span class="year-badge">1898</span>Destruction of the USS Maine: An explosion in Havana harbor triggered the Spanish–American War. This temporal node represents a 'Geopolitical Singularity.' The forensic analysis of the sinking became a case study in 'Yellow Journalism' and the synchronization of public opinion with military intervention, anchoring a new era of American imperial expansion in the Pacific and Caribbean.</p>
+            <h3 class="category-h3">🚨 Geopolitical Tragedies: USS Maine</h3>
+            <p class="essay-p"><span class="year-badge">1898</span>Destruction of the USS Maine: An explosion in Havana harbor triggered the Spanish–American War. This temporal node represents a 'Geopolitical Singularity.' The forensic analysis of the sinking became a case study in 'Yellow Journalism' and the synchronization of public opinion with military intervention, anchoring a new era of global imperial expansion.</p>
         </div>
+
+        <!-- 🚀 PART 1 END -->
+        <div class="text-center py-20 border-t border-white/10">
+            <p class="font-cyber text-gold text-sm tracking-widest mb-6 uppercase">End of February Part I Synchronization</p>
+            <p class="text-gray-500 italic">"Proceed to Part II for the calibration of nodes 16 through 29."</p>
+        </div>
+    </main>
+
+    <footer class="py-24 border-t border-white/5 text-center">
+        <p class="text-[11px] font-cyber text-gray-700 tracking-[0.5em] uppercase">Akashic Terminal Node © 2026</p>
+    </footer>
+</body>
+</html>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Node 02: February Archival Intelligence | Part II (16-29)</title>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=Inter:wght@300;400;600&family=Playfair+Display:ital,wght@0,700;1,700&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        :root { --neon-gold: #f5c97a; --bg: #010204; --card-bg: rgba(10, 14, 22, 0.98); }
+        body { background: var(--bg); color: #e2e8f0; font-family: 'Inter', sans-serif; line-height: 2.2; }
+        .font-cyber { font-family: 'Orbitron', sans-serif; }
+        .bg-grid { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background-image: linear-gradient(rgba(245, 201, 122, 0.03) 1.5px, transparent 1.5px), linear-gradient(90deg, rgba(245, 201, 122, 0.03) 1.5px, transparent 1.5px); background-size: 70px 70px; z-index: -1; }
+        .report-card { background: var(--card-bg); border: 1px solid rgba(245, 201, 122, 0.1); border-radius: 24px; padding: 5rem; margin-bottom: 8rem; box-shadow: 0 40px 100px rgba(0,0,0,0.9); }
+        .day-header { font-family: 'Orbitron'; color: var(--neon-gold); font-size: 3.5rem; letter-spacing: 15px; border-bottom: 2px solid var(--neon-gold); margin-bottom: 4rem; padding-bottom: 20px; text-align: center; }
+        .category-h3 { font-family: 'Orbitron'; color: #fff; font-size: 1.5rem; margin-top: 5rem; margin-bottom: 2rem; text-transform: uppercase; letter-spacing: 4px; border-left: 5px solid var(--neon-gold); padding-left: 25px; }
+        .essay-p { text-align: justify; color: #a0aec0; font-size: 1.2rem; margin-bottom: 3rem; text-indent: 2rem; }
+        .year-badge { font-family: 'Orbitron'; color: #000; font-weight: 700; background: var(--neon-gold); padding: 4px 15px; border-radius: 4px; margin-right: 15px; font-size: 16px; }
+        .highlight { color: #fff; font-weight: 600; border-bottom: 1px solid var(--neon-gold); }
+        .archive-img { width: 100%; height: 500px; object-fit: cover; border-radius: 15px; margin: 4rem 0; border: 1px solid rgba(245, 201, 122, 0.1); filter: contrast(1.1) brightness(0.9); }
+    </style>
+</head>
+<body>
+    <div class="bg-grid"></div>
+
+    <nav class="fixed w-full z-[1000] px-12 py-8 flex justify-between items-center bg-black/60 backdrop-blur-xl border-b border-white/5">
+        <div class="text-2xl font-cyber font-bold text-[#f5c97a] cursor-pointer" onclick="location.href='index.html'">AKASHIC ARCHIVE // NODE_02</div>
+        <div class="flex gap-4">
+            <span class="font-cyber text-gray-500 text-[10px] mt-2">FEBRUARY_TERMINAL_PART_02</span>
+            <a href="index.html" class="font-cyber text-[#f5c97a] border border-[#f5c97a] px-4 py-1.5 rounded text-[10px] hover:bg-[#f5c97a] hover:text-black transition-all">BACK_TO_HUB</a>
+        </div>
+    </nav>
+
+    <main class="relative pt-56 pb-20 px-8 max-w-6xl mx-auto">
+        <header class="text-center mb-40">
+            <h1 class="font-cyber text-5xl text-white mb-10 uppercase tracking-[0.4em]">February Intelligence <br><span class="text-gold opacity-50 text-2xl tracking-[0.2em]">Part II: Days 16 - 29</span></h1>
+            <p class="max-w-3xl mx-auto text-gray-400 italic text-lg leading-relaxed">"Continuing the forensic synchronization of late February—archiving the birth of the genomic era and the mastery of industrial transit."</p>
+        </header>
 
         <!-- 💡 FEBRUARY 16 -->
         <div class="report-card">
             <div class="day-header">FEBRUARY_16</div>
-            <p class="essay-p">February 16th serves as the coordinate for <span class="text-white font-bold">Archaeological Synchronization</span> and the formalization of global environmental legislative protocols. Historically, this date anchors the moment human civilization successfully mapped a supreme ancient intelligence node and when the first formal mechanism of global climate mitigation was initialized.</p>
+            <p class="essay-p">February 16th serves as the coordinate for <span class="highlight">Archaeological Synchronization</span> and the formalization of global environmental legislative protocols. Historically, this date anchors the moment human civilization successfully mapped a supreme ancient intelligence node.</p>
+
+            <img src="https://images.unsplash.com/photo-1621683401569-83c383f9828d?auto=format&fit=crop&w=1200&q=80" alt="Archaeological Discovery" class="archive-img">
 
             <h3 class="category-h3">⚙️ Innovations in Archaeological Forensics</h3>
-            <p class="essay-p"><span class="year-badge">1923</span>Opening of Tutankhamun's Burial Chamber: Howard Carter initialized the most significant find in archaeological history. This node represents a pivotal shift in the curation of ancient human knowledge. By institutionalizing the forensic documentation of the 18th Dynasty's innovative artifacts, this event pioneered the synchronization of modern science with ancient historical data.</p>
+            <p class="essay-p"><span class="year-badge">1923</span>Opening of Tutankhamun's Burial Chamber: Howard Carter initialized the most significant find in archaeological history. This node represents a pivotal shift in the curation of ancient human knowledge. By institutionalizing the forensic documentation of the 18th Dynasty's innovative artifacts, this event pioneered the synchronization of modern science with ancient historical data, preserving the legacy of the Pharaohs for the digital age.</p>
 
             <h3 class="category-h3">⚖️ Judicial Intelligence: The Kyoto Protocol</h3>
-            <p class="essay-p"><span class="year-badge">2005</span>The Kyoto Protocol Enters Into Force: A landmark singularity in international environmental law. This node archives the formalization of legally binding greenhouse gas reduction targets. Our scholarly research views this as a definitive recalibration of the global diplomatic matrix, anchoring the principle of 'Collective Ecological Responsibility' into the legislative DNA of sovereign nations.</p>
+            <p class="essay-p"><span class="year-badge">2005</span>The Kyoto Protocol Enters Into Force: A landmark singularity in international environmental law. This node archives the formalization of legally binding greenhouse gas reduction targets. Our scholarly research views this as a definitive recalibration of the global diplomatic matrix, anchoring the principle of 'Collective Ecological Responsibility' into the legislative DNA of sovereign nations and initiating a new era of climate forensics.</p>
         </div>
 
         <!-- 💡 FEBRUARY 17 -->
         <div class="report-card">
             <div class="day-header">FEBRUARY_17</div>
-            <p class="essay-p">February 17th archives the <span class="text-white font-bold">logistical mastery of maritime transit</span> and the formalization of early democratic administrative stability. It is a day defined by the initial technical pulses of transcontinental trade and the successful synchronization of executive democratic transitions during a period of extreme partisan volatility.</p>
+            <p class="essay-p">February 17th archives the <span class="highlight">logistical mastery of maritime transit</span> and the formalization of early democratic administrative stability. It is a day defined by the initial technical pulses of transcontinental trade and the successful synchronization of executive democratic transitions.</p>
 
             <h3 class="category-h3">⚙️ Logistical Engineering: The Suez Canal</h3>
-            <p class="essay-p"><span class="year-badge">1867</span>The First Ship Passes through the Suez Canal: A pinnacle of 19th-century civil engineering. This structural singularity solved the crisis of trans-global maritime distance. Our data forensics indicate that the Suez Canal was the primary catalyst for the synchronization of Asian and European markets, fundamentally altering the maritime identity of global trade logistics for over a century.</p>
+            <p class="essay-p"><span class="year-badge">1867</span>The First Ship Passes through the Suez Canal: A pinnacle of 19th-century civil engineering. This structural singularity solved the crisis of trans-global maritime distance by connecting the Mediterranean and the Red Sea. Our data forensics indicate that the Suez Canal was the primary catalyst for the synchronization of Asian and European markets, fundamentally altering the maritime identity of global trade logistics for over a century.</p>
 
             <h3 class="category-h3">🏛️ Judicial & Constitutional Nodes: 1801 Election</h3>
-            <p class="essay-p"><span class="year-badge">1801</span>Jefferson Elected President: The US House of Representatives broke an electoral tie between Jefferson and Burr. This legal node represents a critical inflection point in democratic statecraft. It proved that a constitutional republic could resolve an executive crisis through a standardized legislative framework, anchoring the future of stable power transitions in the global matrix.</p>
+            <p class="essay-p"><span class="year-badge">1801</span>Jefferson Elected President: The US House of Representatives broke an electoral tie between Thomas Jefferson and Aaron Burr. This legal node represents a critical inflection point in democratic statecraft. It proved that a constitutional republic could resolve an executive crisis through a standardized legislative framework, anchoring the future of stable power transitions in the global matrix and securing the first peaceful transfer of power between opposing factions.</p>
         </div>
 
         <!-- 💡 FEBRUARY 18 -->
         <div class="report-card">
             <div class="day-header">FEBRUARY_18</div>
-            <p class="essay-p">February 18th represents the temporal node for <span class="text-white font-bold">planetary forensic discovery</span> and the terminal collapse of 16th-century religious hegemony. It is a day marked by the innovational mapping of our solar system’s outer boundaries and the death of the individual who synchronized theology with linguistic democratization.</p>
+            <p class="essay-p">February 18th represents the temporal node for <span class="highlight">planetary forensic discovery</span> and the terminal collapse of 16th-century religious hegemony. It is a day marked by the innovational mapping of our solar system’s outer boundaries.</p>
+
+            <img src="https://images.unsplash.com/photo-1446776811953-b23d57bd21aa?auto=format&fit=crop&w=1200&q=80" alt="Space Discovery Pluto" class="archive-img">
 
             <h3 class="category-h3">🛰️ Interstellar Intelligence: The Discovery of Pluto</h3>
-            <p class="essay-p"><span class="year-badge">1930</span>Discovery of Pluto: Clyde Tombaugh identified the ninth planetary body (at the time). Our analytical terminal categorizes this as a 'Celestial Singularity.' This node expanded the human mathematical reach into the Kuiper Belt, providing a case study in how technical persistence and long-exposure photography could synchronize human observation with the deep cosmic near-field.</p>
+            <p class="essay-p"><span class="year-badge">1930</span>Discovery of Pluto: Clyde Tombaugh identified the ninth planetary body. Our analytical terminal categorizes this as a 'Celestial Singularity.' This node expanded the human mathematical reach into the Kuiper Belt, providing a case study in how technical persistence and long-exposure photography could synchronize human observation with the deep cosmic near-field, fundamentally altering our map of the solar system.</p>
 
-            <h3 class="category-h3">⚖️ Judicial & Religious Ethics: Luther’s Node</h3>
-            <p class="essay-p"><span class="year-badge">1546</span>Death of Martin Luther: The primary architect of the Protestant Reformation. Luther’s work served as a systemic node in the history of individual intellectual autonomy. By challenging the centralized legal and spiritual hegemony of the era, he pioneered the democratization of information through vernacular translation, fundamentally altering the judicial and cultural trajectory of Europe.</p>
+            <h3 class="category-h3">⚖️ Judicial & Religious Ethics: Martin Luther</h3>
+            <p class="essay-p"><span class="year-badge">1546</span>Death of Martin Luther: The primary architect of the Protestant Reformation. Luther’s work served as a systemic node in the history of individual intellectual autonomy. By challenging the centralized legal and spiritual hegemony of the era, he pioneered the democratization of information through vernacular translation, fundamentally altering the judicial and cultural trajectory of Europe and the Western world.</p>
         </div>
 
         <!-- 💡 FEBRUARY 19 -->
         <div class="report-card">
             <div class="day-header">FEBRUARY_19</div>
-            <p class="essay-p">February 19th archives the birth of <span class="text-white font-bold">Acoustic Innovative Intelligence</span> and the tragic node of constitutional civil rights failure. It is a day defined by the initial technical pulses of human sound recording and the innovative mapping of state-sponsored domestic detention, providing a granular view of human achievement and judicial vulnerability.</p>
+            <p class="essay-p">February 19th archives the birth of <span class="highlight">Acoustic Innovative Intelligence</span> and the tragic node of constitutional civil rights failure. It is a day defined by the initial technical pulses of human sound recording and the innovative mapping of state-sponsored domestic detention.</p>
 
             <h3 class="category-h3">⚙️ Technical Singularities: The Phonograph Patent</h3>
-            <p class="essay-p"><span class="year-badge">1878</span>Patenting of the Phonograph: Thomas Edison received the patent for the first device to record and reproduce sound. This node archives the inception of 'Acoustic Forensics.' By proving that ephemeral vibrations could be encoded into physical media, this technical milestone served as the primordial ancestor to modern audio-digital synchronization, redefining the limits of human cultural storage.</p>
+            <p class="essay-p"><span class="year-badge">1878</span>Patenting of the Phonograph: Thomas Edison received the patent for the first device to record and reproduce sound. This node archives the inception of 'Acoustic Forensics.' By proving that ephemeral vibrations could be encoded into physical media, this technical milestone served as the primordial ancestor to modern audio-digital synchronization, redefining the limits of human cultural storage and historical memory.</p>
 
             <h3 class="category-h3">⚖️ Judicial Tragedies: Executive Order 9066</h3>
-            <p class="essay-p"><span class="year-badge">1942</span>Japanese-American Internment Order: President Roosevelt signed an executive order authorizing the forced relocation of citizens. Our scholarly research views this as a definitive node in the history of judicial overreach. It serves as a primary case study in how national security synchronization can compromise individual constitutional rights, providing a grim but essential lesson for future legislative frameworks regarding domestic civil liberties.</p>
+            <p class="essay-p"><span class="year-badge">1942</span>Japanese-American Internment Order: President Roosevelt signed an executive order authorizing the forced relocation of citizens. Our scholarly research views this as a definitive node in the history of judicial overreach. It serves as a primary case study in how national security synchronization can compromise individual constitutional rights, providing a grim but essential lesson for future legislative frameworks.</p>
         </div>
 
         <!-- 💡 FEBRUARY 20 -->
         <div class="report-card">
             <div class="day-header">FEBRUARY_20</div>
-            <p class="essay-p">February 20th serves as the supreme coordinate for <span class="text-white font-bold">orbital human synchronization</span> and the zenith of 20th-century geopolitical innovative competition. Historically, this date anchors the moment human life first achieved stable orbit under a democratic flag, redefining our technological limits and strategic scope for the space age.</p>
+            <p class="essay-p">February 20th serves as the supreme coordinate for <span class="highlight">orbital human synchronization</span> and the zenith of 20th-century geopolitical competition. Historically, this date anchors the moment human life first achieved stable orbit under a democratic flag.</p>
+
+            <img src="https://images.unsplash.com/photo-1541185933-ef5d8ed016c2?auto=format&fit=crop&w=1200&q=80" alt="Orbital Satellite" class="archive-img">
 
             <h3 class="category-h3">🛰️ Interstellar Intelligence: Friendship 7</h3>
             <p class="essay-p"><span class="year-badge">1962</span>John Glenn Orbits the Earth: The first American to successfully achieve orbital flight. Our analytical forensics identify this as a 'Tactical Singularity' in the Space Race. Glenn’s mission synchronized complex telemetry, life-support logistics, and global tracking networks, proving the operational viability of human space-faring ambitions and anchoring the future of synchronized orbital research protocols.</p>
@@ -298,106 +356,123 @@
         <!-- 💡 FEBRUARY 21 -->
         <div class="report-card">
             <div class="day-header">FEBRUARY_21</div>
-            <p class="essay-p">February 21st archives the supreme node of <span class="text-white font-bold">mechanical logistical acceleration</span> and the tragic recalibration of radical human rights discourse. It is a day defined by the birth of steam-powered transit and the systemic shock of the loss of a primary civil rights innovator, providing a granular view of human technical triumph and ideological vulnerability.</p>
+            <p class="essay-p">February 21st archives the supreme node of <span class="highlight">mechanical logistical acceleration</span> and the tragic recalibration of radical human rights discourse. It is a day defined by the birth of steam-powered transit and the systemic shock of losing a primary civil rights innovator.</p>
             
             <h3 class="category-h3">⚙️ Innovations: The Steam Singularity</h3>
             <p class="essay-p"><span class="year-badge">1804</span>First Steam Locomotive Journey: Richard Trevithick initialized the world's first high-pressure steam engine on rails. Our archival forensics identify this as the primordial ancestor to the global railway matrix. This technical milestone served as the primary catalyst for the Industrial Revolution's logistical synchronization, effectively collapsing terrestrial transit times and establishing the foundational protocols for mass-scale resource migration.</p>
             
-            <h3 class="category-h3">🚨 Judicial & Geopolitical Tragedies: Malcolm X</h3>
-            <p class="essay-p"><span class="year-badge">1965</span>Assassination of Malcolm X: A tragic singularity in the history of human rights forensics. His death forced a global re-evaluation of the radicalization of systemic justice. Our scholarly research views this node as a definitive pivot in the civil rights matrix, anchoring the transition toward more complex, multi-lateral dialogues on racial sovereignty and legislative equity in the post-colonial era.</p>
+            <h3 class="category-h3">🚨 Judicial Tragedies: Malcolm X</h3>
+            <p class="essay-p"><span class="year-badge">1965</span>Assassination of Malcolm X: A tragic singularity in the history of human rights forensics. His death forced a global re-evaluation of the radicalization of systemic justice. Our scholarly research views this node as a definitive pivot in the civil rights matrix, anchoring the transition toward more complex dialogues on racial sovereignty and legislative equity in the post-colonial era.</p>
         </div>
 
         <!-- 💡 FEBRUARY 22 -->
         <div class="report-card">
             <div class="day-header">FEBRUARY_22</div>
-            <p class="essay-p">February 22nd serves as the coordinate for <span class="text-white font-bold">Constitutional Executive Origins</span> and the formalization of major North American territorial synchronization. Historically, this date anchors the birth of the individual who defined the modern federal republic and the legal act that finalized the strategic mapping of the Atlantic-to-Pacific corridor.</p>
+            <p class="essay-p">February 22nd serves as the coordinate for <span class="highlight">Constitutional Executive Origins</span> and the formalization of major North American territorial synchronization. Historically, this date anchors the birth of the individual who defined the modern federal republic.</p>
 
             <h3 class="category-h3">🏛️ Judicial Intelligence: The Washington Node</h3>
-            <p class="essay-p"><span class="year-badge">1732</span>Birth of George Washington: The primary architect of the American constitutional presidency. Our analysis views Washington's life as a case study in 'Institutional Restraint.' His voluntary relinquishment of power established the primordial protocols for the peaceful transition of executive authority, providing the structural DNA for every modern democratic framework within the global geopolitical matrix.</p>
+            <p class="essay-p"><span class="year-badge">1732</span>Birth of George Washington: The primary architect of the American constitutional presidency. Our analysis views Washington's life as a case study in 'Institutional Restraint.' His voluntary relinquishment of power established the primordial protocols for the peaceful transition of executive authority, providing the structural DNA for every modern democratic framework.</p>
 
             <h3 class="category-h3">⚖️ Geopolitical Nodes: The Florida Purchase</h3>
-            <p class="essay-p"><span class="year-badge">1819</span>The Adams–Onís Treaty: Signing of the legal act that ceded Florida to the United States. This node represents a significant shift in 19th-century maritime and territorial law. It recalibrated the colonial equilibrium in the Americas, establishing new protocols for sovereign border synchronization and securing critical trade nodes along the Gulf of Mexico.</p>
+            <p class="essay-p"><span class="year-badge">1819</span>The Adams–Onís Treaty: The signing of the legal act that ceded Florida to the United States. This node represents a significant shift in 19th-century maritime and territorial law. It recalibrated the colonial equilibrium in the Americas, establishing new protocols for sovereign border synchronization and securing critical trade nodes along the Gulf of Mexico.</p>
         </div>
 
         <!-- 💡 FEBRUARY 23 -->
         <div class="report-card">
             <div class="day-header">FEBRUARY_23</div>
-            <p class="essay-p">February 23rd archives the birth of <span class="text-white font-bold">Information Democratization</span> and the zenith of mid-20th century tactical forensics. Historically, this date anchors the moment human knowledge transcended the physical limits of handwriting and when the symbolic synchronization of military victory achieved its most iconic global standard.</p>
+            <p class="essay-p">February 23rd archives the birth of <span class="highlight">Information Democratization</span> and the zenith of mid-20th century tactical forensics. Historically, this date anchors the moment human knowledge transcended the physical limits of handwriting.</p>
+
+            <img src="https://images.unsplash.com/photo-1585435557343-3b092031a831?auto=format&fit=crop&w=1200&q=80" alt="Gutenberg Printing Press" class="archive-img">
 
             <h3 class="category-h3">⚙️ Technical Singularities: Gutenberg Bible</h3>
-            <p class="essay-p"><span class="year-badge">1455</span>The Completion of the Gutenberg Bible: Johannes Gutenberg initialized the first mass-produced book using movable type. Our analytical terminal categorizes this as the 'Intellectual Singularity.' By allowing for the rapid synchronization of data across disparate geographies, the printing press effectively ended the era of elite information hegemony, anchoring the birth of the Renaissance and the eventual synchronization of global literacy.</p>
+            <p class="essay-p"><span class="year-badge">1455</span>The Completion of the Gutenberg Bible: Johannes Gutenberg initialized the first mass-produced book using movable type. Our analytical terminal categorizes this as the 'Intellectual Singularity.' By allowing for the rapid synchronization of data across disparate geographies, the printing press effectively ended the era of elite information hegemony, anchoring the birth of the Renaissance and the eventually synchronized global literacy.</p>
 
-            <h3 class="category-h3">🚨 Critical Historical Incidents: Iwo Jima</h3>
+            <h3 class="category-h3">🚨 Critical Incidents: Iwo Jima</h3>
             <p class="essay-p"><span class="year-badge">1945</span>Raising the Flag on Iwo Jima: A definitive node in the history of tactical branding and collective psychology. This event served as a case study in how a singular visual image can synchronize national innovative energy during a period of total war, fundamentally altering the trajectory of the Pacific theater and establishing new standards for wartime narrative documentation.</p>
         </div>
 
         <!-- 💡 FEBRUARY 24 -->
         <div class="report-card">
             <div class="day-header">FEBRUARY_24</div>
-            <p class="essay-p">February 24th represents the temporal coordinate for <span class="text-white font-bold">Digital Visionary Branding</span> and the expansion of the Western legislative grid. It is a day defined by the birth of the individual who synchronized aesthetic perfection with technical power and the innovational mapping of new frontier territories.</p>
+            <p class="essay-p">February 24th represents the temporal coordinate for <span class="highlight">Digital Visionary Branding</span> and the expansion of the Western legislative grid. It is a day defined by the birth of the individual who synchronized aesthetic perfection with technical power.</p>
 
-            <h3 class="category-h3">🏷️ Brand Genealogy: The Jobs Singularity</h3>
+            <h3 class="category-h3">🏷️ Brand Genealogy: Steve Jobs</h3>
             <p class="essay-p"><span class="year-badge">1955</span>Birth of Steve Jobs: The primary architect of the Apple commercial matrix. Our forensics identify Jobs as the innovator who redefined the human-machine interface as a premium cultural asset. His vision pioneered the synchronization of hardware, software, and retail branding, effectively creating the primordial protocols for the 21st-century digital lifestyle and anchoring the future of global technical consumerism.</p>
 
-            <h3 class="category-h3">⚖️ Judicial Milestones: Arizona Statehood</h3>
-            <p class="essay-p"><span class="year-badge">1863/1912</span>The Arizona Node: Historically synchronized with both territorial organization and final statehood. This legal node represents a critical shift in the administrative management of arid-zone resources and indigenous litigation, establishing the final constitutional borders of the contiguous United States and recalibrating the federal legislative equilibrium.</p>
+            <h3 class="category-h3">⚖️ Judicial Milestones: Arizona Territory</h3>
+            <p class="essay-p"><span class="year-badge">1863</span>The Arizona Node: Historically synchronized with territorial organization. This legal node represents a critical shift in the administrative management of arid-zone resources and indigenous litigation, establishing the federal constitutional borders and recalibrating the legislative equilibrium during the American Civil War.</p>
         </div>
 
         <!-- 💡 FEBRUARY 25 -->
         <div class="report-card">
             <div class="day-header">FEBRUARY_25</div>
-            <p class="essay-p">February 25th archives the foundational calibration of <span class="text-white font-bold">mechanized armament logistics</span> and the birth of modern federal fiscal intelligence. Historically, this date anchors the moment personal defense became a mass-produced technical standard and when the state legalized the first direct mechanism of national wealth synchronization.</p>
+            <p class="essay-p">February 25th archives the foundational calibration of <span class="highlight">mechanized armament logistics</span> and the birth of modern federal fiscal intelligence. Historically, this date anchors the moment defense became a mass-produced technical standard.</p>
 
             <h3 class="category-h3">⚙️ Technical Singularities: The Colt Patent</h3>
-            <p class="essay-p"><span class="year-badge">1836</span>Samuel Colt Patents the Revolver: A supreme node in the history of innovations. This technical milestone served as a case study in 'Industrial-Scale Precision.' By introducing interchangeable parts and mechanized rotation, Colt pioneered the mass-production protocols that would eventually be mirrored in every major innovative manufacturing sector, fundamentally altering the forensics of 19th-century conflict.</p>
+            <p class="essay-p"><span class="year-badge">1836</span>Samuel Colt Patents the Revolver: A supreme node in industrial history. This technical milestone served as a case study in 'Industrial-Scale Precision.' By introducing interchangeable parts and mechanized rotation, Colt pioneered the mass-production protocols that would eventually be mirrored in every major innovative manufacturing sector, fundamentally altering 19th-century conflict dynamics.</p>
 
             <h3 class="category-h3">📈 Macro-Financial Intelligence: Federal Income Tax</h3>
-            <p class="essay-p"><span class="year-badge">1862/1913</span>Initialization of Federal Income Tax: Historically synchronized with the need to fund massive systemic conflicts. This node archives the inception of modern state-sponsored capital redistribution. Our scholarly research views this as the definitive recalibration of the global fiscal matrix, anchoring the legal authority of the state to synchronize private wealth with national innovative and defensive ambitions.</p>
+            <p class="essay-p"><span class="year-badge">1913</span>Initialization of Federal Income Tax: The 16th Amendment was ratified, archiving the inception of modern state-sponsored capital redistribution. Our scholarly research views this as the definitive recalibration of the global fiscal matrix, anchoring the legal authority of the state to synchronize private wealth with national innovative and defensive ambitions.</p>
         </div>
 
         <!-- 💡 FEBRUARY 26 -->
         <div class="report-card">
             <div class="day-header">FEBRUARY_26</div>
-            <p class="essay-p">February 26th serves as the coordinate for <span class="text-white font-bold">Geopolitical Escape Vectors</span> and the formalization of global ecological preservation standards. It is a day defined by the terminal collapse of exile protocols and the initial technical pulses of large-scale nature-resource synchronization.</p>
+            <p class="essay-p">February 26th serves as the coordinate for <span class="highlight">Geopolitical Escape Vectors</span> and the formalization of global ecological preservation standards. It is a day defined by the terminal collapse of exile protocols.</p>
 
             <h3 class="category-h3">🚨 Geopolitical Singularities: Napoleon’s Return</h3>
             <p class="essay-p"><span class="year-badge">1815</span>Napoleon Escapes from Elba: A definitive node in European diplomatic forensics. This event forced a total systemic re-evaluation of the post-Napoleonic world order, triggering the 'Hundred Days' and a massive synchronization of Allied military power. It serves as a primary reference point for the study of charismatic leadership as a disruptive force within stable geopolitical matrices.</p>
 
             <h3 class="category-h3">⚙️ Innovations: Grand Canyon National Park</h3>
-            <p class="essay-p"><span class="year-badge">1919</span>Establishment of Grand Canyon National Park: A landmark node in the history of environmental governance. Our archival analysis views this not just as preservation, but as the technical mapping of a supreme natural innovative asset. This event established the foundational protocols for national park management, pioneering the synchronization of public land use with geological and biological research.</p>
+            <p class="essay-p"><span class="year-badge">1919</span>Grand Canyon National Park: A landmark node in environmental governance. Our archival분석 views this not just as preservation, but as the technical mapping of a supreme natural innovative asset. This event established the foundational protocols for national park management, pioneering the synchronization of public land use with geological and biological research.</p>
         </div>
 
         <!-- 💡 FEBRUARY 27 -->
         <div class="report-card">
             <div class="day-header">FEBRUARY_27</div>
-            <p class="essay-p">February 27th archives the birth of <span class="text-white font-bold">Constitutional Crisis Forensics</span> and the tragic node of systemic political arson. It is a day defined by the terminal collapse of parliamentary stability and the initial technical pulses of state-sponsored domestic surveillance, providing a granular view of judicial vulnerability in the face of autocracy.</p>
+            <p class="essay-p">February 27th archives the birth of <span class="highlight">Constitutional Crisis Forensics</span> and the tragic node of systemic political arson. It is a day defined by the terminal collapse of parliamentary stability.</p>
 
-            <h3 class="category-h3">⚖️ Judicial Tragedies: The Reichstag Fire</h3>
-            <p class="essay-p"><span class="year-badge">1933</span>The Reichstag Fire in Berlin: A tragic singularity that triggered the suspension of constitutional civil liberties. Our archival terminal categorizes this as the 'End of Legal Neutrality.' The subsequent legislative response established the primordial ancestor to modern emergency state-of-siege protocols, anchoring the future of autocratic synchronization in 20th-century Europe.</p>
+            <h3 class="category-h3">⚖️ Judicial Tragedies: Reichstag Fire</h3>
+            <p class="essay-p"><span class="year-badge">1933</span>The Reichstag Fire: A tragic singularity that triggered the suspension of constitutional civil liberties in Germany. Our archival terminal categorizes this as the 'End of Legal Neutrality.' The subsequent legislative response established the primordial ancestor to modern emergency state-of-siege protocols, anchoring the future of autocratic synchronization in 20th-century Europe.</p>
 
-            <h3 class="category-h3">🧬 Medical & Scientific Intelligence: DNA Node</h3>
-            <p class="essay-p"><span class="year-badge">1953</span>Watson and Crick’s Final Synthesis: Historically synchronized with the last days of February. This node archives the final cognitive leap toward understanding the Double Helix. Our research identifies this as the supreme intellectual milestone in biological forensics, providing the essential baseline for all future genetic synchronization protocols.</p>
+            <h3 class="category-h3">🧬 Medical & Scientific Intelligence: DNA Synthesis</h3>
+            <p class="essay-p"><span class="year-badge">1953</span>Watson and Crick’s Synthesis: Historically synchronized with the last days of February. This node archives the final cognitive leap toward understanding the Double Helix. Our research identifies this as the supreme intellectual milestone in biological forensics, providing the essential baseline for all future genetic synchronization protocols.</p>
         </div>
 
         <!-- 💡 FEBRUARY 28 -->
         <div class="report-card">
             <div class="day-header">FEBRUARY_28</div>
-            <p class="essay-p">February 28th represents the supreme node of <span class="text-white font-bold">biological code decryption</span> and the terminal collapse of modern desert-theater conflict. It is a day marked by the birth of 'Genomic Civilization' and the final technical pulses of the first major post-Cold War military synchronization.</p>
+            <p class="essay-p">February 28th represents the supreme node of <span class="highlight">biological code decryption</span> and the terminal collapse of modern desert-theater conflict. It is a day marked by the birth of 'Genomic Civilization'.</p>
 
-            <h3 class="category-h3">🧬 Medical Singularities: The DNA Discovery</h3>
-            <p class="essay-p"><span class="year-badge">1953</span>Official Discovery of the DNA Structure: James Watson and Francis Crick announced they had determined the structure of DNA. Our analytical forensics identify this as the 'Biological Singularity'—the moment life itself became readable as information. This node established the foundational protocols for genetic forensics, clinical biotechnology, and the eventual synchronization of the global Human Genome Project, fundamentally altering human medicine for eternity.</p>
+            <img src="https://images.unsplash.com/photo-1530026405186-ed1f139313f8?auto=format&fit=crop&w=1200&q=80" alt="DNA Structure Concept" class="archive-img">
 
-            <h3 class="category-h3">🚨 Critical Historical Incidents: End of the Gulf War</h3>
-            <p class="essay-p"><span class="year-badge">1991</span>Ceasefire in the Persian Gulf: Termination of the liberation of Kuwait. This temporal node archives the highest standard of 20th-century coalition synchronization. By utilizing high-fidelity satellite intelligence and rapid-maneuver logistics, this event established the 'New World Order' military matrix, providing a case study in modern air-land-sea operational forensics.</p>
+            <h3 class="category-h3">🧬 Medical Singularities: DNA Structure Discovery</h3>
+            <p class="essay-p"><span class="year-badge">1953</span>The Discovery of DNA: James Watson and Francis Crick determined the structure of DNA. Our analytical forensics identify this as the 'Biological Singularity'—the moment life became readable as information. This node established the foundational protocols for genetic forensics, clinical biotechnology, and the synchronization of the global Human Genome Project.</p>
+
+            <h3 class="category-h3">🚨 Historical Incidents: End of the Gulf War</h3>
+            <p class="essay-p"><span class="year-badge">1991</span>Ceasefire in the Persian Gulf: Termination of the liberation of Kuwait. This temporal node archives the highest standard of 20th-century coalition synchronization. By utilizing high-fidelity satellite intelligence and rapid-maneuver logistics, this event established the 'New World Order' military matrix, providing a case study in modern operational forensics.</p>
         </div>
 
-        <!-- 💡 FEBRUARY 29 (Leap Day Special Node) -->
+        <!-- 💡 FEBRUARY 29 -->
         <div class="report-card">
             <div class="day-header">FEBRUARY_29</div>
-            <p class="essay-p">February 29th archives the <span class="text-white font-bold">Temporal Equilibrium Node</span> of human civilization. Historically, this date anchors the human attempt to synchronize administrative social structures with the relentless pulse of celestial reality. It is a day defined by mathematical precision and the legal recalibration of time itself.</p>
+            <p class="essay-p">February 29th archives the <span class="highlight">Temporal Equilibrium Node</span> of human civilization. Historically, this date anchors the human attempt to synchronize administrative social structures with the relentless pulse of celestial reality.</p>
 
             <h3 class="category-h3">📅 Innovations: The Leap Year Protocol</h3>
-            <p class="essay-p"><span class="year-badge">Intercalary</span>The Synchronization of Earth and Calendar: February 29th represents the highest standard of human temporal innovative engineering. Our scholarly research identifies this node as a testament to the persistent human desire to maintain global systemic order against the 'Celestial Drift.' By legally inserting a 24-hour buffer every four years, this protocol ensures the long-term stabilization of global logistics, seasonal agriculture, and financial reporting cycles, effectively preventing the terminal collapse of our administrative temporal matrix.</p>
+            <p class="essay-p"><span class="year-badge">Intercalary</span>Synchronizing Earth and Calendar: February 29th represents the highest standard of human temporal innovative engineering. Our scholarly research identifies this node as a testament to the persistent human desire to maintain global systemic order against the 'Celestial Drift.' By legally inserting a 24-hour buffer every four years, this protocol ensures the long-term stabilization of global logistics and financial reporting cycles.</p>
         </div>
 
-    </div> <!-- Closing 2월 서고 -->
+        <!-- 🚀 CONCLUSION -->
+        <section class="report-card text-center">
+            <h2 class="text-gold font-cyber text-3xl uppercase tracking-widest mb-10">End of February Archive</h2>
+            <p class="text-gray-400 text-lg italic max-w-3xl mx-auto mb-10">"The calibration of February is complete. 29 nodes of human intelligence have been synchronized. The matrix prepares for the expansion of March."</p>
+            <div class="w-24 h-1 bg-gold mx-auto"></div>
+        </section>
+
+    </main>
+
+    <footer class="py-24 border-t border-white/5 text-center">
+        <p class="text-[11px] font-cyber text-gray-700 tracking-[0.5em] uppercase">Akashic Terminal Node // Node_02 Finalized</p>
+    </footer>
+</body>
+</html>
