@@ -3,498 +3,510 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Node 03: March Archival Intelligence | Part I (01-15)</title>
+    <title>Node 03: March Archival Intelligence | Complete Node</title>
     <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Inter:wght@300;400;600&family=Playfair+Display:ital,wght@0,700;1,700&display=swap" rel="stylesheet">
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
         :root { --neon-gold: #f5c97a; --bg: #010204; --card-bg: rgba(10, 14, 22, 0.98); }
-        body { background: var(--bg); color: #e2e8f0; font-family: 'Inter', sans-serif; line-height: 2.2; }
+        body { background: var(--bg); color: #e2e8f0; font-family: 'Inter', sans-serif; line-height: 1.8; }
+        @media (min-width: 768px) {
+            body { line-height: 2.2; }
+        }
         .font-cyber { font-family: 'Orbitron', sans-serif; }
-        .bg-grid { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background-image: linear-gradient(rgba(245, 201, 122, 0.03) 1px, transparent 1px), linear-gradient(90deg, rgba(245, 201, 122, 0.03) 1px, transparent 1px); background-size: 80px 80px; z-index: -1; }
-        .report-card { background: var(--card-bg); border: 1px solid rgba(245, 201, 122, 0.1); border-radius: 24px; padding: 5rem; margin-bottom: 8rem; box-shadow: 0 40px 100px rgba(0,0,0,0.9); }
-        .day-header { font-family: 'Orbitron'; color: var(--neon-gold); font-size: 3.5rem; letter-spacing: 15px; border-bottom: 2px solid var(--neon-gold); margin-bottom: 4rem; padding-bottom: 20px; text-align: center; }
-        .category-h3 { font-family: 'Orbitron'; color: #fff; font-size: 1.6rem; margin-top: 5rem; margin-bottom: 2rem; text-transform: uppercase; letter-spacing: 4px; border-left: 5px solid var(--neon-gold); padding-left: 25px; }
-        .essay-p { text-align: justify; color: #a0aec0; font-size: 1.2rem; margin-bottom: 3rem; text-indent: 2rem; line-height: 2.4; }
-        .year-badge { font-family: 'Orbitron'; color: #000; font-weight: 700; background: var(--neon-gold); padding: 4px 15px; border-radius: 4px; margin-right: 15px; font-size: 16px; }
+        .font-serif { font-family: 'Playfair Display', serif; }
+        .bg-grid { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background-image: linear-gradient(rgba(245, 201, 122, 0.02) 1.5px, transparent 1.5px), linear-gradient(90deg, rgba(245, 201, 122, 0.02) 1.5px, transparent 1.5px); background-size: 50px 50px; z-index: -1; }
+        
+        /* Responsive Card Styles */
+        .report-card { 
+            background: var(--card-bg); 
+            border: 1px solid rgba(245, 201, 122, 0.1); 
+            border-radius: 24px; 
+            box-shadow: 0 40px 100px rgba(0,0,0,0.9); 
+            transition: border-color 0.4s; 
+        }
+        .report-card:hover { border-color: var(--neon-gold); }
+        
+        .day-header { 
+            font-family: 'Orbitron'; 
+            color: var(--neon-gold); 
+            border-bottom: 2px solid var(--neon-gold); 
+            text-align: center; 
+        }
+        .category-h3 { 
+            font-family: 'Orbitron'; 
+            color: #fff; 
+            text-transform: uppercase; 
+            border-left: 5px solid var(--neon-gold); 
+        }
+        .essay-p { text-align: justify; color: #a0aec0; }
+        .year-badge { font-family: 'Orbitron'; color: #000; font-weight: 700; background: var(--neon-gold); padding: 2px 10px; border-radius: 4px; margin-right: 12px; font-size: 14px; display: inline-block; }
         .highlight { color: #fff; font-weight: 600; border-bottom: 1px solid var(--neon-gold); }
-        .archive-img { width: 100%; height: 550px; object-fit: cover; border-radius: 15px; margin: 4rem 0; border: 1px solid rgba(245, 201, 122, 0.2); filter: brightness(0.85); transition: 0.5s; }
-        .archive-img:hover { filter: brightness(1) contrast(1.05); }
+        
+        /* Advanced Image Fallback CSS */
+        .archive-img { 
+            width: 100%; 
+            object-fit: cover; 
+            border-radius: 15px; 
+            border: 1px solid rgba(245, 201, 122, 0.1); 
+            background-color: #0b0f19;
+            position: relative;
+            display: block;
+        }
+        .archive-img::before {
+            content: "ARCHIVE IMAGE TEMPORARILY OFFLINE";
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background-color: #0d111a;
+            color: var(--neon-gold);
+            font-family: 'Orbitron';
+            font-size: 0.8rem;
+            letter-spacing: 2px;
+            border: 1px dashed rgba(245, 201, 122, 0.3);
+            border-radius: 15px;
+            text-align: center;
+            padding: 20px;
+        }
     </style>
 </head>
 <body>
     <div class="bg-grid"></div>
 
-    <nav class="fixed w-full z-[1000] px-12 py-8 flex justify-between items-center bg-black/60 backdrop-blur-xl border-b border-white/5">
-        <div class="text-2xl font-cyber font-bold text-[#f5c97a] tracking-tighter cursor-pointer" onclick="location.href='index.html'">AKASHIC ARCHIVE // NODE_03</div>
-        <div class="flex gap-6">
-            <span class="font-cyber text-gray-500 text-xs mt-2">CHRONOLOGICAL_SYNC: MARCH_P1</span>
-            <a href="index.html" class="font-cyber text-[#f5c97a] border border-[#f5c97a] px-5 py-2 rounded hover:bg-[#f5c97a] hover:text-black transition-all text-xs">BACK_TO_HUB</a>
+    <!-- Responsive Top Navigation Bar -->
+    <nav class="fixed w-full z-[1000] px-4 py-4 md:px-12 md:py-6 flex flex-col sm:flex-row justify-between items-center gap-4 bg-black/80 backdrop-blur-xl border-b border-white/5">
+        <div class="text-lg sm:text-xl md:text-2xl font-cyber font-bold text-[#f5c97a] tracking-tight sm:tracking-tighter cursor-pointer text-center sm:text-left" onclick="location.href='index.html'">
+            AKASHIC ARCHIVE // NODE_03
+        </div>
+        <div class="flex items-center gap-4 sm:gap-6">
+            <span class="hidden md:inline font-cyber text-gray-500 text-xs">CHRONOLOGICAL_SYNC: MARCH_FULL</span>
+            <a href="index.html" class="font-cyber text-[#f5c97a] border border-[#f5c97a] px-3 py-1.5 sm:px-5 sm:py-2 rounded hover:bg-[#f5c97a] hover:text-black transition-all text-[10px] sm:text-xs">
+                RETURN_TO_HUB
+            </a>
         </div>
     </nav>
 
-    <main class="relative pt-56 pb-20 px-8 max-w-6xl mx-auto">
-        <header class="text-center mb-40">
-            <h1 class="font-cyber text-6xl text-white mb-10 uppercase tracking-[0.4em]">March Intelligence <br><span class="text-gold opacity-50 text-3xl tracking-[0.2em]">Archival Record Part I</span></h1>
-            <p class="max-w-3xl mx-auto text-gray-400 italic text-xl leading-relaxed">"Synchronizing the supreme nodes of national sovereignty, constitutional genesis, and the birth of the global communication matrix."</p>
+    <main class="relative pt-36 sm:pt-44 md:pt-56 pb-20 px-4 sm:px-8 max-w-6xl mx-auto">
+        <header class="text-center mb-20 md:mb-40">
+            <h1 class="font-cyber text-2xl sm:text-4xl md:text-6xl text-white mb-6 md:mb-10 uppercase tracking-[0.2em] sm:tracking-[0.4em]">
+                March Intelligence <br>
+                <span class="text-gold opacity-50 text-base sm:text-2xl md:text-3xl tracking-[0.1em] sm:tracking-[0.2em]">Archival Record (Days 01 - 31)</span>
+            </h1>
+            <p class="max-w-3xl mx-auto text-gray-400 italic text-sm sm:text-lg md:text-xl leading-relaxed">
+                "Synchronizing the supreme nodes of national sovereignty, constitutional genesis, and the birth of the global communication matrix."
+            </p>
         </header>
 
         <!-- 💡 MARCH 01 -->
-        <div class="report-card">
-            <div class="day-header">MARCH_01</div>
-            <p class="essay-p">March 1st serves as a supreme temporal coordinate for the <span class="highlight">awakening of national sovereignty</span> and the formal institutionalization of environmental preservation. Historically, this date anchors the moments human civilization legally reclaimed its identity against imperial hegemonies and when the first formal mechanism for terrestrial ecological security was initialized.</p>
+        <div class="report-card p-5 sm:p-10 md:p-20 mb-12 md:mb-32">
+            <div class="day-header text-2xl sm:text-4xl md:text-5xl tracking-[8px] sm:tracking-[15px] pb-3 md:pb-5 mb-8 md:mb-16">MARCH_01</div>
+            <p class="essay-p text-sm sm:text-base md:text-lg mb-6 md:mb-12 indent-4 sm:indent-8">March 1st serves as a supreme temporal coordinate for the <span class="highlight">awakening of national sovereignty</span> and the formal institutionalization of environmental preservation. Historically, this date anchors the moments human civilization legally reclaimed its identity against imperial hegemonies and when the first formal mechanism for terrestrial ecological security was initialized.</p>
             
-            <img src="https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?auto=format&fit=crop&w=1200&q=80" alt="Mountain Landscape Yellowstone" class="archive-img">
+            <img src="https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?auto=format&fit=crop&w=1200&q=80" alt="Mountain Landscape Yellowstone" class="archive-img h-48 sm:h-72 md:h-[450px] lg:h-[550px] my-6 md:my-16">
 
-            <h3 class="category-h3">⚖️ Judicial Intelligence: Sovereign Awakening</h3>
-            <p class="essay-p"><span class="year-badge">1919</span>The March 1st Movement: A landmark declaration of independence and non-violent civil resistance in Korea against Japanese colonial rule. Our archival forensics identify this as a 'Moral Singularity' in international law. By challenging the legality of occupation through a synchronized mass movement, this node provided the ethical framework for global decolonization and fundamentally altered the East Asian geopolitical trajectory for the 20th century.</p>
+            <h3 class="category-h3 text-base sm:text-lg md:text-2xl tracking-[2px] sm:tracking-[4px] pl-4 sm:pl-6 mt-8 md:mt-20 mb-4 md:mb-8">⚖️ Judicial Intelligence: Sovereign Awakening</h3>
+            <p class="essay-p text-sm sm:text-base md:text-lg mb-6 md:mb-12 indent-4 sm:indent-8"><span class="year-badge">1919</span>The March 1st Movement: A landmark declaration of independence and non-violent civil resistance in Korea against Japanese colonial rule. Our archival forensics identify this as a 'Moral Singularity' in international law. By challenging the legality of colonial occupation through a highly synchronized mass movement, this node provided a powerful ethical framework for global decolonization and fundamentally altered the East Asian geopolitical trajectory for the 20th century, inspiring self-determination movements worldwide.</p>
             
-            <h3 class="category-h3">⚙️ Innovations: The Yellowstone Node</h3>
-            <p class="essay-p"><span class="year-badge">1872</span>Establishment of Yellowstone National Park: President Ulysses S. Grant signed the act into law, creating the world's first national park. This legal act recalibrated the human relationship with natural innovative assets, establishing the foundational protocols for state-sponsored environmental governance and anchoring the future of synchronized ecological research across the globe.</p>
+            <h3 class="category-h3 text-base sm:text-lg md:text-2xl tracking-[2px] sm:tracking-[4px] pl-4 sm:pl-6 mt-8 md:mt-20 mb-4 md:mb-8">⚙️ Innovations: The Yellowstone Node</h3>
+            <p class="essay-p text-sm sm:text-base md:text-lg mb-6 md:mb-12 indent-4 sm:indent-8"><span class="year-badge">1872</span>Establishment of Yellowstone National Park: President Ulysses S. Grant signed the act into law, creating the world's first national park. This legislative milestone marked a paradigm shift in how human civilization manages physical wilderness, introducing the 'Public Trust Doctrine' to protect pristine ecological landscapes from private exploitation. It established the baseline for modern environmental governance and globally synchronized conservation strategies.</p>
 
-            <h3 class="category-h3">📉 Macro-Financial Records: IMF</h3>
-            <p class="essay-p"><span class="year-badge">1947</span>International Monetary Fund (IMF) Operations: The IMF initialized its first financial operations on this day. This logistical milestone represented a definitive shift in global fiscal architecture, providing the structural DNA for synchronized international lending and monetary stability monitoring that continues to define 21st-century capital flows.</p>
+            <h3 class="category-h3 text-base sm:text-lg md:text-2xl tracking-[2px] sm:tracking-[4px] pl-4 sm:pl-6 mt-8 md:mt-20 mb-4 md:mb-8">📉 Macro-Financial Records: IMF</h3>
+            <p class="essay-p text-sm sm:text-base md:text-lg mb-6 md:mb-12 indent-4 sm:indent-8"><span class="year-badge">1947</span>International Monetary Fund (IMF) Operations: The IMF initialized its first financial operations on this day. This logistical milestone represented a definitive shift in global fiscal architecture, providing the structural DNA for synchronized international lending, short-term liquidity management, and global exchange rate stabilization that continues to define 21st-century macro-economic health.</p>
         </div>
 
         <!-- 💡 MARCH 02 -->
-        <div class="report-card">
-            <div class="day-header">MARCH_02</div>
-            <p class="essay-p">March 2nd archives the foundational calibration of <span class="highlight">frontier statehood</span> and the zenith of 19th-century diplomatic expansion. It is a day defined by the birth of new sovereign identities and the legal formalization of territorial synchronization.</p>
+        <div class="report-card p-5 sm:p-10 md:p-20 mb-12 md:mb-32">
+            <div class="day-header text-2xl sm:text-4xl md:text-5xl tracking-[8px] sm:tracking-[15px] pb-3 md:pb-5 mb-8 md:mb-16">MARCH_02</div>
+            <p class="essay-p text-sm sm:text-base md:text-lg mb-6 md:mb-12 indent-4 sm:indent-8">March 2nd archives the foundational calibration of <span class="highlight">frontier statehood</span> and the zenith of 19th-century diplomatic expansion. It is a day defined by the birth of new sovereign identities and the legal formalization of territorial synchronization across contested borders.</p>
 
-            <h3 class="category-h3">🏛️ Judicial Intelligence: Texas Independence</h3>
-            <p class="essay-p"><span class="year-badge">1836</span>Texas Declaration of Independence: The formal adoption of independence from Mexico. This node archives the birth of the Republic of Texas, a pivotal shift in the North American geopolitical matrix. Our research views this as a case study in 'Frontier Jurisprudence,' where localized revolutionary energy forced a massive recalibration of international borders and capital migration.</p>
+            <h3 class="category-h3 text-base sm:text-lg md:text-2xl tracking-[2px] sm:tracking-[4px] pl-4 sm:pl-6 mt-8 md:mt-20 mb-4 md:mb-8">🏛️ Judicial Intelligence: Texas Independence</h3>
+            <p class="essay-p text-sm sm:text-base md:text-lg mb-6 md:mb-12 indent-4 sm:indent-8"><span class="year-badge">1836</span>Texas Declaration of Independence: The formal adoption of independence from Mexico. This node archives the birth of the Republic of Texas, a pivotal shift in the North American geopolitical matrix. Our research views this as a prime case study in 'Frontier Jurisprudence,' where localized pioneer populations utilized written constitutional frameworks to claim territorial autonomy, ultimately reshaping North American trade and immigration patterns.</p>
 
-            <h3 class="category-h3">🏷️ Brand Genealogy: The Birth of Icons</h3>
-            <p class="essay-p"><span class="year-badge">1962</span>Wilt Chamberlain's 100-Point Game: Beyond its athletic value, our analytical terminal categorizes this as a 'Performance Branding Singularity.' This event redefined the commercial genealogy of individual sports icons, establishing a new global standard for athletic marketing and synchronized media hype cycles that would dominate the late 20th century.</p>
+            <h3 class="category-h3 text-base sm:text-lg md:text-2xl tracking-[2px] sm:tracking-[4px] pl-4 sm:pl-6 mt-8 md:mt-20 mb-4 md:mb-8">🏷️ Brand Genealogy: The Birth of Icons</h3>
+            <p class="essay-p text-sm sm:text-base md:text-lg mb-6 md:mb-12 indent-4 sm:indent-8"><span class="year-badge">1962</span>Wilt Chamberlain's 100-Point Game: Beyond its athletic value, our analytical terminal categorizes this as a 'Performance Branding Singularity.' This historic feat redefined the commercialization of individual athletic stardom, proving that statistical anomaly, when combined with emerging mass media broadcast networks, could create permanent personal consumer brands, paving the way for the multi-billion-dollar modern sports entertainment industry.</p>
         </div>
 
         <!-- 💡 MARCH 03 -->
-        <div class="report-card">
-            <div class="day-header">MARCH_03</div>
-            <p class="essay-p">March 3rd represents a supreme node in the history of <span class="highlight">acoustic innovation</span> and the terminal collapse of isolationist maritime policy. Historically, this date anchors the birth of the individual who synchronized human voice with electronic distance.</p>
+        <div class="report-card p-5 sm:p-10 md:p-20 mb-12 md:mb-32">
+            <div class="day-header text-2xl sm:text-4xl md:text-5xl tracking-[8px] sm:tracking-[15px] pb-3 md:pb-5 mb-8 md:mb-16">MARCH_03</div>
+            <p class="essay-p text-sm sm:text-base md:text-lg mb-6 md:mb-12 indent-4 sm:indent-8">March 3rd represents a supreme node in the history of <span class="highlight">acoustic innovation</span> and the terminal collapse of isolationist maritime policy. Historically, this date anchors the birth of the individual who synchronized the human voice with electronic distance and the physical breakdown of sovereign barriers in the Far East.</p>
 
-            <img src="https://images.unsplash.com/photo-1551733512-58837bc55941?auto=format&fit=crop&w=1200&q=80" alt="Antique Telephone" class="archive-img">
+            <img src="https://images.unsplash.com/photo-1551733512-58837bc55941?auto=format&fit=crop&w=1200&q=80" alt="Antique Telephone" class="archive-img h-48 sm:h-72 md:h-[450px] lg:h-[550px] my-6 md:my-16">
 
-            <h3 class="category-h3">⚙️ Technical Singularities: Alexander Graham Bell</h3>
-            <p class="essay-p"><span class="year-badge">1847</span>Birth of Alexander Graham Bell: The primary architect of modern telecommunications. Bell’s work served as a technical singularity in 'Human-to-Human Synchronization.' By proving that human speech could be converted into electrical pulses, he birthed the commercial genealogy of the telephone industry, effectively collapsing the global temporal gap and anchoring the birth of the 21st-century interconnected matrix.</p>
+            <h3 class="category-h3 text-base sm:text-lg md:text-2xl tracking-[2px] sm:tracking-[4px] pl-4 sm:pl-6 mt-8 md:mt-20 mb-4 md:mb-8">⚙️ Technical Singularities: Alexander Graham Bell</h3>
+            <p class="essay-p text-sm sm:text-base md:text-lg mb-6 md:mb-12 indent-4 sm:indent-8"><span class="year-badge">1847</span>Birth of Alexander Graham Bell: The primary architect of modern telecommunications. Bell’s work served as a technical singularity in 'Human-to-Human Synchronization.' By proving that sound waves could be converted into varying electromagnetic currents over a wire, he birthed the global telecommunications industry. This physical interface collapsed geographic barriers and laid the groundwork for modern digital networking and information exchange.</p>
 
-            <h3 class="category-h3">🚨 Critical Geopolitical Milestones: Opium War</h3>
-            <p class="essay-p"><span class="year-badge">1857</span>Opium War Escalation: The initialization of the Second Opium War. This temporal node archives a significant shift in Eastern geopolitical forensics. The subsequent synchronization of colonial powers forced a total systemic overhaul of Chinese maritime law and established the primordial protocols for modern treaty ports and international trade logistics in Asia.</p>
+            <h3 class="category-h3 text-base sm:text-lg md:text-2xl tracking-[2px] sm:tracking-[4px] pl-4 sm:pl-6 mt-8 md:mt-20 mb-4 md:mb-8">🚨 Critical Geopolitical Milestones: Opium War</h3>
+            <p class="essay-p text-sm sm:text-base md:text-lg mb-6 md:mb-12 indent-4 sm:indent-8"><span class="year-badge">1857</span>Opium War Escalation: The initialization of the Second Opium War. This temporal node archives a significant shift in East Asian geopolitical relations. The coordinated intervention of British and French forces forced a restructuring of Chinese trade laws, establishing treaty ports and unequal treaties that accelerated the colonization of Asian commercial corridors and reorganized maritime trade routes.</p>
         </div>
 
         <!-- 💡 MARCH 04 -->
-        <div class="report-card">
-            <div class="day-header">MARCH_04</div>
-            <p class="essay-p">March 4th serves as the supreme coordinate for <span class="highlight">Executive Democratic Calibration</span> and the formalization of modern constitutional authority. Historically, this date anchors the moment the legal framework of the United States was operationalized.</p>
+        <div class="report-card p-5 sm:p-10 md:p-20 mb-12 md:mb-32">
+            <div class="day-header text-2xl sm:text-4xl md:text-5xl tracking-[8px] sm:tracking-[15px] pb-3 md:pb-5 mb-8 md:mb-16">MARCH_04</div>
+            <p class="essay-p text-sm sm:text-base md:text-lg mb-6 md:mb-12 indent-4 sm:indent-8">March 4th serves as the supreme coordinate for <span class="highlight">Executive Democratic Calibration</span> and the formalization of modern constitutional authority. Historically, this date anchors the moment the legal framework of the United States was operationalized and when the survival of that same union was tested under civil war pressures.</p>
 
-            <h3 class="category-h3">⚖️ Judicial Intelligence: Constitutional Genesis</h3>
-            <p class="essay-p"><span class="year-badge">1789</span>The US Constitution Enters Into Force: This node archives the formal initialization of the most enduring constitutional framework in history. Our archival analysis views this as the birth of 'Operational Democracy.' It established the procedural DNA for global federalist governance, ensuring that sovereign power is mediated through a synchronized legislative balance.</p>
+            <h3 class="category-h3 text-base sm:text-lg md:text-2xl tracking-[2px] sm:tracking-[4px] pl-4 sm:pl-6 mt-8 md:mt-20 mb-4 md:mb-8">⚖️ Judicial Intelligence: Constitutional Genesis</h3>
+            <p class="essay-p text-sm sm:text-base md:text-lg mb-6 md:mb-12 indent-4 sm:indent-8"><span class="year-badge">1789</span>The US Constitution Enters Into Force: This node archives the formal initialization of the most enduring constitutional framework in history. Our archival analysis views this as the birth of 'Operational Democracy.' It codified the separation of powers, federalist checks and balances, and judicial oversight, establishing the primary legal baseline for democratic governance globally.</p>
 
-            <h3 class="category-h3">🏛️ Geopolitical Nodes: The Lincoln Inaugural</h3>
-            <p class="essay-p"><span class="year-badge">1861</span>Inauguration of Abraham Lincoln: A definitive node in the history of institutional resilience. Lincoln’s first inaugural address served as a case study in 'Judicial Diplomacy,' attempting to synchronize the fracturing Union under a singular legal mandate, redefining the boundaries of federal authority during a time of total systemic crisis.</p>
+            <h3 class="category-h3 text-base sm:text-lg md:text-2xl tracking-[2px] sm:tracking-[4px] pl-4 sm:pl-6 mt-8 md:mt-20 mb-4 md:mb-8">🏛️ Geopolitical Nodes: The Lincoln Inaugural</h3>
+            <p class="essay-p text-sm sm:text-base md:text-lg mb-6 md:mb-12 indent-4 sm:indent-8"><span class="year-badge">1861</span>Inauguration of Abraham Lincoln: A definitive node in the history of institutional resilience. Lincoln’s first inaugural address served as a case study in 'Judicial Diplomacy,' establishing the legal argument for the perpetuity of the Union and the unconstitutionality of secession. This administrative assertion redefined federal authority during a time of existential domestic crisis.</p>
         </div>
 
         <!-- 💡 MARCH 05 -->
-        <div class="report-card">
-            <div class="day-header">MARCH_05</div>
-            <p class="essay-p">March 5th archives the supreme node of <span class="highlight">colonial judicial friction</span> and the formalization of Cold War geopolitical boundaries. It is a day defined by the initial sparks of revolutionary resistance and the mapping of a bipolar world order.</p>
+        <div class="report-card p-5 sm:p-10 md:p-20 mb-12 md:mb-32">
+            <div class="day-header text-2xl sm:text-4xl md:text-5xl tracking-[8px] sm:tracking-[15px] pb-3 md:pb-5 mb-8 md:mb-16">MARCH_05</div>
+            <p class="essay-p text-sm sm:text-base md:text-lg mb-6 md:mb-12 indent-4 sm:indent-8">March 5th archives the supreme node of <span class="highlight">colonial judicial friction</span> and the formalization of Cold War geopolitical boundaries. It is a day defined by the initial spark of violent revolutionary resistance and the strategic mapping of a bipolar global order.</p>
             
-            <h3 class="category-h3">⚖️ Judicial Intelligence: The Boston Massacre</h3>
-            <p class="essay-p"><span class="year-badge">1770</span>The Boston Massacre: A definitive node in revolutionary jurisprudence. The confrontation between British soldiers and colonial civilians served as a psychological singularity. The subsequent legal trial established the foundational protocols for the rule of law even amidst systemic civil unrest, anchoring the legislative path toward American independence.</p>
+            <h3 class="category-h3 text-base sm:text-lg md:text-2xl tracking-[2px] sm:tracking-[4px] pl-4 sm:pl-6 mt-8 md:mt-20 mb-4 md:mb-8">⚖️ Judicial Intelligence: The Boston Massacre</h3>
+            <p class="essay-p text-sm sm:text-base md:text-lg mb-6 md:mb-12 indent-4 sm:indent-8"><span class="year-badge">1770</span>The Boston Massacre: A definitive node in revolutionary history. The lethal confrontation between British occupation troops and colonial civilians served as a psychological catalyst for independence. The subsequent trial, defended by future president John Adams, established the foundational legal protocol for the rule of law and the right to a fair defense, even amidst profound political unrest.</p>
             
-            <h3 class="category-h3">🏛️ Geopolitical Nodes: The Iron Curtain</h3>
-            <p class="essay-p"><span class="year-badge">1946</span>Churchill’s 'Iron Curtain' Speech: Delivered in Fulton, Missouri. Our terminal categorizes this as a 'Strategic Singularity.' Churchill’s rhetoric provided the intellectual framework for the Cold War, recalibrating post-war alliances into two disparate ideological matrices and altering the global diplomatic trajectory for the next half-century.</p>
+            <h3 class="category-h3 text-base sm:text-lg md:text-2xl tracking-[2px] sm:tracking-[4px] pl-4 sm:pl-6 mt-8 md:mt-20 mb-4 md:mb-8">🏛️ Geopolitical Nodes: The Iron Curtain</h3>
+            <p class="essay-p text-sm sm:text-base md:text-lg mb-6 md:mb-12 indent-4 sm:indent-8"><span class="year-badge">1946</span>Churchill’s 'Iron Curtain' Speech: Delivered in Fulton, Missouri. Our terminal categorizes this as a 'Strategic Singularity.' Churchill’s rhetoric formulated the intellectual paradigm of containment, dividing post-WWII alliances into two distinct military-ideological spheres and guiding the diplomatic and intelligence strategies of Western nations for the next half-century.</p>
         </div>
 
         <!-- 💡 MARCH 06 -->
-        <div class="report-card">
-            <div class="day-header">MARCH_06</div>
-            <p class="essay-p">March 6th serves as the coordinate for <span class="highlight">supreme constitutional failure</span> and the zenith of Renaissance artistic intelligence. Historically, this date anchors a controversial judicial ruling and the birth of a supreme artistic pioneer.</p>
+        <div class="report-card p-5 sm:p-10 md:p-20 mb-12 md:mb-32">
+            <div class="day-header text-2xl sm:text-4xl md:text-5xl tracking-[8px] sm:tracking-[15px] pb-3 md:pb-5 mb-8 md:mb-16">MARCH_06</div>
+            <p class="essay-p text-sm sm:text-base md:text-lg mb-6 md:mb-12 indent-4 sm:indent-8">March 6th serves as the coordinate for <span class="highlight">supreme constitutional failure</span> and the zenith of Renaissance anatomical intelligence. Historically, this date anchors a highly controversial judicial ruling and the birth of an unmatched artistic pioneer.</p>
 
-            <h3 class="category-h3">⚖️ Judicial Intelligence: Dred Scott Node</h3>
-            <p class="essay-p"><span class="year-badge">1857</span>The Dred Scott v. Sandford Decision: The US Supreme Court issued a ruling denying citizenship to African Americans. Our scholarly research identifies this as a 'Constitutional Singularity'—the precise moment when the legal system failed to resolve a moral crisis, making the Civil War inevitable. This node serves as a primary case study in judicial overreach.</p>
+            <h3 class="category-h3 text-base sm:text-lg md:text-2xl tracking-[2px] sm:tracking-[4px] pl-4 sm:pl-6 mt-8 md:mt-20 mb-4 md:mb-8">⚖️ Judicial Intelligence: Dred Scott Node</h3>
+            <p class="essay-p text-sm sm:text-base md:text-lg mb-6 md:mb-12 indent-4 sm:indent-8"><span class="year-badge">1857</span>The Dred Scott v. Sandford Decision: The US Supreme Court issued its ruling denying citizenship to African Americans and striking down the Missouri Compromise. Our scholarly research identifies this as a 'Constitutional Singularity'—the precise moment when the highest judicial tribunal failed to resolve a moral crisis, making the Civil War inevitable. It remains a core study in the catastrophic risks of judicial overreach.</p>
 
-            <h3 class="category-h3">🎨 Arts & Intellectual Heritage: Michelangelo</h3>
-            <p class="essay-p"><span class="year-badge">1475</span>Birth of Michelangelo Buonarroti: A supreme node in artistic innovation. Michelangelo’s work served as a technical singularity in 'Anatomical Realism.' By synchronizing meticulous forensic-level anatomy with high-Renaissance theology, he pioneered new standards in visual intelligence, fundamentally altering the innovative scope of Western art.</p>
+            <h3 class="category-h3 text-base sm:text-lg md:text-2xl tracking-[2px] sm:tracking-[4px] pl-4 sm:pl-6 mt-8 md:mt-20 mb-4 md:mb-8">🎨 Arts & Intellectual Heritage: Michelangelo</h3>
+            <p class="essay-p text-sm sm:text-base md:text-lg mb-6 md:mb-12 indent-4 sm:indent-8"><span class="year-badge">1475</span>Birth of Michelangelo Buonarroti: A supreme node in artistic innovation. Michelangelo’s work served as a technical singularity in 'Anatomical Realism.' By integrating forensic-level dissection with theological themes, he pioneered new standards in volumetric human rendering, fundamentally altering the aesthetic, spatial, and structural trajectory of Western art.</p>
         </div>
 
         <!-- 💡 MARCH 07 -->
-        <div class="report-card">
-            <div class="day-header">MARCH_07</div>
-            <p class="essay-p">March 7th archives the birth of <span class="highlight">Global Voice Synchronization</span> and the zenith of 19th-century intellectual property law through a landmark patent singularity.</p>
+        <div class="report-card p-5 sm:p-10 md:p-20 mb-12 md:mb-32">
+            <div class="day-header text-2xl sm:text-4xl md:text-5xl tracking-[8px] sm:tracking-[15px] pb-3 md:pb-5 mb-8 md:mb-16">MARCH_07</div>
+            <p class="essay-p text-sm sm:text-base md:text-lg mb-6 md:mb-12 indent-4 sm:indent-8">March 7th archives the birth of <span class="highlight">Global Voice Synchronization</span> and the zenith of 19th-century intellectual property law through a landmark patent singularity that structured the corporate tech giants of tomorrow.</p>
 
-            <img src="https://images.unsplash.com/photo-1509228468518-180dd486490e?auto=format&fit=crop&w=1200&q=80" alt="Old Patent Document" class="archive-img">
+            <img src="https://images.unsplash.com/photo-1509228468518-180dd486490e?auto=format&fit=crop&w=1200&q=80" alt="Old Patent Document" class="archive-img h-48 sm:h-72 md:h-[450px] lg:h-[550px] my-6 md:my-16">
 
-            <h3 class="category-h3">⚙️ Technical Singularities: Telephone Patent</h3>
-            <p class="essay-p"><span class="year-badge">1876</span>Alexander Graham Bell Granted Telephone Patent: Patent No. 174,465 was officially issued. Our archival forensics identify this as the 'Civilizational Singularity.' It was the legal act that birthed the commercial genealogy of the telecommunications industry, untethering human speech from physical transit for the first time in history and initiating global capital flows in tech branding.</p>
+            <h3 class="category-h3 text-base sm:text-lg md:text-2xl tracking-[2px] sm:tracking-[4px] pl-4 sm:pl-6 mt-8 md:mt-20 mb-4 md:mb-8">⚙️ Technical Singularities: Telephone Patent</h3>
+            <p class="essay-p text-sm sm:text-base md:text-lg mb-6 md:mb-12 indent-4 sm:indent-8"><span class="year-badge">1876</span>Alexander Graham Bell Granted Telephone Patent: Patent No. 174,465 was officially issued to Bell, secure in the knowledge that his filing beat competitor Elisha Gray by a matter of hours. Our archival forensics identify this as a 'Civilizational Singularity.' It legalized the commercialization of electronic sound transmission, transforming human discourse and igniting massive capital flows toward infrastructure development.</p>
 
-            <h3 class="category-h3">📈 Macro-Financial Records: Standard Oil</h3>
-            <p class="essay-p"><span class="year-badge">1911</span>Standard Oil Recalibration: During this era, the legislative dismantling of the Rockefeller trust reached its peak. This node archives the systemic shift from a monopolistic entity to synchronized competitive markets, redefining antitrust law and the financial architecture of modern industrial capital.</p>
+            <h3 class="category-h3 text-base sm:text-lg md:text-2xl tracking-[2px] sm:tracking-[4px] pl-4 sm:pl-6 mt-8 md:mt-20 mb-4 md:mb-8">📈 Macro-Financial Records: Standard Oil</h3>
+            <p class="essay-p text-sm sm:text-base md:text-lg mb-6 md:mb-12 indent-4 sm:indent-8"><span class="year-badge">1911</span>Standard Oil Trust Dissolution: During this era, federal antitrust pressure under the Sherman Act reached a critical juncture. This node archives the systemic shift from monopolistic market concentration to regulated competition, redefining the legal parameters of corporate mergers, market capture, and the financial architecture of modern industrial capital.</p>
         </div>
 
         <!-- 💡 MARCH 08 -->
-        <div class="report-card">
-            <div class="day-header">MARCH_08</div>
-            <p class="essay-p">March 8th represents the temporal coordinate for <span class="highlight">universal gender parity struggle</span> and the tragic recalibration of 21st-century aerospace forensics.</p>
+        <div class="report-card p-5 sm:p-10 md:p-20 mb-12 md:mb-32">
+            <div class="day-header text-2xl sm:text-4xl md:text-5xl tracking-[8px] sm:tracking-[15px] pb-3 md:pb-5 mb-8 md:mb-16">MARCH_08</div>
+            <p class="essay-p text-sm sm:text-base md:text-lg mb-6 md:mb-12 indent-4 sm:indent-8">March 8th represents the temporal coordinate for the <span class="highlight">universal gender parity struggle</span> and the tragic recalibration of 21st-century aerospace tracking forensics, proving both human social progress and mechanical fallibility.</p>
 
-            <h3 class="category-h3">⚖️ Judicial Intelligence: International Women's Day</h3>
-            <p class="essay-p"><span class="year-badge">1908/1917</span>Inception of International Women's Day: Synchronized with labor strikes and the February Revolution in Russia. This node archives the birth of a global judicial mandate for gender equality, serving as the primary catalyst for the synchronization of suffrage movements worldwide and anchoring feminine legislative authority into the global matrix.</p>
+            <h3 class="category-h3 text-base sm:text-lg md:text-2xl tracking-[2px] sm:tracking-[4px] pl-4 sm:pl-6 mt-8 md:mt-20 mb-4 md:mb-8">⚖️ Judicial Intelligence: International Women's Day</h3>
+            <p class="essay-p text-sm sm:text-base md:text-lg mb-6 md:mb-12 indent-4 sm:indent-8"><span class="year-badge">1908/1917</span>Inception of International Women's Day: Historically tied to New York needle trade strikes and the February Revolution in Russia. This node archives the emergence of a global political and labor mandate for gender equality, driving the synchronization of suffrage and equal employment laws across sovereign legal frameworks.</p>
 
-            <h3 class="category-h3">🚨 Critical Tragedies: MH370</h3>
-            <p class="essay-p"><span class="year-badge">2014</span>Disappearance of Malaysia Airlines Flight 370: A tragic singularity in modern aerospace forensics. The loss of a synchronized satellite-tracked vehicle forced a global re-evaluation of maritime surveillance and air-traffic innovative protocols, establishing new standards for real-time logistical synchronization.</p>
+            <h3 class="category-h3 text-base sm:text-lg md:text-2xl tracking-[2px] sm:tracking-[4px] pl-4 sm:pl-6 mt-8 md:mt-20 mb-4 md:mb-8">🚨 Critical Tragedies: MH370</h3>
+            <p class="essay-p text-sm sm:text-base md:text-lg mb-6 md:mb-12 indent-4 sm:indent-8"><span class="year-badge">2014</span>Disappearance of Malaysia Airlines Flight 370: A tragic mystery in modern aviation history. The loss of a commercial aircraft with its transponders disabled forced a global reassessment of maritime satellite tracking, real-time telemetry streaming, and black box accessibility protocols, changing international flight safety standards forever.</p>
         </div>
 
         <!-- 💡 MARCH 09 -->
-        <div class="report-card">
-            <div class="day-header">MARCH_09</div>
-            <p class="essay-p">March 9th archives the birth of <span class="highlight">Mass-Consumer Cultural Branding</span> and the zenith of 19th-century naval innovative warfare through ironclad synchronization.</p>
+        <div class="report-card p-5 sm:p-10 md:p-20 mb-12 md:mb-32">
+            <div class="day-header text-2xl sm:text-4xl md:text-5xl tracking-[8px] sm:tracking-[15px] pb-3 md:pb-5 mb-8 md:mb-16">MARCH_09</div>
+            <p class="essay-p text-sm sm:text-base md:text-lg mb-6 md:mb-12 indent-4 sm:indent-8">March 9th archives the birth of <span class="highlight">mass-consumer cultural branding</span> and the terminal collapse of wooden naval architectures through the debut of ironclad military engineering.</p>
 
-            <h3 class="category-h3">🏷️ Brand Genealogy: The Barbie Debut</h3>
-            <p class="essay-p"><span class="year-badge">1959</span>Debut of the Barbie Doll: Mattel initialized a commercial legacy that would dominate global toy branding. Our forensics identify this as a 'Psychological Singularity' in retail. Barbie synchronized aspirational lifestyle with mass-production, creating a case study in global brand-building that altered consumer capital flows of the mid-20th century.</p>
+            <h3 class="category-h3 text-base sm:text-lg md:text-2xl tracking-[2px] sm:tracking-[4px] pl-4 sm:pl-6 mt-8 md:mt-20 mb-4 md:mb-8">🏷️ Brand Genealogy: The Barbie Debut</h3>
+            <p class="essay-p text-sm sm:text-base md:text-lg mb-6 md:mb-12 indent-4 sm:indent-8"><span class="year-badge">1959</span>Debut of the Barbie Doll: Mattel unveiled the iconic doll at the American Toy Fair in New York. Our forensics categorize this as a 'Psychological Singularity' in modern retail. By selling an aspirational, mature lifestyle brand rather than a traditional baby doll, Mattel pioneered modern consumer demographic modeling, altering postwar commercial toy distribution models.</p>
 
-            <h3 class="category-h3">⚙️ Technical Milestones: Ironclads</h3>
-            <p class="essay-p"><span class="year-badge">1862</span>Battle of the Monitor and Merrimack: The first engagement between ironclad warships. This technical milestone served as the terminal collapse of wooden naval architecture. Our research views this as the birth of 'Industrialized Naval Warfare,' providing foundational protocols for modern ship synchronization and metallurgical defense.</p>
+            <h3 class="category-h3 text-base sm:text-lg md:text-2xl tracking-[2px] sm:tracking-[4px] pl-4 sm:pl-6 mt-8 md:mt-20 mb-4 md:mb-8">⚙️ Technical Milestones: Ironclads</h3>
+            <p class="essay-p text-sm sm:text-base md:text-lg mb-6 md:mb-12 indent-4 sm:indent-8"><span class="year-badge">1862</span>Battle of Hampton Roads (Monitor vs. Virginia): The first engagement between steam-powered, ironclad warships during the American Civil War. This mechanical milestone rendered traditional wooden hulls obsolete overnight, initiating the modern era of metallurgical naval defense, rotating turrets, and naval armor plating.</p>
         </div>
 
         <!-- 💡 MARCH 10 -->
-        <div class="report-card">
-            <div class="day-header">MARCH_10</div>
-            <p class="essay-p">March 10th serves as the supreme coordinate for <span class="highlight">successful acoustic transmission</span> and the terminal collapse of isolationist Tibetan sovereignty.</p>
+        <div class="report-card p-5 sm:p-10 md:p-20 mb-12 md:mb-32">
+            <div class="day-header text-2xl sm:text-4xl md:text-5xl tracking-[8px] sm:tracking-[15px] pb-3 md:pb-5 mb-8 md:mb-16">MARCH_10</div>
+            <p class="essay-p text-sm sm:text-base md:text-lg mb-6 md:mb-12 indent-4 sm:indent-8">March 10th serves as the supreme coordinate for <span class="highlight">successful acoustic transmission</span> over wired circuits and the tragic collapse of isolationist sovereign governance in high-altitude Asia.</p>
 
-            <h3 class="category-h3">⚙️ IT & Communication Singularities: First Call</h3>
-            <p class="essay-p"><span class="year-badge">1876</span>First Successful Telephone Transmission: Alexander Graham Bell spoke the words, "Mr. Watson, come here." This technical milestone served as the primordial ancestor to modern digital packet-switching, proving that human speech could be encoded and transmitted across a synchronized electrical network without physical delay.</p>
+            <h3 class="category-h3 text-base sm:text-lg md:text-2xl tracking-[2px] sm:tracking-[4px] pl-4 sm:pl-6 mt-8 md:mt-20 mb-4 md:mb-8">⚙️ IT & Communication Singularities: First Call</h3>
+            <p class="essay-p text-sm sm:text-base md:text-lg mb-6 md:mb-12 indent-4 sm:indent-8"><span class="year-badge">1876</span>First Successful Telephone Transmission: Alexander Graham Bell spoke the words, "Mr. Watson, come here, I want you," over a liquid transmitter. This technical milestone is the primordial ancestor of modern telecommunication networks, proving that acoustic vibrations could be faithfully translated into electrical current, paving the way for real-time global voice data sharing.</p>
 
-            <h3 class="category-h3">🚨 Critical Geopolitical Milestones: Tibetan Uprising</h3>
-            <p class="essay-p"><span class="year-badge">1959</span>The Tibetan Uprising: A definitive node in the history of Himalayan sovereignty. The resistance against centralized control forced a massive recalibration of South Asian diplomatic relations and archives the birth of a global dialogue on religious autonomy and territorial law.</p>
+            <h3 class="category-h3 text-base sm:text-lg md:text-2xl tracking-[2px] sm:tracking-[4px] pl-4 sm:pl-6 mt-8 md:mt-20 mb-4 md:mb-8">🚨 Critical Geopolitical Milestones: Tibetan Uprising</h3>
+            <p class="essay-p text-sm sm:text-base md:text-lg mb-6 md:mb-12 indent-4 sm:indent-8"><span class="year-badge">1959</span>The Tibetan Uprising: A massive popular revolt in Lhasa to protect the Dalai Lama against integration into the People's Republic of China. The subsequent military crackdown led to the Dalai Lama's escape to India and the establishment of a government-in-exile. This critical event reshaped Sino-Indian border relations and remains a central node in international sovereignty and human rights law.</p>
         </div>
 
         <!-- 💡 MARCH 11 -->
-        <div class="report-card">
-            <div class="day-header">MARCH_11</div>
-            <p class="essay-p">March 11th archives the supreme node of <span class="highlight">systemic technical-environmental failure</span> and the tragic recalibration of 21st-century geopolitical security.</p>
+        <div class="report-card p-5 sm:p-10 md:p-20 mb-12 md:mb-32">
+            <div class="day-header text-2xl sm:text-4xl md:text-5xl tracking-[8px] sm:tracking-[15px] pb-3 md:pb-5 mb-8 md:mb-16">MARCH_11</div>
+            <p class="essay-p text-sm sm:text-base md:text-lg mb-6 md:mb-12 indent-4 sm:indent-8">March 11th archives the supreme node of <span class="highlight">cascading technical-environmental failure</span> and the tragic recalibration of 21st-century homeland security in the face of coordinated asymmetrical warfare.</p>
             
-            <img src="https://images.unsplash.com/photo-1542332606-b3d8c603f99b?auto=format&fit=crop&w=1200&q=80" alt="Nuclear Energy Concept" class="archive-img">
+            <img src="https://images.unsplash.com/photo-1542332606-b3d8c603f99b?auto=format&fit=crop&w=1200&q=80" alt="Nuclear Energy Concept" class="archive-img h-48 sm:h-72 md:h-[450px] lg:h-[550px] my-6 md:my-16">
 
-            <h3 class="category-h3">⚙️ Technical Singularities: Fukushima Disaster</h3>
-            <p class="essay-p"><span class="year-badge">2011</span>Fukushima Daiichi Nuclear Disaster: Triggered by a massive seismic event and tsunami. Our terminal categorizes this as a 'Cascading Systemic Failure.' The breach of containment forced a global re-evaluation of nuclear innovative safety and established the 'Post-Fukushima' baseline for global energy policy and biosecurity standards.</p>
+            <h3 class="category-h3 text-base sm:text-lg md:text-2xl tracking-[2px] sm:tracking-[4px] pl-4 sm:pl-6 mt-8 md:mt-20 mb-4 md:mb-8">⚙️ Technical Singularities: Fukushima Disaster</h3>
+            <p class="essay-p text-sm sm:text-base md:text-lg mb-6 md:mb-12 indent-4 sm:indent-8"><span class="year-badge">2011</span>Fukushima Daiichi Nuclear Disaster: Triggered by a magnitude 9.0 earthquake and subsequent tsunami, which overwhelmed the plant's sea wall and flooded its backup diesel generators. Our terminal categorizes this as a 'Cascading Systemic Failure.' The loss of reactor core cooling and subsequent hydrogen explosions forced a global re-evaluation of nuclear engineering safety margins and decentralized energy portfolios.</p>
             
-            <h3 class="category-h3">🚨 Geopolitical Tragedies: Madrid Bombings</h3>
-            <p class="essay-p"><span class="year-badge">2004</span>The Madrid Train Bombings: A definitive node in asymmetrical warfare. The synchronized attacks served as a catalyst for the harmonization of European Union anti-terrorism judicial frameworks, accelerating the integration of cross-border forensic intelligence synchronization.</p>
+            <h3 class="category-h3 text-base sm:text-lg md:text-2xl tracking-[2px] sm:tracking-[4px] pl-4 sm:pl-6 mt-8 md:mt-20 mb-4 md:mb-8">🚨 Geopolitical Tragedies: Madrid Bombings</h3>
+            <p class="essay-p text-sm sm:text-base md:text-lg mb-6 md:mb-12 indent-4 sm:indent-8"><span class="year-badge">2004</span>The Madrid Train Bombings: Coordinated backpack explosions on Madrid commuter trains just three days before general elections. This tragic asymmetry led to the defeat of the ruling conservative party due to their mishandling of public communications regarding the attack's perpetrators, showing how tactical violence could alter democratic voting outcomes and accelerate European counter-terror intelligence sharing.</p>
         </div>
 
         <!-- 💡 MARCH 12 -->
-        <div class="report-card">
-            <div class="day-header">MARCH_12</div>
-            <p class="essay-p">March 12th represents perhaps the most significant node in the history of <span class="highlight">human intellectual synchronization</span> and the formalization of non-violent resistance.</p>
+        <div class="report-card p-5 sm:p-10 md:p-20 mb-12 md:mb-32">
+            <div class="day-header text-2xl sm:text-4xl md:text-5xl tracking-[8px] sm:tracking-[15px] pb-3 md:pb-5 mb-8 md:mb-16">MARCH_12</div>
+            <p class="essay-p text-sm sm:text-base md:text-lg mb-6 md:mb-12 indent-4 sm:indent-8">March 12th represents the most significant node in the history of <span class="highlight">human intellectual synchronization</span> and the formalization of non-violent economic resistance against imperial tax structures.</p>
 
-            <img src="https://images.unsplash.com/photo-1519389950473-47ba0277781c?auto=format&fit=crop&w=1200&q=80" alt="Global Network Web" class="archive-img">
+            <img src="https://images.unsplash.com/photo-1519389950473-47ba0277781c?auto=format&fit=crop&w=1200&q=80" alt="Global Network Web" class="archive-img h-48 sm:h-72 md:h-[450px] lg:h-[550px] my-6 md:my-16">
 
-            <h3 class="category-h3">⚙️ IT Singularities: World Wide Web Proposal</h3>
-            <p class="essay-p"><span class="year-badge">1989</span>Tim Berners-Lee’s Information Management Proposal: The technical blueprint for the World Wide Web was submitted. Our forensics identify this as the 'Connectivity Singularity.' By proposing a decentralized hypertext system, Berners-Lee pioneered the protocols for the universal organization of knowledge, anchoring the birth of modern digital civilization.</p>
+            <h3 class="category-h3 text-base sm:text-lg md:text-2xl tracking-[2px] sm:tracking-[4px] pl-4 sm:pl-6 mt-8 md:mt-20 mb-4 md:mb-8">⚙️ IT Singularities: World Wide Web Proposal</h3>
+            <p class="essay-p text-sm sm:text-base md:text-lg mb-6 md:mb-12 indent-4 sm:indent-8"><span class="year-badge">1989</span>Tim Berners-Lee’s Information Management Proposal: Submitted at CERN, this technical paper mapped out the architecture of the World Wide Web. Our forensics identify this as the 'Connectivity Singularity.' By proposing a decentralized hypertext transfer protocol (HTTP) and universal resource locators (URLs), Berners-Lee democratized knowledge sharing, birthing modern digital civilization.</p>
 
-            <h3 class="category-h3">🏛️ Judicial Intelligence: The Salt March</h3>
-            <p class="essay-p"><span class="year-badge">1930</span>Inception of the Salt March: Mahatma Gandhi initialized a 240-mile journey to challenge the British salt monopoly. This node archives a supreme case study in 'Economic Jurisprudence.' By non-violently challenging imperial tax laws, Gandhi forced a global re-evaluation of colonial legitimacy, anchoring mass civil disobedience in the global sovereign matrix.</p>
+            <h3 class="category-h3 text-base sm:text-lg md:text-2xl tracking-[2px] sm:tracking-[4px] pl-4 sm:pl-6 mt-8 md:mt-20 mb-4 md:mb-8">🏛️ Judicial Intelligence: The Salt March</h3>
+            <p class="essay-p text-sm sm:text-base md:text-lg mb-6 md:mb-12 indent-4 sm:indent-8"><span class="year-badge">1930</span>Inception of the Salt March: Mahatma Gandhi initiated a 240-mile march to the sea to protest the British colonial monopoly on salt production. This node archives a supreme case study in 'Sovereign Disobedience.' By peaceably violating unjust fiscal laws, Gandhi demonstrated how non-violent resistance could strip an occupying empire of its moral legitimacy, fueling India's push for self-rule.</p>
         </div>
 
         <!-- 💡 MARCH 13 -->
-        <div class="report-card">
-            <div class="day-header">MARCH_13</div>
-            <p class="essay-p">March 13th archives the birth of <span class="highlight">modern celestial mapping</span> and the formalization of early industrial monopolistic recalibration.</p>
+        <div class="report-card p-5 sm:p-10 md:p-20 mb-12 md:mb-32">
+            <div class="day-header text-2xl sm:text-4xl md:text-5xl tracking-[8px] sm:tracking-[15px] pb-3 md:pb-5 mb-8 md:mb-16">MARCH_13</div>
+            <p class="essay-p text-sm sm:text-base md:text-lg mb-6 md:mb-12 indent-4 sm:indent-8">March 13th archives the birth of <span class="highlight">modern celestial mapping</span> beyond traditional solar boundaries and the formalization of early industrial antitrust legal actions.</p>
 
-            <h3 class="category-h3">🛰️ Interstellar Intelligence: Uranus Discovery</h3>
-            <p class="essay-p"><span class="year-badge">1781</span>Discovery of Uranus: William Herschel identified the seventh planet. This scientific node shattered the 2,000-year-old traditional-planetary paradigm. Our research highlights this as the primary catalyst for modern celestial forensics, proving human innovative scope could expand our mathematical understanding of the deep cosmic near-field.</p>
+            <h3 class="category-h3 text-base sm:text-lg md:text-2xl tracking-[2px] sm:tracking-[4px] pl-4 sm:pl-6 mt-8 md:mt-20 mb-4 md:mb-8">🛰️ Interstellar Intelligence: Uranus Discovery</h3>
+            <p class="essay-p text-sm sm:text-base md:text-lg mb-6 md:mb-12 indent-4 sm:indent-8"><span class="year-badge">1781</span>Discovery of Uranus: William Herschel identified Uranus with his custom reflecting telescope. This astronomical discovery shattered the ancient geocentric boundary of visible solar bodies, proving that systematically applied optical engineering could push human understanding of the cosmos far beyond classical limits.</p>
 
-            <h3 class="category-h3">📈 Macro-Financial Records: Standard Oil Dissolution</h3>
-            <p class="essay-p"><span class="year-badge">1911</span>Standard Oil Dissolution Peak: Historically synchronized with the legislative peak of antitrust enforcement. This node archives the systemic shift from monopolistic capital concentration to synchronized competitive financial matrices, altering the trajectory of industrial regulation.</p>
+            <h3 class="category-h3 text-base sm:text-lg md:text-2xl tracking-[2px] sm:tracking-[4px] pl-4 sm:pl-6 mt-8 md:mt-20 mb-4 md:mb-8">📈 Macro-Financial Records: Standard Oil Dissolution Peak</h3>
+            <p class="essay-p text-sm sm:text-base md:text-lg mb-6 md:mb-12 indent-4 sm:indent-8"><span class="year-badge">1911</span>Standard Oil Dissolution Peak: During this phase, final legal arguments for splitting the Standard Oil trust were codified. This node represents the historical peak of state intervention in monopolistic conglomerates under the Sherman Act, establishing the 'Rule of Reason' standard in corporate regulation, permanently shifting the trajectory of market competition.</p>
         </div>
 
         <!-- 💡 MARCH 14 -->
-        <div class="report-card">
-            <div class="day-header">MARCH_14</div>
-            <p class="essay-p">March 14th serves as the supreme coordinate for <span class="highlight">Mathematical and Theoretical Singularities</span>, anchoring the birth of the individual who synchronized space, time, and gravity.</p>
+        <div class="report-card p-5 sm:p-10 md:p-20 mb-12 md:mb-32">
+            <div class="day-header text-2xl sm:text-4xl md:text-5xl tracking-[8px] sm:tracking-[15px] pb-3 md:pb-5 mb-8 md:mb-16">MARCH_14</div>
+            <p class="essay-p text-sm sm:text-base md:text-lg mb-6 md:mb-12 indent-4 sm:indent-8">March 14th serves as the supreme coordinate for <span class="highlight">Mathematical and Theoretical Singularities</span>, anchoring the birth of the individual who synchronized space, time, and gravity, and the cultural standardization of geometry's most enduring constant.</p>
 
-            <img src="https://images.unsplash.com/photo-1509228468518-180dd486490e?auto=format&fit=crop&w=1200&q=80" alt="Mathematical Physics Concept" class="archive-img">
+            <img src="https://images.unsplash.com/photo-1509228468518-180dd486490e?auto=format&fit=crop&w=1200&q=80" alt="Mathematical Physics Concept" class="archive-img h-48 sm:h-72 md:h-[450px] lg:h-[550px] my-6 md:my-16">
 
-            <h3 class="category-h3">⚙️ Intellectual Heritage: Albert Einstein</h3>
-            <p class="essay-p"><span class="year-badge">1879</span>Birth of Albert Einstein: A supreme node in the history of human intelligence. Einstein’s work served as a 'Cognitive Singularity.' By introducing General Relativity, he redefined the physical framework of the universe, providing the theoretical protocols for modern GPS synchronization and black hole forensics.</p>
+            <h3 class="category-h3 text-base sm:text-lg md:text-2xl tracking-[2px] sm:tracking-[4px] pl-4 sm:pl-6 mt-8 md:mt-20 mb-4 md:mb-8">⚙️ Intellectual Heritage: Albert Einstein</h3>
+            <p class="essay-p text-sm sm:text-base md:text-lg mb-6 md:mb-12 indent-4 sm:indent-8"><span class="year-badge">1879</span>Birth of Albert Einstein: A key mind in human scientific history. Einstein’s work in relativity revolutionized physics, shifting the mechanical worldview from absolute Galilean frames to a synchronized spacetime continuum. His equations provided the direct mathematical foundation for global positioning systems (GPS) and modern cosmology.</p>
 
-            <h3 class="category-h3">📐 Mathematical Standardization: Pi Day</h3>
-            <p class="essay-p"><span class="year-badge">Annual</span>Global Celebration of Pi: Synchronized with the date 3.14. This node archives the cultural recognition of the mathematical constant (π), a testament to the human desire to synchronize symbolic social rituals with fundamental technical truths of geometry and engineering.</p>
+            <h3 class="category-h3 text-base sm:text-lg md:text-2xl tracking-[2px] sm:tracking-[4px] pl-4 sm:pl-6 mt-8 md:mt-20 mb-4 md:mb-8">📐 Mathematical Standardization: Pi Day</h3>
+            <p class="essay-p text-sm sm:text-base md:text-lg mb-6 md:mb-12 indent-4 sm:indent-8"><span class="year-badge">Annual</span>Global Celebration of Pi: Commemorated on 3/14, reflecting the value of 3.14. This node archives the popular celebration of the mathematical ratio of a circle's circumference to its diameter, showing how human civilization synchronizes social and academic calendars to celebrate abstract, immutable scientific truths.</p>
         </div>
 
         <!-- 💡 MARCH 15 -->
-        <div class="report-card">
-            <div class="day-header">MARCH_15</div>
-            <p class="essay-p">March 15th represents the archival coordinate for the <span class="highlight">terminal collapse of ancient autocratic archetypes</span> and the birth of modern digital commerce branding.</p>
+        <div class="report-card p-5 sm:p-10 md:p-20 mb-12 md:mb-32">
+            <div class="day-header text-2xl sm:text-4xl md:text-5xl tracking-[8px] sm:tracking-[15px] pb-3 md:pb-5 mb-8 md:mb-16">MARCH_15</div>
+            <p class="essay-p text-sm sm:text-base md:text-lg mb-6 md:mb-12 indent-4 sm:indent-8">March 15th represents the archival coordinate for the <span class="highlight">terminal collapse of ancient autocratic authority</span> and the birth of modern digital property rights in commercial web development.</p>
 
-            <h3 class="category-h3">⚖️ Judicial Intelligence: The Ides of March</h3>
-            <p class="essay-p"><span class="year-badge">44 BC</span>Assassination of Julius Caesar: A definitive node in sovereign transition. The terminal act by the Roman Senate served as a 'Political Singularity,' marking the death of the Republic and the birth of the Imperial Age. Our forensics focus on how this event redefined the legal concepts of tyranny and state-sponsored assassination.</p>
+            <h3 class="category-h3 text-base sm:text-lg md:text-2xl tracking-[2px] sm:tracking-[4px] pl-4 sm:pl-6 mt-8 md:mt-20 mb-4 md:mb-8">⚖️ Judicial Intelligence: The Ides of March</h3>
+            <p class="essay-p text-sm sm:text-base md:text-lg mb-6 md:mb-12 indent-4 sm:indent-8"><span class="year-badge">44 BC</span>Assassination of Julius Caesar: A definitive political shock in antiquity. Conspirators seeking to preserve republican law killed Caesar, triggering a power vacuum that ultimately accelerated the collapse of the Roman Republic and birthed the autocratic Roman Empire. This event remains a core case study in the jurisprudence of state-sponsored assassination and tyranny.</p>
 
-            <h3 class="category-h3">⚙️ IT & Digital Origins: Symbolics.com</h3>
-            <p class="essay-p"><span class="year-badge">1985</span>First .com Domain Registration: Symbolics.com was initialized. This node archives the birth of the 'Commercial Web.' It established the primordial protocols for digital property rights and global brand genealogy within the DNS matrix, initiating the transformation of the internet into a synchronized global commercial theater.</p>
+            <h3 class="category-h3 text-base sm:text-lg md:text-2xl tracking-[2px] sm:tracking-[4px] pl-4 sm:pl-6 mt-8 md:mt-20 mb-4 md:mb-8">⚙️ IT & Digital Origins: Symbolics.com</h3>
+            <p class="essay-p text-sm sm:text-base md:text-lg mb-6 md:mb-12 indent-4 sm:indent-8"><span class="year-badge">1985</span>First .com Domain Registration: Symbolics.com was registered by the computer company Symbolics, Inc. This node archives the official birth of commercial real estate on the web, initiating the formalization of domain naming registries and paving the way for digital branding, commerce, and online search navigation.</p>
         </div>
-
-        <!-- 🚀 PART 1 END -->
-        <div class="text-center py-20 border-t border-white/10">
-            <p class="font-cyber text-gold text-sm tracking-widest mb-6 uppercase">End of March Part I Synchronization</p>
-            <p class="text-gray-500 italic">"The journey of March continues. Proceed to Part II for nodes 16 through 31."</p>
-        </div>
-    </main>
-
-    <footer class="py-24 border-t border-white/5 text-center">
-        <p class="text-[11px] font-cyber text-gray-700 tracking-[0.5em] uppercase">Akashic Terminal Node © 2026</p>
-    </footer>
-</body>
-</html>
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Node 03: March Archival Intelligence | Part II (16-31)</title>
-    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Inter:wght@300;400;600&family=Playfair+Display:ital,wght@0,700;1,700&display=swap" rel="stylesheet">
-    <script src="https://cdn.tailwindcss.com"></script>
-    <style>
-        :root { --neon-gold: #f5c97a; --bg: #010204; --card-bg: rgba(10, 14, 22, 0.98); }
-        body { background: var(--bg); color: #e2e8f0; font-family: 'Inter', sans-serif; line-height: 2.2; }
-        .font-cyber { font-family: 'Orbitron', sans-serif; }
-        .bg-grid { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background-image: linear-gradient(rgba(245, 201, 122, 0.03) 1px, transparent 1px), linear-gradient(90deg, rgba(245, 201, 122, 0.03) 1px, transparent 1px); background-size: 80px 80px; z-index: -1; }
-        .report-card { background: var(--card-bg); border: 1px solid rgba(245, 201, 122, 0.1); border-radius: 24px; padding: 5rem; margin-bottom: 8rem; box-shadow: 0 40px 100px rgba(0,0,0,0.9); }
-        .day-header { font-family: 'Orbitron'; color: var(--neon-gold); font-size: 3.5rem; letter-spacing: 15px; border-bottom: 2px solid var(--neon-gold); margin-bottom: 4rem; padding-bottom: 20px; text-align: center; }
-        .category-h3 { font-family: 'Orbitron'; color: #fff; font-size: 1.6rem; margin-top: 5rem; margin-bottom: 2rem; text-transform: uppercase; letter-spacing: 4px; border-left: 5px solid var(--neon-gold); padding-left: 25px; }
-        .essay-p { text-align: justify; color: #a0aec0; font-size: 1.2rem; margin-bottom: 3rem; text-indent: 2rem; line-height: 2.4; }
-        .year-badge { font-family: 'Orbitron'; color: #000; font-weight: 700; background: var(--neon-gold); padding: 4px 15px; border-radius: 4px; margin-right: 15px; font-size: 16px; }
-        .highlight { color: #fff; font-weight: 600; border-bottom: 1px solid var(--neon-gold); }
-        .archive-img { width: 100%; height: 550px; object-fit: cover; border-radius: 15px; margin: 4rem 0; border: 1px solid rgba(245, 201, 122, 0.2); filter: brightness(0.9); transition: 0.5s; }
-        .archive-img:hover { filter: brightness(1); }
-    </style>
-</head>
-<body>
-    <div class="bg-grid"></div>
-
-    <nav class="fixed w-full z-[1000] px-12 py-8 flex justify-between items-center bg-black/60 backdrop-blur-xl border-b border-white/5">
-        <div class="text-2xl font-cyber font-bold text-[#f5c97a] tracking-tighter cursor-pointer" onclick="location.href='index.html'">AKASHIC ARCHIVE // NODE_03</div>
-        <div class="flex gap-6">
-            <span class="font-cyber text-gray-500 text-xs mt-2">CHRONOLOGICAL_SYNC: MARCH_P2</span>
-            <a href="index.html" class="font-cyber text-[#f5c97a] border border-[#f5c97a] px-5 py-2 rounded hover:bg-[#f5c97a] hover:text-black transition-all text-xs">BACK_TO_HUB</a>
-        </div>
-    </nav>
-
-    <main class="relative pt-56 pb-20 px-8 max-w-6xl mx-auto">
-        <header class="text-center mb-40">
-            <h1 class="font-cyber text-6xl text-white mb-10 uppercase tracking-[0.4em]">March Intelligence <br><span class="text-gold opacity-50 text-3xl tracking-[0.2em]">Archival Record Part II</span></h1>
-            <p class="max-w-3xl mx-auto text-gray-400 italic text-xl leading-relaxed">"Systematically archiving the transition from industrial-age engineering to the era of digital micro-communication and biological forensics."</p>
-        </header>
 
         <!-- 💡 MARCH 16 -->
-        <div class="report-card">
-            <div class="day-header">MARCH_16</div>
-            <p class="essay-p">March 16th archives the birth of <span class="highlight">liquid-fueled interstellar logistics</span> and the zenith of 20th-century high-speed innovative ambition. Historically, this date anchors the moment human propulsion transcended traditional mechanical limits, redefining the strategic scope of the aerospace matrix.</p>
+        <div class="report-card p-5 sm:p-10 md:p-20 mb-12 md:mb-32">
+            <div class="day-header text-2xl sm:text-4xl md:text-5xl tracking-[8px] sm:tracking-[15px] pb-3 md:pb-5 mb-8 md:mb-16">MARCH_16</div>
+            <p class="essay-p text-sm sm:text-base md:text-lg mb-6 md:mb-12 indent-4 sm:indent-8">March 16th archives the birth of <span class="highlight">liquid-fueled aerospace transport</span> and the zenith of 20th-century orbital ambitions. Historically, this date anchors the moment human propulsion engineering shifted from short-range combustion to long-range high-efficiency rocketry.</p>
 
-            <img src="https://images.unsplash.com/photo-1517976487492-5750f3195933?auto=format&fit=crop&w=1200&q=80" alt="Rocket Launch Exploration" class="archive-img">
+            <img src="https://images.unsplash.com/photo-1517976487492-5750f3195933?auto=format&fit=crop&w=1200&q=80" alt="Rocket Launch Exploration" class="archive-img h-48 sm:h-72 md:h-[450px] lg:h-[550px] my-6 md:my-16">
 
-            <h3 class="category-h3">⚙️ Technical Singularities: Robert Goddard</h3>
-            <p class="essay-p"><span class="year-badge">1926</span>Launch of the First Liquid-Fueled Rocket: Robert Goddard initialized the operational birth of modern rocketry in Auburn, Massachusetts. Our archival terminal categorizes this as the 'Propulsion Singularity.' Although the flight lasted only 2.5 seconds, it provided the foundational protocols for every subsequent orbital and lunar mission, proving that liquid-fueled combustion could provide the necessary thrust to eventually escape Earth's gravity.</p>
+            <h3 class="category-h3 text-base sm:text-lg md:text-2xl tracking-[2px] sm:tracking-[4px] pl-4 sm:pl-6 mt-8 md:mt-20 mb-4 md:mb-8">⚙️ Technical Singularities: Robert Goddard</h3>
+            <p class="essay-p text-sm sm:text-base md:text-lg mb-6 md:mb-12 indent-4 sm:indent-8"><span class="year-badge">1926</span>Launch of the First Liquid-Fueled Rocket: Robert Goddard successfully launched a liquid oxygen and gasoline-fueled rocket in Auburn, Massachusetts. Our terminal categorizes this as a 'Propulsion Singularity.' This technical milestone proved that liquid propellants could provide the variable thrust control needed to escape gravity, serving as the directly documented direct ancestor to the Saturn V and Space Shuttle boosters.</p>
         </div>
 
         <!-- 💡 MARCH 17 -->
-        <div class="report-card">
-            <div class="day-header">MARCH_17</div>
-            <p class="essay-p">March 17th serves as the coordinate for <span class="highlight">Mass-Cultural Branding</span> and the birth of 19th-century elastic innovative logistics. Historically, this date anchors the moments when a localized ethnic identity achieved global synchronized recognition.</p>
+        <div class="report-card p-5 sm:p-10 md:p-20 mb-12 md:mb-32">
+            <div class="day-header text-2xl sm:text-4xl md:text-5xl tracking-[8px] sm:tracking-[15px] pb-3 md:pb-5 mb-8 md:mb-16">MARCH_17</div>
+            <p class="essay-p text-sm sm:text-base md:text-lg mb-6 md:mb-12 indent-4 sm:indent-8">March 17th serves as the coordinate for <span class="highlight">Mass-Cultural Branding</span> and the birth of 19th-century elastic packaging logistics. Historically, this date anchors the moment a localized ethnic tradition converted into a global commercial holiday and when material science enabled temporary binding solutions.</p>
 
-            <h3 class="category-h3">🎉 Global Heritage: Cultural Synchronization</h3>
-            <p class="essay-p"><span class="year-badge">Annual</span>St. Patrick’s Day: Beyond its religious origins, our analysis views this as a supreme case study in 'Ethnic Global Branding.' The synchronized celebration across every major financial hub represents the highest standard of cultural capital migration, establishing the protocols for how localized traditions can scale into a unified global media-commerce cycle.</p>
+            <h3 class="category-h3 text-base sm:text-lg md:text-2xl tracking-[2px] sm:tracking-[4px] pl-4 sm:pl-6 mt-8 md:mt-20 mb-4 md:mb-8">🎉 Global Heritage: Cultural Synchronization</h3>
+            <p class="essay-p text-sm sm:text-base md:text-lg mb-6 md:mb-12 indent-4 sm:indent-8"><span class="year-badge">Annual</span>St. Patrick’s Day: Originally an ethnic and religious observance, our analysis views this as a prime study in 'Socio-Cultural Branding.' The global mobilization of green icons, parades, and consumer food/beverage expenditure represents a highly successful capitalization of cultural folklore into international commerce.</p>
 
-            <h3 class="category-h3">⚙️ Innovations: The Rubber Band Patent</h3>
-            <p class="essay-p"><span class="year-badge">1845</span>Patent of the Rubber Band: Stephen Perry initialized the first technical standard for vulcanized elastic binding. This node represents a milestone in small-scale logistical synchronization, providing a case study in how simple technical breakthroughs can fundamentally improve the innovative efficiency of urban data and resource management across the centuries.</p>
+            <h3 class="category-h3 text-base sm:text-lg md:text-2xl tracking-[2px] sm:tracking-[4px] pl-4 sm:pl-6 mt-8 md:mt-20 mb-4 md:mb-8">⚙️ Innovations: The Rubber Band Patent</h3>
+            <p class="essay-p text-sm sm:text-base md:text-lg mb-6 md:mb-12 indent-4 sm:indent-8"><span class="year-badge">1845</span>Patent of the Rubber Band: Stephen Perry obtained a patent for vulcanized rubber bands. This logistical innovation stabilized packaging and postal systems, showing how small-scale improvements in materials science could secure office and trade logistics during early industrial scaling.</p>
         </div>
 
         <!-- 💡 MARCH 18 -->
-        <div class="report-card">
-            <div class="day-header">MARCH_18</div>
-            <p class="essay-p">March 18th archives the supreme node of <span class="highlight">extra-vehicular human synchronization</span> and the zenith of 19th-century urban transportation forensics. Historically, this date anchors the moment human life first physically floated in the vacuum of space.</p>
+        <div class="report-card p-5 sm:p-10 md:p-20 mb-12 md:mb-32">
+            <div class="day-header text-2xl sm:text-4xl md:text-5xl tracking-[8px] sm:tracking-[15px] pb-3 md:pb-5 mb-8 md:mb-16">MARCH_18</div>
+            <p class="essay-p text-sm sm:text-base md:text-lg mb-6 md:mb-12 indent-4 sm:indent-8">March 18th archives the supreme node of <span class="highlight">extra-vehicular human synchronization</span> and the birth of 17th-century public transportation models, demonstrating the expansion of transport from earth to deep space.</p>
 
-            <img src="https://images.unsplash.com/photo-1446776811953-b23d57bd21aa?auto=format&fit=crop&w=1200&q=80" alt="Astronaut in Space" class="archive-img">
+            <img src="https://images.unsplash.com/photo-1446776811953-b23d57bd21aa?auto=format&fit=crop&w=1200&q=80" alt="Astronaut in Space" class="archive-img h-48 sm:h-72 md:h-[450px] lg:h-[550px] my-6 md:my-16">
 
-            <h3 class="category-h3">🛰️ Interstellar Intelligence: First Spacewalk</h3>
-            <p class="essay-p"><span class="year-badge">1965</span>Alexei Leonov Performs First EVA: For 12 minutes, Leonov left the Voskhod 2 spacecraft. This temporal node archives the extreme psychological and technical limits of the 'Human-Machine Interface.' Leonov’s mission established the foundational protocols for space-based survival and innovative hull-repair, anchoring the future of synchronized space-station maintenance and the International Space Station (ISS) protocols.</p>
+            <h3 class="category-h3 text-base sm:text-lg md:text-2xl tracking-[2px] sm:tracking-[4px] pl-4 sm:pl-6 mt-8 md:mt-20 mb-4 md:mb-8">🛰️ Interstellar Intelligence: First Spacewalk</h3>
+            <p class="essay-p text-sm sm:text-base md:text-lg mb-6 md:mb-12 indent-4 sm:indent-8"><span class="year-badge">1965</span>Alexei Leonov Performs First EVA: Leonov left the Voskhod 2 spacecraft for 12 minutes. This temporal node pushed the limits of the 'Human-Machine Interface.' Leonov’s survival suit inflated in the vacuum, requiring a dangerous, manual depressurization to re-enter. His mission set the safety baselines for spacewalk engineering, extra-vehicular repairs, and orbital station maintenance.</p>
 
-            <h3 class="category-h3">⚙️ Innovations: Urban Transit Genesis</h3>
-            <p class="essay-p"><span class="year-badge">1662</span>First Public Bus System: Initialized in Paris by Blaise Pascal. This node archives the birth of organized metropolitan human flow. By synchronizing multiple passengers into a singular logistical cycle with set routes and fares, Pascal pioneered the protocols for modern public transportation, providing a primary case study in urban innovative efficiency and logistical scaling.</p>
+            <h3 class="category-h3 text-base sm:text-lg md:text-2xl tracking-[2px] sm:tracking-[4px] pl-4 sm:pl-6 mt-8 md:mt-20 mb-4 md:mb-8">⚙️ Innovations: Urban Transit Genesis</h3>
+            <p class="essay-p text-sm sm:text-base md:text-lg mb-6 md:mb-12 indent-4 sm:indent-8"><span class="year-badge">1662</span>First Public Bus System: Blaise Pascal initialized the "five-sol carriages" in Paris, creating fixed routes and scheduled departures. This node represents the birth of managed urban commuter flow. By synchronizing multiple public passengers into a uniform transport matrix, Pascal established the logistics that undergird modern mass transit systems.</p>
         </div>
 
         <!-- 💡 MARCH 19 -->
-        <div class="report-card">
-            <div class="day-header">MARCH_19</div>
-            <p class="essay-p">March 19th represents the temporal node for <span class="highlight">Large-Scale Geopolitical Shock</span> and the birth of 20th-century entertainment branding. It is a day marked by the initialization of major desert-theater conflict and the formal opening of the synchronized gambling matrix.</p>
+        <div class="report-card p-5 sm:p-10 md:p-20 mb-12 md:mb-32">
+            <div class="day-header text-2xl sm:text-4xl md:text-5xl tracking-[8px] sm:tracking-[15px] pb-3 md:pb-5 mb-8 md:mb-16">MARCH_19</div>
+            <p class="essay-p text-sm sm:text-base md:text-lg mb-6 md:mb-12 indent-4 sm:indent-8">March 19th represents the temporal coordinate for <span class="highlight">modern geopolitical conflict</span> and the birth of 20th-century desert casino capitalization. It is a day defined by military intervention and the legalization of gray-market recreation.</p>
 
-            <h3 class="category-h3">🚨 Critical Geopolitical Milestones: Iraq Node</h3>
-            <p class="essay-p"><span class="year-badge">2003</span>Invasion of Iraq: The initialization of 'Operation Iraqi Freedom.' This node archives a significant shift in 21st-century international law and preemptive defense doctrines. Our forensics focus on the massive synchronization of precision-guided logistics and the subsequent recalibration of Middle Eastern geopolitical boundaries, fundamentally altering the trajectory of global security forensics and state-building models.</p>
+            <h3 class="category-h3 text-base sm:text-lg md:text-2xl tracking-[2px] sm:tracking-[4px] pl-4 sm:pl-6 mt-8 md:mt-20 mb-4 md:mb-8">🚨 Critical Geopolitical Milestones: Iraq War Inception</h3>
+            <p class="essay-p text-sm sm:text-base md:text-lg mb-6 md:mb-12 indent-4 sm:indent-8"><span class="year-badge">2003</span>Invasion of Iraq: The formal start of "Operation Iraqi Freedom" with precision air strikes on Baghdad. This node archives a critical shift in early 21st-century international law, preemptive defense doctrines, and geopolitical instability. The deployment of smart munitions and rapid armor movements destabilized regional borders and led to prolonged counter-insurgency operations, altering global defense planning and security parameters.</p>
 
-            <h3 class="category-h3">📈 Macro-Financial Intelligence: Vegas Inception</h3>
-            <p class="essay-p"><span class="year-badge">1931</span>Nevada Legalizes Gambling: A pivotal shift in the history of consumer capital flow. This node represents the legal birth of the Las Vegas entertainment ecosystem, establishing new protocols for the synchronization of tourism, luxury branding, and high-stakes financial risk management into a singular, highly-profitable economic matrix.</p>
+            <h3 class="category-h3 text-base sm:text-lg md:text-2xl tracking-[2px] sm:tracking-[4px] pl-4 sm:pl-6 mt-8 md:mt-20 mb-4 md:mb-8">📈 Macro-Financial Intelligence: Nevada Gambling Legalization</h3>
+            <p class="essay-p text-sm sm:text-base md:text-lg mb-6 md:mb-12 indent-4 sm:indent-8"><span class="year-badge">1931</span>Nevada Legalizes Gambling: Facing massive tax deficits during the Great Depression, Nevada legalized casino gambling. This tactical legislative shift redirected national leisure capital toward a barren desert valley, facilitating the birth of the Las Vegas entertainment ecosystem and transforming unregulated gambling into a structured corporate tax base.</p>
         </div>
 
         <!-- 💡 MARCH 20 -->
-        <div class="report-card">
-            <div class="day-header">MARCH_20</div>
-            <p class="essay-p">March 20th serves as the supreme coordinate for <span class="highlight">Global Corporate Synchronization</span> and the zenith of celestial temporal recalibration. Historically, this date anchors the birth of the world’s first multinational corporation.</p>
+        <div class="report-card p-5 sm:p-10 md:p-20 mb-12 md:mb-32">
+            <div class="day-header text-2xl sm:text-4xl md:text-5xl tracking-[8px] sm:tracking-[15px] pb-3 md:pb-5 mb-8 md:mb-16">MARCH_20</div>
+            <p class="essay-p text-sm sm:text-base md:text-lg mb-6 md:mb-12 indent-4 sm:indent-8">March 20th serves as the supreme coordinate for <span class="highlight">Global Corporate Synchronization</span> and the zenith of celestial calendar calibration, marking both maritime corporate sovereignty and planetary timing.</p>
 
-            <img src="https://images.unsplash.com/photo-1534447677768-be436bb09401?auto=format&fit=crop&w=1200&q=80" alt="Maritime Trade and Ships" class="archive-img">
+            <img src="https://images.unsplash.com/photo-1534447677768-be436bb09401?auto=format&fit=crop&w=1200&q=80" alt="Maritime Trade and Ships" class="archive-img h-48 sm:h-72 md:h-[450px] lg:h-[550px] my-6 md:my-16">
 
-            <h3 class="category-h3">📈 Finance & Brand Genealogy: The VOC Node</h3>
-            <p class="essay-p"><span class="year-badge">1602</span>Founding of the Dutch East India Company (VOC): The world's first publicly traded company. Our archival forensics identify this as the 'Corporate Singularity.' By introducing the first permanent stock system and sovereign-like corporate power, the VOC pioneered the protocols for modern global trade, central banking, and multinational logistical synchronization, anchoring the financial architecture of the 21st-century global matrix.</p>
+            <h3 class="category-h3 text-base sm:text-lg md:text-2xl tracking-[2px] sm:tracking-[4px] pl-4 sm:pl-6 mt-8 md:mt-20 mb-4 md:mb-8">📈 Finance & Brand Genealogy: The VOC Node</h3>
+            <p class="essay-p text-sm sm:text-base md:text-lg mb-6 md:mb-12 indent-4 sm:indent-8"><span class="year-badge">1602</span>Founding of the Dutch East India Company (VOC): Granted a monopoly on Asian trade by the Dutch government, the VOC became the world's first publicly traded company. Our archival forensics identify this as the 'Corporate Singularity.' By introducing permanent capital and fractional stock trading on the Amsterdam Exchange, the VOC pioneered multinational logistics and laid the structural basis for modern capitalism.</p>
 
-            <h3 class="category-h3">📅 Temporal Recalibration: Vernal Equinox</h3>
-            <p class="essay-p"><span class="year-badge">Astronomic</span>The Spring Equinox: Historically synchronized with ancient innovative festivals and the legal start of agricultural cycles. This node represents the human attempt to align judicial and economic reporting with the immutable biological pulses of the planet, ensuring global systemic equilibrium through synchronized seasonal timing.</p>
+            <h3 class="category-h3 text-base sm:text-lg md:text-2xl tracking-[2px] sm:tracking-[4px] pl-4 sm:pl-6 mt-8 md:mt-20 mb-4 md:mb-8">📅 Temporal Recalibration: Vernal Equinox</h3>
+            <p class="essay-p text-sm sm:text-base md:text-lg mb-6 md:mb-12 indent-4 sm:indent-8"><span class="year-badge">Astronomic</span>The Spring Equinox: Historically synchronized with ancient spring festivals and the legal start of agricultural crop contracts. This node represents the alignment of human social, fiscal, and regulatory schedules with the orbital mechanics of the planet, stabilizing logistical reporting with natural seasonal limits.</p>
         </div>
 
         <!-- 💡 MARCH 21 -->
-        <div class="report-card">
-            <div class="day-header">MARCH_21</div>
-            <p class="essay-p">March 21st archives the supreme node of <span class="highlight">micro-communication synchronization</span> and the tragic recalibration of racial judicial equity. It is a day defined by the birth of the real-time digital pulse and the systemic shock of state-sponsored violence.</p>
+        <div class="report-card p-5 sm:p-10 md:p-20 mb-12 md:mb-32">
+            <div class="day-header text-2xl sm:text-4xl md:text-5xl tracking-[8px] sm:tracking-[15px] pb-3 md:pb-5 mb-8 md:mb-16">MARCH_21</div>
+            <p class="essay-p text-sm sm:text-base md:text-lg mb-6 md:mb-12 indent-4 sm:indent-8">March 21st archives the supreme node of <span class="highlight">real-time digital broadcasting</span> and the tragic international alert regarding apartheid-era civil rights violations.</p>
             
-            <h3 class="category-h3">⚙️ IT Singularities: The First Tweet</h3>
-            <p class="essay-p"><span class="year-badge">2006</span>Initialization of Twitter: Jack Dorsey sent the first message. Our archival forensics identify this as a 'Communication Singularity.' By restricting information to high-velocity short bursts, Twitter established a new protocol for data synchronization. This node fundamentally shifted global political discourse, real-time crisis management, and the commercial genealogy of digital branding.</p>
+            <h3 class="category-h3 text-base sm:text-lg md:text-2xl tracking-[2px] sm:tracking-[4px] pl-4 sm:pl-6 mt-8 md:mt-20 mb-4 md:mb-8">⚙️ IT Singularities: The First Tweet</h3>
+            <p class="essay-p text-sm sm:text-base md:text-lg mb-6 md:mb-12 indent-4 sm:indent-8"><span class="year-badge">2006</span>Twitter Launch: Jack Dorsey sent the first message, "just setting up my twttr." This milestone serves as a 'Communication Singularity.' By forcing real-time information to be compressed into rapid-fire text bursts, Twitter bypassed traditional news editing, accelerating political discourse, corporate messaging, and crisis journalism.</p>
             
-            <h3 class="category-h3">🚨 Judicial & Geopolitical Tragedies: Sharpeville</h3>
-            <p class="essay-p"><span class="year-badge">1960</span>The Sharpeville Massacre: South African police opened fire on peaceful protesters. This tragic singularity forced a global re-evaluation of Apartheid's legality. Our research views this node as the primary catalyst for the international synchronization of economic sanctions and the recalibration of global judicial ethics regarding systemic racism.</p>
+            <h3 class="category-h3 text-base sm:text-lg md:text-2xl tracking-[2px] sm:tracking-[4px] pl-4 sm:pl-6 mt-8 md:mt-20 mb-4 md:mb-8">🚨 Judicial & Geopolitical Tragedies: Sharpeville</h3>
+            <p class="essay-p text-sm sm:text-base md:text-lg mb-6 md:mb-12 indent-4 sm:indent-8"><span class="year-badge">1960</span>The Sharpeville Massacre: South African police opened fire on peaceful demonstrators protesting against the apartheid regime's pass laws, killing 69 people. This tragic event galvanized global condemnation, driving international economic sanctions and leading the United Nations to designate March 21st as the International Day for the Elimination of Racial Discrimination.</p>
         </div>
 
         <!-- 💡 MARCH 22 -->
-        <div class="report-card">
-            <div class="day-header">MARCH_22</div>
-            <p class="essay-p">March 22nd serves as the coordinate for <span class="highlight">Colonial Fiscal Friction</span> and the formalization of global water resource synchronization. Historically, this date anchors the moment imperial tax laws catalyzed national resistance.</p>
+        <div class="report-card p-5 sm:p-10 md:p-20 mb-12 md:mb-32">
+            <div class="day-header text-2xl sm:text-4xl md:text-5xl tracking-[8px] sm:tracking-[15px] pb-3 md:pb-5 mb-8 md:mb-16">MARCH_22</div>
+            <p class="essay-p text-sm sm:text-base md:text-lg mb-6 md:mb-12 indent-4 sm:indent-8">March 22nd serves as the coordinate for <span class="highlight">colonial fiscal disputes</span> and the formalization of global water security initiatives, highlighting the contrast between governmental greed and essential natural resource management.</p>
 
-            <h3 class="category-h3">⚖️ Judicial Intelligence: The Stamp Act</h3>
-            <p class="essay-p"><span class="year-badge">1765</span>Passage of the Stamp Act: The British Parliament initialized a direct tax on the American colonies. Our archival terminal categorizes this as a 'Legislative Singularity.' By imposing a tax without representation, this act served as the primordial spark for the American Revolution, providing the legal DNA for the subsequent synchronization of revolutionary movements across the Atlantic.</p>
+            <h3 class="category-h3 text-base sm:text-lg md:text-2xl tracking-[2px] sm:tracking-[4px] pl-4 sm:pl-6 mt-8 md:mt-20 mb-4 md:mb-8">⚖️ Judicial Intelligence: The Stamp Act</h3>
+            <p class="essay-p text-sm sm:text-base md:text-lg mb-6 md:mb-12 indent-4 sm:indent-8"><span class="year-badge">1765</span>Passage of the Stamp Act: The British Parliament enacted a tax on all printed materials in the American colonies. This milestone represents a 'Legislative Singularity.' By taxing colonists without representation, this act sparked deep constitutional anger, establishing the intellectual argument for self-defense and colonial rebellion across the Atlantic.</p>
 
-            <h3 class="category-h3">🌍 Innovations: World Water Day</h3>
-            <p class="essay-p"><span class="year-badge">1993</span>Initialization of World Water Day: Established by the UN, this node archives the first global attempt to synchronize administrative attention with the preservation of the most fundamental biological innovative asset. Our research highlights its role in establishing the protocols for international hydro-diplomacy and synchronized environmental frameworks.</p>
+            <h3 class="category-h3 text-base sm:text-lg md:text-2xl tracking-[2px] sm:tracking-[4px] pl-4 sm:pl-6 mt-8 md:mt-20 mb-4 md:mb-8">🌍 Innovations: World Water Day</h3>
+            <p class="essay-p text-sm sm:text-base md:text-lg mb-6 md:mb-12 indent-4 sm:indent-8"><span class="year-badge">1993</span>Initialization of World Water Day: Established by the UN, this node archives the first global effort to prioritize clean water access and ecological protection in international law. It serves as a starting point for hydro-diplomacy, cross-border resource treaties, and sustainable municipal infrastructure development.</p>
         </div>
 
         <!-- 💡 MARCH 23 -->
-        <div class="report-card">
-            <div class="day-header">MARCH_23</div>
-            <p class="essay-p">March 23rd represents the temporal coordinate for <span class="highlight">Revolutionary Rhetorical Intelligence</span> and the terminal collapse of 20th-century orbital hegemony. It is a day defined by the most iconic demand for sovereignty.</p>
+        <div class="report-card p-5 sm:p-10 md:p-20 mb-12 md:mb-32">
+            <div class="day-header text-2xl sm:text-4xl md:text-5xl tracking-[8px] sm:tracking-[15px] pb-3 md:pb-5 mb-8 md:mb-16">MARCH_23</div>
+            <p class="essay-p text-sm sm:text-base md:text-lg mb-6 md:mb-12 indent-4 sm:indent-8">March 23rd represents the temporal coordinate for <span class="highlight">revolutionary rhetorical power</span> and the physical deorbiting of 20th-century orbital space stations, showing how ideological and mechanical structures reach their natural limits.</p>
 
-            <h3 class="category-h3">🏛️ Judicial & Sovereign Nodes: Patrick Henry</h3>
-            <p class="essay-p"><span class="year-badge">1775</span>"Give me liberty, or give me death!": Patrick Henry delivered this seminal node in sovereign philosophy. Our scholarly analysis identifies this rhetoric as a 'Psychological Singularity.' By synchronizing individual moral imperative with collective political action, Henry provided the intellectual framework for the demand for legal autonomy, fundamentally altering the trajectory of global democratic statecraft.</p>
+            <h3 class="category-h3 text-base sm:text-lg md:text-2xl tracking-[2px] sm:tracking-[4px] pl-4 sm:pl-6 mt-8 md:mt-20 mb-4 md:mb-8">🏛️ Judicial & Sovereign Nodes: Patrick Henry</h3>
+            <p class="essay-p text-sm sm:text-base md:text-lg mb-6 md:mb-12 indent-4 sm:indent-8"><span class="year-badge">1775</span>"Give me liberty, or give me death!": Patrick Henry delivered his revolutionary speech to the Virginia Convention. Our analysis views this address as a 'Psychological Singularity.' By organizing civic resistance around basic moral imperatives, Henry galvanized the move toward legal independence, redefining the trajectory of constitutional government.</p>
 
-            <h3 class="category-h3">🛰️ Interstellar Intelligence: Mir Deorbit</h3>
-            <p class="essay-p"><span class="year-badge">2001</span>Deorbiting of the Mir Space Station: After 15 years of continuous occupation, Mir re-entered the atmosphere. This node archives the highest standard of orbital logistical synchronization. The controlled disposal of a massive technical artifact provided a case study in aerospace forensics and the transition toward the synchronized era of the ISS.</p>
+            <h3 class="category-h3 text-base sm:text-lg md:text-2xl tracking-[2px] sm:tracking-[4px] pl-4 sm:pl-6 mt-8 md:mt-20 mb-4 md:mb-8">🛰️ Interstellar Intelligence: Mir Deorbit</h3>
+            <p class="essay-p text-sm sm:text-base md:text-lg mb-6 md:mb-12 indent-4 sm:indent-8"><span class="year-badge">2001</span>Deorbiting of the Mir Space Station: After 15 years of continuous research, Mir was intentionally guided to a safe re-entry over the Pacific Ocean. This node archives high-level orbital safety logistics, providing an important case study in orbital debris mitigation and global tracking synchronization before the transition to the ISS.</p>
         </div>
 
         <!-- 💡 MARCH 24 -->
-        <div class="report-card">
-            <div class="day-header">MARCH_24</div>
-            <p class="essay-p">March 24th archives the birth of <span class="highlight">Pathological Forensic Decryption</span> and the tragic node of large-scale ecological logistical failure. It is a day defined by the technical triumph of clinical microbiology.</p>
+        <div class="report-card p-5 sm:p-10 md:p-20 mb-12 md:mb-32">
+            <div class="day-header text-2xl sm:text-4xl md:text-5xl tracking-[8px] sm:tracking-[15px] pb-3 md:pb-5 mb-8 md:mb-16">MARCH_24</div>
+            <p class="essay-p text-sm sm:text-base md:text-lg mb-6 md:mb-12 indent-4 sm:indent-8">March 24th archives the birth of <span class="highlight">clinical diagnostic microbiology</span> and the tragic node of major maritime oil spills, showing both medical advancement and corporate ecological neglect.</p>
 
-            <img src="https://images.unsplash.com/photo-1581093588401-fbb62a02f120?auto=format&fit=crop&w=1200&q=80" alt="Medical Laboratory Research" class="archive-img">
+            <img src="https://images.unsplash.com/photo-1581093588401-fbb62a02f120?auto=format&fit=crop&w=1200&q=80" alt="Medical Laboratory Research" class="archive-img h-48 sm:h-72 md:h-[450px] lg:h-[550px] my-6 md:my-16">
 
-            <h3 class="category-h3">💉 Medical Singularities: Robert Koch</h3>
-            <p class="essay-p"><span class="year-badge">1882</span>Discovery of TB Bacterium: Robert Koch announced the identification of Mycobacterium tuberculosis. Our archival forensics identify this as the 'Pathological Singularity.' By proving the germ theory through high-fidelity clinical observation, Koch pioneered the protocols for modern infectious disease forensics and global vaccine synchronization.</p>
+            <h3 class="category-h3 text-base sm:text-lg md:text-2xl tracking-[2px] sm:tracking-[4px] pl-4 sm:pl-6 mt-8 md:mt-20 mb-4 md:mb-8">💉 Medical Singularities: Robert Koch</h3>
+            <p class="essay-p text-sm sm:text-base md:text-lg mb-6 md:mb-12 indent-4 sm:indent-8"><span class="year-badge">1882</span>Discovery of Tuberculosis Bacillus: Robert Koch announced the isolation of Mycobacterium tuberculosis. This milestone represents a 'Pathological Singularity.' By verifying germ theory through rigorous observation, Koch established the protocols for modern clinical pathology, quarantine practices, and vaccine research.</p>
 
-            <h3 class="category-h3">🚨 Critical Tragedies: Exxon Valdez</h3>
-            <p class="essay-p"><span class="year-badge">1989</span>Exxon Valdez Oil Spill: The grounding of a supertanker in Alaska. This temporal node represents a 'Forensic Failure Singularity.' The subsequent synchronization of cleanup efforts forced a global re-evaluation of maritime logistical safety and corporate liability, establishing the 'Post-Valdez' protocols for environmental innovative protection.</p>
+            <h3 class="category-h3 text-base sm:text-lg md:text-2xl tracking-[2px] sm:tracking-[4px] pl-4 sm:pl-6 mt-8 md:mt-20 mb-4 md:mb-8">🚨 Critical Tragedies: Exxon Valdez</h3>
+            <p class="essay-p text-sm sm:text-base md:text-lg mb-6 md:mb-12 indent-4 sm:indent-8"><span class="year-badge">1989</span>Exxon Valdez Oil Spill: The oil tanker Exxon Valdez struck Bligh Reef in Prince William Sound, spilling millions of gallons of crude oil. This event represents a 'Risk Management failure.' The disaster prompted federal action under the Oil Pollution Act of 1990, establishing strict double-hull requirements and corporate financial liability for environmental restoration.</p>
         </div>
 
         <!-- 💡 MARCH 25 -->
-        <div class="report-card">
-            <div class="day-header">MARCH_25</div>
-            <p class="essay-p">March 25th serves as the coordinate for <span class="highlight">Trans-European Judicial Integration</span> and the tragic node of industrial-age labor failure. Historically, this date anchors the moment a continent legally unified its economic markets.</p>
+        <div class="report-card p-5 sm:p-10 md:p-20 mb-12 md:mb-32">
+            <div class="day-header text-2xl sm:text-4xl md:text-5xl tracking-[8px] sm:tracking-[15px] pb-3 md:pb-5 mb-8 md:mb-16">MARCH_25</div>
+            <p class="essay-p text-sm sm:text-base md:text-lg mb-6 md:mb-12 indent-4 sm:indent-8">March 25th serves as the coordinate for <span class="highlight">European economic integration</span> and the tragic node of industrial-age factory fires, contrasting the growth of trade with the historical lack of safety regulations.</p>
 
-            <h3 class="category-h3">⚖️ Judicial Intelligence: The Treaty of Rome</h3>
-            <p class="essay-p"><span class="year-badge">1957</span>Signing of the Treaty of Rome: This node archives the formal birth of the European Economic Community (EEC). Our scholarly research views this as the most significant diplomatic synchronization in European history. By creating a unified legal framework for the movement of goods and capital, it provided the constitutional DNA for the eventual European Union.</p>
+            <h3 class="category-h3 text-base sm:text-lg md:text-2xl tracking-[2px] sm:tracking-[4px] pl-4 sm:pl-6 mt-8 md:mt-20 mb-4 md:mb-8">⚖️ Judicial Intelligence: The Treaty of Rome</h3>
+            <p class="essay-p text-sm sm:text-base md:text-lg mb-6 md:mb-12 indent-4 sm:indent-8"><span class="year-badge">1957</span>Signing of the Treaty of Rome: This milestone established the European Economic Community (EEC). This historic agreement coordinated Western European trade, establishing a common market framework for goods, labor, and capital. It served as the legal precursor to the modern European Union.</p>
 
-            <h3 class="category-h3">🚨 Judicial Tragedies: Triangle Fire</h3>
-            <p class="essay-p"><span class="year-badge">1911</span>Triangle Shirtwaist Factory Fire: A tragic singularity in New York City. The loss of 146 workers due to systemic logistical neglect forced a total recalibration of labor law. This node served as the primary catalyst for the synchronization of workplace safety standards and fire-prevention innovative protocols across the world.</p>
+            <h3 class="category-h3 text-base sm:text-lg md:text-2xl tracking-[2px] sm:tracking-[4px] pl-4 sm:pl-6 mt-8 md:mt-20 mb-4 md:mb-8">🚨 Judicial Tragedies: Triangle Fire</h3>
+            <p class="essay-p text-sm sm:text-base md:text-lg mb-6 md:mb-12 indent-4 sm:indent-8"><span class="year-badge">1911</span>Triangle Shirtwaist Factory Fire: A massive factory fire in New York City killed 146 garment workers due to locked exit doors. This tragedy spurred sweeping changes in state labor laws, workplace safety inspections, and fire prevention mandates, establishing early safety standards for industrial workers.</p>
         </div>
 
         <!-- 💡 MARCH 26 -->
-        <div class="report-card">
-            <div class="day-header">MARCH_26</div>
-            <p class="essay-p">March 26th represents the temporal node for <span class="highlight">Universal Biological Security</span> and the zenith of 19th-century artistic legacy. It is a day marked by the scientific victory over a debilitating virus.</p>
+        <div class="report-card p-5 sm:p-10 md:p-20 mb-12 md:mb-32">
+            <div class="day-header text-2xl sm:text-4xl md:text-5xl tracking-[8px] sm:tracking-[15px] pb-3 md:pb-5 mb-8 md:mb-16">MARCH_26</div>
+            <p class="essay-p text-sm sm:text-base md:text-lg mb-6 md:mb-12 indent-4 sm:indent-8">March 26th represents the temporal node for <span class="highlight">mass preventative medicine</span> and the end of symphonic music's classical era, showing human advancements in both biology and art.</p>
 
-            <h3 class="category-h3">💉 Medical Singularities: Polio Vaccine</h3>
-            <p class="essay-p"><span class="year-badge">1953</span>Salk Announces Polio Vaccine Success: Jonas Salk initialized the global era of biological preventative intelligence. By refusing to patent the vaccine for personal gain, Salk pioneered a new ethic of 'Intellectual Commons,' enabling the rapid global synchronization of immunization that effectively eradicated polio from the terrestrial biosphere.</p>
+            <h3 class="category-h3 text-base sm:text-lg md:text-2xl tracking-[2px] sm:tracking-[4px] pl-4 sm:pl-6 mt-8 md:mt-20 mb-4 md:mb-8">💉 Medical Singularities: Polio Vaccine</h3>
+            <p class="essay-p text-sm sm:text-base md:text-lg mb-6 md:mb-12 indent-4 sm:indent-8"><span class="year-badge">1953</span>Salk Announces Polio Vaccine Success: Jonas Salk announced the success of his inactivated polio vaccine. By declining to patent the drug for personal profit, Salk prioritized public health, establishing an ethical precedent for affordable medicine that facilitated rapid global immunization and nearly eradicated polio from the planet.</p>
 
-            <h3 class="category-h3">🎨 Sound & Vibration: Beethoven Node</h3>
-            <p class="essay-p"><span class="year-badge">1827</span>Death of Ludwig van Beethoven: A supreme node in the history of human intelligence. Beethoven’s work served as a technical singularity in 'Symphonic Architecture,' transitioning global culture from the Classical to the Romantic era and anchoring the future of synchronized musical theory for eternity.</p>
+            <h3 class="category-h3 text-base sm:text-lg md:text-2xl tracking-[2px] sm:tracking-[4px] pl-4 sm:pl-6 mt-8 md:mt-20 mb-4 md:mb-8">🎨 Sound & Vibration: Beethoven Node</h3>
+            <p class="essay-p text-sm sm:text-base md:text-lg mb-6 md:mb-12 indent-4 sm:indent-8"><span class="year-badge">1827</span>Death of Ludwig van Beethoven: A major transitional figure in music history. Beethoven's symphonies expanded classical form into emotional, romantic structures, changing how music was composed and establishing the independence of the artist as a cultural figure.</p>
         </div>
 
         <!-- 💡 MARCH 27 -->
-        <div class="report-card">
-            <div class="day-header">MARCH_27</div>
-            <p class="essay-p">March 27th archives the birth of <span class="highlight">X-Ray Crystallographic Origins</span> and the tragic node of the deadliest aviation disaster in history.</p>
+        <div class="report-card p-5 sm:p-10 md:p-20 mb-12 md:mb-32">
+            <div class="day-header text-2xl sm:text-4xl md:text-5xl tracking-[8px] sm:tracking-[15px] pb-3 md:pb-5 mb-8 md:mb-16">MARCH_27</div>
+            <p class="essay-p text-sm sm:text-base md:text-lg mb-6 md:mb-12 indent-4 sm:indent-8">March 27th archives the birth of <span class="highlight">diagnostic x-ray physics</span> and the tragic aviation failure at Tenerife, showing the growth of imaging technology alongside the necessity of aircrew coordination.</p>
 
-            <h3 class="category-h3">⚙️ Technical Singularities: Wilhelm Röntgen</h3>
-            <p class="essay-p"><span class="year-badge">1895</span>Patenting of the X-Ray: Formal calibration of electromagnetic radiation for clinical use. Our archival analysis views this as the birth of 'Non-Invasive Forensics.' This technical milestone provided the foundational protocols for modern diagnostic medicine, airport security synchronization, and metallurgical innovative research.</p>
+            <h3 class="category-h3 text-base sm:text-lg md:text-2xl tracking-[2px] sm:tracking-[4px] pl-4 sm:pl-6 mt-8 md:mt-20 mb-4 md:mb-8">⚙️ Technical Singularities: Wilhelm Röntgen</h3>
+            <p class="essay-p text-sm sm:text-base md:text-lg mb-6 md:mb-12 indent-4 sm:indent-8"><span class="year-badge">1895</span>Patenting of the X-Ray: The formal calibration of electromagnetic x-radiation for clinical diagnostic use. This milestone represents the birth of 'Non-Invasive Imaging,' providing the foundational protocols for modern radiology, structural analysis, and security screening.</p>
 
-            <h3 class="category-h3">🚨 Critical Tragedies: Tenerife Disaster</h3>
-            <p class="essay-p"><span class="year-badge">1977</span>Tenerife Airport Disaster: Two Boeing 747s collided on a foggy runway. This node archives the ultimate failure of human-technical synchronization. The subsequent forensic analysis forced a total systemic overhaul of global air-traffic innovative protocols and Crew Resource Management (CRM) standards.</p>
+            <h3 class="category-h3 text-base sm:text-lg md:text-2xl tracking-[2px] sm:tracking-[4px] pl-4 sm:pl-6 mt-8 md:mt-20 mb-4 md:mb-8">🚨 Critical Tragedies: Tenerife Disaster</h3>
+            <p class="essay-p text-sm sm:text-base md:text-lg mb-6 md:mb-12 indent-4 sm:indent-8"><span class="year-badge">1977</span>Tenerife Airport Disaster: Two Boeing 747s collided on a fog-covered runway in the Canary Islands, killing 583 people. This tragedy was caused by communication misunderstandings and bad weather, leading to the creation of Crew Resource Management (CRM) standards to improve cockpit communication and coordination worldwide.</p>
         </div>
 
         <!-- 💡 MARCH 28 -->
-        <div class="report-card">
-            <div class="day-header">MARCH_28</div>
-            <p class="essay-p">March 28th serves as the coordinate for <span class="highlight">Nuclear Risk Forensics</span> and the zenith of 19th-century geopolitical re-branding. It is a day defined by the near-terminal failure of a fission reactor.</p>
+        <div class="report-card p-5 sm:p-10 md:p-20 mb-12 md:mb-32">
+            <div class="day-header text-2xl sm:text-4xl md:text-5xl tracking-[8px] sm:tracking-[15px] pb-3 md:pb-5 mb-8 md:mb-16">MARCH_28</div>
+            <p class="essay-p text-sm sm:text-base md:text-lg mb-6 md:mb-12 indent-4 sm:indent-8">March 28th serves as the coordinate for <span class="highlight">nuclear plant safety analysis</span> and the transition from classical Byzantine-Ottoman naming conventions to modern secular designations.</p>
 
-            <h3 class="category-h3">⚙️ Technical Singularities: Three Mile Island</h3>
-            <p class="essay-p"><span class="year-badge">1979</span>Three Mile Island Accident: A partial nuclear meltdown in Pennsylvania. Our analytical terminal categorizes this as a 'Risk Management Singularity.' The failure forced a global recalibration of nuclear energy legislative protocols and established more rigorous innovative safety standards and public transparency.</p>
+            <h3 class="category-h3 text-base sm:text-lg md:text-2xl tracking-[2px] sm:tracking-[4px] pl-4 sm:pl-6 mt-8 md:mt-20 mb-4 md:mb-8">⚙️ Technical Singularities: Three Mile Island</h3>
+            <p class="essay-p text-sm sm:text-base md:text-lg mb-6 md:mb-12 indent-4 sm:indent-8"><span class="year-badge">1979</span>Three Mile Island Accident: A partial meltdown occurred at the Three Mile Island nuclear plant in Pennsylvania. This event represents a 'Nuclear Safety Singularity.' It led to major reforms in plant safety regulation, operator training, and emergency response procedures by the Nuclear Regulatory Commission.</p>
 
-            <h3 class="category-h3">🏛️ Geopolitical Nodes: Constantinople to Istanbul</h3>
-            <p class="essay-p"><span class="year-badge">1930</span>Renaming of Constantinople to Istanbul: A definitive node in national re-branding. Our archival research highlights how this legal act synchronized Turkish identity with a modern, secular framework, effectively erasing the final nomenclature of the Byzantine-Ottoman administrative matrix.</p>
+            <h3 class="category-h3 text-base sm:text-lg md:text-2xl tracking-[2px] sm:tracking-[4px] pl-4 sm:pl-6 mt-8 md:mt-20 mb-4 md:mb-8">🏛️ Geopolitical Nodes: Constantinople to Istanbul</h3>
+            <p class="essay-p text-sm sm:text-base md:text-lg mb-6 md:mb-12 indent-4 sm:indent-8"><span class="year-badge">1930</span>Renaming of Constantinople to Istanbul: The Turkish Republic officially adopted 'Istanbul' as the sole name for the city under a new postal law. This administrative change was part of Atatürk's secular reforms, modernizing the country's geography and breaking with its Ottoman past.</p>
         </div>
 
         <!-- 💡 MARCH 29 -->
-        <div class="report-card">
-            <div class="day-header">MARCH_29</div>
-            <p class="essay-p">March 29th represents the temporal coordinate for <span class="highlight">Archaeological Intelligence</span> and the birth of 19th-century mass-market chemical branding.</p>
+        <div class="report-card p-5 sm:p-10 md:p-20 mb-12 md:mb-32">
+            <div class="day-header text-2xl sm:text-4xl md:text-5xl tracking-[8px] sm:tracking-[15px] pb-3 md:pb-5 mb-8 md:mb-16">MARCH_29</div>
+            <p class="essay-p text-sm sm:text-base md:text-lg mb-6 md:mb-12 indent-4 sm:indent-8">March 29th represents the temporal coordinate for <span class="highlight">archaeological excavation</span> and the birth of 19th-century secret beverage formulas, showing the preservation of history alongside corporate trade secrets.</p>
 
-            <img src="https://images.unsplash.com/photo-1599839619722-397514118834?auto=format&fit=crop&w=1200&q=80" alt="Ancient Chinese Artifacts" class="archive-img">
+            <img src="https://images.unsplash.com/photo-1599839619722-397514118834?auto=format&fit=crop&w=1200&q=80" alt="Ancient Chinese Artifacts" class="archive-img h-48 sm:h-72 md:h-[450px] lg:h-[550px] my-6 md:my-16">
 
-            <h3 class="category-h3">⚙️ Innovations in Archaeological Forensics</h3>
-            <p class="essay-p"><span class="year-badge">1974</span>Discovery of the Terracotta Army: Farmers in China identified a massive subterranean military matrix. This node represents a pivotal shift in the curation of ancient human innovative techniques. The forensic documentation of the Qin Dynasty's metallurgical and artistic intelligence pioneered the synchronization of modern heritage law with ancient logistical data.</p>
+            <h3 class="category-h3 text-base sm:text-lg md:text-2xl tracking-[2px] sm:tracking-[4px] pl-4 sm:pl-6 mt-8 md:mt-20 mb-4 md:mb-8">⚙️ Innovations in Archaeological Forensics: Terracotta Army</h3>
+            <p class="essay-p text-sm sm:text-base md:text-lg mb-6 md:mb-12 indent-4 sm:indent-8"><span class="year-badge">1974</span>Discovery of the Terracotta Army: Farmers digging a well in Lintong, China, discovered the buried clay soldiers of Qin Shi Huang. This find provided valuable historical data on 3rd-century BC Chinese weapons, metal casting, and art, leading to major archaeological excavations and preservation projects.</p>
 
-            <h3 class="category-h3">🏷️ Brand Genealogy: Coca-Cola</h3>
-            <p class="essay-p"><span class="year-badge">1886</span>Inception of Coca-Cola: John Pemberton initialized the technical standard for the world's most successful consumer brand. Our forensics identify this as a 'Commercial Singularity.' By protecting a proprietary chemical algorithm, Pemberton pioneered mass-production protocols for global branding, fundamentally altering global capital flows.</p>
+            <h3 class="category-h3 text-base sm:text-lg md:text-2xl tracking-[2px] sm:tracking-[4px] pl-4 sm:pl-6 mt-8 md:mt-20 mb-4 md:mb-8">🏷️ Brand Genealogy: Coca-Cola</h3>
+            <p class="essay-p text-sm sm:text-base md:text-lg mb-6 md:mb-12 indent-4 sm:indent-8"><span class="year-badge">1886</span>Inception of Coca-Cola: John Pemberton mixed the first batch of Coca-Cola syrup in Atlanta. By maintaining the formula as a trade secret rather than filing a public patent, the company preserved its brand value, establishing an early strategy in trademark protection and consumer branding.</p>
         </div>
 
         <!-- 💡 MARCH 30 -->
-        <div class="report-card">
-            <div class="day-header">MARCH_30</div>
-            <p class="essay-p">March 30th archives the birth of <span class="highlight">Modern Anesthesia Intelligence</span> and the supreme recalibration of North American strategic territory. It is a day defined by the technical victory over human pain.</p>
+        <div class="report-card p-5 sm:p-10 md:p-20 mb-12 md:mb-32">
+            <div class="day-header text-2xl sm:text-4xl md:text-5xl tracking-[8px] sm:tracking-[15px] pb-3 md:pb-5 mb-8 md:mb-16">MARCH_30</div>
+            <p class="essay-p text-sm sm:text-base md:text-lg mb-6 md:mb-12 indent-4 sm:indent-8">March 30th archives the birth of <span class="highlight">painless surgery</span> and the purchase of strategic territory in the far north, contrasting medical progress with the acquisition of sovereign land.</p>
 
-            <h3 class="category-h3">💉 Medical Singularities: Ether Anesthesia</h3>
-            <p class="essay-p"><span class="year-badge">1842</span>First Use of Ether in Surgery: Crawford Long performed a painless excision. Our archival terminal categorizes this as the 'Surgical Singularity.' By proving that biological consciousness could be safely suspended for innovative repair, Long established the foundational protocols for modern clinical surgery and biological engineering.</p>
+            <h3 class="category-h3 text-base sm:text-lg md:text-2xl tracking-[2px] sm:tracking-[4px] pl-4 sm:pl-6 mt-8 md:mt-20 mb-4 md:mb-8">💉 Medical Singularities: Ether Anesthesia</h3>
+            <p class="essay-p text-sm sm:text-base md:text-lg mb-6 md:mb-12 indent-4 sm:indent-8"><span class="year-badge">1842</span>First Use of Ether in Surgery: Crawford Long used diethyl ether to painlessly excise a tumor from a patient's neck. This milestone represents a 'Surgical Singularity.' By proving that surgical pain could be chemically managed, Long established the basis for modern anesthesiology and complex surgical procedures.</p>
 
-            <h3 class="category-h3">📈 Macro-Financial Intelligence: Alaska Purchase</h3>
-            <p class="essay-p"><span class="year-badge">1867</span>The Purchase of Alaska: The US and Russia signed the treaty for the transfer of territory. This node archives a significant shift in resource capital flow. Our forensics highlight it as a tactical masterpiece in territorial synchronization, securing vast mineral and energy innovative assets for the federal republic.</p>
+            <h3 class="category-h3 text-base sm:text-lg md:text-2xl tracking-[2px] sm:tracking-[4px] pl-4 sm:pl-6 mt-8 md:mt-20 mb-4 md:mb-8">📈 Macro-Financial Intelligence: Alaska Purchase</h3>
+            <p class="essay-p text-sm sm:text-base md:text-lg mb-6 md:mb-12 indent-4 sm:indent-8"><span class="year-badge">1867</span>The Purchase of Alaska: The US agreed to buy Alaska from Russia for $7.2 million. Although criticized at the time as "Seward's Folly," the purchase secured valuable mineral, timber, and oil resources, while expanding the strategic presence of the United States in the north.</p>
         </div>
 
         <!-- 💡 MARCH 31 -->
-        <div class="report-card">
-            <div class="day-header">MARCH_31</div>
-            <p class="essay-p">March 31st serves as the supreme coordinate for <span class="highlight">Industrial Age Engineering Zenith</span> and the birth of 20th-century digital literacy. Historically, this date anchors the moment human structural ambition conquered the 19th-century sky.</p>
+        <div class="report-card p-5 sm:p-10 md:p-20 mb-12 md:mb-32">
+            <div class="day-header text-2xl sm:text-4xl md:text-5xl tracking-[8px] sm:tracking-[15px] pb-3 md:pb-5 mb-8 md:mb-16">MARCH_31</div>
+            <p class="essay-p text-sm sm:text-base md:text-lg mb-6 md:mb-12 indent-4 sm:indent-8">March 31st serves as the supreme coordinate for <span class="highlight">structural iron-frame engineering</span> and the birth of early personal computing magazines, showing how architectural limits were broken alongside the growth of public technical literacy.</p>
 
-            <img src="https://images.unsplash.com/photo-1543349689-9a4d426bee8e?auto=format&fit=crop&w=1200&q=80" alt="Eiffel Tower Paris" class="archive-img">
+            <img src="https://images.unsplash.com/photo-1543349689-9a4d426bee8e?auto=format&fit=crop&w=1200&q=80" alt="Eiffel Tower Paris" class="archive-img h-48 sm:h-72 md:h-[450px] lg:h-[550px] my-6 md:my-16">
 
-            <h3 class="category-h3">⚙️ Structural Innovations: The Eiffel Tower</h3>
-            <p class="essay-p"><span class="year-badge">1889</span>Inauguration of the Eiffel Tower: A pinnacle of iron-frame innovative engineering. At 300 meters, it re-defined the vertical identity of civilization. Our archival forensics indicate the tower was the primary catalyst for the development of global wireless telecommunication synchronization, providing a supreme case study in urban innovative efficiency and structural scaling.</p>
+            <h3 class="category-h3 text-base sm:text-lg md:text-2xl tracking-[2px] sm:tracking-[4px] pl-4 sm:pl-6 mt-8 md:mt-20 mb-4 md:mb-8">⚙️ Structural Innovations: Eiffel Tower</h3>
+            <p class="essay-p text-sm sm:text-base md:text-lg mb-6 md:mb-12 indent-4 sm:indent-8"><span class="year-badge">1889</span>Inauguration of the Eiffel Tower: The formal opening of the 300-meter iron lattice tower in Paris. This achievement demonstrated the capabilities of structural iron engineering, later serving as an early broadcasting tower and becoming a key symbol of industrial-era architecture.</p>
 
-            <h3 class="category-h3">⚙️ IT & Digital Origins: PC Magazine</h3>
-            <p class="essay-p"><span class="year-badge">1981</span>First Issue of PC Magazine: Initialized the operational synchronization of personal technical intelligence. This node archives the birth of mass-market digital literacy. By institutionalizing the periodic review of hardware and software, this publication pioneered the 'Tech Media Ethics' that allow modern users to synchronize their personal lives with the computational matrix.</p>
+            <h3 class="category-h3 text-base sm:text-lg md:text-2xl tracking-[2px] sm:tracking-[4px] pl-4 sm:pl-6 mt-8 md:mt-20 mb-4 md:mb-8">⚙️ IT & Digital Origins: PC Magazine</h3>
+            <p class="essay-p text-sm sm:text-base md:text-lg mb-6 md:mb-12 indent-4 sm:indent-8"><span class="year-badge">1981</span>First Issue of PC Magazine: The launch of the consumer technology publication. By providing product benchmarks, reviews, and technical guides, the magazine improved computer literacy, helping to guide the public through the growth of personal computing.</p>
         </div>
 
         <!-- 🚀 CONCLUSION -->
-        <div class="text-center py-20 border-t border-white/10">
-            <p class="font-cyber text-gold text-sm tracking-widest mb-6 uppercase">March Archival Synchronization Complete</p>
-            <p class="text-gray-500 italic">"The matrix prepares for the awakening of April. Node 03 finalized and logged."</p>
-        </div>
+        <section class="report-card p-5 sm:p-10 md:p-20 text-center">
+            <h2 class="text-gold font-cyber text-xl sm:text-2xl md:text-3xl uppercase tracking-widest mb-6 md:mb-10">Monthly Archive Conclusion</h2>
+            <p class="text-gray-400 text-sm sm:text-base md:text-lg italic max-w-3xl mx-auto mb-6 md:mb-10">
+                "The calibration of March is complete. 31 nodes of human intelligence have been synchronized. The matrix prepares for the expansion of April."
+            </p>
+            <div class="w-16 sm:w-24 h-1 bg-[#f5c97a] mx-auto"></div>
+        </section>
+
     </main>
 
-    <footer class="py-24 border-t border-white/5 text-center">
-        <p class="text-[11px] font-cyber text-gray-700 tracking-[0.5em] uppercase">Akashic Terminal Node // March Finalized</p>
+    <footer class="py-12 md:py-24 border-t border-white/5 text-center px-4">
+        <p class="text-[9px] sm:text-[11px] font-cyber text-gray-700 tracking-[0.3em] sm:tracking-[0.5em] uppercase">Akashic Terminal Node // Node_03 Finalized</p>
     </footer>
 </body>
 </html>
