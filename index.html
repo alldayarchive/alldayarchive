@@ -122,12 +122,11 @@
     <div class="bg-nebula"></div>
     <div class="bg-grid"></div>
     
-    <!-- Responsive Header Navbar -->
+    <!-- Responsive Header Navbar (Clean & Minimalist) -->
     <nav class="fixed w-full z-[1000] px-4 py-4 md:px-12 md:py-6 flex flex-col sm:flex-row justify-between items-center gap-4 border-b border-white/5 bg-black/80 backdrop-blur-3xl">
         <div class="text-xl sm:text-2xl font-cyber font-bold tracking-[0.3em] text-[#f5c97a]">ALLDAY ARCHIVE</div>
         <div class="flex flex-col sm:flex-row items-center gap-4 sm:gap-6">
             <span id="current-time" class="font-code text-[10px] text-gold/60 hidden md:block"></span>
-            <div id="google_translate_element" class="scale-90"></div>
         </div>
     </nav>
 
@@ -143,7 +142,7 @@
             <p class="max-w-4xl mx-auto text-[#94a3b8] text-base sm:text-xl md:text-2xl font-light leading-relaxed font-serif italic px-2">
                 "Synchronizing the vast intellectual heritage of humanity across 17 specialized sectors. A definitive terminal for the deep-rooted origins of global civilization."
             </p>
-        </header>
+        </section>
 
         <!-- 🔴 [Today's Temporal Node] - Dynamic rendering based on client-side date -->
         <section id="daily-intelligence" class="cyber-card p-5 sm:p-8 md:p-12">
@@ -203,7 +202,7 @@
                 <img src="https://images.unsplash.com/photo-1450101499163-c8848c66ca85?auto=format&fit=crop&w=800&q=80" alt="Justice" class="section-img h-48 sm:h-72 md:h-[450px]">
             </div>
             <div class="space-y-6 md:space-y-10">
-                <img src="https://images.unsplash.com/photo-1611974714158-f89905d17992?auto=format&fit=crop&w=800&q=80" alt="Finance" class="section-img h-48 sm:h-72 md:h-[450px]">
+                <img src="https://images.unsplash.com/photo-1590283603385-17ffb3a7f29f?auto=format&fit=crop&w=800&q=80" alt="Finance" class="section-img h-48 sm:h-72 md:h-[450px]">
                 <div class="editorial-p text-sm sm:text-base leading-relaxed sm:leading-[2.2] space-y-4">
                     <p>Our financial timelines record not only productive periods of growth but also critical market adjustments and historical recessions. By analyzing the great economic crises of the past—including the Wall Street Crash of 1929 and the global financial adjustments of the late 20th century—the AllDay Archive provides an organized framework for studying macroeconomic trends. We preserve the historical records of the financial systems that structure modern markets, helping users understand the economic patterns that continue to shape our global financial systems.</p>
                 </div>
@@ -386,11 +385,6 @@
         }
 
         window.onload = syncDailyIntel;
-
-        function googleTranslateElementInit() {
-            new google.translate.TranslateElement({pageLanguage: 'en', layout: google.translate.TranslateElement.InlineLayout.SIMPLE}, 'google_translate_element');
-        }
     </script>
-    <script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
 </body>
 </html>
