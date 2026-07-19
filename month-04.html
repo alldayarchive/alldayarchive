@@ -3,488 +3,501 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Node 04: April Archival Intelligence | Part I (01-15)</title>
+    <title>Node 04: April Archival Intelligence | Complete Node</title>
     <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Inter:wght@300;400;600&family=Playfair+Display:ital,wght@0,700;1,700&display=swap" rel="stylesheet">
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
         :root { --neon-gold: #f5c97a; --bg: #010204; --card-bg: rgba(10, 14, 22, 0.98); }
-        body { background: var(--bg); color: #e2e8f0; font-family: 'Inter', sans-serif; line-height: 2.2; }
+        body { background: var(--bg); color: #e2e8f0; font-family: 'Inter', sans-serif; line-height: 1.8; }
+        @media (min-width: 768px) {
+            body { line-height: 2.2; }
+        }
         .font-cyber { font-family: 'Orbitron', sans-serif; }
-        .bg-grid { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background-image: linear-gradient(rgba(245, 201, 122, 0.03) 1px, transparent 1px), linear-gradient(90deg, rgba(245, 201, 122, 0.03) 1px, transparent 1px); background-size: 80px 80px; z-index: -1; }
-        .report-card { background: var(--card-bg); border: 1px solid rgba(245, 201, 122, 0.1); border-radius: 24px; padding: 5rem; margin-bottom: 8rem; box-shadow: 0 40px 100px rgba(0,0,0,0.9); transition: 0.5s; }
-        .day-header { font-family: 'Orbitron'; color: var(--neon-gold); font-size: 3.5rem; letter-spacing: 15px; border-bottom: 2px solid var(--neon-gold); margin-bottom: 4rem; padding-bottom: 20px; text-align: center; }
-        .category-h3 { font-family: 'Orbitron'; color: #fff; font-size: 1.6rem; margin-top: 5rem; margin-bottom: 2rem; text-transform: uppercase; letter-spacing: 4px; border-left: 5px solid var(--neon-gold); padding-left: 25px; }
-        .essay-p { text-align: justify; color: #a0aec0; font-size: 1.2rem; margin-bottom: 3rem; text-indent: 2rem; line-height: 2.4; }
-        .year-badge { font-family: 'Orbitron'; color: #000; font-weight: 700; background: var(--neon-gold); padding: 4px 15px; border-radius: 4px; margin-right: 15px; font-size: 16px; }
+        .font-serif { font-family: 'Playfair Display', serif; }
+        .bg-grid { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background-image: linear-gradient(rgba(245, 201, 122, 0.02) 1.5px, transparent 1.5px), linear-gradient(90deg, rgba(245, 201, 122, 0.02) 1.5px, transparent 1.5px); background-size: 50px 50px; z-index: -1; }
+        
+        /* Responsive Card Style */
+        .report-card { 
+            background: var(--card-bg); 
+            border: 1px solid rgba(245, 201, 122, 0.1); 
+            border-radius: 24px; 
+            box-shadow: 0 40px 100px rgba(0,0,0,0.9); 
+            transition: border-color 0.4s; 
+        }
+        .report-card:hover { border-color: var(--neon-gold); }
+        
+        .day-header { 
+            font-family: 'Orbitron'; 
+            color: var(--neon-gold); 
+            border-bottom: 2px solid var(--neon-gold); 
+            text-align: center; 
+        }
+        .category-h3 { 
+            font-family: 'Orbitron'; 
+            color: #fff; 
+            text-transform: uppercase; 
+            border-left: 5px solid var(--neon-gold); 
+        }
+        .essay-p { text-align: justify; color: #a0aec0; }
+        .year-badge { font-family: 'Orbitron'; color: #000; font-weight: 700; background: var(--neon-gold); padding: 2px 10px; border-radius: 4px; margin-right: 12px; font-size: 14px; display: inline-block; }
         .highlight { color: #fff; font-weight: 600; border-bottom: 1px solid var(--neon-gold); }
-        .archive-img { width: 100%; height: 550px; object-fit: cover; border-radius: 15px; margin: 4rem 0; border: 1px solid rgba(245, 201, 122, 0.2); filter: brightness(0.8); transition: 0.5s; }
-        .archive-img:hover { filter: brightness(1) contrast(1.1); }
+        
+        /* Advanced Image Fallback CSS */
+        .archive-img { 
+            width: 100%; 
+            object-fit: cover; 
+            border-radius: 15px; 
+            border: 1px solid rgba(245, 201, 122, 0.1); 
+            background-color: #0b0f19;
+            position: relative;
+            display: block;
+        }
+        .archive-img::before {
+            content: "ARCHIVE IMAGE TEMPORARILY OFFLINE";
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background-color: #0d111a;
+            color: var(--neon-gold);
+            font-family: 'Orbitron';
+            font-size: 0.8rem;
+            letter-spacing: 2px;
+            border: 1px dashed rgba(245, 201, 122, 0.3);
+            border-radius: 15px;
+            text-align: center;
+            padding: 20px;
+        }
     </style>
 </head>
 <body>
     <div class="bg-grid"></div>
 
-    <nav class="fixed w-full z-[1000] px-12 py-8 flex justify-between items-center bg-black/60 backdrop-blur-xl border-b border-white/5">
-        <div class="text-2xl font-cyber font-bold text-[#f5c97a] tracking-tighter cursor-pointer" onclick="location.href='index.html'">AKASHIC ARCHIVE // NODE_04</div>
-        <div class="flex gap-6">
-            <span class="font-cyber text-gray-500 text-xs mt-2">CHRONOLOGICAL_SYNC: APRIL_P1</span>
-            <a href="index.html" class="font-cyber text-[#f5c97a] border border-[#f5c97a] px-5 py-2 rounded hover:bg-[#f5c97a] hover:text-black transition-all text-xs">BACK_TO_HUB</a>
+    <!-- Responsive Navigation Bar -->
+    <nav class="fixed w-full z-[1000] px-4 py-4 md:px-12 md:py-6 flex flex-col sm:flex-row justify-between items-center gap-4 bg-black/80 backdrop-blur-xl border-b border-white/5">
+        <div class="text-lg sm:text-xl md:text-2xl font-cyber font-bold text-[#f5c97a] tracking-tight sm:tracking-tighter cursor-pointer text-center sm:text-left" onclick="location.href='index.html'">
+            AKASHIC ARCHIVE // NODE_04
+        </div>
+        <div class="flex items-center gap-4 sm:gap-6">
+            <span class="hidden md:inline font-cyber text-gray-500 text-xs">CHRONOLOGICAL_SYNC: APRIL_FULL</span>
+            <a href="index.html" class="font-cyber text-[#f5c97a] border border-[#f5c97a] px-3 py-1.5 sm:px-5 sm:py-2 rounded hover:bg-[#f5c97a] hover:text-black transition-all text-[10px] sm:text-xs">
+                RETURN_TO_HUB
+            </a>
         </div>
     </nav>
 
-    <main class="relative pt-56 pb-20 px-8 max-w-6xl mx-auto">
-        <header class="text-center mb-40">
-            <h1 class="font-cyber text-6xl text-white mb-10 uppercase tracking-[0.4em]">April Intelligence <br><span class="text-gold opacity-50 text-3xl tracking-[0.2em]">The Architecture of Alliances</span></h1>
-            <p class="max-w-3xl mx-auto text-gray-400 italic text-xl leading-relaxed">"Synchronizing the supreme nodes of collective defense, cosmic exploration, and the commercial genealogy of digital capitalism."</p>
+    <!-- Main Container -->
+    <main class="relative pt-36 sm:pt-44 md:pt-56 pb-20 px-4 sm:px-8 max-w-6xl mx-auto">
+        <header class="text-center mb-20 md:mb-40">
+            <h1 class="font-cyber text-2xl sm:text-4xl md:text-6xl text-white mb-6 md:mb-10 uppercase tracking-[0.2em] sm:tracking-[0.4em]">
+                April Intelligence <br>
+                <span class="text-gold opacity-50 text-base sm:text-2xl md:text-3xl tracking-[0.1em] sm:tracking-[0.2em]">The Architecture of Alliances (Days 01 - 30)</span>
+            </h1>
+            <p class="max-w-3xl mx-auto text-gray-400 italic text-sm sm:text-lg md:text-xl leading-relaxed">
+                "Synchronizing the supreme nodes of collective defense, cosmic exploration, and the commercial genealogy of digital capitalism."
+            </p>
         </header>
 
         <!-- 💡 APRIL 01 -->
-        <div class="report-card">
-            <div class="day-header">APRIL_01</div>
-            <p class="essay-p">April 1st serves as the supreme temporal coordinate for the <span class="highlight">institutionalization of collective intelligence</span> and the formalization of modern commercial lineages. Historically, this date anchors the moments when the technical singularities of personal computing were initialized, redefining the human-machine interface for the 21st century.</p>
+        <div class="report-card p-5 sm:p-10 md:p-20 mb-12 md:mb-32">
+            <div class="day-header text-2xl sm:text-4xl md:text-5xl tracking-[8px] sm:tracking-[15px] pb-3 md:pb-5 mb-8 md:mb-16">APRIL_01</div>
+            <p class="essay-p text-sm sm:text-base md:text-lg mb-6 md:mb-12 indent-4 sm:indent-8">April 1st serves as the supreme temporal coordinate for the <span class="highlight">institutionalization of collective intelligence</span> and the formalization of modern commercial lineages. Historically, this date anchors the moments when the technical singularities of personal computing were initialized, redefining the human-machine interface for the 21st century and altering global capital flow.</p>
             
-            <img src="https://images.unsplash.com/photo-1517694712202-14dd9538aa97?auto=format&fit=crop&w=1200&q=80" alt="Retro Apple Computing" class="archive-img">
+            <img src="https://images.unsplash.com/photo-1517694712202-14dd9538aa97?auto=format&fit=crop&w=1200&q=80" alt="Retro Apple Computing" class="archive-img h-48 sm:h-72 md:h-[450px] lg:h-[550px] my-6 md:my-16">
 
-            <h3 class="category-h3">🏷️ Brand Genealogy: The Apple Singularity</h3>
-            <p class="essay-p"><span class="year-badge">1976</span>The Founding of Apple Computer Company: Steve Jobs, Steve Wozniak, and Ronald Wayne initialized a commercial matrix that would fundamentally alter human cognitive processing. Our archival forensics identify this as the 'Consumer Technology Singularity.' By transitioning the computer from a specialized industrial tool to a personal creative node, Apple pioneered the commercial genealogy of user-centric branding, effectively anchoring the trajectory of digital capitalism.</p>
+            <h3 class="category-h3 text-base sm:text-lg md:text-2xl tracking-[2px] sm:tracking-[4px] pl-4 sm:pl-6 mt-8 md:mt-20 mb-4 md:mb-8">🏷️ Brand Genealogy: The Apple Singularity</h3>
+            <p class="essay-p text-sm sm:text-base md:text-lg mb-6 md:mb-12 indent-4 sm:indent-8"><span class="year-badge">1976</span>The Founding of Apple Computer Company: Steve Jobs, Steve Wozniak, and Ronald Wayne initialized a partnership that transformed the electronic calculation matrix. By transitioning the computer from a specialized industrial tool to a personal, user-centric creative node, Apple pioneered consumer-oriented digital capitalism. Their hardware integrations and user interface designs altered human cognitive engagement and global consumer tech markets forever.</p>
             
-            <h3 class="category-h3">⚖️ Judicial Intelligence: International Law</h3>
-            <p class="essay-p"><span class="year-badge">1924</span>The Inception of High-Fidelity Phonograph Recording: This node archives a major shift in intellectual property law. Our research views this as a case study in how technical breakthroughs force a recalibration of judicial frameworks regarding creative ownership and global media capital flow, establishing the foundational protocols for modern acoustic copyrights.</p>
+            <h3 class="category-h3 text-base sm:text-lg md:text-2xl tracking-[2px] sm:tracking-[4px] pl-4 sm:pl-6 mt-8 md:mt-20 mb-4 md:mb-8">⚖️ Judicial Intelligence: Acoustic Copyrights</h3>
+            <p class="essay-p text-sm sm:text-base md:text-lg mb-6 md:mb-12 indent-4 sm:indent-8"><span class="year-badge">1924</span>The Inception of High-Fidelity Phonograph Recording: This technical breakthrough forced a substantial recalibration of intellectual property law. Our forensic researchers view this as a primary case study in how rapid technological development forces a restructuring of judicial frameworks regarding creative ownership, patent duration, and global media royalties, establishing modern acoustic copyrights.</p>
         </div>
 
         <!-- 💡 APRIL 02 -->
-        <div class="report-card">
-            <div class="day-header">APRIL_02</div>
-            <p class="essay-p">April 2nd archives the foundational calibration of <span class="highlight">maritime geopolitical sovereignty</span> and the zenith of mid-20th century technical logic. It is a day defined by the inception of synchronized computer research nodes and the formalization of modern amphibious warfare forensics.</p>
+        <div class="report-card p-5 sm:p-10 md:p-20 mb-12 md:mb-32">
+            <div class="day-header text-2xl sm:text-4xl md:text-5xl tracking-[8px] sm:tracking-[15px] pb-3 md:pb-5 mb-8 md:mb-16">APRIL_02</div>
+            <p class="essay-p text-sm sm:text-base md:text-lg mb-6 md:mb-12 indent-4 sm:indent-8">April 2nd archives the foundational calibration of <span class="highlight">maritime geopolitical sovereignty</span> and the zenith of mid-20th century technical logic. It is a day defined by the inception of synchronized computer research nodes and the formalization of modern amphibious warfare forensics.</p>
 
-            <h3 class="category-h3">🚨 Major Geopolitical Incidents: The Falklands Node</h3>
-            <p class="essay-p"><span class="year-badge">1982</span>The Invasion of the Falkland Islands: Argentine forces synchronized an amphibious landing, triggering a major maritime conflict with Britain. This temporal node represents a 'Geopolitical Singularity' in the Southern Hemisphere. The subsequent forensic analysis forced a global re-evaluation of naval missile defense innovative protocols and redefined the legal boundaries of territorial sovereignty in the post-WWII diplomatic matrix.</p>
+            <h3 class="category-h3 text-base sm:text-lg md:text-2xl tracking-[2px] sm:tracking-[4px] pl-4 sm:pl-6 mt-8 md:mt-20 mb-4 md:mb-8">🚨 Major Geopolitical Incidents: The Falklands Node</h3>
+            <p class="essay-p text-sm sm:text-base md:text-lg mb-6 md:mb-12 indent-4 sm:indent-8"><span class="year-badge">1982</span>The Invasion of the Falkland Islands: Argentine military forces initiated an amphibious landing on the islands, triggering a major maritime conflict with Great Britain. This conflict represented a 'Geopolitical Singularity' in the Southern Hemisphere, forcing naval strategists to re-evaluate the vulnerabilities of modern ships to anti-ship missiles and redefining the parameters of sovereign territory in international maritime law.</p>
 
-            <h3 class="category-h3">⚙️ Technical Milestones in Logic</h3>
-            <p class="essay-p"><span class="year-badge">1953</span>Initialization of synchronized computer research nodes in major academic institutions. This archival node represents the primordial ancestor to modern artificial intelligence and algorithmic data forensics, establishing the protocols for large-scale computational synchronization across the global intellectual matrix.</p>
+            <h3 class="category-h3 text-base sm:text-lg md:text-2xl tracking-[2px] sm:tracking-[4px] pl-4 sm:pl-6 mt-8 md:mt-20 mb-4 md:mb-8">⚙️ Technical Milestones: Early Computing Networks</h3>
+            <p class="essay-p text-sm sm:text-base md:text-lg mb-6 md:mb-12 indent-4 sm:indent-8"><span class="year-badge">1953</span>Academic Computing Synchronization: Major research institutions successfully synchronized early vacuum-tube mainframe computers to model complex data. This baseline research served as the direct ancestor to modern distributed networks and artificial intelligence modeling, establishing the first standardized protocols for shared scientific computational calculations.</p>
         </div>
 
         <!-- 💡 APRIL 03 -->
-        <div class="report-card">
-            <div class="day-header">APRIL_03</div>
-            <p class="essay-p">April 3rd represents a supreme node in the history of <span class="highlight">macro-financial reconstruction</span> and the zenith of 19th-century logistical expansion. Historically, this date anchors the moment global capital was synchronized to rebuild a shattered continent and when the mastery of terrestrial time-gap reduction was achieved.</p>
+        <div class="report-card p-5 sm:p-10 md:p-20 mb-12 md:mb-32">
+            <div class="day-header text-2xl sm:text-4xl md:text-5xl tracking-[8px] sm:tracking-[15px] pb-3 md:pb-5 mb-8 md:mb-16">APRIL_03</div>
+            <p class="essay-p text-sm sm:text-base md:text-lg mb-6 md:mb-12 indent-4 sm:indent-8">April 3rd represents a supreme node in the history of <span class="highlight">macro-financial reconstruction</span> and the zenith of 19th-century logistical expansion. Historically, this date anchors the moment global capital was synchronized to rebuild a shattered continent and when the mastery of terrestrial time-gap reduction was achieved.</p>
 
-            <img src="https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&fit=crop&w=1200&q=80" alt="Financial Architecture" class="archive-img">
+            <img src="https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&fit=crop&w=1200&q=80" alt="Financial Architecture" class="archive-img h-48 sm:h-72 md:h-[450px] lg:h-[550px] my-6 md:my-16">
 
-            <h3 class="category-h3">📈 Macro-Financial Records: The Marshall Plan</h3>
-            <p class="essay-p"><span class="year-badge">1948</span>Signing of the Marshall Plan: President Harry S. Truman legalized the Economic Cooperation Act. Our financial intelligence team views this as the most significant recalibration of global capital in the post-war era. By synchronizing $13 billion in aid with the reconstruction of European infrastructure, this node birthed the modern trans-Atlantic economic matrix and established the protocols for state-sponsored institutional lending.</p>
+            <h3 class="category-h3 text-base sm:text-lg md:text-2xl tracking-[2px] sm:tracking-[4px] pl-4 sm:pl-6 mt-8 md:mt-20 mb-4 md:mb-8">📈 Macro-Financial Records: The Marshall Plan</h3>
+            <p class="essay-p text-sm sm:text-base md:text-lg mb-6 md:mb-12 indent-4 sm:indent-8"><span class="year-badge">1948</span>Signing of the Marshall Plan: President Harry S. Truman signed the Economic Cooperation Act into law. This monumental program synchronized over $13 billion in financial aid to rebuild war-torn European infrastructure. By linking economic relief with international democratic alliances, it laid the foundation for the postwar Western trade matrix, establishing structural standards for international development lending.</p>
 
-            <h3 class="category-h3">⚙️ Innovations in Logistics: Pony Express</h3>
-            <p class="essay-p"><span class="year-badge">1860</span>Initialization of the Pony Express: The first high-speed transcontinental mail service in North America. This node archives the mastery of terrestrial time-gap reduction. By synchronizing riders and relay stations, it pioneered the logistical protocols for 'Just-in-Time' data delivery, serving as a primary case study in early innovative communication efficiency.</p>
+            <h3 class="category-h3 text-base sm:text-lg md:text-2xl tracking-[2px] sm:tracking-[4px] pl-4 sm:pl-6 mt-8 md:mt-20 mb-4 md:mb-8">⚙️ Innovations in Logistics: Pony Express</h3>
+            <p class="essay-p text-sm sm:text-base md:text-lg mb-6 md:mb-12 indent-4 sm:indent-8"><span class="year-badge">1860</span>Initialization of the Pony Express: The first high-speed transcontinental mail service in North America. This node archives the mastery of overland communication speed. By utilizing a relay system of horsemen and stations across rugged terrain, it pioneered the logistical protocols for rapid information delivery, showing the limits of animal-based networks before the telegraph.</p>
         </div>
 
         <!-- 💡 APRIL 04 -->
-        <div class="report-card">
-            <div class="day-header">APRIL_04</div>
-            <p class="essay-p">April 4th serves as the supreme coordinate for <span class="highlight">Global Defensive Calibration</span> and the tragic node of civil rights trauma. Historically, this date anchors the moment the Western world legally synchronized its security and when a primary moral node was systemically terminated.</p>
+        <div class="report-card p-5 sm:p-10 md:p-20 mb-12 md:mb-32">
+            <div class="day-header text-2xl sm:text-4xl md:text-5xl tracking-[8px] sm:tracking-[15px] pb-3 md:pb-5 mb-8 md:mb-16">APRIL_04</div>
+            <p class="essay-p text-sm sm:text-base md:text-lg mb-6 md:mb-12 indent-4 sm:indent-8">April 4th serves as the supreme coordinate for <span class="highlight">Global Defensive Calibration</span> and the tragic node of civil rights trauma. Historically, this date anchors the moment the Western world legally synchronized its security and when a primary moral node was systemically terminated.</p>
 
-            <h3 class="category-h3">⚖️ Judicial Intelligence: The NATO Treaty</h3>
-            <p class="essay-p"><span class="year-badge">1949</span>Signing of the North Atlantic Treaty: The foundational act that established NATO. Our archival analysis views this as a definitive node in international constitutional law. By anchoring the principle of 'Collective Self-Defense' into a formal legislative treaty, this node established the structural equilibrium of the Cold War and recalibrated global diplomatic security protocols for the next century.</p>
+            <h3 class="category-h3 text-base sm:text-lg md:text-2xl tracking-[2px] sm:tracking-[4px] pl-4 sm:pl-6 mt-8 md:mt-20 mb-4 md:mb-8">⚖️ Judicial Intelligence: The NATO Treaty</h3>
+            <p class="essay-p text-sm sm:text-base md:text-lg mb-6 md:mb-12 indent-4 sm:indent-8"><span class="year-badge">1949</span>Signing of the North Atlantic Treaty: The foundational act that established the North Atlantic Treaty Organization (NATO). This agreement integrated the defenses of North American and European states, introducing Article 5's collective defense principle into international law. It structured the security equilibrium of the Cold War and established modern military-diplomatic coordination.</p>
 
-            <h3 class="category-h3">🚨 Critical Tragedies: The MLK Node</h3>
-            <p class="essay-p"><span class="year-badge">1968</span>Assassination of Martin Luther King Jr.: A tragic singularity in the history of civil rights forensics. King’s death forced a global re-evaluation of non-violent legislative pressure. This event served as the primary catalyst for the synchronization of the Fair Housing Act, proving that moral intelligence can survive systemic violence to force a constitutional overhaul.</p>
+            <h3 class="category-h3 text-base sm:text-lg md:text-2xl tracking-[2px] sm:tracking-[4px] pl-4 sm:pl-6 mt-8 md:mt-20 mb-4 md:mb-8">🚨 Critical Tragedies: The MLK Node</h3>
+            <p class="essay-p text-sm sm:text-base md:text-lg mb-6 md:mb-12 indent-4 sm:indent-8"><span class="year-badge">1968</span>Assassination of Martin Luther King Jr.: Dr. King was assassinated in Memphis, Tennessee. This tragic event represents a major shock to the civil rights struggle, sparking riots in cities across the United States. His death catalyzed the quick passage of the Civil Rights Act of 1968 (Fair Housing Act), proving that moral ideas can withstand violence and drive legal reforms.</p>
         </div>
 
         <!-- 💡 APRIL 05 -->
-        <div class="report-card">
-            <div class="day-header">APRIL_05</div>
-            <p class="essay-p">April 5th archives the birth of <span class="highlight">modern athletic synchronization</span> and the zenith of 20th-century executive statecraft. Historically, this date anchors the moment the modern world revived the Olympic ideal and when a supreme node of imperial leadership was recalibrated.</p>
+        <div class="report-card p-5 sm:p-10 md:p-20 mb-12 md:mb-32">
+            <div class="day-header text-2xl sm:text-4xl md:text-5xl tracking-[8px] sm:tracking-[15px] pb-3 md:pb-5 mb-8 md:mb-16">APRIL_05</div>
+            <p class="essay-p text-sm sm:text-base md:text-lg mb-6 md:mb-12 indent-4 sm:indent-8">April 5th archives the birth of <span class="highlight">modern athletic synchronization</span> and the transition of mid-20th century executive leadership. Historically, this date anchors the moment the modern world revived the Olympic ideal and when a key era of British leadership came to a close.</p>
 
-            <h3 class="category-h3">🏛️ Geopolitical Nodes: Churchill's Resignation</h3>
-            <p class="essay-p"><span class="year-badge">1955</span>Winston Churchill Resigned as Prime Minister: The termination of a supreme node in 20th-century executive statecraft. This act marked the end of the 'Imperial Leadership' era and initiated a recalibration of British administrative power. Our scholarly research views this transition as a milestone in the stabilization of parliamentary democracy during the nuclear innovative age.</p>
+            <h3 class="category-h3 text-base sm:text-lg md:text-2xl tracking-[2px] sm:tracking-[4px] pl-4 sm:pl-6 mt-8 md:mt-20 mb-4 md:mb-8">🏛️ Geopolitical Nodes: Churchill's Resignation</h3>
+            <p class="essay-p text-sm sm:text-base md:text-lg mb-6 md:mb-12 indent-4 sm:indent-8"><span class="year-badge">1955</span>Resignation of Sir Winston Churchill: Due to failing health, Churchill stepped down as Prime Minister of the United Kingdom, ending a major era in 20th-century leadership. This transition marked a political hand-over to Anthony Eden and highlighted the UK's postwar adaptation to a changing global role, showcasing parliamentary continuity in the nuclear age.</p>
 
-            <h3 class="category-h3">🏆 Sports Milestones: The Modern Olympics</h3>
-            <p class="essay-p"><span class="year-badge">1896</span>Opening of the First Modern Olympic Games: Held in Athens, Greece. This node represents the formal expansion of ancient athletic synchronization into the modern geopolitical matrix. Beyond its sporting value, our analysis views this as a milestone in international cultural branding and synchronized logistical management of global events.</p>
+            <h3 class="category-h3 text-base sm:text-lg md:text-2xl tracking-[2px] sm:tracking-[4px] pl-4 sm:pl-6 mt-8 md:mt-20 mb-4 md:mb-8">🏆 Sports Milestones: The Modern Olympics</h3>
+            <p class="essay-p text-sm sm:text-base md:text-lg mb-6 md:mb-12 indent-4 sm:indent-8"><span class="year-badge">1896</span>Opening of the First Modern Olympic Games: Held in Athens, Greece, the Games revived the ancient athletic tradition. This milestone integrated diverse athletic cultures into a synchronized international competition. It laid the foundation for modern global branding and event logistics, serving as an early prototype for international mass-gathering coordination.</p>
         </div>
 
         <!-- 💡 APRIL 06 -->
-        <div class="report-card">
-            <div class="day-header">APRIL_06</div>
-            <p class="essay-p">April 6th serves as the coordinate for <span class="highlight">extreme terrestrial ambition</span> and the zenith of 19th-century judicial conflict forensics. Historically, this date anchors the moment human transit reached the absolute vertical axis of the planet.</p>
+        <div class="report-card p-5 sm:p-10 md:p-20 mb-12 md:mb-32">
+            <div class="day-header text-2xl sm:text-4xl md:text-5xl tracking-[8px] sm:tracking-[15px] pb-3 md:pb-5 mb-8 md:mb-16">APRIL_06</div>
+            <p class="essay-p text-sm sm:text-base md:text-lg mb-6 md:mb-12 indent-4 sm:indent-8">April 6th serves as the coordinate for <span class="highlight">extreme terrestrial exploration</span> and the tragic scale of Civil War conflict. Historically, this date anchors the moment human exploration reached the high Arctic and when military tactics and medical care faced immense physical pressures.</p>
 
-            <h3 class="category-h3">⚙️ Innovations in Exploration: The North Pole</h3>
-            <p class="essay-p"><span class="year-badge">1909</span>Robert Peary Reaches the North Pole: Historically synchronized with the first successful human transit to the North Pole. This node archives the extreme psychological and logistical limits of human ambition, providing the essential baseline for subsequent polar medical research and high-latitude navigation forensics in the global matrix.</p>
+            <h3 class="category-h3 text-base sm:text-lg md:text-2xl tracking-[2px] sm:tracking-[4px] pl-4 sm:pl-6 mt-8 md:mt-20 mb-4 md:mb-8">⚙️ Innovations in Exploration: The North Pole</h3>
+            <p class="essay-p text-sm sm:text-base md:text-lg mb-6 md:mb-12 indent-4 sm:indent-8"><span class="year-badge">1909</span>Robert Peary's Polar Expedition: Peary, along with Matthew Henson and four Inuit guides, claimed to have reached the geographic North Pole. This polar journey pushed the limits of human cold-weather logistics and navigation, establishing early operational baselines for high-latitude logistics and arctic exploration survival techniques.</p>
 
-            <h3 class="category-h3">⚖️ Judicial Intelligence: Civil War Nodes</h3>
-            <p class="essay-p"><span class="year-badge">1862</span>The Battle of Shiloh: A definitive engaged node that redefined the scale of legislative conflict. The forensic analysis of the unprecedented casualty rates forced a systemic recalibration of military clinical logistics and established new standards for wartime judicial documentation and medical archival protocols.</p>
+            <h3 class="category-h3 text-base sm:text-lg md:text-2xl tracking-[2px] sm:tracking-[4px] pl-4 sm:pl-6 mt-8 md:mt-20 mb-4 md:mb-8">⚖️ Judicial Intelligence: Battle of Shiloh</h3>
+            <p class="essay-p text-sm sm:text-base md:text-lg mb-6 md:mb-12 indent-4 sm:indent-8"><span class="year-badge">1862</span>The Battle of Shiloh: One of the bloodiest engagements in the American Civil War, fought in Tennessee. The unprecedented casualty rate shocked the nation, highlighting the urgent need for systematic battlefield triaging, military field hospital organization, and formal procedures for wartime casualty records and medical archiving.</p>
         </div>
 
         <!-- 💡 APRIL 07 -->
-        <div class="report-card">
-            <div class="day-header">APRIL_07</div>
-            <p class="essay-p">April 7th archives the birth of <span class="highlight">Global Biosecurity Synchronization</span> and the zenith of 20th-century digital documentation ethics. It is a day defined by the institutionalization of planetary clinical governance.</p>
+        <div class="report-card p-5 sm:p-10 md:p-20 mb-12 md:mb-32">
+            <div class="day-header text-2xl sm:text-4xl md:text-5xl tracking-[8px] sm:tracking-[15px] pb-3 md:pb-5 mb-8 md:mb-16">APRIL_07</div>
+            <p class="essay-p text-sm sm:text-base md:text-lg mb-6 md:mb-12 indent-4 sm:indent-8">April 7th archives the birth of <span class="highlight">Global Biosecurity Synchronization</span> and the launch of early digital documentation standards, showing the coordinate where global health and computing governance systems were structured.</p>
 
-            <img src="https://images.unsplash.com/photo-1584622650111-993a426fbf0a?auto=format&fit=crop&w=1200&q=80" alt="Healthcare and Lab" class="archive-img">
+            <img src="https://images.unsplash.com/photo-1584622650111-993a426fbf0a?auto=format&fit=crop&w=1200&q=80" alt="Healthcare and Lab" class="archive-img h-48 sm:h-72 md:h-[450px] lg:h-[550px] my-6 md:my-16">
 
-            <h3 class="category-h3">💉 Medical Frontiers: The WHO Genesis</h3>
-            <p class="essay-p"><span class="year-badge">1948</span>Founding of the World Health Organization (WHO): A supreme node in the history of clinical governance. Our terminal identifies this as the birth of 'Global Biosecurity Synchronization.' By centralizing medical intelligence and health security responses, the WHO established the first legal framework for managing planetary-scale biological risks, fundamentally altering human life expectancy.</p>
+            <h3 class="category-h3 text-base sm:text-lg md:text-2xl tracking-[2px] sm:tracking-[4px] pl-4 sm:pl-6 mt-8 md:mt-20 mb-4 md:mb-8">💉 Medical Frontiers: The WHO Founding</h3>
+            <p class="essay-p text-sm sm:text-base md:text-lg mb-6 md:mb-12 indent-4 sm:indent-8"><span class="year-badge">1948</span>Founding of the World Health Organization (WHO): A major step in global public health coordination. Established to coordinate international health policy, the WHO created a framework for managing global disease outbreaks, establishing sanitation standards, and tracking epidemiological data across sovereign borders to improve global life expectancy.</p>
 
-            <h3 class="category-h3">🌐 Digital Media Intelligence: RFC 1</h3>
-            <p class="essay-p"><span class="year-badge">1969</span>Publication of RFC 1: The birth of the 'Request for Comments' system. This technical milestone served as the primordial ancestor to modern internet standard-setting protocols, proving that decentralized human intelligence could be synchronized through collaborative documentation ethics and peer-reviewed technical standards.</p>
+            <h3 class="category-h3 text-base sm:text-lg md:text-2xl tracking-[2px] sm:tracking-[4px] pl-4 sm:pl-6 mt-8 md:mt-20 mb-4 md:mb-8">🌐 Digital Media Intelligence: RFC 1</h3>
+            <p class="essay-p text-sm sm:text-base md:text-lg mb-6 md:mb-12 indent-4 sm:indent-8"><span class="year-badge">1969</span>Publication of RFC 1: Steve Crocker wrote the first "Request for Comments" document, titled "Host Software." This publication established a collaborative peer-review system for internet standard-setting, demonstrating how a decentralized, open-source model could coordinate tech developers and build early internet protocols.</p>
         </div>
 
         <!-- 💡 APRIL 08 -->
-        <div class="report-card">
-            <div class="day-header">APRIL_08</div>
-            <p class="essay-p">April 8th represents the temporal node for <span class="highlight">Visual Deconstruction</span> and the birth of modern PC interface hegemony. It is a day marked by the technical triumph of graphical logic and the death of the most significant artistic innovator of the 20th century.</p>
+        <div class="report-card p-5 sm:p-10 md:p-20 mb-12 md:mb-32">
+            <div class="day-header text-2xl sm:text-4xl md:text-5xl tracking-[8px] sm:tracking-[15px] pb-3 md:pb-5 mb-8 md:mb-16">APRIL_08</div>
+            <p class="essay-p text-sm sm:text-base md:text-lg mb-6 md:mb-12 indent-4 sm:indent-8">April 8th represents the temporal node for <span class="highlight">Visual Deconstruction</span> and the development of modern operating systems, contrasting artistic changes with the expansion of consumer software.</p>
 
-            <h3 class="category-h3">⚙️ IT Singularities: Windows 3.1</h3>
-            <p class="essay-p"><span class="year-badge">1992</span>Launch of Windows 3.1: Microsoft initialized the technical standard for the world's most dominant PC operating system. This node archives a 'Market Singularity'—the moment graphical user interface (GUI) became the universal language of business and home computation, initiating a massive boom in software branding and digital capital flow.</p>
+            <h3 class="category-h3 text-base sm:text-lg md:text-2xl tracking-[2px] sm:tracking-[4px] pl-4 sm:pl-6 mt-8 md:mt-20 mb-4 md:mb-8">⚙️ IT Singularities: Windows 3.1</h3>
+            <p class="essay-p text-sm sm:text-base md:text-lg mb-6 md:mb-12 indent-4 sm:indent-8"><span class="year-badge">1992</span>Launch of Windows 3.1: Microsoft released Windows 3.1, incorporating advanced scalable fonts and multimedia support. This release helped popularize the graphical user interface (GUI) for personal computers, accelerating home and office computer use and strengthening Microsoft's position in global consumer software markets.</p>
 
-            <h3 class="category-h3">🎨 Arts & Intellectual Masterpieces: Picasso</h3>
-            <p class="essay-p"><span class="year-badge">1973</span>Death of Pablo Picasso: A supreme node in the history of artistic innovation. Picasso’s work served as a technical singularity in 'Visual Deconstruction.' His legacy case study shows how individual innovative energy can recalibrate an entire culture's perception of reality and form, anchoring the future of synchronized modern art theory.</p>
+            <h3 class="category-h3 text-base sm:text-lg md:text-2xl tracking-[2px] sm:tracking-[4px] pl-4 sm:pl-6 mt-8 md:mt-20 mb-4 md:mb-8">🎨 Arts & Intellectual Masterpieces: Picasso</h3>
+            <p class="essay-p text-sm sm:text-base md:text-lg mb-6 md:mb-12 indent-4 sm:indent-8"><span class="year-badge">1973</span>Death of Pablo Picasso: The co-founder of Cubism passed away, marking the end of a major era in modern art history. His work broke traditional rules of perspective and form, showing how individual creative direction can change cultural perceptions of space and shape, permanently influencing modern art theory.</p>
         </div>
 
         <!-- 💡 APRIL 09 -->
-        <div class="report-card">
-            <div class="day-header">APRIL_09</div>
-            <p class="essay-p">April 9th archives the supreme node of <span class="highlight">National Reunification Forensics</span> and the zenith of mid-20th century structural synchronization. Historically, this date anchors the moment a major civil conflict achieved its terminal legal closure.</p>
+        <div class="report-card p-5 sm:p-10 md:p-20 mb-12 md:mb-32">
+            <div class="day-header text-2xl sm:text-4xl md:text-5xl tracking-[8px] sm:tracking-[15px] pb-3 md:pb-5 mb-8 md:mb-16">APRIL_09</div>
+            <p class="essay-p text-sm sm:text-base md:text-lg mb-6 md:mb-12 indent-4 sm:indent-8">April 9th archives the coordinate for <span class="highlight">national reunification</span> and the launch of mid-20th-century dome structures, showing the resolution of a massive domestic conflict alongside advancements in civil engineering.</p>
 
-            <h3 class="category-h3">⚖️ Judicial Intelligence: The End of Conflict</h3>
-            <p class="essay-p"><span class="year-badge">1865</span>Surrender at Appomattox: General Robert E. Lee surrendered to Ulysses S. Grant. Our archival forensics identify this as a systemic singularity—the legal termination of the American Civil War. This node marked the victory of federal constitutional authority over secession, establishing the foundational protocols for modern national reunification and the synchronization of civil rights law.</p>
+            <h3 class="category-h3 text-base sm:text-lg md:text-2xl tracking-[2px] sm:tracking-[4px] pl-4 sm:pl-6 mt-8 md:mt-20 mb-4 md:mb-8">⚖️ Judicial Intelligence: Surrender at Appomattox</h3>
+            <p class="essay-p text-sm sm:text-base md:text-lg mb-6 md:mb-12 indent-4 sm:indent-8"><span class="year-badge">1865</span>Surrender at Appomattox Court House: General Robert E. Lee surrendered the Army of Northern Virginia to General Ulysses S. Grant, marking the end of the American Civil War. This event established federal constitutional authority over state secession, laying the legal foundation for postwar national reconstruction and the preservation of the Union.</p>
 
-            <h3 class="category-h3">⚙️ Structural Innovations: The Astrodome</h3>
-            <p class="essay-p"><span class="year-badge">1965</span>Opening of the Houston Astrodome: The world's first multi-purpose, domed sports stadium. This node represents the zenith of mid-20th-century structural synchronization, providing a case study in how complex innovative engineering can create artificial terrestrial biospheres for mass human gathering and entertainment branding.</p>
+            <h3 class="category-h3 text-base sm:text-lg md:text-2xl tracking-[2px] sm:tracking-[4px] pl-4 sm:pl-6 mt-8 md:mt-20 mb-4 md:mb-8">⚙️ Structural Innovations: The Houston Astrodome</h3>
+            <p class="essay-p text-sm sm:text-base md:text-lg mb-6 md:mb-12 indent-4 sm:indent-8"><span class="year-badge">1965</span>Opening of the Houston Astrodome: The world's first fully enclosed, multi-purpose stadium. This structure demonstrated the capabilities of mid-20th-century civil engineering, proving that large climate-controlled domes could host mass sporting and entertainment events, creating an artificial biosphere that changed modern stadium architecture.</p>
         </div>
 
         <!-- 💡 APRIL 10 -->
-        <div class="report-card">
-            <div class="day-header">APRIL_10</div>
-            <p class="essay-p">April 10th represents the archival coordinate for the <span class="highlight">terminal failure of maritime hubris</span> and the birth of 20th-century peace-time jurisprudence. It is a day defined by the initial pulse of a supreme logistical tragedy.</p>
+        <div class="report-card p-5 sm:p-10 md:p-20 mb-12 md:mb-32">
+            <div class="day-header text-2xl sm:text-4xl md:text-5xl tracking-[8px] sm:tracking-[15px] pb-3 md:pb-5 mb-8 md:mb-16">APRIL_10</div>
+            <p class="essay-p text-sm sm:text-base md:text-lg mb-6 md:mb-12 indent-4 sm:indent-8">April 10th represents the coordinate for <span class="highlight">maritime travel safety reforms</span> and the formalization of modern peace agreements, contrasting a major maritime tragedy with a historic diplomatic resolution.</p>
 
-            <img src="https://images.unsplash.com/photo-1500077423678-25eead4cb523?auto=format&fit=crop&w=1200&q=80" alt="Sea and Ship" class="archive-img">
+            <img src="https://images.unsplash.com/photo-1500077423678-25eead4cb523?auto=format&fit=crop&w=1200&q=80" alt="Sea and Ship" class="archive-img h-48 sm:h-72 md:h-[450px] lg:h-[550px] my-6 md:my-16">
 
-            <h3 class="category-h3">🚨 Critical Tragedies: The Titanic Sets Sail</h3>
-            <p class="essay-p"><span class="year-badge">1912</span>Maiden Voyage of the Titanic: A tragic node in maritime history. The departure from Southampton served as the initial pulse of a systemic failure. The subsequent forensic analysis forced a total global overhaul of maritime safety law and logistical synchronization, fundamentally altering the trajectory of international shipboard life-support protocols.</p>
+            <h3 class="category-h3 text-base sm:text-lg md:text-2xl tracking-[2px] sm:tracking-[4px] pl-4 sm:pl-6 mt-8 md:mt-20 mb-4 md:mb-8">🚨 Critical Tragedies: Titanic Maiden Voyage</h3>
+            <p class="essay-p text-sm sm:text-base md:text-lg mb-6 md:mb-12 indent-4 sm:indent-8"><span class="year-badge">1912</span>Maiden Voyage of the Titanic: The Titanic departed Southampton, England, on its fateful maiden voyage. This event represents the start of a major maritime disaster. The subsequent loss of the vessel prompted complete reforms in international maritime safety laws, including lifeboat requirements and maritime radio protocols.</p>
 
-            <h3 class="category-h3">⚖️ Judicial Intelligence: The Good Friday Agreement</h3>
-            <p class="essay-p"><span class="year-badge">1998</span>Signing of the Belfast Agreement: A landmark singularity in modern peace-time jurisprudence. This node archives the formal synchronization of disparate national identities under a singular legislative framework, effectively ending decades of systemic conflict in Northern Ireland and providing a blueprint for global conflict resolution forensics.</p>
+            <h3 class="category-h3 text-base sm:text-lg md:text-2xl tracking-[2px] sm:tracking-[4px] pl-4 sm:pl-6 mt-8 md:mt-20 mb-4 md:mb-8">⚖️ Judicial Intelligence: The Good Friday Agreement</h3>
+            <p class="essay-p text-sm sm:text-base md:text-lg mb-6 md:mb-12 indent-4 sm:indent-8"><span class="year-badge">1998</span>The Belfast Agreement (Good Friday Agreement): A major milestone in modern peace-time diplomacy. This historic agreement established a political framework to end decades of sectarian conflict in Northern Ireland, providing a model for multi-party conflict resolution and constitutional integration.</p>
         </div>
 
         <!-- 💡 APRIL 11 -->
-        <div class="report-card">
-            <div class="day-header">APRIL_11</div>
-            <p class="essay-p">April 11th archives the supreme node of <span class="highlight">mission-critical crisis management</span> and the birth of 20th-century award-based branding. Historically, this date anchors the moment human innovative resilience was tested in the vacuum of space.</p>
+        <div class="report-card p-5 sm:p-10 md:p-20 mb-12 md:mb-32">
+            <div class="day-header text-2xl sm:text-4xl md:text-5xl tracking-[8px] sm:tracking-[15px] pb-3 md:pb-5 mb-8 md:mb-16">APRIL_11</div>
+            <p class="essay-p text-sm sm:text-base md:text-lg mb-6 md:mb-12 indent-4 sm:indent-8">April 11th archives the coordinate for <span class="highlight">spaceflight crisis management</span> and the development of early Hollywood awards, showing human problem-solving in space alongside the branding of artistic success.</p>
             
-            <h3 class="category-h3">⚙️ Interstellar Intelligence: Apollo 13</h3>
-            <p class="essay-p"><span class="year-badge">1970</span>The Launch of Apollo 13: This mission eventually became a 'Crisis Management Singularity.' Following an oxygen tank explosion, the synchronization of ground-based engineering and orbital survival protocols forced a total systemic recalibration of space rescue forensics. It remains the definitive case study in 'Improvisational Engineering,' proving human intelligence can navigate terminal technical failures.</p>
+            <h3 class="category-h3 text-base sm:text-lg md:text-2xl tracking-[2px] sm:tracking-[4px] pl-4 sm:pl-6 mt-8 md:mt-20 mb-4 md:mb-8">⚙️ Interstellar Intelligence: Apollo 13 Launch</h3>
+            <p class="essay-p text-sm sm:text-base md:text-lg mb-6 md:mb-12 indent-4 sm:indent-8"><span class="year-badge">1970</span>The Launch of Apollo 13: This mission became a well-known example of spaceflight crisis management. Following an oxygen tank rupture, the coordination between ground control and the crew successfully brought the astronauts home. It remains a key study in improvisational engineering under intense physical and mechanical pressures.</p>
             
-            <h3 class="category-h3">🎬 Cinematic Arts: The First Oscars</h3>
-            <p class="essay-p"><span class="year-badge">1921</span>Inception of film award protocols: Pioneering the commercial genealogy of 'Award-Based Branding' in the media matrix, fundamentally altering global film distribution and prestige synchronization for the next century.</p>
+            <h3 class="category-h3 text-base sm:text-lg md:text-2xl tracking-[2px] sm:tracking-[4px] pl-4 sm:pl-6 mt-8 md:mt-20 mb-4 md:mb-8">🎬 Cinematic Arts: Film Award Protocols</h3>
+            <p class="essay-p text-sm sm:text-base md:text-lg mb-6 md:mb-12 indent-4 sm:indent-8"><span class="year-badge">1921/1929</span>Early Film Award Developments: The conceptualization and planning of early film award systems, which led to the creation of the Academy of Motion Picture Arts and Sciences. This development pioneered early systems of peer-reviewed film quality and institutional branding, shaping the commercial structures of the global film industry.</p>
         </div>
 
         <!-- 💡 APRIL 12 -->
-        <div class="report-card">
-            <div class="day-header">APRIL_12</div>
-            <p class="essay-p">April 12th represents the supreme node of <span class="highlight">Orbital Human Singularity</span> and the birth of modern aerospace logistics. Historically, this date anchors the moment human civilization transitioned into a spacefaring species.</p>
+        <div class="report-card p-5 sm:p-10 md:p-20 mb-12 md:mb-32">
+            <div class="day-header text-2xl sm:text-4xl md:text-5xl tracking-[8px] sm:tracking-[15px] pb-3 md:pb-5 mb-8 md:mb-16">APRIL_12</div>
+            <p class="essay-p text-sm sm:text-base md:text-lg mb-6 md:mb-12 indent-4 sm:indent-8">April 12th represents the coordinate for <span class="highlight">human spaceflight</span> and the development of reusable space vehicles, marking the moment when human travel officially entered Earth's orbit and introducing reusable aerospace logistics.</p>
 
-            <img src="https://images.unsplash.com/photo-1517976487492-5750f3195933?auto=format&fit=crop&w=1200&q=80" alt="Rocket into Space" class="archive-img">
+            <img src="https://images.unsplash.com/photo-1517976487492-5750f3195933?auto=format&fit=crop&w=1200&q=80" alt="Rocket into Space" class="archive-img h-48 sm:h-72 md:h-[450px] lg:h-[550px] my-6 md:my-16">
 
-            <h3 class="category-h3">🛰️ Interstellar Intelligence: Yuri Gagarin</h3>
-            <p class="essay-p"><span class="year-badge">1961</span>Vostok 1: Yuri Gagarin becomes the first human in space. Our analytical terminal categorizes this as the 'Cosmic Singularity.' By achieving stable Earth orbit, Gagarin synchronized human biological systems with orbital mechanics, effectively ending the era of terrestrial isolation and establishing the foundational protocols for all future human spaceflight.</p>
+            <h3 class="category-h3 text-base sm:text-lg md:text-2xl tracking-[2px] sm:tracking-[4px] pl-4 sm:pl-6 mt-8 md:mt-20 mb-4 md:mb-8">🛰️ Interstellar Intelligence: Yuri Gagarin</h3>
+            <p class="essay-p text-sm sm:text-base md:text-lg mb-6 md:mb-12 indent-4 sm:indent-8"><span class="year-badge">1961</span>Vostok 1: Soviet cosmonaut Yuri Gagarin became the first human in space, completing a single orbit of the Earth. This historic mission proved that humans could survive orbital flight, changing global space exploration and initiating a major phase of the space race between competing superpower nations.</p>
 
-            <h3 class="category-h3">⚙️ Technological Singularities: The Space Shuttle</h3>
-            <p class="essay-p"><span class="year-badge">1981</span>First Launch of Columbia (STS-1): Columbia initialized the era of reusable aerospace hardware. This technical milestone served as a definitive leap in logistical synchronization, proving that complex innovative structures could survive multiple re-entries and fundamentally altering the financial architecture of satellite deployment.</p>
+            <h3 class="category-h3 text-base sm:text-lg md:text-2xl tracking-[2px] sm:tracking-[4px] pl-4 sm:pl-6 mt-8 md:mt-20 mb-4 md:mb-8">⚙️ Technological Singularities: The Space Shuttle</h3>
+            <p class="essay-p text-sm sm:text-base md:text-lg mb-6 md:mb-12 indent-4 sm:indent-8"><span class="year-badge">1981</span>First Launch of Columbia (STS-1): The first flight of NASA's reusable Space Shuttle. This launch demonstrated that complex aerospace hardware could survive spaceflight and re-entry to fly again, changing the logistics of satellite deployment and space telescope maintenance.</p>
         </div>
 
         <!-- 💡 APRIL 13 -->
-        <div class="report-card">
-            <div class="day-header">APRIL_13</div>
-            <p class="essay-p">April 13th archives the birth of <span class="highlight">Mass-Scale Cultural Curation</span> and the zenith of early 18th-century administrative forensics. It is a day defined by the institutionalization of artistic heritage.</p>
+        <div class="report-card p-5 sm:p-10 md:p-20 mb-12 md:mb-32">
+            <div class="day-header text-2xl sm:text-4xl md:text-5xl tracking-[8px] sm:tracking-[15px] pb-3 md:pb-5 mb-8 md:mb-16">APRIL_13</div>
+            <p class="essay-p text-sm sm:text-base md:text-lg mb-6 md:mb-12 indent-4 sm:indent-8">April 13th archives the coordinate for <span class="highlight">large-scale art curation</span> and the birth of 18th-century constitutional statecraft, showing the preservation of human creative history alongside the growth of democratic ideas.</p>
 
-            <h3 class="category-h3">🎨 Arts & Intellectual Heritage: The MET</h3>
-            <p class="essay-p"><span class="year-badge">1870</span>Founding of the Metropolitan Museum of Art: A landmark node in human intelligence curation. Our research views the MET as the primordial ancestor to modern global museum networks. By synchronizing thousands of years of human creative output into a single matrix, it established the protocols for 'Cultural Capital Management,' fundamentally altering the trajectory of global artistic branding.</p>
+            <h3 class="category-h3 text-base sm:text-lg md:text-2xl tracking-[2px] sm:tracking-[4px] pl-4 sm:pl-6 mt-8 md:mt-20 mb-4 md:mb-8">🎨 Arts & Intellectual Heritage: The MET Founding</h3>
+            <p class="essay-p text-sm sm:text-base md:text-lg mb-6 md:mb-12 indent-4 sm:indent-8"><span class="year-badge">1870</span>Founding of the Metropolitan Museum of Art: Established in New York, the museum was created to preserve and showcase historical art. This initiative created a framework for national art curation, showing how public-private partnerships could organize and preserve historic human creations for research and education.</p>
 
-            <h3 class="category-h3">🏛️ Judicial & Political Nodes: Jefferson</h3>
-            <p class="essay-p"><span class="year-badge">1743</span>Birth of Thomas Jefferson: The primary architect of the Declaration of Independence. His life archives the synchronization of Enlightenment philosophy with constitutional statecraft, providing the structural DNA for modern individual rights and agrarian economic ethics in the early global matrix.</p>
+            <h3 class="category-h3 text-base sm:text-lg md:text-2xl tracking-[2px] sm:tracking-[4px] pl-4 sm:pl-6 mt-8 md:mt-20 mb-4 md:mb-8">🏛️ Judicial & Political Nodes: Thomas Jefferson</h3>
+            <p class="essay-p text-sm sm:text-base md:text-lg mb-6 md:mb-12 indent-4 sm:indent-8"><span class="year-badge">1743</span>Birth of Thomas Jefferson: The author of the Declaration of Independence and third US President. His work integrated Enlightenment philosophy into democratic governance, establishing early concepts of individual rights, agrarian economics, and constitutional statecraft in the early American republic.</p>
         </div>
 
         <!-- 💡 APRIL 14 -->
-        <div class="report-card">
-            <div class="day-header">APRIL_14</div>
-            <p class="essay-p">April 14th represents a dual singularity: the <span class="highlight">terminal collapse of maritime synchronization</span> and the tragic node of executive democratic trauma. It is a day defined by the most iconic technical failure in history.</p>
+        <div class="report-card p-5 sm:p-10 md:p-20 mb-12 md:mb-32">
+            <div class="day-header text-2xl sm:text-4xl md:text-5xl tracking-[8px] sm:tracking-[15px] pb-3 md:pb-5 mb-8 md:mb-16">APRIL_14</div>
+            <p class="essay-p text-sm sm:text-base md:text-lg mb-6 md:mb-12 indent-4 sm:indent-8">April 14th represents a coordinate for <span class="highlight">major transport and executive crises</span>, marking both the sinking of the Titanic and the assassination of President Lincoln, demonstrating how mechanical and political stability can be challenged.</p>
 
-            <h3 class="category-h3">🚨 Critical Tragedies: Titanic Hits Iceberg</h3>
-            <p class="essay-p"><span class="year-badge">1912</span>The Titanic Hits the Iceberg: 11:40 PM. A tragic singularity in industrial-age hubris. The failure of logistical synchronization forced a total global re-evaluation of maritime law. Our forensics indicate this event was the primary catalyst for the SOLAS treaty, establishing the first synchronized international protocols for marine radio monitoring and safety.</p>
+            <h3 class="category-h3 text-base sm:text-lg md:text-2xl tracking-[2px] sm:tracking-[4px] pl-4 sm:pl-6 mt-8 md:mt-20 mb-4 md:mb-8">🚨 Critical Tragedies: Titanic Hits Iceberg</h3>
+            <p class="essay-p text-sm sm:text-base md:text-lg mb-6 md:mb-12 indent-4 sm:indent-8"><span class="year-badge">1912</span>The Sinking of the Titanic: The vessel struck an iceberg in the North Atlantic. This disaster demonstrated the limitations of contemporary maritime design and safety regulations, leading directly to the creation of the International Convention for the Safety of Life at Sea (SOLAS) to coordinate global marine safety standards.</p>
 
-            <h3 class="category-h3">⚖️ Judicial Tragedies: Lincoln Assassination</h3>
-            <p class="essay-p"><span class="year-badge">1865</span>Assassination of Abraham Lincoln: At Ford’s Theatre. This node archives the first assassination of a US President. The loss of the primary executive architect during the reconstruction era forced a massive recalibration of federal reunification laws and established new protocols for presidential security and succession.</p>
+            <h3 class="category-h3 text-base sm:text-lg md:text-2xl tracking-[2px] sm:tracking-[4px] pl-4 sm:pl-6 mt-8 md:mt-20 mb-4 md:mb-8">⚖️ Judicial Tragedies: Lincoln Assassination</h3>
+            <p class="essay-p text-sm sm:text-base md:text-lg mb-6 md:mb-12 indent-4 sm:indent-8"><span class="year-badge">1865</span>Assassination of Abraham Lincoln: Lincoln was shot at Ford’s Theatre during the Reconstruction era. This event was the first assassination of a US president, creating a major political and leadership crisis during the postwar transition and prompting new discussions on presidential safety and transition of power.</p>
         </div>
 
         <!-- 💡 APRIL 15 -->
-        <div class="report-card">
-            <div class="day-header">APRIL_15</div>
-            <p class="essay-p">April 15th archives the birth of <span class="highlight">Global Food Standardization</span> and the formalization of modern fiscal obligations. It is a day defined by the inception of a commercial hegemony that redefined retail supply chains.</p>
+        <div class="report-card p-5 sm:p-10 md:p-20 mb-12 md:mb-32">
+            <div class="day-header text-2xl sm:text-4xl md:text-5xl tracking-[8px] sm:tracking-[15px] pb-3 md:pb-5 mb-8 md:mb-16">APRIL_15</div>
+            <p class="essay-p text-sm sm:text-base md:text-lg mb-6 md:mb-12 indent-4 sm:indent-8">April 15th archives the coordinate for <span class="highlight">food service franchising</span> and the formalization of national tax deadlines, showing the growth of corporate branding alongside state fiscal reporting structures.</p>
 
-            <img src="https://images.unsplash.com/photo-1552566626-52f8b828add9?auto=format&fit=crop&w=1200&q=80" alt="Commercial Food Branding" class="archive-img">
+            <img src="https://images.unsplash.com/photo-1552566626-52f8b828add9?auto=format&fit=crop&w=1200&q=80" alt="Commercial Food Branding" class="archive-img h-48 sm:h-72 md:h-[450px] lg:h-[550px] my-6 md:my-16">
 
-            <h3 class="category-h3">🏷️ Brand Genealogy: McDonald's Singularity</h3>
-            <p class="essay-p"><span class="year-badge">1955</span>The Founding of the McDonald's Corporation: Ray Kroc initialized the first franchised outlet. Our forensics identify this as a 'Logistical Singularity.' By applying assembly-line techniques to gastronomy, McDonald's pioneered the commercial genealogy of 'Systemic Branding,' fundamentally altering global consumption patterns and hospitality finance.</p>
+            <h3 class="category-h3 text-base sm:text-lg md:text-2xl tracking-[2px] sm:tracking-[4px] pl-4 sm:pl-6 mt-8 md:mt-20 mb-4 md:mb-8">🏷️ Brand Genealogy: McDonald's Franchise Inception</h3>
+            <p class="essay-p text-sm sm:text-base md:text-lg mb-6 md:mb-12 indent-4 sm:indent-8"><span class="year-badge">1955</span>The Founding of the McDonald's Corporation: Ray Kroc opened his first franchised McDonald's restaurant in Des Plaines, Illinois. This step led to the standardization of fast-food logistics, showing how assembly-line methods could be applied to food service, creating a major global corporate brand and altering consumer eating habits.</p>
 
-            <h3 class="category-h3">📈 Macro-Financial Intelligence: Tax Day</h3>
-            <p class="essay-p"><span class="year-badge">1955</span>Finalization of the April 15th Tax Deadline: A pivotal node in national capital synchronization. This legal act established a singular temporal target for federal fiscal reporting, providing a case study in how state authority can synchronize millions of individual financial nodes into a collective national fund.</p>
+            <h3 class="category-h3 text-base sm:text-lg md:text-2xl tracking-[2px] sm:tracking-[4px] pl-4 sm:pl-6 mt-8 md:mt-20 mb-4 md:mb-8">📈 Macro-Financial Intelligence: US Tax Deadline</h3>
+            <p class="essay-p text-sm sm:text-base md:text-lg mb-6 md:mb-12 indent-4 sm:indent-8"><span class="year-badge">1955</span>Establishment of the April 15th Tax Deadline: The US Internal Revenue Service designated April 15th as the annual deadline for federal income tax filings. This change coordinated national tax reporting, showing how federal agencies can establish a uniform schedule to collect public funds for national programs and infrastructure.</p>
         </div>
-
-        <!-- 🚀 PART 1 END -->
-        <div class="text-center py-20 border-t border-white/10">
-            <p class="font-cyber text-gold text-sm tracking-widest mb-6 uppercase">End of April Part I Synchronization</p>
-            <p class="text-gray-500 italic">"The journey of April continues. Proceed to Part II for nodes 16 through 30."</p>
-        </div>
-    </main>
-
-    <footer class="py-24 border-t border-white/5 text-center">
-        <p class="text-[11px] font-cyber text-gray-700 tracking-[0.5em] uppercase">Akashic Terminal Node © 2026</p>
-    </footer>
-</body>
-</html>
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Node 04: April Archival Intelligence | Part II (16-30)</title>
-    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Inter:wght@300;400;600&family=Playfair+Display:ital,wght@0,700;1,700&display=swap" rel="stylesheet">
-    <script src="https://cdn.tailwindcss.com"></script>
-    <style>
-        :root { --neon-gold: #f5c97a; --bg: #010204; --card-bg: rgba(10, 14, 22, 0.98); }
-        body { background: var(--bg); color: #e2e8f0; font-family: 'Inter', sans-serif; line-height: 2.2; }
-        .font-cyber { font-family: 'Orbitron', sans-serif; }
-        .bg-grid { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background-image: linear-gradient(rgba(245, 201, 122, 0.03) 1px, transparent 1px), linear-gradient(90deg, rgba(245, 201, 122, 0.03) 1px, transparent 1px); background-size: 80px 80px; z-index: -1; }
-        .report-card { background: var(--card-bg); border: 1px solid rgba(245, 201, 122, 0.1); border-radius: 24px; padding: 5rem; margin-bottom: 8rem; box-shadow: 0 40px 100px rgba(0,0,0,0.9); transition: 0.5s; }
-        .day-header { font-family: 'Orbitron'; color: var(--neon-gold); font-size: 3.5rem; letter-spacing: 15px; border-bottom: 2px solid var(--neon-gold); margin-bottom: 4rem; padding-bottom: 20px; text-align: center; }
-        .category-h3 { font-family: 'Orbitron'; color: #fff; font-size: 1.6rem; margin-top: 5rem; margin-bottom: 2rem; text-transform: uppercase; letter-spacing: 4px; border-left: 5px solid var(--neon-gold); padding-left: 25px; }
-        .essay-p { text-align: justify; color: #a0aec0; font-size: 1.2rem; margin-bottom: 3rem; text-indent: 2rem; line-height: 2.4; }
-        .year-badge { font-family: 'Orbitron'; color: #000; font-weight: 700; background: var(--neon-gold); padding: 4px 15px; border-radius: 4px; margin-right: 15px; font-size: 16px; }
-        .highlight { color: #fff; font-weight: 600; border-bottom: 1px solid var(--neon-gold); }
-        .archive-img { width: 100%; height: 550px; object-fit: cover; border-radius: 15px; margin: 4rem 0; border: 1px solid rgba(245, 201, 122, 0.2); filter: brightness(0.8); transition: 0.5s; }
-        .archive-img:hover { filter: brightness(1) contrast(1.1); }
-    </style>
-</head>
-<body>
-    <div class="bg-grid"></div>
-
-    <nav class="fixed w-full z-[1000] px-12 py-8 flex justify-between items-center bg-black/60 backdrop-blur-xl border-b border-white/5">
-        <div class="text-2xl font-cyber font-bold text-[#f5c97a] tracking-tighter cursor-pointer" onclick="location.href='index.html'">AKASHIC ARCHIVE // NODE_04</div>
-        <div class="flex gap-6">
-            <span class="font-cyber text-gray-500 text-xs mt-2">CHRONOLOGICAL_SYNC: APRIL_P2</span>
-            <a href="index.html" class="font-cyber text-[#f5c97a] border border-[#f5c97a] px-5 py-2 rounded hover:bg-[#f5c97a] hover:text-black transition-all text-xs">BACK_TO_HUB</a>
-        </div>
-    </nav>
-
-    <main class="relative pt-56 pb-20 px-8 max-w-6xl mx-auto">
-        <header class="text-center mb-40">
-            <h1 class="font-cyber text-6xl text-white mb-10 uppercase tracking-[0.4em]">April Intelligence <br><span class="text-gold opacity-50 text-3xl tracking-[0.2em]">Part II: Days 16 - 30</span></h1>
-            <p class="max-w-3xl mx-auto text-gray-400 italic text-xl leading-relaxed">"Decrypting the terminal nodes of April—from planetary biosecurity to the tragic collapse of autocratic administrative matrices."</p>
-        </header>
 
         <!-- 💡 APRIL 16 -->
-        <div class="report-card">
-            <div class="day-header">APRIL_16</div>
-            <p class="essay-p">April 16th serves as the coordinate for <span class="highlight">Deep-Space Logistical Execution</span> and the tragic node of asymmetrical domestic violence. Historically, this date anchors the moment human structural ambition returned to the lunar surface and when the forensic standards of campus security were systemically challenged.</p>
+        <div class="report-card p-5 sm:p-10 md:p-20 mb-12 md:mb-32">
+            <div class="day-header text-2xl sm:text-4xl md:text-5xl tracking-[8px] sm:tracking-[15px] pb-3 md:pb-5 mb-8 md:mb-16">FEBRUARY_16</div>
+            <p class="essay-p text-sm sm:text-base md:text-lg mb-6 md:mb-12 indent-4 sm:indent-8">April 16th serves as the coordinate for <span class="highlight">lunar research logistics</span> and the tragic occurrences of campus violence, showing both advanced exploration and the necessity of improved public safety measures.</p>
 
-            <img src="https://images.unsplash.com/photo-1446776811953-b23d57bd21aa?auto=format&fit=crop&w=1200&q=80" alt="Lunar Exploration Apollo" class="archive-img">
+            <img src="https://images.unsplash.com/photo-1446776811953-b23d57bd21aa?auto=format&fit=crop&w=1200&q=80" alt="Lunar Exploration Apollo" class="archive-img h-48 sm:h-72 md:h-[450px] lg:h-[550px] my-6 md:my-16">
 
-            <h3 class="category-h3">🛰️ Interstellar Intelligence: Apollo 16</h3>
-            <p class="essay-p"><span class="year-badge">1972</span>Launch of Apollo 16: The fifth human mission to the Moon. This node archives the maturity of lunar logistical synchronization. By utilizing the Lunar Roving Vehicle, Apollo 16 established the protocols for high-fidelity extraterrestrial geological research and innovative terrain-mapping, anchoring the future of synchronized lunar habitat studies and deep-space resource forensics.</p>
+            <h3 class="category-h3 text-base sm:text-lg md:text-2xl tracking-[2px] sm:tracking-[4px] pl-4 sm:pl-6 mt-8 md:mt-20 mb-4 md:mb-8">🛰️ Interstellar Intelligence: Apollo 16</h3>
+            <p class="essay-p text-sm sm:text-base md:text-lg mb-6 md:mb-12 indent-4 sm:indent-8"><span class="year-badge">1972</span>The Launch of Apollo 16: The fifth crewed lunar landing mission. By utilizing the Lunar Roving Vehicle, the mission completed detailed geologic sampling in the lunar highlands, showing how coordinated equipment and transport could expand human research capabilities in extraterrestrial environments.</p>
 
-            <h3 class="category-h3">🚨 Critical Tragedies: Virginia Tech Node</h3>
-            <p class="essay-p"><span class="year-badge">2007</span>The Virginia Tech Shooting: A tragic singularity in modern forensic history. The systemic failure of campus notification protocols and mental health monitoring forced a global re-evaluation of educational security law. This node served as a primary catalyst for the synchronization of real-time emergency alert systems across global academic institutions and redefined judicial standards for public safety.</p>
+            <h3 class="category-h3 text-base sm:text-lg md:text-2xl tracking-[2px] sm:tracking-[4px] pl-4 sm:pl-6 mt-8 md:mt-20 mb-4 md:mb-8">🚨 Critical Tragedies: Virginia Tech Shooting</h3>
+            <p class="essay-p text-sm sm:text-base md:text-lg mb-6 md:mb-12 indent-4 sm:indent-8"><span class="year-badge">2007</span>The Virginia Tech Shooting: A tragic event in Blacksburg, Virginia. This incident highlighted limitations in campus emergency notification systems and threat-assessment protocols, leading directly to reforms in university safety regulations and emergency alert procedures nationwide.</p>
         </div>
 
         <!-- 💡 APRIL 17 -->
-        <div class="report-card">
-            <div class="day-header">APRIL_17</div>
-            <p class="essay-p">April 17th archives the birth of <span class="highlight">modern consumer-technical interfaces</span> and the tragic failure of Cold War clandestine logistics. It is a day defined by the inception of a personal computational era and the innovative mapping of ideological conflict in the Caribbean matrix.</p>
+        <div class="report-card p-5 sm:p-10 md:p-20 mb-12 md:mb-32">
+            <div class="day-header text-2xl sm:text-4xl md:text-5xl tracking-[8px] sm:tracking-[15px] pb-3 md:pb-5 mb-8 md:mb-16">FEBRUARY_17</div>
+            <p class="essay-p text-sm sm:text-base md:text-lg mb-6 md:mb-12 indent-4 sm:indent-8">April 17th archives the coordinate for <span class="highlight">consumer computer development</span> and the failure of covert military operations, contrasting an important computer release with a major Cold War military incident.</p>
 
-            <h3 class="category-h3">⚙️ IT Singularities: Apple II Debut</h3>
-            <p class="essay-p"><span class="year-badge">1977</span>Introduction of the Apple II: At the West Coast Computer Faire, Apple introduced the machine that would define the home computing era. Our archival analysis views this as the birth of 'Consumer GUI Potential.' The Apple II was the first personal computer to be sold as a finished appliance, establishing the primordial protocols for home-based digital synchronization and initiating the global boom in educational and business software branding.</p>
+            <h3 class="category-h3 text-base sm:text-lg md:text-2xl tracking-[2px] sm:tracking-[4px] pl-4 sm:pl-6 mt-8 md:mt-20 mb-4 md:mb-8">⚙️ IT Singularities: Apple II Debut</h3>
+            <p class="essay-p text-sm sm:text-base md:text-lg mb-6 md:mb-12 indent-4 sm:indent-8"><span class="year-badge">1977</span>Introduction of the Apple II: At the West Coast Computer Faire, Apple introduced the Apple II computer. This machine featured color graphics and an integrated keyboard, helping to establish the consumer personal computer market and accelerating the growth of home-based educational and business software.</p>
 
-            <h3 class="category-h3">🏛️ Geopolitical Nodes: Bay of Pigs</h3>
-            <p class="essay-p"><span class="year-badge">1961</span>The Bay of Pigs Invasion: A definitive node in the history of failed tactical synchronization. The CIA-sponsored landing in Cuba served as a case study in 'Intelligence Asymmetry.' The subsequent fallout forced a total systemic overhaul of US covert operation protocols and recalibrated the geopolitical equilibrium between the super-powers during the Cold War.</p>
+            <h3 class="category-h3 text-base sm:text-lg md:text-2xl tracking-[2px] sm:tracking-[4px] pl-4 sm:pl-6 mt-8 md:mt-20 mb-4 md:mb-8">🏛️ Geopolitical Nodes: Bay of Pigs</h3>
+            <p class="essay-p text-sm sm:text-base md:text-lg mb-6 md:mb-12 indent-4 sm:indent-8"><span class="year-badge">1961</span>The Bay of Pigs Invasion: A failed CIA-sponsored landing by Cuban exiles in Cuba. This failed operation demonstrated the challenges of covert military logistics and intelligence coordination, leading to increased tensions between superpower nations during the Cold War.</p>
         </div>
 
         <!-- 💡 APRIL 18 -->
-        <div class="report-card">
-            <div class="day-header">APRIL_18</div>
-            <p class="essay-p">April 18th represents the temporal node for <span class="highlight">Systemic Urban Resilience</span> and the birth of 20th-century theoretical genius. It is a day marked by the terminal collapse of a major metropolitan infrastructure and the death of the world's most significant cognitive node.</p>
+        <div class="report-card p-5 sm:p-10 md:p-20 mb-12 md:mb-32">
+            <div class="day-header text-2xl sm:text-4xl md:text-5xl tracking-[8px] sm:tracking-[15px] pb-3 md:pb-5 mb-8 md:mb-16">FEBRUARY_18</div>
+            <p class="essay-p text-sm sm:text-base md:text-lg mb-6 md:mb-12 indent-4 sm:indent-8">April 18th represents the coordinate for <span class="highlight">urban disaster reconstruction</span> and the death of a major theoretical physicist, contrasting a massive natural disaster with the passing of a prominent scientist.</p>
 
-            <img src="https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=1200&q=80" alt="Earthquake Destruction and Resilience" class="archive-img">
+            <img src="https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=1200&q=80" alt="Earthquake Destruction and Resilience" class="archive-img h-48 sm:h-72 md:h-[450px] lg:h-[550px] my-6 md:my-16">
 
-            <h3 class="category-h3">🚨 Critical Tragedies: 1906 San Francisco Earthquake</h3>
-            <p class="essay-p"><span class="year-badge">1906</span>The San Francisco Earthquake: A tragic singularity that leveled 80% of the city. Beyond its destructive value, our forensics focus on the subsequent 'Reconstruction Synchronization.' This node served as the primary catalyst for modern fire-prevention innovative protocols and the development of seismic-resistant urban design laws, fundamentally altering the trajectory of West Coast capital flows.</p>
+            <h3 class="category-h3 text-base sm:text-lg md:text-2xl tracking-[2px] sm:tracking-[4px] pl-4 sm:pl-6 mt-8 md:mt-20 mb-4 md:mb-8">🚨 Critical Tragedies: 1906 San Francisco Earthquake</h3>
+            <p class="essay-p text-sm sm:text-base md:text-lg mb-6 md:mb-12 indent-4 sm:indent-8"><span class="year-badge">1906</span>The San Francisco Earthquake: A major earthquake and subsequent fires destroyed much of the city. This disaster highlighted the need for improved seismic building designs and fire prevention infrastructure, leading to major developments in modern urban planning and building safety regulations.</p>
 
-            <h3 class="category-h3">⚙️ Intellectual Heritage: Albert Einstein</h3>
-            <p class="essay-p"><span class="year-badge">1955</span>Death of Albert Einstein: The terminal coordinate for the individual who synchronized the fundamental laws of the physical universe. Einstein’s work established the theoretical protocols for the nuclear and digital age. His legacy serves as a milestone in the cultural synchronization of ethics and science, anchoring the future of global research foundations.</p>
+            <h3 class="category-h3 text-base sm:text-lg md:text-2xl tracking-[2px] sm:tracking-[4px] pl-4 sm:pl-6 mt-8 md:mt-20 mb-4 md:mb-8">⚙️ Intellectual Heritage: Albert Einstein passing</h3>
+            <p class="essay-p text-sm sm:text-base md:text-lg mb-6 md:mb-12 indent-4 sm:indent-8"><span class="year-badge">1955</span>Death of Albert Einstein: The theoretical physicist passed away, leaving a major legacy in modern physics. His work in relativity established key concepts for quantum mechanics and nuclear physics, continuing to influence global scientific research and space technology.</p>
         </div>
 
         <!-- 💡 APRIL 19 -->
-        <div class="report-card">
-            <div class="day-header">APRIL_19</div>
-            <p class="essay-p">April 19th archives the birth of <span class="highlight">Revolutionary Sovereign Action</span> and the tragic node of domestic anti-institutional violence. It is a day defined by the initial technical pulses of the American Revolutionary War and the systemic shock of domestic terrorism.</p>
+        <div class="report-card p-5 sm:p-10 md:p-20 mb-12 md:mb-32">
+            <div class="day-header text-2xl sm:text-4xl md:text-5xl tracking-[8px] sm:tracking-[15px] pb-3 md:pb-5 mb-8 md:mb-16">FEBRUARY_19</div>
+            <p class="essay-p text-sm sm:text-base md:text-lg mb-6 md:mb-12 indent-4 sm:indent-8">April 19th archives the coordinate for <span class="highlight">the start of revolutionary conflicts</span> and major domestic security crises, marking both the battles of Lexington and Concord and the Oklahoma City bombing.</p>
 
-            <h3 class="category-h3">⚖️ Judicial Intelligence: Lexington & Concord</h3>
-            <p class="essay-p"><span class="year-badge">1775</span>Battles of Lexington and Concord: The initialization of the American Revolutionary War. Our archival forensics identify this as the 'Sovereignty Singularity.' This node represented the physical and legal breakdown of colonial governance, anchoring the transition toward a new constitutional framework based on the 'consent of the governed' and establishing the primordial protocols for modern democratic warfare.</p>
+            <h3 class="category-h3 text-base sm:text-lg md:text-2xl tracking-[2px] sm:tracking-[4px] pl-4 sm:pl-6 mt-8 md:mt-20 mb-4 md:mb-8">⚖️ Judicial Intelligence: Lexington & Concord</h3>
+            <p class="essay-p text-sm sm:text-base md:text-lg mb-6 md:mb-12 indent-4 sm:indent-8"><span class="year-badge">1775</span>The Battles of Lexington and Concord: The opening military engagements of the American Revolutionary War. These conflicts marked the end of British colonial governance, initiating a transition toward a new constitutional framework based on self-determination and popular sovereignty.</p>
 
-            <h3 class="category-h3">🚨 Critical Tragedies: Oklahoma City Bombing</h3>
-            <p class="essay-p"><span class="year-badge">1995</span>Oklahoma City Bombing: A tragic singularity in modern security forensics. The destruction of a federal building forced a total systemic overhaul of domestic biosecurity and explosive-material tracking laws. This node established the 'Post-Oklahoma' protocols for federal facility protection and synchronized law enforcement intelligence-sharing against domestic threats.</p>
+            <h3 class="category-h3 text-base sm:text-lg md:text-2xl tracking-[2px] sm:tracking-[4px] pl-4 sm:pl-6 mt-8 md:mt-20 mb-4 md:mb-8">🚨 Critical Tragedies: Oklahoma City Bombing</h3>
+            <p class="essay-p text-sm sm:text-base md:text-lg mb-6 md:mb-12 indent-4 sm:indent-8"><span class="year-badge">1995</span>The Oklahoma City Bombing: A massive bombing of the Alfred P. Murrah Federal Building in Oklahoma City. This incident highlighted the threat of domestic terrorism, leading directly to reforms in federal building security regulations, threat-assessment tracking, and law enforcement coordination.</p>
         </div>
 
         <!-- 💡 APRIL 20 -->
-        <div class="report-card">
-            <div class="day-header">APRIL_20</div>
-            <p class="essay-p">April 20th serves as the supreme coordinate for <span class="highlight">forensic ecological catastrophe</span> and the tragic recalibration of youth social security. Historically, this date anchors the moment industrial failure caused a terminal environmental shock.</p>
+        <div class="report-card p-5 sm:p-10 md:p-20 mb-12 md:mb-32">
+            <div class="day-header text-2xl sm:text-4xl md:text-5xl tracking-[8px] sm:tracking-[15px] pb-3 md:pb-5 mb-8 md:mb-16">FEBRUARY_20</div>
+            <p class="essay-p text-sm sm:text-base md:text-lg mb-6 md:mb-12 indent-4 sm:indent-8">April 20th serves as the coordinate for <span class="highlight">offshore environmental disasters</span> and tragic events in schools, contrasting a major deep-sea engineering failure with a historic campus tragedy.</p>
 
-            <img src="https://images.unsplash.com/photo-1542332606-b3d8c603f99b?auto=format&fit=crop&w=1200&q=80" alt="Environmental Oil Spill Crisis" class="archive-img">
+            <img src="https://images.unsplash.com/photo-1542332606-b3d8c603f99b?auto=format&fit=crop&w=1200&q=80" alt="Environmental Oil Spill Crisis" class="archive-img h-48 sm:h-72 md:h-[450px] lg:h-[550px] my-6 md:my-16">
 
-            <h3 class="category-h3">⚙️ Technological Singularities: Deepwater Horizon</h3>
-            <p class="essay-p"><span class="year-badge">2010</span>Deepwater Horizon Oil Spill: An explosion in the Gulf of Mexico initiated the worst environmental disaster in US history. Our archival terminal categorizes this as a 'Systemic Engineering Failure.' The failure of blowout-preventer synchronization forced a total global re-evaluation of offshore drilling law and innovative safety standards for high-pressure resource extraction.</p>
+            <h3 class="category-h3 text-base sm:text-lg md:text-2xl tracking-[2px] sm:tracking-[4px] pl-4 sm:pl-6 mt-8 md:mt-20 mb-4 md:mb-8">⚙️ Technological Singularities: Deepwater Horizon</h3>
+            <p class="essay-p text-sm sm:text-base md:text-lg mb-6 md:mb-12 indent-4 sm:indent-8"><span class="year-badge">2010</span>The Deepwater Horizon Oil Spill: An explosion on an offshore oil rig in the Gulf of Mexico caused a massive marine oil spill. This disaster highlighted limitations in deep-sea petroleum engineering and blowout-preventer designs, prompting major reforms in offshore drilling regulations and environmental safety standards.</p>
 
-            <h3 class="category-h3">🚨 Critical Tragedies: Columbine High School</h3>
-            <p class="essay-p"><span class="year-badge">1999</span>The Columbine Massacre: A tragic node that fundamentally altered the global perception of school security and gun-control forensics. This event served as a case study in 'Social Synchronicity,' where media coverage forced a massive recalibration of security protocols and legislative debate regarding public safety in academic environments.</p>
+            <h3 class="category-h3 text-base sm:text-lg md:text-2xl tracking-[2px] sm:tracking-[4px] pl-4 sm:pl-6 mt-8 md:mt-20 mb-4 md:mb-8">🚨 Critical Tragedies: Columbine High School</h3>
+            <p class="essay-p text-sm sm:text-base md:text-lg mb-6 md:mb-12 indent-4 sm:indent-8"><span class="year-badge">1999</span>The Columbine High School Massacre: A tragic shooting in Littleton, Colorado, that prompted national debates on school safety, threat-assessment tracking, and gun control regulations, leading to major changes in academic security protocols.</p>
         </div>
 
         <!-- 💡 APRIL 21 -->
-        <div class="report-card">
-            <div class="day-header">APRIL_21</div>
-            <p class="essay-p">April 21st archives the <span class="highlight">primordial nodes of Western sovereign identity</span> and the birth of modern institutional branding through monarchical continuity. It anchors the mythological inception of the Roman administrative matrix.</p>
+        <div class="report-card p-5 sm:p-10 md:p-20 mb-12 md:mb-32">
+            <div class="day-header text-2xl sm:text-4xl md:text-5xl tracking-[8px] sm:tracking-[15px] pb-3 md:pb-5 mb-8 md:mb-16">FEBRUARY_21</div>
+            <p class="essay-p text-sm sm:text-base md:text-lg mb-6 md:mb-12 indent-4 sm:indent-8">April 21st archives the coordinate for <span class="highlight">early city foundations</span> and the birth of a long-reigning monarch, marking both the traditional foundation of Rome and the birth of Queen Elizabeth II.</p>
             
-            <h3 class="category-h3">🏛️ Geopolitical Nodes: The Founding of Rome</h3>
-            <p class="essay-p"><span class="year-badge">753 BC</span>Founding of Rome: Romulus initialized the city that would become the epicenter of global law. Our archival research identifies this as the 'Governance Singularity'—the birth of the legislative DNA (Roman Law) that provides the foundational protocols for modern Western judicial systems and synchronized urban logistical management.</p>
+            <h3 class="category-h3 text-base sm:text-lg md:text-2xl tracking-[2px] sm:tracking-[4px] pl-4 sm:pl-6 mt-8 md:mt-20 mb-4 md:mb-8">🏛️ Geopolitical Nodes: The Founding of Rome</h3>
+            <p class="essay-p text-sm sm:text-base md:text-lg mb-6 md:mb-12 indent-4 sm:indent-8"><span class="year-badge">753 BC</span>The Traditional Founding of Rome: The city of Rome was founded, which later became the center of a major ancient empire. This development laid the foundation for Roman law, which influenced modern Western civil and statutory codes, shaping early systems of municipal administration.</p>
             
-            <h3 class="category-h3">🏷️ Brand Genealogy: Queen Elizabeth II</h3>
-            <p class="essay-p"><span class="year-badge">1926</span>Birth of Elizabeth II: The longest-reigning monarch in British history. Her life served as a case study in 'Sovereign Branding Synchronization.' By maintaining institutional stability through the transition from an imperial to a digital era, her reign anchored the psychological and legal continuity of the Commonwealth matrix for over seven decades.</p>
+            <h3 class="category-h3 text-base sm:text-lg md:text-2xl tracking-[2px] sm:tracking-[4px] pl-4 sm:pl-6 mt-8 md:mt-20 mb-4 md:mb-8">🏷️ Brand Genealogy: Queen Elizabeth II birth</h3>
+            <p class="essay-p text-sm sm:text-base md:text-lg mb-6 md:mb-12 indent-4 sm:indent-8"><span class="year-badge">1926</span>Birth of Queen Elizabeth II: The monarch was born, later completing a 70-year reign during a period of major decolonization. Her reign provided institutional stability for the Commonwealth, showcasing monarchical continuity during the transition into the modern digital age.</p>
         </div>
 
         <!-- 💡 APRIL 22 -->
-        <div class="report-card">
-            <div class="day-header">APRIL_22</div>
-            <p class="essay-p">April 22nd represents the supreme coordinate for <span class="highlight">Planetary Biosecurity Awareness</span> and the birth of 20th-century theoretical physics. Historically, this date anchors the global synchronization of ecological preservation.</p>
+        <div class="report-card p-5 sm:p-10 md:p-20 mb-12 md:mb-32">
+            <div class="day-header text-2xl sm:text-4xl md:text-5xl tracking-[8px] sm:tracking-[15px] pb-3 md:pb-5 mb-8 md:mb-16">FEBRUARY_22</div>
+            <p class="essay-p text-sm sm:text-base md:text-lg mb-6 md:mb-12 indent-4 sm:indent-8">April 22nd represents the coordinate for <span class="highlight">global environmental awareness</span> and the birth of a prominent physicist, marking both Earth Day and the birth of J. Robert Oppenheimer.</p>
 
-            <img src="https://images.unsplash.com/photo-1451187580459-43490279c0fa?auto=format&fit=crop&w=1200&q=80" alt="The Earth from Space" class="archive-img">
+            <img src="https://images.unsplash.com/photo-1451187580459-43490279c0fa?auto=format&fit=crop&w=1200&q=80" alt="The Earth from Space" class="archive-img h-48 sm:h-72 md:h-[450px] lg:h-[550px] my-6 md:my-16">
 
-            <h3 class="category-h3">🌍 Innovations in Resource Governance: Earth Day</h3>
-            <p class="essay-p"><span class="year-badge">1970</span>Initialization of Earth Day: A global node for environmental legislative pressure. This event synchronized millions of individual ecological concerns into a singular diplomatic mandate, catalyzing the development of global clean-air innovative protocols and anchoring the principle of 'Planetary Stewardship' in international law.</p>
+            <h3 class="category-h3 text-base sm:text-lg md:text-2xl tracking-[2px] sm:tracking-[4px] pl-4 sm:pl-6 mt-8 md:mt-20 mb-4 md:mb-8">🌍 Innovations in Resource Governance: Earth Day</h3>
+            <p class="essay-p text-sm sm:text-base md:text-lg mb-6 md:mb-12 indent-4 sm:indent-8"><span class="year-badge">1970</span>The First Earth Day: An event established to promote environmental preservation and public health regulations. This initiative coordinated environmental awareness, leading directly to the creation of the US Environmental Protection Agency and early Clean Air and Clean Water Acts.</p>
 
-            <h3 class="category-h3">⚙️ Intellectual Heritage: Robert Oppenheimer</h3>
-            <p class="essay-p"><span class="year-badge">1904</span>Birth of J. Robert Oppenheimer: The primary architect of the Manhattan Project. His life archives the synchronization of theoretical physics with military logistics, leading to the first atomic technical singularity. Our analysis views this node as the definitive transition point into the nuclear age, redefining global security forensics.</p>
+            <h3 class="category-h3 text-base sm:text-lg md:text-2xl tracking-[2px] sm:tracking-[4px] pl-4 sm:pl-6 mt-8 md:mt-20 mb-4 md:mb-8">⚙️ Intellectual Heritage: Robert Oppenheimer</h3>
+            <p class="essay-p text-sm sm:text-base md:text-lg mb-6 md:mb-12 indent-4 sm:indent-8"><span class="year-badge">1904</span>Birth of J. Robert Oppenheimer: The theoretical physicist was born, later directing the Manhattan Project during WWII. His work coordinated theoretical physics with military logistics, leading to the development of early nuclear weapons and changing global security and defense strategies.</p>
         </div>
 
         <!-- 💡 APRIL 23 -->
-        <div class="report-card">
-            <div class="day-header">APRIL_23</div>
-            <p class="essay-p">April 23rd archives the birth of <span class="highlight">Modern Information Hegemony</span> and the zenith of 16th-century literary intelligence. It is a day marked by the initialization of the world's most dominant video search matrix.</p>
+        <div class="report-card p-5 sm:p-10 md:p-20 mb-12 md:mb-32">
+            <div class="day-header text-2xl sm:text-4xl md:text-5xl tracking-[8px] sm:tracking-[15px] pb-3 md:pb-5 mb-8 md:mb-16">FEBRUARY_23</div>
+            <p class="essay-p text-sm sm:text-base md:text-lg mb-6 md:mb-12 indent-4 sm:indent-8">April 23rd archives the coordinate for <span class="highlight">video sharing development</span> and the birth of a major English playwright, contrasting early web video uploads with the literary heritage of William Shakespeare.</p>
 
-            <h3 class="category-h3">⚙️ IT Singularities: First YouTube Video</h3>
-            <p class="essay-p"><span class="year-badge">2005</span>"Me at the zoo": The first video was uploaded to YouTube. Our analytical terminal identifies this as the 'Video Synchronization Singularity.' It marked the birth of a decentralized media empire where video intelligence became the primary medium for global information consumption, fundamentally altering the commercial genealogy of digital branding.</p>
+            <h3 class="category-h3 text-base sm:text-lg md:text-2xl tracking-[2px] sm:tracking-[4px] pl-4 sm:pl-6 mt-8 md:mt-20 mb-4 md:mb-8">⚙️ IT Singularities: First YouTube Video</h3>
+            <p class="essay-p text-sm sm:text-base md:text-lg mb-6 md:mb-12 indent-4 sm:indent-8"><span class="year-badge">2005</span>The Upload of "Me at the zoo": The first video uploaded to YouTube. This milestone demonstrated the potential for user-generated video content on the web, accelerating online media consumption and changing digital marketing and branding practices.</p>
 
-            <h3 class="category-h3">📚 Literature & Intellectual Heritage: Shakespeare</h3>
-            <p class="essay-p"><span class="year-badge">1564/1616</span>The Shakespeare Node: Synchronized with both his birth and death. Shakespeare’s work served as a technical singularity in 'Linguistic Forensics.' By codifying thousands of new words and dramatic archetypes, he provided the structural DNA for modern English narrative and the synchronization of global psychological theater for centuries.</p>
+            <h3 class="category-h3 text-base sm:text-lg md:text-2xl tracking-[2px] sm:tracking-[4px] pl-4 sm:pl-6 mt-8 md:mt-20 mb-4 md:mb-8">📚 Literature & Intellectual Heritage: Shakespeare</h3>
+            <p class="essay-p text-sm sm:text-base md:text-lg mb-6 md:mb-12 indent-4 sm:indent-8"><span class="year-badge">1564/1616</span>The William Shakespeare Node: Marking both the birth and death of the English playwright. His plays and poetry established early modern English vocabulary and dramatic structures, continuing to influence international literature, theater, and storytelling.</p>
         </div>
 
         <!-- 💡 APRIL 24 -->
-        <div class="report-card">
-            <div class="day-header">APRIL_24</div>
-            <p class="essay-p">April 24th represents the supreme coordinate for <span class="highlight">Deep-Space Observational Intelligence</span> and the tragic node of Armenian geopolitical memory. Historically, this date anchors the moment human vision transcended the atmospheric blur.</p>
+        <div class="report-card p-5 sm:p-10 md:p-20 mb-12 md:mb-32">
+            <div class="day-header text-2xl sm:text-4xl md:text-5xl tracking-[8px] sm:tracking-[15px] pb-3 md:pb-5 mb-8 md:mb-16">FEBRUARY_24</div>
+            <p class="essay-p text-sm sm:text-base md:text-lg mb-6 md:mb-12 indent-4 sm:indent-8">April 24th represents the coordinate for <span class="highlight">orbital space telescopes</span> and historic human rights tragedies, contrasting the launch of the Hubble Space Telescope with the commemoration of the Armenian Genocide.</p>
 
-            <img src="https://images.unsplash.com/photo-1610296669228-602fa827ee1f?auto=format&fit=crop&w=1200&q=80" alt="Hubble Space Telescope Galaxy" class="archive-img">
+            <img src="https://images.unsplash.com/photo-1610296669228-602fa827ee1f?auto=format&fit=crop&w=1200&q=80" alt="Hubble Space Telescope Galaxy" class="archive-img h-48 sm:h-72 md:h-[450px] lg:h-[550px] my-6 md:my-16">
 
-            <h3 class="category-h3">🛰️ Interstellar Intelligence: Hubble Launch</h3>
-            <p class="essay-p"><span class="year-badge">1990</span>Launch of the Hubble Space Telescope: A pinnacle of high-fidelity innovative engineering. Hubble synchronized astronomical observation with orbital logistics, providing a case study in celestial data-mapping that redefined our mathematical understanding of the universe's expansion and cosmic origins.</p>
+            <h3 class="category-h3 text-base sm:text-lg md:text-2xl tracking-[2px] sm:tracking-[4px] pl-4 sm:pl-6 mt-8 md:mt-20 mb-4 md:mb-8">🛰️ Interstellar Intelligence: Hubble Launch</h3>
+            <p class="essay-p text-sm sm:text-base md:text-lg mb-6 md:mb-12 indent-4 sm:indent-8"><span class="year-badge">1990</span>Launch of the Hubble Space Telescope: The Space Shuttle Discovery launched the observatory into orbit. By avoiding atmospheric distortion, the telescope has completed detailed deep-space observations, providing important data on the expansion rate of the universe and cosmic history.</p>
 
-            <h3 class="category-h3">🚨 Geopolitical Tragedies: Armenian Genocide</h3>
-            <p class="essay-p"><span class="year-badge">1915</span>Armenian Genocide Initialization: A tragic singularity in modern human rights forensics. The systemic failure of international judicial intervention forced a global re-evaluation of the definition of 'Genocide' and established the primordial protocols for modern war-crime documentation and historical memory law.</p>
+            <h3 class="category-h3 text-base sm:text-lg md:text-2xl tracking-[2px] sm:tracking-[4px] pl-4 sm:pl-6 mt-8 md:mt-20 mb-4 md:mb-8">🚨 Geopolitical Tragedies: Armenian Genocide</h3>
+            <p class="essay-p text-sm sm:text-base md:text-lg mb-6 md:mb-12 indent-4 sm:indent-8"><span class="year-badge">1915</span>Armenian Genocide Commemoration: The date marks the beginning of the forced relocation of Armenian intellectuals and community leaders. This tragic event prompted international discussions on the legal definition of genocide, leading to early war-crime documentation standards and historical memory laws.</p>
         </div>
 
         <!-- 💡 APRIL 25 -->
-        <div class="report-card">
-            <div class="day-header">APRIL_25</div>
-            <p class="essay-p">April 25th archives the supreme node of <span class="highlight">Biological Code Decryption</span> and the birth of 18th-century satirical intelligence. It is a day defined by the technical triumph of clinical genetics.</p>
+        <div class="report-card p-5 sm:p-10 md:p-20 mb-12 md:mb-32">
+            <div class="day-header text-2xl sm:text-4xl md:text-5xl tracking-[8px] sm:tracking-[15px] pb-3 md:pb-5 mb-8 md:mb-16">FEBRUARY_25</div>
+            <p class="essay-p text-sm sm:text-base md:text-lg mb-6 md:mb-12 indent-4 sm:indent-8">April 25th archives the coordinate for <span class="highlight">molecular biology developments</span> and early novel publications, contrasting the discovery of DNA's double helix with the literary history of Daniel Defoe.</p>
 
-            <h3 class="category-h3">🧬 Medical Singularities: The DNA Publication</h3>
-            <p class="essay-p"><span class="year-badge">1953</span>Watson and Crick Publish DNA Structure: In 'Nature' magazine. Our archival forensics identify this as the 'Molecular Singularity.' By proving the double-helix structure, they established the foundational protocols for genetic forensics, clinical biotechnology, and the synchronization of the Human Genome Project, fundamentally altering human clinical medicine.</p>
+            <h3 class="category-h3 text-base sm:text-lg md:text-2xl tracking-[2px] sm:tracking-[4px] pl-4 sm:pl-6 mt-8 md:mt-20 mb-4 md:mb-8">🧬 Medical Singularities: DNA Double Helix Publication</h3>
+            <p class="essay-p text-sm sm:text-base md:text-lg mb-6 md:mb-12 indent-4 sm:indent-8"><span class="year-badge">1953</span>Watson and Crick’s DNA Publication: Francis Crick and James Watson published their paper describing the double-helix structure of DNA in 'Nature' magazine. This finding established early concepts for genetic forensics and clinical biotechnology, leading to the Human Genome Project and changing clinical medicine.</p>
 
-            <h3 class="category-h3">📚 Literature & Enlightenment: Daniel Defoe</h3>
-            <p class="essay-p"><span class="year-badge">1719</span>Publication of Robinson Crusoe: A landmark node in the history of commercial branding. Defoe’s work served as a social singularity, establishing the foundational protocols for the modern 'Novel' and the synchronization of survival narrative with early industrial individualism in the Western matrix.</p>
+            <h3 class="category-h3 text-base sm:text-lg md:text-2xl tracking-[2px] sm:tracking-[4px] pl-4 sm:pl-6 mt-8 md:mt-20 mb-4 md:mb-8">📚 Literature & Enlightenment: Daniel Defoe</h3>
+            <p class="essay-p text-sm sm:text-base md:text-lg mb-6 md:mb-12 indent-4 sm:indent-8"><span class="year-badge">1719</span>Publication of Robinson Crusoe: Daniel Defoe's novel was published. The book established early structures for the modern English novel, showing how narrative could reflect themes of individual survival and early industrial development in Western literature.</p>
         </div>
 
         <!-- 💡 APRIL 26 -->
-        <div class="report-card">
-            <div class="day-header">APRIL_26</div>
-            <p class="essay-p">April 26th serves as the archival coordinate for <span class="highlight">Terminal Nuclear Logistical Failure</span> and the formalization of early 20th-century architectural modernism. This node archives the most devastating failure of industrial-age biosecurity.</p>
+        <div class="report-card p-5 sm:p-10 md:p-20 mb-12 md:mb-32">
+            <div class="day-header text-2xl sm:text-4xl md:text-5xl tracking-[8px] sm:tracking-[15px] pb-3 md:pb-5 mb-8 md:mb-16">FEBRUARY_26</div>
+            <p class="essay-p text-sm sm:text-base md:text-lg mb-6 md:mb-12 indent-4 sm:indent-8">April 26th serves as the coordinate for <span class="highlight">major nuclear disasters</span> and modern art masterpieces, contrasting the Chernobyl accident with the historical context of Picasso's Guernica.</p>
 
-            <img src="https://images.unsplash.com/photo-1447069387593-a5de0862481e?auto=format&fit=crop&w=1200&q=80" alt="Chernobyl Power Plant Ruins" class="archive-img">
+            <img src="https://images.unsplash.com/photo-1447069387593-a5de0862481e?auto=format&fit=crop&w=1200&q=80" alt="Chernobyl Power Plant Ruins" class="archive-img h-48 sm:h-72 md:h-[450px] lg:h-[550px] my-6 md:my-16">
 
-            <h3 class="category-h3">⚙️ Technological Singularities: Chernobyl disaster</h3>
-            <p class="essay-p"><span class="year-badge">1986</span>The Chernobyl Disaster: A reactor core explosion in Ukraine. Our analytical terminal categorizes this as a 'Systemic Meltdown Singularity.' The failure of mechanical synchronization and administrative transparency forced a total global recalibration of nuclear energy law and innovative safety standards for high-risk resource management.</p>
+            <h3 class="category-h3 text-base sm:text-lg md:text-2xl tracking-[2px] sm:tracking-[4px] pl-4 sm:pl-6 mt-8 md:mt-20 mb-4 md:mb-8">⚙️ Technological Singularities: Chernobyl disaster</h3>
+            <p class="essay-p text-sm sm:text-base md:text-lg mb-6 md:mb-12 indent-4 sm:indent-8"><span class="year-badge">1986</span>The Chernobyl Disaster: A steam explosion and subsequent nuclear meltdown occurred at the Chernobyl Nuclear Power Plant in Ukraine. This incident highlighted limitations in RBMK reactor designs and nuclear safety protocols, leading directly to reforms in international nuclear regulations and safety standards.</p>
 
-            <h3 class="category-h3">🎨 Arts & Architectural Intelligence: Guernica</h3>
-            <p class="essay-p"><span class="year-badge">1937</span>Bombing of Guernica: Historically synchronized with Picasso’s subsequent masterpiece. This node archives the first major aerial-forensic tragedy of modern warfare, providing a case study in how technical destruction can be synchronized with artistic intelligence to form a global brand for anti-war activism.</p>
+            <h3 class="category-h3 text-base sm:text-lg md:text-2xl tracking-[2px] sm:tracking-[4px] pl-4 sm:pl-6 mt-8 md:mt-20 mb-4 md:mb-8">🎨 Arts & Architectural Intelligence: Guernica</h3>
+            <p class="essay-p text-sm sm:text-base md:text-lg mb-6 md:mb-12 indent-4 sm:indent-8"><span class="year-badge">1937</span>Bombing of Guernica: The aerial bombing of the town of Guernica during the Spanish Civil War. This event inspired Pablo Picasso's famous mural, showing how modern art can be used to reflect anti-war activism and historical memory.</p>
         </div>
 
         <!-- 💡 APRIL 27 -->
-        <div class="report-card">
-            <div class="day-header">APRIL_27</div>
-            <p class="essay-p">April 27th archives the birth of <span class="highlight">Digital Visual Standardization</span> and the tragic node of early maritime navigational discovery. It is a day defined by the inception of high-fidelity computer mice.</p>
+        <div class="report-card p-5 sm:p-10 md:p-20 mb-12 md:mb-32">
+            <div class="day-header text-2xl sm:text-4xl md:text-5xl tracking-[8px] sm:tracking-[15px] pb-3 md:pb-5 mb-8 md:mb-16">FEBRUARY_27</div>
+            <p class="essay-p text-sm sm:text-base md:text-lg mb-6 md:mb-12 indent-4 sm:indent-8">April 27th archives the coordinate for <span class="highlight">commercial computer interfaces</span> and historic maritime exploration, contrasting the launch of the Xerox Star with the death of explorer Ferdinand Magellan.</p>
 
-            <h3 class="category-h3">⚙️ IT Singularities: Xerox 8010 Star</h3>
-            <p class="essay-p"><span class="year-badge">1981</span>Launch of the Xerox Star: The first commercial system to include a computer mouse and GUI. This technical milestone served as the primordial ancestor to modern personal digital synchronization, proving that human motor skills could be encoded and synchronized with computational logic through a simple innovative interface.</p>
+            <h3 class="category-h3 text-base sm:text-lg md:text-2xl tracking-[2px] sm:tracking-[4px] pl-4 sm:pl-6 mt-8 md:mt-20 mb-4 md:mb-8">⚙️ IT Singularities: Xerox 8010 Star</h3>
+            <p class="essay-p text-sm sm:text-base md:text-lg mb-6 md:mb-12 indent-4 sm:indent-8"><span class="year-badge">1981</span>Introduction of the Xerox Star: The first commercial system to include a graphical user interface and a computer mouse. This release established early standards for consumer computing, demonstrating how intuitive user interfaces can improve computer usability and design.</p>
 
-            <h3 class="category-h3">🛰️ Navigational & Geopolitical Nodes: Magellan</h3>
-            <p class="essay-p"><span class="year-badge">1521</span>Death of Ferdinand Magellan: In the Philippines. This node archives the extreme logistical risks inherent in early maritime innovative ambition. Magellan’s mission established the foundational protocols for global navigational forensics, providing the essential baseline for subsequent transcontinental trade synchronization.</p>
+            <h3 class="category-h3 text-base sm:text-lg md:text-2xl tracking-[2px] sm:tracking-[4px] pl-4 sm:pl-6 mt-8 md:mt-20 mb-4 md:mb-8">🛰️ Navigational & Geopolitical Nodes: Magellan</h3>
+            <p class="essay-p text-sm sm:text-base md:text-lg mb-6 md:mb-12 indent-4 sm:indent-8"><span class="year-badge">1521</span>Death of Ferdinand Magellan: The explorer was killed in the Battle of Mactan in the Philippines during his expedition to circumnavigate the globe. This event highlighted the risks of early maritime exploration, providing important data on global navigation and trade routes.</p>
         </div>
 
         <!-- 💡 APRIL 28 -->
-        <div class="report-card">
-            <div class="day-header">APRIL_28</div>
-            <p class="essay-p">April 28th represents the temporal coordinate for <span class="highlight">Absolute Autocratic Collapse</span> and the birth of 18th-century occupational safety standards. It is a day marked by the terminal execution of a dictator.</p>
+        <div class="report-card p-5 sm:p-10 md:p-20 mb-12 md:mb-32">
+            <div class="day-header text-2xl sm:text-4xl md:text-5xl tracking-[8px] sm:tracking-[15px] pb-3 md:pb-5 mb-8 md:mb-16">FEBRUARY_28</div>
+            <p class="essay-p text-sm sm:text-base md:text-lg mb-6 md:mb-12 indent-4 sm:indent-8">April 28th represents the coordinate for <span class="highlight">the end of fascist regimes</span> and historic maritime mutinies, contrasting the death of Benito Mussolini with the mutiny on the HMS Bounty.</p>
 
-            <h3 class="category-h3">⚖️ Judicial Tragedies: Mussolini’s End</h3>
-            <p class="essay-p"><span class="year-badge">1945</span>Execution of Benito Mussolini: Mark the terminal collapse of the fascist administrative matrix. Our scholarly research views this as a definitive node in post-war judicial accountability, providing the ethical momentum for the synchronization of international war-crimes tribunals and the re-establishment of democratic law.</p>
+            <h3 class="category-h3 text-base sm:text-lg md:text-2xl tracking-[2px] sm:tracking-[4px] pl-4 sm:pl-6 mt-8 md:mt-20 mb-4 md:mb-8">⚖️ Judicial Tragedies: Mussolini’s End</h3>
+            <p class="essay-p text-sm sm:text-base md:text-lg mb-6 md:mb-12 indent-4 sm:indent-8"><span class="year-badge">1945</span>Execution of Benito Mussolini: The Italian dictator was executed by Italian partisans, marking the end of the fascist regime. This transition led directly to postwar discussions on judicial accountability, establishing early standards for international war-crimes tribunals and the restoration of democratic law.</p>
 
-            <h3 class="category-h3">🚨 Geopolitical Nodes: Mutiny on the Bounty</h3>
-            <p class="essay-p"><span class="year-badge">1789</span>Mutiny on the HMS Bounty: A tragic singularity in maritime logistics. This node served as a primary case study in how systemic leadership failure can destabilize a synchronized innovative vessel, fundamentally altering the trajectory of British naval law and discipline protocols within the imperial matrix.</p>
+            <h3 class="category-h3 text-base sm:text-lg md:text-2xl tracking-[2px] sm:tracking-[4px] pl-4 sm:pl-6 mt-8 md:mt-20 mb-4 md:mb-8">🚨 Geopolitical Nodes: Mutiny on the Bounty</h3>
+            <p class="essay-p text-sm sm:text-base md:text-lg mb-6 md:mb-12 indent-4 sm:indent-8"><span class="year-badge">1789</span>Mutiny on the HMS Bounty: Fletcher Christian led a mutiny against Lieutenant William Bligh on the British vessel. This event became a well-known example of leadership failures on remote ships, prompting reforms in British naval regulations and maritime discipline standards.</p>
         </div>
 
         <!-- 💡 APRIL 29 -->
-        <div class="report-card">
-            <div class="day-header">APRIL_29</div>
-            <p class="essay-p">April 29th archives the birth of <span class="highlight">Modern Cinematic Suspense</span> and the tragic node of urban social synchronicity failure. It is a day defined by the individual who synchronized fear with visual suspense.</p>
+        <div class="report-card p-5 sm:p-10 md:p-20 mb-12 md:mb-32">
+            <div class="day-header text-2xl sm:text-4xl md:text-5xl tracking-[8px] sm:tracking-[15px] pb-3 md:pb-5 mb-8 md:mb-16">FEBRUARY_29</div>
+            <p class="essay-p text-sm sm:text-base md:text-lg mb-6 md:mb-12 indent-4 sm:indent-8">April 29th archives the coordinate for <span class="highlight">suspense cinema developments</span> and major urban civil unrest, contrasting the work of director Alfred Hitchcock with the historical context of the Los Angeles riots.</p>
 
-            <h3 class="category-h3">🎬 Cinematic Innovations: Alfred Hitchcock</h3>
-            <p class="essay-p"><span class="year-badge">1899</span>Birth of Alfred Hitchcock: A supreme node in the history of media innovation. Our archival forensics identify Hitchcock as the innovator who redefined human cognitive response to suspense. His vision pioneered the synchronization of psychological tension with camera innovative techniques, creating the primordial protocols for modern thriller branding.</p>
+            <h3 class="category-h3 text-base sm:text-lg md:text-2xl tracking-[2px] sm:tracking-[4px] pl-4 sm:pl-6 mt-8 md:mt-20 mb-4 md:mb-8">🎬 Cinematic Innovations: Alfred Hitchcock</h3>
+            <p class="essay-p text-sm sm:text-base md:text-lg mb-6 md:mb-12 indent-4 sm:indent-8"><span class="year-badge">1899</span>Birth of Alfred Hitchcock: The film director was born, later pioneering psychological suspense and subjective camera techniques. His films established early standards for cinematic storytelling and visual tension, permanently influencing modern thriller genre conventions.</p>
 
-            <h3 class="category-h3">🚨 Critical Tragedies: L.A. Riots</h3>
-            <p class="essay-p"><span class="year-badge">1992</span>Initialization of the Los Angeles Riots: Triggered by the Rodney King judicial verdict. This tragic singularity forced a global re-evaluation of urban racial security and police-force forensics, establishing new standards for real-time media synchronization of civil unrest and the recalibration of domestic judicial equity law.</p>
+            <h3 class="category-h3 text-base sm:text-lg md:text-2xl tracking-[2px] sm:tracking-[4px] pl-4 sm:pl-6 mt-8 md:mt-20 mb-4 md:mb-8">🚨 Critical Tragedies: L.A. Riots</h3>
+            <p class="essay-p text-sm sm:text-base md:text-lg mb-6 md:mb-12 indent-4 sm:indent-8"><span class="year-badge">1992</span>The Los Angeles Riots: Coordinated civil unrest occurred in Los Angeles following the acquittal of police officers in the Rodney King trial. These events highlighted ongoing challenges in civil rights and police accountability, prompting reforms in law enforcement practices and urban community relations.</p>
         </div>
 
         <!-- 💡 APRIL 30 -->
-        <div class="report-card">
-            <div class="day-header">APRIL_30</div>
-            <p class="essay-p">April 30th serves as the supreme coordinate for <span class="highlight">Terminal Ideological Collapse</span> and the birth of modern American executive statecraft. Historically, this date anchors the moment the 20th-century’s most destructive administrative matrix was terminated.</p>
+        <div class="report-card p-5 sm:p-10 md:p-20 mb-12 md:mb-32">
+            <div class="day-header text-2xl sm:text-4xl md:text-5xl tracking-[8px] sm:tracking-[15px] pb-3 md:pb-5 mb-8 md:mb-16">FEBRUARY_30</div>
+            <p class="essay-p text-sm sm:text-base md:text-lg mb-6 md:mb-12 indent-4 sm:indent-8">April 30th serves as the coordinate for <span class="highlight">the start of executive presidencies</span> and the end of totalitarian regimes, marking both the inauguration of George Washington and the death of Adolf Hitler.</p>
 
-            <img src="https://images.unsplash.com/photo-1521295121783-8a321d551ad2?auto=format&fit=crop&w=1200&q=80" alt="Washington DC Government" class="archive-img">
+            <img src="https://images.unsplash.com/photo-1521295121783-8a321d551ad2?auto=format&fit=crop&w=1200&q=80" alt="Washington DC Government" class="archive-img h-48 sm:h-72 md:h-[450px] lg:h-[550px] my-6 md:my-16">
 
-            <h3 class="category-h3">⚖️ Judicial Intelligence: Washington Inauguration</h3>
-            <p class="essay-p"><span class="year-badge">1789</span>Inauguration of George Washington: The initialization of the US presidency. Our archival analysis views this as the birth of 'Operational Statecraft.' By establishing the first protocols for executive behavior and legislative balance, this node anchored the stability of the global democratic experiment for the next two centuries.</p>
+            <h3 class="category-h3 text-base sm:text-lg md:text-2xl tracking-[2px] sm:tracking-[4px] pl-4 sm:pl-6 mt-8 md:mt-20 mb-4 md:mb-8">⚖️ Judicial Intelligence: Washington Inauguration</h3>
+            <p class="essay-p text-sm sm:text-base md:text-lg mb-6 md:mb-12 indent-4 sm:indent-8"><span class="year-badge">1789</span>Inauguration of George Washington: Washington was inaugurated in New York City as the first US President. This development established early standards for executive actions and federal governance, providing a model for presidential conduct and constitutional transitions of power.</p>
 
-            <h3 class="category-h3">🚨 Geopolitical Singularities: Hitler’s Suicide</h3>
-            <p class="essay-p"><span class="year-badge">1945</span>Death of Adolf Hitler: The terminal collapse of the Nazi German administrative matrix. This node represents the definitive end of the 'European Totalitarian Singularity.' The subsequent synchronization of Allied occupation forces led to the birth of the modern world order, anchoring the future of synchronized international human rights and biosecurity law.</p>
+            <h3 class="category-h3 text-base sm:text-lg md:text-2xl tracking-[2px] sm:tracking-[4px] pl-4 sm:pl-6 mt-8 md:mt-20 mb-4 md:mb-8">🚨 Geopolitical Singularities: Hitler’s Suicide</h3>
+            <p class="essay-p text-sm sm:text-base md:text-lg mb-6 md:mb-12 indent-4 sm:indent-8"><span class="year-badge">1945</span>Death of Adolf Hitler: The German dictator died in Berlin, marking the imminent end of the Nazi regime during WWII. This transition led directly to the end of the conflict in Europe, establishing the foundation for postwar partitioning, international reconstruction, and human rights regulations.</p>
         </div>
 
         <!-- 🚀 CONCLUSION -->
-        <div class="text-center py-20 border-t border-white/10">
-            <p class="font-cyber text-gold text-sm tracking-widest mb-6 uppercase">April Archival Synchronization Complete</p>
-            <p class="text-gray-500 italic">"Node 04 finalized and logged. System preparing for the transition to the intelligence of May."</p>
-        </div>
+        <section class="report-card p-5 sm:p-10 md:p-20 text-center">
+            <h2 class="text-gold font-cyber text-xl sm:text-2xl md:text-3xl uppercase tracking-widest mb-6 md:mb-10">Monthly Archive Conclusion</h2>
+            <p class="text-gray-400 text-sm sm:text-base md:text-lg italic max-w-3xl mx-auto mb-6 md:mb-10">
+                "The calibration of April is complete. 30 nodes of human intelligence have been synchronized. The matrix prepares for the expansion of May."
+            </p>
+            <div class="w-16 sm:w-24 h-1 bg-[#f5c97a] mx-auto"></div>
+        </section>
+
     </main>
 
-    <footer class="py-24 border-t border-white/5 text-center">
-        <p class="text-[11px] font-cyber text-gray-700 tracking-[0.5em] uppercase">Akashic Terminal Node // April Node Finalized</p>
+    <footer class="py-12 md:py-24 border-t border-white/5 text-center px-4">
+        <p class="text-[9px] sm:text-[11px] font-cyber text-gray-700 tracking-[0.3em] sm:tracking-[0.5em] uppercase">Akashic Terminal Node // Node_04 Finalized</p>
     </footer>
 </body>
 </html>
