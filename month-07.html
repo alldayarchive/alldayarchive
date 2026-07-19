@@ -3,471 +3,483 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Node 07: July Archival Intelligence | Part I (01-15)</title>
+    <title>Node 07: July Archival Intelligence | Complete Node</title>
     <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Inter:wght@300;400;600&family=Playfair+Display:ital,wght@0,700;1,700&display=swap" rel="stylesheet">
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
         :root { --neon-gold: #f5c97a; --bg: #010204; --card-bg: rgba(10, 14, 22, 0.98); }
-        body { background: var(--bg); color: #e2e8f0; font-family: 'Inter', sans-serif; line-height: 2.2; }
+        body { background: var(--bg); color: #e2e8f0; font-family: 'Inter', sans-serif; line-height: 1.8; }
+        @media (min-width: 768px) {
+            body { line-height: 2.2; }
+        }
         .font-cyber { font-family: 'Orbitron', sans-serif; }
-        .bg-grid { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background-image: linear-gradient(rgba(245, 201, 122, 0.03) 1px, transparent 1px), linear-gradient(90deg, rgba(245, 201, 122, 0.03) 1px, transparent 1px); background-size: 80px 80px; z-index: -1; }
-        .report-card { background: var(--card-bg); border: 1px solid rgba(245, 201, 122, 0.1); border-radius: 24px; padding: 5rem; margin-bottom: 8rem; box-shadow: 0 40px 100px rgba(0,0,0,0.9); transition: 0.5s; }
-        .day-header { font-family: 'Orbitron'; color: var(--neon-gold); font-size: 3.5rem; letter-spacing: 15px; border-bottom: 2px solid var(--neon-gold); margin-bottom: 4rem; padding-bottom: 20px; text-align: center; }
-        .category-h3 { font-family: 'Orbitron'; color: #fff; font-size: 1.6rem; margin-top: 5rem; margin-bottom: 2rem; text-transform: uppercase; letter-spacing: 4px; border-left: 5px solid var(--neon-gold); padding-left: 25px; }
-        .essay-p { text-align: justify; color: #a0aec0; font-size: 1.2rem; margin-bottom: 3rem; text-indent: 2rem; line-height: 2.4; }
-        .year-badge { font-family: 'Orbitron'; color: #000; font-weight: 700; background: var(--neon-gold); padding: 4px 15px; border-radius: 4px; margin-right: 15px; font-size: 16px; }
+        .font-serif { font-family: 'Playfair Display', serif; }
+        .bg-grid { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background-image: linear-gradient(rgba(245, 201, 122, 0.02) 1.5px, transparent 1.5px), linear-gradient(90deg, rgba(245, 201, 122, 0.02) 1.5px, transparent 1.5px); background-size: 50px 50px; z-index: -1; }
+        
+        /* Responsive Card Style */
+        .report-card { 
+            background: var(--card-bg); 
+            border: 1px solid rgba(245, 201, 122, 0.1); 
+            border-radius: 24px; 
+            box-shadow: 0 40px 100px rgba(0,0,0,0.9); 
+            transition: border-color 0.4s; 
+        }
+        .report-card:hover { border-color: var(--neon-gold); }
+        
+        .day-header { 
+            font-family: 'Orbitron'; 
+            color: var(--neon-gold); 
+            border-bottom: 2px solid var(--neon-gold); 
+            text-align: center; 
+        }
+        .category-h3 { 
+            font-family: 'Orbitron'; 
+            color: #fff; 
+            text-transform: uppercase; 
+            border-left: 5px solid var(--neon-gold); 
+        }
+        .essay-p { text-align: justify; color: #a0aec0; }
+        .year-badge { font-family: 'Orbitron'; color: #000; font-weight: 700; background: var(--neon-gold); padding: 2px 10px; border-radius: 4px; margin-right: 12px; font-size: 14px; display: inline-block; }
         .highlight { color: #fff; font-weight: 600; border-bottom: 1px solid var(--neon-gold); }
-        .archive-img { width: 100%; height: 550px; object-fit: cover; border-radius: 15px; margin: 4rem 0; border: 1px solid rgba(245, 201, 122, 0.2); filter: brightness(0.8); transition: 0.5s; }
-        .archive-img:hover { filter: brightness(1) contrast(1.1); }
+        
+        /* Advanced Image Fallback CSS */
+        .archive-img { 
+            width: 100%; 
+            object-fit: cover; 
+            border-radius: 15px; 
+            border: 1px solid rgba(245, 201, 122, 0.1); 
+            background-color: #0b0f19;
+            position: relative;
+            display: block;
+        }
+        .archive-img::before {
+            content: "ARCHIVE IMAGE TEMPORARILY OFFLINE";
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background-color: #0d111a;
+            color: var(--neon-gold);
+            font-family: 'Orbitron';
+            font-size: 0.8rem;
+            letter-spacing: 2px;
+            border: 1px dashed rgba(245, 201, 122, 0.3);
+            border-radius: 15px;
+            text-align: center;
+            padding: 20px;
+        }
     </style>
 </head>
 <body>
     <div class="bg-grid"></div>
 
-    <nav class="fixed w-full z-[1000] px-12 py-8 flex justify-between items-center bg-black/60 backdrop-blur-xl border-b border-white/5">
-        <div class="text-2xl font-cyber font-bold text-[#f5c97a] tracking-tighter cursor-pointer" onclick="location.href='index.html'">AKASHIC ARCHIVE // NODE_07</div>
-        <div class="flex gap-6">
-            <span class="font-cyber text-gray-500 text-xs mt-2">CHRONOLOGICAL_SYNC: JULY_P1</span>
-            <a href="index.html" class="font-cyber text-[#f5c97a] border border-[#f5c97a] px-5 py-2 rounded hover:bg-[#f5c97a] hover:text-black transition-all text-xs">BACK_TO_HUB</a>
+    <!-- Responsive Navigation Bar -->
+    <nav class="fixed w-full z-[1000] px-4 py-4 md:px-12 md:py-6 flex flex-col sm:flex-row justify-between items-center gap-4 bg-black/80 backdrop-blur-xl border-b border-white/5">
+        <div class="text-lg sm:text-xl md:text-2xl font-cyber font-bold text-[#f5c97a] tracking-tight sm:tracking-tighter cursor-pointer text-center sm:text-left" onclick="location.href='index.html'">
+            AKASHIC ARCHIVE // NODE_07
+        </div>
+        <div class="flex items-center gap-4 sm:gap-6">
+            <span class="hidden md:inline font-cyber text-gray-500 text-xs">CHRONOLOGICAL_SYNC: JULY_FULL</span>
+            <a href="index.html" class="font-cyber text-[#f5c97a] border border-[#f5c97a] px-3 py-1.5 sm:px-5 sm:py-2 rounded hover:bg-[#f5c97a] hover:text-black transition-all text-[10px] sm:text-xs">
+                RETURN_TO_HUB
+            </a>
         </div>
     </nav>
 
-    <main class="relative pt-56 pb-20 px-8 max-w-6xl mx-auto">
-        <header class="text-center mb-40">
-            <h1 class="font-cyber text-6xl text-white mb-10 uppercase tracking-[0.4em]">July Intelligence <br><span class="text-gold opacity-50 text-3xl tracking-[0.2em]">The Zenith of Sovereignty</span></h1>
-            <p class="max-w-3xl mx-auto text-gray-400 italic text-xl leading-relaxed">"Synchronizing the radical recalibration of human sovereignty and the physical expansion of intelligence beyond the terrestrial biosphere."</p>
+    <!-- Main Container -->
+    <main class="relative pt-36 sm:pt-44 md:pt-56 pb-20 px-4 sm:px-8 max-w-6xl mx-auto">
+        <header class="text-center mb-20 md:mb-40">
+            <h1 class="font-cyber text-2xl sm:text-4xl md:text-6xl text-white mb-6 md:mb-10 uppercase tracking-[0.2em] sm:tracking-[0.4em]">
+                July Intelligence <br>
+                <span class="text-gold opacity-50 text-base sm:text-2xl md:text-3xl tracking-[0.1em] sm:tracking-[0.2em]">The Zenith of Sovereignty (Days 01 - 31)</span>
+            </h1>
+            <p class="max-w-3xl mx-auto text-gray-400 italic text-sm sm:text-lg md:text-xl leading-relaxed">
+                "Synchronizing the radical recalibration of human sovereignty and the physical expansion of intelligence beyond the terrestrial biosphere."
+            </p>
         </header>
 
         <!-- 💡 JULY 01 -->
-        <div class="report-card">
-            <div class="day-header">JULY_01</div>
-            <p class="essay-p">July 1st serves as the supreme temporal coordinate for the <span class="highlight">Sovereign Recalibration</span> of East Asia and the birth of modern prestige beauty branding. Historically, this date anchors the terminal collapse of 19th-century colonial maritime law and the inception of aspirational retail capital flows.</p>
+        <div class="report-card p-5 sm:p-10 md:p-20 mb-12 md:mb-32">
+            <div class="day-header text-2xl sm:text-4xl md:text-5xl tracking-[8px] sm:tracking-[15px] pb-3 md:pb-5 mb-8 md:mb-16">JULY_01</div>
+            <p class="essay-p text-sm sm:text-base md:text-lg mb-6 md:mb-12 indent-4 sm:indent-8">July 1st serves as the supreme temporal coordinate for the <span class="highlight">Sovereign Recalibration</span> of East Asia and the birth of modern prestige beauty branding. Historically, this date anchors the terminal collapse of 19th-century colonial maritime law and the inception of aspirational retail capital flows.</p>
             
-            <img src="https://images.unsplash.com/photo-1532187875605-2fe35952016a?auto=format&fit=crop&w=1200&q=80" alt="Hong Kong Skyline" class="archive-img">
+            <img src="https://images.unsplash.com/photo-1532187875605-2fe35952016a?auto=format&fit=crop&w=1200&q=80" alt="Hong Kong Skyline" class="archive-img h-48 sm:h-72 md:h-[450px] lg:h-[550px] my-6 md:my-16">
 
-            <h3 class="category-h3">🏛️ Geopolitical Nodes: Hong Kong Reversion</h3>
-            <p class="essay-p"><span class="year-badge">1997</span>Transfer of Sovereignty over Hong Kong: After 156 years of British administration, jurisdiction was officially reverted to China. Our archival forensics identify this as a 'Sovereign Recalibration Singularity.' This node represented the end of colonial-era territorial governance and established the 'One Country, Two Systems' framework—a definitive case study in modern international financial law and synchronized geopolitical equilibrium.</p>
+            <h3 class="category-h3 text-base sm:text-lg md:text-2xl tracking-[2px] sm:tracking-[4px] pl-4 sm:pl-6 mt-8 md:mt-20 mb-4 md:mb-8">🏛️ Geopolitical Nodes: Hong Kong Reversion</h3>
+            <p class="essay-p text-sm sm:text-base md:text-lg mb-6 md:mb-12 indent-4 sm:indent-8"><span class="year-badge">1997</span>Transfer of Sovereignty over Hong Kong: After 156 years of British administration, jurisdiction was officially reverted to China. Our archival forensics identify this as a 'Sovereign Recalibration Singularity.' This node represented the end of colonial-era territorial governance and established the 'One Country, Two Systems' framework—a definitive case study in modern international financial law and synchronized geopolitical equilibrium, preserving Hong Kong's role as a unique judicial and capitalist node.</p>
             
-            <h3 class="category-h3">🏷️ Brand Genealogy: Estée Lauder</h3>
-            <p class="essay-p"><span class="year-badge">1906</span>Birth of Estée Lauder: The primary architect of the modern prestige beauty matrix. Her life archives the synchronization of high-end clinical science with aspirational retail branding. This node pioneered the commercial genealogy of 'Luxury Lifestyle Marketing,' fundamentally altering the global consumer capital flow in the 20th-century cosmetics industry.</p>
+            <h3 class="category-h3 text-base sm:text-lg md:text-2xl tracking-[2px] sm:tracking-[4px] pl-4 sm:pl-6 mt-8 md:mt-20 mb-4 md:mb-8">🏷️ Brand Genealogy: Estée Lauder</h3>
+            <p class="essay-p text-sm sm:text-base md:text-lg mb-6 md:mb-12 indent-4 sm:indent-8"><span class="year-badge">1906</span>Birth of Estée Lauder: The primary architect of the modern prestige beauty matrix. Her life archives the synchronization of high-end clinical science with aspirational retail branding. This node pioneered the commercial genealogy of 'Luxury Lifestyle Marketing,' introducing the revolutionary "gift with purchase" sales model and fundamentally altering the global consumer capital flow in the 20th-century cosmetics industry.</p>
         </div>
 
         <!-- 💡 JULY 02 -->
-        <div class="report-card">
-            <div class="day-header">JULY_02</div>
-            <p class="essay-p">July 2nd archives the foundational calibration of <span class="highlight">Legislative Equality</span> and the zenith of early 20th-century aerial logistics. It is a day defined by the formalization of universal human rights and the initial technical pulses of large-scale atmospheric transit.</p>
+        <div class="report-card p-5 sm:p-10 md:p-20 mb-12 md:mb-32">
+            <div class="day-header text-2xl sm:text-4xl md:text-5xl tracking-[8px] sm:tracking-[15px] pb-3 md:pb-5 mb-8 md:mb-16">JULY_02</div>
+            <p class="essay-p text-sm sm:text-base md:text-lg mb-6 md:mb-12 indent-4 sm:indent-8">July 2nd archives the foundational calibration of <span class="highlight">Legislative Equality</span> and the zenith of early 20th-century aerial logistics. It is a day defined by the formalization of universal human rights and the initial technical pulses of large-scale atmospheric transit.</p>
 
-            <h3 class="category-h3">⚖️ Judicial Intelligence: Civil Rights Act</h3>
-            <p class="essay-p"><span class="year-badge">1964</span>Signing of the Civil Rights Act: President Lyndon B. Johnson legalized the prohibition of discrimination based on race, color, religion, or sex. Our research views this as a 'Constitutional Singularity.' This node forced a total systemic overhaul of American labor and public accommodation law, anchoring the principle of 'Equality Under Law' into the legislative DNA of the global matrix.</p>
+            <h3 class="category-h3 text-base sm:text-lg md:text-2xl tracking-[2px] sm:tracking-[4px] pl-4 sm:pl-6 mt-8 md:mt-20 mb-4 md:mb-8">⚖️ Judicial Intelligence: Civil Rights Act</h3>
+            <p class="essay-p text-sm sm:text-base md:text-lg mb-6 md:mb-12 indent-4 sm:indent-8"><span class="year-badge">1964</span>Signing of the Civil Rights Act: President Lyndon B. Johnson signed this historic bill into law, prohibiting discrimination based on race, color, religion, sex, or national origin. By leveraging the legislative powers of the Commerce Clause, this constitutional milestone banned desegregation in public accommodations and unequal voting registration requirements, anchoring the principle of 'Equality Under Law' into the legislative DNA of modern democracies.</p>
 
-            <h3 class="category-h3">⚙️ Innovations: The Zeppelin Singularity</h3>
-            <p class="essay-p"><span class="year-badge">1900</span>First Flight of the Zeppelin: Ferdinand von Zeppelin initialized the LZ 1. This technical milestone served as the primordial ancestor to large-scale aerial logistics, proving that human artifacts could achieve sustained trans-atmospheric transit through synchronized buoyancy and engineering.</p>
+            <h3 class="category-h3 text-base sm:text-lg md:text-2xl tracking-[2px] sm:tracking-[4px] pl-4 sm:pl-6 mt-8 md:mt-20 mb-4 md:mb-8">⚙️ Innovations: The Zeppelin Singularity</h3>
+            <p class="essay-p text-sm sm:text-base md:text-lg mb-6 md:mb-12 indent-4 sm:indent-8"><span class="year-badge">1900</span>First Flight of the Zeppelin: Count Ferdinand von Zeppelin completed the first successful trial flight of his rigid airship, the LZ 1, over Lake Constance, Germany. Utilizing an internal aluminum framework and hydrogen-gas cells, this technical milestone pioneered large-scale aerial transport logistics, proving that heavy passenger structures could achieve sustained, steered flight.</p>
         </div>
 
         <!-- 💡 JULY 03 -->
-        <div class="report-card">
-            <div class="day-header">JULY_03</div>
-            <p class="essay-p">July 3rd represents a critical node for <span class="highlight">Automated Combat Forensics</span> and the birth of consumer ergonomic intelligence. It is a day marked by the tragic failure of tactical synchronization and the innovative untethering of the human-machine interface.</p>
+        <div class="report-card p-5 sm:p-10 md:p-20 mb-12 md:mb-32">
+            <div class="day-header text-2xl sm:text-4xl md:text-5xl tracking-[8px] sm:tracking-[15px] pb-3 md:pb-5 mb-8 md:mb-16">JULY_03</div>
+            <p class="essay-p text-sm sm:text-base md:text-lg mb-6 md:mb-12 indent-4 sm:indent-8">July 3rd represents a critical node for <span class="highlight">Automated Combat Forensics</span> and the birth of consumer ergonomic intelligence. It is a day marked by the tragic failure of tactical automated synchronization and the innovative untethering of the human-machine interface.</p>
 
-            <h3 class="category-h3">🚨 Critical Tragedies: Iran Air 655</h3>
-            <p class="essay-p"><span class="year-badge">1988</span>Sinking of Iran Air Flight 655: A tragic singularity in naval-aerospace forensics. A US cruiser mistakenly shot down a civilian airliner. This node archives the extreme risks of automated combat synchronization. The subsequent forensic analysis forced a global re-evaluation of IFF (Identification Friend or Foe) protocols and recalibrated diplomatic tensions in the Persian Gulf.</p>
+            <h3 class="category-h3 text-base sm:text-lg md:text-2xl tracking-[2px] sm:tracking-[4px] pl-4 sm:pl-6 mt-8 md:mt-20 mb-4 md:mb-8">🚨 Critical Tragedies: Iran Air 655</h3>
+            <p class="essay-p text-sm sm:text-base md:text-lg mb-6 md:mb-12 indent-4 sm:indent-8"><span class="year-badge">1988</span>Sinking of Iran Air Flight 655: The US Navy guided-missile cruiser USS Vincennes mistakenly shot down a civilian Iranian airliner over the Persian Gulf. This tragic event demonstrated the extreme risks of relying on automated Aegis combat tracking systems during high-tension military operations, prompting complete reviews of international Identification Friend or Foe (IFF) protocols and changing maritime military regulations.</p>
 
-            <h3 class="category-h3">⚙️ IT Singularities: First TV Remote</h3>
-            <p class="essay-p"><span class="year-badge">1950</span>Introduction of 'Lazy Bones': Zenith initialized the first television remote control. Our analytical terminal identifies this as the birth of 'Consumer Ergonomic Intelligence.' By untethering the human interface from the device, it pioneered the protocols for modern wireless data-synchronization.</p>
+            <h3 class="category-h3 text-base sm:text-lg md:text-2xl tracking-[2px] sm:tracking-[4px] pl-4 sm:pl-6 mt-8 md:mt-20 mb-4 md:mb-8">⚙️ IT Singularities: First TV Remote</h3>
+            <p class="essay-p text-sm sm:text-base md:text-lg mb-6 md:mb-12 indent-4 sm:indent-8"><span class="year-badge">1950</span>Introduction of 'Lazy Bones': Zenith Radio Corporation introduced the first television remote control. Initially connected by a wire, this device allowed users to adjust channels and volume from a distance, establishing early concepts of consumer ergonomic convenience and paving the way for wireless optical signal transmission in household electronics.</p>
         </div>
 
         <!-- 💡 JULY 04 -->
-        <div class="report-card">
-            <div class="day-header">JULY_04</div>
-            <p class="essay-p">July 4th serves as the supreme coordinate for <span class="highlight">Constitutional Codification</span> and the zenith of 21st-century particle forensics. Historically, this date anchors the moment the DNA of modern democracy was initialized and when the fundamental 'God Particle' was empirically verified.</p>
+        <div class="report-card p-5 sm:p-10 md:p-20 mb-12 md:mb-32">
+            <div class="day-header text-2xl sm:text-4xl md:text-5xl tracking-[8px] sm:tracking-[15px] pb-3 md:pb-5 mb-8 md:mb-16">JULY_04</div>
+            <p class="essay-p text-sm sm:text-base md:text-lg mb-6 md:mb-12 indent-4 sm:indent-8">July 4th serves as the supreme coordinate for <span class="highlight">Constitutional Codification</span> and the zenith of 21st-century particle forensics. Historically, this date anchors the moment the DNA of modern democracy was initialized and when the fundamental 'God Particle' was empirically verified.</p>
 
-            <img src="https://images.unsplash.com/photo-1534796636912-3b95b3ab5986?auto=format&fit=crop&w=1200&q=80" alt="Space and Particle Physics" class="archive-img">
+            <img src="https://images.unsplash.com/photo-1534796636912-3b95b3ab5986?auto=format&fit=crop&w=1200&q=80" alt="Space and Particle Physics" class="archive-img h-48 sm:h-72 md:h-[450px] lg:h-[550px] my-6 md:my-16">
 
-            <h3 class="category-h3">⚖️ Judicial Intelligence: Declaration of Independence</h3>
-            <p class="essay-p"><span class="year-badge">1776</span>Adoption of the Declaration of Independence: A pivotal legal singularity. By codifying the inherent right to 'Life, Liberty, and the pursuit of Happiness,' this document challenged imperial hegemony and provided the legal DNA for every subsequent synchronized democratic movement worldwide.</p>
+            <h3 class="category-h3 text-base sm:text-lg md:text-2xl tracking-[2px] sm:tracking-[4px] pl-4 sm:pl-6 mt-8 md:mt-20 mb-4 md:mb-8">⚖️ Judicial Intelligence: Declaration of Independence</h3>
+            <p class="essay-p text-sm sm:text-base md:text-lg mb-6 md:mb-12 indent-4 sm:indent-8"><span class="year-badge">1776</span>Adoption of the Declaration of Independence: The Second Continental Congress approved the declaration, separating the thirteen colonies from Great Britain. Written by Thomas Jefferson and influenced by John Locke, this document stated that all individuals are created equal with inalienable rights to life, liberty, and the pursuit of happiness, establishing the legal framework for modern self-governance and democratic reform globally.</p>
 
-            <h3 class="category-h3">🔬 Scientific Singularities: Higgs Boson</h3>
-            <p class="essay-p"><span class="year-badge">2012</span>Discovery of the Higgs Boson: CERN announced the identification of the 'God Particle.' This scientific node provided the empirical foundation for the Standard Model of particle physics, synchronizing theoretical quantum mechanics with high-fidelity collider forensics.</p>
+            <h3 class="category-h3 text-base sm:text-lg md:text-2xl tracking-[2px] sm:tracking-[4px] pl-4 sm:pl-6 mt-8 md:mt-20 mb-4 md:mb-8">🔬 Scientific Singularities: Higgs Boson</h3>
+            <p class="essay-p text-sm sm:text-base md:text-lg mb-6 md:mb-12 indent-4 sm:indent-8"><span class="year-badge">2012</span>Discovery of the Higgs Boson: Scientists at CERN announced the discovery of a new particle consistent with the Higgs Boson, often called the 'God Particle.' This finding confirmed the Higgs mechanism of the Standard Model, explaining how subatomic particles obtain mass and showing the value of large-scale international scientific cooperation and high-energy particle physics.</p>
         </div>
 
         <!-- 💡 JULY 05 -->
-        <div class="report-card">
-            <div class="day-header">JULY_05</div>
-            <p class="essay-p">July 5th archives the birth of <span class="highlight">E-Commerce Hegemony</span> and the zenith of biological reproductive engineering. It is a day defined by the synchronization of retail supply chains with algorithmic data and the first successful adult-cell cloning.</p>
+        <div class="report-card p-5 sm:p-10 md:p-20 mb-12 md:mb-32">
+            <div class="day-header text-2xl sm:text-4xl md:text-5xl tracking-[8px] sm:tracking-[15px] pb-3 md:pb-5 mb-8 md:mb-16">JULY_05</div>
+            <p class="essay-p text-sm sm:text-base md:text-lg mb-6 md:mb-12 indent-4 sm:indent-8">July 5th archives the birth of <span class="highlight">E-Commerce Hegemony</span> and the zenith of biological reproductive engineering. It is a day defined by the synchronization of retail supply chains with algorithmic data and the first successful adult-cell cloning.</p>
 
-            <h3 class="category-h3">🏷️ Brand Genealogy: Amazon.com Founding</h3>
-            <p class="essay-p"><span class="year-badge">1994</span>Incorporation of Amazon: Jeff Bezos initialized a digital retail matrix. Our forensics identify this as the 'Logistical Singularity'—the moment retail began to be synchronized with search data, fundamentally shifting global consumption patterns and digital capital flow.</p>
+            <h3 class="category-h3 text-base sm:text-lg md:text-2xl tracking-[2px] sm:tracking-[4px] pl-4 sm:pl-6 mt-8 md:mt-20 mb-4 md:mb-8">🏷️ Brand Genealogy: Amazon.com Founding</h3>
+            <p class="essay-p text-sm sm:text-base md:text-lg mb-6 md:mb-12 indent-4 sm:indent-8"><span class="year-badge">1994</span>Incorporation of Amazon: Jeff Bezos incorporated the company in Washington state, originally as an online bookstore. This step led to the development of modern e-commerce logistics and supply chain systems, showing how database management and online search platforms could build a major global retail brand and alter modern shopping habits.</p>
 
-            <h3 class="category-h3">🧬 Medical Singularities: Dolly the Sheep</h3>
-            <p class="essay-p"><span class="year-badge">1996</span>Birth of Dolly: The world's first mammal cloned from an adult cell. This node archives a supreme leap in bio-engineering, establishing the protocols for somatic cell nuclear transfer and pioneering the future of regenerative clinical medicine.</p>
+            <h3 class="category-h3 text-base sm:text-lg md:text-2xl tracking-[2px] sm:tracking-[4px] pl-4 sm:pl-6 mt-8 md:mt-20 mb-4 md:mb-8">🧬 Medical Singularities: Dolly the Sheep</h3>
+            <p class="essay-p text-sm sm:text-base md:text-lg mb-6 md:mb-12 indent-4 sm:indent-8"><span class="year-badge">1996</span>Birth of Dolly: Dolly, the first mammal cloned from an adult somatic cell, was born at the Roslin Institute in Scotland. Developed by Ian Wilmut and Keith Campbell, this experiment proved the viability of somatic cell nuclear transfer (SCNT) in mammals, prompting major developments in stem cell research, genetic engineering, and regenerative medicine.</p>
         </div>
 
         <!-- 💡 JULY 06 -->
-        <div class="report-card">
-            <div class="day-header">JULY_06</div>
-            <p class="essay-p">July 6th represents the supreme node of <span class="highlight">Pathological Mitigation Intelligence</span>. Historically, this date anchors the scientific victory over a lethal biological pathogen through the synchronization of microbiology and human immunity.</p>
+        <div class="report-card p-5 sm:p-10 md:p-20 mb-12 md:mb-32">
+            <div class="day-header text-2xl sm:text-4xl md:text-5xl tracking-[8px] sm:tracking-[15px] pb-3 md:pb-5 mb-8 md:mb-16">JULY_06</div>
+            <p class="essay-p text-sm sm:text-base md:text-lg mb-6 md:mb-12 indent-4 sm:indent-8">July 6th represents the supreme node of <span class="highlight">Pathological Mitigation Intelligence</span>. Historically, this date anchors the scientific victory over a lethal biological pathogen through the synchronization of microbiology and human immunity.</p>
 
-            <h3 class="category-h3">💉 Medical Frontiers: The Pasteur Singularity</h3>
-            <p class="essay-p"><span class="year-badge">1885</span>Successful Rabies Vaccine Test: Louis Pasteur successfully treated a young boy. By proving the protocols for 'Viral Mitigation,' Pasteur pioneered modern global vaccine synchronization, effectively initiating the conquest of biological lethal pathogens.</p>
+            <h3 class="category-h3 text-base sm:text-lg md:text-2xl tracking-[2px] sm:tracking-[4px] pl-4 sm:pl-6 mt-8 md:mt-20 mb-4 md:mb-8">💉 Medical Frontiers: The Pasteur Singularity</h3>
+            <p class="essay-p text-sm sm:text-base md:text-lg mb-6 md:mb-12 indent-4 sm:indent-8"><span class="year-badge">1885</span>Successful Rabies Vaccine Test: Louis Pasteur successfully treated Joseph Meister, a young boy bitten by a rabid dog, using an experimental rabies vaccine made from desiccated spinal cords of infected rabbits. This success verified Pasteur's germ theory of disease, leading directly to the widespread use of vaccines and changing public health approaches to infectious diseases.</p>
         </div>
 
         <!-- 💡 JULY 07 -->
-        <div class="report-card">
-            <div class="day-header">JULY_07</div>
-            <p class="essay-p">July 7th archives the birth of <span class="highlight">Documentary Synchronization Logistics</span>. It is a day defined by the technical mastery of rapid legal and innovative duplication, providing the structural DNA for modern office-intelligence.</p>
+        <div class="report-card p-5 sm:p-10 md:p-20 mb-12 md:mb-32">
+            <div class="day-header text-2xl sm:text-4xl md:text-5xl tracking-[8px] sm:tracking-[15px] pb-3 md:pb-5 mb-8 md:mb-16">JULY_07</div>
+            <p class="essay-p text-sm sm:text-base md:text-lg mb-6 md:mb-12 indent-4 sm:indent-8">July 7th archives the birth of <span class="highlight">Documentary Synchronization Logistics</span>. It is a day defined by the technical mastery of rapid legal and innovative duplication, providing the structural DNA for modern office-intelligence.</p>
 
-            <h3 class="category-h3">⚙️ Innovations: The First Photostat</h3>
-            <p class="essay-p"><span class="year-badge">1906</span>Commercial Photostat Machine: A pinnacle of industrial-age information logistics. This node established the technical protocols for rapid documentary reproduction, fundamentally altering the trajectory of administrative forensics and legal archival management.</p>
+            <h3 class="category-h3 text-base sm:text-lg md:text-2xl tracking-[2px] sm:tracking-[4px] pl-4 sm:pl-6 mt-8 md:mt-20 mb-4 md:mb-8">⚙️ Innovations: The First Photostat</h3>
+            <p class="essay-p text-sm sm:text-base md:text-lg mb-6 md:mb-12 indent-4 sm:indent-8"><span class="year-badge">1906</span>Commercial Photostat Machine: The Photostat Corporation introduced the commercial Photostat machine, which used photographic paper to rapidly copy documents. This development coordinated office logistics and business administration, demonstrating how optical duplication could streamline document retention and standardize legal archiving practices.</p>
         </div>
 
         <!-- 💡 JULY 08 -->
-        <div class="report-card">
-            <div class="day-header">JULY_08</div>
-            <p class="essay-p">July 8th serves as the coordinate for <span class="highlight">Financial Information Hegemony</span>. Historically, this date anchors the birth of the world's most significant terminal for market volatility and corporate forensic reporting.</p>
+        <div class="report-card p-5 sm:p-10 md:p-20 mb-12 md:mb-32">
+            <div class="day-header text-2xl sm:text-4xl md:text-5xl tracking-[8px] sm:tracking-[15px] pb-3 md:pb-5 mb-8 md:mb-16">JULY_08</div>
+            <p class="essay-p text-sm sm:text-base md:text-lg mb-6 md:mb-12 indent-4 sm:indent-8">July 8th serves as the coordinate for <span class="highlight">Financial Information Hegemony</span>. Historically, this date anchors the birth of the world's most significant terminal for market volatility and corporate forensic reporting.</p>
 
-            <h3 class="category-h3">📈 Macro-Financial Records: Dow Jones Node</h3>
-            <p class="essay-p"><span class="year-badge">1889</span>Wall Street Journal Founding: Established by Dow, Jones, and Bergstresser. This node archives the inception of institutionalized market reporting, providing the protocols for global capital synchronization and modern investment forensics.</p>
+            <h3 class="category-h3 text-base sm:text-lg md:text-2xl tracking-[2px] sm:tracking-[4px] pl-4 sm:pl-6 mt-8 md:mt-20 mb-4 md:mb-8">📈 Macro-Financial Records: Dow Jones Node</h3>
+            <p class="essay-p text-sm sm:text-base md:text-lg mb-6 md:mb-12 indent-4 sm:indent-8"><span class="year-badge">1889</span>Wall Street Journal Founding: Charles Dow, Edward Jones, and Charles Bergstresser published the first issue of the Wall Street Journal. This publication coordinated business journalism, establishing the Dow Jones Industrial Average as a primary index for tracking stock market performance, changing economic reporting, and coordinating global capital flows.</p>
         </div>
 
         <!-- 💡 JULY 09 -->
-        <div class="report-card">
-            <div class="day-header">JULY_09</div>
-            <p class="essay-p">July 9th represents the temporal node for <span class="highlight">Character Franchise Singularities</span>. It is a day marked by the initialization of a digital entertainment matrix that redefined consumer capital flow in the media sector.</p>
+        <div class="report-card p-5 sm:p-10 md:p-20 mb-12 md:mb-32">
+            <div class="day-header text-2xl sm:text-4xl md:text-5xl tracking-[8px] sm:tracking-[15px] pb-3 md:pb-5 mb-8 md:mb-16">JULY_09</div>
+            <p class="essay-p text-sm sm:text-base md:text-lg mb-6 md:mb-12 indent-4 sm:indent-8">July 9th represents the temporal node for <span class="highlight">Character Franchise Singularities</span>. It is a day marked by the initialization of a digital entertainment matrix that redefined consumer capital flow in the media sector.</p>
 
-            <h3 class="category-h3">⚙️ IT Singularities: Nintendo Donkey Kong</h3>
-            <p class="essay-p"><span class="year-badge">1981</span>Debut of Donkey Kong: Nintendo initialized a commercial legacy. This node synchronized high-fidelity game theory with mass-market retail logistics, fundamentally altering the commercial genealogy of digital media and gaming branding.</p>
+            <h3 class="category-h3 text-base sm:text-lg md:text-2xl tracking-[2px] sm:tracking-[4px] pl-4 sm:pl-6 mt-8 md:mt-20 mb-4 md:mb-8">⚙️ IT Singularities: Nintendo Donkey Kong</h3>
+            <p class="essay-p text-sm sm:text-base md:text-lg mb-6 md:mb-12 indent-4 sm:indent-8"><span class="year-badge">1981</span>Debut of Donkey Kong: Nintendo released the arcade game Donkey Kong, designed by Shigeru Miyamoto. The game featured the characters "Jumpman" (later Mario) and "Donkey Kong," demonstrating how character-driven gameplay could build major media franchises, changing gaming logistics and intellectual property licensing globally.</p>
         </div>
 
         <!-- 💡 JULY 10 -->
-        <div class="report-card">
-            <div class="day-header">JULY_10</div>
-            <p class="essay-p">July 10th archives the birth of <span class="highlight">Wireless Energy Synchronization</span> and the zenith of 19th-century intellectual heritage. Historically, this date anchors the birth of the individual who provided the structural DNA for the global power grid.</p>
+        <div class="report-card p-5 sm:p-10 md:p-20 mb-12 md:mb-32">
+            <div class="day-header text-2xl sm:text-4xl md:text-5xl tracking-[8px] sm:tracking-[15px] pb-3 md:pb-5 mb-8 md:mb-16">JULY_10</div>
+            <p class="essay-p text-sm sm:text-base md:text-lg mb-6 md:mb-12 indent-4 sm:indent-8">July 10th archives the birth of <span class="highlight">Wireless Energy Synchronization</span> and the zenith of 19th-century intellectual heritage. Historically, this date anchors the birth of the individual who provided the structural DNA for the global power grid.</p>
 
-            <img src="https://images.unsplash.com/photo-1510511459019-5dda7724fd87?auto=format&fit=crop&w=1200&q=80" alt="Energy Grid and Electricity" class="archive-img">
+            <img src="https://images.unsplash.com/photo-1510511459019-5dda7724fd87?auto=format&fit=crop&w=1200&q=80" alt="Energy Grid and Electricity" class="archive-img h-48 sm:h-72 md:h-[450px] lg:h-[550px] my-6 md:my-16">
 
-            <h3 class="category-h3">⚙️ Innovations: The Tesla Singularity</h3>
-            <p class="essay-p"><span class="year-badge">1856</span>Birth of Nikola Tesla: Tesla’s work served as a technical singularity. By pioneering AC motor protocols and magnetic field synchronization, he fundamentally altered the innovative scope of human civilization and the trajectory of telecommunication forensics.</p>
+            <h3 class="category-h3 text-base sm:text-lg md:text-2xl tracking-[2px] sm:tracking-[4px] pl-4 sm:pl-6 mt-8 md:mt-20 mb-4 md:mb-8">⚙️ Innovations: The Tesla Singularity</h3>
+            <p class="essay-p text-sm sm:text-base md:text-lg mb-6 md:mb-12 indent-4 sm:indent-8"><span class="year-badge">1856</span>Birth of Nikola Tesla: The pioneer of modern alternating current (AC) electricity systems. His inventions in polyphase motor designs and electromagnetic induction coordinated early power generation, defeating Edison's DC system in the War of the Currents, laying the physical foundation for regional power grids, electrical engineering, and wireless communication research.</p>
         </div>
 
         <!-- 💡 JULY 11 -->
-        <div class="report-card">
-            <div class="day-header">JULY_11</div>
-            <p class="essay-p">July 11th serves as the supreme coordinate for <span class="highlight">Global Demographic Forensics</span> and the tragic recalibration of orbital logistical recovery.</p>
+        <div class="report-card p-5 sm:p-10 md:p-20 mb-12 md:mb-32">
+            <div class="day-header text-2xl sm:text-4xl md:text-5xl tracking-[8px] sm:tracking-[15px] pb-3 md:pb-5 mb-8 md:mb-16">JULY_11</div>
+            <p class="essay-p text-sm sm:text-base md:text-lg mb-6 md:mb-12 indent-4 sm:indent-8">July 11th serves as the supreme coordinate for <span class="highlight">Global Demographic Forensics</span> and the tragic recalibration of orbital logistical recovery.</p>
 
-            <h3 class="category-h3">🌍 Innovations: Population Day</h3>
-            <p class="essay-p"><span class="year-badge">1987</span>The Five Billion Day: The global human population reached 5,000,000,000. This event served as the catalyst for the synchronization of international resource-management law and anchoring the principle of 'Planetary Carrying Capacity' in diplomacy.</p>
+            <h3 class="category-h3 text-base sm:text-lg md:text-2xl tracking-[2px] sm:tracking-[4px] pl-4 sm:pl-6 mt-8 md:mt-20 mb-4 md:mb-8">🌍 Innovations: Population Day</h3>
+            <p class="essay-p text-sm sm:text-base md:text-lg mb-6 md:mb-12 indent-4 sm:indent-8"><span class="year-badge">1987</span>The Day of Five Billion: The United Nations estimated that the global human population reached five billion. This milestone prompted the creation of World Population Day, coordinating international attention on family planning, sustainable resource consumption, and regional demographic data tracking.</p>
 
-            <h3 class="category-h3">⚙️ Technological Singularities: Skylab Re-entry</h3>
-            <p class="essay-p"><span class="year-badge">1979</span>Deorbiting of Skylab: The first US space station re-entered the atmosphere. This node archives the extreme risks of large-scale orbital forensics and redefined the legal boundaries of international space-debris liability.</p>
+            <h3 class="category-h3 text-base sm:text-lg md:text-2xl tracking-[2px] sm:tracking-[4px] pl-4 sm:pl-6 mt-8 md:mt-20 mb-4 md:mb-8">⚙️ Technological Singularities: Skylab Re-entry</h3>
+            <p class="essay-p text-sm sm:text-base md:text-lg mb-6 md:mb-12 indent-4 sm:indent-8"><span class="year-badge">1979</span>Deorbiting of Skylab: The first US space station completed an uncontrolled re-entry, with debris landing in the Indian Ocean and Western Australia. This event highlighted the challenges of managing large orbital structures, prompting improvements in spacecraft tracking, orbit decay calculations, and international space-debris liability laws.</p>
         </div>
 
         <!-- 💡 JULY 12 -->
-        <div class="report-card">
-            <div class="day-header">JULY_12</div>
-            <p class="essay-p">July 12th represents the coordinate for <span class="highlight">Linguistic Intelligence Recovery</span> and the zenith of 21st-century cosmic observational forensics.</p>
+        <div class="report-card p-5 sm:p-10 md:p-20 mb-12 md:mb-32">
+            <div class="day-header text-2xl sm:text-4xl md:text-5xl tracking-[8px] sm:tracking-[15px] pb-3 md:pb-5 mb-8 md:mb-16">JULY_12</div>
+            <p class="essay-p text-sm sm:text-base md:text-lg mb-6 md:mb-12 indent-4 sm:indent-8">July 12th represents the coordinate for <span class="highlight">Linguistic Intelligence Recovery</span> and the zenith of 21st-century cosmic observational forensics.</p>
 
-            <img src="https://images.unsplash.com/photo-1614728894747-a83421e2b9c9?auto=format&fit=crop&w=1200&q=80" alt="James Webb Telescope Galaxy" class="archive-img">
+            <img src="https://images.unsplash.com/photo-1614728894747-a83421e2b9c9?auto=format&fit=crop&w=1200&q=80" alt="James Webb Telescope Galaxy" class="archive-img h-48 sm:h-72 md:h-[450px] lg:h-[550px] my-6 md:my-16">
 
-            <h3 class="category-h3">⚙️ Innovations: The Rosetta Stone Discovery</h3>
-            <p class="essay-p"><span class="year-badge">1799</span>Rosetta Stone Discovery: This node archives the 'Linguistic Singularity.' By providing the technical bridge to Egyptian hieroglyphs, it enabled the forensic synchronization of ancient human history with modern archaeological methodology.</p>
+            <h3 class="category-h3 text-base sm:text-lg md:text-2xl tracking-[2px] sm:tracking-[4px] pl-4 sm:pl-6 mt-8 md:mt-20 mb-4 md:mb-8">⚙️ Innovations: The Rosetta Stone Discovery</h3>
+            <p class="essay-p text-sm sm:text-base md:text-lg mb-6 md:mb-12 indent-4 sm:indent-8"><span class="year-badge">1799</span>Discovery of the Rosetta Stone: French soldiers discovered the granite stele in Rosetta, Egypt, during Napoleon's campaign. Featuring three scripts—hieroglyphic, demotic, and Greek—this artifact provided the key to deciphering Egyptian hieroglyphs, coordinating linguistic research, and modernizing archaeological study.</p>
 
-            <h3 class="category-h3">🛰️ Interstellar Intelligence: JWST First Images</h3>
-            <p class="essay-p"><span class="year-badge">2022</span>First Images from James Webb: A pinnacle of high-fidelity engineering. The telescope transmitted the deepest infrared images of the universe, providing a case study in celestial forensics that redefined the human innovative scope.</p>
+            <h3 class="category-h3 text-base sm:text-lg md:text-2xl tracking-[2px] sm:tracking-[4px] pl-4 sm:pl-6 mt-8 md:mt-20 mb-4 md:mb-8">🛰️ Interstellar Intelligence: JWST First Images</h3>
+            <p class="essay-p text-sm sm:text-base md:text-lg mb-6 md:mb-12 indent-4 sm:indent-8"><span class="year-badge">2022</span>First Images from James Webb Space Telescope: NASA released the first deep-field infrared images of the universe from the James Webb Space Telescope. This milestone demonstrated the potential of advanced optical instruments in space, providing important astronomical data on distant galaxies and cosmic history.</p>
         </div>
 
         <!-- 💡 JULY 13 -->
-        <div class="report-card">
-            <div class="day-header">JULY_13</div>
-            <p class="essay-p">July 13th archives the birth of <span class="highlight">Standardized Sports Branding</span> and the formalization of modern North American territorial legislative frameworks.</p>
+        <div class="report-card p-5 sm:p-10 md:p-20 mb-12 md:mb-32">
+            <div class="day-header text-2xl sm:text-4xl md:text-5xl tracking-[8px] sm:tracking-[15px] pb-3 md:pb-5 mb-8 md:mb-16">JULY_13</div>
+            <p class="essay-p text-sm sm:text-base md:text-lg mb-6 md:mb-12 indent-4 sm:indent-8">July 13th archives the birth of <span class="highlight">Standardized Sports Branding</span> and the formalization of modern North American territorial legislative frameworks.</p>
 
-            <h3 class="category-h3">🏆 Sports Milestones: The First World Cup</h3>
-            <p class="essay-p"><span class="year-badge">1930</span>Initialization of FIFA World Cup: The first tournament in Uruguay. Our forensics identify this as a 'Cultural Branding Singularity.' By synchronizing national identities into a single athletic matrix, it pioneered modern mass-media sports logistics.</p>
+            <h3 class="category-h3 text-base sm:text-lg md:text-2xl tracking-[2px] sm:tracking-[4px] pl-4 sm:pl-6 mt-8 md:mt-20 mb-4 md:mb-8">🏆 Sports Milestones: The First World Cup</h3>
+            <p class="essay-p text-sm sm:text-base md:text-lg mb-6 md:mb-12 indent-4 sm:indent-8"><span class="year-badge">1930</span>Opening of the First FIFA World Cup: The tournament began in Montevideo, Uruguay. This competition integrated diverse national soccer programs, establishing early standards for international sports branding and event logistics, changing modern sports entertainment marketing.</p>
 
-            <h3 class="category-h3">⚖️ Judicial Intelligence: Northwest Ordinance</h3>
-            <p class="essay-p"><span class="year-badge">1787</span>Passage of the Northwest Ordinance: A foundational legal act establishing the protocols for admitting new states. This node anchored property rights and civil liberties into the administrative mapping of new territories.</p>
+            <h3 class="category-h3 text-base sm:text-lg md:text-2xl tracking-[2px] sm:tracking-[4px] pl-4 sm:pl-6 mt-8 md:mt-20 mb-4 md:mb-8">⚖️ Judicial Intelligence: Northwest Ordinance</h3>
+            <p class="essay-p text-sm sm:text-base md:text-lg mb-6 md:mb-12 indent-4 sm:indent-8"><span class="year-badge">1787</span>Passage of the Northwest Ordinance: The Confederation Congress approved the law to coordinate the admission of new states in the Northwest Territory. This legislation protected property rights and civil liberties, banning slavery in the territory and establishing a standard model for national territorial expansion.</p>
         </div>
 
         <!-- 💡 JULY 14 -->
-        <div class="report-card">
-            <div class="day-header">JULY_14</div>
-            <p class="essay-p">July 14th represents the coordinate for <span class="highlight">Systemic Sovereign Deconstruction</span> and the zenith of planetary flyby forensics.</p>
+        <div class="report-card p-5 sm:p-10 md:p-20 mb-12 md:mb-32">
+            <div class="day-header text-2xl sm:text-4xl md:text-5xl tracking-[8px] sm:tracking-[15px] pb-3 md:pb-5 mb-8 md:mb-16">JULY_14</div>
+            <p class="essay-p text-sm sm:text-base md:text-lg mb-6 md:mb-12 indent-4 sm:indent-8">July 14th represents the coordinate for <span class="highlight">Systemic Sovereign Deconstruction</span> and the zenith of planetary flyby forensics.</p>
 
-            <h3 class="category-h3">⚖️ Judicial Intelligence: Bastille Day</h3>
-            <p class="essay-p"><span class="year-badge">1789</span>Storming of the Bastille: The French Revolution. This 'Systemic Singularity' marked the terminal collapse of the Ancien Régime’s legal legitimacy and birthed the Declaration of the Rights of Man, anchoring modern constitutional democracy.</p>
+            <h3 class="category-h3 text-base sm:text-lg md:text-2xl tracking-[2px] sm:tracking-[4px] pl-4 sm:pl-6 mt-8 md:mt-20 mb-4 md:mb-8">⚖️ Judicial Intelligence: Bastille Day</h3>
+            <p class="essay-p text-sm sm:text-base md:text-lg mb-6 md:mb-12 indent-4 sm:indent-8"><span class="year-badge">1789</span>Storming of the Bastille: Rebel citizens in Paris stormed the Bastille fortress, marking the beginning of the French Revolution. This event ended French absolute monarchy, leading directly to the Declaration of the Rights of Man and of the Citizen, changing European governance and modern constitutional law.</p>
 
-            <h3 class="category-h3">🛰️ Interstellar Intelligence: Pluto Flyby</h3>
-            <p class="essay-p"><span class="year-badge">2015</span>New Horizons Pluto Flyby: NASA's spacecraft achieved the first close-up observation of the Kuiper Belt’s most significant node, redefining our innovative scope and celestial mapping standards.</p>
+            <h3 class="category-h3 text-base sm:text-lg md:text-2xl tracking-[2px] sm:tracking-[4px] pl-4 sm:pl-6 mt-8 md:mt-20 mb-4 md:mb-8">🛰️ Interstellar Intelligence: Pluto Flyby</h3>
+            <p class="essay-p text-sm sm:text-base md:text-lg mb-6 md:mb-12 indent-4 sm:indent-8"><span class="year-badge">2015</span>New Horizons Pluto Flyby: NASA's New Horizons probe completed the first close-up observation of the dwarf planet Pluto. The flyby transmitted detailed data on Pluto's nitrogen-ice glaciers, providing important astronomical information and improving Kuiper Belt cosmic mapping.</p>
         </div>
 
         <!-- 💡 JULY 15 -->
-        <div class="report-card">
-            <div class="day-header">JULY_15</div>
-            <p class="essay-p">July 15th archives the birth of <span class="highlight">Micro-Information Synchronization</span> and the zenith of industrial-age pharmaceutical branding.</p>
+        <div class="report-card p-5 sm:p-10 md:p-20 mb-12 md:mb-32">
+            <div class="day-header text-2xl sm:text-4xl md:text-5xl tracking-[8px] sm:tracking-[15px] pb-3 md:pb-5 mb-8 md:mb-16">JULY_15</div>
+            <p class="essay-p text-sm sm:text-base md:text-lg mb-6 md:mb-12 indent-4 sm:indent-8">July 15th archives the birth of <span class="highlight">Micro-Information Synchronization</span> and the zenith of industrial-age pharmaceutical branding.</p>
 
-            <h3 class="category-h3">⚙️ IT Singularities: Twitter Launch</h3>
-            <p class="essay-p"><span class="year-badge">2006</span>Launch of Twitter: Our forensics identify this as a 'Communication Singularity.' By restricting data packets to short bursts, Twitter established a new protocol for information-speed, fundamentally shifting global political branding and real-time crisis management.</p>
+            <h3 class="category-h3 text-base sm:text-lg md:text-2xl tracking-[2px] sm:tracking-[4px] pl-4 sm:pl-6 mt-8 md:mt-20 mb-4 md:mb-8">⚙️ IT Singularities: Twitter Launch</h3>
+            <p class="essay-p text-sm sm:text-base md:text-lg mb-6 md:mb-12 indent-4 sm:indent-8"><span class="year-badge">2006</span>Launch of Twitter: The microblogging platform officially launched to the public. By restricting posts to short, real-time message bursts, Twitter established standard methods for micro-communication, changing social media, political reporting, and real-time public communication.</p>
 
-            <h3 class="category-h3">💉 Medical Singularities: Aspirin Trademark</h3>
-            <p class="essay-p"><span class="year-badge">1899</span>Aspirin Branding: Bayer initialized the commercial legacy of the first mass-market clinical therapy. This node represent the birth of 'Pharmaceutical Branding,' synchronizing proprietary chemical formulas with institutional trust.</p>
+            <h3 class="category-h3 text-base sm:text-lg md:text-2xl tracking-[2px] sm:tracking-[4px] pl-4 sm:pl-6 mt-8 md:mt-20 mb-4 md:mb-8">💉 Medical Singularities: Aspirin Trademark</h3>
+            <p class="essay-p text-sm sm:text-base md:text-lg mb-6 md:mb-12 indent-4 sm:indent-8"><span class="year-badge">1899</span>Aspirin Trademark Registration: Bayer registered the trademark for Aspirin in Germany. Developed by Felix Hoffmann, this pharmaceutical branding coordinated mass-market distribution of acetylsalicylic acid, establishing early standards for commercial drug marketing and corporate chemical patents.</p>
         </div>
-
-        <!-- 🚀 PART 1 END -->
-        <div class="text-center py-20 border-t border-white/10">
-            <p class="font-cyber text-gold text-sm tracking-widest mb-6 uppercase">End of July Part I Synchronization</p>
-            <p class="text-gray-500 italic">"The spectrum of human liberation continues. Proceed to Part II for nodes 16 through 31."</p>
-        </div>
-    </main>
-
-    <footer class="py-24 border-t border-white/5 text-center">
-        <p class="text-[11px] font-cyber text-gray-700 tracking-[0.5em] uppercase">Akashic Terminal Node © 2026</p>
-    </footer>
-</body>
-</html>
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Node 07: July Archival Intelligence | Part II (16-31)</title>
-    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Inter:wght@300;400;600&family=Playfair+Display:ital,wght@0,700;1,700&display=swap" rel="stylesheet">
-    <script src="https://cdn.tailwindcss.com"></script>
-    <style>
-        :root { --neon-gold: #f5c97a; --bg: #010204; --card-bg: rgba(10, 14, 22, 0.98); }
-        body { background: var(--bg); color: #e2e8f0; font-family: 'Inter', sans-serif; line-height: 2.2; }
-        .font-cyber { font-family: 'Orbitron', sans-serif; }
-        .bg-grid { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background-image: linear-gradient(rgba(245, 201, 122, 0.03) 1px, transparent 1px), linear-gradient(90deg, rgba(245, 201, 122, 0.03) 1px, transparent 1px); background-size: 70px 70px; z-index: -1; }
-        .report-card { background: var(--card-bg); border: 1px solid rgba(245, 201, 122, 0.1); border-radius: 24px; padding: 5rem; margin-bottom: 8rem; box-shadow: 0 40px 100px rgba(0,0,0,0.9); transition: 0.4s; }
-        .report-card:hover { border-color: var(--neon-gold); }
-        .day-header { font-family: 'Orbitron'; color: var(--neon-gold); font-size: 3.5rem; letter-spacing: 15px; border-bottom: 2px solid var(--neon-gold); margin-bottom: 4rem; padding-bottom: 20px; text-align: center; }
-        .category-h3 { font-family: 'Orbitron'; color: #fff; font-size: 1.6rem; margin-top: 5rem; margin-bottom: 2rem; text-transform: uppercase; letter-spacing: 4px; border-left: 5px solid var(--neon-gold); padding-left: 25px; }
-        .essay-p { text-align: justify; color: #a0aec0; font-size: 1.2rem; margin-bottom: 3rem; text-indent: 2rem; line-height: 2.4; }
-        .year-badge { font-family: 'Orbitron'; color: #000; font-weight: 700; background: var(--neon-gold); padding: 4px 15px; border-radius: 4px; margin-right: 15px; font-size: 16px; }
-        .highlight { color: #fff; font-weight: 600; border-bottom: 1px solid var(--neon-gold); }
-        .archive-img { width: 100%; height: 500px; object-fit: cover; border-radius: 15px; margin: 4rem 0; border: 1px solid rgba(245, 201, 122, 0.1); filter: contrast(1.1) brightness(0.9); transition: 0.5s; }
-        .archive-img:hover { filter: brightness(1); }
-    </style>
-</head>
-<body>
-    <div class="bg-grid"></div>
-
-    <nav class="fixed w-full z-[1000] px-12 py-8 flex justify-between items-center bg-black/60 backdrop-blur-xl border-b border-white/5">
-        <div class="text-2xl font-cyber font-bold text-[#f5c97a] cursor-pointer" onclick="location.href='index.html'">AKASHIC ARCHIVE // NODE_07</div>
-        <div class="flex gap-4">
-            <span class="font-cyber text-gray-500 text-xs mt-2">JULY_TERMINAL_PART_02</span>
-            <a href="index.html" class="font-cyber text-[#f5c97a] border border-[#f5c97a] px-4 py-1.5 rounded text-[10px] hover:bg-[#f5c97a] hover:text-black transition-all">BACK_TO_HUB</a>
-        </div>
-    </nav>
-
-    <main class="relative pt-56 pb-20 px-8 max-w-6xl mx-auto">
-        <header class="text-center mb-40">
-            <h1 class="font-cyber text-6xl text-white mb-10 uppercase tracking-[0.4em]">July Intelligence <br><span class="text-gold opacity-50 text-3xl tracking-[0.2em]">Part II: Days 16 - 31</span></h1>
-            <p class="max-w-3xl mx-auto text-gray-400 italic text-xl leading-relaxed">"Systematically archiving the terminal nodes of July—from the atomic singularity to the supreme conquest of the lunar surface."</p>
-        </header>
 
         <!-- 💡 JULY 16 -->
-        <div class="report-card">
-            <div class="day-header">JULY_16</div>
-            <p class="essay-p">July 16th serves as the supreme coordinate for <span class="highlight">Atomic and Interstellar Singularities</span>. Historically, this date anchors the moment human civilization mastered the destructive potential of matter and when the most ambitious mission toward another world was initialized.</p>
+        <div class="report-card p-5 sm:p-10 md:p-20 mb-12 md:mb-32">
+            <div class="day-header text-2xl sm:text-4xl md:text-5xl tracking-[8px] sm:tracking-[15px] pb-3 md:pb-5 mb-8 md:mb-16">JULY_16</div>
+            <p class="essay-p text-sm sm:text-base md:text-lg mb-6 md:mb-12 indent-4 sm:indent-8">July 16th serves as the supreme coordinate for <span class="highlight">Atomic and Interstellar Singularities</span>. Historically, this date anchors the moment human civilization mastered the destructive potential of matter and when the most ambitious mission toward another world was initialized.</p>
 
-            <img src="https://images.unsplash.com/photo-1446776811953-b23d57bd21aa?auto=format&fit=crop&w=1200&q=80" alt="Space Rocket Launch" class="archive-img">
+            <img src="https://images.unsplash.com/photo-1446776811953-b23d57bd21aa?auto=format&fit=crop&w=1200&q=80" alt="Space Rocket Launch" class="archive-img h-48 sm:h-72 md:h-[450px] lg:h-[550px] my-6 md:my-16">
 
-            <h3 class="category-h3">⚙️ Technological Singularities: The Trinity Test</h3>
-            <p class="essay-p"><span class="year-badge">1945</span>Initialization of the Atomic Age: The first nuclear detonation in New Mexico. Our archival forensics identify this as the 'Ontological Singularity'—the moment human innovative capability could threaten the terrestrial biosphere. This node forced a total global recalibration of security law and diplomatic synchronization, anchoring the Cold War equilibrium.</p>
+            <h3 class="category-h3 text-base sm:text-lg md:text-2xl tracking-[2px] sm:tracking-[4px] pl-4 sm:pl-6 mt-8 md:mt-20 mb-4 md:mb-8">⚙️ Technological Singularities: The Trinity Test</h3>
+            <p class="essay-p text-sm sm:text-base md:text-lg mb-6 md:mb-12 indent-4 sm:indent-8"><span class="year-badge">1945</span>Initialization of the Atomic Age: The Manhattan Project successfully detonated the first nuclear device at the Trinity site in New Mexico. This event showed the capability of atomic fission, leading directly to the end of WWII, initiating the Cold War nuclear deterrence model, and permanently changing global security and international defense treaties.</p>
 
-            <h3 class="category-h3">🛰️ Interstellar Intelligence: Apollo 11 Launch</h3>
-            <p class="essay-p"><span class="year-badge">1969</span>Apollo 11 Liftoff: The Saturn V rocket launched from Kennedy Space Center. This node archives the highest standard of 20th-century logistical synchronization. The mission synchronized millions of lines of code with thousands of physical components, proving that collective intelligence could transcend gravity to initiate an extra-planetary legacy.</p>
+            <h3 class="category-h3 text-base sm:text-lg md:text-2xl tracking-[2px] sm:tracking-[4px] pl-4 sm:pl-6 mt-8 md:mt-20 mb-4 md:mb-8">🛰️ Interstellar Intelligence: Apollo 11 Launch</h3>
+            <p class="essay-p text-sm sm:text-base md:text-lg mb-6 md:mb-12 indent-4 sm:indent-8"><span class="year-badge">1969</span>Apollo 11 Liftoff: The Saturn V rocket launched from Kennedy Space Center, beginning the first crewed lunar landing mission. The launch demonstrated the performance of multi-stage rocket systems, coordinating international telecommunications and spaceflight tracking, and initiating a major phase of interplanetary space exploration.</p>
         </div>
 
         <!-- 💡 JULY 17 -->
-        <div class="report-card">
-            <div class="day-header">JULY_17</div>
-            <p class="essay-p">July 17th archives the birth of <span class="highlight">Experiential Consumer Branding</span> and the formalization of post-war European recalibration. It is a day defined by the inception of immersive storytelling and high-altitude diplomatic mapping.</p>
+        <div class="report-card p-5 sm:p-10 md:p-20 mb-12 md:mb-32">
+            <div class="day-header text-2xl sm:text-4xl md:text-5xl tracking-[8px] sm:tracking-[15px] pb-3 md:pb-5 mb-8 md:mb-16">JULY_17</div>
+            <p class="essay-p text-sm sm:text-base md:text-lg mb-6 md:mb-12 indent-4 sm:indent-8">July 17th archives the birth of <span class="highlight">Experiential Consumer Branding</span> and the formalization of post-war European recalibration. It is a day defined by the inception of immersive storytelling and high-altitude diplomatic mapping.</p>
 
-            <h3 class="category-h3">🏷️ Brand Genealogy: Disneyland Genesis</h3>
-            <p class="essay-p"><span class="year-badge">1955</span>Opening of Disneyland: Walt Disney initialized the first 'Experiential Branding Matrix' in Anaheim. Our forensics identify this as a 'Retail Singularity.' By synchronizing cinematic IP with physical architectural logistics, Disneyland pioneered the protocols for modern immersive branding and global tourism capital flows.</p>
+            <h3 class="category-h3 text-base sm:text-lg md:text-2xl tracking-[2px] sm:tracking-[4px] pl-4 sm:pl-6 mt-8 md:mt-20 mb-4 md:mb-8">🏷️ Brand Genealogy: Disneyland Genesis</h3>
+            <p class="essay-p text-sm sm:text-base md:text-lg mb-6 md:mb-12 indent-4 sm:indent-8"><span class="year-badge">1955</span>Opening of Disneyland: Walt Disney opened the theme park in Anaheim, California. The park integrated diverse media franchises with immersive environmental design, changing themed entertainment, retail marketing, and global family tourism logistics.</p>
 
-            <h3 class="category-h3">🏛️ Geopolitical Nodes: Potsdam Conference</h3>
-            <p class="essay-p"><span class="year-badge">1945</span>Commencement of the Potsdam Conference: Stalin, Truman, and Churchill met to synchronize the administration of defeated Germany. This node archives the formal mapping of the post-WWII matrix, establishing the foundational protocols for Cold War containment.</p>
+            <h3 class="category-h3 text-base sm:text-lg md:text-2xl tracking-[2px] sm:tracking-[4px] pl-4 sm:pl-6 mt-8 md:mt-20 mb-4 md:mb-8">🏛️ Geopolitical Nodes: Potsdam Conference</h3>
+            <p class="essay-p text-sm sm:text-base md:text-lg mb-6 md:mb-12 indent-4 sm:indent-8"><span class="year-badge">1945</span>Commencement of the Potsdam Conference: Allied leaders Truman, Stalin, and Churchill met in Germany to coordinate postwar borders and administrations. This conference established early agreements on German reparations and occupational partitions, shaping European diplomacy during the early Cold War.</p>
         </div>
 
         <!-- 💡 JULY 18 -->
-        <div class="report-card">
-            <div class="day-header">JULY_18</div>
-            <p class="essay-p">July 18th represents the temporal coordinate for <span class="highlight">Computational Hardware Hegemony</span> and the birth of modern human rights moral intelligence. It anchors the founding of the semiconductor matrix and the individual who recalibrated racial ethics.</p>
+        <div class="report-card p-5 sm:p-10 md:p-20 mb-12 md:mb-32">
+            <div class="day-header text-2xl sm:text-4xl md:text-5xl tracking-[8px] sm:tracking-[15px] pb-3 md:pb-5 mb-8 md:mb-16">JULY_18</div>
+            <p class="essay-p text-sm sm:text-base md:text-lg mb-6 md:mb-12 indent-4 sm:indent-8">July 18th represents the temporal coordinate for <span class="highlight">Computational Hardware Hegemony</span> and the birth of modern human rights moral intelligence. It anchors the founding of the semiconductor matrix and the individual who recalibrated racial ethics.</p>
 
-            <img src="https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&w=1200&q=80" alt="Microchip Intel Tech" class="archive-img">
+            <img src="https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&w=1200&q=80" alt="Microchip Intel Tech" class="archive-img h-48 sm:h-72 md:h-[450px] lg:h-[550px] my-6 md:my-16">
 
-            <h3 class="category-h3">⚙️ IT Singularities: Intel Founding</h3>
-            <p class="essay-p"><span class="year-badge">1968</span>Founding of Intel: Robert Noyce and Gordon Moore initialized the world's most significant semiconductor matrix. Our terminal categorizes this as the 'Hardware Singularity.' Intel established the foundational protocols for microprocessor synchronization (Moore's Law), effectively anchoring the trajectory of the digital revolution.</p>
+            <h3 class="category-h3 text-base sm:text-lg md:text-2xl tracking-[2px] sm:tracking-[4px] pl-4 sm:pl-6 mt-8 md:mt-20 mb-4 md:mb-8">⚙️ IT Singularities: Intel Founding</h3>
+            <p class="essay-p text-sm sm:text-base md:text-lg mb-6 md:mb-12 indent-4 sm:indent-8"><span class="year-badge">1968</span>Founding of Intel: Robert Noyce and Gordon Moore founded NM Electronics, later renamed Intel, in Mountain View, California. Their development of silicon-gate MOS technology established early standards for integrated microprocessors, driving computer performance and changing digital hardware markets.</p>
 
-            <h3 class="category-h3">⚖️ Judicial Intelligence: Nelson Mandela</h3>
-            <p class="essay-p"><span class="year-badge">1918</span>Birth of Nelson Mandela: The primary architect of Apartheid deconstruction. His life serves as a definitive node in history, providing the legal momentum for the synchronization of multi-racial democracy and international judicial reconciliation law.</p>
+            <h3 class="category-h3 text-base sm:text-lg md:text-2xl tracking-[2px] sm:tracking-[4px] pl-4 sm:pl-6 mt-8 md:mt-20 mb-4 md:mb-8">⚖️ Judicial Intelligence: Nelson Mandela</h3>
+            <p class="essay-p text-sm sm:text-base md:text-lg mb-6 md:mb-12 indent-4 sm:indent-8"><span class="year-badge">1918</span>Birth of Nelson Mandela: The South African anti-apartheid leader was born, later completing a historic transition from political prisoner to president. His work coordinated anti-apartheid efforts, establishing standard procedures for multi-racial democratic reforms and international judicial reconciliation.</p>
         </div>
 
         <!-- 💡 JULY 19 -->
-        <div class="report-card">
-            <div class="day-header">JULY_19</div>
-            <p class="essay-p">July 19th archives the birth of <span class="highlight">Gender Parity Judicial Intelligence</span> and the zenith of 20th-century athletic logistical synchronization. It is a day defined by the formal demand for feminine sovereignty.</p>
+        <div class="report-card p-5 sm:p-10 md:p-20 mb-12 md:mb-32">
+            <div class="day-header text-2xl sm:text-4xl md:text-5xl tracking-[8px] sm:tracking-[15px] pb-3 md:pb-5 mb-8 md:mb-16">JULY_19</div>
+            <p class="essay-p text-sm sm:text-base md:text-lg mb-6 md:mb-12 indent-4 sm:indent-8">July 19th archives the birth of <span class="highlight">Gender Parity Judicial Intelligence</span> and the zenith of 20th-century athletic logistical synchronization. It is a day defined by the formal demand for feminine sovereignty.</p>
 
-            <h3 class="category-h3">⚖️ Judicial Intelligence: Seneca Falls</h3>
-            <p class="essay-p"><span class="year-badge">1848</span>The Seneca Falls Convention: The first women's rights convention in the US. This node archives the formalization of the demand for feminine suffrage, serving as the primary catalyst for the synchronization of global gender-parity law and universal suffrage principles.</p>
+            <h3 class="category-h3 text-base sm:text-lg md:text-2xl tracking-[2px] sm:tracking-[4px] pl-4 sm:pl-6 mt-8 md:mt-20 mb-4 md:mb-8">⚖️ Judicial Intelligence: Seneca Falls</h3>
+            <p class="essay-p text-sm sm:text-base md:text-lg mb-6 md:mb-12 indent-4 sm:indent-8"><span class="year-badge">1848</span>The Seneca Falls Convention: The first women's rights convention began in Seneca Falls, New York, adopting Elizabeth Cady Stanton's Declaration of Sentiments. This development coordinated early women's suffrage advocacy, establishing standard regulations for gender-based equality and legal civil rights.</p>
 
-            <h3 class="category-h3">🏆 Sports Milestones: 1996 Atlanta Olympics</h3>
-            <p class="essay-p"><span class="year-badge">1996</span>Opening of the Atlanta Olympics: A pinnacle of high-fidelity logistical synchronization during the digital era. Beyond its athletic value, our forensics focus on how this event established new standards for global media branding and synchronized security protocols in the post-Cold War matrix.</p>
+            <h3 class="category-h3 text-base sm:text-lg md:text-2xl tracking-[2px] sm:tracking-[4px] pl-4 sm:pl-6 mt-8 md:mt-20 mb-4 md:mb-8">🏆 Sports Milestones: 1996 Atlanta Olympics</h3>
+            <p class="essay-p text-sm sm:text-base md:text-lg mb-6 md:mb-12 indent-4 sm:indent-8"><span class="year-badge">1996</span>Opening of the Atlanta Olympics: Fought during a period of post-Cold War expansion, the Games integrated diverse athletic teams under unified security regulations, demonstrating modern methods for global event marketing and security logistics.</p>
         </div>
 
         <!-- 💡 JULY 20 -->
-        <div class="report-card">
-            <div class="day-header">JULY_20</div>
-            <p class="essay-p">July 20th serves as the supreme coordinate for <span class="highlight">Human Interstellar Transcendence</span>. Historically, this date anchors the moment human intelligence physically conquered the terrestrial temporal and physical gap by landing on the Moon.</p>
+        <div class="report-card p-5 sm:p-10 md:p-20 mb-12 md:mb-32">
+            <div class="day-header text-2xl sm:text-4xl md:text-5xl tracking-[8px] sm:tracking-[15px] pb-3 md:pb-5 mb-8 md:mb-16">JULY_20</div>
+            <p class="essay-p text-sm sm:text-base md:text-lg mb-6 md:mb-12 indent-4 sm:indent-8">July 20th serves as the supreme coordinate for <span class="highlight">Human Interstellar Transcendence</span>. Historically, this date anchors the moment human intelligence physically conquered the terrestrial temporal and physical gap by landing on the Moon.</p>
 
-            <img src="https://images.unsplash.com/photo-1446776877081-d282a0f896e2?auto=format&fit=crop&w=1200&q=80" alt="Moon Landing Astronaut" class="archive-img">
+            <img src="https://images.unsplash.com/photo-1446776877081-d282a0f896e2?auto=format&fit=crop&w=1200&q=80" alt="Moon Landing Astronaut" class="archive-img h-48 sm:h-72 md:h-[450px] lg:h-[550px] my-6 md:my-16">
 
-            <h3 class="category-h3">🛰️ Interstellar Intelligence: Apollo 11 Landing</h3>
-            <p class="essay-p"><span class="year-badge">1969</span>The Moon Landing: Neil Armstrong and Buzz Aldrin set foot on the lunar surface. Our archival forensics identify this as the 'Supreme Biological-Technical Singularity.' The success of the Eagle module synchronized global telecommunications with extreme innovative precision, proving that human ambition could successfully colonize the vacuum. This node established the essential baseline for all future extraterrestrial research.</p>
+            <h3 class="category-h3 text-base sm:text-lg md:text-2xl tracking-[2px] sm:tracking-[4px] pl-4 sm:pl-6 mt-8 md:mt-20 mb-4 md:mb-8">🛰️ Interstellar Intelligence: Apollo 11 Landing</h3>
+            <p class="essay-p text-sm sm:text-base md:text-lg mb-6 md:mb-12 indent-4 sm:indent-8"><span class="year-badge">1969</span>The Moon Landing: Neil Armstrong and Buzz Aldrin landed the Apollo Lunar Module Eagle on the Moon, completing the first crewed landing. This mission demonstrated the performance of spacecraft guidance computers and lunar life-support systems, confirming that human travel could extend to other celestial bodies, and changing space science.</p>
         </div>
 
         <!-- 💡 JULY 21 -->
-        <div class="report-card">
-            <div class="day-header">JULY_21</div>
-            <p class="essay-p">July 21st archives the supreme node of <span class="highlight">Extraterrestrial Sovereign Return</span> and the zenith of early 20th-century technical synchronization. It is a day defined by the successful departure from another celestial body.</p>
+        <div class="report-card p-5 sm:p-10 md:p-20 mb-12 md:mb-32">
+            <div class="day-header text-2xl sm:text-4xl md:text-5xl tracking-[8px] sm:tracking-[15px] pb-3 md:pb-5 mb-8 md:mb-16">JULY_21</div>
+            <p class="essay-p text-sm sm:text-base md:text-lg mb-6 md:mb-12 indent-4 sm:indent-8">July 21st archives the supreme node of <span class="highlight">Extraterrestrial Sovereign Return</span> and the zenith of early 20th-century technical synchronization. It is a day defined by the successful departure from another celestial body.</p>
             
-            <h3 class="category-h3">🛰️ Interstellar Intelligence: Lunar Lift-off</h3>
-            <p class="essay-p"><span class="year-badge">1969</span>The Apollo 11 Ascent: After 21 hours on the lunar surface, the Eagle module synchronized its ascent engine to return to orbit. Our forensics identify this as a 'Logistical Singularity.' This node established the foundational protocols for extraterrestrial departure and orbital docking synchronization.</p>
+            <h3 class="category-h3 text-base sm:text-lg md:text-2xl tracking-[2px] sm:tracking-[4px] pl-4 sm:pl-6 mt-8 md:mt-20 mb-4 md:mb-8">🛰️ Interstellar Intelligence: Lunar Lift-off</h3>
+            <p class="essay-p text-sm sm:text-base md:text-lg mb-6 md:mb-12 indent-4 sm:indent-8"><span class="year-badge">1969</span>The Apollo 11 Ascent: After 21 hours on the Moon, the Eagle's ascent stage launched from the lunar surface to return the crew to the Command Module Columbia in orbit. This launch proved the reliability of lunar ascent propulsion systems under extreme temperature variations, establishing standard procedures for extraterrestrial takeoff.</p>
             
-            <h3 class="category-h3">⚙️ Innovations: Jet Fighter Carrier Node</h3>
-            <p class="essay-p"><span class="year-badge">1946</span>The first jet-powered aircraft landings on a moving maritime carrier. This technical milestone recalibrated naval innovative logistics, establishing the primordial protocols for modern carrier-based air power and synchronized high-speed maritime defense.</p>
+            <h3 class="category-h3 text-base sm:text-lg md:text-2xl tracking-[2px] sm:tracking-[4px] pl-4 sm:pl-6 mt-8 md:mt-20 mb-4 md:mb-8">⚙️ Innovations: Jet Fighter Carrier Node</h3>
+            <p class="essay-p text-sm sm:text-base md:text-lg mb-6 md:mb-12 indent-4 sm:indent-8"><span class="year-badge">1946</span>First Jet Carrier Landings: The McDonnell FH-1 Phantom completed the first jet-powered aircraft landings on a moving aircraft carrier, the USS Franklin D. Roosevelt. This development coordinated naval defense logistics, proving the feasibility of carrier-based jet operations and changing naval aviation.</p>
         </div>
 
         <!-- 💡 JULY 22 -->
-        <div class="report-card">
-            <div class="day-header">JULY_22</div>
-            <p class="essay-p">July 22nd serves as the coordinate for <span class="highlight">Macro-Forensic Public Health</span> and the zenith of 19th-century high-speed logistical competition. It anchors the global framework for biological security.</p>
+        <div class="report-card p-5 sm:p-10 md:p-20 mb-12 md:mb-32">
+            <div class="day-header text-2xl sm:text-4xl md:text-5xl tracking-[8px] sm:tracking-[15px] pb-3 md:pb-5 mb-8 md:mb-16">JULY_22</div>
+            <p class="essay-p text-sm sm:text-base md:text-lg mb-6 md:mb-12 indent-4 sm:indent-8">July 22nd serves as the coordinate for <span class="highlight">Macro-Forensic Public Health</span> and the zenith of 19th-century high-speed logistical competition. It anchors the global framework for biological security.</p>
 
-            <h3 class="category-h3">💉 Medical Singularities: WHO Constitution</h3>
-            <p class="essay-p"><span class="year-badge">1946</span>Signing of the WHO Constitution: Representatives from 61 nations initialized the first global framework for biological security. This 'Sanitary Singularity' defined health as a fundamental human right and established protocols for synchronized international pandemic response.</p>
+            <h3 class="category-h3 text-base sm:text-lg md:text-2xl tracking-[2px] sm:tracking-[4px] pl-4 sm:pl-6 mt-8 md:mt-20 mb-4 md:mb-8">💉 Medical Singularities: WHO Constitution</h3>
+            <p class="essay-p text-sm sm:text-base md:text-lg mb-6 md:mb-12 indent-4 sm:indent-8"><span class="year-badge">1946</span>Signing of the WHO Constitution: Representatives of 61 nations signed the Constitution of the World Health Organization. This agreement defined health as a fundamental human right, coordinating global health regulations and establishing standard procedures for multilateral disease prevention programs.</p>
 
-            <h3 class="category-h3">⚙️ Innovations: The First Motor Race</h3>
-            <p class="essay-p"><span class="year-badge">1894</span>Paris–Rouen Competition: The first formal test of automotive innovative reliability. This node represents the birth of 'Performance Branding' in logistics, proving how competitive engineering can accelerate technology synchronization.</p>
+            <h3 class="category-h3 text-base sm:text-lg md:text-2xl tracking-[2px] sm:tracking-[4px] pl-4 sm:pl-6 mt-8 md:mt-20 mb-4 md:mb-8">⚙️ Innovations: The First Motor Race</h3>
+            <p class="essay-p text-sm sm:text-base md:text-lg mb-6 md:mb-12 indent-4 sm:indent-8"><span class="year-badge">1894</span>The Paris–Rouen Competition: The motor race demonstrated the reliability of early steam and internal combustion vehicles, driving improvements in early automotive designs and materials science.</p>
         </div>
 
         <!-- 💡 JULY 23 -->
-        <div class="report-card">
-            <div class="day-header">JULY_23</div>
-            <p class="essay-p">July 23rd archives the birth of <span class="highlight">Visual Computational Intelligence</span> and the supreme recalibration of Arab sovereign statecraft. Historically, it anchors the moment human creativity was first encoded into a sophisticated digital matrix.</p>
+        <div class="report-card p-5 sm:p-10 md:p-20 mb-12 md:mb-32">
+            <div class="day-header text-2xl sm:text-4xl md:text-5xl tracking-[8px] sm:tracking-[15px] pb-3 md:pb-5 mb-8 md:mb-16">JULY_23</div>
+            <p class="essay-p text-sm sm:text-base md:text-lg mb-6 md:mb-12 indent-4 sm:indent-8">July 23rd archives the birth of <span class="highlight">Visual Computational Intelligence</span> and the supreme recalibration of Arab sovereign statecraft. Historically, it anchors the moment human creativity was first encoded into a sophisticated digital matrix.</p>
 
-            <img src="https://images.unsplash.com/photo-1550751827-4bd374c3f58b?auto=format&fit=crop&w=1200&q=80" alt="Retro Computing Amiga" class="archive-img">
+            <img src="https://images.unsplash.com/photo-1550751827-4bd374c3f58b?auto=format&fit=crop&w=1200&q=80" alt="Retro Computing Amiga" class="archive-img h-48 sm:h-72 md:h-[450px] lg:h-[550px] my-6 md:my-16">
 
-            <h3 class="category-h3">⚙️ IT Singularities: Commodore Amiga</h3>
-            <p class="essay-p"><span class="year-badge">1985</span>Launch of the Amiga 1000: Commodore initialized the world's first multimedia personal computer. Our terminal identifies this as the 'Multi-Threaded Singularity.' By introducing dedicated hardware for graphics and sound, the Amiga fundamentally altered the commercial genealogy of digital media branding.</p>
+            <h3 class="category-h3 text-base sm:text-lg md:text-2xl tracking-[2px] sm:tracking-[4px] pl-4 sm:pl-6 mt-8 md:mt-20 mb-4 md:mb-8">⚙️ IT Singularities: Commodore Amiga</h3>
+            <p class="essay-p text-sm sm:text-base md:text-lg mb-6 md:mb-12 indent-4 sm:indent-8"><span class="year-badge">1985</span>Launch of the Amiga 1000: Commodore introduced the Amiga 1000 computer, featuring advanced color graphics and a multi-channel sound processor. This release established early standards for consumer multimedia computing, driving software development and changing digital gaming branding.</p>
 
-            <h3 class="category-h3">🏛️ Geopolitical Nodes: The Egyptian Revolution</h3>
-            <p class="essay-p"><span class="year-badge">1952</span>The July 23 Revolution: The overthrow of the Egyptian monarchy. This node archives a significant shift in 20th-century statecraft, establishing foundational protocols for modern Pan-Arab nationalism and the synchronization of regional energy logistics.</p>
+            <h3 class="category-h3 text-base sm:text-lg md:text-2xl tracking-[2px] sm:tracking-[4px] pl-4 sm:pl-6 mt-8 md:mt-20 mb-4 md:mb-8">🏛️ Geopolitical Nodes: The Egyptian Revolution</h3>
+            <p class="essay-p text-sm sm:text-base md:text-lg mb-6 md:mb-12 indent-4 sm:indent-8"><span class="year-badge">1952</span>The Egyptian Revolution of 1952: The Free Officers Movement led a coup overthrowing King Farouk, establishing the Republic of Egypt. This transition led directly to the end of British military occupation, coordinating pan-Arab nationalist movements and changing regional security and Suez Canal diplomacy.</p>
         </div>
 
         <!-- 💡 JULY 24 -->
-        <div class="report-card">
-            <div class="day-header">JULY_24</div>
-            <p class="essay-p">July 24th represents the supreme coordinate for <span class="highlight">Archaeological Intelligence Recovery</span> and the formalization of global aerospace maritime recovery. It anchors the moment human civilization rediscovered a supreme ancient citadel.</p>
+        <div class="report-card p-5 sm:p-10 md:p-20 mb-12 md:mb-32">
+            <div class="day-header text-2xl sm:text-4xl md:text-5xl tracking-[8px] sm:tracking-[15px] pb-3 md:pb-5 mb-8 md:mb-16">JULY_24</div>
+            <p class="essay-p text-sm sm:text-base md:text-lg mb-6 md:mb-12 indent-4 sm:indent-8">July 24th represents the supreme coordinate for <span class="highlight">Archaeological Intelligence Recovery</span> and the formalization of global aerospace maritime recovery. It anchors the moment human civilization rediscovered a supreme ancient citadel.</p>
 
-            <h3 class="category-h3">⚙️ Innovations: Machu Picchu Rediscovery</h3>
-            <p class="essay-p"><span class="year-badge">1911</span>Machu Picchu: Discovery of the lost Incan citadel by Hiram Bingham. This node archives the 'Archaeological Singularity' of the 20th century. By institutionalizing the forensic documentation of the site, this event pioneered the synchronization of high-altitude innovative research with ancient heritage law.</p>
+            <h3 class="category-h3 text-base sm:text-lg md:text-2xl tracking-[2px] sm:tracking-[4px] pl-4 sm:pl-6 mt-8 md:mt-20 mb-4 md:mb-8">⚙️ Innovations: Machu Picchu Rediscovery</h3>
+            <p class="essay-p text-sm sm:text-base md:text-lg mb-6 md:mb-12 indent-4 sm:indent-8"><span class="year-badge">1911</span>Machu Picchu: Archaeologist Hiram Bingham located the ruins of the Incan citadel Machu Picchu in Peru. This find demonstrated the capabilities of early high-altitude exploration, leading directly to major advancements in archaeological research and historical heritage preservation laws.</p>
 
-            <h3 class="category-h3">🛰️ Interstellar Intelligence: Apollo 11 Splashdown</h3>
-            <p class="essay-p"><span class="year-badge">1969</span>Return to Earth: Apollo 11 successfully splashed down in the Pacific. This temporal node archives the maturity of human-technical synchronization, proving the viability of safe re-entry and maritime innovative recovery protocols.</p>
+            <h3 class="category-h3 text-base sm:text-lg md:text-2xl tracking-[2px] sm:tracking-[4px] pl-4 sm:pl-6 mt-8 md:mt-20 mb-4 md:mb-8">🛰️ Interstellar Intelligence: Apollo 11 Splashdown</h3>
+            <p class="essay-p text-sm sm:text-base md:text-lg mb-6 md:mb-12 indent-4 sm:indent-8"><span class="year-badge">1969</span>Return to Earth: The Apollo 11 spacecraft successfully splashed down in the Pacific Ocean, completing the first lunar landing mission. This splashdown demonstrated the performance of spacecraft heat shields during re-entry, establishing standard procedures for marine recovery operations.</p>
         </div>
 
         <!-- 💡 JULY 25 -->
-        <div class="report-card">
-            <div class="day-header">JULY_25</div>
-            <p class="essay-p">July 25th archives the birth of <span class="highlight">Biological Reproductive Singularities</span> and the zenith of early 20th-century aviation ambition. It anchors the moment biological life was initialized outside the terrestrial womb.</p>
+        <div class="report-card p-5 sm:p-10 md:p-20 mb-12 md:mb-32">
+            <div class="day-header text-2xl sm:text-4xl md:text-5xl tracking-[8px] sm:tracking-[15px] pb-3 md:pb-5 mb-8 md:mb-16">JULY_25</div>
+            <p class="essay-p text-sm sm:text-base md:text-lg mb-6 md:mb-12 indent-4 sm:indent-8">July 25th archives the birth of <span class="highlight">Biological Reproductive Singularities</span> and the zenith of early 20th-century aviation ambition. It anchors the moment biological life was initialized outside the terrestrial womb.</p>
 
-            <h3 class="category-h3">🧬 Medical Singularities: First IVF Baby</h3>
-            <p class="essay-p"><span class="year-badge">1978</span>Birth of Louise Brown: The first human conceived via in vitro fertilization. Our archival forensics identify this as the 'Bio-Genesis Singularity.' This node established protocols for modern fertility forensics and clinical genetic synchronization, fundamentally altering human demographics.</p>
+            <h3 class="category-h3 text-base sm:text-lg md:text-2xl tracking-[2px] sm:tracking-[4px] pl-4 sm:pl-6 mt-8 md:mt-20 mb-4 md:mb-8">🧬 Medical Singularities: First IVF Baby</h3>
+            <p class="essay-p text-sm sm:text-base md:text-lg mb-6 md:mb-12 indent-4 sm:indent-8"><span class="year-badge">1978</span>Birth of Louise Brown: The first human conceived via in vitro fertilization (IVF) was born in Oldham, England. Developed by Patrick Steptoe and Robert Edwards, this clinical milestone demonstrated the feasibility of in vitro fertilization, changing fertility medicine and public policy.</p>
 
-            <h3 class="category-h3">⚙️ Innovations: Crossing the English Channel</h3>
-            <p class="essay-p"><span class="year-badge">1909</span>Louis Blériot's Flight: The first successful aerial synchronization across the English Channel, proving that technical artifacts could collapse geopolitical temporal barriers through solo innovative flight.</p>
+            <h3 class="category-h3 text-base sm:text-lg md:text-2xl tracking-[2px] sm:tracking-[4px] pl-4 sm:pl-6 mt-8 md:mt-20 mb-4 md:mb-8">⚙️ Innovations: Crossing the English Channel</h3>
+            <p class="essay-p text-sm sm:text-base md:text-lg mb-6 md:mb-12 indent-4 sm:indent-8"><span class="year-badge">1909</span>Louis Blériot's Flight: The French aviator completed the first successful airplane flight across the English Channel, proving the capability of early monoplane designs to travel across maritime barriers and changing air travel.</p>
         </div>
 
         <!-- 💡 JULY 26 -->
-        <div class="report-card">
-            <div class="day-header">JULY_26</div>
-            <p class="essay-p">July 26th serves as the supreme coordinate for <span class="highlight">Institutional Intelligence Governance</span> and the formalization of global energy maritime law. It anchors the moment a superpower legally centralized its foreign intelligence matrices.</p>
+        <div class="report-card p-5 sm:p-10 md:p-20 mb-12 md:mb-32">
+            <div class="day-header text-2xl sm:text-4xl md:text-5xl tracking-[8px] sm:tracking-[15px] pb-3 md:pb-5 mb-8 md:mb-16">JULY_26</div>
+            <p class="essay-p text-sm sm:text-base md:text-lg mb-6 md:mb-12 indent-4 sm:indent-8">July 26th serves as the supreme coordinate for <span class="highlight">Institutional Intelligence Governance</span> and the formalization of global energy maritime law. It anchors the moment a superpower legally centralized its foreign intelligence matrices.</p>
 
-            <img src="https://images.unsplash.com/photo-1523961131990-5ea7c61b2107?auto=format&fit=crop&w=1200&q=80" alt="Global Security CIA" class="archive-img">
+            <img src="https://images.unsplash.com/photo-1523961131990-5ea7c61b2107?auto=format&fit=crop&w=1200&q=80" alt="Global Security CIA" class="archive-img h-48 sm:h-72 md:h-[450px] lg:h-[550px] my-6 md:my-16">
 
-            <h3 class="category-h3">⚖️ Judicial Intelligence: FBI & CIA Genesis</h3>
-            <p class="essay-p"><span class="year-badge">1908/1947</span>Establishment of the FBI and CIA: Two landmark singularities in national security law. These nodes established the protocols for synchronized federal investigation and clandestine innovative operations, anchoring the legal legitimacy of the national security state.</p>
+            <h3 class="category-h3 text-base sm:text-lg md:text-2xl tracking-[2px] sm:tracking-[4px] pl-4 sm:pl-6 mt-8 md:mt-20 mb-4 md:mb-8">⚖️ Judicial Intelligence: FBI & CIA Genesis</h3>
+            <p class="essay-p text-sm sm:text-base md:text-lg mb-6 md:mb-12 indent-4 sm:indent-8"><span class="year-badge">1908/1947</span>Establishment of the FBI and CIA: The US established the Bureau of Investigation in 1908 and the Central Intelligence Agency in 1947 under the National Security Act. These initiatives coordinated domestic investigations and foreign intelligence gathering, establishing standard procedures for national security coordination.</p>
 
-            <h3 class="category-h3">🏛️ Geopolitical Nodes: Suez Canal Nationalization</h3>
-            <p class="essay-p"><span class="year-badge">1956</span>Suez Canal: Nasser nationalized the maritime artery. This legal act forced a total global re-evaluation of maritime logistical sovereignty and triggered the Suez Crisis node, recalibrating the innovative flows of global energy transit.</p>
+            <h3 class="category-h3 text-base sm:text-lg md:text-2xl tracking-[2px] sm:tracking-[4px] pl-4 sm:pl-6 mt-8 md:mt-20 mb-4 md:mb-8">🏛️ Geopolitical Nodes: Suez Canal Nationalization</h3>
+            <p class="essay-p text-sm sm:text-base md:text-lg mb-6 md:mb-12 indent-4 sm:indent-8"><span class="year-badge">1956</span>Suez Canal Nationalization: Egyptian President Gamal Abdel Nasser nationalized the Suez Canal Company, which managed the strategic maritime artery. This legal act led directly to the Suez Crisis, involving British, French, and Israeli military intervention, changing Middle Eastern diplomacy and international trade logistics.</p>
         </div>
 
         <!-- 💡 JULY 27 -->
-        <div class="report-card">
-            <div class="day-header">JULY_27</div>
-            <p class="essay-p">July 27th represents the temporal coordinate for <span class="highlight">Geopolitical Equilibrium Nodes</span> and the birth of high-velocity commercial aviation branding. It is marked by the termination of ideological conflict in East Asia.</p>
+        <div class="report-card p-5 sm:p-10 md:p-20 mb-12 md:mb-32">
+            <div class="day-header text-2xl sm:text-4xl md:text-5xl tracking-[8px] sm:tracking-[15px] pb-3 md:pb-5 mb-8 md:mb-16">JULY_27</div>
+            <p class="essay-p text-sm sm:text-base md:text-lg mb-6 md:mb-12 indent-4 sm:indent-8">July 27th represents the temporal coordinate for <span class="highlight">Geopolitical Equilibrium Nodes</span> and the birth of high-velocity commercial aviation branding. It is marked by the termination of ideological conflict in East Asia.</p>
 
-            <h3 class="category-h3">⚖️ Judicial Intelligence: Korean War Armistice</h3>
-            <p class="essay-p"><span class="year-badge">1953</span>Korean Armistice Signing: The initialization of a definitive cease-fire. This node archives a 'Strategic Singularity' in international law, creating a geopolitical matrix of 'frozen synchronization' that continues to define 21st-century East Asian security forensics.</p>
+            <h3 class="category-h3 text-base sm:text-lg md:text-2xl tracking-[2px] sm:tracking-[4px] pl-4 sm:pl-6 mt-8 md:mt-20 mb-4 md:mb-8">⚖️ Judicial Intelligence: Korean War Armistice</h3>
+            <p class="essay-p text-sm sm:text-base md:text-lg mb-6 md:mb-12 indent-4 sm:indent-8"><span class="year-badge">1953</span>Korean Armistice Agreement: Military commanders signed the armistice in Panmunjom, establishing a ceasefire and the Korean Demilitarized Zone (DMZ). This agreement established a political boundary to end active hostilities, permanently shaping East Asian security and international diplomacy.</p>
 
-            <h3 class="category-h3">⚙️ Innovations: The Comet Jetliner</h3>
-            <p class="essay-p"><span class="year-badge">1949</span>First Flight of the de Havilland Comet: The birth of commercial jet aviation. This technical milestone proved that human speech and capital could be synchronized across continents at twice the previous innovative speed.</p>
+            <h3 class="category-h3 text-base sm:text-lg md:text-2xl tracking-[2px] sm:tracking-[4px] pl-4 sm:pl-6 mt-8 md:mt-20 mb-4 md:mb-8">⚙️ Innovations: The Comet Jetliner</h3>
+            <p class="essay-p text-sm sm:text-base md:text-lg mb-6 md:mb-12 indent-4 sm:indent-8"><span class="year-badge">1949</span>First Flight of the de Havilland Comet: The first commercial jetliner completed its maiden flight in the United Kingdom. This flight demonstrated the capability of commercial turbojet propulsion, paving the way for transcontinental jet travel and establishing standards for modern passenger flight coordination.</p>
         </div>
 
         <!-- 💡 JULY 28 -->
-        <div class="report-card">
-            <div class="day-header">JULY_28</div>
-            <p class="essay-p">July 28th archives the birth of <span class="highlight">Systemic Global Catastrophe</span> and the zenith of early 20th-century forensic identification. It is a day defined by the initial pulses of the first total innovative war.</p>
+        <div class="report-card p-5 sm:p-10 md:p-20 mb-12 md:mb-32">
+            <div class="day-header text-2xl sm:text-4xl md:text-5xl tracking-[8px] sm:tracking-[15px] pb-3 md:pb-5 mb-8 md:mb-16">JULY_28</div>
+            <p class="essay-p text-sm sm:text-base md:text-lg mb-6 md:mb-12 indent-4 sm:indent-8">July 28th archives the birth of <span class="highlight">Systemic Global Catastrophe</span> and the zenith of early 20th-century forensic identification. It is a day defined by the initial pulses of the first total innovative war.</p>
 
-            <h3 class="category-h3">🚨 Geopolitical Tragedies: Outbreak of WWI</h3>
-            <p class="essay-p"><span class="year-badge">1914</span>WWI Initialization: Austria-Hungary declared war on Serbia. Our analytical terminal categorizes this as the 'First Global Systemic Failure.' It forced a total recalibration of global innovative capital toward industrial-scale conflict and modern military forensics.</p>
+            <h3 class="category-h3 text-base sm:text-lg md:text-2xl tracking-[2px] sm:tracking-[4px] pl-4 sm:pl-6 mt-8 md:mt-20 mb-4 md:mb-8">🚨 Geopolitical Tragedies: Outbreak of WWI</h3>
+            <p class="essay-p text-sm sm:text-base md:text-lg mb-6 md:mb-12 indent-4 sm:indent-8"><span class="year-badge">1914</span>Outbreak of WWI: Austria-Hungary declared war on Serbia, officially initiating WWI. The conflict led directly to the mobilization of European armies and changes in regional borders, permanently affecting global trade logistics and postwar international security agreements.</p>
 
-            <h3 class="category-h3">🕵️ Forensic History: Fingerprinting Node</h3>
-            <p class="essay-p"><span class="year-badge">1858</span>Initialization of Fingerprinting: Sir William Herschel first used palm prints for judicial identification. This node represent the birth of 'Individual Identity Forensics,' providing foundational protocols for biometric synchronization.</p>
+            <h3 class="category-h3 text-base sm:text-lg md:text-2xl tracking-[2px] sm:tracking-[4px] pl-4 sm:pl-6 mt-8 md:mt-20 mb-4 md:mb-8">🕵️ Forensic History: Fingerprinting Node</h3>
+            <p class="essay-p text-sm sm:text-base md:text-lg mb-6 md:mb-12 indent-4 sm:indent-8"><span class="year-badge">1858</span>First Use of Fingerprints: Sir William Herschel used handprints as contracts in Bengal, India, establishing early biometric identification methods. This development coordinated early security forensics, proving the reliability of fingerprinting in judicial and police identification procedures.</p>
         </div>
 
         <!-- 💡 JULY 29 -->
-        <div class="report-card">
-            <div class="day-header">JULY_29</div>
-            <p class="essay-p">July 29th serves as the supreme coordinate for <span class="highlight">Strategic Aerospace Intelligence</span>. Historically, this date anchors the moment a superpower legally centralized its extraterrestrial innovative ambition.</p>
+        <div class="report-card p-5 sm:p-10 md:p-20 mb-12 md:mb-32">
+            <div class="day-header text-2xl sm:text-4xl md:text-5xl tracking-[8px] sm:tracking-[15px] pb-3 md:pb-5 mb-8 md:mb-16">JULY_29</div>
+            <p class="essay-p text-sm sm:text-base md:text-lg mb-6 md:mb-12 indent-4 sm:indent-8">July 29th serves as the supreme coordinate for <span class="highlight">Strategic Aerospace Intelligence</span>. Historically, this date anchors the moment a superpower legally centralized its extraterrestrial innovative ambition.</p>
 
-            <img src="https://images.unsplash.com/photo-1541185933-ef5d8ed016c2?auto=format&fit=crop&w=1200&q=80" alt="NASA Satellite Exploration" class="archive-img">
+            <img src="https://images.unsplash.com/photo-1541185933-ef5d8ed016c2?auto=format&fit=crop&w=1200&q=80" alt="NASA Satellite Exploration" class="archive-img h-48 sm:h-72 md:h-[450px] lg:h-[550px] my-6 md:my-16">
 
-            <h3 class="category-h3">🛰️ Interstellar Intelligence: NASA Founding</h3>
-            <p class="essay-p"><span class="year-badge">1958</span>NASA Established: President Eisenhower signed the National Aeronautics and Space Act. Our archival forensics identify this as the 'Strategic Aerospace Singularity.' This node forced a total synchronization of civilian and military scientific capital, anchoring the innovative trajectory of the entire 20th century.</p>
+            <h3 class="category-h3 text-base sm:text-lg md:text-2xl tracking-[2px] sm:tracking-[4px] pl-4 sm:pl-6 mt-8 md:mt-20 mb-4 md:mb-8">🛰️ Interstellar Intelligence: NASA Founding</h3>
+            <p class="essay-p text-sm sm:text-base md:text-lg mb-6 md:mb-12 indent-4 sm:indent-8"><span class="year-badge">1958</span>Founding of NASA: President Dwight D. Eisenhower signed the National Aeronautics and Space Act, establishing the National Aeronautics and Space Administration (NASA). This act coordinated civilian aerospace research and funding, directing space exploration efforts and space technology during the Cold War.</p>
         </div>
 
         <!-- 💡 JULY 30 -->
-        <div class="report-card">
-            <div class="day-header">JULY_30</div>
-            <p class="essay-p">July 30th archives the birth of <span class="highlight">Standardized Social Safety Nets</span>. Historically, this date anchors the moment the state legally assumed responsibility for universal medical security for the vulnerable.</p>
+        <div class="report-card p-5 sm:p-10 md:p-20 mb-12 md:mb-32">
+            <div class="day-header text-2xl sm:text-4xl md:text-5xl tracking-[8px] sm:tracking-[15px] pb-3 md:pb-5 mb-8 md:mb-16">JULY_30</div>
+            <p class="essay-p text-sm sm:text-base md:text-lg mb-6 md:mb-12 indent-4 sm:indent-8">July 30th archives the birth of <span class="highlight">Standardized Social Safety Nets</span>. Historically, this date anchors the moment the state legally assumed responsibility for universal medical security for the vulnerable.</p>
 
-            <h3 class="category-h3">⚖️ Judicial Intelligence: Medicare & Medicaid</h3>
-            <p class="essay-p"><span class="year-badge">1965</span>Signing of Social Security Amendments: President Johnson legalized Medicare and Medicaid. This node represent a critical shift in social jurisprudence, marking the institutionalization of clinical intelligence access and recalibrating public welfare law.</p>
+            <h3 class="category-h3 text-base sm:text-lg md:text-2xl tracking-[2px] sm:tracking-[4px] pl-4 sm:pl-6 mt-8 md:mt-20 mb-4 md:mb-8">⚖️ Judicial Intelligence: Medicare & Medicaid</h3>
+            <p class="essay-p text-sm sm:text-base md:text-lg mb-6 md:mb-12 indent-4 sm:indent-8"><span class="year-badge">1965</span>Signing of Social Security Amendments: President Lyndon B. Johnson signed the Social Security Amendments of 1965, establishing Medicare and Medicaid. This legislation coordinated public welfare programs, providing medical security for the elderly and low-income populations, changing public health and social security laws.</p>
         </div>
 
         <!-- 💡 JULY 31 -->
-        <div class="report-card">
-            <div class="day-header">JULY_31</div>
-            <p class="essay-p">July 31st represents the supreme coordinate for <span class="highlight">Lunar Surface Logistics</span> and the birth of modern trans-media branding. It anchors the moment human civilization physically mobilized a technical artifact on another planet.</p>
+        <div class="report-card p-5 sm:p-10 md:p-20 mb-12 md:mb-32">
+            <div class="day-header text-2xl sm:text-4xl md:text-5xl tracking-[8px] sm:tracking-[15px] pb-3 md:pb-5 mb-8 md:mb-16">JULY_31</div>
+            <p class="essay-p text-sm sm:text-base md:text-lg mb-6 md:mb-12 indent-4 sm:indent-8">July 31st represents the supreme coordinate for <span class="highlight">Lunar Surface Logistics</span> and the birth of modern trans-media branding. It anchors the moment human civilization physically mobilized a technical artifact on another planet.</p>
 
-            <h3 class="category-h3">⚙️ Innovations: The Lunar Rover</h3>
-            <p class="essay-p"><span class="year-badge">1971</span>First Lunar Rover Use: Apollo 15 astronauts mobilized the 'Moon Buggy.' Our research views this as a 'Logistical Singularity' in aerospace, establishing protocols for future interplanetary mobility and high-fidelity planetary geological research.</p>
+            <h3 class="category-h3 text-base sm:text-lg md:text-2xl tracking-[2px] sm:tracking-[4px] pl-4 sm:pl-6 mt-8 md:mt-20 mb-4 md:mb-8">⚙️ Innovations: The Lunar Rover</h3>
+            <p class="essay-p text-sm sm:text-base md:text-lg mb-6 md:mb-12 indent-4 sm:indent-8"><span class="year-badge">1971</span>First Lunar Rover Use: Apollo 15 astronauts utilized the Lunar Roving Vehicle (LRV) on the Moon. Developed by Boeing, this vehicle demonstrated the performance of lightweight transport under extreme temperature and terrain conditions, establishing standard procedures for extraterrestrial research and geologic sampling.</p>
 
-            <h3 class="category-h3">🏷️ Brand Genealogy: The Potter Genesis</h3>
-            <p class="essay-p"><span class="year-badge">1965</span>Birth of J.K. Rowling: The primary architect of the Harry Potter matrix. Her life serves as a case study in 'Global IP Synchronization.' Her work redefined the cultural synchronization of literature, cinema, and retail innovative design for the 21st-century matrix.</p>
+            <h3 class="category-h3 text-base sm:text-lg md:text-2xl tracking-[2px] sm:tracking-[4px] pl-4 sm:pl-6 mt-8 md:mt-20 mb-4 md:mb-8">🏷️ Brand Genealogy: J.K. Rowling Birth</h3>
+            <p class="essay-p text-sm sm:text-base md:text-lg mb-6 md:mb-12 indent-4 sm:indent-8"><span class="year-badge">1965</span>Birth of J.K. Rowling: The British author of the Harry Potter book series was born. Her work led directly to a major media franchise, demonstrating how fantasy literature could be integrated with licensed merchandise, film adaptations, and global publishing logistics.</p>
         </div>
 
         <!-- 🚀 CONCLUSION -->
-        <div class="text-center py-20 border-t border-white/10">
-            <p class="font-cyber text-gold text-sm tracking-widest mb-6 uppercase">July Archival Synchronization Complete</p>
-            <p class="text-gray-500 italic">"Node 07 finalized and logged. System preparing for the intelligence of August."</p>
-        </div>
+        <section class="report-card p-5 sm:p-10 md:p-20 text-center">
+            <h2 class="text-gold font-cyber text-xl sm:text-2xl md:text-3xl uppercase tracking-widest mb-6 md:mb-10">Monthly Archive Conclusion</h2>
+            <p class="text-gray-400 text-sm sm:text-base md:text-lg italic max-w-3xl mx-auto mb-6 md:mb-10">
+                "The calibration of July is complete. 31 nodes of human intelligence have been synchronized. The matrix prepares for the expansion of August."
+            </p>
+            <div class="w-16 sm:w-24 h-1 bg-[#f5c97a] mx-auto"></div>
+        </section>
+
     </main>
 
-    <footer class="py-24 border-t border-white/5 text-center">
-        <p class="text-[11px] font-cyber text-gray-700 tracking-[0.5em] uppercase">Akashic Terminal Node // July Node Finalized</p>
+    <footer class="py-12 md:py-24 border-t border-white/5 text-center px-4">
+        <p class="text-[9px] sm:text-[11px] font-cyber text-gray-700 tracking-[0.3em] sm:tracking-[0.5em] uppercase">Akashic Terminal Node // Node_07 Finalized</p>
     </footer>
 </body>
 </html>
