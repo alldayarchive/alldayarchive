@@ -3,504 +3,500 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Node 12: December Archival Intelligence | Part I (01-15) Full Sync</title>
-    
-    <!-- Professional Typography -->
-    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Inter:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,700;1,700&family=Source+Code+Pro:wght@400;600&display=swap" rel="stylesheet">
+    <title>Node 12: December Archival Intelligence | Complete Node</title>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Inter:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,700;1,700&display=swap" rel="stylesheet">
     <script src="https://cdn.tailwindcss.com"></script>
-    
     <style>
         :root { --neon-gold: #f5c97a; --bg: #010204; --card-bg: rgba(10, 14, 22, 0.98); }
-        body { background: var(--bg); color: #e2e8f0; font-family: 'Inter', sans-serif; line-height: 2.2; overflow-x: hidden; }
+        body { background: var(--bg); color: #e2e8f0; font-family: 'Inter', sans-serif; line-height: 1.8; }
+        @media (min-width: 768px) {
+            body { line-height: 2.2; }
+        }
         .font-cyber { font-family: 'Orbitron', sans-serif; }
-        .font-code { font-family: 'Source Code Pro', monospace; }
-        .bg-grid { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background-image: linear-gradient(rgba(245, 201, 122, 0.03) 1px, transparent 1px), linear-gradient(90deg, rgba(245, 201, 122, 0.03) 1px, transparent 1px); background-size: 80px 80px; z-index: -1; }
-        .report-card { background: var(--card-bg); border: 1px solid rgba(245, 201, 122, 0.1); border-radius: 32px; padding: 6rem; margin-bottom: 10rem; box-shadow: 0 40px 100px rgba(0,0,0,0.9); transition: 0.5s; }
+        .font-serif { font-family: 'Playfair Display', serif; }
+        .bg-grid { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background-image: linear-gradient(rgba(245, 201, 122, 0.02) 1.5px, transparent 1.5px), linear-gradient(90deg, rgba(245, 201, 122, 0.02) 1.5px, transparent 1.5px); background-size: 50px 50px; z-index: -1; }
+        
+        /* Responsive Card Style */
+        .report-card { 
+            background: var(--card-bg); 
+            border: 1px solid rgba(245, 201, 122, 0.1); 
+            border-radius: 24px; 
+            box-shadow: 0 40px 100px rgba(0,0,0,0.9); 
+            transition: border-color 0.4s; 
+        }
         .report-card:hover { border-color: var(--neon-gold); }
-        .day-header { font-family: 'Orbitron'; color: var(--neon-gold); font-size: 3.5rem; letter-spacing: 15px; border-bottom: 2px solid var(--neon-gold); margin-bottom: 5rem; padding-bottom: 20px; text-align: center; }
-        .category-h3 { font-family: 'Orbitron'; color: #fff; font-size: 1.6rem; margin-top: 5.5rem; margin-bottom: 2rem; text-transform: uppercase; letter-spacing: 4px; border-left: 5px solid var(--neon-gold); padding-left: 25px; }
-        .essay-p { text-align: justify; color: #a0aec0; font-size: 1.2rem; margin-bottom: 3.5rem; text-indent: 2rem; line-height: 2.4; }
-        .year-badge { font-family: 'Orbitron'; color: #000; font-weight: 800; background: var(--neon-gold); padding: 4px 15px; border-radius: 4px; margin-right: 15px; font-size: 16px; }
+        
+        .day-header { 
+            font-family: 'Orbitron'; 
+            color: var(--neon-gold); 
+            border-bottom: 2px solid var(--neon-gold); 
+            text-align: center; 
+        }
+        .category-h3 { 
+            font-family: 'Orbitron'; 
+            color: #fff; 
+            text-transform: uppercase; 
+            border-left: 5px solid var(--neon-gold); 
+        }
+        .essay-p { text-align: justify; color: #a0aec0; }
+        .year-badge { font-family: 'Orbitron'; color: #000; font-weight: 700; background: var(--neon-gold); padding: 2px 10px; border-radius: 4px; margin-right: 12px; font-size: 14px; display: inline-block; }
         .highlight { color: #fff; font-weight: 600; border-bottom: 1px solid var(--neon-gold); }
-        .archive-img { width: 100%; height: 550px; object-fit: cover; border-radius: 15px; margin: 4rem 0; border: 1px solid rgba(245, 201, 122, 0.2); filter: brightness(0.85); transition: 0.5s; }
-        .analysis-box { background: rgba(245, 201, 122, 0.03); border: 1px dashed var(--neon-gold); padding: 3rem; border-radius: 12px; margin: 4rem 0; font-family: 'Source Code Pro', monospace; font-size: 1.05rem; color: #94a3b8; }
+        
+        /* Advanced Image Fallback CSS */
+        .archive-img { 
+            width: 100%; 
+            object-fit: cover; 
+            border-radius: 15px; 
+            border: 1px solid rgba(245, 201, 122, 0.1); 
+            background-color: #0b0f19;
+            position: relative;
+            display: block;
+        }
+        .archive-img::before {
+            content: "ARCHIVE IMAGE TEMPORARILY OFFLINE";
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background-color: #0d111a;
+            color: var(--neon-gold);
+            font-family: 'Orbitron';
+            font-size: 0.8rem;
+            letter-spacing: 2px;
+            border: 1px dashed rgba(245, 201, 122, 0.3);
+            border-radius: 15px;
+            text-align: center;
+            padding: 20px;
+        }
     </style>
 </head>
 <body>
     <div class="bg-grid"></div>
 
-    <nav class="fixed w-full z-[1000] px-12 py-8 flex justify-between items-center bg-black/60 backdrop-blur-xl border-b border-white/5">
-        <div class="text-2xl font-cyber font-bold text-[#f5c97a] tracking-tighter cursor-pointer" onclick="location.href='index.html'">AKASHIC ARCHIVE // NODE_12</div>
-        <div class="flex gap-4">
-            <span class="font-cyber text-gray-500 text-[10px] mt-2 uppercase tracking-widest">DECEMBER_PART_I_FULL_SYNC</span>
-            <a href="index.html" class="font-cyber text-[#f5c97a] border border-[#f5c97a] px-4 py-1.5 rounded text-[10px] hover:bg-[#f5c97a] hover:text-black transition-all">BACK_TO_HUB</a>
+    <!-- Responsive Navigation Bar -->
+    <nav class="fixed w-full z-[1000] px-4 py-4 md:px-12 md:py-6 flex flex-col sm:flex-row justify-between items-center gap-4 bg-black/80 backdrop-blur-xl border-b border-white/5">
+        <div class="text-lg sm:text-xl md:text-2xl font-cyber font-bold text-[#f5c97a] tracking-tight sm:tracking-tighter cursor-pointer text-center sm:text-left" onclick="location.href='index.html'">
+            AKASHIC ARCHIVE // NODE_12
+        </div>
+        <div class="flex items-center gap-4 sm:gap-6">
+            <span class="hidden md:inline font-cyber text-gray-500 text-xs">CHRONOLOGICAL_SYNC: DECEMBER_FULL</span>
+            <a href="index.html" class="font-cyber text-[#f5c97a] border border-[#f5c97a] px-3 py-1.5 sm:px-5 sm:py-2 rounded hover:bg-[#f5c97a] hover:text-black transition-all text-[10px] sm:text-xs">
+                RETURN_TO_HUB
+            </a>
         </div>
     </nav>
 
-    <main class="relative pt-56 pb-20 px-8 max-w-7xl mx-auto">
-        <header class="text-center mb-60">
-            <h1 class="font-cyber text-6xl text-white mb-10 uppercase tracking-[0.4em] leading-tight">December Intelligence <br><span class="text-gold opacity-50 italic text-4xl tracking-[0.2em]">Universal Integration</span></h1>
-            <p class="max-w-4xl mx-auto text-gray-400 italic text-2xl leading-relaxed font-light">
+    <!-- Main Container -->
+    <main class="relative pt-36 sm:pt-44 md:pt-56 pb-20 px-4 sm:px-8 max-w-6xl mx-auto">
+        <header class="text-center mb-20 md:mb-40">
+            <h1 class="font-cyber text-2xl sm:text-4xl md:text-6xl text-white mb-6 md:mb-10 uppercase tracking-[0.2em] sm:tracking-[0.4em]">
+                December Intelligence <br>
+                <span class="text-gold opacity-50 text-base sm:text-2xl md:text-3xl tracking-[0.1em] sm:tracking-[0.2em]">Universal Integration (Days 01 - 31)</span>
+            </h1>
+            <p class="max-w-4xl mx-auto text-gray-400 italic text-sm sm:text-lg md:text-xl leading-relaxed">
                 "Forensic synchronization of the month that codified the inherent dignity of the human species and conquered the final terrestrial and cosmic frontiers. The terminal pulse of the solar cycle."
             </p>
         </header>
 
         <!-- 💡 DECEMBER 01 -->
-        <div class="report-card">
-            <div class="day-header">DECEMBER_01</div>
-            <p class="essay-p">December 1st serves as the supreme temporal coordinate for the <span class="highlight">Moral-Legal Recalibration</span> of social equity and the formalization of global pathological forensics. Historically, this date anchors the moment a singular act of defiance challenged systemic segregation and when the first formal mechanism for planetary biosecurity was initialized.</p>
+        <div class="report-card p-5 sm:p-10 md:p-20 mb-12 md:mb-32">
+            <div class="day-header text-2xl sm:text-4xl md:text-5xl tracking-[8px] sm:tracking-[15px] pb-3 md:pb-5 mb-8 md:mb-16">DECEMBER_01</div>
+            <p class="essay-p text-sm sm:text-base md:text-lg mb-6 md:mb-12 indent-4 sm:indent-8">December 1st serves as a critical coordinate for social civil rights resistance movements and international public health programs, marking both Rosa Parks' civil disobedience and the launch of World AIDS Day.</p>
             
-            <h3 class="category-h3">⚖️ Judicial Intelligence: The Parks Singularity</h3>
-            <p class="essay-p"><span class="year-badge">1955</span>Rosa Parks' Act of Resistance: In Montgomery, Alabama, Parks refused to surrender her seat on a segregated bus. Our archival forensics identify this as a 'Moral-Legal Singularity.' By utilizing civil disobedience to expose the illegitimacy of Jim Crow laws, she forced a total systemic overhaul of US public accommodation law, anchoring the legal legitimacy of racial parity in the global judicial matrix.</p>
-            
-            <h3 class="category-h3">💉 Medical Singularities: World AIDS Day</h3>
-            <p class="essay-p"><span class="year-badge">1988/Annual</span>Global Health Synchronization: Initialized as the first global health awareness node. This archives the formal synchronization of international administrative attention with the management of a pandemic. It established the primordial protocols for cross-border clinical data-sharing and anchored the principle of 'Collective Biosecurity' into international law.</p>
+            <img src="https://images.unsplash.com/photo-1589829545856-d10d557cf95f?auto=format&fit=crop&w=1200&q=80" alt="Justice and Equality" class="archive-img h-48 sm:h-72 md:h-[450px] lg:h-[550px] my-6 md:my-16">
 
-            <img src="https://images.unsplash.com/photo-1589829545856-d10d557cf95f?auto=format&fit=crop&w=1200&q=80" alt="Justice and Equality" class="archive-img">
+            <h3 class="category-h3 text-base sm:text-lg md:text-2xl tracking-[2px] sm:tracking-[4px] pl-4 sm:pl-6 mt-8 md:mt-20 mb-4 md:mb-8">⚖️ Law & Justice: Rosa Parks Defies Segregation</h3>
+            <p class="essay-p text-sm sm:text-base md:text-lg mb-6 md:mb-12 indent-4 sm:indent-8"><span class="year-badge">1955</span>Rosa Parks' Arrest: In Montgomery, Alabama, Rosa Parks refused to yield her seat on a public transit bus to a white passenger, violating municipal segregation ordinances. This civil disobedience led directly to the Montgomery Bus Boycott, coordinated by civil rights groups. This event established early constitutional challenges to Jim Crow laws, changing US civil rights legislation and federal anti-discrimination law.</p>
+            
+            <h3 class="category-h3 text-base sm:text-lg md:text-2xl tracking-[2px] sm:tracking-[4px] pl-4 sm:pl-6 mt-8 md:mt-20 mb-4 md:mb-8">💉 Medical Revolutions: World AIDS Day Inception</h3>
+            <p class="essay-p text-sm sm:text-base md:text-lg mb-6 md:mb-12 indent-4 sm:indent-8"><span class="year-badge">1988</span>First World AIDS Day: The World Health Organization officially designated December 1st as World AIDS Day to coordinate global public awareness of HIV and AIDS. This initiative established standard international protocols for clinical data-sharing, research funding, and preventative public health campaigns, changing biosecurity and medical law.</p>
         </div>
 
         <!-- 💡 DECEMBER 02 -->
-        <div class="report-card">
-            <div class="day-header">DECEMBER_02</div>
-            <p class="essay-p">December 2nd archives the formalization of <span class="highlight">Strategic Hemispheric Deterrence</span> and the birth of modern imperial meritocracy. It is a day defined by the legal opposition to colonial expansion and the crowning of a new administrative archetype.</p>
+        <div class="report-card p-5 sm:p-10 md:p-20 mb-12 md:mb-32">
+            <div class="day-header text-2xl sm:text-4xl md:text-5xl tracking-[8px] sm:tracking-[15px] pb-3 md:pb-5 mb-8 md:mb-16">DECEMBER_02</div>
+            <p class="essay-p text-sm sm:text-base md:text-lg mb-6 md:mb-12 indent-4 sm:indent-8">December 2nd archives foreign policy doctrines and imperial coronations, marking both the proclamation of the Monroe Doctrine and Napoleon Bonaparte's coronation.</p>
 
-            <h3 class="category-h3">🏛️ Geopolitical Nodes: The Monroe Doctrine</h3>
-            <p class="essay-p"><span class="year-badge">1823</span>Monroe Doctrine Proclamation: President James Monroe initialized a definitive shift in 19th-century diplomacy. By legally opposing European interference in the Americas, this node established the protocols for Western Hemisphere strategic sovereignty, recalibrating the geopolitical equilibrium of the Atlantic world for centuries.</p>
+            <h3 class="category-h3 text-base sm:text-lg md:text-2xl tracking-[2px] sm:tracking-[4px] pl-4 sm:pl-6 mt-8 md:mt-20 mb-4 md:mb-8">🏛️ Geopolitical Nodes: Proclamation of the Monroe Doctrine</h3>
+            <p class="essay-p text-sm sm:text-base md:text-lg mb-6 md:mb-12 indent-4 sm:indent-8"><span class="year-badge">1823</span>The Monroe Doctrine: President James Monroe presented his annual message to Congress, declaring that European intervention in the Americas would be viewed as a hostile act against the United States. This foreign policy coordinated Western Hemisphere security, establishing standard sovereign boundaries and changing American and European diplomacy.</p>
 
-            <h3 class="category-h3">⚖️ Judicial Intelligence: Napoleon’s Coronation</h3>
-            <p class="essay-p"><span class="year-badge">1804</span>Coronation of Napoleon I: At Notre-Dame de Paris, Napoleon initialized the transition from revolutionary republic to imperial hegemony. This node archives the formalization of 'Modern Autocracy,' where the Napoleonic Code synchronized civil law, replacing hereditary privilege with standardized legislative authority.</p>
+            <h3 class="category-h3 text-base sm:text-lg md:text-2xl tracking-[2px] sm:tracking-[4px] pl-4 sm:pl-6 mt-8 md:mt-20 mb-4 md:mb-8">⚖️ Law & Justice: Coronation of Napoleon I</h3>
+            <p class="essay-p text-sm sm:text-base md:text-lg mb-6 md:mb-12 indent-4 sm:indent-8"><span class="year-badge">1804</span>Coronation of Napoleon I: Napoleon Bonaparte was crowned Emperor of the French at Notre-Dame Cathedral in Paris. This coronation ended the French revolutionary republic, establishing the French Empire and integrating the Napoleonic Code as the standard civil law across European territories, altering European balance of power.</p>
         </div>
 
         <!-- 💡 DECEMBER 03 -->
-        <div class="report-card">
-            <div class="day-header">DECEMBER_03</div>
-            <p class="essay-p">December 3rd represents the temporal coordinate for <span class="highlight">Surgical Biological Synchronization</span> and the tragic node of industrial-age biosecurity failure. Historically, it anchors the first instance of human organ transfer and the most devastating chemical accident in history.</p>
+        <div class="report-card p-5 sm:p-10 md:p-20 mb-12 md:mb-32">
+            <div class="day-header text-2xl sm:text-4xl md:text-5xl tracking-[8px] sm:tracking-[15px] pb-3 md:pb-5 mb-8 md:mb-16">DECEMBER_03</div>
+            <p class="essay-p text-sm sm:text-base md:text-lg mb-6 md:mb-12 indent-4 sm:indent-8">December 3rd represents the coordinate for surgical cardiac transplantation milestones and industrial chemical disasters, marking both the first human-to-human heart transplant and the Bhopal gas leak.</p>
 
-            <h3 class="category-h3">💉 Medical Singularities: First Heart Transplant</h3>
-            <p class="essay-p"><span class="year-badge">1967</span>Barnard’s Surgical Breakthrough: Dr. Christiaan Barnard performed the first human-to-human heart transplant in Cape Town. Our terminal categorizes this as the 'Biological Singularity.' By proving that the vital core of human life could be synchronized across hosts, this node pioneered modern transplant forensics and global organ-matching logistics.</p>
+            <h3 class="category-h3 text-base sm:text-lg md:text-2xl tracking-[2px] sm:tracking-[4px] pl-4 sm:pl-6 mt-8 md:mt-20 mb-4 md:mb-8">💉 Medical Revolutions: First Human-to-Human Heart Transplant</h3>
+            <p class="essay-p text-sm sm:text-base md:text-lg mb-6 md:mb-12 indent-4 sm:indent-8"><span class="year-badge">1967</span>Barnard's Cardiac Transplant: Dr. Christiaan Barnard performed the first successful human-to-human heart transplant in Cape Town, South Africa, transplanting the heart of Denise Darvall into Louis Washkansky. This medical breakthrough proved the technical feasibility of cardiovascular transplantation, establishing early standards for donor matching and clinical surgery.</p>
 
-            <h3 class="category-h3">🚨 Critical Tragedies: Bhopal Gas Tragedy</h3>
-            <p class="essay-p"><span class="year-badge">1984</span>The Bhopal Disaster: A catastrophic technical failure at a chemical plant in India. This node archives the terminal failure of industrial safety synchronization. The subsequent forensics forced a global re-evaluation of corporate liability law and established new standards for hazardous material innovative management.</p>
+            <h3 class="category-h3 text-base sm:text-lg md:text-2xl tracking-[2px] sm:tracking-[4px] pl-4 sm:pl-6 mt-8 md:mt-20 mb-4 md:mb-8">🚨 Incidents: Bhopal Gas Tragedy</h3>
+            <p class="essay-p text-sm sm:text-base md:text-lg mb-6 md:mb-12 indent-4 sm:indent-8"><span class="year-badge">1984</span>The Bhopal Disaster: A major chemical leak occurred at the Union Carbide pesticide plant in Bhopal, India, releasing highly toxic methyl isocyanate gas. This industrial incident resulted in thousands of immediate casualties, highlighting limitations in chemical storage safety, leading directly to international corporate liability laws and environmental preservation regulations.</p>
         </div>
 
         <!-- 💡 DECEMBER 04 -->
-        <div class="report-card">
-            <div class="day-header">DECEMBER_04</div>
-            <p class="essay-p">December 4th serves as the coordinate for <span class="highlight">High-Fidelity Planetary Observation</span> and the birth of periodic media-forensic branding. Historically, it anchors the moment human artifacts achieved the first close-up mapping of the solar system's titan.</p>
+        <div class="report-card p-5 sm:p-10 md:p-20 mb-12 md:mb-32">
+            <div class="day-header text-2xl sm:text-4xl md:text-5xl tracking-[8px] sm:tracking-[15px] pb-3 md:pb-5 mb-8 md:mb-16">DECEMBER_04</div>
+            <p class="essay-p text-sm sm:text-base md:text-lg mb-6 md:mb-12 indent-4 sm:indent-8">December 4th archives deep-space planetary flyby completions and the founding of major periodic newspapers, contrasting Pioneer 10's Jupiter flyby with the history of British print journalism.</p>
 
-            <h3 class="category-h3">🛰️ Interstellar Intelligence: Pioneer 10 Jupiter Flyby</h3>
-            <p class="essay-p"><span class="year-badge">1973</span>Pioneer 10 Reach Jupiter: The first spacecraft to achieve close-range observation of the gas giant. This temporal node archives the zenith of early robotic ambition, providing the case study in celestial forensics that redefined our mathematical understanding of planetary radiation belts and orbital dynamics.</p>
+            <h3 class="category-h3 text-base sm:text-lg md:text-2xl tracking-[2px] sm:tracking-[4px] pl-4 sm:pl-6 mt-8 md:mt-20 mb-4 md:mb-8">🛰️ Innovations: Pioneer 10 Jupiter Flyby</h3>
+            <p class="essay-p text-sm sm:text-base md:text-lg mb-6 md:mb-12 indent-4 sm:indent-8"><span class="year-badge">1973</span>Pioneer 10’s Closest Approach: NASA's Pioneer 10 space probe completed its closest approach to Jupiter, transmitting high-resolution images of the planet and its moons. This mission proved the viability of using gravity-assist trajectory models, providing vital astronomical data on outer solar system planets and changing space science.</p>
 
-            <h3 class="category-h3">🏷️ Brand Genealogy: The Observer</h3>
-            <p class="essay-p"><span class="year-badge">1791</span>World’s First Sunday Newspaper: Initialized the inception of 'Periodic Media Branding.' This node established the foundational protocols for modern investigative forensics and global information synchronization in the commercial media matrix.</p>
+            <h3 class="category-h3 text-base sm:text-lg md:text-2xl tracking-[2px] sm:tracking-[4px] pl-4 sm:pl-6 mt-8 md:mt-20 mb-4 md:mb-8">🏷️ Brand Genealogy: The Observer Founding</h3>
+            <p class="essay-p text-sm sm:text-base md:text-lg mb-6 md:mb-12 indent-4 sm:indent-8"><span class="year-badge">1791</span>First Issue of The Observer: The world’s first Sunday newspaper began publication in London, founded by W.S. Bourne. This print initiative coordinated mass communications, establishing early standards for periodic newspapers, investigative journalism, and media branding.</p>
         </div>
 
         <!-- 💡 DECEMBER 05 -->
-        <div class="report-card">
-            <div class="day-header">DECEMBER_05</div>
-            <p class="essay-p">December 5th archives the birth of <span class="highlight">Global Narrative Logistics</span> and the terminal collapse of constitutional prohibition. It is a day defined by the inception of an entertainment hegemony and the legal restoration of consumption autonomy.</p>
+        <div class="report-card p-5 sm:p-10 md:p-20 mb-12 md:mb-32">
+            <div class="day-header text-2xl sm:text-4xl md:text-5xl tracking-[8px] sm:tracking-[15px] pb-3 md:pb-5 mb-8 md:mb-16">DECEMBER_05</div>
+            <p class="essay-p text-sm sm:text-base md:text-lg mb-6 md:mb-12 indent-4 sm:indent-8">December 5th serves as the coordinate for the birth of major entertainment producers and constitutional amendments on alcohol bans, marking both Walt Disney's birth and the repeal of Prohibition.</p>
 
-            <h3 class="category-h3">🏷️ Brand Genealogy: The Disney Genesis</h3>
-            <p class="essay-p"><span class="year-badge">1901</span>Birth of Walt Disney: The primary architect of global experiential branding. His life archives the synchronization of technical animation with mass-market emotional intelligence, establish the commercial genealogy of 'Total Immersion,' fundamentally altering global consumption capital flow.</p>
+            <h3 class="category-h3 text-base sm:text-lg md:text-2xl tracking-[2px] sm:tracking-[4px] pl-4 sm:pl-6 mt-8 md:mt-20 mb-4 md:mb-8">🎂 Birthdays: Birth of Walt Disney</h3>
+            <p class="essay-p text-sm sm:text-base md:text-lg mb-6 md:mb-12 indent-4 sm:indent-8"><span class="year-badge">1901</span>Birth of Walter Elias Disney: The American animator, film producer, and entrepreneur was born, later founding the Walt Disney Company. His product designs coordinated digital hardware and consumer software, establishing standard practices for modern media franchise branding.</p>
 
-            <h3 class="category-h3">⚖️ Judicial Intelligence: Repeal of Prohibition</h3>
-            <p class="essay-p"><span class="year-badge">1933</span>Ratification of the 21st Amendment: The terminal collapse of the alcohol ban in the US. This legal node recalibrated federal fiscal authority and individual liberty, anchoring the transition from moralistic legislation to standardized commercial regulation.</p>
+            <h3 class="category-h3 text-base sm:text-lg md:text-2xl tracking-[2px] sm:tracking-[4px] pl-4 sm:pl-6 mt-8 md:mt-20 mb-4 md:mb-8">⚖️ Law & Justice: Repeal of Prohibition</h3>
+            <p class="essay-p text-sm sm:text-base md:text-lg mb-6 md:mb-12 indent-4 sm:indent-8"><span class="year-badge">1933</span>Ratification of the 21st Amendment: The 21st Amendment to the United States Constitution was officially ratified, repealing the 18th Amendment and ending the national prohibition on alcohol. This amendment coordinated national tax reporting, establishing early federal regulations for collecting public funds and changing liquor laws.</p>
         </div>
 
         <!-- 💡 DECEMBER 06 -->
-        <div class="report-card">
-            <div class="day-header">DECEMBER_06</div>
-            <p class="essay-p">December 6th represents the coordinate for <span class="highlight">Nordic Sovereign Synchronization</span> and the tragic node of high-fidelity maritime innovative failure. Historically, it anchors the birth of a new Northern European identity and a catastrophic pre-atomic explosion.</p>
+        <div class="report-card p-5 sm:p-10 md:p-20 mb-12 md:mb-32">
+            <div class="day-header text-2xl sm:text-4xl md:text-5xl tracking-[8px] sm:tracking-[15px] pb-3 md:pb-5 mb-8 md:mb-16">DECEMBER_06</div>
+            <p class="essay-p text-sm sm:text-base md:text-lg mb-6 md:mb-12 indent-4 sm:indent-8">December 6th archives national declarations of sovereignty and major maritime transport accidents, contrasting Finnish independence with the Halifax Explosion.</p>
 
-            <img src="https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=1200&q=80" alt="Nordic Landscape Independence" class="archive-img">
+            <img src="https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=1200&q=80" alt="Nordic Landscape Independence" class="archive-img h-48 sm:h-72 md:h-[450px] lg:h-[550px] my-6 md:my-16">
 
-            <h3 class="category-h3">🏛️ Geopolitical Nodes: Finnish Independence</h3>
-            <p class="essay-p"><span class="year-badge">1917</span>Declaration of Finland’s Sovereignty: Following the collapse of the Russian administrative matrix, Finland initialized its legal autonomy. Our research views this as a case study in 'Social-Democratic Governance Synchronization,' establish the structural DNA for Northern European stability.</p>
+            <h3 class="category-h3 text-base sm:text-lg md:text-2xl tracking-[2px] sm:tracking-[4px] pl-4 sm:pl-6 mt-8 md:mt-20 mb-4 md:mb-8">🏛️ Geopolitical Nodes: Finnish Independence</h3>
+            <p class="essay-p text-sm sm:text-base md:text-lg mb-6 md:mb-12 indent-4 sm:indent-8"><span class="year-badge">1917</span>Declaration of Independence of Finland: The Parliament of Finland officially declared independence from the Russian Empire. This declaration established a sovereign nation, leading directly to the establishment of the Republic of Finland, changing Baltic diplomacy and regional security.</p>
 
-            <h3 class="category-h3">🚨 Critical Tragedies: Halifax Explosion</h3>
-            <p class="essay-p"><span class="year-badge">1917</span>The Halifax Disaster: A massive maritime logistical failure. The collision of two vessels carrying explosives caused the largest man-made detonation before the atomic age. This node forced a global re-evaluation of port-authority innovative protocols and disaster-response synchronization.</p>
+            <h3 class="category-h3 text-base sm:text-lg md:text-2xl tracking-[2px] sm:tracking-[4px] pl-4 sm:pl-6 mt-8 md:mt-20 mb-4 md:mb-8">🚨 Incidents: The Halifax Explosion</h3>
+            <p class="essay-p text-sm sm:text-base md:text-lg mb-6 md:mb-12 indent-4 sm:indent-8"><span class="year-badge">1917</span>The Halifax Disaster: The French cargo ship Mont-Blanc, carrying munitions, collided with the Norwegian vessel Imo in Halifax Harbor, Canada, causing a massive explosion. This incident highlighted the need for strict port-safety regulations, leading to changes in maritime logistics and municipal emergency planning.</p>
         </div>
 
         <!-- 💡 DECEMBER 07 -->
-        <div class="report-card">
-            <div class="day-header">DECEMBER_07</div>
-            <p class="essay-p">December 7th serves as the supreme coordinate for <span class="highlight">Strategic Intelligence Failure</span> and the zenith of 20th-century lunar logistical maturity. It is a day defined by a tragic geopolitical shock and the birth of the 'Blue Marble' perspective.</p>
+        <div class="report-card p-5 sm:p-10 md:p-20 mb-12 md:mb-32">
+            <div class="day-header text-2xl sm:text-4xl md:text-5xl tracking-[8px] sm:tracking-[15px] pb-3 md:pb-5 mb-8 md:mb-16">DECEMBER_07</div>
+            <p class="essay-p text-sm sm:text-base md:text-lg mb-6 md:mb-12 indent-4 sm:indent-8">December 7th serves as the coordinate for strategic military air strikes and final crewed spaceflight launches to the Moon, marking the Pearl Harbor attack and the launch of Apollo 17.</p>
 
-            <h3 class="category-h3">🚨 Geopolitical Tragedies: Pearl Harbor</h3>
-            <p class="essay-p"><span class="year-badge">1941</span>Attack on Pearl Harbor: A tragic singularity in the history of strategic data-synchronization failure. The event forced a total recalibration of the 20th-century geopolitical matrix, marking the entry of industrial capital into WWII and establishing new protocols for tactical surveillance.</p>
+            <h3 class="category-h3 text-base sm:text-lg md:text-2xl tracking-[2px] sm:tracking-[4px] pl-4 sm:pl-6 mt-8 md:mt-20 mb-4 md:mb-8">🚨 Incidents: Attack on Pearl Harbor</h3>
+            <p class="essay-p text-sm sm:text-base md:text-lg mb-6 md:mb-12 indent-4 sm:indent-8"><span class="year-badge">1941</span>Attack on Pearl Harbor: The Imperial Japanese Navy launched a surprise military strike against the US Pacific Fleet at Pearl Harbor, Hawaii. This event led directly to the United States' formal entry into WWII, changing international alliances, trade logistics, and regional security agreements.</p>
 
-            <h3 class="category-h3">🛰️ Interstellar Intelligence: Apollo 17 Launch</h3>
-            <p class="essay-p"><span class="year-badge">1972</span>Final Manned Lunar Mission: Apollo 17 initialized the maturity of orbital logistics. This mission provided the first high-fidelity 'Blue Marble' image of Earth, fundamentally shifting the human cognitive perspective toward planetary biosecurity and terrestrial fragility.</p>
+            <h3 class="category-h3 text-base sm:text-lg md:text-2xl tracking-[2px] sm:tracking-[4px] pl-4 sm:pl-6 mt-8 md:mt-20 mb-4 md:mb-8">🛰️ Innovations: Apollo 17 Launch</h3>
+            <p class="essay-p text-sm sm:text-base md:text-lg mb-6 md:mb-12 indent-4 sm:indent-8"><span class="year-badge">1972</span>Apollo 17 Mission Launch: NASA launched the Apollo 17 mission, the final crewed lunar landing spaceflight, commanded by Eugene Cernan. This flight proved the reliability of lunar rover logistics, establishing standard procedures for lunar geology collection and spaceflight tracking.</p>
         </div>
 
         <!-- 💡 DECEMBER 08 -->
-        <div class="report-card">
-            <div class="day-header">DECEMBER_08</div>
-            <p class="essay-p">December 8th archives the birth of <span class="highlight">Continental Trade Integration</span> and the tragic node of cultural branding trauma. Historically, it anchors the moments when market barriers were dismantled and when a supreme musical brand node was systemically terminated.</p>
+        <div class="report-card p-5 sm:p-10 md:p-20 mb-12 md:mb-32">
+            <div class="day-header text-2xl sm:text-4xl md:text-5xl tracking-[8px] sm:tracking-[15px] pb-3 md:pb-5 mb-8 md:mb-16">DECEMBER_08</div>
+            <p class="essay-p text-sm sm:text-base md:text-lg mb-6 md:mb-12 indent-4 sm:indent-8">December 8th represents the coordinate for postwar trade agreements and the passing of prominent popular musicians, marking both the signing of NAFTA and the passing of John Lennon.</p>
 
-            <h3 class="category-h3">🎵 Sound & Vibration: The Lennon Node</h3>
-            <p class="essay-p"><span class="year-badge">1980</span>Assassination of John Lennon: A tragic singularity in cultural history. The death of the individual who synchronized global pacifism with pop culture forced a re-evaluation of celebrity security law and forensic reporting during high-profile tragedies.</p>
+            <h3 class="category-h3 text-base sm:text-lg md:text-2xl tracking-[2px] sm:tracking-[4px] pl-4 sm:pl-6 mt-8 md:mt-20 mb-4 md:mb-8">📈 Finance & Wealth: NAFTA Signed</h3>
+            <p class="essay-p text-sm sm:text-base md:text-lg mb-6 md:mb-12 indent-4 sm:indent-8"><span class="year-badge">1993</span>The NAFTA Agreement Signed: President Bill Clinton signed the North American Free Trade Agreement into law. This agreement coordinated trade regulations, establishing a common market framework and changing North American economic history and trade logistics.</p>
 
-            <h3 class="category-h3">📈 Macro-Financial Records: NAFTA Node</h3>
-            <p class="essay-p"><span class="year-badge">1993</span>Signing of NAFTA: President Clinton legalized the North American Free Trade Agreement. This node represent the 'Trade Integration Singularity,' anchoring the future of synchronized continental capital flow and industrial innovative logistics.</p>
+            <h3 class="category-h3 text-base sm:text-lg md:text-2xl tracking-[2px] sm:tracking-[4px] pl-4 sm:pl-6 mt-8 md:mt-20 mb-4 md:mb-8">🕊️ Deaths: Passing of John Lennon</h3>
+            <p class="essay-p text-sm sm:text-base md:text-lg mb-6 md:mb-12 indent-4 sm:indent-8"><span class="year-badge">1980</span>The British musician John Lennon was shot and killed in New York City, leaving a major legacy in music and entertainment. His work established lasting standards for global pop music, peace-time public advocacy, and modern performance production.</p>
         </div>
 
         <!-- 💡 DECEMBER 09 -->
-        <div class="report-card">
-            <div class="day-header">DECEMBER_09</div>
-            <p class="essay-p">December 9th represents the coordinate for <span class="highlight">Personal Computational Synchronization</span> and the formalization of international criminal biosecurity. It is a day defined by the 'Mother of All Demos' and the judicial outlawing of genocide.</p>
+        <div class="report-card p-5 sm:p-10 md:p-20 mb-12 md:mb-32">
+            <div class="day-header text-2xl sm:text-4xl md:text-5xl tracking-[8px] sm:tracking-[15px] pb-3 md:pb-5 mb-8 md:mb-16">DECEMBER_09</div>
+            <p class="essay-p text-sm sm:text-base md:text-lg mb-6 md:mb-12 indent-4 sm:indent-8">December 9th archives the coordinate for digital user interface demonstrations and international human rights conventions, marking the "Mother of All Demos" and the UN Genocide Convention.</p>
 
-            <h3 class="category-h3">⚙️ IT Singularities: The Mother of All Demos</h3>
-            <p class="essay-p"><span class="year-badge">1968</span>Douglas Engelbart’s Demonstration: The first public display of the computer mouse, hypertext, and collaborative editing. Our terminal identifies this as the 'Digital Genesis Singularity,' providing the protocols for the human-machine interface and synchronized digital intelligence.</p>
+            <h3 class="category-h3 text-base sm:text-lg md:text-2xl tracking-[2px] sm:tracking-[4px] pl-4 sm:pl-6 mt-8 md:mt-20 mb-4 md:mb-8">⚙️ IT Singularities: The Mother of All Demos</h3>
+            <p class="essay-p text-sm sm:text-base md:text-lg mb-6 md:mb-12 indent-4 sm:indent-8"><span class="year-badge">1968</span>Douglas Engelbart's Demonstration: At the Fall Joint Computer Conference in San Francisco, Douglas Engelbart demonstrated the computer mouse, hypertext, and collaborative editing. This demonstration established early standards for personal computer usability, expanding computer use and digital software branding.</p>
 
-            <h3 class="category-h3">⚖️ Judicial Intelligence: Genocide Convention</h3>
-            <p class="essay-p"><span class="year-badge">1948</span>UN Adoption of the Genocide Convention: A landmark singularity in international law. For the first time, human civilization legally defined and outlawed state-sponsored systemic depravity, establishing primordial protocols for human rights forensics.</p>
+            <h3 class="category-h3 text-base sm:text-lg md:text-2xl tracking-[2px] sm:tracking-[4px] pl-4 sm:pl-6 mt-8 md:mt-20 mb-4 md:mb-8">⚖️ Law & Justice: UN Genocide Convention</h3>
+            <p class="essay-p text-sm sm:text-base md:text-lg mb-6 md:mb-12 indent-4 sm:indent-8"><span class="year-badge">1948</span>Adoption of the Genocide Convention: The United Nations approved the Convention on the Prevention and Punishment of the Crime of Genocide. This convention coordinated international law, establishing the legal definition of 'Genocide' and standard procedures for international prosecution.</p>
         </div>
 
         <!-- 💡 DECEMBER 10 -->
-        <div class="report-card">
-            <div class="day-header">DECEMBER_10</div>
-            <p class="essay-p">December 10th serves as the supreme coordinate for <span class="highlight">Universal Ethical Standardization</span> and the birth of global intellectual meritocracy. It is arguably the most significant moral node in the solar cycle.</p>
+        <div class="report-card p-5 sm:p-10 md:p-20 mb-12 md:mb-32">
+            <div class="day-header text-2xl sm:text-4xl md:text-5xl tracking-[8px] sm:tracking-[15px] pb-3 md:pb-5 mb-8 md:mb-16">DECEMBER_10</div>
+            <p class="essay-p text-sm sm:text-base md:text-lg mb-6 md:mb-12 indent-4 sm:indent-8">December 10th serves as the coordinate for international human rights declarations and the first Nobel Prize ceremonies, marking the Universal Declaration of Human Rights and the first Nobel Awards.</p>
 
-            <img src="https://images.unsplash.com/photo-1524338198850-e76663e66f99?auto=format&fit=crop&w=1200&q=80" alt="Universal Human Rights" class="archive-img">
+            <img src="https://images.unsplash.com/photo-1524338198850-e76663e66f99?auto=format&fit=crop&w=1200&q=80" alt="Universal Human Rights" class="archive-img h-48 sm:h-72 md:h-[450px] lg:h-[550px] my-6 md:my-16">
 
-            <h3 class="category-h3">⚖️ Judicial Intelligence: Declaration of Human Rights</h3>
-            <p class="essay-p"><span class="year-badge">1948</span>Universal Declaration of Human Rights Adopted: The UN initialized the most significant moral recalibration in history. This node established the foundational protocols for individual dignity and legal equality, provide the DNA for every subsequent global rights framework.</p>
+            <h3 class="category-h3 text-base sm:text-lg md:text-2xl tracking-[2px] sm:tracking-[4px] pl-4 sm:pl-6 mt-8 md:mt-20 mb-4 md:mb-8">⚖️ Law & Justice: Universal Declaration of Human Rights</h3>
+            <p class="essay-p text-sm sm:text-base md:text-lg mb-6 md:mb-12 indent-4 sm:indent-8"><span class="year-badge">1948</span>UN Adoption of the UDHR: The United Nations General Assembly officially adopted the Universal Declaration of Human Rights. This document coordinated international human rights, establishing standard principles for individual dignity, legal equality, and social justice globally.</p>
 
-            <h3 class="category-h3">⚙️ Intellectual Heritage: The First Nobel Prizes</h3>
-            <p class="essay-p"><span class="year-badge">1901</span>First Nobel Ceremony: Initialized in Stockholm. By dedicating industrial capital to reward human intelligence, the Nobel Prizes establish the protocols for international innovative competition and synchronized scientific branding.</p>
+            <h3 class="category-h3 text-base sm:text-lg md:text-2xl tracking-[2px] sm:tracking-[4px] pl-4 sm:pl-6 mt-8 md:mt-20 mb-4 md:mb-8">⚙️ Innovations: The First Nobel Ceremony</h3>
+            <p class="essay-p text-sm sm:text-base md:text-lg mb-6 md:mb-12 indent-4 sm:indent-8"><span class="year-badge">1901</span>First Nobel Prizes Awarded: The first Nobel Prize ceremonies were held in Stockholm and Christiania (Oslo). This event coordinated international scientific and literary recognition, establishing standard procedures for academic awards and peace advocacy.</p>
         </div>
 
         <!-- 💡 DECEMBER 11 -->
-        <div class="report-card">
-            <div class="day-header">DECEMBER_11</div>
-            <p class="essay-p">December 11th archives the supreme node of <span class="highlight">Universal Child Biosecurity</span> and the zenith of high-latitude strategic logistics. Historically, it anchors the protection of humanity's future biological assets.</p>
+        <div class="report-card p-5 sm:p-10 md:p-20 mb-12 md:mb-32">
+            <div class="day-header text-2xl sm:text-4xl md:text-5xl tracking-[8px] sm:tracking-[15px] pb-3 md:pb-5 mb-8 md:mb-16">DECEMBER_11</div>
+            <p class="essay-p text-sm sm:text-base md:text-lg mb-6 md:mb-12 indent-4 sm:indent-8">December 11th archives the coordinate for international child-welfare organizations and final crewed moonwalks, marking both the founding of UNICEF and the Apollo 17 lunar landing.</p>
 
-            <h3 class="category-h3">⚖️ Judicial Intelligence: UNICEF Founding</h3>
-            <p class="essay-p"><span class="year-badge">1946</span>Establishment of UNICEF: The UN International Children's Emergency Fund was initialized. Our archival forensics identify this as a 'Humanitarian Singularity,' pioneering the protocols for modern international aid synchronization and pediatric biosecurity law.</p>
+            <h3 class="category-h3 text-base sm:text-lg md:text-2xl tracking-[2px] sm:tracking-[4px] pl-4 sm:pl-6 mt-8 md:mt-20 mb-4 md:mb-8">⚖️ Law & Justice: UNICEF established</h3>
+            <p class="essay-p text-sm sm:text-base md:text-lg mb-6 md:mb-12 indent-4 sm:indent-8"><span class="year-badge">1946</span>Founding of UNICEF: The United Nations General Assembly established the United Nations International Children's Emergency Fund to coordinate post-war relief. This initiative coordinated child welfare, establishing standard procedures for pediatric health, nutrition, and international aid.</p>
 
-            <h3 class="category-h3">🛰️ Interstellar Intelligence: Apollo 17 Moonwalk</h3>
-            <p class="essay-p"><span class="year-badge">1972</span>Cernan and Schmitt on the Moon: This node archives the maturity of human extra-vehicular logistics. The mission provided the highest standard of extraterrestrial geological forensics of the 20th century, established the foundational protocols for lunar navigation.</p>
+            <h3 class="category-h3 text-base sm:text-lg md:text-2xl tracking-[2px] sm:tracking-[4px] pl-4 sm:pl-6 mt-8 md:mt-20 mb-4 md:mb-8">🛰️ Innovations: Final Manned Moonwalk</h3>
+            <p class="essay-p text-sm sm:text-base md:text-lg mb-6 md:mb-12 indent-4 sm:indent-8"><span class="year-badge">1972</span>Apollo 17 Lunar Landing: Eugene Cernan and Harrison Schmitt landed the Apollo Lunar Module Challenger on the Moon, completing the final crewed landing. This mission proved the reliability of lunar rover logistics, establishing standard procedures for extraterrestrial research and geologic sampling.</p>
         </div>
 
         <!-- 💡 DECEMBER 12 -->
-        <div class="report-card">
-            <div class="day-header">DECEMBER_12</div>
-            <p class="essay-p">December 12th serves as the coordinate for <span class="highlight">Wireless Information Synchronization</span> and the zenith of post-colonial sovereignty. It anchors the moments human communication transcended physical cabling.</p>
+        <div class="report-card p-5 sm:p-10 md:p-20 mb-12 md:mb-32">
+            <div class="day-header text-2xl sm:text-4xl md:text-5xl tracking-[8px] sm:tracking-[15px] pb-3 md:pb-5 mb-8 md:mb-16">DECEMBER_12</div>
+            <p class="essay-p text-sm sm:text-base md:text-lg mb-6 md:mb-12 indent-4 sm:indent-8">December 12th serves as the coordinate for transatlantic wireless transmissions and national independence proclamations, marking both Guglielmo Marconi's radio signal and Kenyan independence.</p>
 
-            <h3 class="category-h3">⚙️ Technological Singularities: The Marconi Node</h3>
-            <p class="essay-p"><span class="year-badge">1901</span>First Transatlantic Radio Signal: Marconi synchronized a wireless transmission across the Atlantic. This node archives the 'Communication Singularity,' birthing the commercial genealogy of the wireless industry and anchoring the modern interconnected matrix.</p>
+            <h3 class="category-h3 text-base sm:text-lg md:text-2xl tracking-[2px] sm:tracking-[4px] pl-4 sm:pl-6 mt-8 md:mt-20 mb-4 md:mb-8">⚙️ Innovations: Transatlantic Wireless Signal</h3>
+            <p class="essay-p text-sm sm:text-base md:text-lg mb-6 md:mb-12 indent-4 sm:indent-8"><span class="year-badge">1901</span>First Transatlantic Radio Transmission: Guglielmo Marconi successfully received the first transatlantic wireless signal in St. John's, Newfoundland, sent from Cornwall, England. This transmission proved the viability of using electromagnetic waves for long-distance communication, establishing early standards for international radio routing and communications.</p>
 
-            <h3 class="category-h3">🏛️ Geopolitical Nodes: Kenyan Independence</h3>
-            <p class="essay-p"><span class="year-badge">1963</span>Kenya Independence Act: The terminal collapse of British colonial administrative law in East Africa. This legal node recalibrated the geopolitical equilibrium of the continent, establish new protocols for sovereign border synchronization.</p>
+            <h3 class="category-h3 text-base sm:text-lg md:text-2xl tracking-[2px] sm:tracking-[4px] pl-4 sm:pl-6 mt-8 md:mt-20 mb-4 md:mb-8">⚖️ Law & Justice: Kenyan Independence</h3>
+            <p class="essay-p text-sm sm:text-base md:text-lg mb-6 md:mb-12 indent-4 sm:indent-8"><span class="year-badge">1963</span>Independence of Kenya: Kenya officially declared its independence from the United Kingdom. This transition marked the end of British colonial administration in the region, establishing a new sovereign state and changing East African diplomacy, trade, and regional border regulations.</p>
         </div>
 
         <!-- 💡 DECEMBER 13 -->
-        <div class="report-card">
-            <div class="day-header">DECEMBER_13</div>
-            <p class="essay-p">December 13th archives the birth of <span class="highlight">Systemic Global Maritime Forensics</span> and the supreme recalibration of Middle Eastern energy statecraft. Historically, it anchors the physical mapping of the planetary biosphere.</p>
+        <div class="report-card p-5 sm:p-10 md:p-20 mb-12 md:mb-32">
+            <div class="day-header text-2xl sm:text-4xl md:text-5xl tracking-[8px] sm:tracking-[15px] pb-3 md:pb-5 mb-8 md:mb-16">DECEMBER_13</div>
+            <p class="essay-p text-sm sm:text-base md:text-lg mb-6 md:mb-12 indent-4 sm:indent-8">December 13th archives the coordinate for maritime circumnavigation departures and military capturing operations during Middle Eastern conflicts, contrasting Sir Francis Drake's departure with the capture of Saddam Hussein.</p>
 
-            <h3 class="category-h3">⚙️ Innovations: Drake’s Circumnavigation</h3>
-            <p class="essay-p"><span class="year-badge">1577</span>Sir Francis Drake Departs: Initialization of the second global maritime matrix. This technical milestone represent the first attempt to synchronize naval logistics with global trade-route mapping, proving human technical artifacts could navigate planetary oceans.</p>
+            <h3 class="category-h3 text-base sm:text-lg md:text-2xl tracking-[2px] sm:tracking-[4px] pl-4 sm:pl-6 mt-8 md:mt-20 mb-4 md:mb-8">⚙️ Innovations: Drake's Circumnavigation Voyage</h3>
+            <p class="essay-p text-sm sm:text-base md:text-lg mb-6 md:mb-12 indent-4 sm:indent-8"><span class="year-badge">1577</span>Sir Francis Drake set sail from Plymouth, England, with five ships on his historic expedition to circumnavigate the globe. This voyage demonstrated the reach of contemporary maritime exploration, changing Pacific trade logistics and global shipping routes.</p>
 
-            <h3 class="category-h3">🚨 Geopolitical Nodes: Capture of Saddam Hussein</h3>
-            <p class="essay-p"><span class="year-badge">2003</span>Operation Red Dawn: A definitive node in 21st-century military forensics. The event forced a total global re-evaluation of post-conflict reconstruction law and recalibrated the stability of the Middle Eastern energy matrix.</p>
+            <h3 class="category-h3 text-base sm:text-lg md:text-2xl tracking-[2px] sm:tracking-[4px] pl-4 sm:pl-6 mt-8 md:mt-20 mb-4 md:mb-8">🚨 Incidents: Capture of Saddam Hussein</h3>
+            <p class="essay-p text-sm sm:text-base md:text-lg mb-6 md:mb-12 indent-4 sm:indent-8"><span class="year-badge">2003</span>Operation Red Dawn: US military forces captured former Iraqi President Saddam Hussein near Tikrit, Iraq. This capture led directly to his trial and execution under Iraqi law, establishing a major milestone in the post-invasion stabilization and changing Middle Eastern diplomacy.</p>
         </div>
 
         <!-- 💡 DECEMBER 14 -->
-        <div class="report-card">
-            <div class="day-header">DECEMBER_14</div>
-            <p class="essay-p">December 14th represents the coordinate for <span class="highlight">Terrestrial Physical Mastery</span> and the tragic node of high-fidelity domestic security failure. Historically, it anchors the moments human endurance reached the terminal axis of the planet.</p>
+        <div class="report-card p-5 sm:p-10 md:p-20 mb-12 md:mb-32">
+            <div class="day-header text-2xl sm:text-4xl md:text-5xl tracking-[8px] sm:tracking-[15px] pb-3 md:pb-5 mb-8 md:mb-16">DECEMBER_14</div>
+            <p class="essay-p text-sm sm:text-base md:text-lg mb-6 md:mb-12 indent-4 sm:indent-8">December 14th represents the coordinate for polar exploration achievements and school security crises, marking both Roald Amundsen's South Pole expedition and the Sandy Hook shooting.</p>
 
-            <img src="https://images.unsplash.com/photo-1548392231-e29813731455?auto=format&fit=crop&w=1200&q=80" alt="Antarctica Ice Frontier" class="archive-img">
+            <img src="https://images.unsplash.com/photo-1548392231-e29813731455?auto=format&fit=crop&w=1200&q=80" alt="Antarctica Ice Frontier" class="archive-img h-48 sm:h-72 md:h-[450px] lg:h-[550px] my-6 md:my-16">
 
-            <h3 class="category-h3">⚙️ Physical Singularities: The Amundsen Node</h3>
-            <p class="essay-p"><span class="year-badge">1911</span>First Expedition to Reach the South Pole: Roald Amundsen initialized the terminal conquest of the Antarctic. Our forensics identify this as a 'Logistical Singularity,' synchronizing sled-dog engineering with extreme biological endurance to thrive at the terrestrial limits.</p>
+            <h3 class="category-h3 text-base sm:text-lg md:text-2xl tracking-[2px] sm:tracking-[4px] pl-4 sm:pl-6 mt-8 md:mt-20 mb-4 md:mb-8">⚙️ Innovations: Amundsen Reaches the South Pole</h3>
+            <p class="essay-p text-sm sm:text-base md:text-lg mb-6 md:mb-12 indent-4 sm:indent-8"><span class="year-badge">1911</span>Roald Amundsen’s Polar Expedition: Norwegian explorer Roald Amundsen and his team became the first to reach the geographic South Pole. This polar journey demonstrated the effectiveness of using sled dogs and meticulous equipment logistics, establishing early operational baselines for polar research and survival techniques.</p>
 
-            <h3 class="category-h3">🚨 Critical Tragedies: Sandy Hook</h3>
-            <p class="essay-p"><span class="year-badge">2012</span>Sandy Hook Elementary Shooting: A tragic singularity in modern forensic history. The failure of security monitoring forced a total global re-evaluation of gun-control forensics and educational security law, Establishing new standards for public safety.</p>
+            <h3 class="category-h3 text-base sm:text-lg md:text-2xl tracking-[2px] sm:tracking-[4px] pl-4 sm:pl-6 mt-8 md:mt-20 mb-4 md:mb-8">🚨 Incidents: Sandy Hook Elementary School Shooting</h3>
+            <p class="essay-p text-sm sm:text-base md:text-lg mb-6 md:mb-12 indent-4 sm:indent-8"><span class="year-badge">2012</span>The Sandy Hook Shooting: A tragic shooting occurred at Sandy Hook Elementary School in Newtown, Connecticut. This incident led directly to improved public building security regulations, threat-assessment tracking, and gun control regulations, changing school safety protocols.</p>
         </div>
 
         <!-- 💡 DECEMBER 15 -->
-        <div class="report-card">
-            <div class="day-header">DECEMBER_15</div>
-            <p class="essay-p">December 15th archives the birth of <span class="highlight">Constitutional Civil Liberty Codification</span> and the terminal recalibration of the world's most significant cultural brand icon.</p>
+        <div class="report-card p-5 sm:p-10 md:p-20 mb-12 md:mb-32">
+            <div class="day-header text-2xl sm:text-4xl md:text-5xl tracking-[8px] sm:tracking-[15px] pb-3 md:pb-5 mb-8 md:mb-16">DECEMBER_15</div>
+            <p class="essay-p text-sm sm:text-base md:text-lg mb-6 md:mb-12 indent-4 sm:indent-8">December 15th serves as the coordinate for constitutional rights ratifications and the passing of prominent entertainment producers, marking the Bill of Rights ratification and the death of Walt Disney.</p>
 
-            <h3 class="category-h3">⚖️ Judicial Intelligence: The Bill of Rights</h3>
-            <p class="essay-p"><span class="year-badge">1791</span>Ratification of the US Bill of Rights: The articles entered into force, archiving the 'Liberty Singularity.' By codifying protections against state hegemony, this document established primordial protocols for modern civil rights law and global democratic ethics.</p>
+            <h3 class="category-h3 text-base sm:text-lg md:text-2xl tracking-[2px] sm:tracking-[4px] pl-4 sm:pl-6 mt-8 md:mt-20 mb-4 md:mb-8">⚖️ Law & Justice: Bill of Rights ratified</h3>
+            <p class="essay-p text-sm sm:text-base md:text-lg mb-6 md:mb-12 indent-4 sm:indent-8"><span class="year-badge">1791</span>The US Bill of Rights: The first ten amendments to the United States Constitution officially entered into force, protecting individual civil liberties. This constitutional milestone coordinated civil rights legislation, establishing standard legal protections for freedom of speech, religion, and due process under federal law.</p>
 
-            <h3 class="category-h3">🏷️ Brand Genealogy: Walt Disney’s Final Sync</h3>
-            <p class="essay-p"><span class="year-badge">1966</span>Death of Walt Disney: The terminal coordinate for the architect of the experiential branding era. His legacy established the protocols for synchronized global media and retail innovative design, anchoring the future of narrative capital flows.</p>
+            <h3 class="category-h3 text-base sm:text-lg md:text-2xl tracking-[2px] sm:tracking-[4px] pl-4 sm:pl-6 mt-8 md:mt-20 mb-4 md:mb-8">🏷️ Brand Genealogy: Passing of Walt Disney</h3>
+            <p class="essay-p text-sm sm:text-base md:text-lg mb-6 md:mb-12 indent-4 sm:indent-8"><span class="year-badge">1966</span>Death of Walter Elias Disney: The American animator and co-founder of the Walt Disney Company passed away, leaving a major legacy in entertainment and theme park design, permanently influencing media franchise branding and licensed merchandising.</p>
         </div>
-
-        <!-- 🚀 PART 1 END -->
-        <div class="text-center py-20 border-t border-white/10">
-            <p class="font-cyber text-gold text-sm tracking-widest mb-6 uppercase">End of December Part I Full Sync</p>
-            <p class="text-gray-500 italic">"The architecture of human ambition concludes in Part II. Proceed to nodes 16 through 31."</p>
-        </div>
-    </main>
-
-    <footer class="py-24 border-t border-white/5 text-center">
-        <p class="text-[11px] font-cyber text-gray-700 tracking-[0.5em] uppercase">Akashic Terminal Node © 2026 // NODE_12_FINAL_P1</p>
-    </footer>
-</body>
-</html>
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Node 12: December Archival Intelligence | Part II (16-31) Final Sync</title>
-    
-    <!-- Professional Typography -->
-    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Inter:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,700;1,700&family=Source+Code+Pro:wght@400;600&display=swap" rel="stylesheet">
-    <script src="https://cdn.tailwindcss.com"></script>
-    
-    <style>
-        :root { --neon-gold: #f5c97a; --bg: #010204; --card-bg: rgba(10, 14, 22, 0.98); }
-        body { background: var(--bg); color: #e2e8f0; font-family: 'Inter', sans-serif; line-height: 2.2; overflow-x: hidden; }
-        .font-cyber { font-family: 'Orbitron', sans-serif; }
-        .font-code { font-family: 'Source Code Pro', monospace; }
-        .bg-grid { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background-image: linear-gradient(rgba(245, 201, 122, 0.03) 1px, transparent 1px), linear-gradient(90deg, rgba(245, 201, 122, 0.03) 1px, transparent 1px); background-size: 80px 80px; z-index: -1; }
-        .report-card { background: var(--card-bg); border: 1px solid rgba(245, 201, 122, 0.1); border-radius: 32px; padding: 6rem; margin-bottom: 10rem; box-shadow: 0 40px 100px rgba(0,0,0,0.9); transition: 0.5s; }
-        .report-card:hover { border-color: var(--neon-gold); }
-        .day-header { font-family: 'Orbitron'; color: var(--neon-gold); font-size: 3.5rem; letter-spacing: 15px; border-bottom: 2px solid var(--neon-gold); margin-bottom: 5rem; padding-bottom: 20px; text-align: center; }
-        .category-h3 { font-family: 'Orbitron'; color: #fff; font-size: 1.6rem; margin-top: 5.5rem; margin-bottom: 2rem; text-transform: uppercase; letter-spacing: 4px; border-left: 5px solid var(--neon-gold); padding-left: 25px; }
-        .essay-p { text-align: justify; color: #a0aec0; font-size: 1.25rem; margin-bottom: 3.5rem; text-indent: 2rem; line-height: 2.5; }
-        .year-badge { font-family: 'Orbitron'; color: #000; font-weight: 800; background: var(--neon-gold); padding: 4px 15px; border-radius: 4px; margin-right: 15px; font-size: 16px; }
-        .highlight { color: #fff; font-weight: 600; border-bottom: 1px solid var(--neon-gold); }
-        .archive-img { width: 100%; height: 550px; object-fit: cover; border-radius: 15px; margin: 4rem 0; border: 1px solid rgba(245, 201, 122, 0.2); filter: brightness(0.85); transition: 0.5s; }
-        .archive-img:hover { filter: brightness(1) contrast(1.05); }
-        .analysis-box { background: rgba(245, 201, 122, 0.03); border: 1px dashed var(--neon-gold); padding: 3rem; border-radius: 12px; margin: 4rem 0; font-family: 'Source Code Pro', monospace; font-size: 1.05rem; color: #94a3b8; }
-    </style>
-</head>
-<body>
-    <div class="bg-grid"></div>
-
-    <nav class="fixed w-full z-[1000] px-12 py-8 flex justify-between items-center bg-black/60 backdrop-blur-xl border-b border-white/5">
-        <div class="text-2xl font-cyber font-bold text-[#f5c97a] tracking-tighter cursor-pointer" onclick="location.href='index.html'">AKASHIC ARCHIVE // NODE_12</div>
-        <div class="flex gap-4">
-            <span class="font-cyber text-gray-500 text-[10px] mt-2 uppercase tracking-widest">DECEMBER_PART_II_FINAL_SYNC</span>
-            <a href="index.html" class="font-cyber text-[#f5c97a] border border-[#f5c97a] px-4 py-1.5 rounded text-[10px] hover:bg-[#f5c97a] hover:text-black transition-all">BACK_TO_HUB</a>
-        </div>
-    </nav>
-
-    <main class="relative pt-56 pb-20 px-8 max-w-7xl mx-auto">
-        <header class="text-center mb-60">
-            <h1 class="font-cyber text-7xl md:text-8xl text-white mb-10 uppercase tracking-[0.4em] leading-tight">December Intelligence <br><span class="text-gold opacity-50 italic text-4xl tracking-[0.2em]">The Terminal Recalibration</span></h1>
-            <p class="max-w-4xl mx-auto text-gray-400 italic text-2xl leading-relaxed font-light">
-                "The final forensic audit of the solar cycle. From the birth of aeronautical logistics to the digital synchronization of decentralized trust. The matrix reaches full equilibrium."
-            </p>
-        </header>
 
         <!-- 💡 DECEMBER 16 -->
-        <div class="report-card">
-            <div class="day-header">DECEMBER_16</div>
-            <p class="essay-p">December 16th serve as the coordinate for <span class="highlight">Revolutionary Fiscal Resistance</span> and the birth of early 20th-century high-latitude survival equipment. Historically, this date anchors the moment colonial tax laws catalyzed national resistance in the Atlantic world.</p>
+        <div class="report-card p-5 sm:p-10 md:p-20 mb-12 md:mb-32">
+            <div class="day-header text-2xl sm:text-4xl md:text-5xl tracking-[8px] sm:tracking-[15px] pb-3 md:pb-5 mb-8 md:mb-16">DECEMBER_16</div>
+            <p class="essay-p text-sm sm:text-base md:text-lg mb-6 md:mb-12 indent-4 sm:indent-8">December 16th serve as the coordinate for colonial fiscal disputes and polar exploration announcements, contrasting the Boston Tea Party with the announcement of Amundsen's South Pole achievement.</p>
 
-            <h3 class="category-h3">⚖️ Judicial Intelligence: Boston Tea Party</h3>
-            <p class="essay-p"><span class="year-badge">1773</span>The Boston Tea Party: A pivotal shift in the history of revolutionary jurisprudence. This node archives the 'Fiscal Resistance Singularity.' By non-violently challenging the legal authority of an imperial tea tax, it provided the structural DNA for the subsequent synchronization of revolutionary movements across the Atlantic, anchoring the trajectory toward American constitutionalism.</p>
+            <h3 class="category-h3 text-base sm:text-lg md:text-2xl tracking-[2px] sm:tracking-[4px] pl-4 sm:pl-6 mt-8 md:mt-20 mb-4 md:mb-8">⚖️ Law & Justice: The Boston Tea Party</h3>
+            <p class="essay-p text-sm sm:text-base md:text-lg mb-6 md:mb-12 indent-4 sm:indent-8"><span class="year-badge">1773</span>Colonial Tea Protest: Colonists in Boston destroyed a shipment of tea from the British East India Company to protest the British Tea Act. This tax protest demonstrated the growing resistance under the slogan "no taxation without representation," leading directly to the Coercive Acts and establishing early revolutionary networks.</p>
 
-            <h3 class="category-h3">⚙️ Innovations: Amundsen’s Pole Achievement</h3>
-            <p class="essay-p"><span class="year-badge">1911</span>South Pole Sync: Historically synchronized with the public announcement of Roald Amundsen’s achievement. This node archives a massive boom in exploration-based capital flow and the innovative branding of high-latitude survival protocols, proving the limits of human biological endurance.</p>
+            <h3 class="category-h3 text-base sm:text-lg md:text-2xl tracking-[2px] sm:tracking-[4px] pl-4 sm:pl-6 mt-8 md:mt-20 mb-4 md:mb-8">⚙️ Innovations: Amundsen's Polar Logistics</h3>
+            <p class="essay-p text-sm sm:text-base md:text-lg mb-6 md:mb-12 indent-4 sm:indent-8"><span class="year-badge">1911</span>South Pole Announcement: Roald Amundsen officially announced his expedition's successful transit to the South Pole. This journey demonstrated the effectiveness of using sled dogs and meticulous equipment logistics, establishing early operational baselines for polar research and survival techniques.</p>
         </div>
 
         <!-- 💡 DECEMBER 17 -->
-        <div class="report-card">
-            <div class="day-header">DECEMBER_17</div>
-            <p class="essay-p">December 17th represents perhaps the most significant node in modern <span class="highlight">Atmospheric Logistical Evolution</span>. It is a day marked by the birth of the technical era that redefined global transit and the initial pulses of powered flight.</p>
+        <div class="report-card p-5 sm:p-10 md:p-20 mb-12 md:mb-32">
+            <div class="day-header text-2xl sm:text-4xl md:text-5xl tracking-[8px] sm:tracking-[15px] pb-3 md:pb-5 mb-8 md:mb-16">DECEMBER_17</div>
+            <p class="essay-p text-sm sm:text-base md:text-lg mb-6 md:mb-12 indent-4 sm:indent-8">December 17th represents the coordinate for first powered aircraft flights and heavy rocket propulsion developments, marking both the Wright brothers' flight and Saturn V history.</p>
 
-            <img src="https://images.unsplash.com/photo-1436491865332-7a61a109c0f3?auto=format&fit=crop&w=1200&q=80" alt="Vintage Wright Flyer Airplane" class="archive-img">
+            <img src="https://images.unsplash.com/photo-1436491865332-7a61a109c0f3?auto=format&fit=crop&w=1200&q=80" alt="Vintage Wright Flyer Airplane" class="archive-img h-48 sm:h-72 md:h-[450px] lg:h-[550px] my-6 md:my-16">
 
-            <h3 class="category-h3">⚙️ Technological Singularities: The Wright brothers</h3>
-            <p class="essay-p"><span class="year-badge">1903</span>The Wright brothers' First Flight: At Kitty Hawk, North Carolina, Orville and Wilbur Wright achieved the first controlled, powered, and sustained flight of a heavier-than-air aircraft. Our analytical terminal identifies this as the 'Aeronautical Singularity.' By synchronizing aerodynamic engineering with internal combustion, they effectively collapsed terrestrial transit times and birthed the commercial genealogy of the aviation industry.</p>
+            <h3 class="category-h3 text-base sm:text-lg md:text-2xl tracking-[2px] sm:tracking-[4px] pl-4 sm:pl-6 mt-8 md:mt-20 mb-4 md:mb-8">⚙️ Innovations: The First Powered Flight</h3>
+            <p class="essay-p text-sm sm:text-base md:text-lg mb-6 md:mb-12 indent-4 sm:indent-8"><span class="year-badge">1903</span>The Wright Brothers' Flight: Orville and Wilbur Wright completed the first controlled, sustained flight of a powered, heavier-than-air aircraft, the Wright Flyer, in Kitty Hawk, North Carolina. This flight proved the viability of using internal combustion engines with aerodynamic wing designs, establishing early standards for aviation logistics, and changing transportation.</p>
 
-            <h3 class="category-h3">🛰️ Interstellar Intelligence: Saturn V Launch Node</h3>
-            <p class="essay-p"><span class="year-badge">1969</span>Saturn V Recalibration: Historical data highlights the first technical synchronization of the Saturn V rocket's final 20th-century mission calibration. This node provided a case study in high-fidelity resource management that enabled the eventual lunar landing legacy.</p>
+            <h3 class="category-h3 text-base sm:text-lg md:text-2xl tracking-[2px] sm:tracking-[4px] pl-4 sm:pl-6 mt-8 md:mt-20 mb-4 md:mb-8">🛰️ Innovations: Saturn V Propulsion Development</h3>
+            <p class="essay-p text-sm sm:text-base md:text-lg mb-6 md:mb-12 indent-4 sm:indent-8"><span class="year-badge">1969</span>Saturn V Propulsion Milestone: Mid-December technical archives record the first structural and propulsion synchronization tests of the Saturn V rocket's final 20th-century mission configuration. This work proved the reliability of liquid-fueled booster stages, establishing standard procedures for heavy launch vehicle logistics.</p>
         </div>
 
         <!-- 💡 DECEMBER 18 -->
-        <div class="report-card">
-            <div class="day-header">DECEMBER_18</div>
-            <p class="essay-p">December 18th archives the birth of <span class="highlight">Absolute Human Liberty</span> and the zenith of 19th-century judicial reconfiguration. Historically, this date anchors the moments when the most significant legal barrier to human rights was systemically dismantled.</p>
+        <div class="report-card p-5 sm:p-10 md:p-20 mb-12 md:mb-32">
+            <div class="day-header text-2xl sm:text-4xl md:text-5xl tracking-[8px] sm:tracking-[15px] pb-3 md:pb-5 mb-8 md:mb-16">DECEMBER_18</div>
+            <p class="essay-p text-sm sm:text-base md:text-lg mb-6 md:mb-12 indent-4 sm:indent-8">December 18th archives the coordinate for federal constitutional amendments abolishing slavery and early classic ballet premieres, marking both the 13th Amendment ratification and The Nutcracker.</p>
 
-            <h3 class="category-h3">⚖️ Judicial Intelligence: 13th Amendment Ratified</h3>
-            <p class="essay-p"><span class="year-badge">1865</span>Ratification of the 13th Amendment: The formal initialization of the legal termination of slavery in the US. Our archival forensics identify this as a 'Systemic Singularity'—the legal recalibration of the human personhood definition. This node established the foundational ethics of modern labor law and provided the constitutional momentum for all subsequent civil rights frameworks.</p>
+            <h3 class="category-h3 text-base sm:text-lg md:text-2xl tracking-[2px] sm:tracking-[4px] pl-4 sm:pl-6 mt-8 md:mt-20 mb-4 md:mb-8">⚖️ Law & Justice: The 13th Amendment Ratified</h3>
+            <p class="essay-p text-sm sm:text-base md:text-lg mb-6 md:mb-12 indent-4 sm:indent-8"><span class="year-badge">1865</span>Ratification of the 13th Amendment: US Secretary of State William H. Seward officially certified the ratification of the 13th Amendment, abolishing slavery and involuntary servitude in the United States. This constitutional milestone coordinated civil rights legislation, establishing standard legal protections for human rights under federal law.</p>
 
-            <h3 class="category-h3">⚙️ Technical Milestones in Media</h3>
-            <p class="essay-p"><span class="year-badge">1892</span>Premiere of The Nutcracker: A pinnacle of high-fidelity cultural branding in musical theater. This event established the protocols for synchronized seasonal media rituals, fundamentally altering global artistic branding and cultural capital flow during the solstice season.</p>
+            <h3 class="category-h3 text-base sm:text-lg md:text-2xl tracking-[2px] sm:tracking-[4px] pl-4 sm:pl-6 mt-8 md:mt-20 mb-4 md:mb-8">🎨 Arts & Masterpieces: The Nutcracker Premiere</h3>
+            <p class="essay-p text-sm sm:text-base md:text-lg mb-6 md:mb-12 indent-4 sm:indent-8"><span class="year-badge">1892</span>Premiere of The Nutcracker: Pyotr Ilyich Tchaikovsky's ballet 'The Nutcracker' premiered in St. Petersburg, Russia. The performance integrated romantic orchestration with classical choreography, establishing a standard seasonal theater production and permanently changing ballet history.</p>
         </div>
 
         <!-- 💡 DECEMBER 19 -->
-        <div class="report-card">
-            <div class="day-header">DECEMBER_19</div>
-            <p class="essay-p">December 19th serves as the supreme coordinate for <span class="highlight">Lunar Mission Completion</span> and the formalization of early 20th-century aviation logistics. Historically, it anchors the successful return of the final manned lunar mission.</p>
+        <div class="report-card p-5 sm:p-10 md:p-20 mb-12 md:mb-32">
+            <div class="day-header text-2xl sm:text-4xl md:text-5xl tracking-[8px] sm:tracking-[15px] pb-3 md:pb-5 mb-8 md:mb-16">DECEMBER_19</div>
+            <p class="essay-p text-sm sm:text-base md:text-lg mb-6 md:mb-12 indent-4 sm:indent-8">December 19th serves as the coordinate for final crewed spaceflight returns from the Moon and state secession declarations, marking both the Apollo 17 splashdown and South Carolina's secession.</p>
 
-            <h3 class="category-h3">🛰️ Interstellar Intelligence: Apollo 17 Return</h3>
-            <p class="essay-p"><span class="year-badge">1972</span>Apollo 17 Splashdown: The final human mission to the Moon successfully returned to the terrestrial maritime biosphere. This node archives the highest standard of 20th-century orbital logistical synchronization. The mission established the foundational protocols for long-term clinical survival in microgravity and innovative hull-protection during atmospheric re-entry.</p>
+            <h3 class="category-h3 text-base sm:text-lg md:text-2xl tracking-[2px] sm:tracking-[4px] pl-4 sm:pl-6 mt-8 md:mt-20 mb-4 md:mb-8">🛰️ Innovations: Apollo 17 Splashdown</h3>
+            <p class="essay-p text-sm sm:text-base md:text-lg mb-6 md:mb-12 indent-4 sm:indent-8"><span class="year-badge">1972</span>Apollo 17 Mission Return: The spacecraft successfully splashed down in the Pacific Ocean, completing the final crewed lunar landing mission. This splashdown proved the reliability of command module thermal shielding during atmospheric re-entry, establishing standard procedures for marine recovery operations.</p>
 
-            <h3 class="category-h3">⚖️ Judicial Intelligence: South Carolina Secession</h3>
-            <p class="essay-p"><span class="year-badge">1860</span>Historical Friction: Initial pulses of the secession crisis that tested the US constitutional framework. This node represent the 'Sovereignty Stress-Test,' forcing a total global re-evaluation of federal stability and decentralized legislative power.</p>
+            <h3 class="category-h3 text-base sm:text-lg md:text-2xl tracking-[2px] sm:tracking-[4px] pl-4 sm:pl-6 mt-8 md:mt-20 mb-4 md:mb-8">⚖️ Law & Justice: South Carolina Secession</h3>
+            <p class="essay-p text-sm sm:text-base md:text-lg mb-6 md:mb-12 indent-4 sm:indent-8"><span class="year-badge">1860</span>Secession of South Carolina: South Carolina became the first state to pass an ordinance of secession from the United States, following the election of Abraham Lincoln. This decision led directly to the formation of the Confederate States and the American Civil War, changing US constitutional law.</p>
         </div>
 
         <!-- 💡 DECEMBER 20 -->
-        <div class="report-card">
-            <div class="day-header">DECEMBER_20</div>
-            <p class="essay-p">December 20th archives the birth of <span class="highlight">Strategic Territorial Expansion</span> and the zenith of early 19th-century administrative forensics. It is a day defined by the legal doubling of a superpower's strategic landmass.</p>
+        <div class="report-card p-5 sm:p-10 md:p-20 mb-12 md:mb-32">
+            <div class="day-header text-2xl sm:text-4xl md:text-5xl tracking-[8px] sm:tracking-[15px] pb-3 md:pb-5 mb-8 md:mb-16">DECEMBER_20</div>
+            <p class="essay-p text-sm sm:text-base md:text-lg mb-6 md:mb-12 indent-4 sm:indent-8">December 20th archives the coordinate for formal land acquisitions and early nuclear electricity generation, marking the Louisiana Purchase transfer and the EBR-I generator.</p>
 
-            <h3 class="category-h3">🏛️ Geopolitical Nodes: The Louisiana Purchase</h3>
-            <p class="essay-p"><span class="year-badge">1803</span>Formal Transfer of Louisiana: Jurisdiction shifted from France to the US. Our archival research views this as a 'Strategic Real-Estate Singularity.' This legal act recalibrated the geopolitical equilibrium of North America, securing vast mineral assets and providing the structural DNA for westward synchronization.</p>
+            <h3 class="category-h3 text-base sm:text-lg md:text-2xl tracking-[2px] sm:tracking-[4px] pl-4 sm:pl-6 mt-8 md:mt-20 mb-4 md:mb-8">🏛️ Geopolitical Nodes: The Louisiana Purchase</h3>
+            <p class="essay-p text-sm sm:text-base md:text-lg mb-6 md:mb-12 indent-4 sm:indent-8"><span class="year-badge">1803</span>Louisiana Purchase Transfer completed: The formal transfer of the Louisiana Territory from France to the United States was completed in New Orleans. This transaction coordinated territorial boundaries, establishing US administrative frameworks for land and resource management, while expanding US strategic presence.</p>
 
-            <h3 class="category-h3">⚙️ Innovations: First Nuclear-Produced Electricity</h3>
-            <p class="essay-p"><span class="year-badge">1951</span>EBR-I Generation: In Idaho, four light bulbs were lit using nuclear fission energy. This node represent the 'Energy Singularity,' pioneering the protocols for civil atomic synchronization and anchoring the future of global power-grid logistics.</p>
+            <h3 class="category-h3 text-base sm:text-lg md:text-2xl tracking-[2px] sm:tracking-[4px] pl-4 sm:pl-6 mt-8 md:mt-20 mb-4 md:mb-8">⚙️ Innovations: First Nuclear-Produced Electricity</h3>
+            <p class="essay-p text-sm sm:text-base md:text-lg mb-6 md:mb-12 indent-4 sm:indent-8"><span class="year-badge">1951</span>EBR-I Power Generation: The Experimental Breeder Reactor I (EBR-I) in Idaho became the first nuclear reactor to generate electricity, lighting four light bulbs. This development demonstrated the viability of civil nuclear power, establishing early standards for reactor engineering and electrical grid logistics.</p>
         </div>
 
         <!-- 💡 DECEMBER 21 -->
-        <div class="report-card">
-            <div class="day-header">DECEMBER_21</div>
-            <p class="essay-p">December 21st archives the supreme node of <span class="highlight">Interstellar Trajectory Transcendence</span> and the tragic node of international aviation security failure. Historically, it anchors the moment human life first escaped the Earth's gravity well.</p>
+        <div class="report-card p-5 sm:p-10 md:p-20 mb-12 md:mb-32">
+            <div class="day-header text-2xl sm:text-4xl md:text-5xl tracking-[8px] sm:tracking-[15px] pb-3 md:pb-5 mb-8 md:mb-16">DECEMBER_21</div>
+            <p class="essay-p text-sm sm:text-base md:text-lg mb-6 md:mb-12 indent-4 sm:indent-8">December 21st archives the coordinate for first crewed missions escaping Earth's orbit and international aviation terrorism incidents, marking both the Apollo 8 launch and the Lockerbie bombing.</p>
 
-            <img src="https://images.unsplash.com/photo-1541185933-ef5d8ed016c2?auto=format&fit=crop&w=1200&q=80" alt="Space Rocket Saturn V" class="archive-img">
+            <img src="https://images.unsplash.com/photo-1541185933-ef5d8ed016c2?auto=format&fit=crop&w=1200&q=80" alt="Space Rocket Saturn V" class="archive-img h-48 sm:h-72 md:h-[450px] lg:h-[550px] my-6 md:my-16">
 
-            <h3 class="category-h3">🛰️ Interstellar Intelligence: Apollo 8</h3>
-            <p class="essay-p"><span class="year-badge">1968</span>Launch of Apollo 8: The first manned mission to reach the Moon’s orbit. Our archival forensics identify this as the 'Cosmic Escape Singularity.' By synchronizing Saturn V propulsion with trans-lunar injection protocols, Apollo 8 proved that human biological systems could survive and navigate the deep vacuum beyond Earth, redefining our innovative limits.</p>
-            
-            <h3 class="category-h3">🚨 Geopolitical Tragedies: Pan Am 103</h3>
-            <p class="essay-p"><span class="year-badge">1988</span>Lockerbie Bombing: A tragic singularity in counter-terrorism forensics. The destruction of Pan Am Flight 103 forced a total global re-evaluation of airport biosecurity. This node established new standards for synchronized international criminal investigations across sovereign jurisdictions.</p>
+            <h3 class="category-h3 text-base sm:text-lg md:text-2xl tracking-[2px] sm:tracking-[4px] pl-4 sm:pl-6 mt-8 md:mt-20 mb-4 md:mb-8">🛰️ Innovations: Apollo 8 Launch</h3>
+            <p class="essay-p text-sm sm:text-base md:text-lg mb-6 md:mb-12 indent-4 sm:indent-8"><span class="year-badge">1968</span>The Launch of Apollo 8: NASA launched the Apollo 8 mission, the first crewed spaceflight to escape Earth's gravitational influence and orbit the Moon. This mission proved the reliability of trans-lunar injection calculations, establishing standard procedures for deep-space navigation and communications.</p>
+
+            <h3 class="category-h3 text-base sm:text-lg md:text-2xl tracking-[2px] sm:tracking-[4px] pl-4 sm:pl-6 mt-8 md:mt-20 mb-4 md:mb-8">🚨 Incidents: Lockerbie Bombing</h3>
+            <p class="essay-p text-sm sm:text-base md:text-lg mb-6 md:mb-12 indent-4 sm:indent-8"><span class="year-badge">1988</span>Lockerbie Bombing: Pan Am Flight 103 was destroyed by a bomb over Lockerbie, Scotland, killing all 259 people on board and eleven on the ground. This tragic incident led directly to international counter-terrorism investigations, changing airport security regulations and civil aviation safety standards.</p>
         </div>
 
         <!-- 💡 DECEMBER 22 -->
-        <div class="report-card">
-            <div class="day-header">DECEMBER_22</div>
-            <p class="essay-p">December 22nd serves as the coordinate for <span class="highlight">Temporal & Solstice Recalibration</span>. Historically, this date anchors the human attempt to synchronize social rituals with the winter solar pulse of the planet.</p>
+        <div class="report-card p-5 sm:p-10 md:p-20 mb-12 md:mb-32">
+            <div class="day-header text-2xl sm:text-4xl md:text-5xl tracking-[8px] sm:tracking-[15px] pb-3 md:pb-5 mb-8 md:mb-16">DECEMBER_22</div>
+            <p class="essay-p text-sm sm:text-base md:text-lg mb-6 md:mb-12 indent-4 sm:indent-8">December 22nd serves as the coordinate for solar winter solstices and early supersonic reconnaissance flights, marking both the Winter Solstice and the first SR-71 Blackbird flight.</p>
 
-            <h3 class="category-h3">📅 Innovations: The Winter Solstice Node</h3>
-            <p class="essay-p"><span class="year-badge">Astronomic</span>The Winter Solstice: Historically synchronized with ancient innovative festivals. This node represents the human attempt to align administrative and economic cycles with the immutable biological pulses of the planet, ensuring global logistical equilibrium through synchronized seasonal timing.</p>
+            <h3 class="category-h3 text-base sm:text-lg md:text-2xl tracking-[2px] sm:tracking-[4px] pl-4 sm:pl-6 mt-8 md:mt-20 mb-4 md:mb-8">📅 Innovations: The Winter Solstice</h3>
+            <p class="essay-p text-sm sm:text-base md:text-lg mb-6 md:mb-12 indent-4 sm:indent-8"><span class="year-badge">Astronomic</span>The Winter Solstice: The astronomical event where the Earth’s northern hemisphere tilt is furthest from the Sun. This event was historically used to coordinate early agricultural calendars and solar observations, establishing standard timing methods for public activities.</p>
 
-            <h3 class="category-h3">⚙️ Technical Milestones in Aviation</h3>
-            <p class="essay-p"><span class="year-badge">1964</span>SR-71 Blackbird Maiden Voyage: The world's most advanced high-altitude reconnaissance aircraft initialized its pulse. Our forensics identify this as the 'Supersonic Surveillance Singularity,' anchoring the stability of Cold War tactical intelligence synchronization.</p>
+            <h3 class="category-h3 text-base sm:text-lg md:text-2xl tracking-[2px] sm:tracking-[4px] pl-4 sm:pl-6 mt-8 md:mt-20 mb-4 md:mb-8">⚙️ Innovations: First Flight of the SR-71 Blackbird</h3>
+            <p class="essay-p text-sm sm:text-base md:text-lg mb-6 md:mb-12 indent-4 sm:indent-8"><span class="year-badge">1964</span>SR-71 Blackbird Maiden Voyage: The Lockheed SR-71 Blackbird strategic reconnaissance aircraft completed its maiden flight in California. The aircraft utilized advanced titanium alloy structures and turbo-ramjet engines, demonstrating the capability of long-duration Mach 3 flight, changing military intelligence gathering and aerospace logistics.</p>
         </div>
 
         <!-- 💡 DECEMBER 23 -->
-        <div class="report-card">
-            <div class="day-header">DECEMBER_23</div>
-            <p class="essay-p">December 23rd archives the birth of <span class="highlight">Solid-State Computational Intelligence</span> and the recalibration of global financial hegemony. It is the most significant node for 'Logic & Capital' synchronization in the 20th century.</p>
+        <div class="report-card p-5 sm:p-10 md:p-20 mb-12 md:mb-32">
+            <div class="day-header text-2xl sm:text-4xl md:text-5xl tracking-[8px] sm:tracking-[15px] pb-3 md:pb-5 mb-8 md:mb-16">DECEMBER_23</div>
+            <p class="essay-p text-sm sm:text-base md:text-lg mb-6 md:mb-12 indent-4 sm:indent-8">December 23rd archives the coordinate for semiconductor transistor demonstrations and central banking legislations, marking both the Bell Labs transistor and the Federal Reserve Act.</p>
 
-            <h3 class="category-h3">⚙️ Technological Singularities: The Transistor</h3>
-            <p class="essay-p"><span class="year-badge">1947</span>Discovery of the Transistor: Bell Labs initialized the world's first semiconductor-based logic device. Our terminal identifies this as the 'Digital Genesis Singularity.' By replacing vacuum tubes, this node established the primordial protocols for all future microprocessors, fundamentally altering global computational capital flow and anchoring the information age matrix.</p>
+            <h3 class="category-h3 text-base sm:text-lg md:text-2xl tracking-[2px] sm:tracking-[4px] pl-4 sm:pl-6 mt-8 md:mt-20 mb-4 md:mb-8">⚙️ Innovations & IT: First Transistor Demonstration</h3>
+            <p class="essay-p text-sm sm:text-base md:text-lg mb-6 md:mb-12 indent-4 sm:indent-8"><span class="year-badge">1947</span>Discovery of the Transistor: John Bardeen, Walter Brattain, and William Shockley successfully demonstrated the point-contact transistor at Bell Laboratories. This solid-state semiconductor device proved the viability of using electrical current to control electrical current, replacing vacuum tubes, and changing digital hardware development.</p>
 
-            <h3 class="category-h3">📈 Macro-Financial Intelligence: The Federal Reserve Act</h3>
-            <p class="essay-p"><span class="year-badge">1913</span>Signing of the Federal Reserve Act: President Woodrow Wilson legalized the central banking system. This node archives a 'Capital Synchronization Singularity.' It established the foundational protocols for national monetary policy and elastic currency, effectively anchoring the financial architecture of global capitalism.</p>
+            <h3 class="category-h3 text-base sm:text-lg md:text-2xl tracking-[2px] sm:tracking-[4px] pl-4 sm:pl-6 mt-8 md:mt-20 mb-4 md:mb-8">📈 Finance & Wealth: Federal Reserve Act Signed</h3>
+            <p class="essay-p text-sm sm:text-base md:text-lg mb-6 md:mb-12 indent-4 sm:indent-8"><span class="year-badge">1913</span>Federal Reserve Act signed: President Woodrow Wilson signed the Federal Reserve Act into law, establishing the Federal Reserve System as the central bank of the United States. This legislation coordinated national monetary policies, establishing standard regulations for bank reserves, and changing US financial markets.</p>
         </div>
 
         <!-- 💡 DECEMBER 24 -->
-        <div class="report-card">
-            <div class="day-header">DECEMBER_24</div>
-            <p class="essay-p">December 24th represents the supreme coordinate for <span class="highlight">Planetary Cognitive Recalibration</span>. Historically, it anchors the moment human civilization physically witnessed the Earth as a singular, fragile node in the cosmic matrix.</p>
+        <div class="report-card p-5 sm:p-10 md:p-20 mb-12 md:mb-32">
+            <div class="day-header text-2xl sm:text-4xl md:text-5xl tracking-[8px] sm:tracking-[15px] pb-3 md:pb-5 mb-8 md:mb-16">DECEMBER_24</div>
+            <p class="essay-p text-sm sm:text-base md:text-lg mb-6 md:mb-12 indent-4 sm:indent-8">December 24th represents the coordinate for orbital space photography achievements and early radio broadcasts, marking both the Earthrise photograph and the first audio broadcast.</p>
 
-            <img src="https://images.unsplash.com/photo-1451187580459-43490279c0fa?auto=format&fit=crop&w=1200&q=80" alt="Earth from Moon Orbit" class="archive-img">
+            <img src="https://images.unsplash.com/photo-1451187580459-43490279c0fa?auto=format&fit=crop&w=1200&q=80" alt="Earth from Moon Orbit" class="archive-img h-48 sm:h-72 md:h-[450px] lg:h-[550px] my-6 md:my-16">
 
-            <h3 class="category-h3">🛰️ Interstellar Intelligence: Earthrise</h3>
-            <p class="essay-p"><span class="year-badge">1968</span>The Apollo 8 'Earthrise' Image: As the crew orbited the Moon, they captured the most significant environmental brand icon in history. Our forensics identify this as an 'Ontological Singularity.' This visual node synchronized global consciousness regarding planetary vulnerability, serving as the primary catalyst for the international ecological legislative movement and modern biosecurity law.</p>
+            <h3 class="category-h3 text-base sm:text-lg md:text-2xl tracking-[2px] sm:tracking-[4px] pl-4 sm:pl-6 mt-8 md:mt-20 mb-4 md:mb-8">🛰️ Innovations: The Earthrise Photograph</h3>
+            <p class="essay-p text-sm sm:text-base md:text-lg mb-6 md:mb-12 indent-4 sm:indent-8"><span class="year-badge">1968</span>Apollo 8 Earthrise Image: Astronaut William Anders captured the historic "Earthrise" photograph from lunar orbit during the Apollo 8 mission. This image demonstrated the planetary perspective from deep space, changing environmental protection advocacy and public awareness of Earth's resources.</p>
 
-            <h3 class="category-h3">⚙️ Innovations: The First FM Radio Transmission</h3>
-            <p class="essay-p"><span class="year-badge">1906</span>Fessenden’s Broadcast: The first radio transmission of voice and music. This node archives the 'Acoustic Media Singularity,' providing the primordial ancestor to modern wireless cultural synchronization.</p>
+            <h3 class="category-h3 text-base sm:text-lg md:text-2xl tracking-[2px] sm:tracking-[4px] pl-4 sm:pl-6 mt-8 md:mt-20 mb-4 md:mb-8">⚙️ Innovations: The First Audio Radio Broadcast</h3>
+            <p class="essay-p text-sm sm:text-base md:text-lg mb-6 md:mb-12 indent-4 sm:indent-8"><span class="year-badge">1906</span>First Radio Voice Broadcast: Reginald Fessenden completed the first recorded radio broadcast of voice and music from Brant Rock, Massachusetts. This broadcast proved the viability of using amplitude modulation (AM) to transmit continuous audio over radio waves, establishing standard radio communications procedures.</p>
         </div>
 
         <!-- 💡 DECEMBER 25 -->
-        <div class="report-card">
-            <div class="day-header">DECEMBER_25</div>
-            <p class="essay-p">December 25th archives the birth of <span class="highlight">Universal Physical Intelligence</span> and the zenith of global high-fidelity observational logistics. It anchors the moments when the laws of the universe were codified.</p>
+        <div class="report-card p-5 sm:p-10 md:p-20 mb-12 md:mb-32">
+            <div class="day-header text-2xl sm:text-4xl md:text-5xl tracking-[8px] sm:tracking-[15px] pb-3 md:pb-5 mb-8 md:mb-16">DECEMBER_25</div>
+            <p class="essay-p text-sm sm:text-base md:text-lg mb-6 md:mb-12 indent-4 sm:indent-8">December 25th archives the coordinate for births of prominent physical scientists and modern space telescope launches, marking both Isaac Newton's birth and the launch of the James Webb Space Telescope.</p>
 
-            <h3 class="category-h3">⚙️ Intellectual Heritage: Isaac Newton</h3>
-            <p class="essay-p"><span class="year-badge">1642</span>Birth of Isaac Newton: A supreme node in the history of human intelligence. Newton’s work served as a 'Mathematical Singularity.' By codifying the laws of motion and universal gravitation, he pioneered the protocols for modern engineering and synchronized celestial navigation, fundamentally altering the innovative trajectory of civilization.</p>
+            <h3 class="category-h3 text-base sm:text-lg md:text-2xl tracking-[2px] sm:tracking-[4px] pl-4 sm:pl-6 mt-8 md:mt-20 mb-4 md:mb-8">⚙️ Innovations: Birth of Isaac Newton</h3>
+            <p class="essay-p text-sm sm:text-base md:text-lg mb-6 md:mb-12 indent-4 sm:indent-8"><span class="year-badge">1642</span>Birth of Sir Isaac Newton: The English physicist and mathematician was born in Lincolnshire. His work in formulating the laws of motion and universal gravitation coordinated physical science, establishing standard mathematical methods for engineering and astronomical navigation.</p>
 
-            <h3 class="category-h3">🛰️ Interstellar Intelligence: James Webb Launch</h3>
-            <p class="essay-p"><span class="year-badge">2021</span>Launch of the JWST: Initialized as the world's most advanced infrared observational terminal. This mission successfully synchronized high-fidelity innovative design with the deep-cosmic field, providing celestial forensics that continue to redefine our understanding of the universe's origin nodes.</p>
+            <h3 class="category-h3 text-base sm:text-lg md:text-2xl tracking-[2px] sm:tracking-[4px] pl-4 sm:pl-6 mt-8 md:mt-20 mb-4 md:mb-8">🛰️ Innovations: James Webb Space Telescope Launch</h3>
+            <p class="essay-p text-sm sm:text-base md:text-lg mb-6 md:mb-12 indent-4 sm:indent-8"><span class="year-badge">2021</span>Launch of the JWST: NASA and ESA launched the James Webb Space Telescope aboard an Ariane 5 rocket from Kourou, French Guiana. The telescope utilized custom mid-infrared instruments, demonstrating the capability of space-based deep-space observation, and changing space science.</p>
         </div>
 
         <!-- 💡 DECEMBER 26 -->
-        <div class="report-card">
-            <div class="day-header">DECEMBER_26</div>
-            <p class="essay-p">December 26th serves as the coordinate for <span class="highlight">Macro-Forensic Ecological Tragedy</span> and the formal termination of the 20th century’s most significant ideological matrix.</p>
+        <div class="report-card p-5 sm:p-10 md:p-20 mb-12 md:mb-32">
+            <div class="day-header text-2xl sm:text-4xl md:text-5xl tracking-[8px] sm:tracking-[15px] pb-3 md:pb-5 mb-8 md:mb-16">DECEMBER_26</div>
+            <p class="essay-p text-sm sm:text-base md:text-lg mb-6 md:mb-12 indent-4 sm:indent-8">December 26th serves as the coordinate for major marine earthquake disasters and corporate political dissolutions, marking both the 2004 tsunami and the dissolution of the Soviet Union.</p>
 
-            <h3 class="category-h3">🚨 Critical Tragedies: Indian Ocean Tsunami</h3>
-            <p class="essay-p"><span class="year-badge">2004</span>The 2004 Tsunami: A tragic singularity in modern disaster forensics. The loss of over 230,000 lives forced a total global re-evaluation of maritime early-warning synchronization and international disaster-response law. This node established new standards for synchronized public safety intelligence and real-time seismic data-mapping.</p>
+            <h3 class="category-h3 text-base sm:text-lg md:text-2xl tracking-[2px] sm:tracking-[4px] pl-4 sm:pl-6 mt-8 md:mt-20 mb-4 md:mb-8">🚨 Incidents: Indian Ocean Tsunami</h3>
+            <p class="essay-p text-sm sm:text-base md:text-lg mb-6 md:mb-12 indent-4 sm:indent-8"><span class="year-badge">2004</span>The 2004 Indian Ocean Tsunami: A magnitude 9.1 undersea earthquake triggered a massive tsunami, impacting coastal communities across fourteen countries and causing over 230,000 casualties. This disaster led directly to international ocean warning networks and emergency response regulations, changing coastal safety.</p>
 
-            <h3 class="category-h3">🏛️ Geopolitical Nodes: USSR Dissolution</h3>
-            <p class="essay-p"><span class="year-badge">1991</span>Termination of the Soviet Union: The Supreme Soviet legally dissolved the USSR. This node represent the 'Ideological Failure Singularity.' It marked the transition from a bipolar geopolitical matrix to a multi-lateral world order, fundamentally altering the trajectory of global capital flows in Eastern Europe.</p>
+            <h3 class="category-h3 text-base sm:text-lg md:text-2xl tracking-[2px] sm:tracking-[4px] pl-4 sm:pl-6 mt-8 md:mt-20 mb-4 md:mb-8">🏛️ Geopolitical Nodes: USSR dissolved</h3>
+            <p class="essay-p text-sm sm:text-base md:text-lg mb-6 md:mb-12 indent-4 sm:indent-8"><span class="year-badge">1991</span>Dissolution of the Soviet Union: The Supreme Soviet of the USSR officially voted to dissolve the Soviet Union, establishing the Commonwealth of Independent States. This transition ended the Cold War political system, changing European-Asian trade, regional borders, and regional financial laws.</p>
         </div>
 
         <!-- 💡 DECEMBER 27 -->
-        <div class="report-card">
-            <div class="day-header">DECEMBER_27</div>
-            <p class="essay-p">December 27th archives the birth of <span class="highlight">Biological Evolutionary Intelligence</span> and the formalization of modern supranational capital synchronization. Historically, it anchors the first voyage into the origin of species.</p>
+        <div class="report-card p-5 sm:p-10 md:p-20 mb-12 md:mb-32">
+            <div class="day-header text-2xl sm:text-4xl md:text-5xl tracking-[8px] sm:tracking-[15px] pb-3 md:pb-5 mb-8 md:mb-16">DECEMBER_27</div>
+            <p class="essay-p text-sm sm:text-base md:text-lg mb-6 md:mb-12 indent-4 sm:indent-8">December 27th archives the coordinate for research voyage departures and international monetary agreements, contrasting the HMS Beagle departure with the Bretton Woods systems.</p>
 
-            <h3 class="category-h3">🧬 Medical & Scientific Intelligence: Darwin's Voyage</h3>
-            <p class="essay-p"><span class="year-badge">1831</span>HMS Beagle Departs: Charles Darwin initialized his voyage to the Galapagos. Our terminal categorizes this as the 'Scientific Genesis Node.' The forensic data gleaned from this mission provided the theoretical protocols for biological evolution, fundamentally altering human self-perception within the terrestrial biosphere.</p>
+            <h3 class="category-h3 text-base sm:text-lg md:text-2xl tracking-[2px] sm:tracking-[4px] pl-4 sm:pl-6 mt-8 md:mt-20 mb-4 md:mb-8">🧬 Medical & Innovations: Darwin’s Voyage</h3>
+            <p class="essay-p text-sm sm:text-base md:text-lg mb-6 md:mb-12 indent-4 sm:indent-8"><span class="year-badge">1831</span>The Voyage of the HMS Beagle: The HMS Beagle set sail from Plymouth, England, with naturalist Charles Darwin on board. This voyage led directly to Darwin's theories on natural selection, changing evolutionary biology, clinical genetics, and medicine.</p>
 
-            <h3 class="category-h3">📈 Macro-Financial Intelligence: IMF/World Bank Established</h3>
-            <p class="essay-p"><span class="year-badge">1945</span>Formal Establishment: 28 nations signed the Bretton Woods agreements. This node archives the birth of 'Supranational Fiscal Governance,' establishing the primordial protocols for synchronized global lending and international monetary stability forensics.</p>
+            <h3 class="category-h3 text-base sm:text-lg md:text-2xl tracking-[2px] sm:tracking-[4px] pl-4 sm:pl-6 mt-8 md:mt-20 mb-4 md:mb-8">📈 Finance & Wealth: Bretton Woods Agreements</h3>
+            <p class="essay-p text-sm sm:text-base md:text-lg mb-6 md:mb-12 indent-4 sm:indent-8"><span class="year-badge">1945</span>IMF and World Bank Established: Representatives of twenty-eight nations signed the Bretton Woods agreements, establishing the International Monetary Fund and the World Bank. This agreement coordinated international trade regulations, establishing standard currency exchange rates and changing monetary history.</p>
         </div>
 
         <!-- 💡 DECEMBER 28 -->
-        <div class="report-card">
-            <div class="day-header">DECEMBER_28</div>
-            <p class="essay-p">December 28th serves as the coordinate for <span class="highlight">Systemic Pathological Mitigation</span> and the birth of early 20th-century visual media intelligence. It anchors the moment human intelligence mastered biological lethal threats.</p>
+        <div class="report-card p-5 sm:p-10 md:p-20 mb-12 md:mb-32">
+            <div class="day-header text-2xl sm:text-4xl md:text-5xl tracking-[8px] sm:tracking-[15px] pb-3 md:pb-5 mb-8 md:mb-16">DECEMBER_28</div>
+            <p class="essay-p text-sm sm:text-base md:text-lg mb-6 md:mb-12 indent-4 sm:indent-8">December 28th serves as the coordinate for births of prominent clinical biologists and public movie screenings, marking Louis Pasteur's birth and the Lumière brothers' cinema.</p>
 
-            <h3 class="category-h3">💉 Medical Singularities: Louis Pasteur</h3>
-            <p class="essay-p"><span class="year-badge">1822</span>Birth of Louis Pasteur: A supreme node in clinical governance. Pasteur’s work served as a technical singularity in 'Pathological Mitigation.' By synchronizing germ theory with innovative vaccine protocols, he pioneered modern healthcare hygiene, fundamentally extending the innovative scope of human life expectancy.</p>
+            <h3 class="category-h3 text-base sm:text-lg md:text-2xl tracking-[2px] sm:tracking-[4px] pl-4 sm:pl-6 mt-8 md:mt-20 mb-4 md:mb-8">💉 Medical Revolutions: Birth of Louis Pasteur</h3>
+            <p class="essay-p text-sm sm:text-base md:text-lg mb-6 md:mb-12 indent-4 sm:indent-8"><span class="year-badge">1822</span>Birth of Louis Pasteur: The French biologist and chemist was born, later formulating the germ theory of disease and developing early rabies and anthrax vaccines. His research on pasteurization established standards for clinical microbiology, immunology, and public health.</p>
 
-            <h3 class="category-h3">🎬 Cinematic Innovations: The Lumière Brothers</h3>
-            <p class="essay-p"><span class="year-badge">1895</span>First Public Cinema Demonstration: In Paris, the Lumière brothers synchronized motion picture projection for a paying audience. This node represent the birth of 'Cinematic Civilization,' anchoring the future of synchronized global media branding.</p>
+            <h3 class="category-h3 text-base sm:text-lg md:text-2xl tracking-[2px] sm:tracking-[4px] pl-4 sm:pl-6 mt-8 md:mt-20 mb-4 md:mb-8">🎬 Movies & Innovations: First Public Film Screening</h3>
+            <p class="essay-p text-sm sm:text-base md:text-lg mb-6 md:mb-12 indent-4 sm:indent-8"><span class="year-badge">1895</span>First Commercial Movie Screening: Auguste and Louis Lumière hosted the first paid public movie screening in Paris, projecting ten short films. This event demonstrated the potential for commercial movie projection, changing film production standards and theatrical distribution logistics.</p>
         </div>
 
         <!-- 💡 DECEMBER 29 -->
-        <div class="report-card">
-            <div class="day-header">DECEMBER_29</div>
-            <p class="essay-p">December 29th archives the birth of <span class="highlight">Continental Logistical Expansion</span> and the tragic node of indigenous judicial failure. It is a day defined by the legal synchronization of frontier statehood.</p>
+        <div class="report-card p-5 sm:p-10 md:p-20 mb-12 md:mb-32">
+            <div class="day-header text-2xl sm:text-4xl md:text-5xl tracking-[8px] sm:tracking-[15px] pb-3 md:pb-5 mb-8 md:mb-16">DECEMBER_29</div>
+            <p class="essay-p text-sm sm:text-base md:text-lg mb-6 md:mb-12 indent-4 sm:indent-8">December 29th archives the coordinate for statehood admissions and military actions against indigenous populations, contrasting Texas statehood with the Wounded Knee massacre.</p>
 
-            <h3 class="category-h3">🏛️ Geopolitical Nodes: Texas Annexation</h3>
-            <p class="essay-p"><span class="year-badge">1845</span>Texas Becomes the 28th State: This legal act recalibrated the geopolitical equilibrium of North America, establishing the foundational protocols for westward innovative expansion and anchoring the future of synchronized continental energy logistics.</p>
+            <h3 class="category-h3 text-base sm:text-lg md:text-2xl tracking-[2px] sm:tracking-[4px] pl-4 sm:pl-6 mt-8 md:mt-20 mb-4 md:mb-8">⚖️ Law & Justice: Texas Statehood</h3>
+            <p class="essay-p text-sm sm:text-base md:text-lg mb-6 md:mb-12 indent-4 sm:indent-8"><span class="year-badge">1845</span>Texas Admitted to the Union: The United States Congress passed the resolution admitting Texas as the 28th state. This annexation coordinated US administrative borders, establishing federal laws and changing North American trade and territorial administration.</p>
 
-            <h3 class="category-h3">🚨 Judicial Tragedies: Wounded Knee Massacre</h3>
-            <p class="essay-p"><span class="year-badge">1890</span>Wounded Knee: A tragic singularity in state-sponsored domestic violence. This node represent the terminal failure of judicial mediation between sovereign indigenous entities and federal authority, providing a grim lesson for future human rights frameworks.</p>
+            <h3 class="category-h3 text-base sm:text-lg md:text-2xl tracking-[2px] sm:tracking-[4px] pl-4 sm:pl-6 mt-8 md:mt-20 mb-4 md:mb-8">🚨 Incidents: Wounded Knee Massacre</h3>
+            <p class="essay-p text-sm sm:text-base md:text-lg mb-6 md:mb-12 indent-4 sm:indent-8"><span class="year-badge">1890</span>Wounded Knee Massacre: US Army forces killed over 150 Lakota Sioux near Wounded Knee Creek in South Dakota. This incident demonstrated the tensions between federal forces and indigenous groups, prompting major debates on civil rights and constitutional protections.</p>
         </div>
 
         <!-- 💡 DECEMBER 30 -->
-        <div class="report-card">
-            <div class="day-header">DECEMBER_30</div>
-            <p class="essay-p">December 30th serves as the supreme coordinate for <span class="highlight">Large-Scale Administrative Unification</span>. Historically, this date anchors the moments when the largest ideological state matrix of the 20th century was legally initialized.</p>
+        <div class="report-card p-5 sm:p-10 md:p-20 mb-12 md:mb-32">
+            <div class="day-header text-2xl sm:text-4xl md:text-5xl tracking-[8px] sm:tracking-[15px] pb-3 md:pb-5 mb-8 md:mb-16">DECEMBER_30</div>
+            <p class="essay-p text-sm sm:text-base md:text-lg mb-6 md:mb-12 indent-4 sm:indent-8">December 30th serves as the coordinate for sovereign union agreements during political consolidations, marking the creation of the USSR.</p>
 
-            <img src="https://images.unsplash.com/photo-1547849938-16ef7b9264c1?auto=format&fit=crop&w=1200&q=80" alt="Administrative Building Monument" class="archive-img">
+            <img src="https://images.unsplash.com/photo-1547849938-16ef7b9264c1?auto=format&fit=crop&w=1200&q=80" alt="Administrative Building Monument" class="archive-img h-48 sm:h-72 md:h-[450px] lg:h-[550px] my-6 md:my-16">
 
-            <h3 class="category-h3">🏛️ Geopolitical Nodes: Formation of the USSR</h3>
-            <p class="essay-p"><span class="year-badge">1922</span>Signing of the Treaty on the Creation of the USSR: This node archives the formal birth of the Soviet Union. Our forensics identify this as a 'Strategic Integration Singularity.' By synchronizing multiple republics under a singular ideological matrix, this event established the bipolar world order, anchoring the global strategic equilibrium for decades.</p>
+            <h3 class="category-h3 text-base sm:text-lg md:text-2xl tracking-[2px] sm:tracking-[4px] pl-4 sm:pl-6 mt-8 md:mt-20 mb-4 md:mb-8">🏛️ Geopolitical Nodes: Creation of the USSR</h3>
+            <p class="essay-p text-sm sm:text-base md:text-lg mb-6 md:mb-12 indent-4 sm:indent-8"><span class="year-badge">1922</span>Signing of the Treaty on the Creation of the USSR: Delegations from Russia, Ukraine, Belarus, and Transcaucasia officially signed the treaty establishing the Soviet Union. This agreement coordinated regional governance under a centralized communist party, permanently changing European-Asian politics and regional borders.</p>
         </div>
 
         <!-- 💡 DECEMBER 31 -->
-        <div class="report-card">
-            <div class="day-header">DECEMBER_31</div>
-            <p class="essay-p">December 31st archives the supreme node of <span class="highlight">Sovereign Jurisdictional Reversion</span> and the terminal recalibration of the human temporal matrix. It is the final synchronization point of the solar cycle.</p>
+        <div class="report-card p-5 sm:p-10 md:p-20 mb-12 md:mb-32">
+            <div class="day-header text-2xl sm:text-4xl md:text-5xl tracking-[8px] sm:tracking-[15px] pb-3 md:pb-5 mb-8 md:mb-16">DECEMBER_31</div>
+            <p class="essay-p text-sm sm:text-base md:text-lg mb-6 md:mb-12 indent-4 sm:indent-8">December 31st archives the coordinate for global canal transfers and annual temporal resets, marking the Panama Canal handover and New Year's Eve synchronization.</p>
 
-            <h3 class="category-h3">⚖️ Judicial Intelligence: Panama Canal Handover</h3>
-            <p class="essay-p"><span class="year-badge">1999</span>Transfer of the Panama Canal: Jurisdiction shifted from the US to Panama. This node archives a significant shift in international maritime law. It served as a case study in 'De-Colonial Synchronization,' establishing new standards for post-imperial logistical sovereignty and synchronized trans-global trade forensics.</p>
+            <h3 class="category-h3 text-base sm:text-lg md:text-2xl tracking-[2px] sm:tracking-[4px] pl-4 sm:pl-6 mt-8 md:mt-20 mb-4 md:mb-8">⚖️ Law & Justice: Panama Canal handover</h3>
+            <p class="essay-p text-sm sm:text-base md:text-lg mb-6 md:mb-12 indent-4 sm:indent-8"><span class="year-badge">1999</span>Sovereignty over Panama Canal transferred: The United States officially transferred control of the Panama Canal to Panama under the Torrijos-Carter Treaties. This transition established Panamanian sovereignty over the strategic waterway, changing maritime logistics and international trade.</p>
 
-            <h3 class="category-h3">📅 Innovations: The Midnight Temporal Pulse</h3>
-            <p class="essay-p"><span class="year-badge">Sol-Cycle</span>New Year's Eve Synchronization: The global human population synchronizes its administrative reporting cycles for the coming orbital reset. This node represents the highest standard of collective social timing, ensuring the stabilization of global financial, innovative, and judicial matrices through synchronized temporal order.</p>
+            <h3 class="category-h3 text-base sm:text-lg md:text-2xl tracking-[2px] sm:tracking-[4px] pl-4 sm:pl-6 mt-8 md:mt-20 mb-4 md:mb-8">📅 Innovations: The Midnight Temporal Pulse</h3>
+            <p class="essay-p text-sm sm:text-base md:text-lg mb-6 md:mb-12 indent-4 sm:indent-8"><span class="year-badge">Sol-Cycle</span>New Year's Eve: Global human communities synchronize their clocks for the annual transition, completing the solar cycle. This temporal reset coordinates global financial, administrative, and logistical calendars, demonstrating the human desire to maintain structural order and synchronized timing globally.</p>
         </div>
 
         <!-- 🚀 CONCLUSION OF THE ARCHIVE -->
-        <section class="report-card text-center border-gold/40">
-            <h2 class="text-gold font-cyber text-3xl uppercase tracking-widest mb-10">Archive Synchronization Complete</h2>
-            <p class="text-gray-400 text-lg italic max-w-3xl mx-auto mb-10">"Node 12 finalized. The Akashic Terminal has completed its 12-month forensic audit of human intelligence. All data streams are now resynchronized for the next solar cycle. The record remains open."</p>
-            <div class="w-24 h-1 bg-gold mx-auto"></div>
+        <section class="report-card p-5 sm:p-10 md:p-20 text-center">
+            <h2 class="text-gold font-cyber text-xl sm:text-2xl md:text-3xl uppercase tracking-widest mb-6 md:mb-10">Archive Synchronization Complete</h2>
+            <p class="text-gray-400 text-sm sm:text-base md:text-lg italic max-w-3xl mx-auto mb-6 md:mb-10">
+                "Node 12 is finalized. The Akashic Terminal has completed its 12-month forensic audit of human intelligence. All data streams are now resynchronized for the next solar cycle. The record remains open."
+            </p>
+            <div class="w-16 sm:w-24 h-1 bg-[#f5c97a] mx-auto"></div>
         </section>
 
     </main>
 
-    <footer class="py-24 border-t border-white/5 text-center">
-        <p class="text-[11px] font-cyber text-gray-700 tracking-[0.5em] uppercase">Akashic Terminal Node // End of 12-Month Archival Series © 2026</p>
+    <footer class="py-12 md:py-24 border-t border-white/5 text-center px-4">
+        <p class="text-[9px] sm:text-[11px] font-cyber text-gray-700 tracking-[0.3em] sm:tracking-[0.5em] uppercase">Akashic Terminal Node // End of 12-Month Archival Series © 2026</p>
     </footer>
 </body>
 </html>
