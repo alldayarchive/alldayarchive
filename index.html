@@ -96,6 +96,22 @@
         .live-node-header { font-family: 'Orbitron'; color: var(--neon-gold); font-size: 1.1rem; letter-spacing: 5px; opacity: 0.8; }
         .live-node-content { border-left: 2px solid var(--neon-gold); }
 
+        /* Pulse Indicator */
+        .pulse-dot {
+            width: 8px;
+            height: 8px;
+            background-color: #22c55e;
+            border-radius: 50%;
+            display: inline-block;
+            box-shadow: 0 0 10px #22c55e;
+            animation: pulse-animation 2s infinite;
+        }
+        @keyframes pulse-animation {
+            0% { transform: scale(0.95); opacity: 0.8; }
+            50% { transform: scale(1.3); opacity: 1; box-shadow: 0 0 18px #22c55e; }
+            100% { transform: scale(0.95); opacity: 0.8; }
+        }
+
         /* Custom coffee donation button styling */
         .coffee-btn {
             background-color: transparent;
@@ -122,7 +138,7 @@
     <div class="bg-nebula"></div>
     <div class="bg-grid"></div>
     
-    <!-- Responsive Header Navbar (Clean & Minimalist) -->
+    <!-- Responsive Header Navbar -->
     <nav class="fixed w-full z-[1000] px-4 py-4 md:px-12 md:py-6 flex flex-col sm:flex-row justify-between items-center gap-4 border-b border-white/5 bg-black/80 backdrop-blur-3xl">
         <div class="text-xl sm:text-2xl font-cyber font-bold tracking-[0.3em] text-[#f5c97a]">ALLDAY ARCHIVE</div>
         <div class="flex flex-col sm:flex-row items-center gap-4 sm:gap-6">
@@ -158,23 +174,109 @@
             
             <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mt-8 md:mt-12">
                 <div class="p-6 border border-white/5 bg-white/5 rounded-xl">
-                    <span class="text-gold font-code text-xs uppercase block mb-2">Judicial_Status</span>
+                    <span class="text-[#f5c97a] font-code text-xs uppercase block mb-2">Judicial_Status</span>
                     <p id="judicial-brief" class="text-sm text-gray-400">Synchronizing legal data...</p>
                 </div>
                 <div class="p-6 border border-white/5 bg-white/5 rounded-xl">
-                    <span class="text-gold font-code text-xs uppercase block mb-2">Technical_Node</span>
+                    <span class="text-[#f5c97a] font-code text-xs uppercase block mb-2">Technical_Node</span>
                     <p id="tech-brief" class="text-sm text-gray-400">Scanning innovative breakthroughs...</p>
                 </div>
                 <div class="p-6 border border-white/5 bg-white/5 rounded-xl">
-                    <span class="text-gold font-code text-xs uppercase block mb-2">Macro_Finance</span>
+                    <span class="text-[#f5c97a] font-code text-xs uppercase block mb-2">Macro_Finance</span>
                     <p id="finance-brief" class="text-sm text-gray-400">Tracking capital flow...</p>
                 </div>
             </div>
         </section>
 
+        <!-- 🌌 [NEW: Deep Space Apogee & Multi-Calendar Matrix (100% Client-Side Engine)] -->
+        <section class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+            
+            <!-- Card 1: Voyager 1 Telemetry (지구에서 가장 멀리 떠난 탐사선) -->
+            <div class="cyber-card p-6 sm:p-8 flex flex-col justify-between space-y-6">
+                <div>
+                    <div class="flex items-center justify-between border-b border-white/10 pb-4">
+                        <span class="font-cyber text-xs tracking-widest text-[#f5c97a] uppercase flex items-center gap-2">
+                            <span class="pulse-dot"></span> Voyager 1 // Deep Space Apogee
+                        </span>
+                        <span class="font-code text-[10px] text-gray-500 uppercase tracking-widest">Interstellar Node</span>
+                    </div>
+                    <div class="mt-6 space-y-2">
+                        <span class="text-xs font-code text-gray-400 uppercase tracking-widest block">Real-Time Distance From Earth</span>
+                        <div id="voyager-km" class="text-2xl sm:text-3xl font-cyber font-bold text-white tracking-tight">Calculating...</div>
+                        <div id="voyager-au" class="font-code text-sm text-[#f5c97a]/90">Synchronizing AU telemetry...</div>
+                    </div>
+                </div>
+
+                <div class="grid grid-cols-2 gap-4 pt-4 border-t border-white/5 text-left">
+                    <div class="p-3 bg-white/[0.02] border border-white/5 rounded-lg">
+                        <span class="block font-code text-[10px] text-gray-500 uppercase">Voyage Duration</span>
+                        <span id="voyager-days" class="font-cyber text-xs sm:text-sm text-gray-200 mt-1 block">---</span>
+                    </div>
+                    <div class="p-3 bg-white/[0.02] border border-white/5 rounded-lg">
+                        <span class="block font-code text-[10px] text-gray-500 uppercase">One-Way Light Time</span>
+                        <span id="voyager-light-time" class="font-cyber text-xs sm:text-sm text-[#f5c97a] mt-1 block">---</span>
+                    </div>
+                </div>
+
+                <p class="text-xs text-gray-500 font-serif italic leading-relaxed">
+                    "Launched on Sept 5, 1977, Voyager 1 is the most distant human artifact in existence. Cruising interstellar space at ~17 km/s, its radio pulses traverse cosmic silence to whisper back to Earth."
+                </p>
+            </div>
+
+            <!-- Card 2: Multi-Chronometric System (마야력 및 다중 시간 좌표계) -->
+            <div class="cyber-card p-6 sm:p-8 flex flex-col justify-between space-y-6">
+                <div>
+                    <div class="flex items-center justify-between border-b border-white/10 pb-4">
+                        <span class="font-cyber text-xs tracking-widest text-[#f5c97a] uppercase">Multi-Temporal Matrix</span>
+                        <span class="font-code text-[10px] text-gray-500 uppercase tracking-widest">Astronomical Sync</span>
+                    </div>
+                    <p class="text-xs text-gray-400 mt-4 leading-relaxed font-serif italic">
+                        "Cross-referencing the current Gregorian coordinate with ancient Mesoamerican cyclical chronologies and orbital metrics."
+                    </p>
+                </div>
+
+                <div class="space-y-3">
+                    <!-- Mayan Long Count -->
+                    <div class="flex items-center justify-between p-3.5 bg-white/[0.02] border border-white/5 rounded-xl hover:border-[#f5c97a]/40 transition-colors">
+                        <div>
+                            <span class="text-xs font-cyber text-white block">Mayan Long Count</span>
+                            <span class="text-[10px] font-code text-gray-500">Baktun · Katun · Tun · Uinal · Kin</span>
+                        </div>
+                        <div id="mayan-long-count" class="font-code font-bold text-sm sm:text-base text-[#f5c97a]">--.--.--.--.--</div>
+                    </div>
+
+                    <!-- French Republican / Stardate Matrix -->
+                    <div class="grid grid-cols-2 gap-3">
+                        <div class="p-3 bg-white/[0.02] border border-white/5 rounded-xl">
+                            <span class="text-[10px] font-code text-gray-500 uppercase block">Stardate (우주력)</span>
+                            <span id="stardate-val" class="font-cyber text-xs sm:text-sm text-gray-200 mt-1 block">----.--</span>
+                        </div>
+                        <div class="p-3 bg-white/[0.02] border border-white/5 rounded-xl">
+                            <span class="text-[10px] font-code text-gray-500 uppercase block">Julian Day (JDN)</span>
+                            <span id="julian-day-val" class="font-cyber text-xs sm:text-sm text-[#f5c97a] mt-1 block">-------.-</span>
+                        </div>
+                    </div>
+
+                    <!-- French Republican Calendar -->
+                    <div class="p-3 bg-white/[0.02] border border-white/5 rounded-xl flex items-center justify-between">
+                        <div>
+                            <span class="text-[10px] font-code text-gray-500 uppercase block">Republican Era (자연력)</span>
+                            <span id="republican-val" class="font-serif italic text-xs sm:text-sm text-gray-300">Synchronizing...</span>
+                        </div>
+                        <span class="text-[9px] font-code text-[#f5c97a]/80 border border-[#f5c97a]/20 px-2 py-0.5 rounded">Solar Cycle</span>
+                    </div>
+                </div>
+
+                <div class="text-[10px] font-code text-gray-600 text-right tracking-widest uppercase">
+                    Zero-Server Chrono Pulse // OK
+                </div>
+            </div>
+
+        </section>
+
         <!-- 💡 [Month Selector Hub] -->
         <section class="space-y-8 md:space-y-12">
-            <h2 class="text-gold font-cyber text-xl sm:text-2xl uppercase tracking-[0.3em] md:tracking-[0.4em] text-center">Temporal Node Selection</h2>
+            <h2 class="text-[#f5c97a] font-cyber text-xl sm:text-2xl uppercase tracking-[0.3em] md:tracking-[0.4em] text-center">Temporal Node Selection</h2>
             <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-4">
                 <a href="month-01.html" class="node-link"><span>01</span><span class="text-[9px] uppercase tracking-widest text-gray-500">January</span></a>
                 <a href="month-02.html" class="node-link"><span>02</span><span class="text-[9px] uppercase tracking-widest text-gray-500">February</span></a>
@@ -194,7 +296,7 @@
         <!-- 💡 [Content Block 1] Judicial & Financial Forensics -->
         <section class="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 items-start">
             <div class="space-y-6 md:space-y-10 text-left">
-                <h2 class="text-gold font-cyber text-2xl sm:text-4xl uppercase tracking-widest">Judicial & Financial <br>Forensics</h2>
+                <h2 class="text-[#f5c97a] font-cyber text-2xl sm:text-4xl uppercase tracking-widest">Judicial & Financial <br>Forensics</h2>
                 <div class="editorial-p text-sm sm:text-base leading-relaxed sm:leading-[2.2] space-y-4">
                     <p>The <strong>AllDay Archive</strong> operates as a highly detailed repository dedicated to preserving and analyzing the regulatory, statutory, and legal frameworks that govern modern civil societies. We believe that judicial codifications—ranging from classical statutory systems to historical constitutional amendments and supreme court decisions—represent the institutional infrastructure of human cooperation. By documenting the exact parameters of these legal decisions, our platform allows historians, legal scholars, and independent researchers to study the evolution of human justice and civil liberties across centuries.</p>
                     <p>Simultaneously, our financial intelligence division tracks the long-term synchronization of global capital movements and economic structures. From the rise of early mercantilist joint-stock corporations and central banking systems to the post-war gold standards established at Bretton Woods, we catalog the physical and legal parameters of trade. We monitor the strategic trade alignments and financial disruptions that have altered global wealth distribution, ensuring that the historical timeline of economic development is accessible and organized with scientific precision.</p>
@@ -212,7 +314,7 @@
         <!-- 💡 [Content Block 2] Innovative Breakthroughs & Technological Inceptions -->
         <section class="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 items-center">
             <div class="lg:order-2 space-y-6 md:space-y-10">
-                <h2 class="text-gold font-cyber text-2xl sm:text-4xl uppercase tracking-widest text-left lg:text-right">Innovative <br>Inceptions</h2>
+                <h2 class="text-[#f5c97a] font-cyber text-2xl sm:text-4xl uppercase tracking-widest text-left lg:text-right">Innovative <br>Inceptions</h2>
                 <div class="editorial-p text-sm sm:text-base leading-relaxed sm:leading-[2.2] space-y-4 lg:text-right">
                     <p>Scientific and mechanical innovations are primary drivers of human development. At the AllDay Archive, we isolate and catalog key technological achievements—such as early printing presses, steam-powered transport, and the development of the silicon transistor—that have altered the logistical capabilities of our species. We document the prototypes and engineering plans that served as the technical foundations for our modern digital environment.</p>
                     <p>Our research focuses on the developmental history of scientific tools. We trace the design of communication systems from early electromagnetic telegraph relays to modern personal computers and mobile operating systems, observing how user interfaces have evolved to meet human operational needs. By cataloging the origins of these tools, we provide a detailed record of the developments that led to the modern information age.</p>
@@ -229,7 +331,7 @@
 
         <!-- 💡 [Neural Methodology] -->
         <section class="cyber-card p-5 sm:p-10 md:p-16 text-left space-y-8 md:space-y-12 text-[#94a3b8] leading-relaxed sm:leading-loose">
-            <h2 class="text-gold font-cyber text-2xl sm:text-3xl uppercase tracking-widest text-center">Neural Methodology Documentation & Archival Ethics</h2>
+            <h2 class="text-[#f5c97a] font-cyber text-2xl sm:text-3xl uppercase tracking-widest text-center">Neural Methodology Documentation & Archival Ethics</h2>
             <div class="grid md:grid-cols-2 gap-10 md:gap-16 editorial-p text-xs sm:text-base space-y-4 md:space-y-0">
                 <p>The AllDay Archive operates on the principle of <strong>'Temporal Node Isolation.'</strong> Rather than treating history as a simple linear list of events, our system organizes each of the 365 calendar days as a distinct junction where major regulatory, economic, and scientific developments intersect. By organizing the historical record around specific dates, we enable users to study how particular events and legal decisions have influenced different areas of society over time. Every entry is cross-referenced with primary historical sources, legislative records, and international trade data to ensure the accuracy and reliability of the archive.</p>
                 <p>Our commitment to a high-quality historical database ensures that the legal, economic, and scientific developments that shaped modern society are accessible for research. By reviewing, cataloging, and explaining each event under clear, structured categories, we provide an organized educational resource that differs from conventional, unstructured databases. Our mission is to preserve the historical records of human achievement and social reform through precise digital documentation, providing users with a structured, reliable platform to study our shared history.</p>
@@ -242,10 +344,10 @@
 
         <footer class="py-12 md:py-24 border-t border-white/5 space-y-12 md:space-y-16 text-center px-4">
             <div class="flex flex-wrap justify-center gap-6 md:gap-12 text-[8px] sm:text-[10px] font-cyber text-gray-700 tracking-widest uppercase">
-                <a href="privacy.html" class="hover:text-gold transition-colors">Privacy Protocol</a>
-                <a href="terms.html" class="hover:text-gold transition-colors">Access Terms</a>
-                <a href="contact.html" class="hover:text-gold transition-colors">Archives Support</a>
-                <a href="disclaimer.html" class="hover:text-gold transition-colors">Legal Disclaimer</a>
+                <a href="privacy.html" class="hover:text-[#f5c97a] transition-colors">Privacy Protocol</a>
+                <a href="terms.html" class="hover:text-[#f5c97a] transition-colors">Access Terms</a>
+                <a href="contact.html" class="hover:text-[#f5c97a] transition-colors">Archives Support</a>
+                <a href="disclaimer.html" class="hover:text-[#f5c97a] transition-colors">Legal Disclaimer</a>
             </div>
             <div class="flex flex-col items-center gap-6 md:gap-10">
                 <button onclick="window.open('https://buymeacoffee.com/djawjdaks8g')" class="coffee-btn uppercase tracking-widest">Fuel the Archive (Donate)</button>
@@ -255,7 +357,7 @@
     </main>
 
     <script>
-        // 💡 [Complete 366-Day Static Database Mapping (Optimized for SEO/AdSense)]
+        // 💡 [Static Database Mapping (Preserved exactly as provided)]
         const REAL_ARCHIVE_DB = {
             "01-01": {
                 title: "Supranational Standardization of Global Systems",
@@ -343,6 +445,7 @@
             }
         };
 
+        // 💡 [Daily Intelligence Dispatcher]
         function syncDailyIntel() {
             const now = new Date();
             const month = now.getMonth() + 1;
@@ -356,23 +459,19 @@
             document.getElementById('today-date-display').innerText = `${monthNames[month-1]} ${day}`;
             document.getElementById('current-time').innerText = `SYSTEM_SYNC_TIME: ${now.toISOString()}`;
 
-            // 💡 [Engine Logic] Look up current day in the static database
             let todayIntel = REAL_ARCHIVE_DB[dateKey];
             
-            // If the exact day isn't compiled yet (fallback/proximity safety net)
             if (!todayIntel) {
-                // Proximity routing: use the current month's general fallback data (01 day)
                 const monthKey = `${monthStr}-01`;
                 todayIntel = REAL_ARCHIVE_DB[monthKey] || {
                     title: "Synchronizing Regional Administration & Innovations",
-                    desc: "This specific calendar coordinate records major developments in territorial border definitions and early technical communications. Historically, this date anchors the moment when municipal boundaries were formally finalized to avoid strategic regional conflicts, alongside the public testing of advanced copper-wire signaling relays.",
+                    desc: "This specific calendar coordinate records major developments in territorial border definitions and early technical communications.",
                     judicial: "Federal administrative boundaries were legally finalized to prevent long-standing regional land and resource disputes.",
                     tech: "Early telegraphic relays were demonstrated, proving the viability of using electrical currents to transmit coded symbols.",
                     finance: "Trade routes and canal tariffs were synchronized under new municipal tax guidelines to coordinate regional capital flow."
                 };
             }
 
-            // Render current date content
             const contentArea = document.getElementById('daily-event-placeholder');
             contentArea.innerHTML = `
                 <h3 class="text-xl sm:text-2xl text-white font-cyber mb-4">${todayIntel.title}</h3>
@@ -384,7 +483,93 @@
             document.getElementById('finance-brief').innerText = todayIntel.finance;
         }
 
-        window.onload = syncDailyIntel;
+        // 🚀 [100% Client-Side Engine: Voyager 1 Real-Time Telemetry]
+        function updateVoyagerTelemetry() {
+            const now = new Date();
+            const launchDate = new Date('1977-09-05T12:56:00Z'); // 발사 시각 (UTC)
+            
+            // 1. 발사 후 누적 시간 계산
+            const diffMs = now - launchDate;
+            const days = Math.floor(diffMs / (1000 * 60 * 60 * 24));
+            const hours = Math.floor((diffMs / (1000 * 60 * 60)) % 24);
+            const minutes = Math.floor((diffMs / (1000 * 60)) % 60);
+            const seconds = Math.floor((diffMs / 1000) % 60);
+
+            // 2. 실시간 비행 거리 계산 (초속 약 16.9995 km/s)
+            const refDate = new Date('2024-01-01T00:00:00Z');
+            const baseKm = 24339500000; // 2024.01.01 기준점
+            const speedKmPerSec = 16.9995;
+            
+            const secondsSinceRef = (now - refDate) / 1000;
+            const currentKm = baseKm + (secondsSinceRef * speedKmPerSec);
+            const currentAU = (currentKm / 149597870.7).toFixed(4);
+
+            // 3. 편도 통신 시간 (전파가 지구까지 도달하는 시간)
+            const lightSpeed = 299792.458; // km/s
+            const lightTimeSec = currentKm / lightSpeed;
+            const lHours = Math.floor(lightTimeSec / 3600);
+            const lMinutes = Math.floor((lightTimeSec % 3600) / 60);
+            const lSeconds = Math.floor(lightTimeSec % 60);
+
+            // DOM 동기화
+            document.getElementById('voyager-km').innerText = `${Math.floor(currentKm).toLocaleString()} km`;
+            document.getElementById('voyager-au').innerText = `≈ ${currentAU} AU (Astronomical Units)`;
+            document.getElementById('voyager-days').innerText = `${days.toLocaleString()}d ${hours}h ${minutes}m ${seconds}s`;
+            document.getElementById('voyager-light-time').innerText = `${lHours}h ${lMinutes}m ${lSeconds}s (One-Way)`;
+        }
+
+        // 🏛️ [100% Client-Side Engine: Multi-Calendar Calculations]
+        function updateAlternativeCalendars() {
+            const now = new Date();
+
+            // 1. 율리우스 일 (Julian Day Number) 계산
+            const jdn = (now.getTime() / 86400000) + 2440587.5;
+            document.getElementById('julian-day-val').innerText = jdn.toFixed(2);
+
+            // 2. 마야 장기력 (Mayan Long Count) 변환 알고리즘 (GMT 상관계수 584283)
+            let days = Math.floor(jdn - 584283);
+            const kin = days % 20;
+            days = Math.floor(days / 20);
+            const uinal = days % 18;
+            days = Math.floor(days / 18);
+            const tun = days % 20;
+            days = Math.floor(days / 20);
+            const katun = days % 20;
+            const baktun = Math.floor(days / 20);
+            document.getElementById('mayan-long-count').innerText = `${baktun}.${katun}.${tun}.${uinal}.${kin}`;
+
+            // 3. 스타트렉 우주력 (Stardate) 연산
+            const year = now.getFullYear();
+            const startYear = new Date(year, 0, 1);
+            const endYear = new Date(year + 1, 0, 1);
+            const yearProgress = (now - startYear) / (endYear - startYear);
+            document.getElementById('stardate-val').innerText = (year + yearProgress).toFixed(3);
+
+            // 4. 프랑스 공화력(자연력) 계절명 산출
+            const frenchMonths = [
+                "Vendémiaire (포도월)", "Brumaire (안개월)", "Frimaire (서리월)",
+                "Nivôse (눈월)", "Pluviôse (비월)", "Ventôse (바람월)",
+                "Germinal (싹월)", "Floréal (꽃월)", "Prairial (초원월)",
+                "Messidor (수확월)", "Thermidor (열월)", "Fructidor (열매월)"
+            ];
+            // 추분(9월 22일 전후) 기준 인덱스 간이 매핑
+            const m = now.getMonth(); 
+            const fIndex = (m + 3) % 12;
+            document.getElementById('republican-val').innerText = frenchMonths[fIndex];
+        }
+
+        // Window Init Execution
+        window.onload = function() {
+            syncDailyIntel();
+            updateVoyagerTelemetry();
+            updateAlternativeCalendars();
+
+            // 보이저 거리 및 초 단위는 1초마다 실시간으로 째깍거리며 업데이트
+            setInterval(function() {
+                updateVoyagerTelemetry();
+                document.getElementById('current-time').innerText = `SYSTEM_SYNC_TIME: ${new Date().toISOString()}`;
+            }, 1000);
+        };
     </script>
 </body>
 </html>
